@@ -25,11 +25,13 @@ class OTPViewController: UIViewController {
     @IBOutlet weak var timerView: UIView!
     @IBOutlet weak var resendView: UIView!
     @IBOutlet weak var labelTimer: UILabel!
+    @IBOutlet weak var phoneNumberLabel: UILabel!
     
     // MARK: - Variables
     var comingReason: ComingReasonAtOTPScreen = .loginViaOTP
     var remainingTime = 30
     var otpTimer: Timer?
+    var phoneNumber: String?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -38,6 +40,7 @@ class OTPViewController: UIViewController {
         startTimer()
         resendView.isHidden = true
         textField1.becomeFirstResponder()
+//        phoneNumberLabel.text = phoneNumber
     }
     
     // MARK: - Actions

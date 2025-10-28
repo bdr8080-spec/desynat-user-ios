@@ -11,8 +11,11 @@ class LoginViaOTPViewController: UIViewController {
 
     @IBOutlet weak var phoneTextField: UITextField!
     
+    private lazy var viewModel = LoginViaOTPViewModel(loginHostVC: self)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        phoneTextField.delegate = self
 
     }
     
@@ -27,9 +30,12 @@ class LoginViaOTPViewController: UIViewController {
     }
     
     @IBAction func continueDidTapped(_ sender: Any) {
-        let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
-        vc.comingReason = .loginViaOTP
-        self.navigationController?.pushViewController(vc, animated: true)
+        if viewModel.validFields() {
+            let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
+            vc.comingReason = .loginViaOTP
+            vc.phoneNumber = self.phoneTextField.text?.trimmed() ?? ""
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     @IBAction func loginViaPasswordDidTapped(_ sender: Any) {
@@ -49,5 +55,38 @@ class LoginViaOTPViewController: UIViewController {
     }
     
     @IBAction func googleDidTapped(_ sender: Any) {
+    }
+}
+
+extension LoginViaOTPViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        
+        // Safely unwrap the current text
+        guard let currentText = textField.text else { return true }
+        
+        // Construct the updated text after the change
+        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        
+        // Prevent leading space
+        if updatedText.hasPrefix(" ") {
+            return false
+        }
+        
+        var validation: StringValidation?
+        
+        // Validate mobile number
+        if textField == phoneTextField {
+            validation = StringValidation(string: updatedText, characterCount: 15, validation: .mobileNo)
+        }
+        
+        // Perform validation if applicable
+        if let validation = validation {
+            return validation.validate()
+        }
+        
+        return true
     }
 }
