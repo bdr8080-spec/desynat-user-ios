@@ -9,6 +9,7 @@ import UIKit
 
 class SignupViewController: UIViewController {
 
+    @IBOutlet weak var countryCodeTextField: UITextField!
     @IBOutlet weak var profileImageView: CustomImageView!
     @IBOutlet weak var fullNameTextField: UITextField!
     @IBOutlet weak var mobileTextField: UITextField!
@@ -19,6 +20,7 @@ class SignupViewController: UIViewController {
     var isTermsAccepted: Bool = false
     var selectedImage: UIImage?
     lazy private var viewModel = SignupViewModel(hostVC: self)
+    var countryCode: String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +30,7 @@ class SignupViewController: UIViewController {
 
     @IBAction func conitnueDidTapped(_ sender: Any) {
         if viewModel.validFields() {
-            let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
-            vc.comingReason = .signup
-            vc.phoneNumber = self.mobileTextField.text?.trimmed() ?? ""
-            self.navigationController?.pushViewController(vc, animated: true)
+            viewModel.signupApi()
         }
     }
     
@@ -80,6 +79,17 @@ class SignupViewController: UIViewController {
     @IBAction func confirmPasswordEyeDidTapped(_ sender: UIButton) {
         sender.isSelected.toggle()
         confirmPasswordTextField.isSecureTextEntry.toggle()
+    }
+    
+    @IBAction func countryCodeDidTapped(_ sender: Any) {
+        CommonUtils.openPicker(controller: self) { code, name, callingCode in
+            self.setUpCountryCode(code: callingCode)
+            self.countryCode = callingCode
+        }
+    }
+    
+    func setUpCountryCode(code: String) {
+        self.countryCodeTextField.text = code
     }
     
 }

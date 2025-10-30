@@ -30,7 +30,7 @@ class SignupViewModel: NSObject {
             }
         }
         
-
+        
         let mobile = String.getString(hostVC.mobileTextField.text).trimmingCharacters(in: .whitespacesAndNewlines)
         if errorMessage == .none {
             if mobile.isEmpty {
@@ -81,5 +81,23 @@ class SignupViewModel: NSObject {
         
         hostVC.view.endEditing(true)
         return errorMessage == .none
+    }
+    
+    func signupApi() {
+        let params: [String:Any] = [
+            "full_name": hostVC.fullNameTextField.text?.trimmed() ?? "",
+            "country_code": hostVC.countryCodeTextField.text?.trimmed() ?? "",
+            "mobile": hostVC.mobileTextField.text?.trimmed() ?? "",
+            "email": hostVC.emailTextField.text?.trimmed() ?? "",
+            "password": hostVC.createPasswordTextField.text?.trimmed() ?? "",
+            "confirm_password": hostVC.confirmPasswordTextField.text?.trimmed() ?? ""]
+        WebService.sharedInstance.registerUserService(withParams: params) { (response) in
+            let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
+            vc.comingReason = .signup
+            let phoneNumber = "\(self.hostVC.countryCode)\(self.hostVC.mobileTextField.text?.trimmed() ?? "")"
+            vc.phoneNumber = phoneNumber
+            vc.userId = "\(response.id ?? 0)"
+            self.hostVC.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }

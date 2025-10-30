@@ -13,6 +13,7 @@ class ResetPasswordViewController: UIViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     
     lazy private var viewModel = ResetPasswordViewModel(hostVC: self)
+    var userId: String? = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,12 +23,7 @@ class ResetPasswordViewController: UIViewController {
     
     @IBAction func doneDidTapped(_ sender: Any) {
         if viewModel.validFields() {
-            let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
-            vc.comingReason = .passwordUpdated
-            vc.callBackDismiss = {
-                self.navigationController?.popToViewController(ofClass: LoginViewController.self, animated: true)
-            }
-            self.navigationController?.present(vc, animated: true)
+            viewModel.resetPasswordOTPApi()
         }
     }
     

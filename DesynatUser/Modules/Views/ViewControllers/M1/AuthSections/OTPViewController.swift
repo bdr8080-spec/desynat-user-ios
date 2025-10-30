@@ -29,9 +29,12 @@ class OTPViewController: UIViewController {
     
     // MARK: - Variables
     var comingReason: ComingReasonAtOTPScreen = .loginViaOTP
-    var remainingTime = 30
+    var remainingTime = 90
     var otpTimer: Timer?
     var phoneNumber: String?
+    var userId: String = ""
+    var otpDigits = ""
+    lazy private var viewModel = OTPViewModel(hostVC: self)
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -40,7 +43,7 @@ class OTPViewController: UIViewController {
         startTimer()
         resendView.isHidden = true
         textField1.becomeFirstResponder()
-//        phoneNumberLabel.text = phoneNumber
+        phoneNumberLabel.text = phoneNumber
     }
     
     // MARK: - Actions
@@ -50,22 +53,13 @@ class OTPViewController: UIViewController {
     
     @IBAction func verifyDidTapped(_ sender: Any) {
         guard validation() else { return }
-        
         switch comingReason {
         case .loginViaOTP:
-            kSharedSceneDelegate.navigateToUserHomeVc()
-            
+            viewModel.verifyOtpAPI(type: "1") // 0 register 1 Login 2 forgot password
         case .signup:
-            let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
-            vc.comingReason = .accountCreated
-            vc.callBackDismiss = {
-                kSharedSceneDelegate.navigateToUserHomeVc()
-            }
-            self.navigationController?.present(vc, animated: true)
-            
+            viewModel.verifyOtpAPI(type: "0")
         case .forgotPassword:
-            let vc = ResetPasswordViewController.instantiate(fromAppStoryboard: .Main)
-            self.navigationController?.pushViewController(vc, animated: true)
+            viewModel.verifyOtpAPI(type: "2")
         }
     }
     
@@ -75,10 +69,10 @@ class OTPViewController: UIViewController {
     
     // MARK: - Timer Handling
     func startTimer() {
-        remainingTime = 30
+        remainingTime = 90
         resendView.isHidden = true
         timerView.isHidden = false
-        labelTimer.text = "00:30 Sec"
+        labelTimer.text = "00:90 Sec"
         
         otpTimer?.invalidate()
         otpTimer = Timer.scheduledTimer(timeInterval: 1.0,
@@ -171,7 +165,7 @@ extension OTPViewController {
             showAlert(msg: "Please enter a valid 6-digit OTP.")
             return false
         }
-        
+        otpDigits = String.getString(textField1.text) + String.getString(textField2.text) + String.getString(textField3.text) + String.getString(textField4.text) + String.getString(textField5.text) + String.getString(textField6.text)
         print("Entered OTP: \(otpText)")
         return true
     }

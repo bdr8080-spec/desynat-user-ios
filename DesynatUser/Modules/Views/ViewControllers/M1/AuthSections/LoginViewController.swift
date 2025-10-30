@@ -10,6 +10,7 @@ import UIKit
 class LoginViewController: UIViewController {
 
     
+    @IBOutlet weak var countryCodeLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var emailMobileImageView: UIImageView!
@@ -17,6 +18,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var viewCountryCode: UIView!
     
     private lazy var viewModel = LoginViewModel(loginHostVC: self)
+    var countryCode: String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +33,7 @@ class LoginViewController: UIViewController {
 
     @IBAction func loginDidTapped(_ sender: Any) {
         if viewModel.validFields() {
-            kSharedSceneDelegate.navigateToUserHomeVc()
+            viewModel.loginApi()
         }
     }
     
@@ -75,6 +77,18 @@ class LoginViewController: UIViewController {
         sender.isSelected.toggle()
         passwordTextField.isSecureTextEntry.toggle()
     }
+    
+    @IBAction func countryDidTapped(_ sender: Any) {
+        CommonUtils.openPicker(controller: self) { code, name, callingCode in
+            self.setUpCountryCode(code: callingCode)
+            self.countryCode = callingCode
+        }
+    }
+    
+    func setUpCountryCode(code: String) {
+        self.countryCodeLabel.text = code
+    }
+    
 }
 
 extension LoginViewController: UITextFieldDelegate {

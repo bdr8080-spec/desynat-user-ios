@@ -9,6 +9,7 @@ import UIKit
 
 class ForgotPasswordViewController: UIViewController {
 
+    @IBOutlet weak var countryCodeTextField: UITextField!
     @IBOutlet weak var emailAddressTextField: UITextField!
     @IBOutlet weak var mobileTextField: UITextField!
     @IBOutlet weak var imgEmail: UIImageView!
@@ -18,6 +19,7 @@ class ForgotPasswordViewController: UIViewController {
     
     var mobileIsSelected: Bool = true
     private lazy var viewModel = ForgotPasswordViewModel(hostVC: self)
+    var countryCode: String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +30,7 @@ class ForgotPasswordViewController: UIViewController {
     
     @IBAction func continueDidTapped(_ sender: Any) {
         if viewModel.validFields(mobileIsSelected: mobileIsSelected) {
-            let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
-            vc.comingReason = .forgotPassword
-            vc.phoneNumber = self.mobileTextField.text?.trimmed() ?? ""
-            self.navigationController?.pushViewController(vc, animated: true)
+            viewModel.forgotPasswordApi(mobileIsSelected: mobileIsSelected)
         }
     }
     
@@ -53,6 +52,18 @@ class ForgotPasswordViewController: UIViewController {
         mobileView.isHidden = true
         emailView.isHidden = false
         mobileIsSelected = false
+    }
+    
+    
+    @IBAction func countryDidTapped(_ sender: Any) {
+        CommonUtils.openPicker(controller: self) { code, name, callingCode in
+            self.setUpCountryCode(code: callingCode)
+            self.countryCode = callingCode
+        }
+    }
+    
+    func setUpCountryCode(code: String) {
+        self.countryCodeTextField.text = code
     }
 }
 

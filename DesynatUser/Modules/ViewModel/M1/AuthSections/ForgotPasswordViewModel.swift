@@ -43,5 +43,33 @@ class ForgotPasswordViewModel: NSObject {
         hostVC.view.endEditing(true)
         return errorMessage == .none
     }
+    
+    func forgotPasswordApi(mobileIsSelected: Bool) {
+        var params: [String: Any] = [:]
+            
+            if mobileIsSelected {
+                params = [
+                    "type": "0", // 0 for mobile
+                    "country_code": hostVC.countryCode,
+                    "mobile": hostVC.mobileTextField.text?.trimmed() ?? ""
+                ]
+            } else {
+                params = [
+                    "type": "1", // 1 for email
+                    "email": hostVC.emailAddressTextField.text?.trimmed() ?? ""
+                ]
+            }
+        WebService.sharedInstance.forgotPasswordService(withParams: params) { (response) in
+            let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
+            vc.comingReason = .forgotPassword
+            if mobileIsSelected {
+                vc.phoneNumber = "\(self.hostVC.countryCode)\(self.hostVC.mobileTextField.text?.trimmed() ?? "")"
+            } else{
+                vc.phoneNumber = self.hostVC.emailAddressTextField.text?.trimmed() ?? ""
+            }
+            vc.userId = "\(response.id ?? 0)"
+            self.hostVC.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 
 }

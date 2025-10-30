@@ -507,6 +507,9 @@ experience the app in your preferred language.</string>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w2g-8W-eMS">
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <connections>
+                                                                            <action selector="countryDidTapped:" destination="7kr-ow-iSp" eventType="touchUpInside" id="Hx7-tH-NqE"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1005,6 +1008,7 @@ experience the app in your preferred language.</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="countryCodeLabel" destination="gzw-Kh-599" id="FTO-iX-5gl"/>
                         <outlet property="emailMobileImageView" destination="h5n-iV-45l" id="iuj-Oy-xH3"/>
                         <outlet property="emailTextField" destination="Yq1-uj-4xK" id="k7e-so-Oxa"/>
                         <outlet property="passwordTextField" destination="9s4-R1-Uqd" id="kbr-7S-4mK"/>
@@ -1560,15 +1564,15 @@ experience the app in your preferred language.</string>
                                                                 <rect key="frame" x="0.0" y="25" width="353" height="50"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPp-p1-X7H">
-                                                                        <rect key="frame" x="15" y="5" width="60" height="40"/>
+                                                                        <rect key="frame" x="15" y="5" width="75" height="40"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+91" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xgt-Py-RO1">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="20" height="40"/>
+                                                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+91" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="Xgt-Py-RO1">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                 <textInputTraits key="textInputTraits"/>
                                                                             </textField>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="country" translatesAutoresizingMaskIntoConstraints="NO" id="gnD-rd-z7l">
-                                                                                <rect key="frame" x="30" y="5" width="30" height="30"/>
+                                                                                <rect key="frame" x="45" y="5" width="30" height="30"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" secondItem="gnD-rd-z7l" secondAttribute="height" id="Bna-gl-TE0"/>
                                                                                     <constraint firstAttribute="height" constant="30" id="zLO-3m-udF"/>
@@ -1577,8 +1581,8 @@ experience the app in your preferred language.</string>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" constant="60" id="4zV-GV-shg"/>
-                                                                            <constraint firstItem="gnD-rd-z7l" firstAttribute="leading" secondItem="Xgt-Py-RO1" secondAttribute="trailing" constant="10" id="BXH-xL-GDD"/>
+                                                                            <constraint firstAttribute="width" constant="75" id="4zV-GV-shg"/>
+                                                                            <constraint firstItem="gnD-rd-z7l" firstAttribute="leading" secondItem="Xgt-Py-RO1" secondAttribute="trailing" constant="5" id="BXH-xL-GDD"/>
                                                                             <constraint firstItem="Xgt-Py-RO1" firstAttribute="top" secondItem="hPp-p1-X7H" secondAttribute="top" id="PGr-zH-2I7"/>
                                                                             <constraint firstItem="gnD-rd-z7l" firstAttribute="centerY" secondItem="hPp-p1-X7H" secondAttribute="centerY" id="Ri5-N0-XqI"/>
                                                                             <constraint firstAttribute="bottom" secondItem="Xgt-Py-RO1" secondAttribute="bottom" id="WB6-Hf-hL6"/>
@@ -1586,8 +1590,15 @@ experience the app in your preferred language.</string>
                                                                             <constraint firstAttribute="trailing" secondItem="gnD-rd-z7l" secondAttribute="trailing" id="qjJ-Pj-pV5"/>
                                                                         </constraints>
                                                                     </view>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fzm-R8-yST">
+                                                                        <rect key="frame" x="15" y="5" width="75" height="40"/>
+                                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <connections>
+                                                                            <action selector="countryCodeDidTapped:" destination="8eR-fP-u5v" eventType="touchUpInside" id="rKZ-qt-lcV"/>
+                                                                        </connections>
+                                                                    </button>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Mobile Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YQH-yH-Lcq">
-                                                                        <rect key="frame" x="85" y="5" width="248" height="40"/>
+                                                                        <rect key="frame" x="100" y="5" width="233" height="40"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                         <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                                                     </textField>
@@ -1596,9 +1607,13 @@ experience the app in your preferred language.</string>
                                                                 <constraints>
                                                                     <constraint firstAttribute="bottom" secondItem="YQH-yH-Lcq" secondAttribute="bottom" constant="5" id="2dD-Du-HbB"/>
                                                                     <constraint firstAttribute="trailing" secondItem="YQH-yH-Lcq" secondAttribute="trailing" constant="20" id="6kp-Bc-RVK"/>
+                                                                    <constraint firstItem="Fzm-R8-yST" firstAttribute="top" secondItem="hPp-p1-X7H" secondAttribute="top" id="H6B-R4-Pl8"/>
                                                                     <constraint firstAttribute="bottom" secondItem="hPp-p1-X7H" secondAttribute="bottom" constant="5" id="T82-T5-AIR"/>
+                                                                    <constraint firstItem="Fzm-R8-yST" firstAttribute="bottom" secondItem="hPp-p1-X7H" secondAttribute="bottom" id="Ufs-bR-egr"/>
                                                                     <constraint firstItem="YQH-yH-Lcq" firstAttribute="leading" secondItem="hPp-p1-X7H" secondAttribute="trailing" constant="10" id="UzB-xF-r1K"/>
                                                                     <constraint firstItem="YQH-yH-Lcq" firstAttribute="top" secondItem="j5r-Hf-1nx" secondAttribute="top" constant="5" id="aON-VF-XwF"/>
+                                                                    <constraint firstItem="Fzm-R8-yST" firstAttribute="leading" secondItem="hPp-p1-X7H" secondAttribute="leading" id="cdj-9v-TGr"/>
+                                                                    <constraint firstItem="Fzm-R8-yST" firstAttribute="trailing" secondItem="hPp-p1-X7H" secondAttribute="trailing" id="huN-my-Bmn"/>
                                                                     <constraint firstItem="hPp-p1-X7H" firstAttribute="top" secondItem="j5r-Hf-1nx" secondAttribute="top" constant="5" id="mBm-bJ-BH6"/>
                                                                     <constraint firstItem="hPp-p1-X7H" firstAttribute="leading" secondItem="j5r-Hf-1nx" secondAttribute="leading" constant="15" id="qXv-IY-4aW"/>
                                                                     <constraint firstAttribute="height" constant="50" id="wi2-wk-Xzi"/>
@@ -1692,7 +1707,7 @@ experience the app in your preferred language.</string>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ge6-wQ-xQl">
                                                                         <rect key="frame" x="20" y="5" width="271" height="40"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
-                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                                     </textField>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMT-go-Ntr">
                                                                         <rect key="frame" x="311" y="14" width="22" height="22"/>
@@ -1757,7 +1772,7 @@ experience the app in your preferred language.</string>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter confirm password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b1m-68-d5Y">
                                                                         <rect key="frame" x="20" y="5" width="271" height="40"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
-                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                                     </textField>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dKd-Pi-fLW">
                                                                         <rect key="frame" x="311" y="14" width="22" height="22"/>
@@ -2094,6 +2109,7 @@ experience the app in your preferred language.</string>
                     </view>
                     <connections>
                         <outlet property="confirmPasswordTextField" destination="b1m-68-d5Y" id="bEu-hi-hBU"/>
+                        <outlet property="countryCodeTextField" destination="Xgt-Py-RO1" id="Lp1-QW-qbg"/>
                         <outlet property="createPasswordTextField" destination="ge6-wQ-xQl" id="TWO-uK-YvL"/>
                         <outlet property="emailTextField" destination="3BA-0Y-g0z" id="FAy-Kh-ZAs"/>
                         <outlet property="fullNameTextField" destination="3Cq-K7-tcI" id="ajz-h0-biP"/>
@@ -2309,15 +2325,15 @@ send an OTP to verify that it’s you</string>
                                                         <rect key="frame" x="0.0" y="25" width="353" height="50"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Js8-al-HOL">
-                                                                <rect key="frame" x="15" y="5" width="60" height="40"/>
+                                                                <rect key="frame" x="15" y="5" width="75" height="40"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+91" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8NG-j1-NA0">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="20" height="40"/>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+91" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="8NG-j1-NA0">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="35" height="40"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="country" translatesAutoresizingMaskIntoConstraints="NO" id="uKM-TH-sM3">
-                                                                        <rect key="frame" x="30" y="5" width="30" height="30"/>
+                                                                        <rect key="frame" x="45" y="5" width="30" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" secondItem="uKM-TH-sM3" secondAttribute="height" id="4t0-oY-ZeT"/>
                                                                             <constraint firstAttribute="height" constant="30" id="TQf-iw-WlL"/>
@@ -2329,14 +2345,21 @@ send an OTP to verify that it’s you</string>
                                                                     <constraint firstItem="8NG-j1-NA0" firstAttribute="leading" secondItem="Js8-al-HOL" secondAttribute="leading" id="3r0-xH-Pvw"/>
                                                                     <constraint firstItem="8NG-j1-NA0" firstAttribute="top" secondItem="Js8-al-HOL" secondAttribute="top" id="9Lt-RP-8Ps"/>
                                                                     <constraint firstItem="uKM-TH-sM3" firstAttribute="centerY" secondItem="Js8-al-HOL" secondAttribute="centerY" id="EIu-FW-edv"/>
-                                                                    <constraint firstAttribute="width" constant="60" id="VHC-YT-oaS"/>
+                                                                    <constraint firstAttribute="width" constant="75" id="VHC-YT-oaS"/>
                                                                     <constraint firstAttribute="trailing" secondItem="uKM-TH-sM3" secondAttribute="trailing" id="eA3-oe-Xlz"/>
                                                                     <constraint firstAttribute="bottom" secondItem="8NG-j1-NA0" secondAttribute="bottom" id="yTN-0Y-oDH"/>
                                                                     <constraint firstItem="uKM-TH-sM3" firstAttribute="leading" secondItem="8NG-j1-NA0" secondAttribute="trailing" constant="10" id="zM7-CA-CGh"/>
                                                                 </constraints>
                                                             </view>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9N1-WZ-mxK">
+                                                                <rect key="frame" x="15" y="5" width="75" height="40"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <connections>
+                                                                    <action selector="countryDidTapped:" destination="Vc5-TY-arw" eventType="touchUpInside" id="Yx4-cH-HET"/>
+                                                                </connections>
+                                                            </button>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Mobile Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tMU-eA-IYh">
-                                                                <rect key="frame" x="85" y="5" width="248" height="40"/>
+                                                                <rect key="frame" x="100" y="5" width="233" height="40"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                                             </textField>
@@ -2346,10 +2369,14 @@ send an OTP to verify that it’s you</string>
                                                             <constraint firstAttribute="bottom" secondItem="Js8-al-HOL" secondAttribute="bottom" constant="5" id="1mD-IN-ypv"/>
                                                             <constraint firstAttribute="bottom" secondItem="tMU-eA-IYh" secondAttribute="bottom" constant="5" id="5PZ-5B-PIT"/>
                                                             <constraint firstAttribute="height" constant="50" id="85P-Hx-hUX"/>
+                                                            <constraint firstItem="9N1-WZ-mxK" firstAttribute="trailing" secondItem="Js8-al-HOL" secondAttribute="trailing" id="9vy-Z7-Qdx"/>
+                                                            <constraint firstItem="9N1-WZ-mxK" firstAttribute="leading" secondItem="Js8-al-HOL" secondAttribute="leading" id="Sin-1B-knE"/>
                                                             <constraint firstItem="tMU-eA-IYh" firstAttribute="leading" secondItem="Js8-al-HOL" secondAttribute="trailing" constant="10" id="WGy-dv-dk8"/>
+                                                            <constraint firstItem="9N1-WZ-mxK" firstAttribute="top" secondItem="Js8-al-HOL" secondAttribute="top" id="doe-u6-MKW"/>
                                                             <constraint firstItem="Js8-al-HOL" firstAttribute="top" secondItem="cPO-U5-dbh" secondAttribute="top" constant="5" id="fwk-fZ-yyq"/>
                                                             <constraint firstItem="Js8-al-HOL" firstAttribute="leading" secondItem="cPO-U5-dbh" secondAttribute="leading" constant="15" id="i0o-a4-6G0"/>
                                                             <constraint firstAttribute="trailing" secondItem="tMU-eA-IYh" secondAttribute="trailing" constant="20" id="jNU-kJ-qxH"/>
+                                                            <constraint firstItem="9N1-WZ-mxK" firstAttribute="bottom" secondItem="Js8-al-HOL" secondAttribute="bottom" id="kMD-Hq-iUD"/>
                                                             <constraint firstItem="tMU-eA-IYh" firstAttribute="top" secondItem="cPO-U5-dbh" secondAttribute="top" constant="5" id="s0p-Mu-yBz"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
@@ -2498,6 +2525,7 @@ send an OTP to verify that it’s you</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="countryCodeTextField" destination="8NG-j1-NA0" id="bS4-MW-IlG"/>
                         <outlet property="emailAddressTextField" destination="I1g-X5-FsU" id="oGB-Uh-y5c"/>
                         <outlet property="emailView" destination="mcg-gK-Z6f" id="RqW-nl-5rF"/>
                         <outlet property="imgEmail" destination="Sd2-Hg-O2V" id="M3E-Ua-ivU"/>
@@ -2571,7 +2599,7 @@ letters and special characters.</string>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R9i-lu-qBr" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R9i-lu-qBr" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="25" width="353" height="50"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rWQ-B2-elM">
@@ -2636,7 +2664,7 @@ letters and special characters.</string>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Efr-do-VIU" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Efr-do-VIU" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="25" width="353" height="50"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6OO-Mm-fg2">
@@ -3539,7 +3567,7 @@ miss out</string>
         <image name="done" width="90.333335876464844" height="89.666664123535156"/>
         <image name="email" width="22" height="22"/>
         <image name="eyeClose" width="22" height="16.666666030883789"/>
-        <image name="eye_open" width="24" height="24"/>
+        <image name="eye_open" width="128" height="128"/>
         <image name="facebook" width="44" height="48"/>
         <image name="forwardBack" width="56" height="56"/>
         <image name="forwardNext" width="56" height="56"/>

@@ -18,6 +18,7 @@ enum StringConstant: String {
 }
 
 enum AlertConstant: String {
+
     case none = ""
     /// Network validation
     case noInternet                 = "Network connection failed. Please check your internet and try again."

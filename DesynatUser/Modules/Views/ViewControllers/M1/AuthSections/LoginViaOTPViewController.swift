@@ -16,7 +16,6 @@ class LoginViaOTPViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         phoneTextField.delegate = self
-
     }
     
     @IBAction func signupDidTapped(_ sender: Any) {
@@ -31,10 +30,7 @@ class LoginViaOTPViewController: UIViewController {
     
     @IBAction func continueDidTapped(_ sender: Any) {
         if viewModel.validFields() {
-            let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
-            vc.comingReason = .loginViaOTP
-            vc.phoneNumber = self.phoneTextField.text?.trimmed() ?? ""
-            self.navigationController?.pushViewController(vc, animated: true)
+            viewModel.loginViaOTPApi()
         }
     }
     

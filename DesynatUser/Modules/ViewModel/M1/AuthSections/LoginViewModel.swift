@@ -54,15 +54,12 @@ class LoginViewModel: NSObject {
     }
     
     func loginApi() {
-        //        let params: [String:Any] = [
-        //            APIKeys.countryCode: loginHostVC.lblCountryCode.text ?? "+91",
-        //            APIKeys.emailMobileNo: loginHostVC.txtEmailMobile.text ?? " ",
-        //            APIKeys.password: loginHostVC.txtPassword.text ?? "",
-        //            APIKeys.roleId: kSharedUserDefaults.getStringFor(key: .userId) ?? ""
-        //        ]
-        //        WebService.sharedInstance.loginWithEmailMobileService(withParams: params) { (response) in
-        //        kSharedSceneDelegate.navigateToDealerHomeVc()
-        //        }
+        let params: [String:Any] = [
+            "email_mobile": loginHostVC.emailTextField.text?.trimmed() ?? "",
+            "password": loginHostVC.passwordTextField.text?.trimmed() ?? ""]
+        WebService.sharedInstance.loginUserService(withParams: params) { (response) in
+            kSharedSceneDelegate.navigateToUserHomeVc()
+        }
     }
 }
 

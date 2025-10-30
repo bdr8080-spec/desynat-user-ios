@@ -5,17 +5,34 @@
 //  Created by Rakhi Kumari on 22/09/25.
 //
 
-
 import Foundation
 
-/// User For User Default. Add Desired Key to save associated value in user default
+
 enum UserDefaultsKey : String {
     case deviceToken
     case accessToken
+    case userLocation
+    case user
+    case isSkip
+    case selectedLanguage
+    case defaultLanguage
+    case language
     case sessionToken
+    case userId
 }
 
 extension UserDefaults {
+    func isAppInstalled() -> Bool {
+        return self.bool(forKey: kIsAppInstalled)
+    }
+    
+    func setAppInstalled(installed: Bool) {
+        self.set(installed, forKey: kIsAppInstalled)
+        self.synchronize()
+    }
+    func saveStringFor(Key: UserDefaultsKey, value:String?) {
+        self.saveValue(value: value, for: Key)
+    }
     
     func saveValue<T>(Key: UserDefaultsKey, value:T) {
         self.set(value, forKey: Key.rawValue)
@@ -46,6 +63,22 @@ extension UserDefaults {
     
     func saveBoolFor(key:UserDefaultsKey, value:Bool) {
         self.saveValue(value: value, for: key)
+    }
+    
+    func getModelFor<T:Decodable>(key:UserDefaultsKey,
+                                  model:T.Type,
+                                  completion:@escaping(_ result:Result<T, UserDefaulError>) -> Void) {
+        if let data = self.object(forKey: key.rawValue) as? Data {
+            do {
+                let response = try JSONDecoder().decode(model, from: data)
+                completion(.success(response))
+            } catch let err {
+                printInConsole("Error Fetching model from user default\n\(err)")
+                completion(.failure(.errorDecodingData))
+            }
+        } else {
+            completion(.failure(.noDataFound))
+        }
     }
     
     private func saveValue(value:Any?, for Key:UserDefaultsKey) {
