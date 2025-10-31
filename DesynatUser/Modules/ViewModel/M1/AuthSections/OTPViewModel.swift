@@ -40,4 +40,18 @@ class OTPViewModel: NSObject {
             }
         }
     }
+
+    func resendOtpAPI() {
+        var params: [String: Any] = ["email_mobile": hostVC.phoneNumber ?? ""]
+        if hostVC.isEnteredPhoneNumber {
+            params["country_code"] = hostVC.countryCode
+            params["type"] = "0"
+        } else {
+            params["type"] = "1"
+        }
+    
+        WebService.sharedInstance.resendOTPService(withParams: params){ otp in
+            
+        }
+    }
 }

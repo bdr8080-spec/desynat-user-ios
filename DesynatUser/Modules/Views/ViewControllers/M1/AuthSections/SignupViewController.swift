@@ -8,7 +8,7 @@
 import UIKit
 
 class SignupViewController: UIViewController {
-
+    
     @IBOutlet weak var countryCodeTextField: UITextField!
     @IBOutlet weak var profileImageView: CustomImageView!
     @IBOutlet weak var fullNameTextField: UITextField!
@@ -21,13 +21,14 @@ class SignupViewController: UIViewController {
     var selectedImage: UIImage?
     lazy private var viewModel = SignupViewModel(hostVC: self)
     var countryCode: String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
+    var selectedProfileImageUrl: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mobileTextField.delegate = self
         emailTextField.delegate = self
     }
-
+    
     @IBAction func conitnueDidTapped(_ sender: Any) {
         if viewModel.validFields() {
             viewModel.signupApi()
@@ -37,12 +38,12 @@ class SignupViewController: UIViewController {
     
     @IBAction func signInDidTapped(_ sender: Any) {
         if let navController = self.navigationController,
-               let loginVC = navController.viewControllers.first(where: { $0 is LoginViewController }) {
-                navController.popToViewController(loginVC, animated: true)
-            } else {
-                let vc = LoginViewController.instantiate(fromAppStoryboard: .Main)
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+           let loginVC = navController.viewControllers.first(where: { $0 is LoginViewController }) {
+            navController.popToViewController(loginVC, animated: true)
+        } else {
+            let vc = LoginViewController.instantiate(fromAppStoryboard: .Main)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     @IBAction func continueAsGuestDidTapped(_ sender: Any) {
@@ -68,6 +69,12 @@ class SignupViewController: UIViewController {
                 self.profileImageView.image = image
                 self.selectedImage = image
             }
+            self.viewModel.uploadDocument(file: image, isImage: true) { [weak self] uploadedUrl in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    self.selectedProfileImageUrl = uploadedUrl
+                }
+            }
         }
     }
     
@@ -75,7 +82,7 @@ class SignupViewController: UIViewController {
         sender.isSelected.toggle()
         createPasswordTextField.isSecureTextEntry.toggle()
     }
-
+    
     @IBAction func confirmPasswordEyeDidTapped(_ sender: UIButton) {
         sender.isSelected.toggle()
         confirmPasswordTextField.isSecureTextEntry.toggle()

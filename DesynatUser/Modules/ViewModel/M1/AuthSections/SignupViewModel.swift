@@ -90,14 +90,23 @@ class SignupViewModel: NSObject {
             "mobile": hostVC.mobileTextField.text?.trimmed() ?? "",
             "email": hostVC.emailTextField.text?.trimmed() ?? "",
             "password": hostVC.createPasswordTextField.text?.trimmed() ?? "",
-            "confirm_password": hostVC.confirmPasswordTextField.text?.trimmed() ?? ""]
+            "confirm_password": hostVC.confirmPasswordTextField.text?.trimmed() ?? "",
+            "profile_image": hostVC.selectedProfileImageUrl]
         WebService.sharedInstance.registerUserService(withParams: params) { (response) in
             let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
             vc.comingReason = .signup
-            let phoneNumber = "\(self.hostVC.countryCode)\(self.hostVC.mobileTextField.text?.trimmed() ?? "")"
-            vc.phoneNumber = phoneNumber
+            vc.phoneNumber = self.hostVC.mobileTextField.text?.trimmed() ?? ""
+            vc.countryCode = self.hostVC.countryCode
+            vc.isEnteredPhoneNumber = true
             vc.userId = "\(response.id ?? 0)"
             self.hostVC.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func uploadDocument(file: Any, isImage: Bool, completion: @escaping(String) -> Void) {
+        let param:MultipartUpload = MultipartUpload(fileName: "image", file: file, mimeType: isImage ? .image : .pdf)
+        WebService.sharedInstance.uploadFile(withParams: param) { url, msg, code in
+            completion(url)
         }
     }
 }

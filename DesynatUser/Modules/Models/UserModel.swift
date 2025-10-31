@@ -9,7 +9,7 @@
 // MARK: - UserModel
 struct UserModel: Codable {
     let id: Int?
-        let fullName, countryCode, mobile, email: String?
+        let fullName, countryCode, mobile, email, profileImage: String?
         let emailVerifiedAt: String?
         let otp, otpVerify, deviceType: String?
         let deviceToken, dataLet, long: String?
@@ -30,5 +30,6 @@ struct UserModel: Codable {
             case createdAt = "created_at"
             case updatedAt = "updated_at"
             case accessToken
+            case profileImage = "profile_image"
         }
 }

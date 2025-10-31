@@ -54,9 +54,21 @@ class LoginViewModel: NSObject {
     }
     
     func loginApi() {
-        let params: [String:Any] = [
-            "email_mobile": loginHostVC.emailTextField.text?.trimmed() ?? "",
-            "password": loginHostVC.passwordTextField.text?.trimmed() ?? ""]
+        let input = loginHostVC.emailTextField.text?.trimmed() ?? ""
+            let password = loginHostVC.passwordTextField.text?.trimmed() ?? ""
+            
+            var params: [String: Any] = [
+                "password": password,
+                "email_mobile": input]
+            if input.isEmail() {
+                params["type"] = "1"
+            } else if input.isPhoneNumber() {
+                params["country_code"] = loginHostVC.countryCode
+                params["type"] = "0"
+            } else {
+                loginHostVC.showAlert(msg: AlertConstant.EnterValidEmailorMobile.rawValue)
+                return
+            }
         WebService.sharedInstance.loginUserService(withParams: params) { (response) in
             kSharedSceneDelegate.navigateToUserHomeVc()
         }

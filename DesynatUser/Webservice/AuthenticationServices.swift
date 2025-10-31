@@ -42,6 +42,21 @@ extension WebService {
         }
     }
     
+    func resendOTPService(withParams dictParams: Dictionary<String, Any>, completion: @escaping (_ user: UserModel) -> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.resendOtp), requestMethod: .post, requestParams: dictParams, encoding: JSONEncoding.default, requestModel: UserModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                if let error {
+                    UIApplication.shared.topViewController()?.showAlert(msg: error)
+                } else if let response {
+                    CommonUtils.showToast(message: message ?? "OTP Sent Successfully")
+                    completion(response)
+                }
+            }
+        }
+    }
+    
     func loginUserService(withParams dictParams: Dictionary<String, Any>, completion: @escaping (_ user: UserModel) -> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.loginUser), requestMethod: .post, requestParams: dictParams, encoding: JSONEncoding.default, requestModel: UserModel.self) { result, code in
@@ -84,6 +99,9 @@ extension WebService {
                 if let error {
                     UIApplication.shared.topViewController()?.showAlert(msg: error)
                 } else if let response {
+                    DispatchQueue.main.async {
+                        CommonUtils.showToast(message: message ?? "OTP Sent Successfully")
+                    }
                     completion(response)
                 }
             }

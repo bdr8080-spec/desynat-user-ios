@@ -32,8 +32,10 @@ class OTPViewController: UIViewController {
     var remainingTime = 90
     var otpTimer: Timer?
     var phoneNumber: String?
+    var countryCode: String?
     var userId: String = ""
     var otpDigits = ""
+    var isEnteredPhoneNumber: Bool = false
     lazy private var viewModel = OTPViewModel(hostVC: self)
     
     // MARK: - Lifecycle
@@ -43,7 +45,12 @@ class OTPViewController: UIViewController {
         startTimer()
         resendView.isHidden = true
         textField1.becomeFirstResponder()
-        phoneNumberLabel.text = phoneNumber
+        if isEnteredPhoneNumber {
+            phoneNumberLabel.text = "\(countryCode ?? "")\(phoneNumber ?? "")"
+        } else {
+            phoneNumberLabel.text = phoneNumber
+        }
+        
     }
     
     // MARK: - Actions
@@ -65,6 +72,7 @@ class OTPViewController: UIViewController {
     
     @IBAction func buttonResend(_ sender: UIButton) {
         startTimer()
+        viewModel.resendOtpAPI()
     }
     
     // MARK: - Timer Handling

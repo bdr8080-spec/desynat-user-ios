@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
         passwordTextField.delegate = self
         emailTextField.delegate = self
         viewCountryCode.isHidden = true
-        self.txtFieldLeading.constant = -55
+        self.txtFieldLeading.constant = -52
         emailMobileImageView.image = UIImage(named: "email")
     }
     
@@ -106,8 +106,8 @@ extension LoginViewController: UITextFieldDelegate {
             if !currentText.isNumber() {
                 self.viewCountryCode.isHidden = true
                 emailMobileImageView.image = UIImage(named: "email")
-                self.txtFieldLeading.constant = -55
-                validation = StringValidation(string: currentText, characterCount: 55, validation: .emailId)
+                self.txtFieldLeading.constant = -52
+                validation = StringValidation(string: currentText, characterCount: 52, validation: .emailId)
             } else {
                 self.viewCountryCode.isHidden = false
                 emailMobileImageView.image = UIImage(named: "phone")

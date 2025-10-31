@@ -10,12 +10,20 @@ import UIKit
 class LoginViaOTPViewController: UIViewController {
 
     @IBOutlet weak var phoneTextField: UITextField!
+    @IBOutlet weak var emailMobileImageView: UIImageView!
+    @IBOutlet weak var txtFieldLeading: NSLayoutConstraint!
+    @IBOutlet weak var viewCountryCode: UIView!
+    @IBOutlet weak var countryCodeLabel: UILabel!
     
     private lazy var viewModel = LoginViaOTPViewModel(loginHostVC: self)
+    var countryCode: String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
     
     override func viewDidLoad() {
         super.viewDidLoad()
         phoneTextField.delegate = self
+        viewCountryCode.isHidden = true
+        self.txtFieldLeading.constant = -52
+        emailMobileImageView.image = UIImage(named: "email")
     }
     
     @IBAction func signupDidTapped(_ sender: Any) {
@@ -52,37 +60,49 @@ class LoginViaOTPViewController: UIViewController {
     
     @IBAction func googleDidTapped(_ sender: Any) {
     }
+    
+    @IBAction func countryDidTapped(_ sender: Any) {
+        CommonUtils.openPicker(controller: self) { code, name, callingCode in
+            self.setUpCountryCode(code: callingCode)
+            self.countryCode = callingCode
+        }
+    }
+    
+    func setUpCountryCode(code: String) {
+        self.countryCodeLabel.text = code
+    }
 }
 
 extension LoginViaOTPViewController: UITextFieldDelegate {
     
-    func textField(_ textField: UITextField,
-                   shouldChangeCharactersIn range: NSRange,
-                   replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        // Safely unwrap the current text
-        guard let currentText = textField.text else { return true }
-        
-        // Construct the updated text after the change
-        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
-        
-        // Prevent leading space
-        if updatedText.hasPrefix(" ") {
-            return false
-        }
-        
+        let currentText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         var validation: StringValidation?
         
-        // Validate mobile number
-        if textField == phoneTextField {
-            validation = StringValidation(string: updatedText, characterCount: 15, validation: .mobileNo)
+        if textField == self.phoneTextField {
+            if currentText.hasPrefix(" ") {
+                return false
+            }
+            
+            if !currentText.isNumber() {
+                self.viewCountryCode.isHidden = true
+                emailMobileImageView.image = UIImage(named: "email")
+                self.txtFieldLeading.constant = -52
+                validation = StringValidation(string: currentText, characterCount: 52, validation: .emailId)
+            } else {
+                self.viewCountryCode.isHidden = false
+                emailMobileImageView.image = UIImage(named: "phone")
+                self.txtFieldLeading.constant = 12
+                validation = StringValidation(string: currentText, characterCount: 15, validation: .mobileNo)
+            }
+    
+            if let data = validation {
+                return data.validate()
+            } else {
+                return true
+            }
         }
-        
-        // Perform validation if applicable
-        if let validation = validation {
-            return validation.validate()
-        }
-        
         return true
     }
 }

@@ -11,6 +11,7 @@ import UIKit
 class LoginViaOTPViewModel: NSObject {
     
     private var loginHostVC: LoginViaOTPViewController
+    private var isEnterPhoneNumber: Bool = false
     
     init(loginHostVC: LoginViaOTPViewController) {
         self.loginHostVC = loginHostVC
@@ -37,13 +38,24 @@ class LoginViaOTPViewModel: NSObject {
     }
     
     func loginViaOTPApi() {
-        let params: [String:Any] = ["email_mobile": loginHostVC.phoneTextField.text?.trimmed() ?? ""]
+        let input = loginHostVC.phoneTextField.text?.trimmed() ?? ""
+        var params: [String:Any] = ["email_mobile": loginHostVC.phoneTextField.text?.trimmed() ?? ""]
+        if input.isEmail() {
+            isEnterPhoneNumber = false
+            params["type"] = "1"
+        }else if input.isPhoneNumber() {
+            isEnterPhoneNumber = true
+            params["country_code"] = loginHostVC.countryCode
+            params["type"] = "0"
+        }
+        
         WebService.sharedInstance.loginUserViaOTPService(withParams: params) { (response) in
             let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
             vc.comingReason = .loginViaOTP
-//            let phoneNumber = "\(self.hostVC.countryCode)\(self.loginHostVC.phoneTextField.text?.trimmed() ?? "")"
             vc.phoneNumber = self.loginHostVC.phoneTextField.text?.trimmed() ?? ""
             vc.userId = "\(response.id ?? 0)"
+            vc.countryCode = self.loginHostVC.countryCode
+            vc.isEnteredPhoneNumber = self.isEnterPhoneNumber
             self.loginHostVC.navigationController?.pushViewController(vc, animated: true)
         }
     }
