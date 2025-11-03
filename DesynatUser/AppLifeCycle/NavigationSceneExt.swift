@@ -29,9 +29,23 @@ extension SceneDelegate {
 //        navigateTo(vc: SideMenuVC.instantiate(fromAppStoryboard: .Home))
 //    }
     
+    public func navigateToLoginVc() {
+        navigateTo(vc: LoginViewController.instantiate(fromAppStoryboard: .Main))
+    }
+    
     // Navigate to Home Vc
     public func navigateToUserHomeVc() {
         let vc = TabBarVC.instantiate(fromAppStoryboard: .Home)
+        navigateTo(vc: vc)
+    }
+    
+    public func navigateToWelcomeScreen() {
+        let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
+        navigateTo(vc: vc)
+    }
+    
+    public func navigateToSelectLanguage() {
+        let vc = SelectLanguageViewController.instantiate(fromAppStoryboard:.Main)
         navigateTo(vc: vc)
     }
 //    public func navigateToAgentHomeVc() {

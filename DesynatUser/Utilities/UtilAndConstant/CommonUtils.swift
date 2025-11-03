@@ -261,7 +261,7 @@ class CommonUtils {
         }
     
     static func showToast(message: String) {
-        FTIndicator.showNotification(withTitle: "Altair",
+        FTIndicator.showNotification(withTitle: "Desynat User",
         message: message.count>0 ? message: "Message")
         
     }

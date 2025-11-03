@@ -11,10 +11,11 @@ import UIKit
 let kSharedUserDefaults         = UserDefaults.standard
 let kSharedAppDelegate          = UIApplication.shared.delegate as! AppDelegate
 let kSharedSceneDelegate        = UIApplication.shared.connectedScenes.first!.delegate as! SceneDelegate
+
 let kScreenWidth = UIScreen.main.bounds.size.width
 let kScreenHeight = UIScreen.main.bounds.size.height
 let kCurrency = "BHD"
-//var globalWindow:UIWindow?
+var globalWindow:UIWindow?
 
 
 

@@ -224,6 +224,7 @@ experience the app in your preferred language.</string>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="sat-2Q-FoV"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="arabicView" destination="BjZ-wU-asb" id="6sA-Xq-nB6"/>
                         <outlet property="englishView" destination="Dqc-qU-2MA" id="vAm-R7-8sy"/>
@@ -316,7 +317,7 @@ experience the app in your preferred language.</string>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="v7O-ZR-tPa"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="20"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -917,7 +918,7 @@ experience the app in your preferred language.</string>
                                                 </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pPy-FT-JXg">
-                                                <rect key="frame" x="83.666666666666671" y="636" width="225.66666666666663" height="30"/>
+                                                <rect key="frame" x="85.666666666666671" y="636" width="221.66666666666663" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don’t have an account?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agY-Ky-fdi">
                                                         <rect key="frame" x="0.0" y="0.0" width="166.66666666666666" height="30"/>
@@ -926,7 +927,7 @@ experience the app in your preferred language.</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nWR-W7-6Qa" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
-                                                        <rect key="frame" x="171.66666666666669" y="0.0" width="54" height="30"/>
+                                                        <rect key="frame" x="167.66666666666669" y="0.0" width="54" height="30"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="14"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -944,7 +945,7 @@ experience the app in your preferred language.</string>
                                                     <constraint firstItem="nWR-W7-6Qa" firstAttribute="centerY" secondItem="pPy-FT-JXg" secondAttribute="centerY" id="3Qk-Hk-Z0w"/>
                                                     <constraint firstAttribute="trailing" secondItem="nWR-W7-6Qa" secondAttribute="trailing" id="FEo-4P-p6y"/>
                                                     <constraint firstAttribute="height" constant="30" id="V7l-6z-lCd"/>
-                                                    <constraint firstItem="nWR-W7-6Qa" firstAttribute="leading" secondItem="agY-Ky-fdi" secondAttribute="trailing" constant="5" id="cWQ-HZ-3Jc"/>
+                                                    <constraint firstItem="nWR-W7-6Qa" firstAttribute="leading" secondItem="agY-Ky-fdi" secondAttribute="trailing" constant="1" id="cWQ-HZ-3Jc"/>
                                                     <constraint firstItem="agY-Ky-fdi" firstAttribute="centerY" secondItem="pPy-FT-JXg" secondAttribute="centerY" id="jrJ-Q3-ujd"/>
                                                     <constraint firstItem="nWR-W7-6Qa" firstAttribute="top" secondItem="pPy-FT-JXg" secondAttribute="top" id="qIC-65-gSt"/>
                                                     <constraint firstItem="agY-Ky-fdi" firstAttribute="top" secondItem="pPy-FT-JXg" secondAttribute="top" id="uLn-jC-Zhp"/>
@@ -2593,7 +2594,7 @@ letters and special characters.</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yMA-8N-2rl">
                                                 <rect key="frame" x="0.0" y="0.0" width="353" height="75"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCY-Kr-sXV">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create New Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCY-Kr-sXV">
                                                         <rect key="frame" x="0.0" y="0.0" width="353" height="20"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2658,7 +2659,7 @@ letters and special characters.</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2X-3n-gVZ">
                                                 <rect key="frame" x="0.0" y="90" width="353" height="75"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O88-3z-fkD">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm New Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O88-3z-fkD">
                                                         <rect key="frame" x="0.0" y="0.0" width="353" height="20"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2810,12 +2811,12 @@ letters and special characters.</string>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="lTF-oc-78u"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="nyQ-Xm-Lqo"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bxf-jq-LxV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="788.54961832061065" y="-28.169014084507044"/>
+            <point key="canvasLocation" x="799" y="-29"/>
         </scene>
         <!--Login ViaOTP View Controller-->
         <scene sceneID="cb0-em-72B">

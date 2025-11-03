@@ -85,6 +85,7 @@ extension WebService {
                     Global.shared.user = response
                     kSharedUserDefaults.saveModelFor(key: .user, value: response)
                     //                    kSharedUserDefaults.saveStringFor(Key: .accessToken, value: String.getString(response.tokens?.accessToken))
+                    CommonUtils.showToast(message: message ?? "Login Successfully")
                     completion(response)
                 }
             }

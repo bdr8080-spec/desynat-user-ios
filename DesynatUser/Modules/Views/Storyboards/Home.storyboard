@@ -655,7 +655,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1511" y="-35"/>
+            <point key="canvasLocation" x="-1521" y="87"/>
         </scene>
         <!--Tab BarVC-->
         <scene sceneID="HoA-D3-9Ij">
@@ -871,18 +871,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile Screen" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="voK-dq-88B">
-                                <rect key="frame" x="142" y="439.66666666666669" width="109.33333333333331" height="22.666666666666686"/>
-                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2aT-Nf-Hu3">
+                                <rect key="frame" x="146.66666666666666" y="408.66666666666669" width="100" height="35"/>
+                                <color key="backgroundColor" red="0.43137254899999999" green="0.27058823529999998" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="7gw-7X-qxe"/>
+                                    <constraint firstAttribute="height" constant="35" id="UYP-rB-0NH"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Logout"/>
+                                <connections>
+                                    <action selector="btnTapLogout:" destination="Lgj-Mf-ic7" eventType="touchUpInside" id="5VK-3m-Wps"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vcn-iE-mHx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="voK-dq-88B" firstAttribute="centerY" secondItem="vcn-iE-mHx" secondAttribute="centerY" id="Azc-HN-OBC"/>
-                            <constraint firstItem="voK-dq-88B" firstAttribute="centerX" secondItem="vcn-iE-mHx" secondAttribute="centerX" id="Bgd-8f-v67"/>
+                            <constraint firstItem="2aT-Nf-Hu3" firstAttribute="centerX" secondItem="bjZ-av-uG2" secondAttribute="centerX" id="QEc-cM-afW"/>
+                            <constraint firstItem="2aT-Nf-Hu3" firstAttribute="centerY" secondItem="bjZ-av-uG2" secondAttribute="centerY" id="ear-ek-4d9"/>
                         </constraints>
                     </view>
                 </viewController>

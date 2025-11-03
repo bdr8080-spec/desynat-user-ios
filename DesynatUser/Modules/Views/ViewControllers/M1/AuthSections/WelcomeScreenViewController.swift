@@ -46,6 +46,7 @@ class WelcomeScreenViewController: UIViewController {
         } else {
             let vc = LoginViewController.instantiate(fromAppStoryboard: .Main)
             self.navigationController?.pushViewController(vc, animated: true)
+            UserDefaults.standard.setValue("false", forKey: "isAppInstall")
         }
     }
     
@@ -58,6 +59,7 @@ class WelcomeScreenViewController: UIViewController {
     @IBAction func skipDidTapped(_ sender: Any) {
         let vc = LoginViewController.instantiate(fromAppStoryboard: .Main)
         self.navigationController?.pushViewController(vc, animated: true)
+        UserDefaults.standard.setValue("false", forKey: "isAppInstall")
     }
     
     private func setupCollectionView() {

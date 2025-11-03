@@ -16,6 +16,7 @@ class SelectLanguageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        LocationManager.sharedInstance.startUpdatingLocation()
 //        let vc = LocationPermissionViewController.instantiate(fromAppStoryboard: .Main)
 //                vc.onPermissionCompletion = { [weak self] in
 //                    self?.showNotificationPermission()
@@ -48,6 +49,7 @@ class SelectLanguageViewController: UIViewController {
     @IBAction func btnTapContinue(_ sender: Any) {
         let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
         self.navigationController?.pushViewController(vc, animated: true)
+        UserDefaults.standard.setValue("true", forKey: "isAppInstall")
     }
 
 }

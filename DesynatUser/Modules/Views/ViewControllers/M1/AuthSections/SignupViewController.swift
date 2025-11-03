@@ -8,7 +8,6 @@
 import UIKit
 
 class SignupViewController: UIViewController {
-    
     @IBOutlet weak var countryCodeTextField: UITextField!
     @IBOutlet weak var profileImageView: CustomImageView!
     @IBOutlet weak var fullNameTextField: UITextField!
@@ -25,8 +24,15 @@ class SignupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDelegates()
+    }
+    
+    func setDelegates(){
         mobileTextField.delegate = self
         emailTextField.delegate = self
+        fullNameTextField.delegate = self
+        createPasswordTextField.delegate = self
+        confirmPasswordTextField.delegate = self
     }
     
     @IBAction func conitnueDidTapped(_ sender: Any) {
@@ -124,10 +130,10 @@ extension SignupViewController: UITextFieldDelegate {
         // Validate email
         if textField == emailTextField {
             validation = StringValidation(string: updatedText, characterCount: 55, validation: .emailId)
-        }
-        // Validate mobile number
-        else if textField == mobileTextField {
+        }else if textField == mobileTextField {
             validation = StringValidation(string: updatedText, characterCount: 15, validation: .mobileNo)
+        }else if textField == fullNameTextField{
+            validation = StringValidation(string:updatedText, characterCount:55, validation:.firstName)
         }
         
         // Perform validation if applicable

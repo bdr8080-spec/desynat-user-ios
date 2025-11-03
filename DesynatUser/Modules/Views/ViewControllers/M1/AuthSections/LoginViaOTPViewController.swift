@@ -20,6 +20,7 @@ class LoginViaOTPViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        countryCodeLabel.text = countryCode
         phoneTextField.delegate = self
         viewCountryCode.isHidden = true
         self.txtFieldLeading.constant = -52
