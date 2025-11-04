@@ -26,6 +26,7 @@ enum NetworkEndPoint: String {
     case createPassword                     = "api/create_password"
     case uploadFile                         = "api/upload"
     case resendOtp                          = "api/resend_otp"
+    case country                      = "api/country"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

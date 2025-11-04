@@ -261,7 +261,7 @@ class CommonUtils {
         }
     
     static func showToast(message: String) {
-        FTIndicator.showNotification(withTitle: "Desynat User",
+        FTIndicator.showNotification(withTitle: Bundle.main.ApplicationName ?? "",
         message: message.count>0 ? message: "Message")
         
     }

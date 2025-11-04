@@ -21,7 +21,8 @@ extension WebService {
                 } else if let response {
                     Global.shared.user = response
                     kSharedUserDefaults.saveModelFor(key: .user, value: response)
-                    //                    kSharedUserDefaults.saveStringFor(Key: .accessToken, value: String.getString(response.tokens?.accessToken))
+                    kSharedUserDefaults.saveStringFor(Key: .accessToken, value: response.accessToken)
+                    CommonUtils.showToast(message: "OTP sent succesfully")
                     completion(response)
                 }
             }
@@ -50,7 +51,7 @@ extension WebService {
                 if let error {
                     UIApplication.shared.topViewController()?.showAlert(msg: error)
                 } else if let response {
-                    CommonUtils.showToast(message: message ?? "OTP Sent Successfully")
+                    CommonUtils.showToast(message: "OTP resent succesfully")
                     completion(response)
                 }
             }
@@ -68,6 +69,7 @@ extension WebService {
                     Global.shared.user = response
                     kSharedUserDefaults.saveModelFor(key: .user, value: response)
                     //                    kSharedUserDefaults.saveStringFor(Key: .accessToken, value: String.getString(response.tokens?.accessToken))
+                    CommonUtils.showToast(message: message ?? "Login Successfully")
                     completion(response)
                 }
             }
@@ -85,9 +87,26 @@ extension WebService {
                     Global.shared.user = response
                     kSharedUserDefaults.saveModelFor(key: .user, value: response)
                     //                    kSharedUserDefaults.saveStringFor(Key: .accessToken, value: String.getString(response.tokens?.accessToken))
-                    CommonUtils.showToast(message: message ?? "Login Successfully")
+                    CommonUtils.showToast(message: "OTP sent succesfully")
                     completion(response)
                 }
+            }
+        }
+    }
+    
+    func countryListService(completion:@escaping (_ user:[CountryModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.country), requestMethod: .get,requestModel:[CountryModel].self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
             }
         }
     }
@@ -101,7 +120,7 @@ extension WebService {
                     UIApplication.shared.topViewController()?.showAlert(msg: error)
                 } else if let response {
                     DispatchQueue.main.async {
-                        CommonUtils.showToast(message: message ?? "OTP Sent Successfully")
+                        CommonUtils.showToast(message: "OTP sent successfully")
                     }
                     completion(response)
                 }

@@ -490,23 +490,23 @@ experience the app in your preferred language.</string>
                                                                 </constraints>
                                                             </imageView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BpS-a2-SuB">
-                                                                <rect key="frame" x="52" y="10" width="53" height="30"/>
+                                                                <rect key="frame" x="52" y="10" width="65" height="30"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+91" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gzw-Kh-599">
-                                                                        <rect key="frame" x="0.0" y="7" width="31" height="16.333333333333332"/>
-                                                                        <fontDescription key="fontDescription" name="DMSans-Medium" family="DM Sans" pointSize="14"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+91" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gzw-Kh-599">
+                                                                        <rect key="frame" x="0.0" y="7.3333333333333153" width="43" height="15.333333333333336"/>
+                                                                        <fontDescription key="fontDescription" name="DMSans-Medium" family="DM Sans" pointSize="13"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="country" translatesAutoresizingMaskIntoConstraints="NO" id="cAD-Q7-U0C">
-                                                                        <rect key="frame" x="33" y="0.0" width="20" height="30"/>
+                                                                        <rect key="frame" x="45" y="0.0" width="20" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="30" id="DAf-AW-hR6"/>
                                                                             <constraint firstAttribute="width" constant="20" id="pHL-Ek-Hds"/>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w2g-8W-eMS">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="53" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="65" height="30"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                         <connections>
                                                                             <action selector="countryDidTapped:" destination="7kr-ow-iSp" eventType="touchUpInside" id="Hx7-tH-NqE"/>
@@ -516,7 +516,7 @@ experience the app in your preferred language.</string>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstItem="w2g-8W-eMS" firstAttribute="top" secondItem="BpS-a2-SuB" secondAttribute="top" id="8QG-FH-aqR"/>
-                                                                    <constraint firstAttribute="width" constant="53" id="8yD-hl-x8b"/>
+                                                                    <constraint firstAttribute="width" constant="65" id="8yD-hl-x8b"/>
                                                                     <constraint firstAttribute="bottom" secondItem="w2g-8W-eMS" secondAttribute="bottom" id="HKT-rW-TY1"/>
                                                                     <constraint firstItem="gzw-Kh-599" firstAttribute="centerY" secondItem="BpS-a2-SuB" secondAttribute="centerY" id="Q73-jG-VWy"/>
                                                                     <constraint firstItem="gzw-Kh-599" firstAttribute="leading" secondItem="BpS-a2-SuB" secondAttribute="leading" id="W5N-l7-xTW"/>
@@ -528,7 +528,7 @@ experience the app in your preferred language.</string>
                                                                 </constraints>
                                                             </view>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Mobile Number or Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yq1-uj-4xK">
-                                                                <rect key="frame" x="120" y="5" width="213" height="40"/>
+                                                                <rect key="frame" x="132" y="5" width="201" height="40"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
@@ -1565,15 +1565,15 @@ experience the app in your preferred language.</string>
                                                                 <rect key="frame" x="0.0" y="25" width="353" height="50"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPp-p1-X7H">
-                                                                        <rect key="frame" x="15" y="5" width="75" height="40"/>
+                                                                        <rect key="frame" x="15" y="5" width="65" height="40"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+91" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="Xgt-Py-RO1">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="33" height="40"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                 <textInputTraits key="textInputTraits"/>
                                                                             </textField>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="country" translatesAutoresizingMaskIntoConstraints="NO" id="gnD-rd-z7l">
-                                                                                <rect key="frame" x="45" y="5" width="30" height="30"/>
+                                                                                <rect key="frame" x="35" y="5" width="30" height="30"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" secondItem="gnD-rd-z7l" secondAttribute="height" id="Bna-gl-TE0"/>
                                                                                     <constraint firstAttribute="height" constant="30" id="zLO-3m-udF"/>
@@ -1582,8 +1582,8 @@ experience the app in your preferred language.</string>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" constant="75" id="4zV-GV-shg"/>
-                                                                            <constraint firstItem="gnD-rd-z7l" firstAttribute="leading" secondItem="Xgt-Py-RO1" secondAttribute="trailing" constant="5" id="BXH-xL-GDD"/>
+                                                                            <constraint firstAttribute="width" constant="65" id="4zV-GV-shg"/>
+                                                                            <constraint firstItem="gnD-rd-z7l" firstAttribute="leading" secondItem="Xgt-Py-RO1" secondAttribute="trailing" constant="2" id="BXH-xL-GDD"/>
                                                                             <constraint firstItem="Xgt-Py-RO1" firstAttribute="top" secondItem="hPp-p1-X7H" secondAttribute="top" id="PGr-zH-2I7"/>
                                                                             <constraint firstItem="gnD-rd-z7l" firstAttribute="centerY" secondItem="hPp-p1-X7H" secondAttribute="centerY" id="Ri5-N0-XqI"/>
                                                                             <constraint firstAttribute="bottom" secondItem="Xgt-Py-RO1" secondAttribute="bottom" id="WB6-Hf-hL6"/>
@@ -1592,14 +1592,14 @@ experience the app in your preferred language.</string>
                                                                         </constraints>
                                                                     </view>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fzm-R8-yST">
-                                                                        <rect key="frame" x="15" y="5" width="75" height="40"/>
+                                                                        <rect key="frame" x="15" y="5" width="65" height="40"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                         <connections>
                                                                             <action selector="countryCodeDidTapped:" destination="8eR-fP-u5v" eventType="touchUpInside" id="rKZ-qt-lcV"/>
                                                                         </connections>
                                                                     </button>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Mobile Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YQH-yH-Lcq">
-                                                                        <rect key="frame" x="100" y="5" width="233" height="40"/>
+                                                                        <rect key="frame" x="90" y="5" width="243" height="40"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                         <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                                                     </textField>
@@ -2328,8 +2328,8 @@ send an OTP to verify that it’s you</string>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Js8-al-HOL">
                                                                 <rect key="frame" x="15" y="5" width="75" height="40"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+91" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="8NG-j1-NA0">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="35" height="40"/>
+                                                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+91" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="8NG-j1-NA0">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="43" height="40"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
@@ -2349,7 +2349,7 @@ send an OTP to verify that it’s you</string>
                                                                     <constraint firstAttribute="width" constant="75" id="VHC-YT-oaS"/>
                                                                     <constraint firstAttribute="trailing" secondItem="uKM-TH-sM3" secondAttribute="trailing" id="eA3-oe-Xlz"/>
                                                                     <constraint firstAttribute="bottom" secondItem="8NG-j1-NA0" secondAttribute="bottom" id="yTN-0Y-oDH"/>
-                                                                    <constraint firstItem="uKM-TH-sM3" firstAttribute="leading" secondItem="8NG-j1-NA0" secondAttribute="trailing" constant="10" id="zM7-CA-CGh"/>
+                                                                    <constraint firstItem="uKM-TH-sM3" firstAttribute="leading" secondItem="8NG-j1-NA0" secondAttribute="trailing" constant="2" id="zM7-CA-CGh"/>
                                                                 </constraints>
                                                             </view>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9N1-WZ-mxK">
@@ -2603,7 +2603,7 @@ letters and special characters.</string>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R9i-lu-qBr" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="25" width="353" height="50"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rWQ-B2-elM">
+                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rWQ-B2-elM">
                                                                 <rect key="frame" x="20" y="5" width="269" height="40"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -2668,7 +2668,7 @@ letters and special characters.</string>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Efr-do-VIU" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="25" width="353" height="50"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6OO-Mm-fg2">
+                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Confirm New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6OO-Mm-fg2">
                                                                 <rect key="frame" x="20" y="5" width="269" height="40"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -2881,23 +2881,23 @@ letters and special characters.</string>
                                                                 </constraints>
                                                             </imageView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UkU-l7-DNc">
-                                                                <rect key="frame" x="50" y="10" width="55" height="30"/>
+                                                                <rect key="frame" x="50" y="10" width="65" height="30"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+91" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HIM-h7-fOC">
-                                                                        <rect key="frame" x="0.0" y="7" width="35" height="16.333333333333332"/>
-                                                                        <fontDescription key="fontDescription" name="DMSans-Medium" family="DM Sans" pointSize="14"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+91" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HIM-h7-fOC">
+                                                                        <rect key="frame" x="0.0" y="7.3333333333333153" width="45" height="15.333333333333336"/>
+                                                                        <fontDescription key="fontDescription" name="DMSans-Medium" family="DM Sans" pointSize="13"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="country" translatesAutoresizingMaskIntoConstraints="NO" id="6nM-PH-Fqt">
-                                                                        <rect key="frame" x="35" y="0.0" width="20" height="30"/>
+                                                                        <rect key="frame" x="45" y="0.0" width="20" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="30" id="LeM-eo-zjF"/>
                                                                             <constraint firstAttribute="width" constant="20" id="VsC-3K-siS"/>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8xA-YD-cfU">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="55" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="65" height="30"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                         <connections>
                                                                             <action selector="countryDidTapped:" destination="7kr-ow-iSp" eventType="touchUpInside" id="U1H-dk-28k"/>
@@ -2909,7 +2909,7 @@ letters and special characters.</string>
                                                                 <constraints>
                                                                     <constraint firstAttribute="trailing" secondItem="6nM-PH-Fqt" secondAttribute="trailing" id="06u-uy-SFF"/>
                                                                     <constraint firstItem="HIM-h7-fOC" firstAttribute="leading" secondItem="UkU-l7-DNc" secondAttribute="leading" id="BkT-bC-fRA"/>
-                                                                    <constraint firstAttribute="width" constant="55" id="ItH-qz-dw9"/>
+                                                                    <constraint firstAttribute="width" constant="65" id="ItH-qz-dw9"/>
                                                                     <constraint firstItem="6nM-PH-Fqt" firstAttribute="centerY" secondItem="HIM-h7-fOC" secondAttribute="centerY" id="Lfv-hA-VqF"/>
                                                                     <constraint firstItem="HIM-h7-fOC" firstAttribute="centerY" secondItem="UkU-l7-DNc" secondAttribute="centerY" id="QzN-gS-3eW"/>
                                                                     <constraint firstAttribute="trailing" secondItem="8xA-YD-cfU" secondAttribute="trailing" id="b7f-aH-xig"/>
@@ -2920,7 +2920,7 @@ letters and special characters.</string>
                                                                 </constraints>
                                                             </view>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Mobile Number or Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ccp-3R-7v0">
-                                                                <rect key="frame" x="120" y="5" width="213" height="40"/>
+                                                                <rect key="frame" x="130" y="5" width="203" height="40"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>

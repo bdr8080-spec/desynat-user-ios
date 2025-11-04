@@ -19,8 +19,9 @@ class SignupViewController: UIViewController {
     var isTermsAccepted: Bool = false
     var selectedImage: UIImage?
     lazy private var viewModel = SignupViewModel(hostVC: self)
-    var countryCode: String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
+//    var countryCode: String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
     var selectedProfileImageUrl: String = ""
+    var countryCode: String = "+965"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +29,13 @@ class SignupViewController: UIViewController {
     }
     
     func setDelegates(){
+        countryCodeTextField.text = countryCode
         mobileTextField.delegate = self
         emailTextField.delegate = self
         fullNameTextField.delegate = self
         createPasswordTextField.delegate = self
         confirmPasswordTextField.delegate = self
+        viewModel.countryListApi()
     }
     
     @IBAction func conitnueDidTapped(_ sender: Any) {
@@ -94,10 +97,24 @@ class SignupViewController: UIViewController {
         confirmPasswordTextField.isSecureTextEntry.toggle()
     }
     
-    @IBAction func countryCodeDidTapped(_ sender: Any) {
-        CommonUtils.openPicker(controller: self) { code, name, callingCode in
-            self.setUpCountryCode(code: callingCode)
-            self.countryCode = callingCode
+    @IBAction func countryCodeDidTapped(_ sender: UIButton) {
+//        CommonUtils.openPicker(controller: self) { code, name, callingCode in
+//            self.setUpCountryCode(code: callingCode)
+//            self.countryCode = callingCode
+//        }
+        
+        let countryNames = viewModel.countryList.map { country -> String in
+            let name = country.name ?? ""
+            let dialCode = country.dialCode ?? ""
+            let flag = country.flag ?? "🇰🇼"
+            return "\(flag)  \(name) (\(dialCode))"
+        }
+
+        kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+            let selectedCountry = self.viewModel.countryList[index]
+            let code = selectedCountry.dialCode ?? "+965"
+            self.countryCodeTextField.text = code
+            self.countryCode = code
         }
     }
     

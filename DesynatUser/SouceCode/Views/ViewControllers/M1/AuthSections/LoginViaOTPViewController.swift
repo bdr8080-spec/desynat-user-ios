@@ -16,15 +16,17 @@ class LoginViaOTPViewController: UIViewController {
     @IBOutlet weak var countryCodeLabel: UILabel!
     
     private lazy var viewModel = LoginViaOTPViewModel(loginHostVC: self)
-    var countryCode: String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
+//    var countryCode: String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
+    var countryCode: String = "+965"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         countryCodeLabel.text = countryCode
         phoneTextField.delegate = self
         viewCountryCode.isHidden = true
-        self.txtFieldLeading.constant = -52
+        self.txtFieldLeading.constant = -65
         emailMobileImageView.image = UIImage(named: "email")
+        viewModel.countryListApi()
     }
     
     @IBAction func signupDidTapped(_ sender: Any) {
@@ -51,7 +53,6 @@ class LoginViaOTPViewController: UIViewController {
         kSharedSceneDelegate.navigateToUserHomeVc()
     }
     
-    
     @IBAction func facebookDidTapped(_ sender: Any) {
         
     }
@@ -62,10 +63,24 @@ class LoginViaOTPViewController: UIViewController {
     @IBAction func googleDidTapped(_ sender: Any) {
     }
     
-    @IBAction func countryDidTapped(_ sender: Any) {
-        CommonUtils.openPicker(controller: self) { code, name, callingCode in
-            self.setUpCountryCode(code: callingCode)
-            self.countryCode = callingCode
+    @IBAction func countryDidTapped(_ sender: UIButton) {
+//        CommonUtils.openPicker(controller: self) { code, name, callingCode in
+//            self.setUpCountryCode(code: callingCode)
+//            self.countryCode = callingCode
+//        }
+        
+        let countryNames = viewModel.countryList.map { country -> String in
+            let name = country.name ?? ""
+            let dialCode = country.dialCode ?? ""
+            let flag = country.flag ?? "🇰🇼"
+            return "\(flag)  \(name) (\(dialCode))"
+        }
+
+        kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+            let selectedCountry = self.viewModel.countryList[index]
+            let code = selectedCountry.dialCode ?? "+965"
+            self.countryCodeLabel.text = code
+            self.countryCode = code
         }
     }
     
@@ -89,8 +104,8 @@ extension LoginViaOTPViewController: UITextFieldDelegate {
             if !currentText.isNumber() {
                 self.viewCountryCode.isHidden = true
                 emailMobileImageView.image = UIImage(named: "email")
-                self.txtFieldLeading.constant = -52
-                validation = StringValidation(string: currentText, characterCount: 52, validation: .emailId)
+                self.txtFieldLeading.constant = -65
+                validation = StringValidation(string: currentText, characterCount: 65, validation: .emailId)
             } else {
                 self.viewCountryCode.isHidden = false
                 emailMobileImageView.image = UIImage(named: "phone")

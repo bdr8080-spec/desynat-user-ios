@@ -12,6 +12,7 @@ import UIKit
 class LoginViewModel: NSObject {
     
     private var loginHostVC: LoginViewController
+    var countryList:[CountryModel] = []
     
     init(loginHostVC: LoginViewController) {
         self.loginHostVC = loginHostVC
@@ -72,6 +73,12 @@ class LoginViewModel: NSObject {
         WebService.sharedInstance.loginUserService(withParams: params) { (response) in
             kSharedSceneDelegate.navigateToUserHomeVc()
             UserDefaults.standard.setValue("Yes", forKey:"isLogin")
+        }
+    }
+    
+    func countryListApi(){
+        WebService.sharedInstance.countryListService { list in
+            self.countryList = list
         }
     }
 }

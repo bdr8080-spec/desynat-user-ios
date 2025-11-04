@@ -11,6 +11,7 @@ import UIKit
 
 class SignupViewModel: NSObject {
     private var hostVC: SignupViewController
+    var countryList:[CountryModel] = []
     
     init(hostVC: SignupViewController) {
         self.hostVC = hostVC
@@ -107,6 +108,13 @@ class SignupViewModel: NSObject {
         let param:MultipartUpload = MultipartUpload(fileName: "image", file: file, mimeType: isImage ? .image : .pdf)
         WebService.sharedInstance.uploadFile(withParams: param) { url, msg, code in
             completion(url)
+        }
+    }
+    
+    
+    func countryListApi(){
+        WebService.sharedInstance.countryListService { list in
+            self.countryList = list
         }
     }
 }

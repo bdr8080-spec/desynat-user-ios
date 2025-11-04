@@ -7,27 +7,9 @@
 //
 import Foundation
 import UIKit                 
+import DropDown
 
 extension SceneDelegate {
-   
-    /// Initialize Application (Reset Application)
-//    public func initializeApplication() {
-//        navigateTo(vc: ProfileSelectionVC.instantiate(fromAppStoryboard: .Main))
-//    }
-//    
-//    /// Navigate to Login Vc
-//    public func navigateToGuestLoginVc() {
-//        navigateTo(vc: GuestLogInVC.instantiate(fromAppStoryboard: .Main))
-//    }
-//    public func navigateToLandLordLoginVc() {
-//        navigateTo(vc: LandlordLoginVC.instantiate(fromAppStoryboard: .Main))
-//    }
-//    public func navigateToAgentLoginVc() {
-//        navigateTo(vc: AgentLoginVC.instantiate(fromAppStoryboard: .Main))
-//    }
-//    public func navigateToSideMenuVc() {
-//        navigateTo(vc: SideMenuVC.instantiate(fromAppStoryboard: .Home))
-//    }
     
     public func navigateToLoginVc() {
         navigateTo(vc: LoginViewController.instantiate(fromAppStoryboard: .Main))
@@ -48,21 +30,6 @@ extension SceneDelegate {
         let vc = SelectLanguageViewController.instantiate(fromAppStoryboard:.Main)
         navigateTo(vc: vc)
     }
-//    public func navigateToAgentHomeVc() {
-//        let vc = TabBarVC.instantiate(fromAppStoryboard: .Guest)
-//        vc.selectedProfile = .agent
-//        navigateTo(vc: vc)
-//    }
-//    public func navigateToLanlordHomeVc() {
-//        let vc = TabBarVC.instantiate(fromAppStoryboard: .Guest)
-//        vc.selectedProfile = .landlord
-//        navigateTo(vc: vc)
-//    }
-    
-//    public func navigateToProfileSelectScreen() {
-//        navigateTo(vc: ProfileSelectionVC.instantiate(fromAppStoryboard: .Main))
-//    }
-//
 
 //    /// Logout current user and navigate to loginVc
     func logoutUser() {
@@ -89,4 +56,6 @@ extension SceneDelegate {
         sceneDelegate.window!.rootViewController = nc
         sceneDelegate.window!.makeKeyAndVisible()
     }
+    
+    
 }

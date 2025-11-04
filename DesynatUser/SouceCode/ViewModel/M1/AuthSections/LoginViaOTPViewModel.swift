@@ -12,6 +12,7 @@ class LoginViaOTPViewModel: NSObject {
     
     private var loginHostVC: LoginViaOTPViewController
     private var isEnterPhoneNumber: Bool = false
+    var countryList:[CountryModel] = []
     
     init(loginHostVC: LoginViaOTPViewController) {
         self.loginHostVC = loginHostVC
@@ -57,6 +58,12 @@ class LoginViaOTPViewModel: NSObject {
             vc.countryCode = self.loginHostVC.countryCode
             vc.isEnteredPhoneNumber = self.isEnterPhoneNumber
             self.loginHostVC.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func countryListApi(){
+        WebService.sharedInstance.countryListService { list in
+            self.countryList = list
         }
     }
 }
