@@ -24,7 +24,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Phb-UQ-lSC">
                         <rect key="frame" x="0.0" y="0.0" width="120" height="226"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dress" translatesAutoresizingMaskIntoConstraints="NO" id="n2U-MX-yED" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dress" translatesAutoresizingMaskIntoConstraints="NO" id="n2U-MX-yED" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="120" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="BP2-Mv-XMJ"/>
@@ -64,6 +64,7 @@
             </constraints>
             <size key="customSize" width="119" height="226"/>
             <connections>
+                <outlet property="mainImageView" destination="n2U-MX-yED" id="a5B-fR-8Ex"/>
                 <outlet property="titleLabel" destination="a3y-8b-IPn" id="VKR-mF-JuC"/>
             </connections>
             <point key="canvasLocation" x="63.358778625954194" y="48.591549295774648"/>

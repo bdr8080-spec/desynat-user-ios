@@ -18,6 +18,7 @@ enum BaseURL {
 
 enum NetworkEndPoint: String {
     
+    //M1 API
     case register                           = "api/register"
     case verifyOTP                          = "api/verify_otp"
     case loginUser                          = "api/login"
@@ -28,6 +29,14 @@ enum NetworkEndPoint: String {
     case resendOtp                          = "api/resend_otp"
     case country                            = "api/country"
     case logout                             = "api/user/logout"
+    
+    //M2 API
+    case viewProfile                        = "api/user/view-profile"
+    case changePassword                     = "user/change-password"
+    case updateProfile                      = "api/user/update-profile"
+    case getCategory                        = "api/user/category"
+//    case getCategory                        = "api/user/category"
+    
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

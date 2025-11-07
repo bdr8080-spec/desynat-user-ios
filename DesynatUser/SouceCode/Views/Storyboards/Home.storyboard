@@ -278,15 +278,14 @@
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RBZ-SO-auL">
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RBZ-SO-auL">
                                                         <rect key="frame" x="0.0" y="45" width="353" height="100"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="100" id="k2j-4T-IVh"/>
                                                         </constraints>
-                                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fdX-w4-jfb">
+                                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="5" id="fdX-w4-jfb">
                                                             <size key="itemSize" width="128" height="128"/>
-                                                            <size key="estimatedItemSize" width="128" height="128"/>
                                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -297,6 +296,15 @@
                                                             <outlet property="delegate" destination="Y6W-OH-hqX" id="TlE-1o-EDM"/>
                                                         </connections>
                                                     </collectionView>
+                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Result Found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uak-9Y-Mvh">
+                                                        <rect key="frame" x="0.0" y="152.66666666666663" width="353" height="100"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="100" id="cCS-v3-LTP"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                                        <color key="textColor" systemColor="systemGray2Color"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suggested Stores" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLL-cA-hfY">
                                                         <rect key="frame" x="0.0" y="160" width="353" height="35"/>
                                                         <constraints>
@@ -536,6 +544,7 @@
                         <outlet property="heightConstraintOfNewestProductCollectionView" destination="NSW-pm-Y51" id="Lej-7g-LF3"/>
                         <outlet property="heightConstraintOfSuggestedStoreCollectionView" destination="68X-0M-VsK" id="7JR-Nu-xsz"/>
                         <outlet property="newestProductsCollectionView" destination="jiK-nR-TaL" id="vcP-5a-FIR"/>
+                        <outlet property="noCatgeoriesFoundLabel" destination="Uak-9Y-Mvh" id="ofe-98-Ec3"/>
                         <outlet property="suggestedStoresCollectionView" destination="Cum-a6-Yok" id="wTG-Fl-9oZ"/>
                         <outlet property="topRatedCollectionView" destination="HhN-8j-FdC" id="v5Z-SX-SWL"/>
                     </connections>
@@ -764,7 +773,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Npv-6l-bwI">
                                         <rect key="frame" x="0.0" y="70" width="393" height="40"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="store" translatesAutoresizingMaskIntoConstraints="NO" id="Y3S-kJ-Sm6" customClass="CustomImageView" customModule="DesynatAdmin" customModuleProvider="target">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="store" translatesAutoresizingMaskIntoConstraints="NO" id="Y3S-kJ-Sm6" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="0.0" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Y3S-kJ-Sm6" secondAttribute="height" id="dBI-0t-Fts"/>
@@ -860,7 +869,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V1M-gM-n74">
                                                                         <rect key="frame" x="0.0" y="0.0" width="151.66666666666666" height="44"/>
                                                                         <subviews>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yaq-Bp-H8O" customClass="CustomButton" customModule="DesynatAdmin" customModuleProvider="target">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yaq-Bp-H8O" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="151.66666666666666" height="44"/>
                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <constraints>
@@ -899,7 +908,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Qr-o2-5pA">
                                                                         <rect key="frame" x="171.66666666666663" y="0.0" width="151.33333333333337" height="44"/>
                                                                         <subviews>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YGo-rL-N4S" customClass="CustomButton" customModule="DesynatAdmin" customModuleProvider="target">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YGo-rL-N4S" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="151.33333333333334" height="44"/>
                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <constraints>
@@ -943,7 +952,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LmV-vu-QZv">
                                                                         <rect key="frame" x="0.0" y="0.0" width="151.66666666666666" height="44"/>
                                                                         <subviews>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ErP-Ze-xRa" customClass="CustomButton" customModule="DesynatAdmin" customModuleProvider="target">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ErP-Ze-xRa" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="151.66666666666666" height="44"/>
                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <constraints>
@@ -983,7 +992,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ADv-Wt-fEi">
                                                                         <rect key="frame" x="171.66666666666663" y="0.0" width="151.33333333333337" height="44"/>
                                                                         <subviews>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhd-kv-T5t" customClass="CustomButton" customModule="DesynatAdmin" customModuleProvider="target">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhd-kv-T5t" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="151.33333333333334" height="44"/>
                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <constraints>
@@ -1056,7 +1065,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EvQ-wz-kcR">
                                                 <rect key="frame" x="20" y="724" width="353" height="38"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O6Q-D2-krj" customClass="CustomButton" customModule="DesynatAdmin" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O6Q-D2-krj" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="353" height="38"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -1205,13 +1214,13 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

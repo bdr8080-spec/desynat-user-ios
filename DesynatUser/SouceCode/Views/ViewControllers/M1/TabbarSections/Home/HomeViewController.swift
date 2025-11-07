@@ -9,6 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    @IBOutlet weak var noCatgeoriesFoundLabel: UILabel!
     @IBOutlet weak var heightConstraintOfNewestProductCollectionView: NSLayoutConstraint!
     @IBOutlet weak var browseDiscountPageController: UIPageControl!
     @IBOutlet weak var browsePrimiumPageController: UIPageControl!
@@ -66,14 +67,16 @@ class HomeViewController: UIViewController {
     private var bannerCount = 5
     private var bestSellCount = 5
     private var newProductCount = 6
-    private var categories = ["Abaya", "Kurti set", "Abaya", "Shoes", "Maxi Dress", "Cord Set"]
+//    private var categories = ["Abaya", "Kurti set", "Abaya", "Shoes", "Maxi Dress", "Cord Set"]
     private var suggestedStores = ["Abaya", "Kurti set", "Abaya", "Shoes", "Maxi", "Cord", "Abaya", "Shoes", "Maxi", "Cord"]
-    private var categoriesSection = ["Men", "Women", "Kids"]
-    private var selectedCategoriesSection = 0
+//    private var categoriesSection = ["Men", "Women", "Kids"]
+    
+    private lazy var viewModel = HomeViewModel(hostVC: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         bannerPageController.numberOfPages = bannerCount
+        viewModel.getCategoriesListApi()
 //        bottomLabels = [menBottomLabel, womenBottomLabel, kidsBottomLabel]
         //        updateCategoriesCollectionHeight()
     }
@@ -103,7 +106,6 @@ class HomeViewController: UIViewController {
         browsePrimiumCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
-    
     @IBAction func browseDiscountChanges(_ sender: UIPageControl) {
         let page = sender.currentPage
         let indexPath = IndexPath(item: page, section: 0)
@@ -120,10 +122,21 @@ class HomeViewController: UIViewController {
 //    }
     
     private func updateCollectionsHeight() {
-        heightConstraintOfCategoryColelctionView.constant = categoriesCollectionView.contentSize.height
+        
         heightConstraintOfSuggestedStoreCollectionView.constant = suggestedStoresCollectionView.contentSize.height
         heightConstraintOfNewestProductCollectionView.constant = newestProductsCollectionView.contentSize.height
     }
+    
+    func updateCategoryCollectionHeight() {
+        let itemCount = viewModel.subCategoriesSection.count
+        let rows = ceil(Double(itemCount) / 3.0)
+        let itemHeight: CGFloat = 120
+        let verticalSpacing: CGFloat = 10
+        
+        let totalHeight = (CGFloat(rows) * itemHeight) + ((CGFloat(rows - 1)) * verticalSpacing)
+        heightConstraintOfCategoryColelctionView.constant = totalHeight
+    }
+
     
 }
 
@@ -135,7 +148,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case bannerCollectionView:
             return bannerCount
         case categoriesCollectionView:
-            return categories.count
+            return viewModel.subCategoriesSection.count
         case suggestedStoresCollectionView:
             return suggestedStores.count
         case bestSellingCollectionView:
@@ -151,7 +164,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case newestProductsCollectionView:
             return newProductCount
         case categoriesSectionCollectionView:
-            return categoriesSection.count
+            return viewModel.categoriesSection.count
         default:
             return 0
         }
@@ -166,7 +179,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
         case categoriesCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoriesCollectionViewCell", for: indexPath) as! CategoriesCollectionViewCell
-            cell.titleLabel.text = categories[indexPath.row]
+            let data = viewModel.subCategoriesSection[indexPath.row]
+            cell.configData(data: data)
             return cell
             
               case suggestedStoresCollectionView:
@@ -198,9 +212,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
         case categoriesSectionCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoriesSectionCollectionViewCell", for: indexPath) as! CategoriesSectionCollectionViewCell
-            let data = categoriesSection[indexPath.row]
-            cell.titleLabel.text = data
-            if selectedCategoriesSection == indexPath.row {
+            let data = viewModel.categoriesSection[indexPath.row]
+            cell.titleLabel.text = data.name
+            if viewModel.selectedCategoriesSection == data.id {
                 cell.bottomLabel.isHidden = false
             } else {
                 cell.bottomLabel.isHidden = true
@@ -217,10 +231,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
             
         case categoriesCollectionView:
-            let spacing: CGFloat = 10
-            let totalSpacing = spacing * 2 // 3 cells per row → 2 spaces between
-            let width = (collectionView.frame.width - totalSpacing) / 3
-            let height: CGFloat = 120
+//            let spacing: CGFloat = 10
+//            let totalSpacing = spacing * 2
+//            let width = (collectionView.frame.width - totalSpacing) / 3
+//            let height: CGFloat = 125
+//            return CGSize(width: width, height: height)
+            let width = (collectionView.frame.width - 0) / 3
+            let height: CGFloat = 125
             return CGSize(width: width, height: height)
             
         case suggestedStoresCollectionView:
@@ -267,7 +284,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
         case categoriesSectionCollectionView:
-            selectedCategoriesSection = indexPath.row
+            viewModel.selectedCategoriesSection = viewModel.categoriesSection[indexPath.row].id ?? 1
             categoriesSectionCollectionView.reloadData()
         default:
             print("")

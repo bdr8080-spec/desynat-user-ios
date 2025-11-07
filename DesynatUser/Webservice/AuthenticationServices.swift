@@ -160,6 +160,41 @@ extension WebService {
         }
     }
     
+    func getCategoriesService(completion:@escaping (_ user:[CategoriesDataModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.getCategory), requestMethod: .get,requestModel:[CategoriesDataModel].self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getSubCategoriesService(categoryID: Int, completion:@escaping (_ user:[SubCategoriesDataModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        let endPoint = NetworkURL.custom("api/user/sub-category?category_id=\(categoryID)")
+        NetworkManager.shared.request(withAPI: endPoint, requestMethod: .get,requestModel:[SubCategoriesDataModel].self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
 }
 
 
