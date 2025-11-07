@@ -26,6 +26,7 @@ class OTPViewController: UIViewController {
     @IBOutlet weak var resendView: UIView!
     @IBOutlet weak var labelTimer: UILabel!
     @IBOutlet weak var phoneNumberLabel: UILabel!
+    var callBackForProfileDetails:((String,String,String)->())?
     
     // MARK: - Variables
     var comingReason: ComingReasonAtOTPScreen = .loginViaOTP
@@ -35,6 +36,7 @@ class OTPViewController: UIViewController {
     var countryCode: String?
     var userId: String = ""
     var otpDigits = ""
+    var id = ""
     var isEnteredPhoneNumber: Bool = false
     lazy private var viewModel = OTPViewModel(hostVC: self)
     
@@ -68,35 +70,13 @@ class OTPViewController: UIViewController {
         case .forgotPassword:
             viewModel.verifyOtpAPI(type: "2")
         case .changeOldMobileNumber:
-            let vc = ChangeMobileViewController.instantiate(fromAppStoryboard: .Profile)
-            vc.comingToUpdateMobile = true
-            self.navigationController?.pushViewController(vc, animated: false)
-//            viewModel.verifyOtpAPI(type: "2")
-            print("")
+            viewModel.userVerifyOtpApi()
         case .changeOldEmail:
-            let vc = ChangeMobileViewController.instantiate(fromAppStoryboard: .Profile)
-            vc.comingToUpdateMobile = false
-            self.navigationController?.pushViewController(vc, animated: false)
-//            viewModel.verifyOtpAPI(type: "2")
-            print("")
+            viewModel.userVerifyOtpApi()
         case .setNewMobileNumber:
-            let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
-            vc.comingReason = .changeMobileNumber
-            vc.callBackDismiss = {
-                self.navigationController?.popToViewController(ofClass: ProfileDetailsViewController.self, animated: true)
-            }
-            self.navigationController?.present(vc, animated: true)
-//            viewModel.verifyOtpAPI(type: "2")
-            print("")
+            viewModel.userVerifyOtpApi()
         case .setNewEmail:
-            let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
-            vc.comingReason = .changeEmailAddress
-            vc.callBackDismiss = {
-                self.navigationController?.popToViewController(ofClass: ProfileDetailsViewController.self, animated: true)
-            }
-            self.navigationController?.present(vc, animated: true)
-//            viewModel.verifyOtpAPI(type: "2")
-            print("")
+            viewModel.userVerifyOtpApi()
         }
     }
     

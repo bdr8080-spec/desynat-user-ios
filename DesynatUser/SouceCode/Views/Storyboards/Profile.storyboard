@@ -127,7 +127,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0QP-c6-0Cd">
                                                                 <rect key="frame" x="238" y="10" width="115" height="40"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HM3-qT-gN2" customClass="CustomButton" customModule="DesynatAdmin" customModuleProvider="target">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HM3-qT-gN2" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="115" height="40"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
@@ -147,6 +147,9 @@
                                                                                 <real key="value" value="1"/>
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
+                                                                        <connections>
+                                                                            <action selector="btnTapImage:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="JZU-U5-Slj"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Image" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQU-gC-ebk">
                                                                         <rect key="frame" x="12" y="11.666666666666686" width="91" height="17"/>
@@ -266,6 +269,9 @@
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wRJ-Gt-5yy">
                                                                         <rect key="frame" x="15" y="5" width="65" height="40"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <connections>
+                                                                            <action selector="btnTapCountryCode:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="5NA-du-Mcr"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Mobile Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mv5-7l-RLP">
                                                                         <rect key="frame" x="90" y="5" width="166" height="40"/>
@@ -275,7 +281,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDS-G7-luX">
                                                                         <rect key="frame" x="276" y="10" width="65" height="30"/>
                                                                         <subviews>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hN6-1X-qwe" customClass="CustomButton" customModule="DesynatAdmin" customModuleProvider="target">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hN6-1X-qwe" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="65" height="30"/>
                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <constraints>
@@ -382,7 +388,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ypm-w0-dUO">
                                                                         <rect key="frame" x="276" y="10" width="65" height="30"/>
                                                                         <subviews>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Fh-z3-07D" customClass="CustomButton" customModule="DesynatAdmin" customModuleProvider="target">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Fh-z3-07D" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="65" height="30"/>
                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <constraints>
@@ -476,6 +482,9 @@
                                                                 <real key="value" value="5"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="btnTapSaveChanges:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="N1W-bV-nFp"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save Changes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8N-w5-bgB">
                                                         <rect key="frame" x="125.33333333333334" y="9.333333333333373" width="102.66666666666666" height="19.666666666666671"/>
@@ -530,6 +539,13 @@
                             <constraint firstItem="OVS-Fz-Mri" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="teS-Sf-GTr"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imgProfile" destination="uaa-7f-6ZT" id="GIw-f0-ehm"/>
+                        <outlet property="txtCountryCode" destination="xRj-Z0-mv7" id="gBW-as-iqp"/>
+                        <outlet property="txtEmail" destination="6jM-NZ-frz" id="w5q-au-Ihx"/>
+                        <outlet property="txtFullName" destination="rwu-yl-gdl" id="xSF-f8-d9f"/>
+                        <outlet property="txtMobileNumber" destination="Mv5-7l-RLP" id="VP3-nJ-5st"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -598,6 +614,9 @@
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" title="Button" image="eyeClose"/>
                                                                 <state key="selected" image="eye_open"/>
+                                                                <connections>
+                                                                    <action selector="btnTapEyeOldPass:" destination="FgD-5f-MWl" eventType="touchUpInside" id="eHh-GZ-Pix"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -660,6 +679,9 @@
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" title="Button" image="eyeClose"/>
                                                                 <state key="selected" image="eye_open"/>
+                                                                <connections>
+                                                                    <action selector="btnTapEyeNewPass:" destination="FgD-5f-MWl" eventType="touchUpInside" id="V4s-3H-blR"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -722,6 +744,9 @@
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" title="Button" image="eyeClose"/>
                                                                 <state key="selected" image="eye_open"/>
+                                                                <connections>
+                                                                    <action selector="btnTapEyeConfirmPass:" destination="FgD-5f-MWl" eventType="touchUpInside" id="TkL-Ul-Zip"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -823,6 +848,11 @@
                             <constraint firstItem="c9I-aB-UW3" firstAttribute="bottom" secondItem="2d8-MX-lFV" secondAttribute="bottom" id="qaQ-W2-zxY"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="txtConfirmPass" destination="0N4-bf-gtY" id="oh1-KY-kAn"/>
+                        <outlet property="txtNewPass" destination="GQz-d2-ZSC" id="ZNh-m7-SmL"/>
+                        <outlet property="txtOldPassword" destination="Uqa-rW-tU2" id="8Sx-9m-asy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Hg-KB-pnT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -915,6 +945,9 @@ want to continue with</string>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fc8-Ej-sJb">
                                                                 <rect key="frame" x="15" y="5" width="75" height="40"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <connections>
+                                                                    <action selector="btnTapCountryCode:" destination="A0Q-pw-9uJ" eventType="touchUpInside" id="lbr-FE-gXt"/>
+                                                                </connections>
                                                             </button>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Mobile Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="agM-xp-hLb">
                                                                 <rect key="frame" x="100" y="5" width="233" height="40"/>
@@ -1080,6 +1113,9 @@ want to continue with</string>
                         <outlet property="emailView" destination="zqM-hx-zeY" id="u01-uV-uxe"/>
                         <outlet property="mobileView" destination="NK1-gx-qXp" id="FbY-X4-VAf"/>
                         <outlet property="titleLabel" destination="74w-mh-53c" id="HZu-Lc-NJO"/>
+                        <outlet property="txtCountryCode" destination="ZiB-P1-WkS" id="05G-GT-u5z"/>
+                        <outlet property="txtEmail" destination="5hf-ts-PYy" id="pxL-0W-RCq"/>
+                        <outlet property="txtMobileNumber" destination="agM-xp-hLb" id="SOG-94-w2s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QTc-qd-aHc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1130,7 +1166,7 @@ want to continue with</string>
                                                         <rect key="frame" x="0.0" y="0.0" width="393" height="463"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="exq-7X-GhW" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="exq-7X-GhW" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                         <rect key="frame" x="20" y="28" width="353" height="48"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="mkV-q8-eGE">
@@ -1168,7 +1204,7 @@ want to continue with</string>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDh-Dy-AeW" customClass="CustomButton" customModule="DesynatDealer" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDh-Dy-AeW" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                         <rect key="frame" x="178" y="392" width="195" height="46"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -1200,7 +1236,7 @@ want to continue with</string>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0b-cM-g8J">
                                                         <rect key="frame" x="0.0" y="463.00000000000006" width="393" height="156.66666666666669"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xK8-bW-lua" customClass="CustomLabelFont" customModule="DesynatDealer" customModuleProvider="target">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xK8-bW-lua" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="24" y="17" width="345" height="22.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                 <nil key="textColor"/>
@@ -1220,7 +1256,7 @@ want to continue with</string>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFd-CO-nId">
                                                                 <rect key="frame" x="24" y="118.66666666666663" width="345" height="38"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="647-M4-0zc" customClass="CustomButton" customModule="DesynatDealer" customModuleProvider="target">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="647-M4-0zc" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="345" height="38"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>

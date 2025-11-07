@@ -8,7 +8,6 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-    
     @IBOutlet weak var noCatgeoriesFoundLabel: UILabel!
     @IBOutlet weak var heightConstraintOfNewestProductCollectionView: NSLayoutConstraint!
     @IBOutlet weak var browseDiscountPageController: UIPageControl!
@@ -16,6 +15,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var heightConstraintOfSuggestedStoreCollectionView: NSLayoutConstraint!
     @IBOutlet weak var heightConstraintOfCategoryColelctionView: NSLayoutConstraint!
     @IBOutlet weak var bannerPageController: UIPageControl!
+    @IBOutlet weak var lblLocatioin: UILabel!
+    @IBOutlet weak var imgProfile: CustomImageView!
+    @IBOutlet weak var lblUserName: UILabel!
+    
     @IBOutlet weak var bannerCollectionView: UICollectionView! {
         didSet {
             bannerCollectionView.registerCellFromNib(cellID: "HomeBannerCollectionViewCell")
@@ -69,6 +72,8 @@ class HomeViewController: UIViewController {
     private var newProductCount = 6
 //    private var categories = ["Abaya", "Kurti set", "Abaya", "Shoes", "Maxi Dress", "Cord Set"]
     private var suggestedStores = ["Abaya", "Kurti set", "Abaya", "Shoes", "Maxi", "Cord", "Abaya", "Shoes", "Maxi", "Cord"]
+    
+    let isGuestLogin = UserDefaults.standard.string(forKey:"isGuestLogin")
 //    private var categoriesSection = ["Men", "Women", "Kids"]
     
     private lazy var viewModel = HomeViewModel(hostVC: self)
@@ -77,6 +82,15 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         bannerPageController.numberOfPages = bannerCount
         viewModel.getCategoriesListApi()
+        if isGuestLogin == "true"{
+            lblUserName.text = "Hello Guest"
+            imgProfile.image = UIImage(named:"store")
+        } else {
+            lblUserName.text = Global.shared.user?.fullName
+            imgProfile.sd_setImage(with:URL(string:Global.shared.user?.profileImage ?? ""), placeholderImage:UIImage(named:"store"))
+        }
+        
+        
 //        bottomLabels = [menBottomLabel, womenBottomLabel, kidsBottomLabel]
         //        updateCategoriesCollectionHeight()
     }
@@ -114,6 +128,9 @@ class HomeViewController: UIViewController {
     
     @IBAction func changeLocationButtonAction(_ sender: Any) {
         let vc = LocationViewController.instantiate(fromAppStoryboard: .Profile)
+        vc.locationCallBack = { address,locality,city,state,country,pincode,latitude,longitude in
+            self.lblLocatioin.text = address
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -236,8 +253,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 //            let width = (collectionView.frame.width - totalSpacing) / 3
 //            let height: CGFloat = 125
 //            return CGSize(width: width, height: height)
-            let width = (collectionView.frame.width - 0) / 3
-            let height: CGFloat = 125
+            let width = (categoriesCollectionView.frame.width - 40) / 3
+            let height: CGFloat = 135
             return CGSize(width: width, height: height)
             
         case suggestedStoresCollectionView:

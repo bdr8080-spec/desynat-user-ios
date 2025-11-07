@@ -32,9 +32,12 @@ enum NetworkEndPoint: String {
     
     //M2 API
     case viewProfile                        = "api/user/view-profile"
-    case changePassword                     = "user/change-password"
+    case changePassword                     = "api/user/change-password"
     case updateProfile                      = "api/user/update-profile"
     case getCategory                        = "api/user/category"
+    case changeMobileNumber                 = "api/user/change-mobile-number"
+    case userVerifyOtp                      = "api/user/verify-otp"
+    
 //    case getCategory                        = "api/user/category"
     
     

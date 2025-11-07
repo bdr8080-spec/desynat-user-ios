@@ -36,15 +36,13 @@ class HomeViewModel: NSObject {
     func getSubCategoriesListApi(categoryID: Int) {
         WebService.sharedInstance.getSubCategoriesService(categoryID: categoryID) { list in
             self.subCategoriesSection = list
-            self.hostVC.categoriesCollectionView.reloadData()
             DispatchQueue.main.async {
-                self.hostVC.heightConstraintOfCategoryColelctionView.constant = self.hostVC.categoriesCollectionView.contentSize.height
+                self.hostVC.categoriesCollectionView.reloadData()
                 self.hostVC.categoriesCollectionView.layoutIfNeeded()
+                self.hostVC.heightConstraintOfCategoryColelctionView.constant = self.hostVC.categoriesCollectionView.contentSize.height
                 self.hostVC.noCatgeoriesFoundLabel.isHidden = !self.subCategoriesSection.isEmpty
             }
         }
     }
-
-
 }
 

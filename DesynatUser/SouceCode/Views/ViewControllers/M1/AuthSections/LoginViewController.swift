@@ -60,9 +60,9 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func continueAsGuestDidTapped(_ sender: Any) {
+        UserDefaults.standard.setValue("true", forKey:"isGuestLogin")
         kSharedSceneDelegate.navigateToUserHomeVc()
     }
-    
     
     @IBAction func facebookDidTapped(_ sender: Any) {
         

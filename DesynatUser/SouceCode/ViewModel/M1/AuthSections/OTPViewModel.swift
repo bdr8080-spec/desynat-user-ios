@@ -65,4 +65,68 @@ class OTPViewModel: NSObject {
             
         }
     }
+    
+    func userVerifyOtpApi(){
+        let param:[String:Any] = [
+            "id":self.hostVC.id,
+            "otp":self.hostVC.otpDigits
+        ]
+        WebService.sharedInstance.userVerifyOtpService(withParams:param) { user in
+            if self.hostVC.comingReason == .changeOldMobileNumber{
+                let vc = ChangeMobileViewController.instantiate(fromAppStoryboard: .Profile)
+                vc.countryCode = user.countryCode ?? ""
+                vc.comingToUpdateMobile = true
+                self.hostVC.navigationController?.pushViewController(vc, animated: false)
+            }else if self.hostVC.comingReason == .changeOldEmail{
+                let vc = ChangeMobileViewController.instantiate(fromAppStoryboard: .Profile)
+                vc.comingToUpdateMobile = false
+                self.hostVC.navigationController?.pushViewController(vc, animated: false)
+            }else if self.hostVC.comingReason == .setNewMobileNumber{
+                let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
+                vc.comingReason = .changeMobileNumber
+                vc.callBackDismiss = {
+//                    self.hostVC.callBackForProfileDetails?(user.mobile ?? "",user.countryCode ?? "","")
+//                    print("user.mobile:\(user.mobile ?? "")")
+//                    print("user.countryCode:\(user.countryCode ?? "")")
+//                    self.hostVC.navigationController?.popToViewController(ofClass: ProfileDetailsViewController.self, animated: true)
+                    if let navController = self.hostVC.navigationController {
+                        for controller in navController.viewControllers {
+                            if let profileVC = controller as? ProfileDetailsViewController {
+                                profileVC.mobile = user.mobile
+                                profileVC.countryCode = user.countryCode ?? ""
+                                profileVC.comingAfterUpdate = true
+                                navController.popToViewController(profileVC, animated: true)
+                                break
+                            }
+                        }
+                    }
+
+                  //  self.hostVC.callBackForProfileDetails?(user.mobile ?? "",user.countryCode ?? "","")
+                    
+
+                    
+                }
+                self.hostVC.navigationController?.present(vc, animated: true)
+            }else if self.hostVC.comingReason == .setNewEmail{
+                let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
+                vc.comingReason = .changeEmailAddress
+                vc.callBackDismiss = {
+                    if let navController = self.hostVC.navigationController {
+                        for controller in navController.viewControllers {
+                            if let profileVC = controller as? ProfileDetailsViewController {
+                                profileVC.email = user.email
+                                profileVC.comingAfterUpdate = true
+                                navController.popToViewController(profileVC, animated: true)
+                                break
+                            }
+                        }
+                    }
+                    
+                }
+                self.hostVC.navigationController?.present(vc, animated: true)
+            }
+        }
+    }
+    
+    
 }

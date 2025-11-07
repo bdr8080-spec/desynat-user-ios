@@ -8,12 +8,15 @@
 import UIKit
 
 class ChangeMobileViewController: UIViewController {
-
+    private lazy var viewModel = ChangeMobileViewModel(hostVC:self)
     @IBOutlet weak var mobileView: UIView!
     @IBOutlet weak var emailView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
-    
+    @IBOutlet weak var txtCountryCode: UITextField!
+    @IBOutlet weak var txtMobileNumber: UITextField!
+    @IBOutlet weak var txtEmail: UITextField!
     var comingToUpdateMobile: Bool = false
+    var countryCode:String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,18 +28,18 @@ class ChangeMobileViewController: UIViewController {
     }
     
     @IBAction func continueBtnAction(_ sender: Any) {
-        let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
-        if comingToUpdateMobile {
-            vc.comingReason = .setNewMobileNumber
-        } else {
-            vc.comingReason = .setNewEmail
+        viewModel.changeMobileNumberAndEmailApi()
+    }
+    
+    @IBAction func btnTapCountryCode(_ sender: UIButton) {
+        CommonUtils.openPicker(controller: self) { code, name, callingCode in
+            self.setUpCountryCode(code: callingCode)
+            self.countryCode = callingCode
         }
-        
-//        vc.phoneNumber = self.hostVC.mobileTextField.text?.trimmed() ?? ""
-//        vc.countryCode = self.hostVC.countryCode
-//        vc.isEnteredPhoneNumber = true
-//        vc.userId = "\(response.id ?? 0)"
-        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func setUpCountryCode(code: String) {
+        self.txtCountryCode.text = code
     }
     
     func initialSetup() {

@@ -8,25 +8,57 @@
 import UIKit
 
 class ChangePassowrdViewController: UIViewController {
-
+    private lazy var viewModel = ChangePassowrdViewModel(hostVC:self)
+    @IBOutlet weak var txtOldPassword: UITextField!
+    @IBOutlet weak var txtNewPass: UITextField!
+    @IBOutlet weak var txtConfirmPass: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
-    
 
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func changePasswordBtnAction(_ sender: Any) {
-        let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
-        vc.comingReason = .changePassword
-        vc.callBackDismiss = {
-            self.navigationController?.popViewController(animated: true)
+        if txtOldPassword.text == ""{
+            showAlert(msg:"Please enter old password")
+        }else if txtNewPass.text == ""{
+            showAlert(msg:"Please enter new password")
+        }else if txtConfirmPass.text == ""{
+            showAlert(msg:"Please enter confirm password")
+        }else{
+            viewModel.changePasswordApi()
         }
-        self.navigationController?.present(vc, animated: true)
+    }
+    
+    @IBAction func btnTapEyeOldPass(_ sender:UIButton) {
+        sender.isSelected = !sender.isSelected
+        if sender.isSelected == true{
+            txtOldPassword.isSecureTextEntry = false
+        }else{
+            txtOldPassword.isSecureTextEntry = true
+        }
+    }
+    
+    @IBAction func btnTapEyeNewPass(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if sender.isSelected == true{
+            txtNewPass.isSecureTextEntry = false
+        }else{
+            txtNewPass.isSecureTextEntry = true
+        }
+    }
+    
+    @IBAction func btnTapEyeConfirmPass(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if sender.isSelected == true{
+            txtConfirmPass.isSecureTextEntry = false
+        }else{
+            txtConfirmPass.isSecureTextEntry = true
+        }
     }
     
 }

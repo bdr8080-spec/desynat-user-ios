@@ -37,19 +37,37 @@ class ProfileViewController: UIViewController {
     
     private lazy var viewModel = ProfileViewModel(hostVC: self)
     
+    let isGuestLogin = UserDefaults.standard.string(forKey:"isGuestLogin")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateTableHeight()
+        if isGuestLogin == "true" {
+            emailLabel.isHidden = true
+            usernameLabel.text = "Hello Guest"
+        } else {
+            emailLabel.isHidden = false
+            updateTableHeight()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.getUserData()
+        
+        if isGuestLogin == "true" {
+            
+        } else {
+            viewModel.getUserData()
+        }
+
     }
     
     override func viewDidLayoutSubviews() {
             super.viewDidLayoutSubviews()
+        if isGuestLogin == "true" {
+            
+        } else {
             updateTableHeight()
+        }
         }
 
         private func updateTableHeight() {
@@ -59,16 +77,24 @@ class ProfileViewController: UIViewController {
         }
     
     @IBAction func btnTapLogout(_ sender: UIButton) {
-        self.showConfirmationAlert(msg: "Are you sure you want to logout?"){ [weak self] in
-            guard let self = self else { return }
-            self.viewModel.logoutAPI()
+        if isGuestLogin == "true" {
+            kSharedSceneDelegate.navigateToLoginVc()
+        } else {
+            self.showConfirmationAlert(msg: "Are you sure you want to logout?"){ [weak self] in
+                guard let self = self else { return }
+                self.viewModel.logoutAPI()
+            }
         }
     }
     
     
     @IBAction func pencilButtonAction(_ sender: Any) {
-        let vc = ProfileDetailsViewController.instantiate(fromAppStoryboard: .Profile)
-        self.navigationController?.pushViewController(vc, animated: false)
+        if isGuestLogin == "true" {
+            kSharedSceneDelegate.navigateToLoginVc()
+        } else {
+            let vc = ProfileDetailsViewController.instantiate(fromAppStoryboard: .Profile)
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
     }
     
 }
@@ -87,54 +113,59 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedItem = sideMenuData[indexPath.row].title
-
-        switch selectedItem {
-        case "My Wallet":
-            print("✅ Selected: My Wallet")
+        if isGuestLogin == "true" {
+            kSharedSceneDelegate.navigateToLoginVc()
+        } else {
             
-        case "Terms & Condition":
-            print("✅ Selected: Terms & Condition")
+            let selectedItem = sideMenuData[indexPath.row].title
             
-        case "Return Policy":
-            print("✅ Selected: Return Policy")
+            switch selectedItem {
+            case "My Wallet":
+                print("✅ Selected: My Wallet")
+                
+            case "Terms & Condition":
+                print("✅ Selected: Terms & Condition")
+                
+            case "Return Policy":
+                print("✅ Selected: Return Policy")
+                
+            case "About Us":
+                print("✅ Selected: About Us")
+                
+            case "FAQ's":
+                print("✅ Selected: FAQ's")
+                
+            case "Change Language":
+                print("✅ Selected: Change Language")
+                
+            case "Change Currency":
+                print("✅ Selected: Change Currency")
+                
+            case "Change Country":
+                print("✅ Selected: Change Country")
+                
+            case "Cancellation Policy":
+                print("✅ Selected: Cancellation Policy")
+                
+            case "Exchange Policy":
+                print("✅ Selected: Exchange Policy")
+                
+            case "Support":
+                print("✅ Selected: Support")
+                
+            case "Become An Affiliate":
+                print("✅ Selected: Become An Affiliate")
+                
+            case "Settings":
+                print("✅ Selected: Settings")
+                
+            default:
+                print("⚠️ Unknown option selected: \(selectedItem)")
+            }
             
-        case "About Us":
-            print("✅ Selected: About Us")
-            
-        case "FAQ's":
-            print("✅ Selected: FAQ's")
-            
-        case "Change Language":
-            print("✅ Selected: Change Language")
-            
-        case "Change Currency":
-            print("✅ Selected: Change Currency")
-            
-        case "Change Country":
-            print("✅ Selected: Change Country")
-            
-        case "Cancellation Policy":
-            print("✅ Selected: Cancellation Policy")
-            
-        case "Exchange Policy":
-            print("✅ Selected: Exchange Policy")
-            
-        case "Support":
-            print("✅ Selected: Support")
-            
-        case "Become An Affiliate":
-            print("✅ Selected: Become An Affiliate")
-            
-        case "Settings":
-            print("✅ Selected: Settings")
-            
-        default:
-            print("⚠️ Unknown option selected: \(selectedItem)")
+            // Deselect the row
+            tableView.deselectRow(at: indexPath, animated: true)
         }
-
-        // Deselect the row
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }

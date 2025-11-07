@@ -7,5 +7,5 @@ struct APIKeys {
     //Signup
     static let email               = "email"
     static let password            = "password"
-    
+   
 }

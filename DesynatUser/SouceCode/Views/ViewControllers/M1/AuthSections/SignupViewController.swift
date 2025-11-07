@@ -56,6 +56,7 @@ class SignupViewController: UIViewController {
     }
     
     @IBAction func continueAsGuestDidTapped(_ sender: Any) {
+        UserDefaults.standard.setValue("true", forKey:"isGuestLogin")
         kSharedSceneDelegate.navigateToUserHomeVc()
     }
     

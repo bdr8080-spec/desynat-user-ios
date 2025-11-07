@@ -196,11 +196,9 @@ extension LocationViewController: CLLocationManagerDelegate,GMSMapViewDelegate {
             }
         }
     }
-
-
-    
-    
 }
+
+
 extension LocationViewController: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         viewMap.moveCamera(GMSCameraUpdate.setTarget(CLLocationCoordinate2D(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude), zoom: ZOOM_LEVEL_HIGH))
