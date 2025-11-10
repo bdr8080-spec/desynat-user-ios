@@ -28,7 +28,9 @@ class ChangeMobileViewController: UIViewController {
     }
     
     @IBAction func continueBtnAction(_ sender: Any) {
-        viewModel.changeMobileNumberAndEmailApi()
+        if viewModel.validFields() {
+            viewModel.changeMobileNumberAndEmailApi()
+        }
     }
     
     @IBAction func btnTapCountryCode(_ sender: UIButton) {
@@ -44,11 +46,11 @@ class ChangeMobileViewController: UIViewController {
     
     func initialSetup() {
         if comingToUpdateMobile {
-            titleLabel.text = "Change Mobile Number"
+            titleLabel.text = "Enter New Mobile Number"
             emailView.isHidden = true
             mobileView.isHidden = false
         } else {
-            titleLabel.text = "Change Email"
+            titleLabel.text = "Enter New Email "
             emailView.isHidden = false
             mobileView.isHidden = true
         }

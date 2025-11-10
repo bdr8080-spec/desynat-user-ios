@@ -30,7 +30,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gM8-Xa-5U1">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="88"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Z8n-dk-9hi" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z8n-dk-9hi" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="50" width="38" height="38"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="38" id="0Gl-JI-0Y0"/>
@@ -296,7 +296,7 @@
                                                             <outlet property="delegate" destination="Y6W-OH-hqX" id="TlE-1o-EDM"/>
                                                         </connections>
                                                     </collectionView>
-                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Result Found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uak-9Y-Mvh">
+                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no Category found " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uak-9Y-Mvh">
                                                         <rect key="frame" x="0.0" y="152.66666666666663" width="353" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="100" id="cCS-v3-LTP"/>
@@ -776,7 +776,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Npv-6l-bwI">
                                         <rect key="frame" x="0.0" y="70" width="393" height="40"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="store" translatesAutoresizingMaskIntoConstraints="NO" id="Y3S-kJ-Sm6" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y3S-kJ-Sm6" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="0.0" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Y3S-kJ-Sm6" secondAttribute="height" id="dBI-0t-Fts"/>
@@ -893,7 +893,7 @@
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </button>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gift Cards" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjh-Dj-suT">
-                                                                                <rect key="frame" x="35.333333333333329" y="10.666666666666659" width="81" height="22.666666666666671"/>
+                                                                                <rect key="frame" x="35.333333333333329" y="10.666666666666659" width="80.999999999999986" height="22.666666666666671"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -1178,6 +1178,8 @@
                     </view>
                     <connections>
                         <outlet property="emailLabel" destination="wtA-rj-D4d" id="J22-eH-Ufd"/>
+                        <outlet property="logoutImageView" destination="sue-q9-Pcq" id="GIa-G3-MQ5"/>
+                        <outlet property="logoutLabel" destination="Fye-Rb-CMA" id="BoQ-E9-s1W"/>
                         <outlet property="sideMenuHeightConstaint" destination="r7V-0j-vvL" id="2Vu-lg-tnN"/>
                         <outlet property="sideMenuTableView" destination="3yT-it-Ruc" id="aD5-LY-sFo"/>
                         <outlet property="userProfileImageView" destination="Y3S-kJ-Sm6" id="0mh-KC-wGN"/>
@@ -1202,7 +1204,6 @@
         <image name="homeUnselected" width="52" height="44"/>
         <image name="lineTabbar" width="375" height="79"/>
         <image name="locationMarker" width="12" height="12"/>
-        <image name="logo" width="42" height="42"/>
         <image name="logout" width="16" height="16"/>
         <image name="message" width="24" height="24"/>
         <image name="mic" width="20" height="20"/>
@@ -1212,7 +1213,6 @@
         <image name="profileUnselected" width="52" height="44"/>
         <image name="search" width="20" height="20"/>
         <image name="show" width="52.666667938232422" height="52.666667938232422"/>
-        <image name="store" width="60" height="60"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

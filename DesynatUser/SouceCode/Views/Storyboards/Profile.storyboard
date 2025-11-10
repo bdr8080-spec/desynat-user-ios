@@ -86,7 +86,7 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Your Password" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fqc-he-0Wk">
-                                                                <rect key="frame" x="20" y="14.333333333333345" width="164" height="19.666666666666671"/>
+                                                                <rect key="frame" x="20" y="14.333333333333345" width="164" height="19.666666666666664"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -114,7 +114,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nwM-YK-aUU">
                                                         <rect key="frame" x="0.0" y="68" width="353" height="80"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="store" translatesAutoresizingMaskIntoConstraints="NO" id="uaa-7f-6ZT" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfile" translatesAutoresizingMaskIntoConstraints="NO" id="uaa-7f-6ZT" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="60" id="NNC-V0-mfD"/>
@@ -886,8 +886,8 @@
                                             <action selector="backDidTapped:" destination="A0Q-pw-9uJ" eventType="touchUpInside" id="ipu-9b-Sju"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Mobile Number" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="74w-mh-53c">
-                                        <rect key="frame" x="100.66666666666669" y="8.6666666666666732" width="192" height="22.666666666666671"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter New Mobile Number " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="74w-mh-53c">
+                                        <rect key="frame" x="74" y="8.6666666666666732" width="245" height="22.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -906,7 +906,7 @@ want to continue with</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NK1-gx-qXp">
                                                 <rect key="frame" x="0.0" y="54.333333333333314" width="353" height="75"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Mobile Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzG-Da-ehq">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter New Mobile Number " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzG-Da-ehq">
                                                         <rect key="frame" x="0.0" y="0.0" width="353" height="20"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -949,7 +949,7 @@ want to continue with</string>
                                                                     <action selector="btnTapCountryCode:" destination="A0Q-pw-9uJ" eventType="touchUpInside" id="lbr-FE-gXt"/>
                                                                 </connections>
                                                             </button>
-                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Mobile Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="agM-xp-hLb">
+                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter New Mobile Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="agM-xp-hLb">
                                                                 <rect key="frame" x="100" y="5" width="233" height="40"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
@@ -1094,6 +1094,7 @@ want to continue with</string>
                                     <constraint firstItem="lF4-iO-qRB" firstAttribute="leading" secondItem="RJV-09-93C" secondAttribute="leading" constant="24" id="GPo-of-so4"/>
                                     <constraint firstItem="74w-mh-53c" firstAttribute="centerX" secondItem="RJV-09-93C" secondAttribute="centerX" id="HRp-YD-SDt"/>
                                     <constraint firstItem="74w-mh-53c" firstAttribute="centerY" secondItem="lF4-iO-qRB" secondAttribute="centerY" id="QAj-Dq-eUs"/>
+                                    <constraint firstItem="74w-mh-53c" firstAttribute="leading" secondItem="lF4-iO-qRB" secondAttribute="trailing" constant="10" id="b6I-XM-1kf"/>
                                     <constraint firstItem="Js9-z8-cgV" firstAttribute="leading" secondItem="RJV-09-93C" secondAttribute="leading" constant="20" id="gWG-cE-omQ"/>
                                     <constraint firstItem="LYM-ey-Oph" firstAttribute="top" secondItem="Js9-z8-cgV" secondAttribute="bottom" constant="35" id="iYe-QC-LzB"/>
                                     <constraint firstItem="LYM-ey-Oph" firstAttribute="trailing" secondItem="Js9-z8-cgV" secondAttribute="trailing" id="opG-y2-LQ0"/>
@@ -1378,7 +1379,7 @@ want to continue with</string>
         <image name="location" width="30.333333969116211" height="37.666667938232422"/>
         <image name="rightArrow" width="17.666666030883789" height="13.666666984558105"/>
         <image name="search" width="20" height="20"/>
-        <image name="store" width="60" height="60"/>
+        <image name="userProfile" width="128" height="128"/>
         <namedColor name="darkBrown">
             <color red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -9,7 +9,9 @@ import UIKit
 import SDWebImage
 
 class ProfileViewController: UIViewController {
-
+    
+    @IBOutlet weak var logoutImageView: UIImageView!
+    @IBOutlet weak var logoutLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var userProfileImageView: CustomImageView!
@@ -36,45 +38,39 @@ class ProfileViewController: UIViewController {
         SideMenuModel(title: "Settings", image: "settings")]
     
     private lazy var viewModel = ProfileViewModel(hostVC: self)
-    
     let isGuestLogin = UserDefaults.standard.string(forKey:"isGuestLogin")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if isGuestLogin == "true" {
-            emailLabel.isHidden = true
-            usernameLabel.text = "Hello Guest"
-        } else {
-            emailLabel.isHidden = false
-            updateTableHeight()
-        }
+        updateTableHeight()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         if isGuestLogin == "true" {
-            
+            emailLabel.isHidden = true
+            usernameLabel.text = "Hello Guest"
+            userProfileImageView.image = UIImage(named: "userProfile")
+            logoutLabel.text = "Login"
+            logoutImageView.isHidden = true
         } else {
+            emailLabel.isHidden = false
             viewModel.getUserData()
+            logoutLabel.text = "Logout"
+            logoutImageView.isHidden = false
         }
-
     }
     
     override func viewDidLayoutSubviews() {
-            super.viewDidLayoutSubviews()
-        if isGuestLogin == "true" {
-            
-        } else {
-            updateTableHeight()
+        super.viewDidLayoutSubviews()
+        updateTableHeight()
+    }
+    
+    private func updateTableHeight() {
+        DispatchQueue.main.async {
+            self.sideMenuHeightConstaint.constant = self.sideMenuTableView.contentSize.height
         }
-        }
-
-        private func updateTableHeight() {
-            DispatchQueue.main.async {
-                self.sideMenuHeightConstaint.constant = self.sideMenuTableView.contentSize.height
-            }
-        }
+    }
     
     @IBAction func btnTapLogout(_ sender: UIButton) {
         if isGuestLogin == "true" {
@@ -167,7 +163,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
-
+    
 }
 
 

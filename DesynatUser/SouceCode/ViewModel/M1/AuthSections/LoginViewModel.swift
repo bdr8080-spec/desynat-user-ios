@@ -72,8 +72,9 @@ class LoginViewModel: NSObject {
                 return
             }
         WebService.sharedInstance.loginUserService(withParams: params) { (response) in
-            kSharedSceneDelegate.navigateToUserHomeVc()
             UserDefaults.standard.setValue("Yes", forKey:"isLogin")
+            UserDefaults.standard.setValue("false", forKey:"isGuestLogin")
+            kSharedSceneDelegate.navigateToUserHomeVc()
         }
     }
     

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 class ProfileViewModel {
     
@@ -28,13 +29,19 @@ class ProfileViewModel {
         if let savedUser: UserModel = kSharedUserDefaults.retrieveModelFor(key: .user, model: UserModel.self) {
             hostVC.usernameLabel.text = savedUser.fullName
             hostVC.emailLabel.text = savedUser.email
+            hostVC.userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.medium
+            (hostVC.userProfileImageView.sd_imageIndicator as? SDWebImageActivityIndicator)?.indicatorView.color = .gray
             if let imageUrlString = savedUser.profileImage,
                let url = URL(string: imageUrlString) {
-                hostVC.userProfileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "userProfile"))
+                hostVC.userProfileImageView.sd_setImage(
+                    with: url,
+                    placeholderImage: UIImage(named: "userProfile")
+                )
             } else {
                 hostVC.userProfileImageView.image = UIImage(named: "userProfile")
             }
         }
     }
+
     
 }

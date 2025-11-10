@@ -47,7 +47,7 @@ extension WebService {
                     //Global.shared.user = response
                   //  kSharedUserDefaults.saveModelFor(key: .user, value: response)
                   //  kSharedUserDefaults.saveStringFor(Key: .accessToken, value: response.accessToken)
-                    CommonUtils.showToast(message:message ?? "")
+                    CommonUtils.showToast(message: "Otp sent succesfully")
                     completion(response)
                 }
             }

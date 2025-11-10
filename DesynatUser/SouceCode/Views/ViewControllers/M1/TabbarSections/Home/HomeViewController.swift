@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class HomeViewController: UIViewController {
     @IBOutlet weak var noCatgeoriesFoundLabel: UILabel!
@@ -70,11 +71,11 @@ class HomeViewController: UIViewController {
     private var bannerCount = 5
     private var bestSellCount = 5
     private var newProductCount = 6
-//    private var categories = ["Abaya", "Kurti set", "Abaya", "Shoes", "Maxi Dress", "Cord Set"]
+    //    private var categories = ["Abaya", "Kurti set", "Abaya", "Shoes", "Maxi Dress", "Cord Set"]
     private var suggestedStores = ["Abaya", "Kurti set", "Abaya", "Shoes", "Maxi", "Cord", "Abaya", "Shoes", "Maxi", "Cord"]
     
     let isGuestLogin = UserDefaults.standard.string(forKey:"isGuestLogin")
-//    private var categoriesSection = ["Men", "Women", "Kids"]
+    //    private var categoriesSection = ["Men", "Women", "Kids"]
     
     private lazy var viewModel = HomeViewModel(hostVC: self)
     
@@ -82,17 +83,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         bannerPageController.numberOfPages = bannerCount
         viewModel.getCategoriesListApi()
-        if isGuestLogin == "true"{
-            lblUserName.text = "Hello Guest"
-            imgProfile.image = UIImage(named:"store")
-        } else {
-            lblUserName.text = Global.shared.user?.fullName
-            imgProfile.sd_setImage(with:URL(string:Global.shared.user?.profileImage ?? ""), placeholderImage:UIImage(named:"store"))
-        }
-        
-        
-//        bottomLabels = [menBottomLabel, womenBottomLabel, kidsBottomLabel]
-        //        updateCategoriesCollectionHeight()
+        showUserData()
     }
     
     override func viewWillLayoutSubviews() {
@@ -101,11 +92,6 @@ class HomeViewController: UIViewController {
             self.updateCollectionsHeight()
         }
     }
-    
-//    @IBAction func categoryTapped(_ sender: UIButton) {
-//        hideAllBottomLines()
-//        bottomLabels[sender.tag].isHidden = false
-//    }
     
     // MARK: - Page Control Tap Handling
     @IBAction func pageControlChanged(_ sender: UIPageControl) {
@@ -134,10 +120,6 @@ class HomeViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-//    private func hideAllBottomLines() {
-//        bottomLabels.forEach { $0.isHidden = true }
-//    }
-    
     private func updateCollectionsHeight() {
         
         heightConstraintOfSuggestedStoreCollectionView.constant = suggestedStoresCollectionView.contentSize.height
@@ -152,6 +134,23 @@ class HomeViewController: UIViewController {
         
         let totalHeight = (CGFloat(rows) * itemHeight) + ((CGFloat(rows - 1)) * verticalSpacing)
         heightConstraintOfCategoryColelctionView.constant = totalHeight
+    }
+    
+    private func showUserData() {
+        if isGuestLogin == "true" {
+            lblUserName.text = "Hello Guest"
+            imgProfile.image = UIImage(named: "userProfile")
+        } else {
+            lblUserName.text = "Deliver to \(Global.shared.user?.fullName ?? "")"
+            imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.medium
+            imgProfile.sd_imageIndicator?.startAnimatingIndicator()
+            imgProfile.sd_setImage(
+                with: URL(string: Global.shared.user?.profileImage ?? "userProfile"),
+                placeholderImage: UIImage(named: "userProfile")
+            ) { [weak imgProfile] _, _, _, _ in
+                imgProfile?.sd_imageIndicator?.stopAnimatingIndicator()
+            }
+        }
     }
 
     

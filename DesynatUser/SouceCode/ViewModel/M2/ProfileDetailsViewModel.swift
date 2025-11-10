@@ -51,6 +51,9 @@ class ProfileDetailsViewModel:NSObject{
             let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
             vc.comingReason = .changeOldMobileNumber
             vc.id = "\(user.id ?? 0)"
+            vc.isEnteredPhoneNumber = true
+            vc.phoneNumber = self.hostVC.txtMobileNumber.text?.trimmed() ?? ""
+            vc.countryCode = self.hostVC.countryCode
             vc.callBackForProfileDetails = { mobile,countryCode,_ in
                 self.hostVC.txtMobileNumber.text = mobile
                 self.hostVC.txtCountryCode.text = countryCode
@@ -75,6 +78,8 @@ class ProfileDetailsViewModel:NSObject{
             let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
             vc.comingReason = .changeOldEmail
             vc.id = "\(user.id ?? 0)"
+            vc.isEnteredPhoneNumber = false
+            vc.phoneNumber = self.hostVC.txtEmail.text?.trimmed() ?? ""
             vc.callBackForProfileDetails = { _, _, email in
                 self.hostVC.txtEmail.text = email
                 print("email:\(email)")

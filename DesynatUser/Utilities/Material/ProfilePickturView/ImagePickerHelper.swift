@@ -108,7 +108,7 @@ class ImagePickerHelper: NSObject {
 
     private func showCameraPermissionAlert() {
         let alert = UIAlertController(title: "Camera Permission Denied",
-                                      message: "Please allow the camera permission from Phone Settings.",
+                                      message: "Please allow the camera permission from Phone Settings",
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         if let topController = UIApplication.shared.keyWindow?.rootViewController {
@@ -126,7 +126,7 @@ class ImagePickerHelper: NSObject {
             picker.sourceType = .camera
             presetImagePicker(pickerVC: picker)
         } else {
-            UIApplication.shared.topViewController()?.showAlert(msg: "Camera not available.")
+            UIApplication.shared.topViewController()?.showAlert(msg: "Camera not available")
         }
         pickerCallBack = handler
         picker.delegate = self

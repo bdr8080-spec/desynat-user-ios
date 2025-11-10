@@ -15,6 +15,35 @@ class ChangeMobileViewModel:NSObject{
         self.hostVC = hostVC
     }
     
+    func validFields() -> Bool {
+        var errorMessage: AlertConstant = .none
+        let input = String.getString(hostVC.txtMobileNumber.text).trimmingCharacters(in: .whitespacesAndNewlines)
+        if hostVC.comingToUpdateMobile == true{
+            if input.isEmpty {
+                errorMessage = .changeNewMobile
+            } else if input.isPhoneNumber() {
+                if !input.isValidPhoneNumber() {
+                    errorMessage = .validMobileNumber
+                }
+            }
+        } else{
+            if input.isEmpty {
+                errorMessage = .chnageNewEmail
+            } else if input.isEmail() {
+                if !input.isValidEmail() {
+                    errorMessage = .EnterValidEmailAddress
+                }
+            }
+        }
+        
+        if errorMessage != .none {
+            hostVC.showAlert(msg: errorMessage.rawValue)
+        }
+        
+        hostVC.view.endEditing(true)
+        return errorMessage == .none
+    }
+    
     //Mark->:changeMobileNumberApi
     func changeMobileNumberAndEmailApi(){
         var param:[String:Any] = [:]

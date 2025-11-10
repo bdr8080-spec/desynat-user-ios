@@ -180,7 +180,7 @@ extension OTPViewController {
         let otpText = [textField1, textField2, textField3, textField4, textField5, textField6].compactMap { $0?.text }.joined()
         
         if otpText.count < 6 {
-            showAlert(msg: "Please enter a valid 6-digit OTP.")
+            showAlert(msg: "Please enter a valid 6-digit OTP")
             return false
         }
         otpDigits = String.getString(textField1.text) + String.getString(textField2.text) + String.getString(textField3.text) + String.getString(textField4.text) + String.getString(textField5.text) + String.getString(textField6.text)
