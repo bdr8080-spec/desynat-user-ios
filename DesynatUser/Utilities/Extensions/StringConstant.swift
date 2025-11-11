@@ -46,8 +46,8 @@ enum AlertConstant: String {
     case EnterNewPassword           = "Please enter create new password"
     case EnterConfirmPassword       = "Please enter confirm new password"
     case PasswordNotMatched         = "Passwords do not match"
-    case changeNewMobile            = "Please Enter New Mobile Number"
-    case chnageNewEmail             = "Please Enter New Email address"
+    case changeNewMobile            = "Please enter new mobile number"
+    case chnageNewEmail             = "Please enter new email address"
 //    case SelectProfileImage         = "Please select a profile image."
     
 //    case EnterLastName              = "Please enter your last name."

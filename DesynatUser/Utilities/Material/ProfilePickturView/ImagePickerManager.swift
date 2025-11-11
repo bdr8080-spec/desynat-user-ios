@@ -108,13 +108,29 @@ class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//        picker.dismiss(animated: true, completion: nil)
+//        guard let image = info[.originalImage] as? UIImage else {
+//            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+//        }
+//        //let fileName = (info[.imageURL] as? URL)?.lastPathComponent ?? ""
+//        let fileName = UUID().uuidString + ".jpg"
+//        pickImageCallback?(image, fileName,nil )
+        
+        
         picker.dismiss(animated: true, completion: nil)
-        guard let image = info[.originalImage] as? UIImage else {
-            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
-        }
-        //let fileName = (info[.imageURL] as? URL)?.lastPathComponent ?? ""
-        let fileName = UUID().uuidString + ".jpg"
-        pickImageCallback?(image, fileName,nil )
+
+            guard let image = info[.originalImage] as? UIImage else { return }
+
+            // ✅ Save image to temporary folder
+            let fileName = UUID().uuidString + ".jpg"
+            let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
+
+            if let data = image.jpegData(compressionQuality: 0.8) {
+                try? data.write(to: tempURL)
+            }
+
+            // ✅ Provide valid URL to callback
+            pickImageCallback?(image, fileName, tempURL)
     }
     
     @objc func imagePickerController(_ picker: UIImagePickerController, pickedImage: UIImage?) {

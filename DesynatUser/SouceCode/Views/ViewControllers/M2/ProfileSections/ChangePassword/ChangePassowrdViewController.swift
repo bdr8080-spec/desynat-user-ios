@@ -47,7 +47,7 @@ class ChangePassowrdViewController: UIViewController {
         sender.isSelected = !sender.isSelected
         if sender.isSelected == true{
             txtNewPass.isSecureTextEntry = false
-        }else{
+        } else{
             txtNewPass.isSecureTextEntry = true
         }
     }

@@ -8,15 +8,16 @@
 import UIKit
 
 class ProfileDetailsViewController: UIViewController {
+    
     private lazy var viewModel = ProfileDetailsViewModel(hostVC:self)
     @IBOutlet weak var imgProfile: CustomImageView!
     @IBOutlet weak var txtFullName: UITextField!
     @IBOutlet weak var txtMobileNumber: UITextField!
     @IBOutlet weak var txtCountryCode: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
+    
     var selectedProfileImageUrl:String = ""
     var isMobile = ""
-    
     var email: String? = ""
     var mobile: String? = ""
     var countryCode: String = ""
@@ -59,19 +60,15 @@ class ProfileDetailsViewController: UIViewController {
     @IBAction func btnTapImage(_ sender: UIButton) {
         ImagePickerManager().pickImage(self) { [weak self] image, fileName, url in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.imgProfile.image = image
-               // self.selectedImage = image
-            }
             self.viewModel.uploadDocument(file: image, isImage: true) { [weak self] uploadedUrl in
                 guard let self = self else { return }
                 DispatchQueue.main.async {
                     self.selectedProfileImageUrl = uploadedUrl
+                    self.imgProfile.image = image
                 }
             }
         }
     }
-    
     
     @IBAction func btnTapCountryCode(_ sender: Any) {
     }

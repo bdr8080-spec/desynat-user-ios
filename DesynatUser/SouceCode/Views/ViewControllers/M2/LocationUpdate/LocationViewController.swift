@@ -5,7 +5,6 @@
 //  Created by fluper on 06/11/25.
 //
 
-
 import UIKit
 import GoogleMaps
 import GooglePlaces
@@ -38,21 +37,10 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
         LocationManager.sharedInstance.startUpdatingLocation()
         self.txtSearch.delegate = self
         self.googleMapSetup()
-        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
-    }
-    
-    func googleMapSetup() {
-        self.latitude = LocationManager.sharedInstance.location?.latitude ?? 0.0
-        self.longitude = LocationManager.sharedInstance.location?.longitude ?? 0.0
-        self.currentLocation =  LocationManager.sharedInstance.currentLocation
-        viewMap.isMyLocationEnabled = false
-        let camera = GMSCameraPosition.camera(withLatitude: latitude ?? 0.0, longitude: longitude ?? 0.0, zoom: 12)
-        self.viewMap.camera = camera
-        self.viewMap.delegate = self
     }
     
     @IBAction func btnBack(_ sender: Any) {
@@ -67,18 +55,28 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func btnSave(_ sender: Any) {
+        let fullAddress = lblLocation.text ?? address
         locationCallBack?(
-            address,     // Full address
-            locality,    // Area or sublocality
-            city,        // City
-            state,       // State
-            country,     // Country
-            pincode,     // Pincode
+            fullAddress,
+            locality,
+            city,
+            state,
+            country,
+            pincode,
             latitude ?? 0,
             longitude ?? 0
         )
         self.navigationController?.popViewController(animated: true)
-        
+    }
+    
+    private func googleMapSetup() {
+        self.latitude = LocationManager.sharedInstance.location?.latitude ?? 0.0
+        self.longitude = LocationManager.sharedInstance.location?.longitude ?? 0.0
+        self.currentLocation =  LocationManager.sharedInstance.currentLocation
+        viewMap.isMyLocationEnabled = false
+        let camera = GMSCameraPosition.camera(withLatitude: latitude ?? 0.0, longitude: longitude ?? 0.0, zoom: 12)
+        self.viewMap.camera = camera
+        self.viewMap.delegate = self
     }
 }
 
@@ -98,57 +96,6 @@ extension LocationViewController: CLLocationManagerDelegate,GMSMapViewDelegate {
         reverseGeocodeCoordinate(cameraPosition.target)
     }
     
-//    func reverseGeocodeCoordinate(_ coordinate: CLLocationCoordinate2D) {
-//        let geocoder = CLGeocoder()
-//        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-//        self.latitude = coordinate.latitude
-//        self.longitude = coordinate.longitude
-//        
-//        geocoder.reverseGeocodeLocation(location) { placemarks, error in
-//            guard error == nil else { return }
-//            guard let pm = placemarks?.first else { return }
-//            
-//            var fullAddress = ""
-//            var shortAddress = ""
-//            
-//            // 🔹 Extract individual address components
-//            let name = pm.name ?? ""
-//            let subLocality = pm.subLocality ?? ""
-//            let locality = pm.locality ?? ""
-//            let state = pm.administrativeArea ?? ""
-//            let country = pm.country ?? ""
-//            let postalCode = pm.postalCode ?? ""
-//            
-//            // 🔹 Clean short address: remove repeating locality part (like "Sector 63")
-//            if !name.isEmpty {
-//                shortAddress = name
-//                if shortAddress.lowercased().contains(subLocality.lowercased()) {
-//                    shortAddress = shortAddress.replacingOccurrences(of: subLocality, with: "", options: .caseInsensitive)
-//                }
-//                shortAddress = shortAddress.replacingOccurrences(of: ", ,", with: ",")
-//                    .trimmingCharacters(in: .whitespacesAndNewlines)
-//                    .trimmingCharacters(in: CharacterSet(charactersIn: ", "))
-//            }
-//            
-//            // 🔹 Full readable address for label
-//            fullAddress = [name, subLocality, locality, state, country, postalCode]
-//                .filter { !$0.isEmpty }
-//                .joined(separator: ", ")
-//            
-//            // 🔹 Assign cleaned-up values
-//            self.locality = subLocality
-//            self.city = locality
-//            self.state = state
-//            self.country = country
-//            self.pincode = postalCode
-//            self.address = shortAddress
-//            
-//            // 🔹 Update UI
-//            self.txtSearch.text = shortAddress                  // only "142, B Block"
-//            self.lblLocation.text = fullAddress                 // full readable address
-//        }
-//    }
-    
     func reverseGeocodeCoordinate(_ coordinate: CLLocationCoordinate2D) {
         let geocoder = CLGeocoder()
         let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -159,7 +106,6 @@ extension LocationViewController: CLLocationManagerDelegate,GMSMapViewDelegate {
             guard error == nil else { return }
             guard let pm = placemarks?.first else { return }
             
-            // 🔹 Extract components safely
             let name = pm.name ?? ""
             let subLocality = pm.subLocality ?? ""
             let locality = pm.locality ?? ""
@@ -167,29 +113,42 @@ extension LocationViewController: CLLocationManagerDelegate,GMSMapViewDelegate {
             let country = pm.country ?? ""
             let postalCode = pm.postalCode ?? ""
             
-            // 🔹 Construct clean short address (for main field)
-            var shortAddress = name
-            if shortAddress.lowercased().contains(subLocality.lowercased()) {
-                shortAddress = shortAddress.replacingOccurrences(of: subLocality, with: "", options: .caseInsensitive)
-            }
-            shortAddress = shortAddress.replacingOccurrences(of: ", ,", with: ",")
-                .trimmingCharacters(in: .whitespacesAndNewlines)
-                .trimmingCharacters(in: CharacterSet(charactersIn: ", "))
+            self.locality = subLocality
+            self.city = locality
+            self.state = state
+            self.country = country
+            self.pincode = postalCode
             
-            // 🔹 Construct full readable address
-            let fullAddress = [name, subLocality, locality, state, country, postalCode]
+            let components = [
+                name,
+                subLocality,
+                locality,
+                state,
+                country,
+                postalCode
+            ]
+                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
                 .filter { !$0.isEmpty }
-                .joined(separator: ", ")
             
-            // 🔹 Assign values (always non-nil)
-            self.locality = subLocality.isEmpty ? "" : subLocality
-            self.city = locality.isEmpty ? "" : locality
-            self.state = state.isEmpty ? "" : state
-            self.country = country.isEmpty ? "" : country
-            self.pincode = postalCode.isEmpty ? "" : postalCode
-            self.address = shortAddress.isEmpty ? "" : shortAddress
+            let uniqueComponents = components.reduce(into: [String]()) { result, item in
+                if !result.contains(item) {
+                    result.append(item)
+                }
+            }
             
-            // 🔹 Update UI
+            let fullAddress = uniqueComponents.joined(separator: ", ")
+            if !subLocality.isEmpty && subLocality.caseInsensitiveCompare(locality) != .orderedSame {
+                self.address = subLocality
+            } else if !locality.isEmpty {
+                self.address = locality
+            } else if !state.isEmpty {
+                self.address = state
+            } else if !country.isEmpty {
+                self.address = country
+            } else {
+                self.address = "Unknown Location"
+            }
+            
             DispatchQueue.main.async {
                 self.txtSearch.text = self.address
                 self.lblLocation.text = fullAddress

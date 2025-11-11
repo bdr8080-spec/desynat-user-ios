@@ -35,7 +35,7 @@ class RegisterationSuccessViewController: UIViewController {
         case .changeMobileNumber:
             descriptionLabel.text = "Mobile Number Changed\nsuccessfully !"
         case .changeEmailAddress:
-            descriptionLabel.text = "Email Number Changed\nsuccessfully !"
+            descriptionLabel.text = "Email Address Changed\nsuccessfully !"
         }
     }
 

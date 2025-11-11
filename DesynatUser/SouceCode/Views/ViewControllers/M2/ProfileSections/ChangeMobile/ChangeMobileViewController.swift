@@ -8,6 +8,7 @@
 import UIKit
 
 class ChangeMobileViewController: UIViewController {
+    
     private lazy var viewModel = ChangeMobileViewModel(hostVC:self)
     @IBOutlet weak var mobileView: UIView!
     @IBOutlet weak var emailView: UIView!
@@ -15,12 +16,15 @@ class ChangeMobileViewController: UIViewController {
     @IBOutlet weak var txtCountryCode: UITextField!
     @IBOutlet weak var txtMobileNumber: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
+    
     var comingToUpdateMobile: Bool = false
     var countryCode:String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
+        txtEmail.delegate = self
+        txtMobileNumber.delegate = self
     }
     
     @IBAction func backDidTapped(_ sender: Any) {
@@ -54,5 +58,42 @@ class ChangeMobileViewController: UIViewController {
             emailView.isHidden = false
             mobileView.isHidden = true
         }
+    }
+}
+
+extension ChangeMobileViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        
+        // Safely unwrap the current text
+        guard let currentText = textField.text else { return true }
+        
+        // Construct the updated text after the change
+        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        
+        // Prevent leading space
+        if updatedText.hasPrefix(" ") {
+            return false
+        }
+        
+        var validation: StringValidation?
+        
+        // Validate email
+        if textField == txtEmail {
+            validation = StringValidation(string: updatedText, characterCount: 55, validation: .emailId)
+        }
+        // Validate mobile number
+        else if textField == txtMobileNumber {
+            validation = StringValidation(string: updatedText, characterCount: 15, validation: .mobileNo)
+        }
+        
+        // Perform validation if applicable
+        if let validation = validation {
+            return validation.validate()
+        }
+        
+        return true
     }
 }

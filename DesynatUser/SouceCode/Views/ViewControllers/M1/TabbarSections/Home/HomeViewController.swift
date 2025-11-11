@@ -114,8 +114,8 @@ class HomeViewController: UIViewController {
     
     @IBAction func changeLocationButtonAction(_ sender: Any) {
         let vc = LocationViewController.instantiate(fromAppStoryboard: .Profile)
-        vc.locationCallBack = { address,locality,city,state,country,pincode,latitude,longitude in
-            self.lblLocatioin.text = address
+        vc.locationCallBack = { fullAddress, locality, city, state, country, pincode, latitude, longitude in
+            self.lblLocatioin.text = fullAddress
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }

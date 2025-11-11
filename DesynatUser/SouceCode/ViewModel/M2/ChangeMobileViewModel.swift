@@ -17,8 +17,9 @@ class ChangeMobileViewModel:NSObject{
     
     func validFields() -> Bool {
         var errorMessage: AlertConstant = .none
-        let input = String.getString(hostVC.txtMobileNumber.text).trimmingCharacters(in: .whitespacesAndNewlines)
+        
         if hostVC.comingToUpdateMobile == true{
+            let input = String.getString(hostVC.txtMobileNumber.text).trimmingCharacters(in: .whitespacesAndNewlines)
             if input.isEmpty {
                 errorMessage = .changeNewMobile
             } else if input.isPhoneNumber() {
@@ -27,6 +28,7 @@ class ChangeMobileViewModel:NSObject{
                 }
             }
         } else{
+            let input = String.getString(hostVC.txtEmail.text).trimmingCharacters(in: .whitespacesAndNewlines)
             if input.isEmpty {
                 errorMessage = .chnageNewEmail
             } else if input.isEmail() {
@@ -67,12 +69,17 @@ class ChangeMobileViewModel:NSObject{
            
         WebService.sharedInstance.changeMobileNumberService(withParams:param) { user in
             let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
+            vc.id = "\(user.id ?? 0)"
             if self.hostVC.comingToUpdateMobile {
                 vc.comingReason = .setNewMobileNumber
+                vc.isEnteredPhoneNumber = true
+                vc.phoneNumber = self.hostVC.txtMobileNumber.text?.trimmed() ?? ""
+                vc.countryCode = self.hostVC.countryCode
             } else {
                 vc.comingReason = .setNewEmail
+                vc.isEnteredPhoneNumber = false
+                vc.phoneNumber = self.hostVC.txtEmail.text?.trimmed() ?? ""
             }
-            vc.id = "\(user.id ?? 0)"
             self.hostVC.navigationController?.pushViewController(vc, animated: true)
         }
     }
