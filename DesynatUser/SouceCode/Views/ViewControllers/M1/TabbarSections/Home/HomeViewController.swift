@@ -139,17 +139,17 @@ class HomeViewController: UIViewController {
     private func showUserData() {
         if isGuestLogin == "true" {
             lblUserName.text = "Hello Guest"
-            imgProfile.image = UIImage(named: "userProfile")
+//            imgProfile.image = UIImage(named: "userProfile")
         } else {
             lblUserName.text = "Deliver to \(Global.shared.user?.fullName ?? "")"
             imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.medium
-            imgProfile.sd_imageIndicator?.startAnimatingIndicator()
-            imgProfile.sd_setImage(
-                with: URL(string: Global.shared.user?.profileImage ?? "userProfile"),
-                placeholderImage: UIImage(named: "userProfile")
-            ) { [weak imgProfile] _, _, _, _ in
-                imgProfile?.sd_imageIndicator?.stopAnimatingIndicator()
-            }
+//            imgProfile.sd_imageIndicator?.startAnimatingIndicator()
+//            imgProfile.sd_setImage(
+//                with: URL(string: Global.shared.user?.profileImage ?? "userProfile"),
+//                placeholderImage: UIImage(named: "userProfile")
+//            ) { [weak imgProfile] _, _, _, _ in
+//                imgProfile?.sd_imageIndicator?.stopAnimatingIndicator()
+//            }
         }
     }
 
