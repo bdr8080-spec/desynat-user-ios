@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Medium.ttf">
+            <string>Poppins-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gTV-IL-0wX" customClass="SubCatgoryCollectionViewCell" customModule="DesynatUser" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="265" height="208"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="265" height="208"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Vx-Nx-IUT">
+                        <rect key="frame" x="0.0" y="10" width="265" height="188"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subCatgory" translatesAutoresizingMaskIntoConstraints="NO" id="e3j-5O-wJZ" customClass="CustomImageView" customModule="DesynatAdmin" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="265" height="169"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="169" id="l2P-dv-IlZ"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sports Wear" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n8b-SV-DcU">
+                                <rect key="frame" x="0.0" y="174" width="265" height="14"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="n8b-SV-DcU" firstAttribute="leading" secondItem="e3j-5O-wJZ" secondAttribute="leading" id="L4s-xi-L7v"/>
+                            <constraint firstItem="e3j-5O-wJZ" firstAttribute="leading" secondItem="7Vx-Nx-IUT" secondAttribute="leading" id="Tz1-0z-cOu"/>
+                            <constraint firstItem="n8b-SV-DcU" firstAttribute="trailing" secondItem="e3j-5O-wJZ" secondAttribute="trailing" id="YIE-DB-q0C"/>
+                            <constraint firstAttribute="bottom" secondItem="n8b-SV-DcU" secondAttribute="bottom" id="f1T-s7-XAk"/>
+                            <constraint firstItem="n8b-SV-DcU" firstAttribute="top" secondItem="e3j-5O-wJZ" secondAttribute="bottom" constant="5" id="fjk-9i-E56"/>
+                            <constraint firstAttribute="trailing" secondItem="e3j-5O-wJZ" secondAttribute="trailing" id="hnj-9Q-Z8G"/>
+                            <constraint firstItem="e3j-5O-wJZ" firstAttribute="top" secondItem="7Vx-Nx-IUT" secondAttribute="top" id="zle-6L-rTq"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="leading" secondItem="7Vx-Nx-IUT" secondAttribute="leading" id="T2p-eP-oY0"/>
+                <constraint firstAttribute="trailing" secondItem="7Vx-Nx-IUT" secondAttribute="trailing" id="arx-T7-9Tf"/>
+                <constraint firstItem="7Vx-Nx-IUT" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="bHG-Fe-Cnq"/>
+                <constraint firstAttribute="bottom" secondItem="7Vx-Nx-IUT" secondAttribute="bottom" constant="10" id="t9c-fY-2kU"/>
+            </constraints>
+            <size key="customSize" width="292" height="297"/>
+            <point key="canvasLocation" x="241.22137404580153" y="75.704225352112687"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="subCatgory" width="165" height="169"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

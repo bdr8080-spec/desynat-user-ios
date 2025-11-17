@@ -93,6 +93,11 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    @IBAction func savedAddressDidTapped(_ sender: Any) {
+        let vc = SavedAddressViewController.instantiate(fromAppStoryboard: .Profile)
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {

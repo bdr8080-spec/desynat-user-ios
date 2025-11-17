@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ReelsCollectionViewCell" customModule="DesynatUser" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="205" height="277"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="205" height="277"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aU6-FG-DoH" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="205" height="277"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bestSell" translatesAutoresizingMaskIntoConstraints="NO" id="9Y6-0T-MZf" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="205" height="277"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQg-Nk-GGj">
+                                <rect key="frame" x="12" y="12" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="os3-Nq-cbz"/>
+                                    <constraint firstAttribute="width" secondItem="TQg-Nk-GGj" secondAttribute="height" id="uQp-p6-y19"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="share"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcw-2z-bJ5">
+                                <rect key="frame" x="168" y="12" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="BFT-j1-TLm"/>
+                                    <constraint firstAttribute="width" secondItem="fcw-2z-bJ5" secondAttribute="height" id="DYu-at-Son"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="besSellLike"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="9Y6-0T-MZf" secondAttribute="bottom" id="0B4-ks-avj"/>
+                            <constraint firstItem="9Y6-0T-MZf" firstAttribute="leading" secondItem="aU6-FG-DoH" secondAttribute="leading" id="9nk-4v-74h"/>
+                            <constraint firstAttribute="trailing" secondItem="9Y6-0T-MZf" secondAttribute="trailing" id="DKK-5b-e96"/>
+                            <constraint firstItem="TQg-Nk-GGj" firstAttribute="centerY" secondItem="fcw-2z-bJ5" secondAttribute="centerY" id="Had-pl-gLx"/>
+                            <constraint firstItem="9Y6-0T-MZf" firstAttribute="top" secondItem="aU6-FG-DoH" secondAttribute="top" id="Jgy-pk-dNG"/>
+                            <constraint firstItem="TQg-Nk-GGj" firstAttribute="leading" secondItem="aU6-FG-DoH" secondAttribute="leading" constant="12" id="RUo-GQ-Rqh"/>
+                            <constraint firstItem="fcw-2z-bJ5" firstAttribute="top" secondItem="aU6-FG-DoH" secondAttribute="top" constant="12" id="d2Z-V5-h2b"/>
+                            <constraint firstAttribute="trailing" secondItem="fcw-2z-bJ5" secondAttribute="trailing" constant="12" id="otl-RL-WYD"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" systemColor="systemGray5Color"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="aU6-FG-DoH" secondAttribute="bottom" id="40v-QB-26y"/>
+                <constraint firstAttribute="trailing" secondItem="aU6-FG-DoH" secondAttribute="trailing" id="cJa-Z0-x6u"/>
+                <constraint firstItem="aU6-FG-DoH" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="vMA-Jn-MCJ"/>
+                <constraint firstItem="aU6-FG-DoH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="vWg-5q-Ltl"/>
+            </constraints>
+            <size key="customSize" width="205" height="277"/>
+            <point key="canvasLocation" x="199.23664122137404" y="68.661971830985919"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="besSellLike" width="20" height="20"/>
+        <image name="bestSell" width="158" height="136"/>
+        <image name="share" width="20" height="20"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

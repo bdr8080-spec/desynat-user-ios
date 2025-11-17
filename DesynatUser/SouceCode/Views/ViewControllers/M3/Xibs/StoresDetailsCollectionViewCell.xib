@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Regular.ttf">
+            <string>Poppins-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="StoresDetailsCollectionViewCell" insetsLayoutMarginsFromSafeArea="NO" id="gTV-IL-0wX" customClass="StoresDetailsCollectionViewCell" customModule="DesynatUser" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="75" height="204"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="75" height="204"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iko-Md-8cs">
+                        <rect key="frame" x="0.0" y="0.0" width="75" height="204"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="store" translatesAutoresizingMaskIntoConstraints="NO" id="97G-rP-blm" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                <rect key="frame" x="7.6666666666666643" y="0.0" width="59.999999999999993" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="t2R-Ph-BqJ"/>
+                                    <constraint firstAttribute="height" constant="60" id="vi8-pa-tkn"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" name="darkBrown"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="circleCorner" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Abaya" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sD4-ho-qUh">
+                                <rect key="frame" x="7.6666666666666643" y="70" width="59.999999999999993" height="17"/>
+                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="sD4-ho-qUh" firstAttribute="leading" secondItem="97G-rP-blm" secondAttribute="leading" id="5aU-fx-jub"/>
+                            <constraint firstAttribute="trailing" secondItem="97G-rP-blm" secondAttribute="trailing" constant="7.3333333333333428" id="9Zo-F6-0tb"/>
+                            <constraint firstItem="97G-rP-blm" firstAttribute="leading" secondItem="iko-Md-8cs" secondAttribute="leading" constant="7.6666666666666607" id="GN3-SB-07p"/>
+                            <constraint firstItem="sD4-ho-qUh" firstAttribute="top" secondItem="97G-rP-blm" secondAttribute="bottom" constant="10" id="NVj-gb-5Ui"/>
+                            <constraint firstItem="sD4-ho-qUh" firstAttribute="trailing" secondItem="97G-rP-blm" secondAttribute="trailing" id="iaT-V8-mko"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="sD4-ho-qUh" secondAttribute="bottom" constant="15" id="ivD-ag-nHg"/>
+                            <constraint firstItem="97G-rP-blm" firstAttribute="top" secondItem="iko-Md-8cs" secondAttribute="top" id="t7j-kd-Hc9"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="leading" secondItem="iko-Md-8cs" secondAttribute="leading" id="0Q6-w0-CS2"/>
+                <constraint firstAttribute="trailing" secondItem="iko-Md-8cs" secondAttribute="trailing" id="Asp-wt-b9Z"/>
+                <constraint firstAttribute="top" secondItem="iko-Md-8cs" secondAttribute="top" id="a5i-Fs-ccE"/>
+                <constraint firstAttribute="bottom" secondItem="iko-Md-8cs" secondAttribute="bottom" id="xfD-t8-mLq"/>
+            </constraints>
+            <size key="customSize" width="266" height="204"/>
+            <point key="canvasLocation" x="187.78625954198472" y="42.95774647887324"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="store" width="60" height="60"/>
+        <namedColor name="darkBrown">
+            <color red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
