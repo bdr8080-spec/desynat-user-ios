@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Medium.ttf">
+            <string>Poppins-Medium</string>
+        </array>
+        <array key="Poppins-Regular.ttf">
+            <string>Poppins-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="213" id="KGk-i7-Jjw" customClass="SavedAddressTableViewCell" customModule="DesynatUser" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="213"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="213"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nml-xa-Y37" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="159"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="radioSelected" translatesAutoresizingMaskIntoConstraints="NO" id="RR7-RM-44r">
+                                <rect key="frame" x="12" y="10" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="RlC-uS-i64"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="office" translatesAutoresizingMaskIntoConstraints="NO" id="gzG-iQ-t2C">
+                                <rect key="frame" x="44" y="12" width="18" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="8jb-Cm-Sig"/>
+                                    <constraint firstAttribute="width" secondItem="gzG-iQ-t2C" secondAttribute="height" id="bms-uq-8mO"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Office" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N79-7d-lTJ">
+                                <rect key="frame" x="77" y="11.333333333333334" width="41" height="19.666666666666664"/>
+                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="0Rp-YA-KZd">
+                                <rect key="frame" x="246" y="8.6666666666666643" width="62" height="25"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cub-zq-mrN">
+                                        <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="o7L-bL-Lzu"/>
+                                            <constraint firstAttribute="height" constant="25" id="sQx-H4-zJP"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="pencil"/>
+                                        <connections>
+                                            <action selector="editDidTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="XD5-QV-O1w"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHH-fy-7Zn">
+                                        <rect key="frame" x="37" y="0.0" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="NFK-KJ-1zr"/>
+                                            <constraint firstAttribute="height" constant="25" id="Nh2-jQ-GWi"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="delete"/>
+                                        <connections>
+                                            <action selector="deleteDidTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="SFh-M3-xzs"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alex" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7iW-0Q-tMe">
+                                <rect key="frame" x="44" y="45" width="258" height="19.666666666666671"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AdW-p1-15s">
+                                <rect key="frame" x="44" y="79.666666666666686" width="258" height="67.333333333333314"/>
+                                <string key="text">HN- 547, Street no,5 Block d new town hale, Saudi Arabia
+Riyad- 10214</string>
+                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gzG-iQ-t2C" firstAttribute="leading" secondItem="RR7-RM-44r" secondAttribute="trailing" constant="10" id="4ld-UK-yEK"/>
+                            <constraint firstItem="0Rp-YA-KZd" firstAttribute="centerY" secondItem="N79-7d-lTJ" secondAttribute="centerY" id="7IG-Bd-ZxS"/>
+                            <constraint firstItem="N79-7d-lTJ" firstAttribute="leading" secondItem="gzG-iQ-t2C" secondAttribute="trailing" constant="15" id="8Vf-mb-6Ja"/>
+                            <constraint firstAttribute="trailing" secondItem="0Rp-YA-KZd" secondAttribute="trailing" constant="12" id="CfO-0d-BIY"/>
+                            <constraint firstItem="RR7-RM-44r" firstAttribute="width" secondItem="RR7-RM-44r" secondAttribute="height" id="DQJ-T2-VS9"/>
+                            <constraint firstAttribute="trailing" secondItem="7iW-0Q-tMe" secondAttribute="trailing" constant="18" id="Dn8-NZ-8Ia"/>
+                            <constraint firstItem="AdW-p1-15s" firstAttribute="leading" secondItem="7iW-0Q-tMe" secondAttribute="leading" id="L5Q-wZ-U5v"/>
+                            <constraint firstItem="N79-7d-lTJ" firstAttribute="centerY" secondItem="gzG-iQ-t2C" secondAttribute="centerY" id="U5M-8Z-y5b"/>
+                            <constraint firstItem="RR7-RM-44r" firstAttribute="centerY" secondItem="gzG-iQ-t2C" secondAttribute="centerY" id="WyZ-rU-XFH"/>
+                            <constraint firstAttribute="bottom" secondItem="AdW-p1-15s" secondAttribute="bottom" constant="12" id="cDP-AC-07W"/>
+                            <constraint firstItem="7iW-0Q-tMe" firstAttribute="top" secondItem="gzG-iQ-t2C" secondAttribute="bottom" constant="15" id="d6e-qC-yF1"/>
+                            <constraint firstItem="gzG-iQ-t2C" firstAttribute="top" secondItem="nml-xa-Y37" secondAttribute="top" constant="12" id="diG-YY-Rof"/>
+                            <constraint firstItem="7iW-0Q-tMe" firstAttribute="leading" secondItem="gzG-iQ-t2C" secondAttribute="leading" id="fVF-Yc-H1G"/>
+                            <constraint firstItem="AdW-p1-15s" firstAttribute="top" secondItem="7iW-0Q-tMe" secondAttribute="bottom" constant="15" id="omy-Dj-9yy"/>
+                            <constraint firstItem="0Rp-YA-KZd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="N79-7d-lTJ" secondAttribute="trailing" constant="20" id="uFC-eo-MVr"/>
+                            <constraint firstItem="AdW-p1-15s" firstAttribute="trailing" secondItem="7iW-0Q-tMe" secondAttribute="trailing" id="uYa-rL-m0z"/>
+                            <constraint firstItem="RR7-RM-44r" firstAttribute="leading" secondItem="nml-xa-Y37" secondAttribute="leading" constant="12" id="xpL-br-QhV"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="nml-xa-Y37" secondAttribute="bottom" constant="15" id="0ox-lf-OlT"/>
+                    <constraint firstItem="nml-xa-Y37" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="8mm-MZ-9Sb"/>
+                    <constraint firstItem="nml-xa-Y37" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="EgJ-WM-Nlt"/>
+                    <constraint firstAttribute="trailing" secondItem="nml-xa-Y37" secondAttribute="trailing" id="Too-YQ-LLU"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="deleteButtonOutlet" destination="XHH-fy-7Zn" id="hzr-mM-t1f"/>
+                <outlet property="editButtonOutlet" destination="Cub-zq-mrN" id="Eg8-Kz-0YX"/>
+                <outlet property="selectedRadioImageView" destination="RR7-RM-44r" id="JqC-ho-eSu"/>
+            </connections>
+            <point key="canvasLocation" x="129.7709923664122" y="48.239436619718312"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="delete" width="24" height="24"/>
+        <image name="office" width="17" height="19"/>
+        <image name="pencil" width="24" height="24"/>
+        <image name="radioSelected" width="20" height="20"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

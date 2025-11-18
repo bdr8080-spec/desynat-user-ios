@@ -25,24 +25,25 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hGJ-d8-aat">
-                        <rect key="frame" x="0.0" y="2.3333333333333321" width="320" height="39.333333333333343"/>
+                        <rect key="frame" x="0.0" y="10" width="320" height="24"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="alj-UB-biR">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="19.666666666666668"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="12"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HqO-Iu-c21">
-                                <rect key="frame" x="0.0" y="19.666666666666664" width="320" height="19.666666666666664"/>
+                                <rect key="frame" x="0.0" y="12" width="320" height="12"/>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                     </stackView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="hGJ-d8-aat" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="EMX-Wl-wsy"/>
                     <constraint firstItem="hGJ-d8-aat" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="aTO-0r-OLC"/>
                     <constraint firstAttribute="trailing" secondItem="hGJ-d8-aat" secondAttribute="trailing" id="nqt-gM-s2G"/>
                     <constraint firstItem="hGJ-d8-aat" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="o2y-0m-mnx"/>

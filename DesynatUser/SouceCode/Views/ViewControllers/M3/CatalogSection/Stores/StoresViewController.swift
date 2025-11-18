@@ -42,6 +42,13 @@ class StoresViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    // MARK: - Page Control Tap Handling
+    @IBAction func pageControlChanged(_ sender: UIPageControl) {
+        let page = sender.currentPage
+        let indexPath = IndexPath(item: page, section: 0)
+        bannerCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+    
     private func updateCollectionsHeight() {
         storesCollectionViewHeightConstriant.constant = storesCollectionView.contentSize.height
     }

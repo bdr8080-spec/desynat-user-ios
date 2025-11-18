@@ -11,6 +11,7 @@ import GooglePlaces
 
 class LocationViewController: UIViewController, UITextFieldDelegate {
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var txtSearch: UITextField!
     @IBOutlet weak var viewMap: GMSMapView!
     @IBOutlet weak var lblLocation: UILabel!
@@ -31,6 +32,7 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
     var pincode = ""
     var locationMarker = GMSMarker()
     lazy private var viewModel = LocationViewModel(hostVC: self)
+    var comingReason: ComingReasonAtLocationScreen = .fromHome
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +43,7 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        initialSetup()
     }
     
     @IBAction func btnBack(_ sender: Any) {
@@ -77,6 +80,15 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
         let camera = GMSCameraPosition.camera(withLatitude: latitude ?? 0.0, longitude: longitude ?? 0.0, zoom: 12)
         self.viewMap.camera = camera
         self.viewMap.delegate = self
+    }
+    
+    private func initialSetup() {
+        switch comingReason {
+        case .fromHome:
+            titleLabel.text = "Change Location"
+        case .fromAddAddress:
+            titleLabel.text = "Set Location"
+        }
     }
 }
 
@@ -185,4 +197,9 @@ extension LocationViewController: GMSAutocompleteViewControllerDelegate {
             return
         }
     }
+}
+
+enum ComingReasonAtLocationScreen {
+    case fromHome
+    case fromAddAddress
 }

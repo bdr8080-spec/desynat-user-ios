@@ -9,6 +9,7 @@ import UIKit
 
 class FiltersOptionsTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var mainContentView: UIView!
     @IBOutlet weak var colourView: CustomView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var selectionImageView: UIImageView!

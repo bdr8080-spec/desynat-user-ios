@@ -60,8 +60,10 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="colourView" destination="EcE-nJ-Icr" id="6Ep-xe-mz7"/>
+                <outlet property="mainContentView" destination="H2p-sc-9uM" id="EIM-EY-WWO"/>
                 <outlet property="selectionImageView" destination="Vpa-lf-lsS" id="bPV-MP-nJP"/>
                 <outlet property="titleLabel" destination="UMT-Ld-lkq" id="Gpu-2N-HjK"/>
             </connections>

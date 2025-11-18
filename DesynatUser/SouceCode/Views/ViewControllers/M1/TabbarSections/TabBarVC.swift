@@ -23,7 +23,7 @@ class TabBarVC: UIViewController {
         updateTabSelection(forTag: sender.tag)
     }
     
-    private func updateTabSelection(forTag tag: Int) {
+    func updateTabSelection(forTag tag: Int) {
         loadSubview(forTag: tag)
         setUserButtonImages(selectedTag: tag)
     }

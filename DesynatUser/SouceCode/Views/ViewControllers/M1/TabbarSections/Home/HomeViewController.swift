@@ -114,6 +114,7 @@ class HomeViewController: UIViewController {
     
     @IBAction func changeLocationButtonAction(_ sender: Any) {
         let vc = LocationViewController.instantiate(fromAppStoryboard: .Profile)
+        vc.comingReason = .fromHome
         vc.locationCallBack = { fullAddress, locality, city, state, country, pincode, latitude, longitude in
             self.lblLocatioin.text = fullAddress
         }
@@ -302,6 +303,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case categoriesSectionCollectionView:
             viewModel.selectedCategoriesSection = viewModel.categoriesSection[indexPath.row].id ?? 1
             categoriesSectionCollectionView.reloadData()
+        case categoriesCollectionView:
+            let nextVC = StoresViewController.instantiate(fromAppStoryboard: .Catalog)
+            self.navigationController?.pushViewController(nextVC, animated: true)
         default:
             print("")
         }

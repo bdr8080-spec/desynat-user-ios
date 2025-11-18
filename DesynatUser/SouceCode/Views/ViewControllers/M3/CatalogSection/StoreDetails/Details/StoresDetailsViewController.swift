@@ -142,6 +142,16 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch collectionView {
+        case storesCollectionView:
+            let nextVC = ProductDetailViewController.instantiate(fromAppStoryboard: .Catalog)
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        default:
+            break
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt
                         indexPath: IndexPath) -> CGSize {
         switch collectionView {

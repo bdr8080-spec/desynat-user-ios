@@ -94,7 +94,7 @@ extension ProductsFiltersViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        return 60
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -107,7 +107,7 @@ extension ProductsFiltersViewController: UITableViewDelegate, UITableViewDataSou
         }
         headerCell.titlelabel.text = filtersOptions[section].header
         let description = filtersOptions[section].description
-        if description.isEmpty {
+        if !description.isEmpty {
             headerCell.decriptionLabel.isHidden = false
             headerCell.decriptionLabel.text = description
         } else {
@@ -145,7 +145,7 @@ extension ProductsFiltersViewController: UITableViewDelegate, UITableViewDataSou
 
         // PRICE section → fixed height 50
         if sectionHeader == "Price" {
-            return 50
+            return 60
         }
 
         // For all other sections → normal height
