@@ -14,24 +14,30 @@ class CatalogViewController: UIViewController {
             catalogTableView.registerCellFromNib(cellID: "CatalogTableViewCell")
         }
     }
+  
+  private lazy var viewModel = CatalogViewModel(hostVC: self)
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
-    
-
-
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    viewModel.getCategoriesListApi()
+  }
 
 }
 
 extension CatalogViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+      return viewModel.categoriesSection.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CatalogTableViewCell", for: indexPath) as! CatalogTableViewCell
+      cell.configData(data: viewModel.categoriesSection[indexPath.row])
         if indexPath.row % 2 == 0 {
             cell.leftImageView.isHidden = true
             cell.rightImageView.isHidden = false
@@ -50,6 +56,7 @@ extension CatalogViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nextVC = SubCatgoryViewController.instantiate(fromAppStoryboard: .Catalog)
+      nextVC.categoryId = viewModel.categoriesSection[indexPath.row].id
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     

@@ -16,20 +16,18 @@ class SortByStoresViewController: UIViewController {
         }
     }
     
-    var filtersOptions: [StoreFilterOption] = [
-        StoreFilterOption(id: 0, title: "Recommended", isSelected: true, apiParcing: "recommended", seletedImage: "radioSelected", unselectedImage: "radioUnselected"),
-        StoreFilterOption(id: 0, title: "Price: Low to High", isSelected: false, apiParcing: "lowToHigh", seletedImage: "radioSelected", unselectedImage: "radioUnselected"),
-        StoreFilterOption(id: 0, title: "Price: High to Low", isSelected: false, apiParcing: "highToLow", seletedImage: "radioSelected", unselectedImage: "radioUnselected"),
-        StoreFilterOption(id: 0, title: "Newest First", isSelected: false, apiParcing: "newestFirst", seletedImage: "radioSelected", unselectedImage: "radioUnselected"),
-        StoreFilterOption(id: 0, title: "Customer Ratings", isSelected: false, apiParcing: "customerRatings", seletedImage: "radioSelected", unselectedImage: "radioUnselected"),
-        StoreFilterOption(id: 0, title: "Best Selling", isSelected: false, apiParcing: "bestSelling", seletedImage: "radioSelected", unselectedImage: "radioUnselected"),
-        StoreFilterOption(id: 0, title: "Fastest Delivery", isSelected: false, apiParcing: "fastest", seletedImage: "radioSelected", unselectedImage: "radioUnselected"),
-    ]
-    var selectedIndex: Int = 0
+
+  var selectedIndex: Int = 0
+  private lazy var viewModel = SortByStoreViewModel(hostVC: self)
+  var preSelectedApiValue: Int?
+  var filtersOptions: [SortOptionModel] = []
+  weak var delegate: SortByStoresViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
+      viewModel.getSingleStoresApi()
+      setupOptions()
     }
     
     @IBAction func dismissDidTapped(_ sender: Any) {
@@ -42,6 +40,19 @@ class SortByStoresViewController: UIViewController {
         titleView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
 
     }
+  
+  func setupOptions() {
+      guard let selectedApi = preSelectedApiValue,
+            let storeList = viewModel.sortedStoreList,
+            let index = storeList.firstIndex(where: { $0.id == selectedApi }) else {
+          sortTableview.reloadData()
+          return
+      }
+
+      selectedIndex = index
+      sortTableview.reloadData()
+  }
+
     
 }
 
@@ -49,32 +60,27 @@ class SortByStoresViewController: UIViewController {
 extension SortByStoresViewController: UITableViewDelegate, UITableViewDataSource {
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filtersOptions.count
+      return viewModel.sortedStoreList?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
-        let option = filtersOptions[indexPath.row]
-        cell.configure(option: option)
+      let option = viewModel.sortedStoreList?[indexPath.row]
+      cell.titleLabel.text = option?.name
+      if selectedIndex == indexPath.row {
+        cell.selectionImageView.image = UIImage(named: "radioSelected")
+      } else {
+        cell.selectionImageView.image = UIImage(named: "radioUnselected")
+      }
         return cell
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        // 1. First, reset all selections
-        for i in 0..<filtersOptions.count {
-            filtersOptions[i].isSelected = false
-        }
-        
-        // 2. Then update the selected option
-        filtersOptions[indexPath.row].isSelected = true
-        selectedIndex = indexPath.row
-        
-        // 3. Reload table to update UI
-        tableView.reloadData()
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    selectedIndex = indexPath.row
+    sortTableview.reloadData()
+    delegate?.didSelectSortOption(viewModel.sortedStoreList?[indexPath.row].id ?? 0)
+      self.dismiss(animated: true)
+  }
 
-        // 4. (Optional) Send back selected API value
-        print("Selected Sort: \(filtersOptions[indexPath.row].apiParcing)")
-    }
 
 }

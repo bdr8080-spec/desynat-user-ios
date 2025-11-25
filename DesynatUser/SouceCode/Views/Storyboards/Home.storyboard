@@ -817,6 +817,7 @@
                                                         <rect key="frame" x="12" y="13" width="25" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="uFb-SX-3NX"/>
+                                                            <constraint firstAttribute="width" secondItem="GaI-Xc-5Az" secondAttribute="height" id="vRp-Dg-ieC"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -858,7 +859,6 @@
                                                     <constraint firstAttribute="bottom" secondItem="cik-gZ-eGY" secondAttribute="bottom" id="gbU-XT-geE"/>
                                                     <constraint firstItem="Xqc-0O-IVC" firstAttribute="centerY" secondItem="b89-rm-T2W" secondAttribute="centerY" id="rx2-Lb-E3o"/>
                                                     <constraint firstItem="b89-rm-T2W" firstAttribute="centerY" secondItem="JeO-gX-XKA" secondAttribute="centerY" id="tGL-6e-DdM"/>
-                                                    <constraint firstItem="GaI-Xc-5Az" firstAttribute="width" secondItem="GaI-Xc-5Az" secondAttribute="height" id="vRp-Dg-ieC"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -994,7 +994,8 @@
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qea-H8-Dhj">
                                                                         <rect key="frame" x="0.0" y="0.0" width="155.66666666666666" height="19.666666666666668"/>
-                                                                        <string key="text">Shipping Fee</string>
+                                                                        <string key="text">Shipping Fee
+</string>
                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -1673,16 +1674,16 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

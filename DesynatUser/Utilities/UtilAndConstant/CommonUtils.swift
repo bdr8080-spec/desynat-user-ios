@@ -16,6 +16,36 @@ class CommonUtils {
             return countryPicker.getDialCode(countryCode: NSLocale.current.identifier) ?? "+91"
         }
     }
+  
+  static func setStrikethrough(label: UILabel, text: String) {
+      let attributeString = NSMutableAttributedString(string: text)
+      
+      // Strikethrough in the same color as the label text
+      let textColor = label.textColor ?? .black
+      
+      attributeString.addAttribute(
+          .strikethroughStyle,
+          value: NSUnderlineStyle.single.rawValue,
+          range: NSRange(location: 0, length: attributeString.length)
+      )
+      
+      attributeString.addAttribute(
+          .strikethroughColor,
+          value: textColor,
+          range: NSRange(location: 0, length: attributeString.length)
+      )
+      
+      // Keep label's current font
+      if let font = label.font {
+          attributeString.addAttribute(
+              .font,
+              value: font,
+              range: NSRange(location: 0, length: attributeString.length)
+          )
+      }
+      
+      label.attributedText = attributeString
+  }
     
 //    static func formatDate(_ date: Date) -> String {
 //        let formatter = DateFormatter()

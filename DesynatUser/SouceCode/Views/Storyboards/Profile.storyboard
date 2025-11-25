@@ -86,7 +86,7 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Your Password" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fqc-he-0Wk">
-                                                                <rect key="frame" x="20" y="14.333333333333345" width="164" height="19.666666666666664"/>
+                                                                <rect key="frame" x="20" y="14.333333333333345" width="164" height="19.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -1555,13 +1555,13 @@ want to continue with</string>
                                 <rect key="frame" x="0.0" y="178" width="393" height="606"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="60b-PF-DUi">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="908.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="998.66666666666663"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hO3-OO-2tK" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="24" y="0.0" width="345" height="735"/>
+                                                <rect key="frame" x="24" y="0.0" width="345" height="825"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Coq-QZ-tXq">
-                                                        <rect key="frame" x="15" y="15" width="315" height="705"/>
+                                                        <rect key="frame" x="15" y="15" width="315" height="795"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gjd-LK-hGb">
                                                                 <rect key="frame" x="0.0" y="0.0" width="315" height="75"/>
@@ -1572,7 +1572,7 @@ want to continue with</string>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7mC-DT-0Vq" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7mC-DT-0Vq" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="25" width="315" height="50"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qNS-BC-BKi">
@@ -1622,7 +1622,7 @@ want to continue with</string>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MeD-jh-pNy" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MeD-jh-pNy" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="25" width="315" height="50"/>
                                                                         <subviews>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ifg-9e-EWu">
@@ -1701,8 +1701,67 @@ want to continue with</string>
                                                                     <constraint firstItem="MeD-jh-pNy" firstAttribute="top" secondItem="duT-01-SyP" secondAttribute="bottom" constant="5" id="oit-5q-d1K"/>
                                                                 </constraints>
                                                             </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KWO-rm-lbB">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OWR-eb-9yU">
                                                                 <rect key="frame" x="0.0" y="180" width="315" height="75"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CxR-el-Ze0">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="315" height="20"/>
+                                                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
+                                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q4l-Is-YWp" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="25" width="315" height="50"/>
+                                                                        <subviews>
+                                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Country" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qg6-oo-ze5">
+                                                                                <rect key="frame" x="20" y="5" width="255" height="40"/>
+                                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                                                                <textInputTraits key="textInputTraits"/>
+                                                                            </textField>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downImag" translatesAutoresizingMaskIntoConstraints="NO" id="dcA-Yv-vgV">
+                                                                                <rect key="frame" x="285" y="15" width="20" height="20"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="20" id="Xrz-9J-Is7"/>
+                                                                                </constraints>
+                                                                            </imageView>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstItem="Qg6-oo-ze5" firstAttribute="leading" secondItem="Q4l-Is-YWp" secondAttribute="leading" constant="20" id="AkP-nj-oF2"/>
+                                                                            <constraint firstItem="Qg6-oo-ze5" firstAttribute="top" secondItem="Q4l-Is-YWp" secondAttribute="top" constant="5" id="JPf-n5-m8C"/>
+                                                                            <constraint firstItem="dcA-Yv-vgV" firstAttribute="width" secondItem="dcA-Yv-vgV" secondAttribute="height" id="bAf-Bf-vco"/>
+                                                                            <constraint firstItem="dcA-Yv-vgV" firstAttribute="leading" secondItem="Qg6-oo-ze5" secondAttribute="trailing" constant="10" id="gs7-VD-ndC"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="Qg6-oo-ze5" secondAttribute="bottom" constant="5" id="hCw-Fi-HNG"/>
+                                                                            <constraint firstItem="dcA-Yv-vgV" firstAttribute="centerY" secondItem="Q4l-Is-YWp" secondAttribute="centerY" id="k8y-qE-SAD"/>
+                                                                            <constraint firstAttribute="height" constant="50" id="lL4-fa-4tl"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="dcA-Yv-vgV" secondAttribute="trailing" constant="10" id="px8-tW-POG"/>
+                                                                        </constraints>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                <real key="value" value="12"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                                <real key="value" value="1"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </view>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="Q4l-Is-YWp" firstAttribute="top" secondItem="CxR-el-Ze0" secondAttribute="bottom" constant="5" id="FkJ-hC-sli"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="Q4l-Is-YWp" secondAttribute="bottom" id="Onw-Ub-Wux"/>
+                                                                    <constraint firstItem="Q4l-Is-YWp" firstAttribute="trailing" secondItem="CxR-el-Ze0" secondAttribute="trailing" id="QlS-NM-sv3"/>
+                                                                    <constraint firstItem="CxR-el-Ze0" firstAttribute="top" secondItem="OWR-eb-9yU" secondAttribute="top" id="dI6-2c-XVV"/>
+                                                                    <constraint firstItem="Q4l-Is-YWp" firstAttribute="leading" secondItem="CxR-el-Ze0" secondAttribute="leading" id="gd2-Oo-Ab6"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="CxR-el-Ze0" secondAttribute="trailing" id="ghb-VE-LM8"/>
+                                                                    <constraint firstAttribute="height" constant="75" id="kup-HG-cGN"/>
+                                                                    <constraint firstItem="CxR-el-Ze0" firstAttribute="leading" secondItem="OWR-eb-9yU" secondAttribute="leading" id="q77-di-HOg"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KWO-rm-lbB">
+                                                                <rect key="frame" x="0.0" y="270" width="315" height="75"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WaL-of-kws">
                                                                         <rect key="frame" x="0.0" y="0.0" width="315" height="20"/>
@@ -1710,7 +1769,7 @@ want to continue with</string>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wJc-bM-Mam" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wJc-bM-Mam" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="25" width="315" height="50"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xx3-Bo-SdY">
@@ -1766,7 +1825,7 @@ want to continue with</string>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U04-Ye-TWe">
-                                                                <rect key="frame" x="0.0" y="270" width="315" height="75"/>
+                                                                <rect key="frame" x="0.0" y="360" width="315" height="75"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="House no./Building no/Area" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sUv-oy-Q1W">
                                                                         <rect key="frame" x="0.0" y="0.0" width="315" height="20"/>
@@ -1774,7 +1833,7 @@ want to continue with</string>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Sa-Yi-U4a" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Sa-Yi-U4a" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="25" width="315" height="50"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="House no./Building no/Area" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JME-7p-gog">
@@ -1816,7 +1875,7 @@ want to continue with</string>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e8H-jk-Q3B">
-                                                                <rect key="frame" x="0.0" y="360" width="315" height="75"/>
+                                                                <rect key="frame" x="0.0" y="450" width="315" height="75"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block/Street" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yzq-1M-5Pd">
                                                                         <rect key="frame" x="0.0" y="0.0" width="315" height="20"/>
@@ -1824,7 +1883,7 @@ want to continue with</string>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eyq-Ru-Tfv" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eyq-Ru-Tfv" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="25" width="315" height="50"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Block/Street" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dz0-tY-ug7">
@@ -1866,7 +1925,7 @@ want to continue with</string>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yWm-3a-uaE">
-                                                                <rect key="frame" x="0.0" y="450" width="315" height="75"/>
+                                                                <rect key="frame" x="0.0" y="540" width="315" height="75"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Postal Code (optional)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8U0-oD-Mm6">
                                                                         <rect key="frame" x="0.0" y="0.0" width="315" height="20"/>
@@ -1874,7 +1933,7 @@ want to continue with</string>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E42-Na-LgH" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E42-Na-LgH" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="25" width="315" height="50"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Postal Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tu8-7c-9Hn">
@@ -1916,7 +1975,7 @@ want to continue with</string>
                                                                 </constraints>
                                                             </view>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="uFy-EI-MYM">
-                                                                <rect key="frame" x="0.0" y="540" width="315" height="75"/>
+                                                                <rect key="frame" x="0.0" y="630" width="315" height="75"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Q9-WV-Q9Z">
                                                                         <rect key="frame" x="0.0" y="0.0" width="151.66666666666666" height="75"/>
@@ -1927,7 +1986,7 @@ want to continue with</string>
                                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1Q-81-4Gs" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1Q-81-4Gs" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="25" width="151.66666666666666" height="50"/>
                                                                                 <subviews>
                                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="City/District " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YlM-fs-bd5">
@@ -1977,7 +2036,7 @@ want to continue with</string>
                                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOI-7U-ja2" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOI-7U-ja2" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="25" width="151.33333333333334" height="50"/>
                                                                                 <subviews>
                                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZmC-fR-rxD">
@@ -2021,7 +2080,7 @@ want to continue with</string>
                                                                 </subviews>
                                                             </stackView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="afi-wQ-wWX">
-                                                                <rect key="frame" x="0.0" y="630" width="315" height="75"/>
+                                                                <rect key="frame" x="0.0" y="720" width="315" height="75"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Landmark" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwX-kx-ARk">
                                                                         <rect key="frame" x="0.0" y="0.0" width="315" height="20"/>
@@ -2029,7 +2088,7 @@ want to continue with</string>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UDI-0M-e5h" customClass="CustomView" customModule="DesynatDealer" customModuleProvider="target">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UDI-0M-e5h" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="25" width="315" height="50"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Landmark" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Oa-Hj-UCo">
@@ -2093,13 +2152,13 @@ want to continue with</string>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save Address As" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHR-fj-2CH">
-                                                <rect key="frame" x="24" y="755" width="345" height="22.666666666666629"/>
+                                                <rect key="frame" x="24" y="845" width="345" height="22.666666666666629"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="rZf-Hq-9xl">
-                                                <rect key="frame" x="24" y="797.66666666666663" width="345" height="48"/>
+                                                <rect key="frame" x="24" y="887.66666666666674" width="345" height="48"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sqc-TZ-GuU" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="165" height="48"/>
@@ -2112,7 +2171,7 @@ want to continue with</string>
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhZ-sp-xi4">
-                                                                <rect key="frame" x="42" y="14.333333333333373" width="103" height="19.666666666666671"/>
+                                                                <rect key="frame" x="42" y="14.333333333333259" width="103" height="19.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -2164,7 +2223,7 @@ want to continue with</string>
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Office" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mn0-Ra-ZIG">
-                                                                <rect key="frame" x="42" y="14.333333333333373" width="103" height="19.666666666666671"/>
+                                                                <rect key="frame" x="42" y="14.333333333333259" width="103" height="19.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -2207,7 +2266,7 @@ want to continue with</string>
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g04-S2-Oxm">
-                                                <rect key="frame" x="24" y="870.66666666666674" width="345" height="38"/>
+                                                <rect key="frame" x="24" y="960.66666666666674" width="345" height="38"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hVD-Mv-qhl" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="345" height="38"/>
@@ -2303,6 +2362,7 @@ want to continue with</string>
         <image name="btnGradient" width="343" height="38"/>
         <image name="country" width="20.333333969116211" height="31"/>
         <image name="currectLocation" width="21" height="21"/>
+        <image name="downImag" width="24" height="24"/>
         <image name="eyeClose" width="22" height="16.666666030883789"/>
         <image name="eye_open" width="128" height="128"/>
         <image name="homeAddress" width="16" height="16.666666030883789"/>
@@ -2313,7 +2373,7 @@ want to continue with</string>
         <image name="plus" width="16" height="16"/>
         <image name="rightArrow" width="17.666666030883789" height="13.666666984558105"/>
         <image name="search" width="20" height="20"/>
-        <image name="userProfile" width="128" height="128"/>
+        <image name="userProfile" width="32" height="32.333332061767578"/>
         <namedColor name="darkBrown">
             <color red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -2321,10 +2381,10 @@ want to continue with</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

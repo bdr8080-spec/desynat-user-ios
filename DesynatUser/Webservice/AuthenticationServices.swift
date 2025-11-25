@@ -198,6 +198,54 @@ extension WebService {
             }
         }
     }
+  
+  func getStoresListService(param: [String: Any], completion:@escaping (_ user:[StoreListDataModel])-> Void) {
+      CommonUtils.showHud(show: true)
+    NetworkManager.shared.request(withAPI: .endpoint(.categoryWiseStoreList), requestMethod: .post,requestParams: param, requestModel:[StoreListDataModel].self) { result, code in
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
+  }
+  
+  func getSingleStoresListService(param: [String: Any], completion:@escaping (_ user:SingleStoreDetailsDataModel)-> Void) {
+      CommonUtils.showHud(show: true)
+    NetworkManager.shared.request(withAPI: .endpoint(.singleStoreDetails), requestMethod: .post,requestParams: param, requestModel:SingleStoreDetailsDataModel.self) { result, code in
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
+  }
+  
+  func getSortByStoreListService(completion:@escaping (_ user:[SortByStoreDataModel])-> Void) {
+      CommonUtils.showHud(show: true)
+    NetworkManager.shared.request(withAPI: .endpoint(.sortStoreFilter), requestMethod: .get, requestModel:[SortByStoreDataModel].self) { result, code in
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
+  }
     
 }
 

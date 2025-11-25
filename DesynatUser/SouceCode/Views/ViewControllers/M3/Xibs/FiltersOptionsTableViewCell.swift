@@ -28,6 +28,14 @@ class FiltersOptionsTableViewCell: UITableViewCell {
         let imageName = option.isSelected ? option.seletedImage : option.unselectedImage
         selectionImageView.image = UIImage(named: imageName)
     }
+  
+  func configureSortBy(option: SortOptionModel?) {
+      titleLabel.text = option?.title
+      
+    let isSlected = option?.isSelected ?? false
+      let imageName = isSlected ? "radioSelected" : "radioUnselected"
+      selectionImageView.image = UIImage(named: imageName)
+  }
     
     func configureProductFilter(option: ProductFilterOption) {
         titleLabel.text = option.title

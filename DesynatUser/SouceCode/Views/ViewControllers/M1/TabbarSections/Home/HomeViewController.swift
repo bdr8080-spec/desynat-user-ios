@@ -78,7 +78,8 @@ class HomeViewController: UIViewController {
     //    private var categoriesSection = ["Men", "Women", "Kids"]
     
     private lazy var viewModel = HomeViewModel(hostVC: self)
-    
+  var slecetdCategoryId: Int? = 0
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         bannerPageController.numberOfPages = bannerCount
@@ -305,6 +306,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             categoriesSectionCollectionView.reloadData()
         case categoriesCollectionView:
             let nextVC = StoresViewController.instantiate(fromAppStoryboard: .Catalog)
+          nextVC.slectedsubCategoryId = viewModel.selectedCategoriesSection
             self.navigationController?.pushViewController(nextVC, animated: true)
         default:
             print("")

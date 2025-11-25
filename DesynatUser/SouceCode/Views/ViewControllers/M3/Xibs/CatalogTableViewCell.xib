@@ -110,9 +110,11 @@ and more.dfvdf vdovd fvodv dvndvdv dvodvdnvdf vdfnvd dfhvidhfvd fvdivd vdvbd vd 
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="descriptionLabel" destination="EtB-BG-Vbk" id="FOv-Zi-498"/>
                 <outlet property="leftImageView" destination="V9R-rl-fbI" id="Z8R-aW-SmD"/>
                 <outlet property="mainContentView" destination="qkE-gd-gu3" id="kP7-YE-5cJ"/>
                 <outlet property="rightImageView" destination="1rd-Ti-N9v" id="OzA-Jw-BVD"/>
+                <outlet property="titleLabel" destination="xxb-2d-dv7" id="lX9-IT-ij4"/>
             </connections>
             <point key="canvasLocation" x="359.5419847328244" y="42.95774647887324"/>
         </tableViewCell>

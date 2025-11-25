@@ -171,6 +171,13 @@
                 <constraint firstAttribute="trailing" secondItem="K5C-SQ-wgv" secondAttribute="trailing" id="o9E-gW-CTE"/>
             </constraints>
             <size key="customSize" width="267" height="269"/>
+            <connections>
+                <outlet property="actualPriceLabel" destination="Sx8-aW-sgl" id="84m-lA-Pni"/>
+                <outlet property="finalPriceLabel" destination="GL6-DP-SCP" id="4D7-LJ-zna"/>
+                <outlet property="iscountPriceLabel" destination="6ry-gc-2rr" id="rrz-Pv-6U7"/>
+                <outlet property="mainImageView" destination="bzT-u9-KC6" id="d96-mq-oHH"/>
+                <outlet property="titleLabel" destination="M4h-gO-Bqr" id="Apa-4H-cAv"/>
+            </connections>
             <point key="canvasLocation" x="315.26717557251908" y="42.605633802816904"/>
         </collectionViewCell>
     </objects>

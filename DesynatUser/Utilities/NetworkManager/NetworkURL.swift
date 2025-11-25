@@ -39,7 +39,10 @@ enum NetworkEndPoint: String {
     case userVerifyOtp                      = "api/user/verify-otp"
     
 //    case getCategory                        = "api/user/category"
-    
+    //M3
+  case categoryWiseStoreList                      = "api/user/category-Wise-Store-List"
+  case singleStoreDetails                      = "api/user/single-store-details"
+  case sortStoreFilter                      = "api/store_filter"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

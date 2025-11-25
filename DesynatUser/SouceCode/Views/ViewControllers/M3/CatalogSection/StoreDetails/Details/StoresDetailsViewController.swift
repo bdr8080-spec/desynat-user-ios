@@ -6,10 +6,26 @@
 //
 
 import UIKit
+import SDWebImage
 
-class StoresDetailsViewController: UIViewController {
+class StoresDetailsViewController: UIViewController, SortByStoresViewControllerDelegate {
+  func didSelectSortOption(_ option: Int) {
+          appliedSortFilter = option
+          self.viewModel.getSingleStoresApi()   // call API again
+      }
+  
     
-    @IBOutlet weak var reelsCollectionViewHeightConstriant: NSLayoutConstraint!
+  @IBOutlet weak var statusView: CustomView!
+  @IBOutlet weak var searchTF: UITextField!
+  @IBOutlet weak var descriptionLabel: UILabel!
+  @IBOutlet weak var qrImageView: CustomImageView!
+  @IBOutlet weak var brandLabel: UILabel!
+  @IBOutlet weak var pageTitleLabel: UILabel!
+  @IBOutlet weak var storeTitleLabel: UILabel!
+  @IBOutlet weak var userProfileImage: CustomImageView!
+  @IBOutlet weak var storeImageView: UIImageView!
+  @IBOutlet weak var noProductsFoundLabel: UILabel!
+  @IBOutlet weak var reelsCollectionViewHeightConstriant: NSLayoutConstraint!
     @IBOutlet weak var searchView: CustomView!
     @IBOutlet weak var sortFilterView: UIView!
     @IBOutlet weak var storesCollectionViewHeightConstraint: NSLayoutConstraint!
@@ -32,17 +48,27 @@ class StoresDetailsViewController: UIViewController {
             reelsCollectionView.registerCellFromNib(cellID: "ReelsCollectionViewCell")
         }
     }
+  
+  var storeId: Int? = 0
+  private lazy var viewModel = StoreDetailsViewModel(hostVC: self)
+  private var searchWorkItem: DispatchWorkItem?
+  var fullName: String? = ""
+  var appliedSortFilter: Int?
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadAllCollections()
+      searchTF.delegate = self
     }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    viewModel.getSingleStoresApi()
+  }
     
-//    override func viewWillLayoutSubviews() {
-//        super.viewWillLayoutSubviews()
-//        DispatchQueue.main.async {
-//            self.updateCollectionsHeight()
-//        }
-//    }
+  override func viewDidLayoutSubviews() {
+      super.viewDidLayoutSubviews()
+      updateCollectionsHeight()
+  }
     
     @IBAction func bakDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -73,16 +99,46 @@ class StoresDetailsViewController: UIViewController {
     }
     
     @IBAction func sortDidTapped(_ sender: Any) {
-        let nextVC = SortByStoresViewController.instantiate(fromAppStoryboard: .Catalog)
-        self.navigationController?.present(nextVC, animated: true)
+      let nextVC = SortByStoresViewController.instantiate(fromAppStoryboard: .Catalog)
+              nextVC.delegate = self
+              nextVC.preSelectedApiValue = appliedSortFilter
+              self.navigationController?.present(nextVC, animated: true)
     }
     
     @IBAction func filterDidTapped(_ sender: Any) {
         let nextVC = ProductsFiltersViewController.instantiate(fromAppStoryboard: .Catalog)
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
+  
+  func configData(data: Store) {
+    pageTitleLabel.text = data.storeName
+    storeTitleLabel.text = fullName
+    brandLabel.text = data.storeName
     
-    private func updateCollectionsHeight() {
+    if let imageUrlString = data.storeImage,
+           let url = URL(string: imageUrlString) {
+
+      storeImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+      storeImageView.sd_imageIndicator?.startAnimatingIndicator()
+      storeImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+        
+       
+        } else {
+          storeImageView.image = UIImage(named: "")
+        }
+    
+    descriptionLabel.text = data.bio
+    
+    if data.storeAvailability == 1 {
+      statusView.isHidden = true
+    } else {
+      statusView.isHidden = false
+    }
+  }
+  
+
+    
+     func updateCollectionsHeight() {
         storesCollectionViewHeightConstraint.constant = storesCollectionView.contentSize.height
         reelsCollectionViewHeightConstriant.constant = reelsCollectionView.contentSize.height
     }
@@ -114,7 +170,7 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
         case storiesCollectionView:
             return 5
         case storesCollectionView:
-            return 8
+          return viewModel.singleStoresSection?.allProduct?.data?.count ?? 0
         case reelsCollectionView:
             return 8
         default:
@@ -130,7 +186,8 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
             return cell
         case storesCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilteredStoreCollectionViewCell", for: indexPath) as! FilteredStoreCollectionViewCell
-            //        cell.titleLabel.text = suggestedStores[indexPath.row]
+          let data = viewModel.singleStoresSection?.allProduct?.data?[indexPath.row]
+          cell.configData(data: data)
             return cell
         case reelsCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ReelsCollectionViewCell", for: indexPath) as! ReelsCollectionViewCell
@@ -163,7 +220,7 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
             let spacing: CGFloat = 10
             let totalSpacing = spacing * 2 // 3 cells per row → 2 spaces between
             let width = (collectionView.frame.width - totalSpacing) / 2
-            return CGSize(width: width, height: storesCollectionView.frame.height)
+            return CGSize(width: width, height: 220)
         case reelsCollectionView:
             let spacing: CGFloat = 10
             let totalSpacing = spacing * 2 // 3 cells per row → 2 spaces between
@@ -181,3 +238,29 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
 //    }
     
 }
+
+extension StoresDetailsViewController: UITextFieldDelegate {
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+    searchWorkItem?.cancel()
+    let workItem = DispatchWorkItem { [weak self] in
+      guard let self = self else { return }
+      self.viewModel.searchText = currentText
+      viewModel.getSingleStoresApi()
+    }
+    searchWorkItem = workItem
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
+    return true
+  }
+}
+
+protocol SortByStoresViewControllerDelegate: AnyObject {
+    func didSelectSortOption(_ option: Int)
+}
+
+struct SortOptionModel {
+    var title: String
+    var apiParcing: String
+    var isSelected: Bool = false
+}
+

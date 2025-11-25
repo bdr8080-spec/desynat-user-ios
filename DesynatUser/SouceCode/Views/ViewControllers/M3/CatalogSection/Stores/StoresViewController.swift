@@ -9,7 +9,9 @@ import UIKit
 
 class StoresViewController: UIViewController {
     
-    @IBOutlet weak var storesCollectionViewHeightConstriant: NSLayoutConstraint!
+  @IBOutlet weak var noResultFoundLabel: UILabel!
+  @IBOutlet weak var searchTF: UITextField!
+  @IBOutlet weak var storesCollectionViewHeightConstriant: NSLayoutConstraint!
     @IBOutlet weak var bannerPageController: UIPageControl!
     @IBOutlet weak var bannerCollectionView: UICollectionView! {
         didSet {
@@ -21,21 +23,53 @@ class StoresViewController: UIViewController {
             storesCollectionView.registerCellFromNib(cellID: "StoresCollectionViewCell")
         }
     }
+  
+  var slectedsubCategoryId: Int? = 0
+  private lazy var viewModel = StoreViewModel(hostVC: self)
+  var appliedRatings: [String] = []
+     var appliedAvailability: String = ""
+     var appliedShortest: Bool = false
+     var appliedHighest: Bool = false
+  private var searchWorkItem: DispatchWorkItem?
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         bannerCollectionView.layer.cornerRadius = 12
+      searchTF.delegate = self
     }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    viewModel.getStoresListApi()
+  }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        DispatchQueue.main.async {
-            self.updateCollectionsHeight()
-        }
-    }
+  override func viewDidLayoutSubviews() {
+      super.viewDidLayoutSubviews()
+      updateCollectionsHeight()
+  }
 
     @IBAction func filterDidTapped(_ sender: Any) {
-        let nextViewController = StoresFiltersViewController.instantiate(fromAppStoryboard: .Catalog)
-        self.navigationController?.pushViewController(nextViewController, animated: true)
+      let nextVC = StoresFiltersViewController.instantiate(fromAppStoryboard: .Catalog)
+
+          // Pass previous selections
+          nextVC.selectedRatings = appliedRatings
+          nextVC.selectedAvailability = appliedAvailability
+          nextVC.selectedShortest = appliedShortest
+          nextVC.selectedHighest = appliedHighest
+
+          // Closure callback
+          nextVC.onFilterApplied = { [weak self] ratings, availability, shortest, highest in
+              guard let self = self else { return }
+
+              self.appliedRatings = ratings
+              self.appliedAvailability = availability
+              self.appliedShortest = shortest
+              self.appliedHighest = highest
+
+              self.viewModel.getStoresListApi()
+          }
+
+          navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @IBAction func backDidTapped(_ sender: Any) {
@@ -49,7 +83,7 @@ class StoresViewController: UIViewController {
         bannerCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
-    private func updateCollectionsHeight() {
+    func updateCollectionsHeight() {
         storesCollectionViewHeightConstriant.constant = storesCollectionView.contentSize.height
     }
 }
@@ -61,7 +95,7 @@ extension StoresViewController: UICollectionViewDelegate, UICollectionViewDataSo
         case bannerCollectionView:
             return 5
         case storesCollectionView:
-            return 8
+          return viewModel.storesSection.count
         default:
             return 0
         }
@@ -75,11 +109,8 @@ extension StoresViewController: UICollectionViewDelegate, UICollectionViewDataSo
             return cell
         case storesCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoresCollectionViewCell", for: indexPath) as! StoresCollectionViewCell
-            if indexPath.row % 2 == 0 {
-                cell.statusView.isHidden = true
-            } else{
-                cell.statusView.isHidden = false
-            }
+          let data = viewModel.storesSection[indexPath.row]
+          cell.configData(data: data)
             return cell
         default:
             return UICollectionViewCell()
@@ -94,7 +125,7 @@ extension StoresViewController: UICollectionViewDelegate, UICollectionViewDataSo
             let spacing: CGFloat = 10
             let totalSpacing = spacing * 2 // 3 cells per row → 2 spaces between
             let width = (collectionView.frame.width - totalSpacing) / 2
-            return CGSize(width: width, height: storesCollectionView.frame.height - 10)
+          return CGSize(width: width, height: 194)
         default:
             return CGSize.zero
         }
@@ -102,14 +133,17 @@ extension StoresViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let nextVC = StoresDetailsViewController.instantiate(fromAppStoryboard: .Catalog)
+      nextVC.storeId = viewModel.storesSection[indexPath.row].id
+      let info = viewModel.storesSection[indexPath.row].sellerInformation
+      nextVC.fullName = "\(info?.firstName ?? "") \(info?.lastName ?? "")"
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if collectionView == storesCollectionView {
-            viewWillLayoutSubviews()
-        }
-    }
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        if collectionView == storesCollectionView {
+//            viewWillLayoutSubviews()
+//        }
+//    }
     
     // MARK: - Update Page Control on Scroll
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -119,4 +153,19 @@ extension StoresViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     
+}
+
+extension StoresViewController: UITextFieldDelegate {
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+    searchWorkItem?.cancel()
+    let workItem = DispatchWorkItem { [weak self] in
+      guard let self = self else { return }
+      self.viewModel.searchText = currentText
+      viewModel.getStoresListApi()
+    }
+    searchWorkItem = workItem
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
+    return true
+  }
 }

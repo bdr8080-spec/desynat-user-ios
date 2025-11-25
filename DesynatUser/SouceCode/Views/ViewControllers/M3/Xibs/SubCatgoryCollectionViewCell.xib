@@ -24,7 +24,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Vx-Nx-IUT">
                         <rect key="frame" x="0.0" y="10" width="265" height="188"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subCatgory" translatesAutoresizingMaskIntoConstraints="NO" id="e3j-5O-wJZ" customClass="CustomImageView" customModule="DesynatAdmin" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subCatgory" translatesAutoresizingMaskIntoConstraints="NO" id="e3j-5O-wJZ" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="265" height="169"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="169" id="l2P-dv-IlZ"/>
@@ -62,6 +62,10 @@
                 <constraint firstAttribute="bottom" secondItem="7Vx-Nx-IUT" secondAttribute="bottom" constant="10" id="t9c-fY-2kU"/>
             </constraints>
             <size key="customSize" width="292" height="297"/>
+            <connections>
+                <outlet property="mainImageView" destination="e3j-5O-wJZ" id="X7E-L5-vIa"/>
+                <outlet property="titleLabel" destination="n8b-SV-DcU" id="BA7-K7-FMC"/>
+            </connections>
             <point key="canvasLocation" x="241.22137404580153" y="75.704225352112687"/>
         </collectionViewCell>
     </objects>

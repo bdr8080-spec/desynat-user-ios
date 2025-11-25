@@ -7,13 +7,27 @@
 
 import Foundation
 
+//struct StoreFilterOption {
+//    let id: Int
+//    let title: String
+//    var isSelected: Bool
+//    var apiParcing: String
+//    var seletedImage: String
+//    var unselectedImage: String
+//}
+//
+//struct StoreFilterSection {
+//    let header: String
+//    var options: [StoreFilterOption]
+//}
+
 struct StoreFilterOption {
     let id: Int
     let title: String
     var isSelected: Bool
-    var apiParcing: String
-    var seletedImage: String
-    var unselectedImage: String
+    let apiParcing: String
+    let seletedImage: String
+    let unselectedImage: String
 }
 
 struct StoreFilterSection {
