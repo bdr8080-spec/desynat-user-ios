@@ -9,23 +9,23 @@ import UIKit
 import SDWebImage
 
 class StoresDetailsViewController: UIViewController, SortByStoresViewControllerDelegate {
-  func didSelectSortOption(_ option: Int) {
-          appliedSortFilter = option
-          self.viewModel.getSingleStoresApi()   // call API again
-      }
-  
+    func didSelectSortOption(_ option: Int) {
+        appliedSortFilter = option
+        self.viewModel.getSingleStoresApi()   // call API again
+    }
     
-  @IBOutlet weak var statusView: CustomView!
-  @IBOutlet weak var searchTF: UITextField!
-  @IBOutlet weak var descriptionLabel: UILabel!
-  @IBOutlet weak var qrImageView: CustomImageView!
-  @IBOutlet weak var brandLabel: UILabel!
-  @IBOutlet weak var pageTitleLabel: UILabel!
-  @IBOutlet weak var storeTitleLabel: UILabel!
-  @IBOutlet weak var userProfileImage: CustomImageView!
-  @IBOutlet weak var storeImageView: UIImageView!
-  @IBOutlet weak var noProductsFoundLabel: UILabel!
-  @IBOutlet weak var reelsCollectionViewHeightConstriant: NSLayoutConstraint!
+    
+    @IBOutlet weak var statusView: CustomView!
+    @IBOutlet weak var searchTF: UITextField!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var qrImageView: CustomImageView!
+    @IBOutlet weak var brandLabel: UILabel!
+    @IBOutlet weak var pageTitleLabel: UILabel!
+    @IBOutlet weak var storeTitleLabel: UILabel!
+    @IBOutlet weak var userProfileImage: CustomImageView!
+    @IBOutlet weak var storeImageView: UIImageView!
+    @IBOutlet weak var noProductsFoundLabel: UILabel!
+    @IBOutlet weak var reelsCollectionViewHeightConstriant: NSLayoutConstraint!
     @IBOutlet weak var searchView: CustomView!
     @IBOutlet weak var sortFilterView: UIView!
     @IBOutlet weak var storesCollectionViewHeightConstraint: NSLayoutConstraint!
@@ -48,27 +48,27 @@ class StoresDetailsViewController: UIViewController, SortByStoresViewControllerD
             reelsCollectionView.registerCellFromNib(cellID: "ReelsCollectionViewCell")
         }
     }
-  
-  var storeId: Int? = 0
-  private lazy var viewModel = StoreDetailsViewModel(hostVC: self)
-  private var searchWorkItem: DispatchWorkItem?
-  var fullName: String? = ""
-  var appliedSortFilter: Int?
+    
+    var storeId: Int? = 0
+    private lazy var viewModel = StoreDetailsViewModel(hostVC: self)
+    private var searchWorkItem: DispatchWorkItem?
+    var fullName: String? = ""
+    var appliedSortFilter: Int?
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadAllCollections()
-      searchTF.delegate = self
+        searchTF.delegate = self
     }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    viewModel.getSingleStoresApi()
-  }
     
-  override func viewDidLayoutSubviews() {
-      super.viewDidLayoutSubviews()
-      updateCollectionsHeight()
-  }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.getSingleStoresApi()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateCollectionsHeight()
+    }
     
     @IBAction func bakDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -99,46 +99,46 @@ class StoresDetailsViewController: UIViewController, SortByStoresViewControllerD
     }
     
     @IBAction func sortDidTapped(_ sender: Any) {
-      let nextVC = SortByStoresViewController.instantiate(fromAppStoryboard: .Catalog)
-              nextVC.delegate = self
-              nextVC.preSelectedApiValue = appliedSortFilter
-              self.navigationController?.present(nextVC, animated: true)
+        let nextVC = SortByStoresViewController.instantiate(fromAppStoryboard: .Catalog)
+        nextVC.delegate = self
+        nextVC.preSelectedApiValue = appliedSortFilter
+        self.navigationController?.present(nextVC, animated: true)
     }
     
     @IBAction func filterDidTapped(_ sender: Any) {
         let nextVC = ProductsFiltersViewController.instantiate(fromAppStoryboard: .Catalog)
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
-  
-  func configData(data: Store) {
-    pageTitleLabel.text = data.storeName
-    storeTitleLabel.text = fullName
-    brandLabel.text = data.storeName
     
-    if let imageUrlString = data.storeImage,
-           let url = URL(string: imageUrlString) {
-
-      storeImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-      storeImageView.sd_imageIndicator?.startAnimatingIndicator()
-      storeImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+    func configData(data: Store) {
+        pageTitleLabel.text = data.storeName
+        storeTitleLabel.text = fullName
+        brandLabel.text = data.storeName
         
-       
+        if let imageUrlString = data.storeImage,
+           let url = URL(string: imageUrlString) {
+            
+            storeImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            storeImageView.sd_imageIndicator?.startAnimatingIndicator()
+            storeImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+            
+            
         } else {
-          storeImageView.image = UIImage(named: "")
+            storeImageView.image = UIImage(named: "")
         }
-    
-    descriptionLabel.text = data.bio
-    
-    if data.storeAvailability == 1 {
-      statusView.isHidden = true
-    } else {
-      statusView.isHidden = false
+        
+        descriptionLabel.text = data.bio
+        
+        if data.storeAvailability == 1 {
+            statusView.isHidden = true
+        } else {
+            statusView.isHidden = false
+        }
     }
-  }
-  
-
     
-     func updateCollectionsHeight() {
+    
+    
+    func updateCollectionsHeight() {
         storesCollectionViewHeightConstraint.constant = storesCollectionView.contentSize.height
         reelsCollectionViewHeightConstriant.constant = reelsCollectionView.contentSize.height
     }
@@ -147,21 +147,54 @@ class StoresDetailsViewController: UIViewController, SortByStoresViewControllerD
         storiesCollectionView.reloadData()
         storesCollectionView.reloadData()
         reelsCollectionView.reloadData()
-
+        
         DispatchQueue.main.async {
             self.storesCollectionView.layoutIfNeeded()
             self.reelsCollectionView.layoutIfNeeded()
-
+            
             self.storesCollectionViewHeightConstraint.constant =
-                self.storesCollectionView.collectionViewLayout.collectionViewContentSize.height
-
+            self.storesCollectionView.collectionViewLayout.collectionViewContentSize.height
+            
             self.reelsCollectionViewHeightConstriant.constant =
-                self.reelsCollectionView.collectionViewLayout.collectionViewContentSize.height
-
+            self.reelsCollectionView.collectionViewLayout.collectionViewContentSize.height
+            
             self.view.layoutIfNeeded()
         }
     }
-
+    
+    func handleWishlistTap(index: Int) {
+        
+        guard let product = viewModel.singleStoresSection?.allProduct?.data?[index] else { return }
+        let productId = product.id ?? 0
+        
+        // Call API first
+        viewModel.addToWishlist(productId: productId) { [weak self] success in
+            guard let self = self else { return }
+            
+            if success {
+                // get product again
+                guard var updatedProduct = self.viewModel.singleStoresSection?.allProduct?.data?[index] else { return }
+                
+                // toggle status
+                let newStatus = updatedProduct.wishlist == 1 ? 0 : 1
+                updatedProduct.wishlist = newStatus
+                
+                // update model locally
+                self.viewModel.singleStoresSection?.allProduct?.data?[index] = updatedProduct
+                
+                // reload only that cell
+                DispatchQueue.main.async {
+                    self.storesCollectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
+                }
+                
+            } else {
+                print("Wishlist API Failed")
+            }
+        }
+    }
+    
+    
+    
 }
 
 extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -170,7 +203,7 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
         case storiesCollectionView:
             return 5
         case storesCollectionView:
-          return viewModel.singleStoresSection?.allProduct?.data?.count ?? 0
+            return viewModel.singleStoresSection?.allProduct?.data?.count ?? 0
         case reelsCollectionView:
             return 8
         default:
@@ -186,8 +219,12 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
             return cell
         case storesCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilteredStoreCollectionViewCell", for: indexPath) as! FilteredStoreCollectionViewCell
-          let data = viewModel.singleStoresSection?.allProduct?.data?[indexPath.row]
-          cell.configData(data: data)
+            let data = viewModel.singleStoresSection?.allProduct?.data?[indexPath.row]
+            cell.configData(data: data)
+            cell.wishlistButtonTapped = { [weak self] in
+                guard let self = self else { return }
+                self.handleWishlistTap(index: indexPath.row)
+            }
             return cell
         case reelsCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ReelsCollectionViewCell", for: indexPath) as! ReelsCollectionViewCell
@@ -203,6 +240,7 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
         switch collectionView {
         case storesCollectionView:
             let nextVC = ProductDetailViewController.instantiate(fromAppStoryboard: .Catalog)
+            nextVC.productId = viewModel.singleStoresSection?.allProduct?.data?[indexPath.row].id
             self.navigationController?.pushViewController(nextVC, animated: true)
         default:
             break
@@ -231,27 +269,27 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
         }
     }
     
-//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        if collectionView == storesCollectionView {
-//            viewWillLayoutSubviews()
-//        }
-//    }
+    //    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    //        if collectionView == storesCollectionView {
+    //            viewWillLayoutSubviews()
+    //        }
+    //    }
     
 }
 
 extension StoresDetailsViewController: UITextFieldDelegate {
-  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
-    searchWorkItem?.cancel()
-    let workItem = DispatchWorkItem { [weak self] in
-      guard let self = self else { return }
-      self.viewModel.searchText = currentText
-      viewModel.getSingleStoresApi()
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+        searchWorkItem?.cancel()
+        let workItem = DispatchWorkItem { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.searchText = currentText
+            viewModel.getSingleStoresApi()
+        }
+        searchWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
+        return true
     }
-    searchWorkItem = workItem
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
-    return true
-  }
 }
 
 protocol SortByStoresViewControllerDelegate: AnyObject {

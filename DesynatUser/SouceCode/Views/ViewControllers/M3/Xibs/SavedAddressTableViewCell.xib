@@ -26,11 +26,12 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nml-xa-Y37" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="159"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="144.33333333333334"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="radioSelected" translatesAutoresizingMaskIntoConstraints="NO" id="RR7-RM-44r">
                                 <rect key="frame" x="12" y="10" width="22" height="22"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="RR7-RM-44r" secondAttribute="height" id="DQJ-T2-VS9"/>
                                     <constraint firstAttribute="height" constant="22" id="RlC-uS-i64"/>
                                 </constraints>
                             </imageView>
@@ -42,7 +43,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Office" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N79-7d-lTJ">
-                                <rect key="frame" x="77" y="11.333333333333334" width="41" height="19.666666666666664"/>
+                                <rect key="frame" x="77" y="12.999999999999998" width="37" height="16.333333333333329"/>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -77,15 +78,16 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alex" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7iW-0Q-tMe">
-                                <rect key="frame" x="44" y="45" width="258" height="19.666666666666671"/>
+                                <rect key="frame" x="44" y="45" width="258" height="16.333333333333329"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AdW-p1-15s">
-                                <rect key="frame" x="44" y="79.666666666666686" width="258" height="67.333333333333314"/>
+                                <rect key="frame" x="44" y="76.333333333333329" width="258" height="55.999999999999986"/>
                                 <string key="text">HN- 547, Street no,5 Block d new town hale, Saudi Arabia
-Riyad- 10214</string>
+Riyad- 10214
+</string>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -97,7 +99,6 @@ Riyad- 10214</string>
                             <constraint firstItem="0Rp-YA-KZd" firstAttribute="centerY" secondItem="N79-7d-lTJ" secondAttribute="centerY" id="7IG-Bd-ZxS"/>
                             <constraint firstItem="N79-7d-lTJ" firstAttribute="leading" secondItem="gzG-iQ-t2C" secondAttribute="trailing" constant="15" id="8Vf-mb-6Ja"/>
                             <constraint firstAttribute="trailing" secondItem="0Rp-YA-KZd" secondAttribute="trailing" constant="12" id="CfO-0d-BIY"/>
-                            <constraint firstItem="RR7-RM-44r" firstAttribute="width" secondItem="RR7-RM-44r" secondAttribute="height" id="DQJ-T2-VS9"/>
                             <constraint firstAttribute="trailing" secondItem="7iW-0Q-tMe" secondAttribute="trailing" constant="18" id="Dn8-NZ-8Ia"/>
                             <constraint firstItem="AdW-p1-15s" firstAttribute="leading" secondItem="7iW-0Q-tMe" secondAttribute="leading" id="L5Q-wZ-U5v"/>
                             <constraint firstItem="N79-7d-lTJ" firstAttribute="centerY" secondItem="gzG-iQ-t2C" secondAttribute="centerY" id="U5M-8Z-y5b"/>
@@ -133,8 +134,11 @@ Riyad- 10214</string>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="addressLabel" destination="AdW-p1-15s" id="ihd-VE-IfH"/>
+                <outlet property="addressTypeLabel" destination="N79-7d-lTJ" id="xhp-pb-G3g"/>
                 <outlet property="deleteButtonOutlet" destination="XHH-fy-7Zn" id="hzr-mM-t1f"/>
                 <outlet property="editButtonOutlet" destination="Cub-zq-mrN" id="Eg8-Kz-0YX"/>
+                <outlet property="nameLabel" destination="7iW-0Q-tMe" id="fai-US-Fc4"/>
                 <outlet property="selectedRadioImageView" destination="RR7-RM-44r" id="JqC-ho-eSu"/>
             </connections>
             <point key="canvasLocation" x="129.7709923664122" y="48.239436619718312"/>

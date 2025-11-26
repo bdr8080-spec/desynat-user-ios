@@ -73,6 +73,15 @@ enum AlertConstant: String {
 //    case EnterBankName              = "Please enter bank name."
 //    case EnterAccountHolder         = "Please enter account holder name."
 
+    case EnterName = "Please enter name"
+        case EnterCountryCode = "Please select country code"
+        case EnterAddress = "Please enter address"
+        case EnterHouseNumber = "Please enter house number"
+        case EnterStreetNumber = "Please enter street number"
+        case EnterPostalCode = "Please enter postal code"
+        case EnterCity = "Please enter city"
+        case EnterState = "Please enter state"
+    
 func value() -> String {
     return self.rawValue
 }

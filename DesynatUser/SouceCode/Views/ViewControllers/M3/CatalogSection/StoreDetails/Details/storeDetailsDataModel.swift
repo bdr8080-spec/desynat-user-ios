@@ -10,7 +10,7 @@ import Foundation
 // MARK: - SingleStoreDetailsDataModel
 struct SingleStoreDetailsDataModel: Codable {
     let store: Store?
-    let allProduct: AllProduct?
+    var allProduct: AllProduct?
 
     enum CodingKeys: String, CodingKey {
         case store
@@ -21,7 +21,7 @@ struct SingleStoreDetailsDataModel: Codable {
 // MARK: - AllProduct
 struct AllProduct: Codable {
     let currentPage: Int?
-    let data: [ProductList]?
+    var data: [ProductList]?
     let firstPageURL: String?
     let from, lastPage: Int?
     let lastPageURL: String?
@@ -60,7 +60,7 @@ struct ProductList: Codable {
     let uploadSizeChart: String?
     let productActiveStatus: Int?
     let createdAt, updatedAt: String?
-    let wishlist: Int?
+    var wishlist: Int?
     let brand: Brand?
     let category: Category?
     let subcategory: Brand?

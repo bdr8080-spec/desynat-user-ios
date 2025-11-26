@@ -10,16 +10,25 @@ import SDWebImage
 
 class FilteredStoreCollectionViewCell: UICollectionViewCell {
 
-  @IBOutlet weak var iscountPriceLabel: UILabel!
+    @IBOutlet weak var likeButtonOutlet: UIButton!
+    @IBOutlet weak var iscountPriceLabel: UILabel!
   @IBOutlet weak var actualPriceLabel: CustomLabelFont!
   @IBOutlet weak var finalPriceLabel: UILabel!
   @IBOutlet weak var mainImageView: CustomImageView!
   @IBOutlet weak var titleLabel: UILabel!
   
+    var wishlistButtonTapped: (() -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
+    
+    
+
+        @IBAction func likeButtonTapped(_ sender: UIButton) {
+            wishlistButtonTapped?()
+        }
   
   func configData(data: ProductList?) {
     titleLabel.text = data?.productNameEn
@@ -35,6 +44,12 @@ class FilteredStoreCollectionViewCell: UICollectionViewCell {
     finalPriceLabel.text = "\(data?.productVariants?.first?.finalPrice ?? "") KD"
     CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productVariants?.first?.actualPrice ?? "") KD")
     iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD"
+      
+      if data?.wishlist == 1 {
+          likeButtonOutlet.setImage(UIImage(named: "selectedHeartImage"), for: .normal)
+      } else {
+          likeButtonOutlet.setImage(UIImage(named: "besSellLike"), for: .normal)
+      }
   }
 
 }

@@ -9,6 +9,29 @@ import UIKit
 
 class AddAddressViewController: UIViewController {
 
+    
+    @IBOutlet weak var nameTF: UITextField!
+    
+    @IBOutlet weak var countryNameTF: UITextField!
+    
+    @IBOutlet weak var mobileTF: UITextField!
+    
+    @IBOutlet weak var addressTF: UITextField!
+    
+    @IBOutlet weak var landMarkTF: UITextField!
+    @IBOutlet weak var cityTF: UITextField!
+    
+    @IBOutlet weak var stateTF: UITextField!
+    @IBOutlet weak var houseNoTF: UITextField!
+    
+    @IBOutlet weak var postalCodeTF: UITextField!
+    
+    @IBOutlet weak var streetTF: UITextField!
+    
+    
+    @IBOutlet weak var countryCodeTF: UITextField!
+    
+    
     @IBOutlet weak var buttonLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var homeMainView: CustomView!
@@ -21,10 +44,14 @@ class AddAddressViewController: UIViewController {
     var lat: Double = 0.0
     var long: Double = 0.0
     var comingReason: comingReasonAtAddAddress = .forAddNewAddress
-    
+    var editAddressID: Int?
+    var addressData: SavedAddressList?
+    private lazy var viewModel = AddaddressViewModel(hostVC: self)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         initialUserSetup()
+        viewModel.countryListApi()
     }
     
     private func initialUserSetup() {
@@ -35,6 +62,7 @@ class AddAddressViewController: UIViewController {
         case .forEditAddress:
             titleLabel.text = "Edit ADDRESS"
             buttonLabel.text = "Update"
+            prefillData()
         }
     }
     
@@ -108,7 +136,68 @@ class AddAddressViewController: UIViewController {
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    
+    @IBAction func countyrCodeDidTapped(_ sender: UIButton) {
+        let countryNames = viewModel.countryList.map { country -> String in
+            let name = country.name ?? ""
+            let dialCode = country.dialCode ?? ""
+            let flag = country.flag ?? "🇰🇼"
+            return "\(flag)  \(name) (\(dialCode))"
+        }
 
+        kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+            let selectedCountry = self.viewModel.countryList[index]
+            let code = selectedCountry.dialCode ?? "+965"
+            self.countryCodeTF.text = code
+        }
+    }
+    
+    
+    @IBAction func countyDidTapped(_ sender: UIButton) {
+        let countryNames = viewModel.countryList.map { country -> String in
+            let name = country.name ?? ""
+            return "\(name)"
+        }
+
+        kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+            let selectedCountry = self.viewModel.countryList[index]
+            let name = selectedCountry.name ?? ""
+            self.countryNameTF.text = name
+        }
+    }
+    
+    @IBAction func addDidTapped(_ sender: Any) {
+        viewModel.addOrUpdateAddressApi()
+    }
+    
+    private func prefillData() {
+        guard let data = addressData else { return }
+
+        nameTF.text = data.name
+        countryCodeTF.text = data.countryCode
+        mobileTF.text = data.mobile
+        addressTF.text = data.address
+        landMarkTF.text = data.landmark
+        cityTF.text = data.city
+        stateTF.text = data.state
+        houseNoTF.text = data.houseNo
+        postalCodeTF.text = data.postalCode
+        streetTF.text = data.streetNo
+        
+        // Update Lat Long
+        lat = Double(data.latitude ?? "0") ?? 0.0
+        long = Double(data.longitude ?? "0") ?? 0.0
+
+        // Home = 1, Office = 0
+        if data.saveAddressAs == 1 {
+            homeDidTapped(UIView())
+        } else {
+            officeDidTapped(UIView())
+        }
+    }
+
+    
 }
 
 enum comingReasonAtAddAddress {

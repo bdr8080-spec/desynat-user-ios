@@ -43,6 +43,14 @@ enum NetworkEndPoint: String {
   case categoryWiseStoreList                      = "api/user/category-Wise-Store-List"
   case singleStoreDetails                      = "api/user/single-store-details"
   case sortStoreFilter                      = "api/store_filter"
+  case addToWishlist                      = "api/user/product-add-to-wishlist"
+  case productDetails                      = "api/user/single-product-details"
+  case addToCart                      = "api/user/product-add-to-cart"
+  case incrementDecrement                      = "api/user/addtocart-increment-decrement"
+  case cartDetailsList                      = "api/user/view_cart_details"
+  case getSavedAddress                      = "api/user/view-address"
+  case addNewAddress                      = "api/user/save-address"
+  case editAddress                      = "api/user/update-address"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

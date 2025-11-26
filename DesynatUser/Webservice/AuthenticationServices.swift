@@ -247,6 +247,159 @@ extension WebService {
       }
   }
     
+    func addToWishelistSercie(param: [String: Any], completion:@escaping (_ user:EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI: .endpoint(.addToWishlist), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getProductDetailsService(param: [String: Any], completion:@escaping (_ user:ProductDetailsDataModel)-> Void) {
+        CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI: .endpoint(.productDetails), requestMethod: .post,requestParams: param, requestModel:ProductDetailsDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func addToCart(param: [String: Any], completion:@escaping (_ user:EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI: .endpoint(.addToCart), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func incrementDecrement(param: [String: Any], completion:@escaping (_ user:EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI: .endpoint(.incrementDecrement), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    
+    func gteBagDetails(completion:@escaping (_ user:MyCartDetailsDataModel)-> Void) {
+        CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI: .endpoint(.cartDetailsList), requestMethod: .get, requestModel: MyCartDetailsDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getSavedAddressList(completion:@escaping (_ user:[SavedAddressList])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.getSavedAddress), requestMethod: .get,requestModel:[SavedAddressList].self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func deleteAddressAPi(addressId: Int, completion:@escaping (_ user:EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        let endPoint = NetworkURL.custom("api/user/delete-address/\(addressId)")
+        NetworkManager.shared.request(withAPI: endPoint, requestMethod: .delete,requestModel:EmptyModel.self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func addAddressAPi(param: [String: Any], completion:@escaping (_ user:EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        
+        NetworkManager.shared.request(withAPI: .endpoint(.addNewAddress), requestMethod: .post,  requestParams: param ,requestModel:EmptyModel.self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func editAddressAPi(param: [String: Any], completion:@escaping (_ user:EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        
+        NetworkManager.shared.request(withAPI: .endpoint(.editAddress), requestMethod: .put,  requestParams: param ,requestModel:EmptyModel.self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    
 }
 
 

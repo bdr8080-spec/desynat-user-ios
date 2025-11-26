@@ -9,6 +9,9 @@ import UIKit
 
 class ProductDetailViewController: UIViewController {
     
+    @IBOutlet weak var wishlistButtonOutlet: UIButton!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var pagetitleLabel: UILabel!
     @IBOutlet weak var ratingTableViewHeightConstriant: NSLayoutConstraint!
     @IBOutlet weak var checkDeliveryTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var checkDeliveryImageView: UIImageView!
@@ -18,8 +21,11 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet weak var incrementDecrementView: CustomView!
     @IBOutlet weak var bagItemCountView: CustomView!
     @IBOutlet weak var itemCountLabel: UILabel!
-    
-    
+    @IBOutlet weak var productNameLabel: UILabel!
+    @IBOutlet weak var productLabel: UILabel!
+    @IBOutlet weak var finalPriceLAbel: UILabel!
+    @IBOutlet weak var actualPriceLAbel: CustomLabelFont!
+    @IBOutlet weak var discountPercentageLabel: UILabel!
     @IBOutlet weak var productImageCollectionView: UICollectionView! {
         didSet {
             productImageCollectionView.registerCellFromNib(cellID: "ProductDetailImageCollectionViewCell")
@@ -62,7 +68,8 @@ class ProductDetailViewController: UIViewController {
         }
     }
     
-    
+    private lazy var viewModel = ProductDetailsViewModel(hostVC: self)
+    var productId: Int? = 0
     private var selectedColourIndex = 0
     private var selectedSizeIndex = 0
     private var speifcationArray = ["Type 1- Feature", "Type 2- Feature", "Type 3- Feature"]
@@ -71,10 +78,22 @@ class ProductDetailViewController: UIViewController {
                                                        CheckDeliveryModel(image: "returnExchamge", title: "7 Days Return & 5 days Exchange"),
     ]
     var quantity = 0
-    
+    var uniqueColors: [Color] = []
+    var filteredVariants: [ProductVariant] = []   // variants of selected color
+    var selectedVariantImages: [String] = []
+    var productDetails: ProductDetailsDataModel?
+    var selectedVariant: ProductVariant? {
+        return filteredVariants.isEmpty ? nil : filteredVariants[selectedSizeIndex]
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetUp()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.getProductDetails()
     }
     
     override func viewWillLayoutSubviews() {
@@ -103,30 +122,47 @@ class ProductDetailViewController: UIViewController {
     }
     
     @IBAction func addToBagDidTapped(_ sender: Any) {
-        addToBagView.isHidden = true
-        bagItemCountView.isHidden = false
-        incrementDecrementView.isHidden = false
-        quantity = 1
-        updateUI()
+//        addToBagView.isHidden = true
+//        bagItemCountView.isHidden = false
+//        incrementDecrementView.isHidden = false
+//        quantity = 1
+//        updateUI()
+        
+        quantity = 1   // default
+        addProductToCart(forIncrement: true) // Call function
     }
     
     
     @IBAction func minusDidTapped(_ sender: Any) {
+//        if quantity > 1 {
+//            quantity -= 1
+//        } else if quantity == 1 {
+//            quantity = 0
+//            addToBagView.isHidden = false
+//            incrementDecrementView.isHidden = true
+//            bagItemCountView.isHidden = true
+//            return
+//        }
+//        updateUI()
+        
         if quantity > 1 {
-            quantity -= 1
-        } else if quantity == 1 {
-            quantity = 0
-            addToBagView.isHidden = false
-            incrementDecrementView.isHidden = true
-            bagItemCountView.isHidden = true
-            return
-        }
-        updateUI()
+                quantity -= 1
+            addProductToCart(forIncrement: false)  // call API again
+            } else {
+                quantity = 0
+                addToBagView.isHidden = false
+                incrementDecrementView.isHidden = true
+                bagItemCountView.isHidden = true
+                
+                // If your API supports remove-from-cart, call that here
+            }
     }
     
     @IBAction func plusDidTapped(_ sender: Any) {
+//        quantity += 1
+//        updateUI()
         quantity += 1
-        updateUI()
+        addProductToCart(forIncrement: true)   // c
     }
     
     @IBAction func buyNowDidTapped(_ sender: Any) {
@@ -140,6 +176,124 @@ class ProductDetailViewController: UIViewController {
                 }
             }
     }
+    
+    @IBAction func sizeGuideDidTapped(_ sender: Any) {
+        let nextVC = SizeChartViewController.instantiate(fromAppStoryboard: .Catalog)
+        nextVC.sizeChartUrl = productDetails?.uploadSizeChart
+        self.navigationController?.present(nextVC, animated: true)
+    }
+    
+    
+    @IBAction func wishlistDidTapped(_ sender: Any) {
+        guard let productId = productDetails?.id else { return }
+
+        viewModel.addToWishlist(productId: productId) { [weak self] success in
+                guard let self = self else { return }
+
+                if success {
+                    // Toggle local value only after success
+                    let currentStatus = self.productDetails?.wishlist ?? 0
+                    let newStatus = currentStatus == 1 ? 0 : 1
+                    self.productDetails?.wishlist = newStatus
+
+                    // Update button image
+                    let wishlist = productDetails?.wishlist ?? 1
+                    if wishlist == 1 {
+                        wishlistButtonOutlet.setImage(UIImage(named: "selectedHeartImage"), for: .normal)
+                    } else {
+                        wishlistButtonOutlet.setImage(UIImage(named: "besSellLike"), for: .normal)
+                    }
+                } else {
+                    print("Wishlist API failed")
+                }
+            }
+    }
+    
+    func addProductToCart(forIncrement: Bool) {
+        guard let productId = productDetails?.id else { return }
+        
+        // Selected variant
+        let selectedVariant = filteredVariants[selectedSizeIndex]
+        let variantId = selectedVariant.id ?? 0
+        
+        // Call API first
+        viewModel.addToCart(productId: productId, variantId: variantId, quantity: quantity, forIncrement: forIncrement) { [weak self] success in
+            guard let self = self else { return }
+            
+            if success {
+                // Update UI only after API success
+                self.addToBagView.isHidden = true
+                self.bagItemCountView.isHidden = false
+                self.incrementDecrementView.isHidden = false
+                self.itemCountLabel.text = "\(self.quantity)"
+            } else {
+                // API failed
+                showAlert(msg: "Failed to add item to cart. Please try again.")
+            }
+        }
+    }
+
+
+    
+    func prepareVariantData() {
+        guard let variants = productDetails?.productVariants else { return }
+        
+        pagetitleLabel.text = productDetails?.productNameEn
+        productNameLabel.text = productDetails?.productNameEn
+        productLabel.text = productDetails?.brand.nameEnglish
+        
+        finalPriceLAbel.text = "\(variants.first?.finalPrice ?? "") KD"
+        CommonUtils.setStrikethrough(label: actualPriceLAbel, text: "\(variants.first?.actualPrice ?? "") KD")
+        discountPercentageLabel.text = "\(variants.first?.discountValue ?? "") KD"
+        descriptionLabel.text = productDetails?.descriptionEn
+        // 1️⃣ Get unique colors
+        uniqueColors = Array(
+            Dictionary(grouping: variants, by: { $0.color?.id })
+                .compactMap { $0.value.first?.color }
+        )
+
+        // 2️⃣ Default selected color = first color
+        selectedColourIndex = 0
+        filterVariantsForSelectedColor()
+
+        // RELOAD UI
+        colorsCollectionView.reloadData()
+        sizeCollectionView.reloadData()
+        productImageCollectionView.reloadData()
+        
+        let wishlist = productDetails?.wishlist ?? 1
+        if wishlist == 1 {
+            wishlistButtonOutlet.setImage(UIImage(named: "selectedHeartImage"), for: .normal)
+        } else {
+            wishlistButtonOutlet.setImage(UIImage(named: "besSellLike"), for: .normal)
+        }
+    }
+    
+    func filterVariantsForSelectedColor() {
+        guard let variants = productDetails?.productVariants else { return }
+
+        let selectedColor = uniqueColors[selectedColourIndex]
+
+        // Filter variants of selected color
+        filteredVariants = variants.filter { $0.color?.id == selectedColor.id }
+
+        // Default selected size = first available
+        selectedSizeIndex = 0
+
+        updateImagesForSelectedSize()
+        sizeCollectionView.reloadData()
+    }
+
+    func updateImagesForSelectedSize() {
+        if filteredVariants.isEmpty { return }
+
+        let variant = filteredVariants[selectedSizeIndex]
+        selectedVariantImages = variant.variantImage ?? []
+
+        imagesPageController.numberOfPages = selectedVariantImages.count
+        productImageCollectionView.reloadData()
+    }
+
     
     private func findTabBarVC() -> TabBarVC? {
         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
@@ -183,11 +337,11 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case productImageCollectionView:
-            return 5
+            return selectedVariantImages.count
         case colorsCollectionView:
-            return 5
+            return uniqueColors.count
         case sizeCollectionView:
-            return 5
+            return filteredVariants.count
         case similarProductCollectionView:
             return 5
         default:
@@ -199,23 +353,27 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
         switch collectionView {
         case productImageCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductDetailImageCollectionViewCell", for: indexPath) as! ProductDetailImageCollectionViewCell
+            let img = selectedVariantImages[indexPath.row]
+            cell.configData(data: img)
             return cell
         case colorsCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorsCollectionViewCell", for: indexPath) as! ColorsCollectionViewCell
-            if selectedColourIndex == indexPath.row {
-                cell.borderView.layer.borderColor = UIColor.darkBrown.cgColor
-            } else {
-                cell.borderView.layer.borderColor = UIColor.white.cgColor
-            }
-            return cell
+            let colorData = uniqueColors[indexPath.row]
+            cell.mainView.backgroundColor = UIColor(hex: colorData.hexCode ?? "#FFFFFF")
+
+                cell.borderView.layer.borderColor =
+                    (selectedColourIndex == indexPath.row ? UIColor.darkBrown : UIColor.clear).cgColor
+                
+                return cell
         case sizeCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SizeVariantCollectionViewCell", for: indexPath) as! SizeVariantCollectionViewCell
-            if selectedSizeIndex == indexPath.row {
-                cell.mainView.layer.borderColor = UIColor.darkBrown.cgColor
-            } else {
-                cell.mainView.layer.borderColor = UIColor.lightGray.cgColor
-            }
-            return cell
+            let variant = filteredVariants[indexPath.row]
+            cell.titleLabel.text = variant.size?.name
+
+                cell.mainView.layer.borderColor =
+                    (selectedSizeIndex == indexPath.row ? UIColor.darkBrown : UIColor.lightGray).cgColor
+                
+                return cell
         case similarProductCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BestSellingsCollectionViewCell", for: indexPath) as! BestSellingsCollectionViewCell
             return cell
@@ -231,10 +389,15 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
             print("")
         case colorsCollectionView:
             selectedColourIndex = indexPath.row
-            colorsCollectionView.reloadData()
+                filterVariantsForSelectedColor()
+                colorsCollectionView.reloadData()
+                sizeCollectionView.reloadData()
+                productImageCollectionView.reloadData()
         case sizeCollectionView:
             selectedSizeIndex = indexPath.row
-            sizeCollectionView.reloadData()
+               updateImagesForSelectedSize()
+               sizeCollectionView.reloadData()
+               productImageCollectionView.reloadData()
         case similarProductCollectionView:
             print("")
         default:
@@ -277,7 +440,7 @@ extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case specificationTableView:
-            return speifcationArray.count
+            return productDetails?.productSpecifications.count ?? 0
         case checkDeliveryTableView:
             return checkDelivery.count
         case ratingsTableView:
@@ -292,16 +455,95 @@ extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegat
         switch tableView {
         case specificationTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ListTableViewCell", for: indexPath) as! ListTableViewCell
-            cell.titleLabel.text = "● \(speifcationArray[indexPath.row])"
+            cell.titleLabel.text = "● \(productDetails?.productSpecifications[indexPath.row].nameEn ?? "")"
             return cell
+//        case checkDeliveryTableView:
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
+//            let data = checkDelivery[indexPath.row]
+//            
+//            cell.selectionImageView.image = UIImage(named: data.image)
+//            cell.colourView.isHidden = true
+//            cell.mainContentView.backgroundColor = .clear
+//            let cashOnDelivery = productDetails?.cashOnDelivery ?? "1"
+//            let exchangale = productDetails?.productExchangable ?? "1"
+//            let returnable = productDetails?.productReturn ?? "1"
+//            if indexPath.row == 0 {
+//                cell.titleLabel.text = data.title
+//            }else if indexPath.row == 1 {
+//                if cashOnDelivery == "1" {
+//                    cell.titleLabel.text = "Cash on Delivery Available"
+//                } else {
+//                    cell.titleLabel.text = "Cash on Delivery not Available"
+//                }
+//            } else if indexPath.row == 2 {
+//                var title = ""
+//                if returnable == "1" {
+//                    title.append("\(productDetails?.returnDays ?? "0") Days Return &")
+//                } else {
+//                    title.append("Non retunable &")
+//                }
+//                
+//                if exchangale == "1" {
+//                    title.append("\(productDetails?.exchangableDays ?? "0") Days Exchange")
+//                } else {
+//                    title.append("Non Exchangable")
+//                }
+//                cell.titleLabel.text = title
+//            }
+//            return cell
         case checkDeliveryTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
             let data = checkDelivery[indexPath.row]
-            cell.titleLabel.text = data.title
+
             cell.selectionImageView.image = UIImage(named: data.image)
             cell.colourView.isHidden = true
             cell.mainContentView.backgroundColor = .clear
+
+            // Product flags
+            let cod = productDetails?.cashOnDelivery ?? "1"
+            let exchangable = productDetails?.productExchangable ?? "1"
+            let returnable = productDetails?.productReturn ?? "1"
+
+            switch indexPath.row {
+
+            // 🔹 Delivery Info
+            case 0:
+                cell.titleLabel.text = data.title
+
+            // 🔹 Cash on Delivery
+            case 1:
+                cell.titleLabel.text = (cod == "1") ?
+                    "Cash on Delivery Available" :
+                    "Cash on Delivery Not Available"
+
+            // 🔹 Return & Exchange
+            case 2:
+                var title = ""
+
+                // Return
+                if returnable == "1" {
+                    let days = productDetails?.returnDays ?? "0"
+                    title += "\(days) Days Return & "
+                } else {
+                    title += "Non Returnable & "
+                }
+
+                // Exchange
+                if exchangable == "1" {
+                    let days = productDetails?.exchangableDays ?? "0"
+                    title += "\(days) Days Exchange"
+                } else {
+                    title += "Non Exchangeable"
+                }
+
+                cell.titleLabel.text = title
+
+            default:
+                cell.titleLabel.text = ""
+            }
+
             return cell
+
         case ratingsTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProductRatingTableViewCell", for: indexPath) as! ProductRatingTableViewCell
             return cell

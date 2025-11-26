@@ -6,43 +6,82 @@
 //
 
 import UIKit
+import SDWebImage
 
 class MyBagTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var minusButton: CustomButton!
+    @IBOutlet weak var plusButton: CustomButton!
+    @IBOutlet weak var mainImageView: CustomImageView!
     @IBOutlet weak var borderLabel: UILabel!
     @IBOutlet weak var shopMoreButtonOutlet: UIButton!
     @IBOutlet weak var detailsLabel: UILabel!
+    @IBOutlet weak var productNameLabel: UILabel!
+    
+    @IBOutlet weak var sellerNameLabel: UILabel!
+    @IBOutlet weak var deliveryDateLabel: UILabel!
+    @IBOutlet weak var returnavaiableLabel: UILabel!
+    @IBOutlet weak var finalPriceLabel: UILabel!
+    
+    @IBOutlet weak var actaulPriceLabel: CustomLabelFont!
+    
+    var onIncrement: (() -> Void)?
+        var onDecrement: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
 //        setColorBox(label: detailsLabel, hexColor: "#6E4527")
-        setColorBox(size: "M", label: detailsLabel, hexColor: "#98ADFF", quantity: "2")
-
+        
     }
     
-//    func setColorBox(size: String, label: UILabel, hexColor: String, quantity: String) {
-//        let box = "⬛"                                    // the square
-//        let dot = "●"
-//        let text = "Size: \(size) ● Color: \(box) ● Qnt: \(quantity)"
-//
-//        let attributedString = NSMutableAttributedString(string: text)
-//
-//        // Color
-//            if let color = UIColor(hexStringcolour: hexColor) {
-//                let range = (text as NSString).range(of: box)
-//                attributedString.addAttribute(.foregroundColor, value: color, range: range)
-//
-//                // ⬇️ Reduce the box size (smaller font for only that character)
-//                attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 8), range: range)
-//            }
-//
-//        label.attributedText = attributedString
-//    }
+    
+    @IBAction func minusDidTapped(_ sender: Any) {
+        onDecrement?()
+    }
+    
+    
+    @IBAction func plusDidTapped(_ sender: Any) {
+        onIncrement?()
+    }
+    
+    func configData(data: CartItemList) {
+       
+        if let imageUrlString = data.productVariants?.variantImage?.first,
+               let url = URL(string: imageUrlString) {
+
+            mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            mainImageView.sd_imageIndicator?.startAnimatingIndicator()
+            mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+            
+           
+            } else {
+                mainImageView.image = UIImage(named: "")
+                
+            }
+        
+        countLabel.text = "\(data.quantity)"
+
+        productNameLabel.text = data.product?.productNameEn
+        sellerNameLabel.text = "\(data.product?.sellerDetails?.firstName ?? "") \(data.product?.sellerDetails?.lastName ?? "")"
+        finalPriceLabel.text = "\(data.productVariants?.finalPrice ?? "0") KD"
+        CommonUtils.setStrikethrough(label: actaulPriceLabel, text: "\(data.productVariants?.actualPrice ?? "0") KD")
+        setColorBox(size: data.productVariants?.size?.name ?? "M", label: detailsLabel, hexColor: data.productVariants?.color?.hexCode ?? "#98ADFF", quantity: "\(data.quantity)")
+        let returnabaiavle = data.product?.productReturn ?? "1"
+        if returnabaiavle == "1" {
+            returnavaiableLabel.text = "\(data.product?.returnDays ?? "1") days return available"
+        } else {
+            returnavaiableLabel.text = "Non returnable"
+        }
+        
+    }
     
     func setColorBox(size: String, label: UILabel, hexColor: String, quantity: String) {
         let box = "⬛"
