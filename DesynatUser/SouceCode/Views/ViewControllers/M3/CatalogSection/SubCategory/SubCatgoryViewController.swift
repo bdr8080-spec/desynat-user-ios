@@ -9,6 +9,7 @@ import UIKit
 
 class SubCatgoryViewController: UIViewController {
 
+  @IBOutlet weak var searchTF: UITextField!
   @IBOutlet weak var noDataFoundLabel: UILabel!
   @IBOutlet weak var subCatgeoryTableView: UICollectionView! {
         didSet {
@@ -21,7 +22,7 @@ class SubCatgoryViewController: UIViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      searchTF.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
     }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -32,6 +33,12 @@ class SubCatgoryViewController: UIViewController {
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+  
+  @objc func searchTextChanged(_ textField: UITextField) {
+      let text = textField.text ?? ""
+      viewModel.filterSubCategories(with: text)
+  }
+
 
 }
 

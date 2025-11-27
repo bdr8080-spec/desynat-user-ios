@@ -9,7 +9,8 @@ import UIKit
 
 class StoresDetailsCollectionViewCell: UICollectionViewCell {
 
-    override func awakeFromNib() {
+  @IBOutlet weak var mainImageView: CustomImageView!
+  override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }

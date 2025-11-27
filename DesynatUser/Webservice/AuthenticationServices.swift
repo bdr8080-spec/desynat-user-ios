@@ -278,6 +278,23 @@ extension WebService {
             }
         }
     }
+  
+  
+  func getWishlistService(completion:@escaping (_ user:[FavoruitesDataModel])-> Void) {
+      CommonUtils.showHud(show: true)
+    NetworkManager.shared.request(withAPI: .endpoint(.productDetails), requestMethod: .get, requestModel:[FavoruitesDataModel].self) { result, code in
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
+  }
     
     func addToCart(param: [String: Any], completion:@escaping (_ user:EmptyModel)-> Void) {
         CommonUtils.showHud(show: true)
@@ -399,6 +416,22 @@ extension WebService {
         }
     }
     
+  func getAllUserscountryList(completion:@escaping (_ user:[GetAllUserCountryModel])-> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI:.endpoint(.allUserCountry), requestMethod: .get,requestModel:[GetAllUserCountryModel].self) { result, code in
+          
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
+  }
     
 }
 

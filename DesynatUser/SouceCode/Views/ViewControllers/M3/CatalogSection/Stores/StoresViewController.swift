@@ -105,7 +105,8 @@ extension StoresViewController: UICollectionViewDelegate, UICollectionViewDataSo
         switch collectionView {
         case bannerCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeBannerCollectionViewCell", for: indexPath) as! HomeBannerCollectionViewCell
-            cell.mainImageView.layer.cornerRadius = 0
+            cell.mainImageView.layer.cornerRadius = 12
+          cell.mainImageView.image = UIImage(named: "storeBannersImage")
             return cell
         case storesCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoresCollectionViewCell", for: indexPath) as! StoresCollectionViewCell
@@ -136,6 +137,7 @@ extension StoresViewController: UICollectionViewDelegate, UICollectionViewDataSo
       nextVC.storeId = viewModel.storesSection[indexPath.row].id
       let info = viewModel.storesSection[indexPath.row].sellerInformation
       nextVC.fullName = "\(info?.firstName ?? "") \(info?.lastName ?? "")"
+      nextVC.profilePic = info?.profilePic
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     

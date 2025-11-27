@@ -11,7 +11,8 @@ import UIKit
 class AddaddressViewModel: NSObject {
     
     private var hostVC: AddAddressViewController
-    var countryList:[CountryModel] = []
+//    var countryList:[CountryModel] = []
+    var getAllUSerCountryList:[GetAllUserCountryModel] = []
     
     init(hostVC: AddAddressViewController) {
         self.hostVC = hostVC
@@ -94,7 +95,16 @@ class AddaddressViewModel: NSObject {
             }
 
             let service: (Any) -> Void = { response in
-                self.hostVC.navigationController?.popViewController(animated: true)
+              if self.hostVC.comingReason == .forEditAddress {
+                CommonUtils.showToast(message: "Address updated successfully")
+                      } else {
+                        CommonUtils.showToast(message: "Address added successfully")
+                      }
+
+                      // ⏳ Delay navigation to allow toast to show clearly
+                      DispatchQueue.main.async {
+                          self.hostVC.navigationController?.popViewController(animated: true)
+                      }
             }
 
             // API Call
@@ -105,9 +115,15 @@ class AddaddressViewModel: NSObject {
             }
         }
     
-    func countryListApi(){
-        WebService.sharedInstance.countryListService { list in
-            self.countryList = list
+//    func countryListApi(){
+//        WebService.sharedInstance.countryListService { list in
+//            self.countryList = list
+//        }
+//    }
+  
+  func getALlUserCountryListApi(){
+        WebService.sharedInstance.getAllUserscountryList { list in
+            self.getAllUSerCountryList = list
         }
     }
 }

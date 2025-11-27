@@ -8,27 +8,27 @@
 import Foundation
 
 struct CheckDeliveryModel {
-    let image: String
-    let title: String
+    let image: String?
+    let title: String?
 }
 
 // MARK: - ProductDetailsDataModel
 struct ProductDetailsDataModel: Codable {
-    let id: Int
-    let sellerID, storeID, categoryID, subcategoryID: String
-    let brandID, otherEn, otherAr, productNameEn: String
-    let productNameAr, descriptionEn, descriptionAr, minCardQuantity: String
-    let maxCardQuantity, productReturn, returnDays, productExchangable: String
-    let exchangableDays, reviewRating, affiliatedProduct, customizedProduct: String
-    let readyToShip, cashOnDelivery: String
-    let uploadSizeChart: String
-    let productActiveStatus: Int
-    let createdAt, updatedAt: String
-    var wishlist: Int
-    let category: Category
-    let subcategory, brand: Brand
-    let productSpecifications: [ProductSpecification]
-    let productVariants: [ProductVariant]
+    let id: Int?
+    let sellerID, storeID, categoryID, subcategoryID: String?
+    let brandID, otherEn, otherAr, productNameEn: String?
+    let productNameAr, descriptionEn, descriptionAr, minCardQuantity: String?
+    let maxCardQuantity, productReturn, returnDays, productExchangable: String?
+    let exchangableDays, reviewRating, affiliatedProduct, customizedProduct: String?
+    let readyToShip, cashOnDelivery: String?
+    let uploadSizeChart: String?
+    let productActiveStatus: Int?
+    let createdAt, updatedAt: String?
+    var wishlist: Int?
+    let category: Category?
+    let subcategory, brand: Brand?
+    let productSpecifications: [ProductSpecification]?
+    let productVariants: [ProductVariant]?
 
     enum CodingKeys: String, CodingKey {
         case id

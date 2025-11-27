@@ -43,13 +43,49 @@ class FilteredStoreCollectionViewCell: UICollectionViewCell {
           }
     finalPriceLabel.text = "\(data?.productVariants?.first?.finalPrice ?? "") KD"
     CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productVariants?.first?.actualPrice ?? "") KD")
-    iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD"
+//    iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD"
       
+    let discountType = data?.productVariants?.first?.discountType ?? "1"
+    if discountType == "1" {
+      iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "")% Off"
+    } else {
+      iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD Off"
+    }
+    
       if data?.wishlist == 1 {
           likeButtonOutlet.setImage(UIImage(named: "selectedHeartImage"), for: .normal)
       } else {
           likeButtonOutlet.setImage(UIImage(named: "besSellLike"), for: .normal)
       }
+  }
+  
+  func configDataForFavouites(data: FavoruitesDataModel?) {
+    titleLabel.text = data?.productNameEn
+    if let imageUrlString = data?.productVariants?.first?.variantImage?.first,
+             let url = URL(string: imageUrlString) {
+
+        mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        mainImageView.sd_imageIndicator?.startAnimatingIndicator()
+        mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+          } else {
+            mainImageView.image = UIImage(named: "")
+          }
+    finalPriceLabel.text = "\(data?.productVariants?.first?.finalPrice ?? "") KD"
+    CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productVariants?.first?.actualPrice ?? "") KD")
+//    iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD"
+      
+    let discountType = data?.productVariants?.first?.discountType ?? "1"
+    if discountType == "1" {
+      iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "")% Off"
+    } else {
+      iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD Off"
+    }
+    
+//    if data. == 1 {
+//          likeButtonOutlet.setImage(UIImage(named: "selectedHeartImage"), for: .normal)
+//      } else {
+//          likeButtonOutlet.setImage(UIImage(named: "besSellLike"), for: .normal)
+//      }
   }
 
 }

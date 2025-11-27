@@ -78,6 +78,16 @@ class ProductsFiltersViewController: UIViewController {
         filtersTableView.showsVerticalScrollIndicator = false
     }
 
+  @IBAction func applydidTapped(_ sender: Any) {
+    self.navigationController?.popViewController(animated: true)
+  }
+  
+  
+  @IBAction func clearDidTapped(_ sender: Any) {
+    self.navigationController?.popViewController(animated: true)
+  }
+  
+  
 }
 
 // MARK: - TableView Delegate & DataSource
@@ -154,11 +164,32 @@ extension ProductsFiltersViewController: UITableViewDelegate, UITableViewDataSou
 
 
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if filtersOptions[indexPath.section].header == "Price" { return }
-        filtersOptions[indexPath.section].options[indexPath.row].isSelected.toggle()
-        tableView.reloadSections(IndexSet(integer: indexPath.section), with: .none)
-    }
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      let section = indexPath.section
+      
+      // Ignore Price section
+      if filtersOptions[section].header == "Price" { return }
+      
+      // ---------- SINGLE SELECTION FOR CATEGORY ----------
+      if filtersOptions[section].header == "Category" {
+          
+          // Make all unselected first
+          for i in 0..<filtersOptions[section].options.count {
+              filtersOptions[section].options[i].isSelected = false
+          }
+          
+          // Select the tapped one
+          filtersOptions[section].options[indexPath.row].isSelected = true
+          
+          tableView.reloadSections(IndexSet(integer: section), with: .none)
+          return
+      }
+      
+      // ---------- MULTI-SELECTION FOR OTHER SECTIONS ----------
+      filtersOptions[section].options[indexPath.row].isSelected.toggle()
+      tableView.reloadSections(IndexSet(integer: section), with: .none)
+  }
+
 
 }
 

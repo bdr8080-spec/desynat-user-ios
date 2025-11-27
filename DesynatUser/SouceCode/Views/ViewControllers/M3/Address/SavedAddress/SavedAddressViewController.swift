@@ -8,18 +8,6 @@
 import UIKit
 
 class SavedAddressViewController: UIViewController {
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     @IBOutlet weak var noDataFoundLabel: UILabel!
     @IBOutlet weak var savedAddressTableView: UITableView! {
@@ -60,6 +48,7 @@ extension SavedAddressViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SavedAddressTableViewCell", for: indexPath) as! SavedAddressTableViewCell
         let data = viewModel.savedAddressList[indexPath.row]
+      cell.configData(data: data)
         cell.delegate = self
         cell.indexPath = indexPath
         if selectedAddressIndex == indexPath.row {

@@ -50,7 +50,7 @@ class MyBagViewController: UIViewController {
         dricountOnMRP.text = "\(data.discountOnMrp ?? 0) KD"
         couponDidcountLabel.text = "\(data.discountCoupon ?? 0) KD"
         shippingFeeLabel.text = "\(data.shippingFees ?? 0) KD"
-        taxLabel.text = "\(data.tax ?? 0)"
+        taxLabel.text = "\(data.tax ?? 0) KD"
         totalAmountLabel.text = "\(data.totalAmount ?? 0) KD"
 //        saveAmountLAbel.text = "\(data.s ?? 0)"
         finalPriceLabel.text = "\(data.totalAmount ?? 0) KD"

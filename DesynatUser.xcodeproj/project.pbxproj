@@ -378,6 +378,11 @@
 			path = Xibs;
 			sourceTree = "<group>";
 		};
+		D19137F72ED888BC003B8EF0 /* Favourites */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Favourites;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -990,6 +995,7 @@
 		7A6C740B2ECAECA7008F3779 /* CatalogSection */ = {
 			isa = PBXGroup;
 			children = (
+				D19137F72ED888BC003B8EF0 /* Favourites */,
 				7A5BFAAF2ECC5E7A0014DEE5 /* ProductDetail */,
 				7A94BD1F2ECB579A00511665 /* FilterBy */,
 				7A426E672ECB2D060006A48B /* StoreDetails */,
@@ -1138,6 +1144,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				7A6C74062ECAE8EE008F3779 /* Xibs */,
+				D19137F72ED888BC003B8EF0 /* Favourites */,
 			);
 			name = DesynatUser;
 			packageProductDependencies = (
@@ -1467,7 +1474,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Anshuman Gupta (6SUBR3T35U)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
@@ -1507,7 +1514,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Anshuman Gupta (6SUBR3T35U)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";

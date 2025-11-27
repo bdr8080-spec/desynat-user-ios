@@ -121,7 +121,13 @@ class HomeViewController: UIViewController {
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
+  
+  
+  @IBAction func lieDidTapped(_ sender: Any) {
+    let vc = FavoruitesViewController.instantiate(fromAppStoryboard: .Profile)
+    self.navigationController?.pushViewController(vc, animated: true)
+  }
+  
     private func updateCollectionsHeight() {
         
         heightConstraintOfSuggestedStoreCollectionView.constant = suggestedStoresCollectionView.contentSize.height

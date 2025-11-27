@@ -9,7 +9,10 @@ import UIKit
 
 class ProductDetailViewController: UIViewController {
     
-    @IBOutlet weak var wishlistButtonOutlet: UIButton!
+  @IBOutlet weak var spaceBootmLabel: UILabel!
+  @IBOutlet weak var spaceTopLabel: UILabel!
+  @IBOutlet weak var customOrderView: CustomView!
+  @IBOutlet weak var wishlistButtonOutlet: UIButton!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var pagetitleLabel: UILabel!
     @IBOutlet weak var ratingTableViewHeightConstriant: NSLayoutConstraint!
@@ -70,9 +73,10 @@ class ProductDetailViewController: UIViewController {
     
     private lazy var viewModel = ProductDetailsViewModel(hostVC: self)
     var productId: Int? = 0
+  var storeName: String? = ""
     private var selectedColourIndex = 0
     private var selectedSizeIndex = 0
-    private var speifcationArray = ["Type 1- Feature", "Type 2- Feature", "Type 3- Feature"]
+//  private var speifcationArray = [:]
     private var checkDelivery: [CheckDeliveryModel] = [CheckDeliveryModel(image: "calender", title: "Get it by 24/12/2024"),
                                                        CheckDeliveryModel(image: "cashOnDelivery", title: "Cash on Delivery Available"),
                                                        CheckDeliveryModel(image: "returnExchamge", title: "7 Days Return & 5 days Exchange"),
@@ -82,9 +86,13 @@ class ProductDetailViewController: UIViewController {
     var filteredVariants: [ProductVariant] = []   // variants of selected color
     var selectedVariantImages: [String] = []
     var productDetails: ProductDetailsDataModel?
-    var selectedVariant: ProductVariant? {
-        return filteredVariants.isEmpty ? nil : filteredVariants[selectedSizeIndex]
-    }
+  var selectedVariant: ProductVariant? {
+      guard !filteredVariants.isEmpty else { return nil }
+      guard selectedSizeIndex >= 0 else { return filteredVariants[0] }
+      
+      let safeIndex = min(selectedSizeIndex, filteredVariants.count - 1)
+      return filteredVariants[safeIndex]
+  }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -199,9 +207,11 @@ class ProductDetailViewController: UIViewController {
                     // Update button image
                     let wishlist = productDetails?.wishlist ?? 1
                     if wishlist == 1 {
-                        wishlistButtonOutlet.setImage(UIImage(named: "selectedHeartImage"), for: .normal)
+                      CommonUtils.showToast(message: "Product added to wishlist")
+                        wishlistButtonOutlet.setImage(UIImage(systemName: "heart.fill"), for: .normal)
                     } else {
-                        wishlistButtonOutlet.setImage(UIImage(named: "besSellLike"), for: .normal)
+                      CommonUtils.showToast(message: "Product removed from wishlist")
+                        wishlistButtonOutlet.setImage(UIImage(systemName: "heart"), for: .normal)
                     }
                 } else {
                     print("Wishlist API failed")
@@ -215,7 +225,7 @@ class ProductDetailViewController: UIViewController {
         // Selected variant
         let selectedVariant = filteredVariants[selectedSizeIndex]
         let variantId = selectedVariant.id ?? 0
-        
+      
         // Call API first
         viewModel.addToCart(productId: productId, variantId: variantId, quantity: quantity, forIncrement: forIncrement) { [weak self] success in
             guard let self = self else { return }
@@ -231,6 +241,7 @@ class ProductDetailViewController: UIViewController {
                 showAlert(msg: "Failed to add item to cart. Please try again.")
             }
         }
+      
     }
 
 
@@ -238,13 +249,32 @@ class ProductDetailViewController: UIViewController {
     func prepareVariantData() {
         guard let variants = productDetails?.productVariants else { return }
         
-        pagetitleLabel.text = productDetails?.productNameEn
+        pagetitleLabel.text = storeName ?? productDetails?.brand?.nameEnglish//productDetails?.productNameEn
         productNameLabel.text = productDetails?.productNameEn
-        productLabel.text = productDetails?.brand.nameEnglish
-        
+//      productLabel.text = productDetails?.brand?.nameEnglish
+      if productDetails?.brand?.nameEnglish == "Other" {
+        productLabel.text = productDetails?.otherEn
+      } else {
+        productLabel.text = productDetails?.brand?.nameEnglish
+      }
+      
+      if productDetails?.customizedProduct == "1" {
+        customOrderView.isHidden = false
+        spaceTopLabel.isHidden = false
+      } else {
+        customOrderView.isHidden = true
+        spaceTopLabel.isHidden = true
+      }
         finalPriceLAbel.text = "\(variants.first?.finalPrice ?? "") KD"
         CommonUtils.setStrikethrough(label: actualPriceLAbel, text: "\(variants.first?.actualPrice ?? "") KD")
-        discountPercentageLabel.text = "\(variants.first?.discountValue ?? "") KD"
+//        discountPercentageLabel.text = "\(variants.first?.discountValue ?? "") KD"
+      
+      let discountType = variants.first?.discountType ?? "1"
+      if discountType == "1" {
+        discountPercentageLabel.text = "\(variants.first?.discountValue ?? "")% Off"
+      } else {
+        discountPercentageLabel.text = "\(variants.first?.discountValue ?? "") KD Off"
+      }
         descriptionLabel.text = productDetails?.descriptionEn
         // 1️⃣ Get unique colors
         uniqueColors = Array(
@@ -263,36 +293,134 @@ class ProductDetailViewController: UIViewController {
         
         let wishlist = productDetails?.wishlist ?? 1
         if wishlist == 1 {
-            wishlistButtonOutlet.setImage(UIImage(named: "selectedHeartImage"), for: .normal)
+          wishlistButtonOutlet.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         } else {
-            wishlistButtonOutlet.setImage(UIImage(named: "besSellLike"), for: .normal)
+          wishlistButtonOutlet.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+      
+      specificationTableView.reloadData()
+    }
+  
+  func updateUIForSelectedVariant() {
+      guard let selectedVariant = self.selectedVariant else { return }
+      
+      // 1. Price
+      let finalPrice = selectedVariant.finalPrice ?? "0"
+      finalPriceLAbel.text = "\(finalPrice) KD"
+      
+      // 2. Actual Price (strikethrough)
+      let actualPrice = selectedVariant.actualPrice ?? "0"
+      CommonUtils.setStrikethrough(label: actualPriceLAbel, text: "\(actualPrice) KD")
+      
+      // 3. Discount
+      let discountType = selectedVariant.discountType ?? "1"
+      let discountValue = selectedVariant.discountValue ?? "0"
+      
+      if discountType == "1" {
+          discountPercentageLabel.text = "\(discountValue)% Off"
+      } else {
+          discountPercentageLabel.text = "\(discountValue) KD Off"
+      }
+      
+      // Optional: Update stock or availability
+      // let inStock = selectedVariant.inStock == 1
+      // someLabel.text = inStock ? "In Stock" : "Out of Stock"
+  }
+
+  func filterVariantsForSelectedColor() {
+      guard let variants = productDetails?.productVariants,
+            !variants.isEmpty,
+            selectedColourIndex < uniqueColors.count else {
+          return
+      }
+
+      let selectedColor = uniqueColors[selectedColourIndex]
+
+      // 1. Filter variants for selected color
+      filteredVariants = variants.filter { $0.color?.id == selectedColor.id }
+
+      // 2. CRITICAL: Clamp selectedSizeIndex to valid range
+      if filteredVariants.isEmpty {
+          selectedSizeIndex = 0
+      } else {
+          // If current selectedSizeIndex is out of bounds → reset to 0
+          if selectedSizeIndex >= filteredVariants.count {
+              selectedSizeIndex = 0
+          }
+          // selectedSizeIndex is now guaranteed to be valid
+      }
+
+      // 3. Now safe to access
+      updateImagesForSelectedSize()
+      updateUIForSelectedVariant()
+
+      // 4. Reload UI
+      sizeCollectionView.reloadData()
+      colorsCollectionView.reloadData()
+      resetImageCarouselToFirst()
+    
+    DispatchQueue.main.async {
+        let firstSizeIndex = IndexPath(item: 0, section: 0)
+        if self.filteredVariants.count > 0 {
+            self.sizeCollectionView.selectItem(at: firstSizeIndex,
+                                               animated: false,
+                                               scrollPosition: .centeredHorizontally)
         }
     }
-    
-    func filterVariantsForSelectedColor() {
-        guard let variants = productDetails?.productVariants else { return }
+  }
 
-        let selectedColor = uniqueColors[selectedColourIndex]
+  func updateImagesForSelectedSize() {
+      guard !filteredVariants.isEmpty else {
+          selectedVariantImages = []
+          imagesPageController.numberOfPages = 0
+          productImageCollectionView.reloadData()
+          return
+      }
 
-        // Filter variants of selected color
-        filteredVariants = variants.filter { $0.color?.id == selectedColor.id }
+      // Double safety
+      let safeIndex = min(selectedSizeIndex, filteredVariants.count - 1)
+      let variant = filteredVariants[safeIndex]
 
-        // Default selected size = first available
-        selectedSizeIndex = 0
+      selectedVariantImages = variant.variantImage ?? []
 
-        updateImagesForSelectedSize()
-        sizeCollectionView.reloadData()
-    }
+      imagesPageController.numberOfPages = selectedVariantImages.count
+      imagesPageController.currentPage = 0
 
-    func updateImagesForSelectedSize() {
-        if filteredVariants.isEmpty { return }
+      productImageCollectionView.reloadData()
+      resetImageCarouselToFirst()
 
-        let variant = filteredVariants[selectedSizeIndex]
-        selectedVariantImages = variant.variantImage ?? []
+      updateUIForSelectedVariant()
+  }
 
-        imagesPageController.numberOfPages = selectedVariantImages.count
-        productImageCollectionView.reloadData()
-    }
+  // Helper function to reset carousel
+  private func resetImageCarouselToFirst() {
+      guard !selectedVariantImages.isEmpty else {
+          imagesPageController.currentPage = 0
+          imagesPageController.numberOfPages = 0
+          return
+      }
+
+      imagesPageController.numberOfPages = selectedVariantImages.count
+      imagesPageController.currentPage = 0
+
+      // Use layoutIfNeeded + scroll without animation
+      productImageCollectionView.layoutIfNeeded()
+      
+      let firstIndexPath = IndexPath(item: 0, section: 0)
+      productImageCollectionView.scrollToItem(at: firstIndexPath,
+                                              at: .centeredHorizontally,
+                                              animated: false)
+  }
+
+//    func updateImagesForSelectedSize() {
+//        if filteredVariants.isEmpty { return }
+//
+//        let variant = filteredVariants[selectedSizeIndex]
+//        selectedVariantImages = variant.variantImage ?? []
+//
+//        imagesPageController.numberOfPages = selectedVariantImages.count
+//        productImageCollectionView.reloadData()
+//    }
 
     
     private func findTabBarVC() -> TabBarVC? {
@@ -388,16 +516,17 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
         case productImageCollectionView:
             print("")
         case colorsCollectionView:
-            selectedColourIndex = indexPath.row
-                filterVariantsForSelectedColor()
+                selectedColourIndex = indexPath.row
+                filterVariantsForSelectedColor()  // ← This updates everything correctly
+                
                 colorsCollectionView.reloadData()
+                // Optional smooth scroll
+                colorsCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+                
+            case sizeCollectionView:
+                selectedSizeIndex = indexPath.row
+                updateImagesForSelectedSize()
                 sizeCollectionView.reloadData()
-                productImageCollectionView.reloadData()
-        case sizeCollectionView:
-            selectedSizeIndex = indexPath.row
-               updateImagesForSelectedSize()
-               sizeCollectionView.reloadData()
-               productImageCollectionView.reloadData()
         case similarProductCollectionView:
             print("")
         default:
@@ -440,7 +569,7 @@ extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case specificationTableView:
-            return productDetails?.productSpecifications.count ?? 0
+          return productDetails?.productSpecifications?.count ?? 0
         case checkDeliveryTableView:
             return checkDelivery.count
         case ratingsTableView:
@@ -455,7 +584,7 @@ extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegat
         switch tableView {
         case specificationTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ListTableViewCell", for: indexPath) as! ListTableViewCell
-            cell.titleLabel.text = "● \(productDetails?.productSpecifications[indexPath.row].nameEn ?? "")"
+          cell.titleLabel.text = "● \(productDetails?.productSpecifications?[indexPath.row].nameEn ?? "")"
             return cell
 //        case checkDeliveryTableView:
 //            let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
@@ -495,7 +624,7 @@ extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegat
             let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
             let data = checkDelivery[indexPath.row]
 
-            cell.selectionImageView.image = UIImage(named: data.image)
+          cell.selectionImageView.image = UIImage(named: data.image ?? "")
             cell.colourView.isHidden = true
             cell.mainContentView.backgroundColor = .clear
 

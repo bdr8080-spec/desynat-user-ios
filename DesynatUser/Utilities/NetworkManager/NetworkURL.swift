@@ -28,6 +28,7 @@ enum NetworkEndPoint: String {
     case uploadFile                         = "api/upload"
     case resendOtp                          = "api/resend_otp"
     case country                            = "api/country"
+    case allUserCountry                            = "api/all_country"
     case logout                             = "api/user/logout"
     
     //M2 API

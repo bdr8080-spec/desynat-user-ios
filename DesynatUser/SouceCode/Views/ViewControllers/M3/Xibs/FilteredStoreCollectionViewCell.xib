@@ -37,13 +37,13 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3pcs Set (by Abaya)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M4h-gO-Bqr">
-                                <rect key="frame" x="10" y="146" width="247" height="14"/>
+                                <rect key="frame" x="10" y="146" width="247" height="17"/>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="pZ3-wL-Ovl">
-                                <rect key="frame" x="9.9999999999999929" y="165" width="109.33333333333331" height="12"/>
+                                <rect key="frame" x="10" y="168" width="111" height="12"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJg-WG-ggE" customClass="CosmosView" customModule="Cosmos">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="12"/>
@@ -74,7 +74,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(123K)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GYD-aW-Lqe">
-                                        <rect key="frame" x="75" y="0.0" width="34.333333333333343" height="12"/>
+                                        <rect key="frame" x="75" y="0.0" width="36" height="12"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -82,26 +82,26 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="239 KD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GL6-DP-SCP">
-                                <rect key="frame" x="10" y="182" width="247" height="15"/>
+                                <rect key="frame" x="10" y="185" width="247" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="6HP-jV-o2U"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fQ7-An-CPd">
-                                <rect key="frame" x="10" y="202" width="80" height="12"/>
+                                <rect key="frame" x="10" y="201" width="86.333333333333329" height="13.333333333333343"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="239 KD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sx8-aW-sgl" customClass="CustomLabelFont">
-                                        <rect key="frame" x="0.0" y="0.0" width="36.333333333333336" height="12"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="39.333333333333336" height="13.333333333333334"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20% off" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ry-gc-2rr">
-                                        <rect key="frame" x="41.333333333333343" y="0.0" width="38.666666666666657" height="12"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <rect key="frame" x="44.333333333333343" y="0.0" width="42" height="13.333333333333334"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" red="0.90980392160000001" green="0.043137254899999998" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -135,7 +135,7 @@
                             <constraint firstItem="NsE-hV-mUH" firstAttribute="top" secondItem="K5C-SQ-wgv" secondAttribute="top" constant="12" id="4NG-2Z-w7m"/>
                             <constraint firstItem="bzT-u9-KC6" firstAttribute="top" secondItem="K5C-SQ-wgv" secondAttribute="top" id="Biu-3g-MKs"/>
                             <constraint firstItem="GL6-DP-SCP" firstAttribute="top" secondItem="pZ3-wL-Ovl" secondAttribute="bottom" constant="5" id="D4N-gZ-EfN"/>
-                            <constraint firstItem="fQ7-An-CPd" firstAttribute="top" secondItem="GL6-DP-SCP" secondAttribute="bottom" constant="5" id="JTo-ki-i1N"/>
+                            <constraint firstItem="fQ7-An-CPd" firstAttribute="top" secondItem="GL6-DP-SCP" secondAttribute="bottom" constant="1" id="JTo-ki-i1N"/>
                             <constraint firstItem="M4h-gO-Bqr" firstAttribute="top" secondItem="bzT-u9-KC6" secondAttribute="bottom" constant="10" id="Jhz-zg-0eR"/>
                             <constraint firstAttribute="trailing" secondItem="bzT-u9-KC6" secondAttribute="trailing" id="KTm-Nu-KMs"/>
                             <constraint firstItem="pZ3-wL-Ovl" firstAttribute="top" secondItem="M4h-gO-Bqr" secondAttribute="bottom" constant="5" id="KtD-XB-0rf"/>
@@ -193,7 +193,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
