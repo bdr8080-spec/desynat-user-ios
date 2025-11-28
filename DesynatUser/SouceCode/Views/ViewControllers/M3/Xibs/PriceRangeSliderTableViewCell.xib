@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="399" height="94"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="neV-o0-MTL" customClass="RangeSliderView" customModule="DesynatUser" customModuleProvider="target">
-                                <rect key="frame" x="15" y="22" width="364" height="50"/>
+                                <rect key="frame" x="15" y="22" width="354" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="FCw-FH-rpT"/>
@@ -31,7 +31,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="neV-o0-MTL" firstAttribute="leading" secondItem="8uZ-4p-KkN" secondAttribute="leading" constant="15" id="Gct-ey-ewa"/>
-                            <constraint firstAttribute="trailing" secondItem="neV-o0-MTL" secondAttribute="trailing" constant="20" id="MMq-kj-qcZ"/>
+                            <constraint firstAttribute="trailing" secondItem="neV-o0-MTL" secondAttribute="trailing" constant="30" id="MMq-kj-qcZ"/>
                             <constraint firstItem="neV-o0-MTL" firstAttribute="centerY" secondItem="8uZ-4p-KkN" secondAttribute="centerY" id="k2g-Ht-omC"/>
                         </constraints>
                     </view>

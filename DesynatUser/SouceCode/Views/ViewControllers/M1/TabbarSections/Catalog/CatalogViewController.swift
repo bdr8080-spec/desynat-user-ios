@@ -17,15 +17,20 @@ class CatalogViewController: UIViewController {
   
   private lazy var viewModel = CatalogViewModel(hostVC: self)
   
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      
     }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     viewModel.getCategoriesListApi()
   }
+  
+  
+  
+
 
 }
 

@@ -11,19 +11,22 @@ import UIKit
 class FavouirtesVieModel: NSObject {
     
     private var hostVC: FavoruitesViewController!
-  var favouritesList: [FavoruitesDataModel]?
-  
+   var productList: [FavoruitesDataModel]? = []
+       var reelsList: [FavoruitesDataModel]? = []
   
     init(hostVC: FavoruitesViewController) {
         self.hostVC = hostVC
     }
 
-    func getProductDetails() {
-          WebService.sharedInstance.getWishlistService() { list in
-              self.favouritesList = list
-            self.hostVC.favouriteTableView.reloadData()
-        }
-    }
+  func getProductDetails(completion: (() -> Void)? = nil) {
+      WebService.sharedInstance.getWishlistService { list in
+          self.productList = list
+          
+          // Notify ViewController that data is ready
+          completion?()
+      }
+  }
+
     
     func addToWishlist(productId: Int, completion: @escaping (Bool) -> Void) {
       let param: [String: Any] = ["product_id": productId]

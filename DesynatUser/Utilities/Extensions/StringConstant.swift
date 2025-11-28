@@ -81,6 +81,7 @@ enum AlertConstant: String {
         case EnterPostalCode = "Please enter postal code"
         case EnterCity = "Please enter city"
         case EnterState = "Please enter state"
+        case EnterLandMark = "Please enter landmark"
     
 func value() -> String {
     return self.rawValue

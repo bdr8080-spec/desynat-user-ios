@@ -10,18 +10,23 @@ import UIKit
 class PriceRangeSliderTableViewCell: UITableViewCell {
 
     @IBOutlet weak var rangeSlider: RangeSliderView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        rangeSlider.minValue = 0
-        rangeSlider.maxValue = 100
-        rangeSlider.currentValue = 20
-    }
+  var onPriceChanged: ((Int, Int) -> Void)?
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+      // Preselected values
+      var minPrice: Int = 0 {
+          didSet { rangeSlider.initialValue = CGFloat(minPrice) } // left thumb
+      }
+      var maxPrice: Int = 10000 {
+          didSet { rangeSlider.currentValue = CGFloat(maxPrice) } // right thumb
+      }
 
-        // Configure the view for the selected state
-    }
-    
+      override func awakeFromNib() {
+          super.awakeFromNib()
+          // Listen to slider changes
+          rangeSlider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
+      }
+
+      @objc private func sliderValueChanged() {
+          onPriceChanged?(Int(rangeSlider.initialValue), Int(rangeSlider.currentValue))
+      }
 }

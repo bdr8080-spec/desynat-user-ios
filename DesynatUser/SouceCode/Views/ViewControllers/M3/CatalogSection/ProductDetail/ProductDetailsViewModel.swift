@@ -22,7 +22,7 @@ class ProductDetailsViewModel: NSObject {
       let param: [String: Any] = ["product_id": hostVC.productId ?? 0]
       WebService.sharedInstance.getProductDetailsService(param: param) { list in
           WebService.sharedInstance.getProductDetailsService(param: param) { list in
-                  
+            
               self.hostVC.productDetails = list
                   self.hostVC.prepareVariantData()
               }

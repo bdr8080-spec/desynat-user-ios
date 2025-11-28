@@ -180,6 +180,58 @@ extension WebService {
             }
         }
     }
+  
+  func getBrandsService(completion:@escaping (_ user:[AllBrandsListData])-> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI:.endpoint(.getAllBrands), requestMethod: .get,requestModel:[AllBrandsListData].self) { result, code in
+          
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
+  }
+  
+  func getColorsService(completion:@escaping (_ user:[AllColorsList])-> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI:.endpoint(.getAllColors), requestMethod: .get,requestModel:[AllColorsList].self) { result, code in
+          
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
+  }
+  
+  func getSizeService(completion:@escaping (_ user:[AllSizesList])-> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI:.endpoint(.getAllSizes), requestMethod: .get,requestModel:[AllSizesList].self) { result, code in
+          
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
+  }
+    
     
     func getSubCategoriesService(categoryID: Int, completion:@escaping (_ user:[SubCategoriesDataModel])-> Void) {
         CommonUtils.showHud(show: true)
@@ -282,7 +334,7 @@ extension WebService {
   
   func getWishlistService(completion:@escaping (_ user:[FavoruitesDataModel])-> Void) {
       CommonUtils.showHud(show: true)
-    NetworkManager.shared.request(withAPI: .endpoint(.productDetails), requestMethod: .get, requestModel:[FavoruitesDataModel].self) { result, code in
+    NetworkManager.shared.request(withAPI: .endpoint(.getWishlist), requestMethod: .get, requestModel:[FavoruitesDataModel].self) { result, code in
           CommonUtils.showHud(show: false)
           self.evaluateWebServiceResponse(response: result) { response, message,error in
               guard let user = response else {
@@ -379,6 +431,24 @@ extension WebService {
             }
         }
     }
+  
+  func makeAddressDefaultAPi(addressId: Int, completion:@escaping (_ user:EmptyModel)-> Void) {
+      CommonUtils.showHud(show: true)
+    let param: [String:Any] = ["address_id": addressId]
+    NetworkManager.shared.request(withAPI: .endpoint(.setDeafultAddress), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
+          
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
+  }
     
     func addAddressAPi(param: [String: Any], completion:@escaping (_ user:EmptyModel)-> Void) {
         CommonUtils.showHud(show: true)

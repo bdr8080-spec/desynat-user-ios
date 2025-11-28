@@ -26,6 +26,7 @@ struct ProductDetailsDataModel: Codable {
     let createdAt, updatedAt: String?
     var wishlist: Int?
     let category: Category?
+  let addtocart: Addtocart?
     let subcategory, brand: Brand?
     let productSpecifications: [ProductSpecification]?
     let productVariants: [ProductVariant]?
@@ -39,6 +40,7 @@ struct ProductDetailsDataModel: Codable {
         case brandID = "brand_id"
         case otherEn = "other_en"
         case otherAr = "other_ar"
+      case addtocart
         case productNameEn = "product_name_en"
         case productNameAr = "product_name_ar"
         case descriptionEn = "description_en"
@@ -61,6 +63,24 @@ struct ProductDetailsDataModel: Codable {
         case wishlist, category, subcategory, brand
         case productSpecifications = "product_specifications"
         case productVariants = "product_variants"
+    }
+}
+
+// MARK: - Addtocart
+struct Addtocart: Codable {
+    let id, userID, productID, quantity: Int?
+    let variantsID: Int?
+    let amount, createdAt, updatedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case userID = "user_id"
+        case productID = "product_id"
+        case quantity
+        case variantsID = "variants_id"
+        case amount
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
     }
 }
 

@@ -35,6 +35,13 @@ class AddAddressViewController: UIViewController {
   var editAddressID: Int?
   var addressData: SavedAddressList?
   private lazy var viewModel = AddaddressViewModel(hostVC: self)
+  private var dropdown: CustomDropdown?
+  private var overlayView: UIView?
+  private var selectedCountry: GetAllUserCountryModel? {
+      didSet {
+          updateCountryCodeField()
+      }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -56,6 +63,29 @@ class AddAddressViewController: UIViewController {
       buttonLabel.text = "Update"
       prefillData()
     }
+  }
+  
+  private func updateCountryCodeField() {
+      guard let country = selectedCountry else { return }
+      
+      countryCodeTF.text = country.dialCode
+      
+      // Optional: Show country name next to code or in another field
+      // countryNameTF.text = country.name
+      
+//      if let flagURLString = country.flag, let url = URL(string: flagURLString) {
+//          let flagView = UIImageView()
+//          flagView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "flag.fill"))
+//          flagView.contentMode = .scaleAspectFit
+//          flagView.frame = CGRect(x: 0, y: 0, width: 30, height: 20)
+//          
+//          let container = UIView(frame: CGRect(x: 0, y: 0, width: 45, height: 30))
+//          container.addSubview(flagView)
+//          flagView.center = container.center
+//          
+//          countryCodeTF.leftView = container
+//          countryCodeTF.leftViewMode = .always
+//      }
   }
   
   @IBAction func officeDidTapped(_ sender: Any) {
@@ -83,42 +113,49 @@ class AddAddressViewController: UIViewController {
   
   @IBAction func addressDidTapped(_ sender: Any) {
     let vc = LocationViewController.instantiate(fromAppStoryboard: .Profile)
-    vc.comingReason = .fromAddAddress
+    vc.preSelectedLat = lat
+    vc.preSelectedLng = long
     vc.locationCallBack = { [weak self] address, locality, city, state, country, pincode, lat, long in
-      guard let self = self else { return }
-      
-      // ✅ Safely unwrap each value with fallbacks
-      let safeAddress = address.isEmpty ? "" : address
-      let safeLocality = locality.isEmpty ? "" : locality
-      let safeCity = city.isEmpty ? "" : city
-      let safeState = state.isEmpty ? "" : state
-      let safeCountry = country.isEmpty ? "" : country
-      let safePincode = pincode.isEmpty ? "" : pincode
-      
-      var components: [String] = []
-      
-      if !safeCity.isEmpty {
-        components.append(safeCity)
-      }
-      if !safeState.isEmpty {
-        components.append(safeState)
-      }
-      
-      var address = components.joined(separator: ", ")
-      
-      if !safePincode.isEmpty {
-        address += " - \(safePincode)"
-      }
-      
-      self.addressTF.text = address
-      self.streetTF.text = safeLocality
-      self.postalCodeTF.text = safePincode
-      self.cityTF.text = safeCity
-      self.stateTF.text = safeState
-      self.lat = lat
-      self.long = long
+        guard let self = self else { return }
+
+        // Split the address into components
+        var components = address.components(separatedBy: ",").map { $0.trimmingCharacters(in: .whitespaces) }
+
+        // Remove any component that matches city, state, country, or postal code
+        components.removeAll { comp in
+            comp == city || comp == state || comp == country || comp == pincode
+        }
+
+        // 1️⃣ Determine addressTF and houseNoTF
+        if components.count >= 2 {
+            // addressTF = all except last component
+            let addressPart = components.dropLast().joined(separator: ", ")
+            self.addressTF.text = !addressPart.isEmpty ? addressPart : components.first
+            // houseNoTF = last component
+            self.houseNoTF.text = components.last
+        } else if components.count == 1 {
+            self.addressTF.text = components[0]
+            self.houseNoTF.text = components[0]
+        } else {
+            // fallback if empty
+            let fallback = !locality.isEmpty ? locality : !city.isEmpty ? city : !state.isEmpty ? state : "N/A"
+            self.addressTF.text = fallback
+            self.houseNoTF.text = fallback
+        }
+
+        // 2️⃣ Fallback-safe values for other fields
+        self.cityTF.text = !city.isEmpty ? city : (!locality.isEmpty ? locality : self.addressTF.text)
+        self.stateTF.text = !state.isEmpty ? state : (!city.isEmpty ? city : (!locality.isEmpty ? locality : self.addressTF.text))
+        self.countryNameTF.text = !country.isEmpty ? country : "Country"
+        self.postalCodeTF.text = pincode
+
+        // 3️⃣ Coordinates
+        self.lat = lat
+        self.long = long
     }
-    self.navigationController?.pushViewController(vc, animated: true)
+
+
+  self.navigationController?.pushViewController(vc, animated: true)
   }
   
   @IBAction func backDidTapped(_ sender: Any) {
@@ -127,45 +164,7 @@ class AddAddressViewController: UIViewController {
   
   
   @IBAction func countyrCodeDidTapped(_ sender: UIButton) {
-//    let items: [DropDownItem] = viewModel.getAllUSerCountryList.map { country in
-//        let title = "\(country.name ?? "") (\(country.dialCode ?? ""))"
-//        return DropDownItem(title: title, imageUrl: country.flag)
-//    }
-//
-//    kSharedAppDelegate.dropDownWithImage(
-//        items: items,
-//        anchorView: sender
-//    ) { index, selectedItem in
-//        let selectedCountry = self.viewModel.getAllUSerCountryList[index]
-//        self.countryCodeTF.text = selectedCountry.dialCode
-//    }
-    
-    let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
-      let name = country.name ?? ""
-      let code = country.dialCode ?? ""
-      return "\(name) \(code)"
-    }
-    
-    kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
-      let selectedCountry = self.viewModel.getAllUSerCountryList[index]
-      let code = selectedCountry.code ?? ""
-      self.countryCodeTF.text = code
-    }
-
-  }
-  
-  
-  @IBAction func countyDidTapped(_ sender: UIButton) {
-//    let countryNames = viewModel.countryList.map { country -> String in
-//      let name = country.name ?? ""
-//      return "\(name)"
-//    }
-//    
-//    kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
-//      let selectedCountry = self.viewModel.countryList[index]
-//      let name = selectedCountry.name ?? ""
-//      self.countryNameTF.text = name
-//    }
+    showCountryCodeDropdown(anchorView: sender)
   }
   
   @IBAction func addDidTapped(_ sender: Any) {
@@ -180,6 +179,7 @@ class AddAddressViewController: UIViewController {
     mobileTF.text = data.mobile
     addressTF.text = data.address
     landMarkTF.text = data.landmark
+    countryNameTF.text = data.countryName
     cityTF.text = data.city
     stateTF.text = data.state
     houseNoTF.text = data.houseNo
@@ -198,9 +198,137 @@ class AddAddressViewController: UIViewController {
     }
   }
   
+  private func showCountryCodeDropdown(anchorView: UIView) {
+      dismissDropdown()
+      
+      guard !viewModel.getAllUSerCountryList.isEmpty else {
+          print("No countries loaded yet")
+          return
+      }
+      
+      // Overlay
+      let overlay = UIView()
+      overlay.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+      view.addSubview(overlay)
+      overlay.fillSuperview()
+      overlay.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissDropdown)))
+      
+      // Dropdown
+      let dropdown = CustomDropdown()
+      dropdown.countries = viewModel.getAllUSerCountryList
+      
+      dropdown.onSelect = { [weak self] index in
+          guard let self = self else { return }
+          self.selectedCountry = self.viewModel.getAllUSerCountryList[index]
+          self.dismissDropdown()
+      }
+      
+      view.addSubview(dropdown)
+      dropdown.translatesAutoresizingMaskIntoConstraints = false
+      
+      // MARK: - THIS IS THE MAGIC - Full height to bottom
+      NSLayoutConstraint.activate([
+          dropdown.topAnchor.constraint(equalTo: anchorView.bottomAnchor, constant: 12),
+          dropdown.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+          dropdown.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+          
+          // This makes it grow down to bottom of screen (safe area respected)
+          dropdown.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+      ])
+      
+      // Optional: Set a reasonable min height so it doesn't look weird with few items
+      dropdown.heightAnchor.constraint(greaterThanOrEqualToConstant: 600).isActive = true
+      
+      // Animation
+      dropdown.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+      dropdown.alpha = 0
+      dropdown.layer.cornerRadius = 16
+      
+      UIView.animate(withDuration: 0.4,
+                     delay: 0,
+                     usingSpringWithDamping: 0.85,
+                     initialSpringVelocity: 0.6,
+                     options: .curveEaseOut) {
+          overlay.alpha = 1
+          dropdown.alpha = 1
+          dropdown.transform = .identity
+      }
+      
+      self.dropdown = dropdown
+      self.overlayView = overlay
+  }
   
+//  private func showCountryCodeDropdown(anchorView: UIView) {
+//      dismissDropdown()
+//      
+//      guard !viewModel.getAllUSerCountryList.isEmpty else {
+//          print("No countries loaded yet")
+//          return
+//      }
+//      
+//      // Overlay
+//      let overlay = UIView()
+//      overlay.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+//      view.addSubview(overlay)
+//      overlay.fillSuperview()
+//      overlay.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissDropdown)))
+//      
+//      // Dropdown
+//      let dropdown = CustomDropdown()
+//      dropdown.countries = viewModel.getAllUSerCountryList
+//      
+//      dropdown.onSelect = { [weak self] index in
+//          guard let self = self else { return }
+//          self.selectedCountry = self.viewModel.getAllUSerCountryList[index]
+//          self.dismissDropdown()
+//      }
+//      
+//      view.addSubview(dropdown)
+//      dropdown.translatesAutoresizingMaskIntoConstraints = false
+//      
+//      // THIS IS THE PERFECT SOLUTION – Never gets cut off
+//      let dropdownWidth: CGFloat = min(300, UIScreen.main.bounds.width - 40) // Max 300, never exceeds screen
+//      
+//      NSLayoutConstraint.activate([
+//          dropdown.topAnchor.constraint(equalTo: anchorView.bottomAnchor, constant: 8),
+//          dropdown.centerXAnchor.constraint(equalTo: view.centerXAnchor),           // Perfectly centered
+//          dropdown.widthAnchor.constraint(equalToConstant: dropdownWidth),
+//          dropdown.heightAnchor.constraint(lessThanOrEqualToConstant: 800)           // Max height
+//      ])
+//      
+//      // Animation
+//      dropdown.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+//      dropdown.alpha = 0
+//      
+//      UIView.animate(withDuration: 0.35,
+//                     delay: 0,
+//                     usingSpringWithDamping: 0.8,
+//                     initialSpringVelocity: 0.5,
+//                     options: .curveEaseOut) {
+//          overlay.alpha = 1
+//          dropdown.alpha = 1
+//          dropdown.transform = .identity
+//      }
+//      
+//      self.dropdown = dropdown
+//      self.overlayView = overlay
+//  }
+  
+  @objc private func dismissDropdown() {
+          guard let dropdown = dropdown, let overlay = overlayView else { return }
+          
+          UIView.animate(withDuration: 0.25, animations: {
+              overlay.alpha = 0
+              dropdown.alpha = 0
+              dropdown.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+          }) { _ in
+              dropdown.removeFromSuperview()
+              overlay.removeFromSuperview()
+              self.dropdown = nil
+              self.overlayView = nil
+          }
+      }
 }
-
 
 
 extension AddAddressViewController: UITextFieldDelegate {
@@ -248,4 +376,19 @@ extension AddAddressViewController: UITextFieldDelegate {
 struct DropDownItem {
     let title: String
     let imageUrl: String?
+}
+
+extension UIView {
+    func fillSuperview(padding: UIEdgeInsets = .zero) {
+        guard let superview = superview else { return }
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: padding.left),
+            trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -padding.right),
+            topAnchor.constraint(equalTo: superview.topAnchor, constant: padding.top),
+            bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -padding.bottom)
+        ])
+    }
 }

@@ -33,18 +33,43 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
     var locationMarker = GMSMarker()
     lazy private var viewModel = LocationViewModel(hostVC: self)
     var comingReason: ComingReasonAtLocationScreen = .fromHome
+  var preSelectedLat: Double?
+  var preSelectedLng: Double?
+  
+  override func viewDidLoad() {
+      super.viewDidLoad()
+      
+      txtSearch.delegate = self
+      viewMap.delegate = self
+      
+      // Setup location manager
+      locationManager.delegate = self
+      locationManager.desiredAccuracy = kCLLocationAccuracyBest
+      locationManager.requestWhenInUseAuthorization()
+      locationManager.startUpdatingLocation()
+      
+      // Smart: Use pre-selected > current location > fallback
+      let targetLat: Double
+      let targetLng: Double
+      let zoom: Float
+      
+      if let lat = preSelectedLat, let lng = preSelectedLng, lat != 0, lng != 0 {
+          targetLat = lat
+          targetLng = lng
+          zoom = ZOOM_LEVEL_HIGH  // Zoom in if user already picked a place
+      } else {
+          targetLat = LocationManager.sharedInstance.location?.latitude ?? 28.6139  // Default: Delhi (or your city)
+          targetLng = LocationManager.sharedInstance.location?.longitude ?? 77.2090
+          zoom = 12
+      }
+      
+      let camera = GMSCameraPosition.camera(withLatitude: targetLat, longitude: targetLng, zoom: zoom)
+      viewMap.camera = camera
+//      locationMarker.position = CLLocationCoordinate2D(latitude: targetLat, longitude: targetLng)
+//      locationMarker.map = viewMap
+      reverseGeocodeCoordinate(CLLocationCoordinate2D(latitude: targetLat, longitude: targetLng))
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        LocationManager.sharedInstance.startUpdatingLocation()
-        self.txtSearch.delegate = self
-        self.googleMapSetup()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-        initialSetup()
-    }
+  }
     
     @IBAction func btnBack(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -71,16 +96,21 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
         )
         self.navigationController?.popViewController(animated: true)
     }
-    
-    private func googleMapSetup() {
-        self.latitude = LocationManager.sharedInstance.location?.latitude ?? 0.0
-        self.longitude = LocationManager.sharedInstance.location?.longitude ?? 0.0
-        self.currentLocation =  LocationManager.sharedInstance.currentLocation
-        viewMap.isMyLocationEnabled = false
-        let camera = GMSCameraPosition.camera(withLatitude: latitude ?? 0.0, longitude: longitude ?? 0.0, zoom: 12)
-        self.viewMap.camera = camera
-        self.viewMap.delegate = self
-    }
+  
+  func googleMapSetup() {
+      viewMap.isMyLocationEnabled = false
+      viewMap.delegate = self
+
+      // If preselected location exists, show it
+      if let preLat = preSelectedLat, let preLong = preSelectedLng {
+          self.latitude = preLat
+          self.longitude = preLong
+//        viewMap.settings.myLocationButton = false
+          let camera = GMSCameraPosition.camera(withLatitude: preLat, longitude: preLong, zoom: 12)
+          self.viewMap.camera = camera
+//          addMarker(at: CLLocationCoordinate2D(latitude: preLat, longitude: preLong))
+      }
+  }
     
     private func initialSetup() {
         switch comingReason {
@@ -93,14 +123,25 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
 }
 
 extension LocationViewController: CLLocationManagerDelegate,GMSMapViewDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations.last
-        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 12.0)
-        self.viewMap.animate(to: camera)
-        self.latitude = location?.coordinate.latitude
-        self.longitude = location?.coordinate.longitude
-        self.locationManager.stopUpdatingLocation()
-    }
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+      guard let location = locations.last else { return }
+
+      // Only move camera if no preselected location
+      if preSelectedLat == nil && preSelectedLng == nil {
+          let coordinate = location.coordinate
+          self.latitude = coordinate.latitude
+          self.longitude = coordinate.longitude
+
+          let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude,
+                                                longitude: coordinate.longitude,
+                                                zoom: 12)
+          self.viewMap.animate(to: camera)
+//          addMarker(at: coordinate)
+      }
+
+      locationManager.stopUpdatingLocation()
+  }
+
     
     func mapView(_ mapView: GMSMapView, idleAt cameraPosition: GMSCameraPosition) {
         self.latitude = cameraPosition.target.latitude
@@ -118,6 +159,7 @@ extension LocationViewController: CLLocationManagerDelegate,GMSMapViewDelegate {
             guard error == nil else { return }
             guard let pm = placemarks?.first else { return }
             
+            // 🔹 Extract components safely
             let name = pm.name ?? ""
             let subLocality = pm.subLocality ?? ""
             let locality = pm.locality ?? ""
@@ -125,51 +167,40 @@ extension LocationViewController: CLLocationManagerDelegate,GMSMapViewDelegate {
             let country = pm.country ?? ""
             let postalCode = pm.postalCode ?? ""
             
-            self.locality = subLocality
-            self.city = locality
-            self.state = state
-            self.country = country
-            self.pincode = postalCode
+            // 🔹 Construct clean short address (for main field)
+            var shortAddress = name
+            if shortAddress.lowercased().contains(subLocality.lowercased()) {
+                shortAddress = shortAddress.replacingOccurrences(of: subLocality, with: "", options: .caseInsensitive)
+            }
+            shortAddress = shortAddress.replacingOccurrences(of: ", ,", with: ",")
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+                .trimmingCharacters(in: CharacterSet(charactersIn: ", "))
             
-            let components = [
-                name,
-                subLocality,
-                locality,
-                state,
-                country,
-                postalCode
-            ]
-                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            // 🔹 Construct full readable address
+            let fullAddress = [name, subLocality, locality, state, country, postalCode]
                 .filter { !$0.isEmpty }
+                .joined(separator: ", ")
             
-            let uniqueComponents = components.reduce(into: [String]()) { result, item in
-                if !result.contains(item) {
-                    result.append(item)
-                }
-            }
+            // 🔹 Assign values (always non-nil)
+            self.locality = subLocality.isEmpty ? "" : subLocality
+            self.city = locality.isEmpty ? "" : locality
+            self.state = state.isEmpty ? "" : state
+            self.country = country.isEmpty ? "" : country
+            self.pincode = postalCode.isEmpty ? "" : postalCode
+            self.address = shortAddress.isEmpty ? "" : shortAddress
             
-            let fullAddress = uniqueComponents.joined(separator: ", ")
-            if !subLocality.isEmpty && subLocality.caseInsensitiveCompare(locality) != .orderedSame {
-                self.address = subLocality
-            } else if !locality.isEmpty {
-                self.address = locality
-            } else if !state.isEmpty {
-                self.address = state
-            } else if !country.isEmpty {
-                self.address = country
-            } else {
-                self.address = "Unknown Location"
-            }
-            
+            // 🔹 Update UI
             DispatchQueue.main.async {
                 self.txtSearch.text = self.address
                 self.lblLocation.text = fullAddress
             }
         }
     }
+
+
+    
+    
 }
-
-
 extension LocationViewController: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         viewMap.moveCamera(GMSCameraUpdate.setTarget(CLLocationCoordinate2D(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude), zoom: ZOOM_LEVEL_HIGH))
@@ -198,6 +229,7 @@ extension LocationViewController: GMSAutocompleteViewControllerDelegate {
         }
     }
 }
+
 
 enum ComingReasonAtLocationScreen {
     case fromHome

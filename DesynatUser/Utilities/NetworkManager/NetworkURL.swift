@@ -52,6 +52,11 @@ enum NetworkEndPoint: String {
   case getSavedAddress                      = "api/user/view-address"
   case addNewAddress                      = "api/user/save-address"
   case editAddress                      = "api/user/update-address"
+  case getWishlist                      = "api/user/get_wishlist_products"
+  case setDeafultAddress                      = "api/user/set_default_address"
+  case getAllBrands                      = "api/all-brand"
+  case getAllColors                      = "api/all-color"
+  case getAllSizes                     = "api/all-size"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

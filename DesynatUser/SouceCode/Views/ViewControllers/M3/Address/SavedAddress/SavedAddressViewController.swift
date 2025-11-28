@@ -51,18 +51,25 @@ extension SavedAddressViewController: UITableViewDelegate, UITableViewDataSource
       cell.configData(data: data)
         cell.delegate = self
         cell.indexPath = indexPath
-        if selectedAddressIndex == indexPath.row {
-            cell.selectedRadioImageView.image = UIImage(named: "radioSelected")
-        } else {
-            cell.selectedRadioImageView.image = UIImage(named: "radioUnselected")
-        }
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedAddressIndex = indexPath.row
-        savedAddressTableView.reloadData()
-    }
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      let selectedAddress = viewModel.savedAddressList[indexPath.row]
+      let selectedAddressID = selectedAddress.id ?? 0
+      viewModel.makeDefaultAddressAPI(addressID: selectedAddressID) { [weak self] success in
+          guard let self = self else { return }
+          if success {
+              for i in 0..<self.viewModel.savedAddressList.count {
+                  self.viewModel.savedAddressList[i].setAsDefault = (i == indexPath.row) ? "1" : "0"
+              }
+              self.savedAddressTableView.reloadData()
+          } else {
+              self.showAlert(msg: "Failed to set default address")
+          }
+      }
+  }
+
     
 }
 

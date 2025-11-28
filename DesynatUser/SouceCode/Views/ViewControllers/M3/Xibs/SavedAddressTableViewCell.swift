@@ -39,12 +39,23 @@ class SavedAddressTableViewCell: UITableViewCell {
         delegate?.didTapEdit(indexPath: indexPath)
     }
     
-    func configData(data: SavedAddressList) {
-        nameLabel.text = data.name ?? ""
-        addressLabel.text = "\(data.houseNo ?? ""), \(data.streetNo ?? ""), \(data.city ?? "")"
-        addressTypeLabel.text = getAddressType(type: data.saveAddressAs ?? 0)
-
+  func configData(data: SavedAddressList) {
+      nameLabel.text = data.name ?? ""
+      
+      let addressLine1 = "\(data.houseNo ?? ""), \(data.streetNo ?? ""), \(data.city ?? ""), \(data.state ?? ""), \(data.countryName ?? "")"
+      let postalCode = data.postalCode ?? ""
+      
+      // Postal code on new line
+      addressLabel.text = "\(addressLine1)\n\(postalCode)"
+    let defaultAddress = data.setAsDefault ?? "0"
+    if defaultAddress == "1"{
+      selectedRadioImageView.image = UIImage(named: "radioSelected")
+    } else {
+      selectedRadioImageView.image = UIImage(named: "radioUnselected")
     }
+      addressTypeLabel.text = getAddressType(type: data.saveAddressAs ?? 0)
+  }
+
 }
 
 

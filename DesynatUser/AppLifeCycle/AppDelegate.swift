@@ -59,45 +59,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
     }
-  
-  func dropDownWithImage(
-      items: [DropDownItem],
-      anchorView: UIView,
-      completion: @escaping (_ index: Int, _ item: DropDownItem) -> ()
-  ) {
-      let dropDown = DropDown()
-      dropDown.anchorView = anchorView
-      dropDown.dataSource = items.map { $0.title }   // titles only
-      dropDown.backgroundColor = .white
-      dropDown.textColor = .black
-      dropDown.direction = .bottom
-      dropDown.selectionBackgroundColor = .white
-      dropDown.selectedTextColor = .black
-      dropDown.bottomOffset = CGPoint(x: 0, y: dropDown.anchorView?.plainView.bounds.height ?? 0)
-      dropDown.dismissMode = .automatic
-      
-      dropDown.cellNib = UINib(nibName: "DropDownImageCell", bundle: nil)
-
-    dropDown.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) in
-        guard let cell = cell as? DropDownImageCellTableViewCell else { return }
-        
-        // Set the inherited label DropDown uses
-        cell.optionLabel.text = item
-        
-        // Set your custom image
-        if let url = URL(string: items[index].imageUrl ?? "") {
-            cell.iconImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
-        } else {
-            cell.iconImageView.image = UIImage(named: "placeholder")
-        }
-    }
-      
-      dropDown.show()
-      
-      dropDown.selectionAction = { index, _ in
-          completion(index, items[index])
-      }
-  }
 
     
 }

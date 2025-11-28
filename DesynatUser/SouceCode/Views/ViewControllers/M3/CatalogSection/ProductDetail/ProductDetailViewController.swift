@@ -248,10 +248,19 @@ class ProductDetailViewController: UIViewController {
     
     func prepareVariantData() {
         guard let variants = productDetails?.productVariants else { return }
-        
-        pagetitleLabel.text = storeName ?? productDetails?.brand?.nameEnglish//productDetails?.productNameEn
+      let store = storeName?.trimmed()
+      let productName = productDetails?.productNameEn ?? ""
+      let brandName = productDetails?.brand?.nameEnglish ?? ""
+
+      if let store, !store.isEmpty {
+        pagetitleLabel.text = store
+      } else if !productName.isEmpty {
+        pagetitleLabel.text = productName
+      } else {
+        pagetitleLabel.text = brandName
+      }
+
         productNameLabel.text = productDetails?.productNameEn
-//      productLabel.text = productDetails?.brand?.nameEnglish
       if productDetails?.brand?.nameEnglish == "Other" {
         productLabel.text = productDetails?.otherEn
       } else {
@@ -299,6 +308,7 @@ class ProductDetailViewController: UIViewController {
         }
       
       specificationTableView.reloadData()
+      checkAndUpdateCartStatus()
     }
   
   func updateUIForSelectedVariant() {
@@ -457,6 +467,37 @@ class ProductDetailViewController: UIViewController {
         addToBagView.isHidden = false
         incrementDecrementView.isHidden = true
     }
+  
+  private func checkAndUpdateCartStatus() {
+      guard let productDetails = productDetails,
+            let variants = productDetails.productVariants,
+            !variants.isEmpty else { return }
+
+      // Use currently selected variant
+      let currentVariant = selectedVariant ?? filteredVariants.first
+      let variantId = currentVariant?.id ?? 0
+      let productId = productDetails.id ?? 0
+
+      // Look for matching item in cart (from API response)
+    if let cartItem = productDetails.addtocart,
+         cartItem.productID == productId,
+         cartItem.variantsID == variantId,
+         let qty = cartItem.quantity, qty > 0 {
+          
+          // Item is already in cart!
+          quantity = qty
+          addToBagView.isHidden = true
+          bagItemCountView.isHidden = false
+          incrementDecrementView.isHidden = false
+          itemCountLabel.text = "\(quantity)"
+      } else {
+          // Not in cart
+          quantity = 0
+          addToBagView.isHidden = false
+          bagItemCountView.isHidden = true
+          incrementDecrementView.isHidden = true
+      }
+  }
     
 }
 
@@ -522,11 +563,12 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
                 colorsCollectionView.reloadData()
                 // Optional smooth scroll
                 colorsCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-                
+          checkAndUpdateCartStatus()
             case sizeCollectionView:
                 selectedSizeIndex = indexPath.row
                 updateImagesForSelectedSize()
                 sizeCollectionView.reloadData()
+          checkAndUpdateCartStatus()
         case similarProductCollectionView:
             print("")
         default:

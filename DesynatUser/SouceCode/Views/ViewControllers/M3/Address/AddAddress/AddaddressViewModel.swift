@@ -28,9 +28,7 @@ class AddaddressViewModel: NSObject {
             if String.getString(hostVC.nameTF.text).isEmpty {
                 errorMessage = .EnterName
             }
-            else if String.getString(hostVC.countryCodeTF.text).isEmpty {
-                errorMessage = .EnterCountryCode
-            }
+            
             else if String.getString(hostVC.mobileTF.text).isEmpty {
                 errorMessage = .EnterMobileNumber
             }
@@ -43,18 +41,23 @@ class AddaddressViewModel: NSObject {
             else if String.getString(hostVC.houseNoTF.text).isEmpty {
                 errorMessage = .EnterHouseNumber
             }
-            else if String.getString(hostVC.streetTF.text).isEmpty {
-                errorMessage = .EnterStreetNumber
-            }
-            else if String.getString(hostVC.postalCodeTF.text).isEmpty {
-                errorMessage = .EnterPostalCode
-            }
+//            else if String.getString(hostVC.streetTF.text).isEmpty {
+//                errorMessage = .EnterStreetNumber
+//            }
+//            else if String.getString(hostVC.postalCodeTF.text).isEmpty {
+//                errorMessage = .EnterPostalCode
+//            }
             else if String.getString(hostVC.cityTF.text).isEmpty {
                 errorMessage = .EnterCity
             }
             else if String.getString(hostVC.stateTF.text).isEmpty {
                 errorMessage = .EnterState
-            }
+            } else if String.getString(hostVC.countryCodeTF.text).isEmpty {
+              errorMessage = .EnterCountryCode
+          }
+//          else if String.getString(hostVC.landMarkTF.text).isEmpty {
+//            errorMessage = .EnterL
+//        }
 
             if errorMessage != .none {
                 hostVC.showAlert(msg: errorMessage.rawValue)
@@ -86,7 +89,8 @@ class AddaddressViewModel: NSObject {
                 "landmark": String.getString(hostVC.landMarkTF.text),
                 "save_address_as": saveAs,
                 "latitude": "\(hostVC.lat)",
-                "longitude": "\(hostVC.long)"
+                "longitude": "\(hostVC.long)",
+                "country_name": String.getString(hostVC.countryNameTF.text),
             ]
 
             // Editing Mode

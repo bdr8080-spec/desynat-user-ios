@@ -49,6 +49,15 @@ class FiltersOptionsTableViewCell: UITableViewCell {
 
         selectionImageView.image = UIImage(named: option.isSelected ? "selectedFilterCheckBox" : "unslectedStoreFilter")
     }
+  
+//  func configureProductFilter(option: ProductFilterOption) {
+//      titleLabel.text = option.title
+//    selectionImageView.isHidden = !option.isSelected  // ✅ show/hide based on isSelected
+//      if option.havingColourCode {
+//        colourView.backgroundColor = UIColor(hex: option.colourCode)
+//      }
+//  }
 
     
 }
+

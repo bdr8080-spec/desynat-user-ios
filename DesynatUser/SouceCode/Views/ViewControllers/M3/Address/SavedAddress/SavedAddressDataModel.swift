@@ -13,7 +13,7 @@ struct SavedAddressList: Codable {
     let name, mobile, countryCode, address: String?
     let houseNo, streetNo, postalCode, city: String?
     let state: String?
-    let landmark: String?
+    var landmark,setAsDefault, countryName: String?
     let saveAddressAs, status: Int?
     let latitude, longitude: String?
     let createdAt, updatedAt: String?
@@ -24,10 +24,12 @@ struct SavedAddressList: Codable {
         case name, mobile
         case countryCode = "country_code"
         case address
+        case countryName = "country_name"
         case houseNo = "house_no"
         case streetNo = "street_no"
         case postalCode = "postal_code"
         case city, state, landmark
+      case setAsDefault = "set_as_default"
         case saveAddressAs = "save_address_as"
         case status, latitude, longitude
         case createdAt = "created_at"

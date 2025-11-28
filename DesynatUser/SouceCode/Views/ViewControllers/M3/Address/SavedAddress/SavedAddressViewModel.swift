@@ -32,7 +32,12 @@ class SavedAddressViewModel: NSObject {
             completion(true)
         }
     }
-
+  
+  func makeDefaultAddressAPI(addressID: Int, completion: @escaping (Bool) -> Void) {
+    WebService.sharedInstance.makeAddressDefaultAPi(addressId: addressID ) { response in
+        completion(true)
+    }
+  }
     
 }
 

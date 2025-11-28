@@ -7,6 +7,8 @@
 
 import UIKit
 import SDWebImage
+import AVFAudio
+import Speech
 
 class StoresDetailsViewController: UIViewController, SortByStoresViewControllerDelegate {
   func didSelectSortOption(_ option: Int) {
@@ -56,15 +58,27 @@ class StoresDetailsViewController: UIViewController, SortByStoresViewControllerD
   var fullName: String? = ""
   var profilePic: String? = ""
   var appliedSortFilter: Int?
+  private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
+  private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+  private var recognitionTask: SFSpeechRecognitionTask?
+  private let audioEngine = AVAudioEngine()
+  private var isListening = false
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     reloadAllCollections()
     searchTF.delegate = self
+    requestPermissions()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     viewModel.getSingleStoresApi()
+  }
+  
+  private func requestPermissions() {
+      SFSpeechRecognizer.requestAuthorization { _ in }
+      AVAudioSession.sharedInstance().requestRecordPermission { _ in }
   }
   
   override func viewDidLayoutSubviews() {
@@ -111,7 +125,114 @@ class StoresDetailsViewController: UIViewController, SortByStoresViewControllerD
   
   @IBAction func filterDidTapped(_ sender: Any) {
     let nextVC = ProductsFiltersViewController.instantiate(fromAppStoryboard: .Catalog)
-    self.navigationController?.pushViewController(nextVC, animated: true)
+    nextVC.selectedCategoryIDs = viewModel.selectedCategoryIDs
+    nextVC.selectedBrandIDs = viewModel.selectedBrandIDs
+    nextVC.selectedColorIDs = viewModel.selectedColorIDs
+    nextVC.selectedSizeIDs = viewModel.selectedSizeIDs
+    nextVC.selectedDiscountIDs = viewModel.selectedDiscountIDs
+    nextVC.selectedMinPrice = viewModel.minPrice
+    nextVC.selectedMaxPrice = viewModel.maxPrice
+        nextVC.onApplyFilters = { [weak self] categories, brands, colors, sizes, discounts, minPrice, maxPrice in
+            guard let self = self else { return }
+
+            self.viewModel.selectedCategoryIDs = categories
+            self.viewModel.selectedBrandIDs = brands
+            self.viewModel.selectedColorIDs = colors
+            self.viewModel.selectedSizeIDs = sizes
+            self.viewModel.selectedDiscountIDs = discounts
+            self.viewModel.minPrice = minPrice
+            self.viewModel.maxPrice = maxPrice
+            self.viewModel.getSingleStoresApi()
+        }
+
+        self.navigationController?.pushViewController(nextVC, animated: true)
+  }
+  
+  // MARK: - Mic Button – This is what you wanted!
+  @IBAction func micDidTapped(_ sender: UIButton) {
+      if isListening {
+          stopListening()
+          sender.setImage(UIImage(systemName: "mic"), for: .normal)
+      } else {
+          startListening()
+          sender.setImage(UIImage(systemName: "mic.fill"), for: .normal)
+          sender.tintColor = .systemRed // optional: show it's active
+      }
+  }
+  
+
+  
+  // MARK: - Start Listening (Speech → Text)
+  private func startListening() {
+      // Reset everything
+      recognitionTask?.cancel()
+      recognitionTask = nil
+      recognitionRequest = nil
+
+      let audioSession = AVAudioSession.sharedInstance()
+      do {
+          try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
+          try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+      } catch {
+          print("Audio session error: \(error)")
+          return
+      }
+
+      recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+      guard let request = recognitionRequest else { return }
+      request.shouldReportPartialResults = true
+
+      recognitionTask = speechRecognizer?.recognitionTask(with: request) { [weak self] result, error in
+          guard let self = self else { return }
+
+          if let result = result {
+              let text = result.bestTranscription.formattedString
+              self.searchTF.text = text
+            self.viewModel.searchText = text
+            viewModel.getSingleStoresApi() // live search as user speaks
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+              self.stopListening()
+            }
+          }
+
+          if error != nil || result?.isFinal == true {
+              self.stopListening()
+              DispatchQueue.main.async {
+                  (self.searchTF.inputView as? UIButton)?.setImage(UIImage(systemName: "mic"), for: .normal)
+              }
+          }
+      }
+
+      let inputNode = audioEngine.inputNode
+      let recordingFormat = inputNode.outputFormat(forBus: 0)
+      inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
+          request.append(buffer)
+      }
+
+      audioEngine.prepare()
+      do {
+          try audioEngine.start()
+          isListening = true
+          searchTF.becomeFirstResponder() // optional: show cursor
+      } catch {
+          print("Failed to start audio engine: \(error)")
+          stopListening()
+      }
+  }
+
+  // MARK: - Stop Listening
+  private func stopListening() {
+      audioEngine.stop()
+      audioEngine.inputNode.removeTap(onBus: 0)
+      recognitionRequest?.endAudio()
+      recognitionRequest = nil
+      recognitionTask?.cancel()
+      recognitionTask = nil
+      isListening = false
+  }
+
+  deinit {
+      stopListening()
   }
   
   func configData(data: Store) {
@@ -207,7 +328,7 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     switch collectionView {
     case storiesCollectionView:
-      return 5
+      return 2
     case storesCollectionView:
       return viewModel.singleStoresSection?.allProduct?.data?.count ?? 0
     case reelsCollectionView:
@@ -221,7 +342,11 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
     switch collectionView {
     case storiesCollectionView:
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoresDetailsCollectionViewCell", for: indexPath) as! StoresDetailsCollectionViewCell
-      cell.mainImageView.image = UIImage(named: "statusImage")
+      if indexPath.row == 0 {
+        cell.mainImageView.image = UIImage(named: "statusImage")
+      } else if indexPath.row == 1 {
+        cell.mainImageView.image = UIImage(named: "bestSell")
+      }
       //        cell.titleLabel.text = suggestedStores[indexPath.row]
       return cell
     case storesCollectionView:
