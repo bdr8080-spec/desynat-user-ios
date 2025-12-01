@@ -213,7 +213,7 @@ extension ProductsFiltersViewController: UITableViewDelegate, UITableViewDataSou
 
           // Preselect previously chosen values
           cell.minPrice = selectedMinPrice ?? 0
-          cell.maxPrice = selectedMaxPrice ?? 10000
+          cell.maxPrice = selectedMaxPrice ?? 100000
 
           cell.onPriceChanged = { [weak self] min, max in
               guard let self = self else { return }
@@ -231,6 +231,17 @@ extension ProductsFiltersViewController: UITableViewDelegate, UITableViewDataSou
         cell.configureProductFilter(option: option)
         return cell
     }
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    let section = indexPath.section
+    let sectionName = filtersOptions[section].header
+
+    if sectionName == "Price" {
+      return 65
+    } else {
+      return UITableView.automaticDimension
+    }
+  }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 

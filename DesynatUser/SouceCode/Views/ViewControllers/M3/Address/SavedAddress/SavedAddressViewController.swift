@@ -53,28 +53,28 @@ extension SavedAddressViewController: UITableViewDelegate, UITableViewDataSource
         cell.indexPath = indexPath
         return cell
     }
-    
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      let selectedAddress = viewModel.savedAddressList[indexPath.row]
-      let selectedAddressID = selectedAddress.id ?? 0
-      viewModel.makeDefaultAddressAPI(addressID: selectedAddressID) { [weak self] success in
-          guard let self = self else { return }
-          if success {
-              for i in 0..<self.viewModel.savedAddressList.count {
-                  self.viewModel.savedAddressList[i].setAsDefault = (i == indexPath.row) ? "1" : "0"
-              }
-              self.savedAddressTableView.reloadData()
-          } else {
-              self.showAlert(msg: "Failed to set default address")
-          }
-      }
-  }
 
     
 }
 
 
 extension SavedAddressViewController: SavedAddressCellDelegate {
+  
+  func didTapRadioButton(indexPath: IndexPath) {
+    let selectedAddress = viewModel.savedAddressList[indexPath.row]
+    let selectedAddressID = selectedAddress.id ?? 0
+    viewModel.makeDefaultAddressAPI(addressID: selectedAddressID) { [weak self] success in
+        guard let self = self else { return }
+        if success {
+            for i in 0..<self.viewModel.savedAddressList.count {
+                self.viewModel.savedAddressList[i].setAsDefault = (i == indexPath.row) ? "1" : "0"
+            }
+            self.savedAddressTableView.reloadData()
+        } else {
+            self.showAlert(msg: "Failed to set default address")
+        }
+    }
+  }
     
     func didTapEdit(indexPath: IndexPath) {
         let selectedAddress = viewModel.savedAddressList[indexPath.row]
@@ -96,15 +96,12 @@ extension SavedAddressViewController: SavedAddressCellDelegate {
             self.viewModel.deleteAddressAPI(addressID: id) { success in
                 if success {
 
-                    // Remove locally
                     self.viewModel.savedAddressList.remove(at: indexPath.row)
 
-                    // Animate deletion
                     self.savedAddressTableView.beginUpdates()
                     self.savedAddressTableView.deleteRows(at: [indexPath], with: .left)
                     self.savedAddressTableView.endUpdates()
 
-                    // Show "No Data"
                     self.noDataFoundLabel.isHidden = !self.viewModel.savedAddressList.isEmpty
                 } else {
                     self.showAlert(msg: "Failed to delete address. Try again.")

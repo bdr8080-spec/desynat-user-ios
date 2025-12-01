@@ -66,7 +66,7 @@ class OTPViewController: UIViewController {
         case .loginViaOTP:
             viewModel.verifyOtpAPI(type: "1") // 0 register 1 Login 2 forgot password
         case .signup:
-            viewModel.verifyOtpAPI(type: "0")
+            viewModel.verifyOtpAPI(type: "1")
         case .forgotPassword:
             viewModel.verifyOtpAPI(type: "2")
         case .changeOldMobileNumber:

@@ -9,7 +9,8 @@ import UIKit
 
 class SavedAddressTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var addressLabel: UILabel!
+  @IBOutlet weak var radioButtonOutlet: UIButton!
+  @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressTypeLabel: UILabel!
     @IBOutlet weak var selectedRadioImageView: UIImageView!
@@ -34,8 +35,11 @@ class SavedAddressTableViewCell: UITableViewCell {
         delegate?.didTapDelete(indexPath: indexPath)
     }
     
-    
-    @IBAction func editDidTapped(_ sender: Any) {
+  @IBAction func radioButonAction(_ sender: Any) {
+    delegate?.didTapRadioButton(indexPath: indexPath)
+  }
+  
+  @IBAction func editDidTapped(_ sender: Any) {
         delegate?.didTapEdit(indexPath: indexPath)
     }
     
@@ -62,6 +66,7 @@ class SavedAddressTableViewCell: UITableViewCell {
 protocol SavedAddressCellDelegate: AnyObject {
     func didTapEdit(indexPath: IndexPath)
     func didTapDelete(indexPath: IndexPath)
+  func didTapRadioButton(indexPath: IndexPath)
 }
 
 func getAddressType(type: Int) -> String {

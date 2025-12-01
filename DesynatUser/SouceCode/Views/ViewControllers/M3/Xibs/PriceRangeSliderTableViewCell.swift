@@ -16,7 +16,7 @@ class PriceRangeSliderTableViewCell: UITableViewCell {
       var minPrice: Int = 0 {
           didSet { rangeSlider.initialValue = CGFloat(minPrice) } // left thumb
       }
-      var maxPrice: Int = 10000 {
+      var maxPrice: Int = 100000 {
           didSet { rangeSlider.currentValue = CGFloat(maxPrice) } // right thumb
       }
 

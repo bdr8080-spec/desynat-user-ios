@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,18 +20,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="399" height="94"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="neV-o0-MTL" customClass="RangeSliderView" customModule="DesynatUser" customModuleProvider="target">
-                                <rect key="frame" x="15" y="22" width="354" height="50"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="0.0" width="399" height="65"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="FCw-FH-rpT"/>
+                                    <constraint firstAttribute="height" constant="65" id="FCw-FH-rpT"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="neV-o0-MTL" firstAttribute="leading" secondItem="8uZ-4p-KkN" secondAttribute="leading" constant="15" id="Gct-ey-ewa"/>
-                            <constraint firstAttribute="trailing" secondItem="neV-o0-MTL" secondAttribute="trailing" constant="30" id="MMq-kj-qcZ"/>
-                            <constraint firstItem="neV-o0-MTL" firstAttribute="centerY" secondItem="8uZ-4p-KkN" secondAttribute="centerY" id="k2g-Ht-omC"/>
+                            <constraint firstItem="neV-o0-MTL" firstAttribute="leading" secondItem="8uZ-4p-KkN" secondAttribute="leading" id="Gct-ey-ewa"/>
+                            <constraint firstItem="neV-o0-MTL" firstAttribute="top" secondItem="8uZ-4p-KkN" secondAttribute="top" id="HWm-3E-MiQ"/>
+                            <constraint firstAttribute="trailing" secondItem="neV-o0-MTL" secondAttribute="trailing" id="MMq-kj-qcZ"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -50,9 +49,4 @@
             <point key="canvasLocation" x="347.32824427480915" y="-17.605633802816904"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
