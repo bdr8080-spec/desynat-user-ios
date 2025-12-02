@@ -9,6 +9,22 @@ import UIKit
 
 class ProductDetailViewController: UIViewController {
   
+  @IBOutlet weak var topSpaceForWomenDetails: UILabel!
+  @IBOutlet weak var bottomSpaceForWomenDetails: UILabel!
+  @IBOutlet weak var bustLabel: UILabel!
+  @IBOutlet weak var waistLabel: UILabel!
+  @IBOutlet weak var hipLabel: UILabel!
+  @IBOutlet weak var shoulderLabel: UILabel!
+  @IBOutlet weak var sleeveLengthLabel: UILabel!
+  @IBOutlet weak var lengthLabel: UILabel!
+  @IBOutlet weak var womenStackView: UIStackView!
+  @IBOutlet weak var lengthStackView: UIStackView!
+  @IBOutlet weak var sleeveLengthStackView: UIStackView!
+  @IBOutlet weak var shoulderView: UIStackView!
+  @IBOutlet weak var hipView: UIStackView!
+  @IBOutlet weak var bustView: UIStackView!
+  @IBOutlet weak var waistView: UIStackView!
+  @IBOutlet weak var womenMeasurementView: CustomView!
   @IBOutlet weak var spaceBootmLabel: UILabel!
   @IBOutlet weak var spaceTopLabel: UILabel!
   @IBOutlet weak var customOrderView: CustomView!
@@ -252,6 +268,33 @@ class ProductDetailViewController: UIViewController {
         .compactMap { $0.value.first?.color }
     )
     
+    let categoryName = productDetails?.category?.name ?? "Women"
+    if categoryName == "Women" {
+      womenMeasurementView.isHidden = false
+      bustView.isHidden = false
+      hipView.isHidden = false
+      waistView.isHidden = false
+      shoulderView.isHidden = false
+      sleeveLengthStackView.isHidden = false
+      lengthStackView.isHidden = false
+      womenStackView.isHidden = false
+      topSpaceForWomenDetails.isHidden = false
+      bottomSpaceForWomenDetails.isHidden = false
+    } else {
+      womenMeasurementView.isHidden = true
+      bustView.isHidden = true
+      hipView.isHidden = true
+      waistView.isHidden = true
+      shoulderView.isHidden = true
+      sleeveLengthStackView.isHidden = true
+      lengthStackView.isHidden = true
+      womenStackView.isHidden = true
+      topSpaceForWomenDetails.isHidden = true
+      bottomSpaceForWomenDetails.isHidden = true
+    }
+    
+    
+    
     // 2️⃣ Default selected color = first color
     selectedColourIndex = 0
     filterVariantsForSelectedColor()
@@ -293,6 +336,13 @@ class ProductDetailViewController: UIViewController {
     } else {
       discountPercentageLabel.text = "\(discountValue) KD Off"
     }
+    
+    bustLabel.text = selectedVariant.bust ?? "-"
+    hipLabel.text = selectedVariant.hip ?? "-"
+    waistLabel.text = selectedVariant.waist ?? "-"
+    shoulderLabel.text = selectedVariant.shoulder ?? "-"
+    sleeveLengthLabel.text = selectedVariant.sleeveLength ?? "-"
+    lengthLabel.text = selectedVariant.length ?? "-"
   }
   
   private func filterVariantsForSelectedColor() {
@@ -307,13 +357,13 @@ class ProductDetailViewController: UIViewController {
     filteredVariants = variants.filter { $0.color?.id == selectedColor.id }
     
     if filteredVariants.isEmpty {
-      selectedSizeIndex = 0
+//      selectedSizeIndex = 0
     } else {
       if selectedSizeIndex >= filteredVariants.count {
-        selectedSizeIndex = 0
+//        selectedSizeIndex = 0
       }
     }
-    
+    selectedSizeIndex = 0
     updateImagesForSelectedSize()
     updateUIForSelectedVariant()
     
@@ -498,7 +548,8 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
       checkAndUpdateCartStatus()
     case sizeCollectionView:
       selectedSizeIndex = indexPath.row
-      updateImagesForSelectedSize()
+//      updateImagesForSelectedSize() // if wanted to reload the image also
+      updateUIForSelectedVariant()
       sizeCollectionView.reloadData()
       checkAndUpdateCartStatus()
     case similarProductCollectionView:
