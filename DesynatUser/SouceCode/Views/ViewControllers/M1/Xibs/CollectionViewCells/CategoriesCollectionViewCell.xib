@@ -36,7 +36,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Abaya" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3y-8b-IPn">
-                                <rect key="frame" x="0.0" y="110" width="120" height="19.666666666666657"/>
+                                <rect key="frame" x="0.0" y="106" width="120" height="19.666666666666671"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -51,7 +51,7 @@
                             <constraint firstItem="a3y-8b-IPn" firstAttribute="trailing" secondItem="n2U-MX-yED" secondAttribute="trailing" id="c7f-xW-FIF"/>
                             <constraint firstItem="n2U-MX-yED" firstAttribute="leading" secondItem="Phb-UQ-lSC" secondAttribute="leading" id="com-4S-YTw"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="a3y-8b-IPn" secondAttribute="bottom" constant="10" id="nRr-s5-tU5"/>
-                            <constraint firstItem="a3y-8b-IPn" firstAttribute="top" secondItem="n2U-MX-yED" secondAttribute="bottom" constant="10" id="zfW-tZ-ILq"/>
+                            <constraint firstItem="a3y-8b-IPn" firstAttribute="top" secondItem="n2U-MX-yED" secondAttribute="bottom" constant="6" id="zfW-tZ-ILq"/>
                         </constraints>
                     </view>
                 </subviews>

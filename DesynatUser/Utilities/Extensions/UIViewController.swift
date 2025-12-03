@@ -349,3 +349,10 @@ extension UINavigationController {
 }
 
 
+extension UINavigationController {
+    func popToViewController<T: UIViewController>(ofType type: T.Type, animated: Bool = true) {
+        if let targetVC = viewControllers.first(where: { $0 is T }) {
+            popToViewController(targetVC, animated: animated)
+        }
+    }
+}

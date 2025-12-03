@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Medium.ttf">
+            <string>Poppins-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SelectOccassionCollectionViewCell" customModule="DesynatUser" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="242" height="170"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="242" height="170"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="412-Rx-dgE" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="242" height="170"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnGradient" translatesAutoresizingMaskIntoConstraints="NO" id="XA9-0U-KQG" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="242" height="170"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthday" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RPZ-QP-HVa">
+                                <rect key="frame" x="5" y="5" width="232" height="160"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="13"/>
+                                <color key="textColor" name="AccentColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="XA9-0U-KQG" secondAttribute="bottom" id="2dd-JF-wil"/>
+                            <constraint firstItem="XA9-0U-KQG" firstAttribute="top" secondItem="412-Rx-dgE" secondAttribute="top" id="MQx-bE-HRl"/>
+                            <constraint firstItem="RPZ-QP-HVa" firstAttribute="leading" secondItem="412-Rx-dgE" secondAttribute="leading" constant="5" id="XsR-yR-9Ki"/>
+                            <constraint firstItem="XA9-0U-KQG" firstAttribute="leading" secondItem="412-Rx-dgE" secondAttribute="leading" id="egd-7f-aBr"/>
+                            <constraint firstAttribute="bottom" secondItem="RPZ-QP-HVa" secondAttribute="bottom" constant="5" id="fQO-lm-rBX"/>
+                            <constraint firstAttribute="trailing" secondItem="XA9-0U-KQG" secondAttribute="trailing" id="nZ5-vK-aLA"/>
+                            <constraint firstAttribute="trailing" secondItem="RPZ-QP-HVa" secondAttribute="trailing" constant="5" id="smF-ep-as0"/>
+                            <constraint firstItem="RPZ-QP-HVa" firstAttribute="top" secondItem="412-Rx-dgE" secondAttribute="top" constant="5" id="tW8-En-3CE"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" name="AccentColor"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="412-Rx-dgE" secondAttribute="trailing" id="A2F-3M-a1H"/>
+                <constraint firstAttribute="bottom" secondItem="412-Rx-dgE" secondAttribute="bottom" id="QtR-Wq-Cde"/>
+                <constraint firstItem="412-Rx-dgE" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="fL6-QA-Wpd"/>
+                <constraint firstItem="412-Rx-dgE" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="syi-a5-STR"/>
+            </constraints>
+            <size key="customSize" width="242" height="170"/>
+            <connections>
+                <outlet property="backgroundImageView" destination="XA9-0U-KQG" id="jMS-NE-D4b"/>
+                <outlet property="titleLabel" destination="RPZ-QP-HVa" id="tJQ-Da-4F0"/>
+            </connections>
+            <point key="canvasLocation" x="-304" y="-19"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="btnGradient" width="343" height="38"/>
+        <namedColor name="AccentColor">
+            <color red="0.4309999942779541" green="0.27099999785423279" blue="0.15299999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -9,6 +9,7 @@ import UIKit
 
 class ProductDetailViewController: UIViewController {
   
+  @IBOutlet weak var womenDeatilsBottomLabel: UILabel!
   @IBOutlet weak var topSpaceForWomenDetails: UILabel!
   @IBOutlet weak var bottomSpaceForWomenDetails: UILabel!
   @IBOutlet weak var bustLabel: UILabel!
@@ -280,6 +281,7 @@ class ProductDetailViewController: UIViewController {
       womenStackView.isHidden = false
       topSpaceForWomenDetails.isHidden = false
       bottomSpaceForWomenDetails.isHidden = false
+      womenDeatilsBottomLabel.isHidden = false
     } else {
       womenMeasurementView.isHidden = true
       bustView.isHidden = true
@@ -291,6 +293,7 @@ class ProductDetailViewController: UIViewController {
       womenStackView.isHidden = true
       topSpaceForWomenDetails.isHidden = true
       bottomSpaceForWomenDetails.isHidden = true
+      womenDeatilsBottomLabel.isHidden = true
     }
     
     
@@ -345,41 +348,114 @@ class ProductDetailViewController: UIViewController {
     lengthLabel.text = selectedVariant.length ?? "-"
   }
   
+//  private func filterVariantsForSelectedColor() {
+//    guard let variants = productDetails?.productVariants,
+//          !variants.isEmpty,
+//          selectedColourIndex < uniqueColors.count else {
+//      return
+//    }
+//    
+//    let selectedColor = uniqueColors[selectedColourIndex]
+//    
+//    filteredVariants = variants.filter { $0.color?.id == selectedColor.id }
+//    
+//    if filteredVariants.isEmpty {
+////      selectedSizeIndex = 0
+//    } else {
+//      if selectedSizeIndex >= filteredVariants.count {
+////        selectedSizeIndex = 0
+//      }
+//    }
+//    selectFirstAvailableSize()
+//    if selectedSizeIndex >= 0 {
+//        updateImagesForSelectedSize()
+//        updateUIForSelectedVariant()
+//    } else {
+//        // No in-stock sizes
+//        selectedVariantImages = []
+//        productImageCollectionView.reloadData()
+//
+//        finalPriceLAbel.text = "-"
+//        actualPriceLAbel.text = "-"
+//        discountPercentageLabel.text = ""
+//
+//        // Disable Add to Bag
+//        addToBagView.isHidden = false
+//        addToBagView.alpha = 0.4
+//        addToBagView.isUserInteractionEnabled = false
+//    }
+//
+////    updateImagesForSelectedSize()
+////    updateUIForSelectedVariant()
+//    
+//    sizeCollectionView.reloadData()
+//    colorsCollectionView.reloadData()
+//    resetImageCarouselToFirst()
+//    
+//    DispatchQueue.main.async {
+//      let firstSizeIndex = IndexPath(item: 0, section: 0)
+//      if self.filteredVariants.count > 0 {
+//        self.sizeCollectionView.selectItem(at: firstSizeIndex,
+//                                           animated: false,
+//                                           scrollPosition: .centeredHorizontally)
+//      }
+//    }
+//  }
+  
   private func filterVariantsForSelectedColor() {
-    guard let variants = productDetails?.productVariants,
-          !variants.isEmpty,
-          selectedColourIndex < uniqueColors.count else {
-      return
-    }
-    
-    let selectedColor = uniqueColors[selectedColourIndex]
-    
-    filteredVariants = variants.filter { $0.color?.id == selectedColor.id }
-    
-    if filteredVariants.isEmpty {
-//      selectedSizeIndex = 0
-    } else {
-      if selectedSizeIndex >= filteredVariants.count {
-//        selectedSizeIndex = 0
+      guard let variants = productDetails?.productVariants,
+            !variants.isEmpty,
+            selectedColourIndex < uniqueColors.count else {
+          return
       }
-    }
-    selectedSizeIndex = 0
-    updateImagesForSelectedSize()
-    updateUIForSelectedVariant()
-    
-    sizeCollectionView.reloadData()
-    colorsCollectionView.reloadData()
-    resetImageCarouselToFirst()
-    
-    DispatchQueue.main.async {
-      let firstSizeIndex = IndexPath(item: 0, section: 0)
-      if self.filteredVariants.count > 0 {
-        self.sizeCollectionView.selectItem(at: firstSizeIndex,
-                                           animated: false,
-                                           scrollPosition: .centeredHorizontally)
+      
+      let selectedColor = uniqueColors[selectedColourIndex]
+      
+      // Filter variants for selected color
+      filteredVariants = variants.filter { $0.color?.id == selectedColor.id }
+      
+      // Select first available size
+      selectFirstAvailableSize()
+      
+      // Reset Add to Bag state every time color changes
+      addToBagView.alpha = 1
+      addToBagView.isUserInteractionEnabled = true
+      
+      if selectedSizeIndex >= 0 {
+          // At least one size IN STOCK
+          updateImagesForSelectedSize()
+          updateUIForSelectedVariant()
+      } else {
+          // No size in stock
+          selectedVariantImages = []
+          productImageCollectionView.reloadData()
+
+          finalPriceLAbel.text = "-"
+          actualPriceLAbel.text = "-"
+          discountPercentageLabel.text = ""
+
+          // Disable Add to Bag (no sizes)
+          addToBagView.isHidden = false
+          addToBagView.alpha = 0.4
+          addToBagView.isUserInteractionEnabled = false
       }
-    }
+      
+      // Reload UI
+      sizeCollectionView.reloadData()
+      colorsCollectionView.reloadData()
+      resetImageCarouselToFirst()
+      
+      // Highlight selected size ONLY if in-stock
+      if selectedSizeIndex >= 0 {
+          DispatchQueue.main.async {
+              let indexPath = IndexPath(item: self.selectedSizeIndex, section: 0)
+              self.sizeCollectionView.selectItem(at: indexPath,
+                                                 animated: false,
+                                                 scrollPosition: .centeredHorizontally)
+          }
+      }
   }
+
   
   private func updateImagesForSelectedSize() {
     guard !filteredVariants.isEmpty else {
@@ -483,6 +559,19 @@ class ProductDetailViewController: UIViewController {
     }
   }
   
+  private func selectFirstAvailableSize() {
+      // Find first size with stock > 0
+      if let index = filteredVariants.firstIndex(where: {
+          (Int($0.totalStock ?? "0") ?? 0) > 0
+      }) {
+          selectedSizeIndex = index
+      } else {
+          // If NO SIZE is in stock
+          selectedSizeIndex = -1
+      }
+  }
+
+  
 }
 
 extension ProductDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -522,10 +611,17 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SizeVariantCollectionViewCell", for: indexPath) as! SizeVariantCollectionViewCell
       let variant = filteredVariants[indexPath.row]
       cell.titleLabel.text = variant.size?.name
-      
-      cell.mainView.layer.borderColor =
-      (selectedSizeIndex == indexPath.row ? UIColor.darkBrown : UIColor.lightGray).cgColor
-      
+      let stock = Int(variant.totalStock ?? "0") ?? 0
+          if stock > 0 {
+              cell.titleLabel.textColor = .black
+              cell.mainView.alpha = 1.0
+              cell.mainView.layer.borderColor =
+              (selectedSizeIndex == indexPath.row ? UIColor.darkBrown : UIColor.lightGray).cgColor
+          } else {
+              cell.titleLabel.textColor = .gray
+              cell.mainView.layer.borderColor = UIColor.lightGray.cgColor
+              cell.mainView.alpha = 0.5
+          }
       return cell
     case similarProductCollectionView:
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BestSellingsCollectionViewCell", for: indexPath) as! BestSellingsCollectionViewCell
@@ -547,11 +643,16 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
       colorsCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
       checkAndUpdateCartStatus()
     case sizeCollectionView:
+      let variant = filteredVariants[indexPath.row]
+          let stock = Int(variant.totalStock ?? "0") ?? 0
+          if stock == 0 {
+              return
+          }
       selectedSizeIndex = indexPath.row
-//      updateImagesForSelectedSize() // if wanted to reload the image also
-      updateUIForSelectedVariant()
-      sizeCollectionView.reloadData()
-      checkAndUpdateCartStatus()
+      //      updateImagesForSelectedSize() // if wanted to reload the image also
+            updateUIForSelectedVariant()
+            sizeCollectionView.reloadData()
+            checkAndUpdateCartStatus()
     case similarProductCollectionView:
       print("")
     default:

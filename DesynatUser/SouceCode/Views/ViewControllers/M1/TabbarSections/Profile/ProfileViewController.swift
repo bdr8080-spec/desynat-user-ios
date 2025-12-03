@@ -97,6 +97,12 @@ class ProfileViewController: UIViewController {
         let vc = SavedAddressViewController.instantiate(fromAppStoryboard: .Profile)
         self.navigationController?.pushViewController(vc, animated: false)
     }
+  
+  @IBAction func giftCardsDidTapped(_ sender: Any) {
+    let vc = GiftCardsListViewController.instantiate(fromAppStoryboard: .Profile)
+    self.navigationController?.pushViewController(vc, animated: false)
+  }
+  
     
 }
 

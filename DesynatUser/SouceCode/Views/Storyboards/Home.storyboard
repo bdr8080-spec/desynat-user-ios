@@ -778,7 +778,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yhF-Pa-lQk">
-                                <rect key="frame" x="0.0" y="150.66666666666669" width="393" height="633.33333333333326"/>
+                                <rect key="frame" x="0.0" y="150.66666666666669" width="393" height="633.33333333333348"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QlT-Cw-HBc">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="885.66666666666663"/>
@@ -852,6 +852,9 @@
                                                         </constraints>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <connections>
+                                                            <action selector="applyPromocodeDidTapped:" destination="f9R-UR-r1C" eventType="touchUpInside" id="bol-w7-dXJ"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -889,7 +892,7 @@
                                                 <rect key="frame" x="24" y="266.66666666666663" width="345" height="48"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saleem Raza- 142 Block D, Noida" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JF3-Vq-yqE">
-                                                        <rect key="frame" x="20" y="14.333333333333373" width="225" height="19.666666666666664"/>
+                                                        <rect key="frame" x="20" y="14.333333333333373" width="231" height="19.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -908,6 +911,9 @@
                                                         </constraints>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <connections>
+                                                            <action selector="deliveryAddressAction:" destination="f9R-UR-r1C" eventType="touchUpInside" id="fhf-Hb-aoF"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -918,6 +924,7 @@
                                                     <constraint firstItem="JF3-Vq-yqE" firstAttribute="centerY" secondItem="9Qo-U4-TR5" secondAttribute="centerY" id="QYP-PK-ihk"/>
                                                     <constraint firstItem="YOy-R2-FY1" firstAttribute="centerY" secondItem="JF3-Vq-yqE" secondAttribute="centerY" id="fLs-ee-iRM"/>
                                                     <constraint firstAttribute="trailing" secondItem="DIZ-Vl-ly0" secondAttribute="trailing" id="fnc-C7-Ofw"/>
+                                                    <constraint firstItem="YOy-R2-FY1" firstAttribute="leading" secondItem="JF3-Vq-yqE" secondAttribute="trailing" constant="15" id="hCg-gL-b6F"/>
                                                     <constraint firstItem="DIZ-Vl-ly0" firstAttribute="top" secondItem="9Qo-U4-TR5" secondAttribute="top" id="jzM-h0-v7B"/>
                                                     <constraint firstAttribute="trailing" secondItem="YOy-R2-FY1" secondAttribute="trailing" constant="10" id="wkS-DL-k67"/>
                                                 </constraints>
@@ -966,13 +973,13 @@
                                                                 <rect key="frame" x="0.0" y="34.666666666666629" width="321" height="19.666666666666671"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Discount on MRP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9LP-Qt-wTd">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="271.33333333333331" height="19.666666666666668"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="115.33333333333333" height="19.666666666666668"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="KD 39" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2A8-98-WAT">
-                                                                        <rect key="frame" x="281.33333333333331" y="0.0" width="39.666666666666686" height="19.666666666666668"/>
+                                                                        <rect key="frame" x="125.33333333333336" y="0.0" width="195.66666666666663" height="19.666666666666668"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                         <color key="textColor" name="E80B26"/>
                                                                         <nil key="highlightedColor"/>
@@ -1124,6 +1131,9 @@
                                                                         <real key="value" value="5"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="placeOrderDidTapped:" destination="f9R-UR-r1C" eventType="touchUpInside" id="qGi-P6-JYo"/>
+                                                                </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place Order" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2M-g1-acb">
                                                                 <rect key="frame" x="40.333333333333336" y="9.3333333333332593" width="82.333333333333314" height="19.666666666666671"/>
@@ -1185,7 +1195,7 @@
                                         </constraints>
                                     </view>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Result found " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="or2-jE-djv">
-                                        <rect key="frame" x="131.33333333333337" y="289" width="130.66666666666663" height="22.666666666666686"/>
+                                        <rect key="frame" x="131.33333333333337" y="541.33333333333337" width="130.66666666666663" height="22.666666666666629"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1217,6 +1227,7 @@
                     </view>
                     <connections>
                         <outlet property="actualPriceLAbel" destination="5hT-ZT-fti" id="qRn-BY-B4g"/>
+                        <outlet property="addressLabel" destination="JF3-Vq-yqE" id="jqG-3M-OYZ"/>
                         <outlet property="bagDetailsView" destination="QlT-Cw-HBc" id="20G-9c-hnu"/>
                         <outlet property="bagTableView" destination="cg1-Qi-044" id="2wH-Zi-fXz"/>
                         <outlet property="bagTableViewHeightConstraint" destination="nod-6D-kXq" id="sJM-5x-EBX"/>
@@ -1224,6 +1235,7 @@
                         <outlet property="dricountOnMRP" destination="2A8-98-WAT" id="3nw-cx-8SZ"/>
                         <outlet property="finalPriceLabel" destination="SOX-7c-xkp" id="q1l-kK-md0"/>
                         <outlet property="noDataFoundLabel" destination="or2-jE-djv" id="wYE-EQ-FD0"/>
+                        <outlet property="promocodeLabel" destination="b89-rm-T2W" id="lvW-Rv-FfP"/>
                         <outlet property="saveAmountLAbel" destination="NYK-EG-Ywd" id="0yf-J4-cQf"/>
                         <outlet property="shippingFeeLabel" destination="WhP-ia-jTh" id="TPx-t0-MgR"/>
                         <outlet property="taxLabel" destination="Ca0-xr-1hN" id="hAy-aP-UT4"/>
@@ -1364,6 +1376,9 @@
                                                                                         <real key="value" value="1"/>
                                                                                     </userDefinedRuntimeAttribute>
                                                                                 </userDefinedRuntimeAttributes>
+                                                                                <connections>
+                                                                                    <action selector="giftCardsDidTapped:" destination="Lgj-Mf-ic7" eventType="touchUpInside" id="fka-XH-StI"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gift Cards" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjh-Dj-suT">
                                                                                 <rect key="frame" x="35.333333333333329" y="10.666666666666659" width="80.999999999999986" height="22.666666666666671"/>

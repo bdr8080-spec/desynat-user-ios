@@ -36,6 +36,8 @@ class RegisterationSuccessViewController: UIViewController {
             descriptionLabel.text = "Mobile Number Changed\nsuccessfully !"
         case .changeEmailAddress:
             descriptionLabel.text = "Email Address Changed\nsuccessfully !"
+        case .giftCardPurchased:
+          descriptionLabel.text = "Gift card purchased\nsuccessfully!"
         }
     }
 
@@ -47,4 +49,5 @@ enum ComingReasonAtRegisterationSuccess {
     case changePassword
     case changeMobileNumber
     case changeEmailAddress
+    case giftCardPurchased
 }
