@@ -86,7 +86,7 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Your Password" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fqc-he-0Wk">
-                                                                <rect key="frame" x="20" y="14.333333333333345" width="164" height="19.666666666666671"/>
+                                                                <rect key="frame" x="20" y="14.333333333333345" width="164" height="19.666666666666664"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -1435,7 +1435,7 @@ want to continue with</string>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add New Address" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJP-2v-pPD">
-                                        <rect key="frame" x="132" y="14.333333333333345" width="124.33333333333331" height="19.666666666666671"/>
+                                        <rect key="frame" x="132" y="14.333333333333345" width="124.33333333333331" height="19.666666666666664"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                         <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1635,22 +1635,22 @@ want to continue with</string>
                                                                         <rect key="frame" x="0.0" y="25" width="315" height="50"/>
                                                                         <subviews>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ifg-9e-EWu">
-                                                                                <rect key="frame" x="15" y="5" width="68" height="40"/>
+                                                                                <rect key="frame" x="15" y="5" width="70" height="40"/>
                                                                                 <subviews>
-                                                                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+965" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="qTe-us-Otl">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="36" height="40"/>
+                                                                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+965" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="qTe-us-Otl">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="39" height="40"/>
                                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                         <textInputTraits key="textInputTraits"/>
                                                                                     </textField>
                                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="country" translatesAutoresizingMaskIntoConstraints="NO" id="tgP-kd-ft1">
-                                                                                        <rect key="frame" x="38" y="5" width="30" height="30"/>
+                                                                                        <rect key="frame" x="40" y="5" width="30" height="30"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="width" secondItem="tgP-kd-ft1" secondAttribute="height" id="avd-Og-geq"/>
                                                                                             <constraint firstAttribute="height" constant="30" id="wfy-ti-c5n"/>
                                                                                         </constraints>
                                                                                     </imageView>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eHS-cx-WgD">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="68" height="40"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="70" height="40"/>
                                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                                         <connections>
                                                                                             <action selector="countyrCodeDidTapped:" destination="QjL-4C-ILX" eventType="touchUpInside" id="yJA-rZ-VRU"/>
@@ -1661,19 +1661,19 @@ want to continue with</string>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="bottom" secondItem="eHS-cx-WgD" secondAttribute="bottom" id="4VL-fP-Zdo"/>
                                                                                     <constraint firstItem="qTe-us-Otl" firstAttribute="leading" secondItem="Ifg-9e-EWu" secondAttribute="leading" id="EnO-ev-s04"/>
-                                                                                    <constraint firstItem="tgP-kd-ft1" firstAttribute="leading" secondItem="qTe-us-Otl" secondAttribute="trailing" constant="2" id="LNw-fv-pPo"/>
+                                                                                    <constraint firstItem="tgP-kd-ft1" firstAttribute="leading" secondItem="qTe-us-Otl" secondAttribute="trailing" constant="1" id="LNw-fv-pPo"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="tgP-kd-ft1" secondAttribute="trailing" id="NVc-aD-5cs"/>
                                                                                     <constraint firstItem="eHS-cx-WgD" firstAttribute="leading" secondItem="Ifg-9e-EWu" secondAttribute="leading" id="bnx-XU-P7R"/>
                                                                                     <constraint firstItem="eHS-cx-WgD" firstAttribute="top" secondItem="Ifg-9e-EWu" secondAttribute="top" id="dto-bN-G7r"/>
                                                                                     <constraint firstAttribute="bottom" secondItem="qTe-us-Otl" secondAttribute="bottom" id="ekG-50-4VS"/>
                                                                                     <constraint firstItem="tgP-kd-ft1" firstAttribute="centerY" secondItem="Ifg-9e-EWu" secondAttribute="centerY" id="ir1-hA-xb1"/>
                                                                                     <constraint firstItem="qTe-us-Otl" firstAttribute="top" secondItem="Ifg-9e-EWu" secondAttribute="top" id="mTl-0w-ip8"/>
-                                                                                    <constraint firstAttribute="width" constant="68" id="oSr-LT-Jab"/>
+                                                                                    <constraint firstAttribute="width" constant="70" id="oSr-LT-Jab"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="eHS-cx-WgD" secondAttribute="trailing" id="qlS-nv-cXC"/>
                                                                                 </constraints>
                                                                             </view>
                                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile No." textAlignment="natural" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="eO0-AA-Mbo">
-                                                                                <rect key="frame" x="93" y="5" width="202" height="40"/>
+                                                                                <rect key="frame" x="95" y="5" width="200" height="40"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                                                             </textField>

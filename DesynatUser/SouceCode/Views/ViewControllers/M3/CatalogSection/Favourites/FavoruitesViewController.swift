@@ -42,7 +42,6 @@ class FavoruitesViewController: UIViewController {
   
   @IBAction func productDidTapped(_ sender: Any) {
     showingProducts = true
-            
             productButtonOutlet.setImage(UIImage(named: "btnGradient"), for: .normal)
             productTitleLabel.textColor = .white
             

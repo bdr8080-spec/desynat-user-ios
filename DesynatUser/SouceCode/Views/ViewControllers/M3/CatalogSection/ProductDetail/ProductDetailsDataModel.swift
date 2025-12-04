@@ -28,6 +28,7 @@ struct ProductDetailsDataModel: Codable {
     let category: Category?
   let addtocart: Addtocart?
     let subcategory, brand: Brand?
+  let store: Store?
     let productSpecifications: [ProductSpecification]?
     let productVariants: [ProductVariant]?
 
@@ -63,6 +64,7 @@ struct ProductDetailsDataModel: Codable {
         case wishlist, category, subcategory, brand
         case productSpecifications = "product_specifications"
         case productVariants = "product_variants"
+      case store = "store"
     }
 }
 

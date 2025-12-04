@@ -90,7 +90,7 @@ class ProductDetailViewController: UIViewController {
   
   private lazy var viewModel = ProductDetailsViewModel(hostVC: self)
   var productId: Int? = 0
-  var storeName: String? = ""
+//  var storeName: String? = ""
   private var selectedColourIndex = 0
   private var selectedSizeIndex = 0
   private var checkDelivery: [CheckDeliveryModel] = [CheckDeliveryModel(image: "calender", title: "Get it by 24/12/2024"),
@@ -226,17 +226,18 @@ class ProductDetailViewController: UIViewController {
   
   func prepareVariantData() {
     guard let variants = productDetails?.productVariants else { return }
-    let store = storeName?.trimmed()
-    let productName = productDetails?.productNameEn ?? ""
-    let brandName = productDetails?.brand?.nameEnglish ?? ""
-    
-    if let store, !store.isEmpty {
-      pagetitleLabel.text = store
-    } else if !productName.isEmpty {
-      pagetitleLabel.text = productName
-    } else {
-      pagetitleLabel.text = brandName
-    }
+//    let store = storeName?.trimmed()
+//    let productName = productDetails?.productNameEn ?? ""
+//    let brandName = productDetails?.brand?.nameEnglish ?? ""
+    let storeName = productDetails?.store?.storeName ?? productDetails?.productNameEn ?? ""
+    pagetitleLabel.text = storeName
+//    if let store, !store.isEmpty {
+//      pagetitleLabel.text = store
+//    } else if !productName.isEmpty {
+//      pagetitleLabel.text = productName
+//    } else {
+//      pagetitleLabel.text = brandName
+//    }
     
     productNameLabel.text = productDetails?.productNameEn
     if productDetails?.brand?.nameEnglish == "Other" {

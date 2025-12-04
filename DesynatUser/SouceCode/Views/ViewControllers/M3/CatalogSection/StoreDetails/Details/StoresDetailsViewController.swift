@@ -373,7 +373,7 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
     case storesCollectionView:
       let nextVC = ProductDetailViewController.instantiate(fromAppStoryboard: .Catalog)
       nextVC.productId = viewModel.singleStoresSection?.allProduct?.data?[indexPath.row].id
-      nextVC.storeName = pageTitleLabel.text?.trimmed()
+//      nextVC.storeName = pageTitleLabel.text?.trimmed()
       self.navigationController?.pushViewController(nextVC, animated: true)
     default:
       break

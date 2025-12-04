@@ -37,11 +37,11 @@ class AddAddressViewController: UIViewController {
   private lazy var viewModel = AddaddressViewModel(hostVC: self)
   private var dropdown: CustomDropdown?
   private var overlayView: UIView?
-  private var selectedCountry: GetAllUserCountryModel? {
-      didSet {
-          updateCountryCodeField()
-      }
-  }
+//  private var selectedCountry: GetAllUserCountryModel? {
+//      didSet {
+//          updateCountryCodeField()
+//      }
+//  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -65,28 +65,28 @@ class AddAddressViewController: UIViewController {
     }
   }
   
-  private func updateCountryCodeField() {
-      guard let country = selectedCountry else { return }
-      
-      countryCodeTF.text = country.dialCode
-      
-      // Optional: Show country name next to code or in another field
-      // countryNameTF.text = country.name
-      
-//      if let flagURLString = country.flag, let url = URL(string: flagURLString) {
-//          let flagView = UIImageView()
-//          flagView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "flag.fill"))
-//          flagView.contentMode = .scaleAspectFit
-//          flagView.frame = CGRect(x: 0, y: 0, width: 30, height: 20)
-//          
-//          let container = UIView(frame: CGRect(x: 0, y: 0, width: 45, height: 30))
-//          container.addSubview(flagView)
-//          flagView.center = container.center
-//          
-//          countryCodeTF.leftView = container
-//          countryCodeTF.leftViewMode = .always
-//      }
-  }
+//  private func updateCountryCodeField() {
+//      guard let country = selectedCountry else { return }
+//      
+//      countryCodeTF.text = country.dialCode
+//      
+//      // Optional: Show country name next to code or in another field
+//      // countryNameTF.text = country.name
+//      
+////      if let flagURLString = country.flag, let url = URL(string: flagURLString) {
+////          let flagView = UIImageView()
+////          flagView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "flag.fill"))
+////          flagView.contentMode = .scaleAspectFit
+////          flagView.frame = CGRect(x: 0, y: 0, width: 30, height: 20)
+////          
+////          let container = UIView(frame: CGRect(x: 0, y: 0, width: 45, height: 30))
+////          container.addSubview(flagView)
+////          flagView.center = container.center
+////          
+////          countryCodeTF.leftView = container
+////          countryCodeTF.leftViewMode = .always
+////      }
+//  }
   
   @IBAction func officeDidTapped(_ sender: Any) {
     officeLabel.textColor = UIColor.darkBrown
@@ -164,7 +164,20 @@ class AddAddressViewController: UIViewController {
   
   
   @IBAction func countyrCodeDidTapped(_ sender: UIButton) {
-    showCountryCodeDropdown(anchorView: sender)
+//    showCountryCodeDropdown(anchorView: sender)
+    let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
+        let name = country.name ?? ""
+        let dialCode = country.dialCode ?? ""
+        let flag = country.flag1 ?? "🇰🇼"
+        return "\(flag)  \(name) (\(dialCode))"
+    }
+
+    kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+        let selectedCountry = self.viewModel.getAllUSerCountryList[index]
+        let code = selectedCountry.dialCode ?? "+965"
+        self.countryCodeTF.text = code
+//        self.selectedCountry = code
+    }
   }
   
   @IBAction func addDidTapped(_ sender: Any) {
@@ -198,65 +211,65 @@ class AddAddressViewController: UIViewController {
     }
   }
   
-  private func showCountryCodeDropdown(anchorView: UIView) {
-      dismissDropdown()
-      
-      guard !viewModel.getAllUSerCountryList.isEmpty else {
-          print("No countries loaded yet")
-          return
-      }
-      
-      // Overlay
-      let overlay = UIView()
-      overlay.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-      view.addSubview(overlay)
-      overlay.fillSuperview()
-      overlay.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissDropdown)))
-      
-      // Dropdown
-      let dropdown = CustomDropdown()
-      dropdown.countries = viewModel.getAllUSerCountryList
-      
-      dropdown.onSelect = { [weak self] index in
-          guard let self = self else { return }
-          self.selectedCountry = self.viewModel.getAllUSerCountryList[index]
-          self.dismissDropdown()
-      }
-      
-      view.addSubview(dropdown)
-      dropdown.translatesAutoresizingMaskIntoConstraints = false
-      
-      // MARK: - THIS IS THE MAGIC - Full height to bottom
-      NSLayoutConstraint.activate([
-          dropdown.topAnchor.constraint(equalTo: anchorView.bottomAnchor, constant: 12),
-          dropdown.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-          dropdown.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-          
-          // This makes it grow down to bottom of screen (safe area respected)
-          dropdown.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
-      ])
-      
-      // Optional: Set a reasonable min height so it doesn't look weird with few items
-      dropdown.heightAnchor.constraint(greaterThanOrEqualToConstant: 600).isActive = true
-      
-      // Animation
-      dropdown.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-      dropdown.alpha = 0
-      dropdown.layer.cornerRadius = 16
-      
-      UIView.animate(withDuration: 0.4,
-                     delay: 0,
-                     usingSpringWithDamping: 0.85,
-                     initialSpringVelocity: 0.6,
-                     options: .curveEaseOut) {
-          overlay.alpha = 1
-          dropdown.alpha = 1
-          dropdown.transform = .identity
-      }
-      
-      self.dropdown = dropdown
-      self.overlayView = overlay
-  }
+//  private func showCountryCodeDropdown(anchorView: UIView) {
+//      dismissDropdown()
+//      
+//      guard !viewModel.getAllUSerCountryList.isEmpty else {
+//          print("No countries loaded yet")
+//          return
+//      }
+//      
+//      // Overlay
+//      let overlay = UIView()
+//      overlay.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+//      view.addSubview(overlay)
+//      overlay.fillSuperview()
+//      overlay.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissDropdown)))
+//      
+//      // Dropdown
+//      let dropdown = CustomDropdown()
+//      dropdown.countries = viewModel.getAllUSerCountryList
+//      
+//      dropdown.onSelect = { [weak self] index in
+//          guard let self = self else { return }
+//          self.selectedCountry = self.viewModel.getAllUSerCountryList[index]
+//          self.dismissDropdown()
+//      }
+//      
+//      view.addSubview(dropdown)
+//      dropdown.translatesAutoresizingMaskIntoConstraints = false
+//      
+//      // MARK: - THIS IS THE MAGIC - Full height to bottom
+//      NSLayoutConstraint.activate([
+//          dropdown.topAnchor.constraint(equalTo: anchorView.bottomAnchor, constant: 12),
+//          dropdown.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+//          dropdown.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+//          
+//          // This makes it grow down to bottom of screen (safe area respected)
+//          dropdown.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+//      ])
+//      
+//      // Optional: Set a reasonable min height so it doesn't look weird with few items
+//      dropdown.heightAnchor.constraint(greaterThanOrEqualToConstant: 600).isActive = true
+//      
+//      // Animation
+//      dropdown.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+//      dropdown.alpha = 0
+//      dropdown.layer.cornerRadius = 16
+//      
+//      UIView.animate(withDuration: 0.4,
+//                     delay: 0,
+//                     usingSpringWithDamping: 0.85,
+//                     initialSpringVelocity: 0.6,
+//                     options: .curveEaseOut) {
+//          overlay.alpha = 1
+//          dropdown.alpha = 1
+//          dropdown.transform = .identity
+//      }
+//      
+//      self.dropdown = dropdown
+//      self.overlayView = overlay
+//  }
   
 //  private func showCountryCodeDropdown(anchorView: UIView) {
 //      dismissDropdown()

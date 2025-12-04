@@ -11,7 +11,8 @@ import UIKit
 
 class SignupViewModel: NSObject {
     private var hostVC: SignupViewController
-    var countryList:[CountryModel] = []
+  var getAllUSerCountryList:[GetAllUserCountryModel] = []
+  
     
     init(hostVC: SignupViewController) {
         self.hostVC = hostVC
@@ -113,9 +114,9 @@ class SignupViewModel: NSObject {
     }
     
     
-    func countryListApi(){
-        WebService.sharedInstance.countryListService { list in
-            self.countryList = list
+  func getALlUserCountryListApi(){
+        WebService.sharedInstance.getAllUserscountryList { list in
+            self.getAllUSerCountryList = list
         }
     }
 }

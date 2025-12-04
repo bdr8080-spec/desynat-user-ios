@@ -18,12 +18,10 @@ class MyBagTableViewCell: UITableViewCell {
   @IBOutlet weak var shopMoreButtonOutlet: UIButton!
   @IBOutlet weak var detailsLabel: UILabel!
   @IBOutlet weak var productNameLabel: UILabel!
-  
   @IBOutlet weak var sellerNameLabel: UILabel!
   @IBOutlet weak var deliveryDateLabel: UILabel!
   @IBOutlet weak var returnavaiableLabel: UILabel!
   @IBOutlet weak var finalPriceLabel: UILabel!
-  
   @IBOutlet weak var actaulPriceLabel: CustomLabelFont!
   
   var onIncrement: (() -> Void)?

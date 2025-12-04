@@ -12,7 +12,7 @@ import UIKit
 class ForgotPasswordViewModel: NSObject {
     
     private var hostVC: ForgotPasswordViewController
-    var countryList:[CountryModel] = []
+  var getAllUSerCountryList:[GetAllUserCountryModel] = []
     
     init(hostVC: ForgotPasswordViewController) {
         self.hostVC = hostVC
@@ -77,9 +77,9 @@ class ForgotPasswordViewModel: NSObject {
         }
     }
     
-    func countryListApi(){
-        WebService.sharedInstance.countryListService { list in
-            self.countryList = list
+  func getALlUserCountryListApi(){
+        WebService.sharedInstance.getAllUserscountryList { list in
+            self.getAllUSerCountryList = list
         }
     }
 

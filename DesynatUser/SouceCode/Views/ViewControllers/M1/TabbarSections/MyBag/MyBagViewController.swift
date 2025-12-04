@@ -90,7 +90,6 @@ extension MyBagViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "MyBagTableViewCell", for: indexPath) as! MyBagTableViewCell
-    let data = viewModel.bagDetails?.cartData?[indexPath.row]
     if let data = viewModel.bagDetails?.cartData?[indexPath.row] {
       cell.configData(data: data)
     }
@@ -114,6 +113,13 @@ extension MyBagViewController: UITableViewDelegate, UITableViewDataSource {
       self?.viewModel.handleIncrementDecrement(cartID: cartID, type: "decrement", index: indexPath.row)
     }
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let nextVC = ProductDetailViewController.instantiate(fromAppStoryboard: .Catalog)
+    let productId = viewModel.bagDetails?.cartData?[indexPath.row].productID
+    nextVC.productId = productId
+    self.navigationController?.pushViewController(nextVC, animated: true)
   }
   
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

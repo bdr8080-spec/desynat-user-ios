@@ -21,6 +21,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      viewModel.getALlUserCountryListApi()
         countryCodeLabel.text = countryCode
         passwordTextField.isSecureTextEntry = true
         passwordTextField.delegate = self
@@ -80,24 +81,20 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func countryDidTapped(_ sender: UIButton) {
-        CommonUtils.openPicker(controller: self) { code, name, callingCode in
-            self.setUpCountryCode(code: callingCode)
-            self.countryCode = callingCode
-        }
-        
-//        let countryNames = viewModel.countryList.map { country -> String in
-//            let name = country.name ?? ""
-//            let dialCode = country.dialCode ?? ""
-//            let flag = country.flag ?? "🇰🇼"
-//            return "\(flag)  \(name) (\(dialCode))"
-//        }
-//
-//        kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
-//            let selectedCountry = self.viewModel.countryList[index]
-//            let code = selectedCountry.dialCode ?? "+965"
-//            self.countryCodeLabel.text = code
-//            self.countryCode = code
-//        }
+      let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
+          let name = country.name ?? ""
+          let dialCode = country.dialCode ?? ""
+          let flag = country.flag1 ?? "🇰🇼"
+          return "\(flag)  \(name) (\(dialCode))"
+      }
+
+      kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+          let selectedCountry = self.viewModel.getAllUSerCountryList[index]
+          let code = selectedCountry.dialCode ?? "+965"
+         
+        self.setUpCountryCode(code: code)
+          self.countryCode = code
+      }
     }
     
     func setUpCountryCode(code: String) {

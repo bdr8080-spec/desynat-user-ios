@@ -9,12 +9,14 @@ import UIKit
 
 class PlaceOrderPaymentMethodsViewController: UIViewController {
 
-    @IBOutlet weak var checkMarkImageView: UIImageView!
+  @IBOutlet weak var giftCardLabel: UILabel!
+  @IBOutlet weak var checkMarkImageView: UIImageView!
     @IBOutlet weak var paymnetTableView: UITableView! {
         didSet {
             paymnetTableView.registerCellFromNib(cellID: "PlaceOrderPaymentMethodsTableViewCell")
         }
     }
+    @IBOutlet weak var paymentTableHeightConstraint: NSLayoutConstraint!
 
     var slecetedPaymentId: Int? = 0
     var giftIsChecked: Bool = false
@@ -22,22 +24,45 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Enable dynamic row height
         paymnetTableView.rowHeight = UITableView.automaticDimension
         paymnetTableView.estimatedRowHeight = 150
         paymnetTableView.delegate = self
         paymnetTableView.dataSource = self
+        
+        DispatchQueue.main.async {
+            self.updatePaymentTableHeight()
+        }
     }
 
+  @IBAction func placeOrderDidTapped(_ sender: Any) {
+    let nextVC = OrderPlacedViewController.instantiate(fromAppStoryboard: .MyBag)
+    self.navigationController?.pushViewController(nextVC, animated: true)
+  }
+  
     @IBAction func backDidTapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 
     @IBAction func giftcheckmarkAction(_ sender: Any) {
-        giftIsChecked.toggle()
-        checkMarkImageView.isHidden = !giftIsChecked
+      let nextVC = UseGiftCardsViewController.instantiate(fromAppStoryboard: .MyBag)
+      nextVC.onRedeem = { [weak self] cardNumber, pin in
+              guard let self = self else { return }
+              print("Card Number: \(cardNumber), PIN: \(pin)")
+        giftCardLabel.text = cardNumber
+        checkMarkImageView.isHidden = false
+          }
+      self.navigationController?.pushViewController(nextVC, animated: true)
+//      giftIsChecked.toggle()
+//      checkMarkImageView.isHidden = !giftIsChecked
     }
+  
+  func updatePaymentTableHeight() {
+      self.paymnetTableView.layoutIfNeeded()
+      self.paymentTableHeightConstraint.constant = self.paymnetTableView.contentSize.height
+      self.view.layoutIfNeeded()
+  }
 }
+
 
 extension PlaceOrderPaymentMethodsViewController: UITableViewDelegate, UITableViewDataSource {
 
@@ -46,53 +71,81 @@ extension PlaceOrderPaymentMethodsViewController: UITableViewDelegate, UITableVi
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceOrderPaymentMethodsTableViewCell", for: indexPath) as! PlaceOrderPaymentMethodsTableViewCell
+        
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "PlaceOrderPaymentMethodsTableViewCell",
+            for: indexPath
+        ) as! PlaceOrderPaymentMethodsTableViewCell
+      cell.addCardDidTapped = { [weak self] in
+        guard let self = self else { return }
+        let nextVC = AddCardViewController.instantiate(fromAppStoryboard: .MyBag)
+        self.navigationController?.pushViewController(nextVC, animated: true)
+      }
+      
+      cell.onSetAsDefaultTapped = { [weak self] in
+          guard let self = self else { return }
+          // Call your API here
+      }
+        // Hide all by default
+        cell.descriptionStackView.isHidden = true
+        cell.checkboxStackView.isHidden = true
+        cell.descriptionCheckbox.isHidden = true
+        cell.cardsTableView.isHidden = true
+        cell.addNewCardView.isHidden = true
+        cell.cardsCount = 0
         
         // Set radio button
         cell.selecetdPaymentMethodButtonOutlet.setImage(
             (indexPath.row == slecetedPaymentId) ? UIImage(named: "radioSelected") : UIImage(named: "radioUnselected"),
             for: .normal
         )
-        
-        // Show/hide extra views only for the selected cell
+
+        // Only show for index 5 & 6
         if indexPath.row == slecetedPaymentId {
-            if slecetedPaymentId == 5 || slecetedPaymentId == 6 {
+            
+            if slecetedPaymentId == 5 {
+                // Show description + cards
+                cell.descriptionStackView.isHidden = false
+                cell.checkboxStackView.isHidden = false
+                cell.descriptionCheckbox.isHidden = false
+                
+                cell.cardsTableView.isHidden = false
+                cell.addNewCardView.isHidden = false
+                
+                cell.cardsCount = 2
+                cell.cardsTableView.reloadData()
+                cell.updateCardsTableViewHeight()
+                cell.fixStackViewLayout()
+            }
+            else if slecetedPaymentId == 6 {
+                // Show description only
                 cell.descriptionStackView.isHidden = false
                 cell.checkboxStackView.isHidden = false
                 
-                if slecetedPaymentId == 5 {
-                    cell.descriptionCheckbox.isHidden = false
-                    cell.cardsTableView.isHidden = false
-                    cell.addNewCardView.isHidden = false
-                    
-                    // Set number of cards and update nested table height
-                    cell.cardsCount = 2 // Replace with your dynamic card count
-                    cell.cardsTableView.reloadData()
-                    
-                } else { // slecetedPaymentId == 6
-                    cell.descriptionCheckbox.isHidden = true
-                    cell.cardsTableView.isHidden = true
-                    cell.addNewCardView.isHidden = true
-                    cell.cardsCount = 0
-                    cell.cardsTableView.reloadData()
-                }
+                cell.cardsCount = 0
+                cell.fixStackViewLayout()
             }
-        } else {
-            // Hide all extra views for unselected cells
-            cell.descriptionStackView.isHidden = true
-            cell.checkboxStackView.isHidden = true
-            cell.descriptionCheckbox.isHidden = true
-            cell.cardsTableView.isHidden = true
-            cell.addNewCardView.isHidden = true
-            cell.cardsCount = 0
-            cell.cardsTableView.reloadData()
         }
-        
+
+        // After layout update table height
+        DispatchQueue.main.async {
+            self.updatePaymentTableHeight()
+        }
+
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        slecetedPaymentId = indexPath.row
-        paymnetTableView.reloadData()
+      if slecetedPaymentId == indexPath.row {
+              return
+          }
+
+          // Otherwise update selection
+          slecetedPaymentId = indexPath.row
+          paymnetTableView.reloadData()
+
+          DispatchQueue.main.async {
+              self.updatePaymentTableHeight()
+          }
     }
 }

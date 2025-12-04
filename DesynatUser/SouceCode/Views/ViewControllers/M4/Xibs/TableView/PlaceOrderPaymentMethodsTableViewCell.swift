@@ -18,41 +18,67 @@ class PlaceOrderPaymentMethodsTableViewCell: UITableViewCell {
     @IBOutlet weak var cardsTableView: UITableView! {
         didSet {
             cardsTableView.registerCellFromNib(cellID: "CreditCardTableViewCell")
+            cardsTableView.rowHeight = 60
+            cardsTableView.separatorStyle = .none
         }
     }
-    
-    var selectedCardID: Int? = 0
-    
-    // Number of cards in the nested table view
+  var selectedCardID: Int = 0
+  var isDefaultSelected: Bool = false
+    // count of cards shown in nested tableView
     var cardsCount: Int = 0 {
-        didSet {
-            updateCardsTableViewHeight()
-        }
+        didSet { updateCardsTableViewHeight() }
     }
-
+  
+  var addCardDidTapped:(() -> Void)?
+  var onSetAsDefaultTapped: (() -> Void)?
+  
     override func awakeFromNib() {
         super.awakeFromNib()
         cardsTableView.delegate = self
         cardsTableView.dataSource = self
     }
 
-    @IBAction func addNewCardDidTapped(_ sender: Any) {
-        // Handle add new card action
-    }
-
-    // Update height of nested table view
+    // MARK: - Update nested table height
     func updateCardsTableViewHeight() {
-        let rowHeight: CGFloat = 60 // Replace with your actual row height
-        cardTableViewHeightConstarint.constant = rowHeight * CGFloat(cardsCount)
-        layoutIfNeeded()
+        DispatchQueue.main.async {
+            self.cardsTableView.layoutIfNeeded()
+            self.cardTableViewHeightConstarint.constant = self.cardsTableView.contentSize.height
+            self.layoutIfNeeded()
+        }
+    }
+  
+  
+  @IBAction func addCardDidTapped(_ sender: Any) {
+    addCardDidTapped?()
+  }
+  
+  @IBAction func setAsDefaultDidTapped(_ sender: Any) {
+    isDefaultSelected.toggle()
+        
+        // Immediately update the button image
+        let imageName = isDefaultSelected ? "selectedFilterCheckBox" : "unslectedCheckbox"
+        descriptionCheckbox.setImage(UIImage(named: imageName), for: .normal)
+        
+        // Call API if needed
+        onSetAsDefaultTapped?()
+  }
+  
+    // MARK: Fix stackView layout
+    func fixStackViewLayout() {
+        descriptionStackView.layoutIfNeeded()
+        checkboxStackView.layoutIfNeeded()
+        addNewCardView.layoutIfNeeded()
+        cardsTableView.layoutIfNeeded()
+        self.layoutIfNeeded()
     }
 }
 
+// MARK: - TableView delegate
 extension PlaceOrderPaymentMethodsTableViewCell: UITableViewDelegate, UITableViewDataSource {
   
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return cardsCount
-  }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cardsCount
+    }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "CreditCardTableViewCell", for: indexPath) as! CreditCardTableViewCell

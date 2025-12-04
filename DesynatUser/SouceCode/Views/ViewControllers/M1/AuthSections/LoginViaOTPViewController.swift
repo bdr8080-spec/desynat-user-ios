@@ -17,7 +17,6 @@ class LoginViaOTPViewController: UIViewController {
     
     private lazy var viewModel = LoginViaOTPViewModel(loginHostVC: self)
     var countryCode: String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
-//    var countryCode: String = "+965"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +25,7 @@ class LoginViaOTPViewController: UIViewController {
         viewCountryCode.isHidden = true
         self.txtFieldLeading.constant = -65
         emailMobileImageView.image = UIImage(named: "email")
-//        viewModel.countryListApi()
+        viewModel.getALlUserCountryListApi()
     }
     
     @IBAction func signupDidTapped(_ sender: Any) {
@@ -65,24 +64,20 @@ class LoginViaOTPViewController: UIViewController {
     }
     
     @IBAction func countryDidTapped(_ sender: UIButton) {
-        CommonUtils.openPicker(controller: self) { code, name, callingCode in
-            self.setUpCountryCode(code: callingCode)
-            self.countryCode = callingCode
-        }
-        
-//        let countryNames = viewModel.countryList.map { country -> String in
-//            let name = country.name ?? ""
-//            let dialCode = country.dialCode ?? ""
-//            let flag = country.flag ?? "🇰🇼"
-//            return "\(flag)  \(name) (\(dialCode))"
-//        }
-//
-//        kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
-//            let selectedCountry = self.viewModel.countryList[index]
-//            let code = selectedCountry.dialCode ?? "+965"
-//            self.countryCodeLabel.text = code
-//            self.countryCode = code
-//        }
+      let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
+          let name = country.name ?? ""
+          let dialCode = country.dialCode ?? ""
+          let flag = country.flag1 ?? "🇰🇼"
+          return "\(flag)  \(name) (\(dialCode))"
+      }
+
+      kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+          let selectedCountry = self.viewModel.getAllUSerCountryList[index]
+          let code = selectedCountry.dialCode ?? "+965"
+         
+        self.setUpCountryCode(code: code)
+          self.countryCode = code
+      }
     }
     
     func setUpCountryCode(code: String) {

@@ -10,7 +10,8 @@ import UIKit
 
 class ChangeMobileViewModel:NSObject{
     private var hostVC:ChangeMobileViewController
-    
+  var getAllUSerCountryList:[GetAllUserCountryModel] = []
+  
     init(hostVC: ChangeMobileViewController) {
         self.hostVC = hostVC
     }
@@ -81,6 +82,12 @@ class ChangeMobileViewModel:NSObject{
                 vc.phoneNumber = self.hostVC.txtEmail.text?.trimmed() ?? ""
             }
             self.hostVC.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+  
+  func getALlUserCountryListApi(){
+        WebService.sharedInstance.getAllUserscountryList { list in
+            self.getAllUSerCountryList = list
         }
     }
 }
