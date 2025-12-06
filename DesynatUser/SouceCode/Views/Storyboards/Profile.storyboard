@@ -86,7 +86,7 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Your Password" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fqc-he-0Wk">
-                                                                <rect key="frame" x="20" y="14.333333333333345" width="164" height="19.666666666666664"/>
+                                                                <rect key="frame" x="20" y="14.333333333333345" width="164" height="19.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -2183,7 +2183,7 @@ want to continue with</string>
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhZ-sp-xi4">
-                                                                <rect key="frame" x="42" y="14.333333333333373" width="103" height="19.666666666666671"/>
+                                                                <rect key="frame" x="42" y="14.333333333333373" width="103" height="19.666666666666664"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -2235,7 +2235,7 @@ want to continue with</string>
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Office" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mn0-Ra-ZIG">
-                                                                <rect key="frame" x="42" y="14.333333333333373" width="103" height="19.666666666666671"/>
+                                                                <rect key="frame" x="42" y="14.333333333333373" width="103" height="19.666666666666664"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -2520,7 +2520,7 @@ want to continue with</string>
                     </view>
                     <connections>
                         <outlet property="noDataLabel" destination="3Zx-aB-rno" id="f8e-LC-emF"/>
-                        <outlet property="searchTF" destination="10G-lv-H0i" id="t38-Ij-9P4"/>
+                        <outlet property="searchTF" destination="10G-lv-H0i" id="3iM-YC-uOZ"/>
                         <outlet property="tableView" destination="Uyr-i9-TrY" id="HsM-Bc-FDt"/>
                     </connections>
                 </viewController>
@@ -2573,13 +2573,13 @@ want to continue with</string>
                                     <constraint firstAttribute="bottom" secondItem="L3o-O1-q4R" secondAttribute="bottom" id="kdk-bl-p8a"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="o4q-XT-nFS">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="o4q-XT-nFS">
                                 <rect key="frame" x="24" y="178" width="345" height="200"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="LiK-5M-Krb"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="10" id="z5n-ep-Ymh">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="5" id="z5n-ep-Ymh">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -2591,7 +2591,7 @@ want to continue with</string>
                                     <outlet property="delegate" destination="LOp-bJ-3oK" id="uY6-eX-HNC"/>
                                 </connections>
                             </collectionView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cards" translatesAutoresizingMaskIntoConstraints="NO" id="nu4-oW-a5A" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nu4-oW-a5A" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                 <rect key="frame" x="24" y="403" width="345" height="167"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="167" id="eTy-AQ-t5u"/>
@@ -2661,6 +2661,8 @@ want to continue with</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="heightOfCollectionView" destination="LiK-5M-Krb" id="rSc-wp-FBe"/>
+                        <outlet property="mainImageView" destination="nu4-oW-a5A" id="fsM-Np-S03"/>
                         <outlet property="occassionCollectionView" destination="o4q-XT-nFS" id="X4T-EA-q6Q"/>
                     </connections>
                 </viewController>
@@ -2737,7 +2739,7 @@ want to continue with</string>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="45" id="GyG-1q-Npi"/>
                                                                 </constraints>
-                                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="agz-zI-bCQ">
+                                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="agz-zI-bCQ">
                                                                     <size key="itemSize" width="128" height="128"/>
                                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -2755,7 +2757,7 @@ want to continue with</string>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZbZ-Hg-Xup">
                                                                         <rect key="frame" x="20" y="5" width="304" height="40"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
-                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                                     </textField>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2963,7 +2965,7 @@ want to continue with</string>
                                                                         <rect key="frame" x="0.0" y="18" width="344" height="82"/>
                                                                         <subviews>
                                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="NJL-7q-wtC">
-                                                                                <rect key="frame" x="20" y="5" width="304" height="72"/>
+                                                                                <rect key="frame" x="18" y="5" width="308" height="72"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <color key="textColor" systemColor="labelColor"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -2976,9 +2978,9 @@ want to continue with</string>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstItem="NJL-7q-wtC" firstAttribute="top" secondItem="nfP-1K-6tR" secondAttribute="top" constant="5" id="CR5-S4-86E"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="NJL-7q-wtC" secondAttribute="trailing" constant="20" id="KDl-vT-Jr1"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="NJL-7q-wtC" secondAttribute="trailing" constant="18" id="KDl-vT-Jr1"/>
                                                                             <constraint firstAttribute="bottom" secondItem="NJL-7q-wtC" secondAttribute="bottom" constant="5" id="LQo-Di-7Lh"/>
-                                                                            <constraint firstItem="NJL-7q-wtC" firstAttribute="leading" secondItem="nfP-1K-6tR" secondAttribute="leading" constant="20" id="Yij-21-Oc6"/>
+                                                                            <constraint firstItem="NJL-7q-wtC" firstAttribute="leading" secondItem="nfP-1K-6tR" secondAttribute="leading" constant="18" id="Yij-21-Oc6"/>
                                                                             <constraint firstAttribute="height" constant="82" id="r7p-cf-agV"/>
                                                                         </constraints>
                                                                         <userDefinedRuntimeAttributes>
@@ -3024,7 +3026,7 @@ want to continue with</string>
                                                                         <rect key="frame" x="0.0" y="18" width="344" height="82"/>
                                                                         <subviews>
                                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CFa-fq-ouU">
-                                                                                <rect key="frame" x="20" y="5" width="304" height="72"/>
+                                                                                <rect key="frame" x="18" y="5" width="308" height="72"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <color key="textColor" systemColor="labelColor"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -3037,8 +3039,8 @@ want to continue with</string>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstItem="CFa-fq-ouU" firstAttribute="top" secondItem="RPd-nj-3fU" secondAttribute="top" constant="5" id="HdR-5M-n3u"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="CFa-fq-ouU" secondAttribute="trailing" constant="20" id="fkD-DG-Ah5"/>
-                                                                            <constraint firstItem="CFa-fq-ouU" firstAttribute="leading" secondItem="RPd-nj-3fU" secondAttribute="leading" constant="20" id="mOH-nL-NbI"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="CFa-fq-ouU" secondAttribute="trailing" constant="18" id="fkD-DG-Ah5"/>
+                                                                            <constraint firstItem="CFa-fq-ouU" firstAttribute="leading" secondItem="RPd-nj-3fU" secondAttribute="leading" constant="18" id="mOH-nL-NbI"/>
                                                                             <constraint firstAttribute="bottom" secondItem="CFa-fq-ouU" secondAttribute="bottom" constant="5" id="qZc-bQ-Flu"/>
                                                                             <constraint firstAttribute="height" constant="82" id="rZR-yH-x71"/>
                                                                         </constraints>
@@ -3153,7 +3155,13 @@ want to continue with</string>
                     </view>
                     <connections>
                         <outlet property="amountCollectioView" destination="3G0-6h-NdL" id="MeJ-FW-RBQ"/>
+                        <outlet property="emailTextField" destination="DyR-d2-d8G" id="e4v-a5-blS"/>
+                        <outlet property="enterAmountTF" destination="ZbZ-Hg-Xup" id="vk8-ot-Czo"/>
                         <outlet property="enterAmountView" destination="SYz-du-xFd" id="XKJ-SE-JA1"/>
+                        <outlet property="fromNameTextField" destination="qmo-IL-PzP" id="yA0-B1-Wqw"/>
+                        <outlet property="nameTextField" destination="som-cH-hmE" id="1U7-14-VO0"/>
+                        <outlet property="noteTextView" destination="CFa-fq-ouU" id="VUH-fZ-dO4"/>
+                        <outlet property="wishMessageTextView" destination="NJL-7q-wtC" id="1e5-GQ-5vv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rU3-1b-pfq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3781,10 +3789,10 @@ want to continue with</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -25,7 +25,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y72-dz-5FB" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="456" height="198"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cards" translatesAutoresizingMaskIntoConstraints="NO" id="Bxg-8Q-LnY">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bxg-8Q-LnY">
                                 <rect key="frame" x="0.0" y="0.0" width="456" height="136"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="136" id="2jd-cE-e8a"/>
@@ -103,11 +103,17 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="cardTypeLabel" destination="Qat-QN-tSJ" id="lUS-cj-YKC"/>
+                <outlet property="dateLabel" destination="y6i-CB-kJ5" id="5oZ-dP-z05"/>
+                <outlet property="mainImageView" destination="Bxg-8Q-LnY" id="GX5-wH-ASm"/>
+                <outlet property="nameLabel" destination="Zu5-6y-0ig" id="Y8K-4Z-Czo"/>
+                <outlet property="priceLabel" destination="Bq2-55-or1" id="Gt1-R6-RsC"/>
+            </connections>
             <point key="canvasLocation" x="386" y="-4"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="cards" width="343" height="136"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

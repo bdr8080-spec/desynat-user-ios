@@ -38,8 +38,7 @@ enum NetworkEndPoint: String {
     case getCategory                        = "api/user/category"
     case changeMobileNumber                 = "api/user/change-mobile-number"
     case userVerifyOtp                      = "api/user/verify-otp"
-    
-//    case getCategory                        = "api/user/category"
+  
     //M3
   case categoryWiseStoreList                      = "api/user/category-Wise-Store-List"
   case singleStoreDetails                      = "api/user/single-store-details"
@@ -58,6 +57,11 @@ enum NetworkEndPoint: String {
   case getAllColors                      = "api/all-color"
   case getAllSizes                     = "api/all-size"
     
+  //M4
+  case getAllCards                     = "api/user/view-gift-cards"
+  case getAllOccassion                 = "api/user/gift-card-occasion-list"
+  
+  
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"
     }

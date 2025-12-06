@@ -96,7 +96,7 @@
                                         <rect key="frame" x="0.0" y="174" width="301" height="33"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ Add new card" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H63-JP-xND">
-                                                <rect key="frame" x="8" y="10" width="111" height="13"/>
+                                                <rect key="frame" x="8" y="10" width="273" height="13"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -112,6 +112,7 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="H63-JP-xND" secondAttribute="trailing" constant="20" id="1eb-qV-Bho"/>
                                             <constraint firstItem="H63-JP-xND" firstAttribute="centerY" secondItem="XDt-bZ-ghH" secondAttribute="centerY" id="3Cl-t4-BIo"/>
                                             <constraint firstItem="I2J-XE-Xrc" firstAttribute="leading" secondItem="XDt-bZ-ghH" secondAttribute="leading" id="4Pi-zn-1uc"/>
                                             <constraint firstItem="H63-JP-xND" firstAttribute="top" secondItem="XDt-bZ-ghH" secondAttribute="top" constant="10" id="EZV-eK-PyZ"/>

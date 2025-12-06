@@ -502,6 +502,38 @@ extension WebService {
           }
       }
   }
+  
+  func getAllGiftCardsList(param: [String: Any], completion:@escaping (_ user:[GiftCardsListDataModel])-> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI:.endpoint(.getAllCards), requestMethod: .post,requestParams: param, requestModel:[GiftCardsListDataModel].self) { result, code in
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
+  }
+  
+  func getAllGiftCardsOccassionList(completion:@escaping (_ user:[GiftCardsDataModel])-> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI:.endpoint(.getAllOccassion), requestMethod: .get, requestModel:[GiftCardsDataModel].self) { result, code in
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
+  }
     
 }
 

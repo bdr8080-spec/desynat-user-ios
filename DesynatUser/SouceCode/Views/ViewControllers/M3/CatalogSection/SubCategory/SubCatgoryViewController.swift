@@ -32,7 +32,6 @@ class SubCatgoryViewController: UIViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
         searchTF.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
         requestPermissions()
     }
