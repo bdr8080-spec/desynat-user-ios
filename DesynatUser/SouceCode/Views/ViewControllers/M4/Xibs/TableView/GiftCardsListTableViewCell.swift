@@ -34,7 +34,7 @@ class GiftCardsListTableViewCell: UITableViewCell {
     
     nameLabel.text = data?.receiverName
     cardTypeLabel.text = data?.giftDetails?.nameEnglish
-    priceLabel.text = data?.amount
+    priceLabel.text = "\(data?.amount ?? "") KD"
     dateLabel.text = formatDate(data?.createdAt ?? "")
   }
   

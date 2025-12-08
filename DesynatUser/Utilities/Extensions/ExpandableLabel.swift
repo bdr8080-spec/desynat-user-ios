@@ -57,7 +57,9 @@ extension UILabel {
             numberOfLines = 0
         } else {
             // Check if text actually exceeds lineLimit
-            let maxSize = CGSize(width: bounds.width, height: .greatestFiniteMagnitude)
+          self.layoutIfNeeded()     // 👈 Ensure width is valid
+          let maxSize = CGSize(width: self.frame.width, height: .greatestFiniteMagnitude)
+
             let neededHeight = fullAttributed.boundingRect(
                 with: maxSize,
                 options: [.usesLineFragmentOrigin, .usesFontLeading],

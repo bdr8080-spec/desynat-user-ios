@@ -53,9 +53,9 @@ extension GiftCardsListViewController: UITableViewDelegate, UITableViewDataSourc
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let nextVC = AddedCardDetailsViewController.instantiate(fromAppStoryboard: .Profile)
+    nextVC.giftCardDetails = viewModel.giftsList?[indexPath.row]
     self.navigationController?.pushViewController(nextVC, animated: true)
   }
-  
 }
 
 extension GiftCardsListViewController: UITextFieldDelegate {

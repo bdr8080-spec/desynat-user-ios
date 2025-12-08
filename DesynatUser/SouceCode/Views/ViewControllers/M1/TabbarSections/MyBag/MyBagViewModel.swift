@@ -9,46 +9,65 @@ import Foundation
 import UIKit
 
 class MyBagViewModel: NSObject {
-    
-    private var hostVC: MyBagViewController
-    var bagDetails: MyCartDetailsDataModel?
-    
-    init(hostVC: MyBagViewController) {
-        self.hostVC = hostVC
+  
+  private var hostVC: MyBagViewController
+  var bagDetails: MyCartDetailsDataModel?
+  
+  init(hostVC: MyBagViewController) {
+    self.hostVC = hostVC
+  }
+  
+  func getBagDetailsApi(){
+    WebService.sharedInstance.gteBagDetails { [self] list in
+      self.bagDetails = list
+      self.hostVC.bagTableView.reloadData()
+      self.hostVC.condifData(data: list)
+      self.hostVC.noDataFoundLabel.isHidden = !(self.bagDetails?.cartData?.isEmpty ?? true)
+      self.hostVC.bagDetailsView.isHidden = self.bagDetails?.cartData?.isEmpty ?? true
     }
-    
-    func gteBagDetailsApi(){
-        WebService.sharedInstance.gteBagDetails { [self] list in
-            self.bagDetails = list
-            self.hostVC.bagTableView.reloadData()
-            self.hostVC.condifData(data: list)
-            self.hostVC.noDataFoundLabel.isHidden = !(self.bagDetails?.cartData?.isEmpty ?? true)
-            self.hostVC.bagDetailsView.isHidden = self.bagDetails?.cartData?.isEmpty ?? true
+  }
+  
+  func handleIncrementDecrement(cartID: Int, type: String, index: Int) {
+    let param: [String: Any] = [
+      "cart_id": "\(cartID)",
+      "type": type
+    ]
+    WebService.sharedInstance.incrementDecrement(param: param) { [weak self] list in
+      guard let self = self else { return }
+      if type == "increment" {
+        self.bagDetails?.cartData?[index].quantity += 1
+      } else {
+        let current = self.bagDetails?.cartData?[index].quantity ?? 1
+        if current > 1 {
+          self.bagDetails?.cartData?[index].quantity -= 1
         }
+      }
+      DispatchQueue.main.async {
+        self.hostVC.bagTableView.reloadData()
+        self.getBagDetailsApi()
+      }
     }
-    
-    func handleIncrementDecrement(cartID: Int, type: String, index: Int) {
-        
-        let param: [String: Any] = [
-            "cart_id": "\(cartID)",
-            "type": type   // increment/decrement
-        ]
-        WebService.sharedInstance.incrementDecrement(param: param) { [weak self] list in
-            guard let self = self else { return }
-            if type == "increment" {
-                self.bagDetails?.cartData?[index].quantity += 1
-            } else {
-                let current = self.bagDetails?.cartData?[index].quantity ?? 1
-                if current > 1 {
-                    self.bagDetails?.cartData?[index].quantity -= 1
-                }
-            }
-            
-            DispatchQueue.main.async {
-                self.hostVC.bagTableView.reloadData()
-                self.hostVC.viewWillLayoutSubviews()
-            }
-        }
+  }
+  
+  func placeOrderApi() {
+    var param: [String: Any] = [
+      "delivery_address": hostVC.deliveryId,
+      "total_mrp": bagDetails?.totalMrp ?? 0,
+      "discount_mrp": bagDetails?.discountOnMrp ?? 0,
+      "promocode_status": hostVC.isPromoCodeApplied ? "yes" : "no",
+      "shipping_fees": bagDetails?.shippingFees ?? 0,
+      "tax": bagDetails?.tax ?? 0,
+      "total_amount": bagDetails?.totalAmount ?? 0]
+    if hostVC.isPromoCodeApplied {
+      param["promocode_id"] = hostVC.selectedPromoCode?.id ?? 0
+      param["promocode_value"] = hostVC.selectedPromoCode?.minOrderValue
     }
+    DispatchQueue.main.async { [weak self] in
+      guard let self = self else { return }
+      let nextVC = PlaceOrderPaymentMethodsViewController.instantiate(fromAppStoryboard: .MyBag)
+      nextVC.param = param
+      self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
+  }
+}
 }
 

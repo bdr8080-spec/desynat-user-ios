@@ -57,6 +57,9 @@
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="applyDidTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1PF-SD-bh6"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flat 20% off On minimum order 299 KD" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9JH-c9-c7p">
                                 <rect key="frame" x="15" y="46.666666666666664" width="404" height="17"/>
@@ -66,7 +69,8 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jFL-0e-MxG">
                                 <rect key="frame" x="15" y="78.666666666666671" width="404" height="50.666666666666671"/>
-                                <string key="text">Lorem ipsum dolor sit amet consectetur. Amet enim quis augue ullamcorper elit massa mi nisl. Sed enim ut sed maecenas pretium Lorem ipsum dolor sit amet consectetur. Amet enim quis augue ullamcorper elit massa mi nisl. Sed enim ut sed maecenas pretium </string>
+                                <string key="text">Lorem ipsum dolor sit amet consectetur. Amet enim quis augue ullamcorper elit massa mi nisl. Sed enim ut sed maecenas pretium Lorem ipsum dolor sit amet consectetur. Amet enim quis augue ullamcorper elit massa mi nisl. Sed enim ut sed maecenas pretium 
+Lorem ipsum dolor sit amet consectetur. Amet enim quis augue ullamcorper elit massa mi nisl. Sed enim ut sed maecenas pretium Lorem ipsum dolor sit amet consectetur. Amet enim quis augue ullamcorper elit massa mi nisl. Sed enim ut sed maecenas pretium </string>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -108,7 +112,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="deiscountLabel" destination="9JH-c9-c7p" id="iXf-dX-QY8"/>
                 <outlet property="descriptionLabel" destination="jFL-0e-MxG" id="ZKx-UO-cdD"/>
+                <outlet property="titleLabel" destination="ufl-og-Bx0" id="nXc-k6-cTz"/>
             </connections>
             <point key="canvasLocation" x="381.67938931297709" y="54.577464788732399"/>
         </tableViewCell>

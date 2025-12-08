@@ -29,6 +29,9 @@ class MyBagViewController: UIViewController {
     }
   }
   private lazy var viewModel = MyBagViewModel(hostVC: self)
+  var deliveryId: Int = 0
+  var isPromoCodeApplied: Bool = false
+  var selectedPromoCode: GetPromoCodeListDataModel?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -37,7 +40,7 @@ class MyBagViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    viewModel.gteBagDetailsApi()
+    viewModel.getBagDetailsApi()
   }
   
   override func viewWillLayoutSubviews() {
@@ -49,8 +52,12 @@ class MyBagViewController: UIViewController {
   
   @IBAction func applyPromocodeDidTapped(_ sender: Any) {
     let nextVC = PromoCodeListViewController.instantiate(fromAppStoryboard: .MyBag)
+    nextVC.deliveryAddress = viewModel.bagDetails?.userAddress?.id ?? 0
+    nextVC.totalAmount = viewModel.bagDetails?.totalAmount ?? 0
     nextVC.onPromoSelected = { [weak self] selectedPromo in
-      self?.promocodeLabel.text = selectedPromo
+      self?.selectedPromoCode = selectedPromo
+      self?.promocodeLabel.text = selectedPromo.nameEnglish
+      self?.isPromoCodeApplied = true
     }
     self.navigationController?.pushViewController(nextVC, animated: true)
   }
@@ -58,6 +65,7 @@ class MyBagViewController: UIViewController {
   @IBAction func deliveryAddressAction(_ sender: Any) {
     let nextVC = SavedAddressViewController.instantiate(fromAppStoryboard: .Profile)
     nextVC.onAddressSelected = { [weak self] selectedAddress in
+      self?.deliveryId = selectedAddress.id ?? 0
       let addressLine = "\(selectedAddress.name ?? "") \(selectedAddress.houseNo ?? ""), \(selectedAddress.streetNo ?? ""), \(selectedAddress.city ?? ""), \(selectedAddress.state ?? ""), \(selectedAddress.countryName ?? "")-\(selectedAddress.postalCode ?? "")"
       self?.addressLabel.text = addressLine
     }
@@ -65,8 +73,7 @@ class MyBagViewController: UIViewController {
   }
   
   @IBAction func placeOrderDidTapped(_ sender: Any) {
-    let nextVC = PlaceOrderPaymentMethodsViewController.instantiate(fromAppStoryboard: .MyBag)
-    self.navigationController?.pushViewController(nextVC, animated: true)
+    viewModel.placeOrderApi()
   }
   
   func condifData(data: MyCartDetailsDataModel) {
@@ -76,9 +83,14 @@ class MyBagViewController: UIViewController {
     shippingFeeLabel.text = "\(data.shippingFees ?? 0) KD"
     taxLabel.text = "\(data.tax ?? 0) KD"
     totalAmountLabel.text = "\(data.totalAmount ?? 0) KD"
-    //        saveAmountLAbel.text = "\(data.s ?? 0)"
     finalPriceLabel.text = "\(data.totalAmount ?? 0) KD"
+    let selectedAddress = data.userAddress
+    deliveryId = selectedAddress?.id ?? 0
+    let addressLine = "\(selectedAddress?.name ?? "") \(selectedAddress?.houseNo ?? ""), \(selectedAddress?.streetNo ?? ""), \(selectedAddress?.city ?? ""), \(selectedAddress?.state ?? ""), \(selectedAddress?.countryName ?? "")-\(selectedAddress?.postalCode ?? "")"
+    addressLabel.text = addressLine
     CommonUtils.setStrikethrough(label: actualPriceLAbel, text: "\(data.totalMrp ?? 0) KD")
+    let savingAmount = (data.totalMrp ?? 0) - (data.totalAmount ?? 0)
+    saveAmountLAbel.text = "You will save \(savingAmount) KD on this"
   }
   
 }
@@ -100,14 +112,11 @@ extension MyBagViewController: UITableViewDelegate, UITableViewDataSource {
       cell.shopMoreButtonOutlet.isHidden = true
       cell.borderLabel.isHidden = false
     }
-    
     let cartItem = viewModel.bagDetails?.cartData?[indexPath.row]
-    
     cell.onIncrement = { [weak self] in
       guard let cartID = cartItem?.id else { return }
       self?.viewModel.handleIncrementDecrement(cartID: cartID, type: "increment", index: indexPath.row)
     }
-    
     cell.onDecrement = { [weak self] in
       guard let cartID = cartItem?.id else { return }
       self?.viewModel.handleIncrementDecrement(cartID: cartID, type: "decrement", index: indexPath.row)

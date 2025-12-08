@@ -11,6 +11,9 @@
         <array key="Poppins-Medium.ttf">
             <string>Poppins-Medium</string>
         </array>
+        <array key="Poppins-Regular.ttf">
+            <string>Poppins-Regular</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -18,7 +21,7 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="PaymentMethodsTableViewCell" customModule="DesynatUser" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -41,21 +44,33 @@
                                     <constraint firstAttribute="width" constant="34" id="bP4-Dy-6pQ"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay by KNET" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sNV-t3-795">
-                                <rect key="frame" x="97" y="12.333333333333334" width="199" height="19.666666666666664"/>
-                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="EOZ-Ec-U6B">
+                                <rect key="frame" x="93" y="12.333333333333334" width="207" height="19.666666666666664"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay by KNET" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nv5-6g-8tT">
+                                        <rect key="frame" x="0.0" y="0.0" width="207" height="19.666666666666668"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available Balance : 349 KD" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sNV-t3-795">
+                                        <rect key="frame" x="0.0" y="19.666666666666664" width="207" height="0.0"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="EOZ-Ec-U6B" firstAttribute="centerY" secondItem="Gvv-MF-tEc" secondAttribute="centerY" id="5Pn-QB-CjZ"/>
                             <constraint firstItem="wUN-fZ-UcN" firstAttribute="centerY" secondItem="m4a-5A-WgX" secondAttribute="centerY" id="83z-Wr-7WT"/>
+                            <constraint firstAttribute="trailing" secondItem="EOZ-Ec-U6B" secondAttribute="trailing" constant="20" id="Hdq-cQ-ifP"/>
                             <constraint firstItem="wUN-fZ-UcN" firstAttribute="top" secondItem="m4a-5A-WgX" secondAttribute="top" constant="10" id="M2z-jJ-dt2"/>
                             <constraint firstItem="Gvv-MF-tEc" firstAttribute="centerY" secondItem="wUN-fZ-UcN" secondAttribute="centerY" id="NMJ-83-A58"/>
-                            <constraint firstAttribute="trailing" secondItem="sNV-t3-795" secondAttribute="trailing" constant="24" id="Tjb-at-rGV"/>
-                            <constraint firstItem="sNV-t3-795" firstAttribute="centerY" secondItem="Gvv-MF-tEc" secondAttribute="centerY" id="V60-UP-qNd"/>
-                            <constraint firstItem="sNV-t3-795" firstAttribute="leading" secondItem="Gvv-MF-tEc" secondAttribute="trailing" constant="12" id="nDd-zv-zkZ"/>
+                            <constraint firstItem="EOZ-Ec-U6B" firstAttribute="leading" secondItem="Gvv-MF-tEc" secondAttribute="trailing" constant="8" id="PB0-Ri-LFY"/>
+                            <constraint firstAttribute="bottom" secondItem="wUN-fZ-UcN" secondAttribute="bottom" constant="10" id="WTw-co-r1r"/>
                             <constraint firstItem="wUN-fZ-UcN" firstAttribute="leading" secondItem="m4a-5A-WgX" secondAttribute="leading" constant="15" id="nF2-hd-jhC"/>
                             <constraint firstItem="Gvv-MF-tEc" firstAttribute="leading" secondItem="wUN-fZ-UcN" secondAttribute="trailing" constant="12" id="uUZ-sr-oJO"/>
                         </constraints>
@@ -64,13 +79,16 @@
                 <constraints>
                     <constraint firstItem="m4a-5A-WgX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="FIE-fI-bcS"/>
                     <constraint firstAttribute="trailing" secondItem="m4a-5A-WgX" secondAttribute="trailing" id="Luo-o8-qaf"/>
-                    <constraint firstAttribute="bottom" secondItem="m4a-5A-WgX" secondAttribute="bottom" id="bdi-6R-Wn7"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="m4a-5A-WgX" secondAttribute="bottom" constant="12" id="bdi-6R-Wn7"/>
                     <constraint firstItem="m4a-5A-WgX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ySw-6B-uqW"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="descriptionLable" destination="sNV-t3-795" id="9RW-k6-IeF"/>
+                <outlet property="paymentMethodImageView" destination="Gvv-MF-tEc" id="aZF-bU-32H"/>
                 <outlet property="radioButonOutlet" destination="wUN-fZ-UcN" id="Dlo-Nd-RgI"/>
+                <outlet property="titleLabel" destination="Nv5-6g-8tT" id="mhU-7X-RYH"/>
             </connections>
             <point key="canvasLocation" x="-26" y="-11"/>
         </tableViewCell>

@@ -8,40 +8,55 @@
 import UIKit
 
 class PromoCodeTableViewCell: UITableViewCell {
+  
+  @IBOutlet weak var deiscountLabel: UILabel!
+  @IBOutlet weak var titleLabel: UILabel!
+  @IBOutlet weak var descriptionLabel: UILabel!
+  
+  var fullData: GetPromoCodeListDataModel?
+  var isExpanded: Bool = false
+  var onExpansionChanged: (() -> Void)?
+  var isPromoApplied: (() -> Void)?
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
     
-    @IBOutlet weak var descriptionLabel: UILabel!
-    
-    var fullText: String = ""
-    var isExpanded: Bool = false
-    var onExpansionChanged: (() -> Void)?
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        // This is the key: reconfigure after bounds are correct
-        if !fullText.isEmpty {
-            configure(text: fullText, expanded: isExpanded)
+    if let data = fullData {
+      descriptionLabel.setExpandableText(
+        fullText: data.descriptionEnglish ?? "",
+        isExpanded: isExpanded,
+        actionText: "More",
+        collapseText: "Short",
+        actionColor: .darkBrown,
+        onTap: { [weak self] in
+          self?.isExpanded.toggle()
+          self?.onExpansionChanged?()
         }
+      )
     }
-    
-    func configure(text: String, expanded: Bool) {
-        self.fullText = text
-        self.isExpanded = expanded
-        
-        // Only proceed if label has valid width
-        if descriptionLabel.bounds.width <= 0 {
-            return // Will be called again in layoutSubviews
-        }
-        
-        descriptionLabel.setExpandableText(
-            fullText: text,
-            isExpanded: expanded,
-            actionText: "More",
-            collapseText: "Short",
-            actionColor: expanded ? .darkBrown : .darkBrown,
-            onTap: { [weak self] in
-                self?.isExpanded.toggle()
-                self?.onExpansionChanged?()
-            }
-        )
-    }
+  }
+  
+  @IBAction func applyDidTapped(_ sender: Any) {
+    isPromoApplied?()
+  }
+  
+  func configure(data: GetPromoCodeListDataModel, expanded: Bool) {
+    self.fullData = data
+    self.isExpanded = expanded
+    titleLabel.text = data.nameEnglish
+    deiscountLabel.text = "Flat \(data.discountPercent ?? "")% Off On minimum order \(data.minOrderValue ?? "")"
+    self.layoutIfNeeded()
+    descriptionLabel.setExpandableText(
+      fullText: data.descriptionEnglish ?? "",
+      isExpanded: expanded,
+      actionText: "More",
+      collapseText: "Short",
+      actionColor: .darkBrown,
+      onTap: { [weak self] in
+        self?.isExpanded.toggle()
+        self?.onExpansionChanged?()
+      }
+    )
+  }
+  
 }

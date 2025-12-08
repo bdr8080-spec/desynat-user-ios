@@ -9,17 +9,24 @@ import UIKit
 
 class PaymentMethodsTableViewCell: UITableViewCell {
 
+  @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var radioButonOutlet: UIButton!
+  @IBOutlet weak var paymentMethodImageView: UIImageView!
+  @IBOutlet weak var descriptionLable: UILabel!
   
   override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
+  
+  func configData(data: PaymentMethod) {
+    titleLabel.text = data.paymentMethodTitle
+    paymentMethodImageView.image = UIImage(named: data.paymentMethodImage)
+    descriptionLable.isHidden = data.showDescription
+  }
     
 }

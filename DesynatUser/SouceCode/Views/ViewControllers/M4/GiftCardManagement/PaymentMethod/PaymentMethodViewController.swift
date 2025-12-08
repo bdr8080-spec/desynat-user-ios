@@ -22,8 +22,16 @@ class PaymentMethodViewController: UIViewController {
       paymentMethodsTableView.registerCellFromNib(cellID: "PaymentMethodsTableViewCell")
     }
   }
+  var orderId: String = ""
   var selectedCardID: Int? = 0
   var selectedPaymentMethodID: Int? = nil
+  var paymentMethods: [PaymentMethod] = [PaymentMethod(paymentMethodImage: "paymentMethods", paymentMethodTitle: "Pay by KNET", showDescription: true),
+                                         PaymentMethod(paymentMethodImage: "applePay", paymentMethodTitle: "Apple Pay", showDescription: true),
+                                         PaymentMethod(paymentMethodImage: "vispay", paymentMethodTitle: "Visapay", showDescription: true),
+                                         PaymentMethod(paymentMethodImage: "samsungPay", paymentMethodTitle: "Samsung Pay", showDescription: true),
+                                         PaymentMethod(paymentMethodImage: "inAppWallet", paymentMethodTitle: "In -App Wallet", showDescription: false),
+                                         PaymentMethod(paymentMethodImage: "cashOnDeliveryMethod", paymentMethodTitle: "Cash On Delivery", showDescription: true)]
+  private lazy var viewModel = PaymentMethodViewModel(hostVC: self)
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -45,12 +53,7 @@ class PaymentMethodViewController: UIViewController {
            showAlert(msg: "Please select a payment option")
            return
        }
-    let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
-    vc.comingReason = .giftCardPurchased
-    vc.callBackDismiss = { [weak self] in
-        self?.navigationController?.popToViewController(ofType: GiftCardsListViewController.self)
-    }
-    self.navigationController?.present(vc, animated: true)
+    viewModel.payForAddingCard()
   }
   
   @IBAction func cardButtonAction(_ sender: Any) {
@@ -64,7 +67,7 @@ extension PaymentMethodViewController: UITableViewDelegate, UITableViewDataSourc
     if tableView == cardsTableiew {
       return 2
     }
-    return 6
+    return paymentMethods.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -76,6 +79,8 @@ extension PaymentMethodViewController: UITableViewDelegate, UITableViewDataSourc
     return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: "PaymentMethodsTableViewCell", for: indexPath) as! PaymentMethodsTableViewCell
+      let data = paymentMethods[indexPath.row]
+      cell.configData(data: data)
         cell.radioButonOutlet.setImage(
             (indexPath.row == selectedPaymentMethodID) ? UIImage(named: "radioSelected") : UIImage(named: "radioUnselected"),
             for: .normal
@@ -100,4 +105,10 @@ extension PaymentMethodViewController: UITableViewDelegate, UITableViewDataSourc
       }
   }
 
+}
+
+struct PaymentMethod {
+  let paymentMethodImage: String
+  let paymentMethodTitle: String
+  let showDescription: Bool
 }

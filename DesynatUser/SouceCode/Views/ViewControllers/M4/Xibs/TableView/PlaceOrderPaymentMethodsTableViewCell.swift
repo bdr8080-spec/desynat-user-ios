@@ -9,7 +9,10 @@ import UIKit
 
 class PlaceOrderPaymentMethodsTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var cardTableViewHeightConstarint: NSLayoutConstraint!
+  @IBOutlet weak var descriptionLabel: UILabel!
+  @IBOutlet weak var paymentMethdImageView: UIImageView!
+  @IBOutlet weak var titleLabel: UILabel!
+  @IBOutlet weak var cardTableViewHeightConstarint: NSLayoutConstraint!
     @IBOutlet weak var addNewCardView: CustomView!
     @IBOutlet weak var checkboxStackView: UIStackView!
     @IBOutlet weak var selecetdPaymentMethodButtonOutlet: UIButton!

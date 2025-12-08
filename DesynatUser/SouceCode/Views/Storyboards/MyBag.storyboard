@@ -155,12 +155,19 @@
                                     <outlet property="delegate" destination="D2T-9m-Ocg" id="88H-Qj-fIE"/>
                                 </connections>
                             </tableView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Promocode Found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VBv-Rv-Q3T">
+                                <rect key="frame" x="109.66666666666667" y="439.66666666666669" width="173.66666666666663" height="22.666666666666686"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="72E-qa-lsO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="w8W-lA-GyP" firstAttribute="centerY" secondItem="AzW-oG-BSG" secondAttribute="centerY" id="0nm-L4-KNP"/>
                             <constraint firstItem="72E-qa-lsO" firstAttribute="top" secondItem="goT-yc-3xc" secondAttribute="top" id="2B2-Vp-ZNn"/>
+                            <constraint firstItem="VBv-Rv-Q3T" firstAttribute="centerX" secondItem="72E-qa-lsO" secondAttribute="centerX" id="7Kz-S6-Zdb"/>
                             <constraint firstItem="72E-qa-lsO" firstAttribute="trailing" secondItem="w8W-lA-GyP" secondAttribute="trailing" constant="24" id="Arc-kb-nb9"/>
                             <constraint firstItem="72E-qa-lsO" firstAttribute="leading" secondItem="goT-yc-3xc" secondAttribute="leading" id="Ebh-S2-XIl"/>
                             <constraint firstItem="72E-qa-lsO" firstAttribute="bottom" secondItem="Ofd-4Z-G3W" secondAttribute="bottom" id="Pyd-7A-GRa"/>
@@ -169,11 +176,14 @@
                             <constraint firstItem="Ofd-4Z-G3W" firstAttribute="top" secondItem="w8W-lA-GyP" secondAttribute="bottom" constant="20" id="SwM-gt-gVV"/>
                             <constraint firstItem="AzW-oG-BSG" firstAttribute="top" secondItem="goT-yc-3xc" secondAttribute="bottom" constant="20" id="Szd-Us-E2h"/>
                             <constraint firstItem="72E-qa-lsO" firstAttribute="trailing" secondItem="Ofd-4Z-G3W" secondAttribute="trailing" constant="24" id="cvp-kH-0V8"/>
+                            <constraint firstItem="VBv-Rv-Q3T" firstAttribute="centerY" secondItem="72E-qa-lsO" secondAttribute="centerY" id="lLh-6P-98K"/>
                             <constraint firstItem="AzW-oG-BSG" firstAttribute="leading" secondItem="72E-qa-lsO" secondAttribute="leading" constant="24" id="y43-xi-a8C"/>
                             <constraint firstItem="72E-qa-lsO" firstAttribute="trailing" secondItem="goT-yc-3xc" secondAttribute="trailing" id="y7I-Ff-ze0"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="SearchTF" destination="v6d-iI-oqN" id="iTT-jr-tJb"/>
+                        <outlet property="noDataFoundLabel" destination="VBv-Rv-Q3T" id="i72-wI-jMS"/>
                         <outlet property="tableview" destination="Ofd-4Z-G3W" id="dGC-LL-s05"/>
                     </connections>
                 </viewController>
@@ -325,7 +335,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ 100 Gift Card Amount Redeemed" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="POA-z6-WyW">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ 100 Gift Card Amount Redeemed" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="POA-z6-WyW">
                                                 <rect key="frame" x="24" y="588" width="345" height="14.333333333333371"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                 <color key="textColor" red="0.090196078431372548" green="0.52156862745098043" blue="0.29803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -413,6 +423,7 @@
                     </view>
                     <connections>
                         <outlet property="checkMarkImageView" destination="0a3-c5-Txb" id="HnI-cf-9rx"/>
+                        <outlet property="giftCardAmountLabel" destination="POA-z6-WyW" id="guw-J6-PEs"/>
                         <outlet property="giftCardLabel" destination="SyQ-Dq-TfB" id="HNv-Og-JQi"/>
                         <outlet property="paymentTableHeightConstraint" destination="2N1-Qi-9IP" id="2JR-ot-ErO"/>
                         <outlet property="paymnetTableView" destination="RMI-76-7md" id="jNc-WB-rCH"/>
@@ -885,7 +896,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="789-Wv-47b" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                <rect key="frame" x="24" y="466.33333333333331" width="345" height="69.999999999999943"/>
+                                <rect key="frame" x="24" y="466.33333333333331" width="345" height="61.666666666666686"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="currentLocation" translatesAutoresizingMaskIntoConstraints="NO" id="WIm-G9-BDI">
                                         <rect key="frame" x="18" y="15" width="30" height="30"/>
@@ -911,12 +922,11 @@
                                 <constraints>
                                     <constraint firstItem="0iZ-P6-5tz" firstAttribute="leading" secondItem="4S2-Cn-5lY" secondAttribute="leading" id="20t-NK-6mY"/>
                                     <constraint firstItem="WIm-G9-BDI" firstAttribute="leading" secondItem="789-Wv-47b" secondAttribute="leading" constant="18" id="2Sb-PW-Cg0"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="4S2-Cn-5lY" secondAttribute="bottom" constant="5" id="3B5-Mi-rye"/>
+                                    <constraint firstAttribute="bottom" secondItem="4S2-Cn-5lY" secondAttribute="bottom" constant="5" id="3B5-Mi-rye"/>
                                     <constraint firstItem="0iZ-P6-5tz" firstAttribute="top" secondItem="789-Wv-47b" secondAttribute="top" constant="15" id="6H3-a5-lod"/>
                                     <constraint firstItem="WIm-G9-BDI" firstAttribute="top" secondItem="789-Wv-47b" secondAttribute="top" constant="15" id="I5Q-eT-JGu"/>
                                     <constraint firstItem="4S2-Cn-5lY" firstAttribute="top" secondItem="0iZ-P6-5tz" secondAttribute="bottom" constant="5" id="Z1h-pN-XJ5"/>
                                     <constraint firstAttribute="trailing" secondItem="0iZ-P6-5tz" secondAttribute="trailing" constant="24" id="fYn-2B-70Q"/>
-                                    <constraint firstAttribute="height" constant="70" id="k3o-t0-N31"/>
                                     <constraint firstItem="0iZ-P6-5tz" firstAttribute="leading" secondItem="WIm-G9-BDI" secondAttribute="trailing" constant="12" id="kzz-lv-6W0"/>
                                     <constraint firstItem="0iZ-P6-5tz" firstAttribute="trailing" secondItem="4S2-Cn-5lY" secondAttribute="trailing" id="w3F-Yg-Th0"/>
                                 </constraints>
@@ -933,7 +943,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7gS-h5-9qT" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                <rect key="frame" x="24" y="556.33333333333337" width="345" height="48"/>
+                                <rect key="frame" x="24" y="548" width="345" height="48"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ff1-Fs-iWm">
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="48"/>
@@ -944,7 +954,7 @@
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track your Order" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWo-HS-zWy">
-                                        <rect key="frame" x="20.000000000000007" y="14.333333333333259" width="117.66666666666669" height="19.666666666666671"/>
+                                        <rect key="frame" x="20.000000000000007" y="14.333333333333373" width="117.66666666666669" height="19.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                         <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1040,7 +1050,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addressDescriptionLabel" destination="4S2-Cn-5lY" id="s5K-o8-oR6"/>
+                        <outlet property="amountPaidLabel" destination="TRr-Jz-eNT" id="e3U-pi-YQc"/>
+                        <outlet property="deliveryDateLabel" destination="xGX-fd-bpJ" id="7zJ-dl-7Xz"/>
                         <outlet property="deliveryDateView" destination="2dV-rC-X4d" id="uI2-ZB-FMl"/>
+                        <outlet property="locationLabel" destination="0iZ-P6-5tz" id="PW9-bj-A85"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g92-am-y8J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

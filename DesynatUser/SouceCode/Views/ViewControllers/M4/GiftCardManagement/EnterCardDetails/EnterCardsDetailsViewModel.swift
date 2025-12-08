@@ -79,34 +79,28 @@ class EnterCardsDetailsViewModel {
     hostVC.view.endEditing(true)
     return errorMessage == .none
   }
-//  {
-//      "gift_card_id":"3",
-//      "amount":100,
-//      "receiver_name":"manoj chauhan",
-//      "receiver_email":"manojchauhan1328989@gmail.com",
-//      "sender_name":"komal",
-//      "sender_email":"komal123@gmail.com",
-//      "wish_message":"This is Test Gift Card",
-//      "notes":"This is Test gift card Note"
-//
-//
-//  }
-//  func payForAddingCard() {
-//          var params: [String: Any] = [
-//            "gift_card_id": hostVC.selectedOccassionId,
-//            "receiver_name": hostVC.nameTextField.text ?? "",
-//            "receiver_email": hostVC.emailTextField.text ?? ""
-//          
-//          ]
-//    if hostVC.selectedIndex == 2 {
-//      params["amount"] = hostVC.enterAmountTF.text ?? ""
-//    } else {
-//      params["amount"] = hostVC.amountArray[hostVC.selectedIndex ?? 0
-//    }
-////      WebService.sharedInstance.loginUserService(withParams: params) { (response) in
-////          UserDefaults.standard.setValue("Yes", forKey:"isLogin")
-////          UserDefaults.standard.setValue("false", forKey:"isGuestLogin")
-////          kSharedSceneDelegate.navigateToUserHomeVc()
-////      }
-//  }
+  
+  func payForAddingCard() {
+    var params: [String: Any] = [
+      "gift_card_id": hostVC.selectedOccassionId,
+      "receiver_name": hostVC.nameTextField.text ?? "",
+      "receiver_email": hostVC.emailTextField.text ?? "",
+      "sender_name": hostVC.fromNameTextField.text ?? "",
+      //"sender_email": hostVC.wishMessageTextView.text ?? "",
+      "wish_message": hostVC.wishMessageTextView.text ?? "",
+      "notes": hostVC.noteTextView.text ?? ""]
+    
+    if hostVC.selectedIndex == 2 {
+      params["amount"] = hostVC.enterAmountTF.text ?? ""
+    } else {
+      let selectedText = hostVC.amountArray[hostVC.selectedIndex ?? 0]
+      let numericAmount = selectedText.replacingOccurrences(of: " KD", with: "")
+      params["amount"] = numericAmount
+    }
+    WebService.sharedInstance.addGiftCardsApi(param: params) { (response) in
+      let nextVC = PaymentMethodViewController.instantiate(fromAppStoryboard: .Profile)
+      nextVC.orderId = response.orderID ?? ""
+      self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
+    }
+  }
 }

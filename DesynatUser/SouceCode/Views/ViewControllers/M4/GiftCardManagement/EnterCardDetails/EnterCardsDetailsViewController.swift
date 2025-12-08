@@ -39,8 +39,7 @@ class EnterCardsDetailsViewController: UIViewController {
   
   @IBAction func payDidTapped(_ sender: Any) {
     if viewModel.validFields() {
-      let nextVC = PaymentMethodViewController.instantiate(fromAppStoryboard: .Profile)
-      self.navigationController?.pushViewController(nextVC, animated: true)
+      viewModel.payForAddingCard()
     }
   }
   
@@ -144,5 +143,4 @@ extension EnterCardsDetailsViewController: UITextFieldDelegate, UITextViewDelega
       }
     }
   }
-
 }

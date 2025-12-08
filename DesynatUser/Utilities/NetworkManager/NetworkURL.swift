@@ -60,7 +60,14 @@ enum NetworkEndPoint: String {
   //M4
   case getAllCards                     = "api/user/view-gift-cards"
   case getAllOccassion                 = "api/user/gift-card-occasion-list"
-  
+  case addGiftCards                    = "api/user/add-gift-card"
+  case paymentForGiftCard              = "api/user/giftcard-complete-Payment"
+  case getAllPromocodeList             = "api/user/view-promocode-list"
+  case createOrder                     = "api/user/create-order"
+  case applyPromocode                  = "api/user/Apply-promocode"
+  case applyGiftCard                   = "api/user/apply-gift-card"
+  case singleOrderSummary              = "api/user/single-order-summary"
+  case completePayment                 = "api/user/product-order-complete-payment"
   
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"
