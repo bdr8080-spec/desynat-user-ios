@@ -20,18 +20,10 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
   @IBOutlet weak var paymentTableHeightConstraint: NSLayoutConstraint!
   
   private lazy var viewModel = PlaceOrderPaymentMethodsViewModel(hostVC: self)
-  var slecetedPaymentId: Int? = 0
+  var selectedPaymentMethod: PaymentMethodType?// = .payByKNET
   var giftCardDetails: UseGiftCardDataModel?
   var giftIsChecked: Bool = false
   var param: [String: Any] = [:]
-  var paymentMethods: [PaymentMethodForPlaceOrder] = [PaymentMethodForPlaceOrder(paymentMethodImage: "paymentMethods", paymentMethodTitle: "Pay by KNET", showDescription: true, description: ""),
-                                                      PaymentMethodForPlaceOrder(paymentMethodImage: "applePay", paymentMethodTitle: "Apple Pay", showDescription: true, description: ""),
-                                                      PaymentMethodForPlaceOrder(paymentMethodImage: "vispay", paymentMethodTitle: "Visapay", showDescription: true, description: ""),
-                                                      PaymentMethodForPlaceOrder(paymentMethodImage: "samsungPay", paymentMethodTitle: "Samsung Pay", showDescription: true, description: ""),
-                                                      PaymentMethodForPlaceOrder(paymentMethodImage: "inAppWallet", paymentMethodTitle: "Credit/ Debit Card", showDescription: true, description: "Set as default payment method"),
-                                                      PaymentMethodForPlaceOrder(paymentMethodImage: "inAppWallet", paymentMethodTitle: "In -App Wallet", showDescription: false, description: "Available Balance : 349 KD"),
-                                                      PaymentMethodForPlaceOrder(paymentMethodImage: "cashOnDeliveryMethod", paymentMethodTitle: "Cash On Delivery", showDescription: true, description: "")]
-  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -45,17 +37,28 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
   }
   
   @IBAction func placeOrderDidTapped(_ sender: Any) {
-    guard let slecetedPaymentId else { return }
-    if slecetedPaymentId < 5 { //1 myfatoorah 2 wallet 3 Cod
-      param["Payment_method"] = 1
-    } else if slecetedPaymentId == 5 {
-      param["Payment_method"] = 2
-    } else if slecetedPaymentId == 6{
-      param["Payment_method"] = 3
+    guard let method = selectedPaymentMethod else {
+      showAlert(msg: "Please select a payment method")
+      return
     }
-    param["giftcard_amount"] = giftCardDetails?.giftCardAmount
-    param["giftcard_id"] = giftCardDetails?.id
-    viewModel.placeOrderApi(param: param)
+    switch method {
+    case .payByKNET:
+      showAlert(msg: "Please tap the Apple Pay button to continue.") // Adjust message if needed
+    case .applePay:
+      showAlert(msg: "Please tap the Apple Pay button to continue.")
+    case .visapay:
+      showAlert(msg: "Please implement standard Fatoorah execute for \(method)")
+    case .samsungPay:
+      showAlert(msg: "Please implement standard Fatoorah execute for \(method)")
+    case .creditDebitCard:
+      showAlert(msg: "Please implement standard Fatoorah execute for \(method)")
+    case .inAppWallet:
+      showAlert(msg: "In App Wallet")
+      proceedToPay()
+    case .cashOnDelivery:
+      showAlert(msg: "Cash on Delivery")
+      proceedToPay()
+    }
   }
   
   @IBAction func backDidTapped(_ sender: Any) {
@@ -77,6 +80,14 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
     //      checkMarkImageView.isHidden = !giftIsChecked
   }
   
+  func proceedToPay() {
+    guard let selectedMethod = selectedPaymentMethod else { return }
+    param["Payment_method"] = selectedMethod.apiValue
+    param["giftcard_amount"] = giftCardDetails?.giftCardAmount
+    param["giftcard_id"] = giftCardDetails?.id
+    viewModel.placeOrderApi(param: param)
+  }
+  
   func updatePaymentTableHeight() {
     self.paymnetTableView.layoutIfNeeded()
     self.paymentTableHeightConstraint.constant = self.paymnetTableView.contentSize.height
@@ -84,11 +95,10 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
   }
 }
 
-
 extension PlaceOrderPaymentMethodsViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return paymentMethods.count
+    return viewModel.paymentMethods.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -97,10 +107,14 @@ extension PlaceOrderPaymentMethodsViewController: UITableViewDelegate, UITableVi
       withIdentifier: "PlaceOrderPaymentMethodsTableViewCell",
       for: indexPath
     ) as! PlaceOrderPaymentMethodsTableViewCell
-    let data = paymentMethods[indexPath.row]
+    let data = viewModel.paymentMethods[indexPath.row]
     cell.titleLabel.text = data.paymentMethodTitle
     cell.paymentMethdImageView.image = UIImage(named: data.paymentMethodImage)
     cell.descriptionLabel.text = data.description
+    if let amountString = param["total_amount"] as? String,
+       let amount = Int(amountString) {
+      cell.totalAmountToPay = amount
+    }
     cell.addCardDidTapped = { [weak self] in
       guard let self = self else { return }
       let nextVC = AddCardViewController.instantiate(fromAppStoryboard: .MyBag)
@@ -118,18 +132,15 @@ extension PlaceOrderPaymentMethodsViewController: UITableViewDelegate, UITableVi
     cell.cardsTableView.isHidden = true
     cell.addNewCardView.isHidden = true
     cell.cardsCount = 0
-    
-    // Set radio button
+    let isSelected = (selectedPaymentMethod?.rawValue == data.paymentMethodTitle)
     cell.selecetdPaymentMethodButtonOutlet.setImage(
-      (indexPath.row == slecetedPaymentId) ? UIImage(named: "radioSelected") : UIImage(named: "radioUnselected"),
+      isSelected ? UIImage(named: "radioSelected") : UIImage(named: "radioUnselected"),
       for: .normal
     )
     
-    // Only show for index 5 & 6
-    if indexPath.row == slecetedPaymentId {
-      
-      if slecetedPaymentId == 4 {
-        // Show description + cards
+    if isSelected {
+      switch selectedPaymentMethod {
+      case .creditDebitCard:
         cell.descriptionStackView.isHidden = false
         cell.checkboxStackView.isHidden = false
         cell.descriptionCheckbox.isHidden = false
@@ -141,43 +152,66 @@ extension PlaceOrderPaymentMethodsViewController: UITableViewDelegate, UITableVi
         cell.cardsTableView.reloadData()
         cell.updateCardsTableViewHeight()
         cell.fixStackViewLayout()
-      }
-      else if slecetedPaymentId == 5 {
-        // Show description only
+      case .inAppWallet:
         cell.descriptionStackView.isHidden = false
         cell.checkboxStackView.isHidden = false
-        
         cell.cardsCount = 0
         cell.fixStackViewLayout()
+      case .applePay:
+        cell.paymentMethodView.isHidden = false
+        DispatchQueue.main.async {
+          cell.layoutIfNeeded()
+          cell.setupApplePay()
+          cell.startApplePaySession()
+        }
+      default:
+        break
       }
     }
     
+    // Inside cellForRowAt when selectedPaymentMethod == .applePay
+    cell.onPaymentCompletion = { [weak self] paymentResponse, invoiceId, error in
+      guard let self = self else { return }
+      
+      if let error = error {
+        self.showAlert(msg: "Payment failed: \(error.localizedDescription)")
+        return
+      }
+      
+      guard let response = paymentResponse else {
+        self.showAlert(msg: "Payment failed: No response")
+        return
+      }
+      
+      // Extract transaction details
+      let transaction = response.invoiceTransactions?.first
+      let transactionID = transaction?.transactionID ?? ""
+      let paymentGateway = transaction?.paymentGateway ?? "ApplePay"
+      
+      // Save for final order placement
+      //        self.param["transaction_id"] = transactionID
+      //        self.param["payment_gateway"] = paymentGateway
+      //        self.param["invoice_id"] = invoiceId
+      
+      // Now place the actual order
+      self.proceedToPay()
+    }
     // After layout update table height
     DispatchQueue.main.async {
       self.updatePaymentTableHeight()
     }
-    
     return cell
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if slecetedPaymentId == indexPath.row {
-      return
-    }
-    
-    // Otherwise update selection
-    slecetedPaymentId = indexPath.row
+    let selectedMethodName = viewModel.paymentMethods[indexPath.row].paymentMethodTitle
+    guard let method = PaymentMethodType(rawValue: selectedMethodName) else { return }
+    if selectedPaymentMethod == method { return }
+    selectedPaymentMethod = method
     paymnetTableView.reloadData()
-    
     DispatchQueue.main.async {
       self.updatePaymentTableHeight()
     }
   }
 }
 
-struct PaymentMethodForPlaceOrder {
-  let paymentMethodImage: String
-  let paymentMethodTitle: String
-  let showDescription: Bool
-  let description: String
-}

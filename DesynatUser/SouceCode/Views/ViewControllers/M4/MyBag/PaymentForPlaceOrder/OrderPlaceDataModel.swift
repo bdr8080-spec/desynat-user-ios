@@ -37,3 +37,10 @@ struct OrderPlaceDataModel: Codable {
         case id
     }
 }
+
+struct PaymentMethodForPlaceOrder {
+  let paymentMethodImage: String
+  let paymentMethodTitle: String
+  let showDescription: Bool
+  let description: String
+}
