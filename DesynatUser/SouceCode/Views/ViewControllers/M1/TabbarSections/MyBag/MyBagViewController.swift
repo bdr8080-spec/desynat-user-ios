@@ -53,7 +53,7 @@ class MyBagViewController: UIViewController {
   @IBAction func applyPromocodeDidTapped(_ sender: Any) {
     let nextVC = PromoCodeListViewController.instantiate(fromAppStoryboard: .MyBag)
     nextVC.deliveryAddress = viewModel.bagDetails?.userAddress?.id ?? 0
-    nextVC.totalAmount = viewModel.bagDetails?.totalAmount ?? 0
+    nextVC.totalAmount = viewModel.bagDetails?.totalAmount ?? 0.0
     nextVC.onPromoSelected = { [weak self] selectedPromo in
       self?.selectedPromoCode = selectedPromo
       self?.promocodeLabel.text = selectedPromo.nameEnglish

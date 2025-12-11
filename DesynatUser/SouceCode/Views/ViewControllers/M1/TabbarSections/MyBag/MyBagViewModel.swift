@@ -66,6 +66,8 @@ class MyBagViewModel: NSObject {
       guard let self = self else { return }
       let nextVC = PlaceOrderPaymentMethodsViewController.instantiate(fromAppStoryboard: .MyBag)
       nextVC.param = param
+//      nextVC.orderID =
+      nextVC.totalAmountToPay = bagDetails?.totalAmount ?? 0.0
       self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
   }
 }

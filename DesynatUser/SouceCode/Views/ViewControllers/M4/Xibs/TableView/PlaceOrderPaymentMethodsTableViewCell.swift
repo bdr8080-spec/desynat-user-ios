@@ -8,9 +8,16 @@
 import UIKit
 import MFSDK
 
-class PlaceOrderPaymentMethodsTableViewCell: UITableViewCell {
+class PlaceOrderPaymentMethodsTableViewCell: UITableViewCell, MFPaymentDelegate {
   
-  @IBOutlet weak var paymentMethodView: UIView!
+  func didInvoiceCreated(invoiceId: String) {
+    print("")
+  }
+  
+  @IBOutlet weak var viewApple: UIView!
+  @IBOutlet weak var paymentButtonView: UIView!
+  @IBOutlet weak var viewCreditCard: UIView!
+  @IBOutlet weak var viewPayment: MFPaymentCardView!
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var paymentMethdImageView: UIImageView!
   @IBOutlet weak var titleLabel: UILabel!
@@ -37,11 +44,13 @@ class PlaceOrderPaymentMethodsTableViewCell: UITableViewCell {
   var addCardDidTapped:(() -> Void)?
   var onSetAsDefaultTapped: (() -> Void)?
   var onPaymentCompletion: ((MFPaymentStatusResponse?, String?, Error?) -> Void)?
+  weak var delegate: PlaceOrderPaymentMethodsCellDelegate?
   
   override func awakeFromNib() {
     super.awakeFromNib()
     cardsTableView.delegate = self
     cardsTableView.dataSource = self
+    MFSettings.shared.delegate = self
   }
   
   // MARK: - Update nested table height
@@ -93,95 +102,232 @@ extension PlaceOrderPaymentMethodsTableViewCell: UITableViewDelegate, UITableVie
   }
 }
 
+extension PlaceOrderPaymentMethodsTableViewCell {
+  func cardPay() {
+    var configure = MFCardConfigureBuilder.default
+    configure.setPlaceholder(MFCardPlaceholder(cardHolderNamePlaceholder: "Name", cardNumberPlaceholder: "Number", expiryDatePlaceholder: "MM / YY", cvvPlaceholder: "CVV"))
+    configure.setLabel(MFCardLabel(cardHolderNameLabel: "Card holder name", cardNumberLabel: "Card number", expiryDateLabel: "MM / YY", cvvLabel: "CVV", showLabels: true, fontWeight: .normal))
+    let theme = MFCardTheme(inputColor: .black, labelColor: .black, errorColor: .red, borderColor: .black)
+    theme.language = .english
+    configure.setTheme(theme)
+    configure.setCardInput(MFCardInput(inputHeight: 32, inputMargin: 15))
+    configure.setFontSize(15)
+    configure.setBorderWidth(1)
+    configure.setBorderRadius(8)
+    configure.setHideCardIcon(false)
+    configure.setFontFamily(.timesNewRoman)
+    configure.setBoxShadow(MFBoxShadow(hOffset: 0, vOffset: 0, blur: 0, spread: 0, color: .gray))
+    viewPayment.configure = configure.build()
+    cardPayInitiation()
+  }
+  
+  func cardPayInitiation() {
+    MFPaymentRequest.shared.initiateSession(apiLanguage: .english) { [weak self] response in
+      switch response {
+      case .success(let session):
+        self?.viewPayment.load(initiateSession: session) { bin in
+          print("bin", bin)
+        }
+      case .failure(let error):
+        print(error)
+        //self?.showToast(error)
+      }
+    }
+  }
+  
+  func payWithSelectedCard(invoiceValue: Decimal,
+                           orderId: String,
+                           supplierId: String?,
+                           completion: @escaping (MFPaymentStatusResponse?, String?, Error?) -> Void) {
+    
+    guard let supplierIDString = supplierId,
+          let supplierCode = Int(supplierIDString) else {
+      completion(nil, nil, NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid supplier ID."]))
+      return
+    }
+    
+    let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
+    request.customerReference = orderId
+    let supplier = MFSupplier(supplierCode: supplierCode, invoiceShare: invoiceValue)
+    request.suppliers = [supplier]
+    
+    viewPayment.pay(request, .english) { [self] result, invoiceId in
+      switch result {
+      case .success(let paymentStatus):
+        completion(paymentStatus, invoiceId, nil)
+        let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
+        let paymentGateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "Card"
+        self.delegate?.paymentTransactionDetails = (transactionID, invoiceId ?? "", paymentGateway)
+        delegate?.paymentCompleted = true
+      case .failure(let error):
+        completion(nil, invoiceId, NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: error.errorDescription]))
+      }
+    }
+  }
+  
+  
+}
+
 extension PlaceOrderPaymentMethodsTableViewCell{
   
   func setupApplePay() {
-    print("🟢 setupApplePay CALLED")
-        print("paymentMethodView frame:", paymentMethodView.frame)
-        print("applePayButton previously added:", applePayButton.superview != nil)
-      if applePayButton.superview != nil { return }
-      paymentMethodView.addSubview(applePayButton)
-      applePayButton.translatesAutoresizingMaskIntoConstraints = false
-      NSLayoutConstraint.activate([
-          applePayButton.leadingAnchor.constraint(equalTo: paymentMethodView.leadingAnchor),
-          applePayButton.trailingAnchor.constraint(equalTo: paymentMethodView.trailingAnchor),
-          applePayButton.topAnchor.constraint(equalTo: paymentMethodView.topAnchor),
-          applePayButton.bottomAnchor.constraint(equalTo: paymentMethodView.bottomAnchor),
-          applePayButton.heightAnchor.constraint(equalToConstant: 50)
-      ])
+    paymentButtonView.addSubview(applePayButton)
+    applePayButton.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      applePayButton.leadingAnchor.constraint(equalTo: paymentButtonView.leadingAnchor),
+      applePayButton.trailingAnchor.constraint(equalTo: paymentButtonView.trailingAnchor),
+      applePayButton.topAnchor.constraint(equalTo: paymentButtonView.topAnchor),
+      applePayButton.bottomAnchor.constraint(equalTo: paymentButtonView.bottomAnchor),
+      applePayButton.heightAnchor.constraint(equalToConstant: 50)
+    ])
   }
-  
-//  func startApplePaySession() {
-//    let invoiceValue = Decimal(totalAmountToPay)
-//    let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
-//    request.displayCurrencyIso = .uAE_AED
-//    request.customerName = "Customer"
-//    request.userDefinedField = "ORDER-38757353"
-//    MFPaymentRequest.shared.initiateSession(apiLanguage: .english) { [weak self] response in
-//      guard let self = self else { return }
-//      switch response {
-//      case .success(let session):
-//        print("Session initiated for Apple Pay")
-//        self.applePayButton.load(session, request, .english,
-//                                 startLoading: {
-//          print("Starting Apple Pay...")
-//        },
-//                                 completion: { response, invoiceId in
-//          switch response {
-//          case .success(let executeResponse):
-//            print("Apple Pay success: Invoice \(invoiceId ?? "N/A")")
-////            let transactionID = executeResponse.invoiceTransactions?.first?.transactionID ?? ""
-////            let gateway = executeResponse.invoiceTransactions?.first?.paymentGateway ?? "ApplePay"
-//            self.onPaymentCompletion?(executeResponse, invoiceId, nil)
-//          case .failure(let error):
-//            print("Apple Pay failed: \(error.errorDescription)")
-//          }
-//        })
-//      case .failure(let error):
-//        print("Failed to initiate session: \(error.localizedDescription)")
-//      }
-//    }
-//  }
   
   func startApplePaySession() {
-      print("🔥 startApplePaySession CALLED")
-
-      let invoiceValue = Decimal(totalAmountToPay)
-      let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
-      request.displayCurrencyIso = .uAE_AED
-      request.customerName = "Customer"
-      request.userDefinedField = "ORDER-38757353"
-
-      MFPaymentRequest.shared.initiateSession(apiLanguage: .english) { [weak self] response in
-          guard let self = self else { return }
-
+    let invoiceValue = Decimal(totalAmountToPay)
+    let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
+    request.displayCurrencyIso = .uAE_AED
+    request.customerName = "Customer"
+    request.userDefinedField = "ORDER-45794947574tr"
+    MFPaymentRequest.shared.initiateSession(apiLanguage: .english) { [weak self] response in
+      guard let self = self else { return }
+      switch response {
+      case .success(let session):
+        print("Session initiated for Apple Pay")
+        self.applePayButton.load(session, request, .english,
+                                 startLoading: {
+          print("Starting Apple Pay...")
+        },
+                                 completion: { response, invoiceId in
           switch response {
-          case .success(let session):
-              print("✅ Session initiated for Apple Pay")
-              
-              // Before loading
-              print("🟦 Loading Apple Pay button...")
-
-              self.applePayButton.load(session, request, .english,
-                  startLoading: {
-                      print("🚀 Apple Pay UI is now loading...")
-                  },
-                  completion: { response, invoiceId in
-                      print("🎯 Apple Pay completion triggered")
-
-                      switch response {
-                      case .success(let executeResponse):
-                          print("💚 Apple Pay success")
-                      case .failure(let error):
-                          print("💔 Apple Pay failed: \(error.errorDescription)")
-                      }
-                  }
-              )
-
+          case .success(let executeResponse):
+            print("Apple Pay success: Invoice \(invoiceId ?? "N/A")")
+            let transactionID = executeResponse.invoiceTransactions?.first?.transactionID ?? ""
+            let gateway = executeResponse.invoiceTransactions?.first?.paymentGateway ?? "ApplePay"
+            self.delegate?.paymentTransactionDetails = (transactionID, invoiceId ?? "", gateway)
+            self.delegate?.paymentCompleted = true
           case .failure(let error):
-              print("❌ Session init failed:", error.localizedDescription)
+            print("Apple Pay failed: \(error.errorDescription)")
+            self.delegate?.didReceivePaymentError("Apple Pay failed: \(error.errorDescription)")
+          }
+        })
+      case .failure(let error):
+        print("Failed to initiate session: \(error.localizedDescription)")
+        self.delegate?.didReceivePaymentError("Failed to start Apple Pay session")
+      }
+    }
+  }
+  
+  func creditDebitCardPayment(invoiceValue: Decimal,
+                              orderId: String,
+                              supplierId: String?,
+                              completion: @escaping (MFPaymentStatusResponse?, String?, Error?) -> Void) {
+                
+                guard let supplierIDString = supplierId,
+                      let supplierCode = Int(supplierIDString) else {
+                    completion(nil, nil, NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid supplier ID."]))
+                    return
+                }
+                
+                // Payment method ID 2 for VisaPay
+                let request = MFExecutePaymentRequest(invoiceValue: invoiceValue, paymentMethod: 2)
+                request.customerReference = orderId
+                
+                let supplier = MFSupplier(supplierCode: 4, invoiceShare: invoiceValue)
+                request.suppliers = [supplier]
+                request.displayCurrencyIso = .uAE_AED // Or your currency
+
+                MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { result, invoiceId in
+                    switch result {
+                    case .success(let paymentStatus):
+                        completion(paymentStatus, invoiceId, nil)
+                        
+                        let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
+                        let paymentGateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "VisaPay"
+                        
+                        self.delegate?.paymentTransactionDetails = (transactionID, invoiceId ?? "", paymentGateway)
+                        self.delegate?.paymentCompleted = true
+                        
+                    case .failure(let error):
+                        completion(nil, invoiceId,
+                                   NSError(domain: "", code: 0,
+                                           userInfo: [NSLocalizedDescriptionKey: error.errorDescription]))
+                    }
+                }
+            }
+  
+  func payByKNET(invoiceValue: Decimal,
+                     orderId: String,
+                     supplierId: String?,
+                     completion: @escaping (MFPaymentStatusResponse?, String?, Error?) -> Void) {
+    let request = MFExecutePaymentRequest(invoiceValue: invoiceValue, paymentMethod: 1)
+          request.customerReference = orderId
+    request.displayCurrencyIso = .kuwait_KWD
+
+          let supplier = MFSupplier(supplierCode: 4, invoiceShare: invoiceValue)
+          request.suppliers = [supplier]
+
+    MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { result, invoiceId in
+              switch result {
+              case .success(let paymentStatus):
+                  completion(paymentStatus, invoiceId, nil)
+
+                  let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
+                  let paymentGateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "KNET"
+
+                  self.delegate?.paymentTransactionDetails = (transactionID, invoiceId ?? "", paymentGateway)
+                  self.delegate?.paymentCompleted = true
+
+              case .failure(let error):
+                  completion(nil, invoiceId,
+                             NSError(domain: "", code: 0,
+                                     userInfo: [NSLocalizedDescriptionKey: error.errorDescription]))
+              }
           }
       }
-  }
+  
+  func payByVisaPay(invoiceValue: Decimal,
+                        orderId: String,
+                        supplierId: String?,
+                        completion: @escaping (MFPaymentStatusResponse?, String?, Error?) -> Void) {
+          
+          guard let supplierIDString = supplierId,
+                let supplierCode = Int(supplierIDString) else {
+              completion(nil, nil, NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid supplier ID."]))
+              return
+          }
+          
+          // Payment method ID 2 for VisaPay
+          let request = MFExecutePaymentRequest(invoiceValue: invoiceValue, paymentMethod: 2)
+          request.customerReference = orderId
+          
+          let supplier = MFSupplier(supplierCode: 4, invoiceShare: invoiceValue)
+          request.suppliers = [supplier]
+          request.displayCurrencyIso = .uAE_AED // Or your currency
 
+          MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { result, invoiceId in
+              switch result {
+              case .success(let paymentStatus):
+                  completion(paymentStatus, invoiceId, nil)
+                  
+                  let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
+                  let paymentGateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "VisaPay"
+                  
+                  self.delegate?.paymentTransactionDetails = (transactionID, invoiceId ?? "", paymentGateway)
+                  self.delegate?.paymentCompleted = true
+                  
+              case .failure(let error):
+                  completion(nil, invoiceId,
+                             NSError(domain: "", code: 0,
+                                     userInfo: [NSLocalizedDescriptionKey: error.errorDescription]))
+              }
+          }
+      }
+  
 }
+
+protocol PlaceOrderPaymentMethodsCellDelegate: AnyObject {
+  var paymentTransactionDetails: (transactionID: String, invoiceId: String, paymentGateway: String)? { get set }
+  var paymentCompleted: Bool { get set }
+  func didReceivePaymentError(_ message: String)
+}
+

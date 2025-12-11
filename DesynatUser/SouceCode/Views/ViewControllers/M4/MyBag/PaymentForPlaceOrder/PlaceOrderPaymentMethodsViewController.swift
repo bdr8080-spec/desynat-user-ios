@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import MFSDK
 
-class PlaceOrderPaymentMethodsViewController: UIViewController {
+class PlaceOrderPaymentMethodsViewController: UIViewController, PlaceOrderPaymentMethodsCellDelegate {
+  func didReceivePaymentError(_ message: String) {
+    showAlert(msg: message)
+  }
   
   @IBOutlet weak var giftCardAmountLabel: UILabel!
   @IBOutlet weak var giftCardLabel: UILabel!
@@ -24,6 +28,20 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
   var giftCardDetails: UseGiftCardDataModel?
   var giftIsChecked: Bool = false
   var param: [String: Any] = [:]
+  let applePayButton = MFApplePayButton()
+  var paymentTransactionDetails: (transactionID: String, invoiceId: String, paymentGateway: String)?
+  var paymentCompleted: Bool = false
+  var getToastMessage: String = ""
+  var totalAmountToPay: Double = 0.0
+  var orderID: String = "46464646"
+  let samsungPayButton: UIButton = {
+    let button = UIButton(type: .system)
+    button.setTitle("Pay with Samsung Pay", for: .normal)
+    button.backgroundColor = .black
+    button.setTitleColor(.white, for: .normal)
+    button.layer.cornerRadius = 8
+    return button
+  }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -34,6 +52,10 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
     DispatchQueue.main.async {
       self.updatePaymentTableHeight()
     }
+//    if let amountString = param["total_amount"] as? String,
+//       let amount = Int(amountString) {
+//      totalAmountToPay = amount
+//    }
   }
   
   @IBAction func placeOrderDidTapped(_ sender: Any) {
@@ -43,20 +65,44 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
     }
     switch method {
     case .payByKNET:
-      showAlert(msg: "Please tap the Apple Pay button to continue.") // Adjust message if needed
-    case .applePay:
-      showAlert(msg: "Please tap the Apple Pay button to continue.")
+      guard paymentCompleted, let details = paymentTransactionDetails else {
+        if !getToastMessage.isEmpty {
+          showToast(msg: getToastMessage)
+        } else {
+          showAlert(msg: "Please complete the payment")
+        }
+        return
+      }
+      print("details, \(details)")
+      proceedToPay()
+    case .applePay, .creditDebitCard:
+      guard paymentCompleted, let details = paymentTransactionDetails else {
+        if !getToastMessage.isEmpty {
+          showToast(msg: getToastMessage)
+        } else {
+          showAlert(msg: "Please complete the payment")
+        }
+        return
+      }
+      print("details, \(details)")
+      proceedToPay()
     case .visapay:
-      showAlert(msg: "Please implement standard Fatoorah execute for \(method)")
-    case .samsungPay:
-      showAlert(msg: "Please implement standard Fatoorah execute for \(method)")
-    case .creditDebitCard:
-      showAlert(msg: "Please implement standard Fatoorah execute for \(method)")
+      guard paymentCompleted, let details = paymentTransactionDetails else {
+        if !getToastMessage.isEmpty {
+          showToast(msg: getToastMessage)
+        } else {
+          showAlert(msg: "Please complete the payment")
+        }
+        return
+      }
+      print("details, \(details)")
+      proceedToPay()
+//    case .samsungPay:
+//      showAlert(msg: "Please implement standard Fatoorah execute for \(method)")
     case .inAppWallet:
       showAlert(msg: "In App Wallet")
       proceedToPay()
     case .cashOnDelivery:
-      showAlert(msg: "Cash on Delivery")
       proceedToPay()
     }
   }
@@ -88,6 +134,7 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
     viewModel.placeOrderApi(param: param)
   }
   
+  
   func updatePaymentTableHeight() {
     self.paymnetTableView.layoutIfNeeded()
     self.paymentTableHeightConstraint.constant = self.paymnetTableView.contentSize.height
@@ -102,7 +149,6 @@ extension PlaceOrderPaymentMethodsViewController: UITableViewDelegate, UITableVi
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
     let cell = tableView.dequeueReusableCell(
       withIdentifier: "PlaceOrderPaymentMethodsTableViewCell",
       for: indexPath
@@ -111,10 +157,7 @@ extension PlaceOrderPaymentMethodsViewController: UITableViewDelegate, UITableVi
     cell.titleLabel.text = data.paymentMethodTitle
     cell.paymentMethdImageView.image = UIImage(named: data.paymentMethodImage)
     cell.descriptionLabel.text = data.description
-    if let amountString = param["total_amount"] as? String,
-       let amount = Int(amountString) {
-      cell.totalAmountToPay = amount
-    }
+    cell.delegate = self
     cell.addCardDidTapped = { [weak self] in
       guard let self = self else { return }
       let nextVC = AddCardViewController.instantiate(fromAppStoryboard: .MyBag)
@@ -125,80 +168,90 @@ extension PlaceOrderPaymentMethodsViewController: UITableViewDelegate, UITableVi
       guard let self = self else { return }
       // Call your API here
     }
-    // Hide all by default
+    cell.viewApple.isHidden = true
+    cell.viewCreditCard.isHidden = true
     cell.descriptionStackView.isHidden = true
     cell.checkboxStackView.isHidden = true
     cell.descriptionCheckbox.isHidden = true
     cell.cardsTableView.isHidden = true
     cell.addNewCardView.isHidden = true
     cell.cardsCount = 0
+
     let isSelected = (selectedPaymentMethod?.rawValue == data.paymentMethodTitle)
+
     cell.selecetdPaymentMethodButtonOutlet.setImage(
-      isSelected ? UIImage(named: "radioSelected") : UIImage(named: "radioUnselected"),
-      for: .normal
+        isSelected ? UIImage(named: "radioSelected") : UIImage(named: "radioUnselected"),
+        for: .normal
     )
-    
+
     if isSelected {
-      switch selectedPaymentMethod {
-      case .creditDebitCard:
-        cell.descriptionStackView.isHidden = false
-        cell.checkboxStackView.isHidden = false
-        cell.descriptionCheckbox.isHidden = false
-        
-        cell.cardsTableView.isHidden = false
-        cell.addNewCardView.isHidden = false
-        
-        cell.cardsCount = 2
-        cell.cardsTableView.reloadData()
-        cell.updateCardsTableViewHeight()
-        cell.fixStackViewLayout()
-      case .inAppWallet:
-        cell.descriptionStackView.isHidden = false
-        cell.checkboxStackView.isHidden = false
-        cell.cardsCount = 0
-        cell.fixStackViewLayout()
-      case .applePay:
-        cell.paymentMethodView.isHidden = false
-        DispatchQueue.main.async {
-          cell.layoutIfNeeded()
-          cell.setupApplePay()
-          cell.startApplePaySession()
+        switch selectedPaymentMethod {
+        case .payByKNET:
+//          cell.descriptionStackView.isHidden = false
+          cell.payByKNET(
+            invoiceValue: Decimal(totalAmountToPay),//Decimal(Double(totalAmountToPay)),
+              orderId: orderID,
+              supplierId: "4897397403"//param["supplier_id"] as? String ?? ""
+          ) { [weak self] response, invoiceId, error in
+            
+            guard let self = self else { return }
+            
+            if let err = error {
+              self.showAlert(msg: err.localizedDescription)
+              return
+            }
+          }
+        case .applePay:
+            cell.descriptionStackView.isHidden = false
+            cell.viewApple.isHidden = false
+            cell.setupApplePay()
+            cell.startApplePaySession()
+
+        case .visapay:
+//          cell.descriptionStackView.isHidden = false
+          cell.payByVisaPay(
+                      invoiceValue: Decimal(totalAmountToPay),
+                      orderId: orderID,
+                      supplierId: "4897397403" // Or param["supplier_id"]
+                  ) { [weak self] response, invoiceId, error in
+                      guard let self = self else { return }
+                      if let err = error {
+                          self.showAlert(msg: err.localizedDescription)
+                          return
+                      }
+                      // Optionally handle successful payment here
+                  }
+//        case .samsungPay:
+//            break
+
+        case .creditDebitCard:
+//            cell.descriptionStackView.isHidden = false
+//            cell.viewCreditCard.isHidden = false
+//            cell.cardPay()
+          cell.creditDebitCardPayment(
+            invoiceValue: Decimal(totalAmountToPay),
+            orderId: orderID,
+            supplierId: "4897397403" // Or param["supplier_id"]
+        ) { [weak self] response, invoiceId, error in
+            guard let self = self else { return }
+            if let err = error {
+                self.showAlert(msg: err.localizedDescription)
+                return
+            }
+            // Optionally handle successful payment here
         }
-      default:
-        break
-      }
-    }
-    
-    // Inside cellForRowAt when selectedPaymentMethod == .applePay
-    cell.onPaymentCompletion = { [weak self] paymentResponse, invoiceId, error in
-      guard let self = self else { return }
-      
-      if let error = error {
-        self.showAlert(msg: "Payment failed: \(error.localizedDescription)")
-        return
-      }
-      
-      guard let response = paymentResponse else {
-        self.showAlert(msg: "Payment failed: No response")
-        return
-      }
-      
-      // Extract transaction details
-      let transaction = response.invoiceTransactions?.first
-      let transactionID = transaction?.transactionID ?? ""
-      let paymentGateway = transaction?.paymentGateway ?? "ApplePay"
-      
-      // Save for final order placement
-      //        self.param["transaction_id"] = transactionID
-      //        self.param["payment_gateway"] = paymentGateway
-      //        self.param["invoice_id"] = invoiceId
-      
-      // Now place the actual order
-      self.proceedToPay()
-    }
-    // After layout update table height
-    DispatchQueue.main.async {
-      self.updatePaymentTableHeight()
+
+        case .inAppWallet:
+            cell.descriptionStackView.isHidden = false
+            cell.checkboxStackView.isHidden = false
+            cell.fixStackViewLayout()
+
+        case .cashOnDelivery:
+            break
+
+        default:
+            break
+        }
     }
     return cell
   }
@@ -213,5 +266,84 @@ extension PlaceOrderPaymentMethodsViewController: UITableViewDelegate, UITableVi
       self.updatePaymentTableHeight()
     }
   }
+}
+
+
+extension PlaceOrderPaymentMethodsViewController {
+  
+  //  func startSamsungPaySession() {
+  //    let invoiceValue = Decimal(totalAmountToPay)
+  //    let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
+  //    request.displayCurrencyIso = .uAE_AED
+  //    request.customerName = "Customer"
+  //    request.userDefinedField = "ORDER-4837frberr"
+  //    MFPaymentRequest.shared.initiateSession(apiLanguage: .english) { [weak self] response in
+  //      guard let self = self else { return }
+  //      switch response {
+  //      case .success(let session):
+  //        self.applePayButton.load(session, request, .english,
+  //                                 startLoading: {
+  //        },
+  //                                 completion: { response, invoiceId in
+  //          switch response {
+  //          case .success(let executeResponse):
+  //            print("Apple Pay success: Invoice \(invoiceId ?? "N/A")")
+  //            let transactionID = executeResponse.invoiceTransactions?.first?.transactionID ?? ""
+  //            let gateway = executeResponse.invoiceTransactions?.first?.paymentGateway ?? "ApplePay"
+  //            self.applePayTransactionDetails = (transactionID, invoiceId ?? "", gateway)
+  //            self.paymentCompleted = true
+  //            //                            self.checkOutOrder(transactionId: transactionID, paymentMethod: gateway)
+  //            //                            self.orderPlaced(with: executeResponse)
+  //          case .failure(let error):
+  //            print("Apple Pay failed: \(error.errorDescription)")
+  //            self.showAlert(msg: "Apple Pay failed: \(error.errorDescription)")
+  //          }
+  //        })
+  //      case .failure(let error):
+  //        print("Failed to initiate session: \(error.localizedDescription)")
+  //        self.showAlert(msg: "Failed to start Apple Pay session")
+  //      }
+  //    }
+  //  }
+  
+  func startSamsungPaySession() {
+    let invoiceValue = Decimal(totalAmountToPay)
+    //      let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
+    let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
+    request.displayCurrencyIso = .uAE_AED
+    request.customerName = "Customer"
+    request.userDefinedField = "ORDER-4837frberr"
+    
+    //      MFPaymentRequest.shared.initiateSession(apiLanguage: .english) { [weak self] response in
+    MFPaymentRequest.shared.initiateSession(apiLanguage: .english) { [weak self] response in
+      guard let self = self else { return }
+      switch response {
+      case .success(let session):
+        print("Session initiated for Samsung Pay")
+        //
+        //              self.samsungPayButton.loadSamsungPay(session, request, .english,
+        //                                                   startLoading: {
+        //                  print("Starting Samsung Pay...")
+        //              }, completion: { response, invoiceId in
+        //                  switch response {
+        //                  case .success(let executeResponse):
+        //                      let transactionID = executeResponse.invoiceTransactions?.first?.transactionID ?? ""
+        //                      let gateway = executeResponse.invoiceTransactions?.first?.paymentGateway ?? "SamsungPay"
+        //                      self.samsungPayTransactionDetails = (transactionID, invoiceId ?? "", gateway)
+        //                      self.paymentCompleted = true
+        //                      self.proceedToPay()
+        //                  case .failure(let error):
+        //                      self.showAlert(msg: "Samsung Pay failed: \(error.errorDescription)")
+        //                  }
+        //              })
+        
+      case .failure(let error):
+        self.showAlert(msg: "Failed to start Samsung Pay session")
+      }
+    }
+  }
+  
+  
+  
 }
 

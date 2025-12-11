@@ -13,7 +13,7 @@ class PlaceOrderPaymentMethodsViewModel {
   var paymentMethods: [PaymentMethodForPlaceOrder] = [PaymentMethodForPlaceOrder(paymentMethodImage: "paymentMethods", paymentMethodTitle: "Pay by KNET", showDescription: true, description: ""),
                                                       PaymentMethodForPlaceOrder(paymentMethodImage: "applePay", paymentMethodTitle: "Apple Pay", showDescription: true, description: ""),
                                                       PaymentMethodForPlaceOrder(paymentMethodImage: "vispay", paymentMethodTitle: "Visapay", showDescription: true, description: ""),
-                                                      PaymentMethodForPlaceOrder(paymentMethodImage: "samsungPay", paymentMethodTitle: "Samsung Pay", showDescription: true, description: ""),
+                                                      //PaymentMethodForPlaceOrder(paymentMethodImage: "samsungPay", paymentMethodTitle: "Samsung Pay", showDescription: true, description: ""),
                                                       PaymentMethodForPlaceOrder(paymentMethodImage: "inAppWallet", paymentMethodTitle: "Credit/ Debit Card", showDescription: true, description: "Set as default payment method"),
                                                       PaymentMethodForPlaceOrder(paymentMethodImage: "inAppWallet", paymentMethodTitle: "In -App Wallet", showDescription: false, description: "Available Balance : 349 KD"),
                                                       PaymentMethodForPlaceOrder(paymentMethodImage: "cashOnDeliveryMethod", paymentMethodTitle: "Cash On Delivery", showDescription: true, description: "")]
@@ -58,7 +58,7 @@ enum PaymentMethodType: String {
     case payByKNET = "Pay by KNET"
     case applePay = "Apple Pay"
     case visapay = "Visapay"
-    case samsungPay = "Samsung Pay"
+//    case samsungPay = "Samsung Pay"
     case creditDebitCard = "Credit/ Debit Card"
     case inAppWallet = "In -App Wallet"
     case cashOnDelivery = "Cash On Delivery"
@@ -66,7 +66,7 @@ enum PaymentMethodType: String {
     // Map to API integer value
     var apiValue: Int {
         switch self {
-        case .payByKNET, .applePay, .visapay, .samsungPay, .creditDebitCard:
+        case .payByKNET, .applePay, .visapay, .creditDebitCard://, samsungPay:
             return 1
         case .inAppWallet:
             return 2

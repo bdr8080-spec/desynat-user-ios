@@ -30,9 +30,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        )
       
 //        // AVORA - TESTING TOKEN
-      MFSettings.shared.configure(token: "hjwN8fTAsBPH3f6Sq8huJH4o0JAa52Fv1SGD7JVvqUlylU72JnCKnTTF974Eq_eeQSJVjCiHG4ndx7cQAwwHX9c3ohdak53eTVc0r-N1aBIC13C8erZGrvISvYVFoVRtdn59h3vDBfPH5qL-fzIvhxCKfbmESgO-IvhcusQJsAxRUjMJ9PRiNc5vJYYo26LXVUxiilwBaO7wbOiMk08_n19lLgQLgN1_hfWl0Mi5uQABnpQUo0LLx8vNLyGV4YQ0TajJ7yPY5SuLzwBFbzCWnKPGKnNj9XgSs6T-rUn5RDOl0h8nYyiJcYs-LKP5gPzLZYF-7yoZuCs5NtAFpWjfcVRO83k1WkpcfVzGd6nEkFQfFskxSDw93dYkIjgNk4b2yRZGp4ny08sbeFSOFX6fxBAlqvtrZ_RPuxxfapL7eePswToOXWRxdXORMKwBCmBLryvOl7XFU3DNPQVgPuvsTSYQ525Idh20uXzTPV5wqSqbUhbuEbGJoQz9P6K1edsCaevhhMXZuBuf1gSzTIoIW1n_ZEeav1z09XccJfLwYNFidMqmjCpqXvou07Q-vNvgdcMCu6SKZGOKq9thX8pvn9vG2Jilt-5VlPY1QE1ZeuSyZTLSSK4Vige5c1ULlEKVUsikLjHmAD6yhT0xTkMm2vA_uwWV_qwAKIdvw8zQaUAiGiF8",country: .unitedArabEmirates, environment: .live
-      )
+//      MFSettings.shared.configure(token: "hjwN8fTAsBPH3f6Sq8huJH4o0JAa52Fv1SGD7JVvqUlylU72JnCKnTTF974Eq_eeQSJVjCiHG4ndx7cQAwwHX9c3ohdak53eTVc0r-N1aBIC13C8erZGrvISvYVFoVRtdn59h3vDBfPH5qL-fzIvhxCKfbmESgO-IvhcusQJsAxRUjMJ9PRiNc5vJYYo26LXVUxiilwBaO7wbOiMk08_n19lLgQLgN1_hfWl0Mi5uQABnpQUo0LLx8vNLyGV4YQ0TajJ7yPY5SuLzwBFbzCWnKPGKnNj9XgSs6T-rUn5RDOl0h8nYyiJcYs-LKP5gPzLZYF-7yoZuCs5NtAFpWjfcVRO83k1WkpcfVzGd6nEkFQfFskxSDw93dYkIjgNk4b2yRZGp4ny08sbeFSOFX6fxBAlqvtrZ_RPuxxfapL7eePswToOXWRxdXORMKwBCmBLryvOl7XFU3DNPQVgPuvsTSYQ525Idh20uXzTPV5wqSqbUhbuEbGJoQz9P6K1edsCaevhhMXZuBuf1gSzTIoIW1n_ZEeav1z09XccJfLwYNFidMqmjCpqXvou07Q-vNvgdcMCu6SKZGOKq9thX8pvn9vG2Jilt-5VlPY1QE1ZeuSyZTLSSK4Vige5c1ULlEKVUsikLjHmAD6yhT0xTkMm2vA_uwWV_qwAKIdvw8zQaUAiGiF8",country: .unitedArabEmirates, environment: .live
+//      )
       
+      
+      
+      MFSettings.shared.configure(token: "SK_KWT_vVZlnnAqu8jRByOWaRPNId4ShzEDNt256dvnjebuyzo52dXjAfRx2ixW5umjWSUx", country: .kuwait, environment: MFEnvironment.test
+      )
+//      
       // AVORA - TOKEN
 //        MFSettings.shared.configure(token: "hjwN8fTAsBPH3f6Sq8huJH4o0JAa52Fv1SGD7JVvqUlylU72JnCKnTTF974Eq_eeQSJVjCiHG4ndx7cQAwwHX9c3ohdak53eTVc0r-N1aBIC13C8erZGrvISvYVFoVRtdn59h3vDBfPH5qL-fzIvhxCKfbmESgO-IvhcusQJsAxRUjMJ9PRiNc5vJYYo26LXVUxiilwBaO7wbOiMk08_n19lLgQLgN1_hfWl0Mi5uQABnpQUo0LLx8vNLyGV4YQ0TajJ7yPY5SuLzwBFbzCWnKPGKnNj9XgSs6T-rUn5RDOl0h8nYyiJcYs-LKP5gPzLZYF-7yoZuCs5NtAFpWjfcVRO83k1WkpcfVzGd6nEkFQfFskxSDw93dYkIjgNk4b2yRZGp4ny08sbeFSOFX6fxBAlqvtrZ_RPuxxfapL7eePswToOXWRxdXORMKwBCmBLryvOl7XFU3DNPQVgPuvsTSYQ525Idh20uXzTPV5wqSqbUhbuEbGJoQz9P6K1edsCaevhhMXZuBuf1gSzTIoIW1n_ZEeav1z09XccJfLwYNFidMqmjCpqXvou07Q-vNvgdcMCu6SKZGOKq9thX8pvn9vG2Jilt-5VlPY1QE1ZeuSyZTLSSK4Vige5c1ULlEKVUsikLjHmAD6yhT0xTkMm2vA_uwWV_qwAKIdvw8zQaUAiGiF8",country: .unitedArabEmirates, environment: .live
 //        )

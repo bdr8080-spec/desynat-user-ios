@@ -100,6 +100,7 @@ class EnterCardsDetailsViewModel {
     WebService.sharedInstance.addGiftCardsApi(param: params) { (response) in
       let nextVC = PaymentMethodViewController.instantiate(fromAppStoryboard: .Profile)
       nextVC.orderId = response.orderID ?? ""
+      nextVC.payAmount = Double(response.amount ?? "0") ?? 0.0
       self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
     }
   }

@@ -15,11 +15,11 @@ class PaymentMethodViewModel {
     self.hostVC = hostVC
   }
     
-    func payForAddingCard() {
+  func payForAddingCard(transactionId: String) {
       let params: [String: Any] = [
         "order_id": hostVC.orderId,
         "payment_status": "1", // 1 paid, 2 cancel
-        "transaction_id": "Trabs23456789"]
+        "transaction_id": transactionId]
       WebService.sharedInstance.paymentForGiftCardsApi(param: params) { (response) in
         DispatchQueue.main.async { [weak self] in
           guard let self else { return }

@@ -41,6 +41,8 @@ class EnterCardsDetailsViewController: UIViewController {
     if viewModel.validFields() {
       viewModel.payForAddingCard()
     }
+//    let nextVC = PaymentMethodViewController.instantiate(fromAppStoryboard: .Profile)
+//    navigationController?.pushViewController(nextVC, animated: true)
   }
   
   func setDelegateMethod() {

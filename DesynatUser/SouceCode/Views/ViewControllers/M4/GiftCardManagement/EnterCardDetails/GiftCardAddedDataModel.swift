@@ -11,9 +11,9 @@ import Foundation
 struct GiftCardAddedDataModel: Codable {
     let orderID: String?
     let userID: Int?
-    let giftCardID: String?
+    let giftCardID, amount: String?
     let giftCardNo: Double?
-    let giftCardPin, amount, receiverID: Int?
+    let giftCardPin, receiverID: Int?
     let receiverName, receiverEmail, senderName, senderEmail: String?
     let wishMessage, notes, updatedAt, createdAt: String?
     let id: Int?

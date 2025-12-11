@@ -24,7 +24,7 @@ class PromoCodeListViewController: UIViewController {
   private var searchWorkItem: DispatchWorkItem?
   var onPromoSelected: ((GetPromoCodeListDataModel) -> Void)?
   var selectedPromocode: GetPromoCodeListDataModel?
-  var totalAmount: Int = 0
+  var totalAmount: Double = 0.0
   
   override func viewDidLoad() {
     super.viewDidLoad()
