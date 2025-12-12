@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - MyCartDetailsDataModel
 struct MyCartDetailsDataModel: Codable {
-  let discountOnMrp, discountCoupon, shippingFees: Int?
+  let discountOnMrp, discountCoupon, shippingFees: Double?
   let tax, totalAmount, totalMrp: Double?
   let userAddress: SavedAddressList?
   var cartData: [CartItemList]?

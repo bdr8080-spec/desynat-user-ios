@@ -36,3 +36,10 @@ struct PaymentMethodForCardAdditionDataModel: Codable {
         case updatedAt = "updated_at"
     }
 }
+
+struct PaymentMethod {
+  let paymentMethodImage: String
+  let paymentMethodTitle: String
+  let showDescription: Bool
+  var description: String
+}

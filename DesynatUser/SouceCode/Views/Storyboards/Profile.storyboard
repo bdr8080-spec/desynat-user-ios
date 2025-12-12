@@ -86,7 +86,7 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Your Password" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fqc-he-0Wk">
-                                                                <rect key="frame" x="20" y="14.333333333333345" width="164" height="19.666666666666671"/>
+                                                                <rect key="frame" x="20" y="14.333333333333345" width="164" height="19.666666666666664"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -1475,13 +1475,56 @@ want to continue with</string>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="v7Q-5q-nUN">
-                                <rect key="frame" x="24" y="251" width="345" height="533"/>
+                                <rect key="frame" x="24" y="251" width="345" height="475"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="2iP-pI-yVA" id="NKg-r5-XL4"/>
                                     <outlet property="delegate" destination="2iP-pI-yVA" id="bzf-1G-YLM"/>
                                 </connections>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8SW-j2-wYb">
+                                <rect key="frame" x="24" y="746" width="345" height="38"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IhD-9u-SPx">
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="38"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ld-Vj-Hqc" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="345" height="38"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="38" id="PO3-aQ-dtd"/>
+                                                </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="btnGradient"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="proceedDidTapped:" destination="2iP-pI-yVA" eventType="touchUpInside" id="ROK-j6-J6Z"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Proceed" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5K-AP-c0H">
+                                                <rect key="frame" x="143.66666666666666" y="9.333333333333373" width="58" height="19.666666666666671"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="o5K-AP-c0H" firstAttribute="centerX" secondItem="IhD-9u-SPx" secondAttribute="centerX" id="HkQ-qE-YpX"/>
+                                            <constraint firstAttribute="bottom" secondItem="3ld-Vj-Hqc" secondAttribute="bottom" id="MF6-qS-QoU"/>
+                                            <constraint firstItem="3ld-Vj-Hqc" firstAttribute="top" secondItem="IhD-9u-SPx" secondAttribute="top" id="PrW-2s-J3L"/>
+                                            <constraint firstItem="3ld-Vj-Hqc" firstAttribute="leading" secondItem="IhD-9u-SPx" secondAttribute="leading" id="Uuz-Vf-KL3"/>
+                                            <constraint firstItem="o5K-AP-c0H" firstAttribute="centerY" secondItem="IhD-9u-SPx" secondAttribute="centerY" id="f7i-e4-PhG"/>
+                                            <constraint firstAttribute="trailing" secondItem="3ld-Vj-Hqc" secondAttribute="trailing" id="zz0-6z-WtK"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Address Added" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qht-V1-krS">
                                 <rect key="frame" x="121.66666666666667" y="439.66666666666669" width="149.66666666666663" height="22.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
@@ -1494,13 +1537,16 @@ want to continue with</string>
                         <constraints>
                             <constraint firstItem="XCb-PH-r9J" firstAttribute="trailing" secondItem="wuo-Ot-Xzf" secondAttribute="trailing" id="1dn-7D-7w3"/>
                             <constraint firstItem="v7Q-5q-nUN" firstAttribute="leading" secondItem="XCb-PH-r9J" secondAttribute="leading" constant="24" id="85T-yT-EWX"/>
+                            <constraint firstItem="XCb-PH-r9J" firstAttribute="trailing" secondItem="8SW-j2-wYb" secondAttribute="trailing" constant="24" id="IYs-Y9-8QQ"/>
                             <constraint firstItem="XCb-PH-r9J" firstAttribute="trailing" secondItem="v7Q-5q-nUN" secondAttribute="trailing" constant="24" id="Krk-6b-KAy"/>
+                            <constraint firstItem="8SW-j2-wYb" firstAttribute="bottom" secondItem="XCb-PH-r9J" secondAttribute="bottom" id="MiO-pc-KaD"/>
                             <constraint firstItem="XCb-PH-r9J" firstAttribute="trailing" secondItem="dJ8-t2-ASC" secondAttribute="trailing" constant="20" id="Ncc-lD-Y9h"/>
                             <constraint firstItem="dJ8-t2-ASC" firstAttribute="top" secondItem="wuo-Ot-Xzf" secondAttribute="bottom" constant="25" id="PgA-qE-7vA"/>
                             <constraint firstItem="XCb-PH-r9J" firstAttribute="leading" secondItem="wuo-Ot-Xzf" secondAttribute="leading" id="RNj-SC-6c5"/>
+                            <constraint firstItem="8SW-j2-wYb" firstAttribute="leading" secondItem="XCb-PH-r9J" secondAttribute="leading" constant="24" id="RYt-iK-4MZ"/>
+                            <constraint firstItem="8SW-j2-wYb" firstAttribute="top" secondItem="v7Q-5q-nUN" secondAttribute="bottom" constant="20" id="SDP-k1-tml"/>
                             <constraint firstItem="v7Q-5q-nUN" firstAttribute="top" secondItem="dJ8-t2-ASC" secondAttribute="bottom" constant="20" id="Szk-bJ-Ur5"/>
                             <constraint firstItem="qht-V1-krS" firstAttribute="centerY" secondItem="XCb-PH-r9J" secondAttribute="centerY" id="ckW-ab-B9X"/>
-                            <constraint firstItem="v7Q-5q-nUN" firstAttribute="bottom" secondItem="XCb-PH-r9J" secondAttribute="bottom" id="px8-7a-klu"/>
                             <constraint firstItem="XCb-PH-r9J" firstAttribute="top" secondItem="wuo-Ot-Xzf" secondAttribute="top" id="sOq-LU-hsE"/>
                             <constraint firstItem="qht-V1-krS" firstAttribute="centerX" secondItem="XCb-PH-r9J" secondAttribute="centerX" id="tod-CQ-IN6"/>
                             <constraint firstItem="dJ8-t2-ASC" firstAttribute="leading" secondItem="XCb-PH-r9J" secondAttribute="leading" constant="20" id="zPl-1R-qLx"/>
@@ -1508,6 +1554,7 @@ want to continue with</string>
                     </view>
                     <connections>
                         <outlet property="noDataFoundLabel" destination="qht-V1-krS" id="3Uk-yq-xJf"/>
+                        <outlet property="proceedButtonView" destination="IhD-9u-SPx" id="b6d-M9-nrH"/>
                         <outlet property="savedAddressTableView" destination="v7Q-5q-nUN" id="Gj2-ZW-NVc"/>
                     </connections>
                 </viewController>
@@ -2183,7 +2230,7 @@ want to continue with</string>
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhZ-sp-xi4">
-                                                                <rect key="frame" x="42" y="14.333333333333373" width="103" height="19.666666666666671"/>
+                                                                <rect key="frame" x="42" y="14.333333333333373" width="103" height="19.666666666666664"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -2235,7 +2282,7 @@ want to continue with</string>
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Office" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mn0-Ra-ZIG">
-                                                                <rect key="frame" x="42" y="14.333333333333373" width="103" height="19.666666666666671"/>
+                                                                <rect key="frame" x="42" y="14.333333333333373" width="103" height="19.666666666666664"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -2556,7 +2603,7 @@ want to continue with</string>
                                             <action selector="backDidTapped:" destination="LOp-bJ-3oK" eventType="touchUpInside" id="cUe-tF-gAk"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Occasion Type" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qda-hC-jaF">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Gift Card Category" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qda-hC-jaF">
                                         <rect key="frame" x="66" y="8.6666666666666732" width="267" height="22.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2719,10 +2766,10 @@ want to continue with</string>
                                 <rect key="frame" x="0.0" y="183" width="393" height="601"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sPM-ub-EW9">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="886"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="856"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="zJ9-cP-H5y">
-                                                <rect key="frame" x="24" y="0.0" width="344" height="886"/>
+                                                <rect key="frame" x="24" y="0.0" width="344" height="856"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="HkD-Bb-XNb">
                                                         <rect key="frame" x="0.0" y="0.0" width="344" height="157.66666666666666"/>
@@ -2782,8 +2829,8 @@ want to continue with</string>
                                                             </view>
                                                         </subviews>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="erP-6a-tY9">
-                                                        <rect key="frame" x="0.0" y="177.66666666666669" width="344" height="212.66666666666669"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="erP-6a-tY9">
+                                                        <rect key="frame" x="0.0" y="177.66666666666669" width="344" height="202.66666666666669"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recepient Details" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hE0-r8-aun">
                                                                 <rect key="frame" x="0.0" y="0.0" width="344" height="22.666666666666668"/>
@@ -2792,7 +2839,7 @@ want to continue with</string>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYL-C9-1L7">
-                                                                <rect key="frame" x="0.0" y="42.666666666666629" width="344" height="75"/>
+                                                                <rect key="frame" x="0.0" y="37.666666666666629" width="344" height="75"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5s-ia-MUL">
                                                                         <rect key="frame" x="0.0" y="0.0" width="344" height="20"/>
@@ -2842,7 +2889,7 @@ want to continue with</string>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KZw-UN-DCH">
-                                                                <rect key="frame" x="0.0" y="137.66666666666663" width="344" height="75"/>
+                                                                <rect key="frame" x="0.0" y="127.66666666666663" width="344" height="75"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ke-PJ-YId">
                                                                         <rect key="frame" x="0.0" y="0.0" width="344" height="20"/>
@@ -2893,8 +2940,8 @@ want to continue with</string>
                                                             </view>
                                                         </subviews>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cjA-6M-6ZA">
-                                                        <rect key="frame" x="0.0" y="410.33333333333337" width="344" height="377.66666666666663"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="cjA-6M-6ZA">
+                                                        <rect key="frame" x="0.0" y="400.33333333333337" width="344" height="357.66666666666663"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qrw-Bs-Op5">
                                                                 <rect key="frame" x="0.0" y="0.0" width="344" height="22.666666666666668"/>
@@ -2903,7 +2950,7 @@ want to continue with</string>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aBJ-aX-zKx">
-                                                                <rect key="frame" x="0.0" y="42.666666666666629" width="344" height="75"/>
+                                                                <rect key="frame" x="0.0" y="37.666666666666629" width="344" height="75"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biV-qR-0gp">
                                                                         <rect key="frame" x="0.0" y="0.0" width="344" height="20"/>
@@ -2953,7 +3000,7 @@ want to continue with</string>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2gh-Pt-ppL">
-                                                                <rect key="frame" x="0.0" y="137.66666666666663" width="344" height="100"/>
+                                                                <rect key="frame" x="0.0" y="127.66666666666663" width="344" height="100"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wish Message" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hga-DY-WnW">
                                                                         <rect key="frame" x="0.0" y="0.0" width="344" height="13"/>
@@ -3008,13 +3055,13 @@ want to continue with</string>
                                                                 </constraints>
                                                             </view>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iGS-Ul-MVh">
-                                                                <rect key="frame" x="0.0" y="257.66666666666663" width="344" height="0.0"/>
+                                                                <rect key="frame" x="0.0" y="242.66666666666663" width="344" height="0.0"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Uj-un-bOC">
-                                                                <rect key="frame" x="0.0" y="277.66666666666663" width="344" height="100"/>
+                                                                <rect key="frame" x="0.0" y="257.66666666666663" width="344" height="100"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuB-se-jdR">
                                                                         <rect key="frame" x="0.0" y="0.0" width="344" height="13"/>
@@ -3071,7 +3118,7 @@ want to continue with</string>
                                                         </subviews>
                                                     </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q0M-ke-hDa">
-                                                        <rect key="frame" x="0.0" y="808" width="344" height="20"/>
+                                                        <rect key="frame" x="0.0" y="778" width="344" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="saK-8H-Lgz"/>
                                                         </constraints>
@@ -3080,7 +3127,7 @@ want to continue with</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CC5-oQ-tFm">
-                                                        <rect key="frame" x="0.0" y="848" width="344" height="38"/>
+                                                        <rect key="frame" x="0.0" y="818" width="344" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oGB-Hq-mz7" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="344" height="38"/>
@@ -3102,7 +3149,7 @@ want to continue with</string>
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eqB-pG-2a9">
-                                                                <rect key="frame" x="159" y="9.3333333333332593" width="26" height="19.666666666666671"/>
+                                                                <rect key="frame" x="159" y="9.333333333333373" width="26" height="19.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -3217,10 +3264,10 @@ want to continue with</string>
                                 <rect key="frame" x="0.0" y="183" width="393" height="601"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jkn-rm-c1P">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="835.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="760.66666666666663"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="S87-FN-C1c">
-                                                <rect key="frame" x="24" y="0.0" width="344" height="835.66666666666663"/>
+                                                <rect key="frame" x="24" y="0.0" width="344" height="760.66666666666663"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SELECT PAYMENT METHOD" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B0Z-2N-BAt">
                                                         <rect key="frame" x="0.0" y="0.0" width="344" height="22.666666666666668"/>
@@ -3229,32 +3276,35 @@ want to continue with</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u60-EW-pHb" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="42.666666666666629" width="344" height="695"/>
+                                                        <rect key="frame" x="0.0" y="42.666666666666629" width="344" height="620"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="stA-Qp-d7p">
                                                                 <rect key="frame" x="15" y="15" width="314" height="50"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EGB-B0-VkB">
-                                                                        <rect key="frame" x="0.0" y="13" width="24" height="24"/>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="radioUnselected" translatesAutoresizingMaskIntoConstraints="NO" id="sXC-wp-dao">
+                                                                        <rect key="frame" x="0.0" y="15" width="20" height="20"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="24" id="4dJ-bh-Sk6"/>
-                                                                            <constraint firstAttribute="width" constant="24" id="pcA-zK-ylK"/>
+                                                                            <constraint firstAttribute="width" constant="20" id="VBR-Dh-pJf"/>
+                                                                            <constraint firstAttribute="height" constant="20" id="khm-a5-uTq"/>
                                                                         </constraints>
+                                                                    </imageView>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EGB-B0-VkB">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="314" height="50"/>
                                                                         <state key="normal" title="Button"/>
-                                                                        <buttonConfiguration key="configuration" style="plain" image="radioUnselected"/>
+                                                                        <buttonConfiguration key="configuration" style="plain"/>
                                                                         <connections>
                                                                             <action selector="cardButtonAction:" destination="2Ms-UV-cIF" eventType="touchUpInside" id="aR8-un-oDj"/>
                                                                         </connections>
                                                                     </button>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="creditCard" translatesAutoresizingMaskIntoConstraints="NO" id="R5c-za-O0A">
-                                                                        <rect key="frame" x="36" y="13" width="34" height="24"/>
+                                                                        <rect key="frame" x="32" y="13" width="34" height="24"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="34" id="O8v-Bn-joK"/>
                                                                             <constraint firstAttribute="height" constant="24" id="hYQ-s6-3co"/>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credit/ Debit Card" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ip7-GB-diO">
-                                                                        <rect key="frame" x="82" y="15.333333333333345" width="208" height="19.666666666666671"/>
+                                                                        <rect key="frame" x="78" y="15.333333333333345" width="212" height="19.666666666666671"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -3262,18 +3312,22 @@ want to continue with</string>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
-                                                                    <constraint firstItem="R5c-za-O0A" firstAttribute="leading" secondItem="EGB-B0-VkB" secondAttribute="trailing" constant="12" id="HGq-Tb-VuM"/>
+                                                                    <constraint firstItem="EGB-B0-VkB" firstAttribute="leading" secondItem="stA-Qp-d7p" secondAttribute="leading" id="0Mg-4J-v4W"/>
+                                                                    <constraint firstItem="R5c-za-O0A" firstAttribute="leading" secondItem="sXC-wp-dao" secondAttribute="trailing" constant="12" id="EAX-Bz-9p7"/>
+                                                                    <constraint firstItem="EGB-B0-VkB" firstAttribute="top" secondItem="stA-Qp-d7p" secondAttribute="top" id="Ibx-G2-t5t"/>
                                                                     <constraint firstAttribute="height" constant="50" id="Mfh-Mo-eK6"/>
-                                                                    <constraint firstItem="EGB-B0-VkB" firstAttribute="centerY" secondItem="stA-Qp-d7p" secondAttribute="centerY" id="c3M-vy-fcC"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="EGB-B0-VkB" secondAttribute="trailing" id="Ngw-IU-11Z"/>
+                                                                    <constraint firstItem="R5c-za-O0A" firstAttribute="centerY" secondItem="sXC-wp-dao" secondAttribute="centerY" id="d9K-3E-O7u"/>
                                                                     <constraint firstItem="ip7-GB-diO" firstAttribute="leading" secondItem="R5c-za-O0A" secondAttribute="trailing" constant="12" id="eyH-si-NIl"/>
                                                                     <constraint firstItem="ip7-GB-diO" firstAttribute="centerY" secondItem="R5c-za-O0A" secondAttribute="centerY" id="goF-wK-8pX"/>
-                                                                    <constraint firstItem="EGB-B0-VkB" firstAttribute="leading" secondItem="stA-Qp-d7p" secondAttribute="leading" id="r9I-fM-Wy6"/>
-                                                                    <constraint firstItem="R5c-za-O0A" firstAttribute="centerY" secondItem="EGB-B0-VkB" secondAttribute="centerY" id="uWj-Rs-j2q"/>
+                                                                    <constraint firstItem="sXC-wp-dao" firstAttribute="leading" secondItem="stA-Qp-d7p" secondAttribute="leading" id="qJ4-cw-aEH"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="EGB-B0-VkB" secondAttribute="bottom" id="s6Q-b0-fNN"/>
+                                                                    <constraint firstItem="sXC-wp-dao" firstAttribute="centerY" secondItem="stA-Qp-d7p" secondAttribute="centerY" id="wLp-O4-W96"/>
                                                                     <constraint firstAttribute="trailing" secondItem="ip7-GB-diO" secondAttribute="trailing" constant="24" id="xyM-zA-eIM"/>
                                                                 </constraints>
                                                             </view>
                                                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="UVA-XX-ipP">
-                                                                <rect key="frame" x="51" y="70.000000000000028" width="269" height="0.0"/>
+                                                                <rect key="frame" x="47" y="70.000000000000028" width="273" height="0.0"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" id="arM-fL-hc6"/>
@@ -3284,13 +3338,13 @@ want to continue with</string>
                                                                 </connections>
                                                             </tableView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hRP-gx-4NJ">
-                                                                <rect key="frame" x="51" y="70.000000000000028" width="278" height="249.99999999999997"/>
+                                                                <rect key="frame" x="47" y="65.000000000000028" width="282" height="249.99999999999997"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z8b-DA-FpU">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="278" height="250"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="282" height="250"/>
                                                                         <subviews>
                                                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="353" placeholderIntrinsicHeight="114" translatesAutoresizingMaskIntoConstraints="NO" id="54M-nq-ag8" customClass="MFPaymentCardView" customModule="MFSDK">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="278" height="250"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="282" height="250"/>
                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             </view>
                                                                         </subviews>
@@ -3305,17 +3359,17 @@ want to continue with</string>
                                                                     </view>
                                                                 </subviews>
                                                             </stackView>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oI3-kD-SfP">
-                                                                <rect key="frame" x="0.0" y="340" width="344" height="40"/>
+                                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oI3-kD-SfP">
+                                                                <rect key="frame" x="0.0" y="315" width="344" height="0.0"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ Add new card" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GQl-pS-h7l">
-                                                                        <rect key="frame" x="15" y="10" width="112" height="20"/>
+                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ Add new card" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GQl-pS-h7l">
+                                                                        <rect key="frame" x="15" y="10.000000000000002" width="112" height="19.666666666666671"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Efh-a4-hdl">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="344" height="40"/>
+                                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Efh-a4-hdl">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="344" height="0.0"/>
                                                                         <state key="normal" title="Button"/>
                                                                         <buttonConfiguration key="configuration" style="plain"/>
                                                                     </button>
@@ -3325,7 +3379,7 @@ want to continue with</string>
                                                                     <constraint firstItem="Efh-a4-hdl" firstAttribute="top" secondItem="oI3-kD-SfP" secondAttribute="top" id="1AL-EO-tWE"/>
                                                                     <constraint firstItem="GQl-pS-h7l" firstAttribute="leading" secondItem="oI3-kD-SfP" secondAttribute="leading" constant="15" id="9YF-20-HXc"/>
                                                                     <constraint firstItem="Efh-a4-hdl" firstAttribute="leading" secondItem="oI3-kD-SfP" secondAttribute="leading" id="ErG-c2-GUQ"/>
-                                                                    <constraint firstAttribute="height" constant="40" id="JH1-Z4-l1s"/>
+                                                                    <constraint firstAttribute="height" id="JH1-Z4-l1s"/>
                                                                     <constraint firstItem="GQl-pS-h7l" firstAttribute="top" secondItem="oI3-kD-SfP" secondAttribute="top" constant="10" id="ZVP-M4-xSH"/>
                                                                     <constraint firstAttribute="bottom" secondItem="Efh-a4-hdl" secondAttribute="bottom" id="gLb-e3-V2a"/>
                                                                     <constraint firstItem="GQl-pS-h7l" firstAttribute="centerY" secondItem="oI3-kD-SfP" secondAttribute="centerY" id="mOc-la-pBg"/>
@@ -3333,7 +3387,7 @@ want to continue with</string>
                                                                 </constraints>
                                                             </view>
                                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="e9w-UL-w4Z">
-                                                                <rect key="frame" x="0.0" y="390" width="344" height="300"/>
+                                                                <rect key="frame" x="0.0" y="315" width="344" height="300"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="300" id="fHg-uD-2Wt"/>
@@ -3353,11 +3407,11 @@ want to continue with</string>
                                                             <constraint firstItem="stA-Qp-d7p" firstAttribute="top" secondItem="u60-EW-pHb" secondAttribute="top" constant="15" id="7YS-em-5ct"/>
                                                             <constraint firstItem="oI3-kD-SfP" firstAttribute="leading" secondItem="e9w-UL-w4Z" secondAttribute="leading" id="Dfg-Xt-TTP"/>
                                                             <constraint firstAttribute="trailing" secondItem="UVA-XX-ipP" secondAttribute="trailing" constant="24" id="E1o-V2-aqe"/>
-                                                            <constraint firstItem="e9w-UL-w4Z" firstAttribute="top" secondItem="oI3-kD-SfP" secondAttribute="bottom" constant="10" id="EMw-CA-Dfs"/>
-                                                            <constraint firstItem="oI3-kD-SfP" firstAttribute="top" secondItem="hRP-gx-4NJ" secondAttribute="bottom" constant="20" id="FoX-Cl-sXn"/>
+                                                            <constraint firstItem="e9w-UL-w4Z" firstAttribute="top" secondItem="oI3-kD-SfP" secondAttribute="bottom" id="EMw-CA-Dfs"/>
+                                                            <constraint firstItem="oI3-kD-SfP" firstAttribute="top" secondItem="hRP-gx-4NJ" secondAttribute="bottom" id="FoX-Cl-sXn"/>
                                                             <constraint firstItem="stA-Qp-d7p" firstAttribute="leading" secondItem="u60-EW-pHb" secondAttribute="leading" constant="15" id="PP0-RH-k7s"/>
                                                             <constraint firstAttribute="trailing" secondItem="oI3-kD-SfP" secondAttribute="trailing" id="Vjw-tT-m7F"/>
-                                                            <constraint firstItem="hRP-gx-4NJ" firstAttribute="top" secondItem="stA-Qp-d7p" secondAttribute="bottom" constant="5.0000000000000284" id="j03-Jq-xdE"/>
+                                                            <constraint firstItem="hRP-gx-4NJ" firstAttribute="top" secondItem="stA-Qp-d7p" secondAttribute="bottom" id="j03-Jq-xdE"/>
                                                             <constraint firstItem="oI3-kD-SfP" firstAttribute="leading" secondItem="u60-EW-pHb" secondAttribute="leading" id="ncr-w6-Adz"/>
                                                             <constraint firstAttribute="bottom" secondItem="e9w-UL-w4Z" secondAttribute="bottom" constant="5" id="pAj-y9-3gN"/>
                                                             <constraint firstItem="hRP-gx-4NJ" firstAttribute="trailing" secondItem="stA-Qp-d7p" secondAttribute="trailing" id="ptm-SJ-Sxy"/>
@@ -3376,7 +3430,7 @@ want to continue with</string>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gOH-9P-Akq">
-                                                        <rect key="frame" x="0.0" y="757.66666666666663" width="344" height="20"/>
+                                                        <rect key="frame" x="0.0" y="682.66666666666663" width="344" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="gCB-3t-QLE"/>
                                                         </constraints>
@@ -3385,7 +3439,7 @@ want to continue with</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="95Z-iD-yM5">
-                                                        <rect key="frame" x="0.0" y="797.66666666666663" width="344" height="38"/>
+                                                        <rect key="frame" x="0.0" y="722.66666666666663" width="344" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nRZ-7f-cZx" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="344" height="38"/>
@@ -3459,7 +3513,7 @@ want to continue with</string>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="cardButtonOutlet" destination="EGB-B0-VkB" id="Tqg-yv-73q"/>
+                        <outlet property="cardSelectionImageView" destination="sXC-wp-dao" id="Lyj-Uo-PFe"/>
                         <outlet property="cardsTableViewHeightConstraint" destination="arM-fL-hc6" id="YO3-nO-NH0"/>
                         <outlet property="cardsTableiew" destination="UVA-XX-ipP" id="Ery-oP-Abb"/>
                         <outlet property="paymentMethodsTableView" destination="e9w-UL-w4Z" id="ux0-SJ-6um"/>

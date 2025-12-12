@@ -37,14 +37,29 @@ class ProductDetailsViewModel: NSObject {
   }
   
   func addToCart(productId: Int, variantId: Int, quantity: Int, forIncrement: Bool, completion: @escaping (Bool) -> Void) {
-    
     let param: [String: Any] = [
       "product_id": productId,
       "variants_id": variantId,
       "quantity": forIncrement ? 1 : -1 //quantity
     ]
-    
     WebService.sharedInstance.addToCart(param: param) { list in
+      DispatchQueue.main.async {
+        CommonUtils.showToast(message: "Product Added to Cart Succesfully")
+      }
+      completion(true)
+    }
+  }
+  
+  func buyNow(productId: Int, variantId: Int, quantity: Int, completion: @escaping (Bool) -> Void) {
+    let param: [String: Any] = [
+      "product_id": productId,
+      "variants_id": variantId,
+      "quantity":  1
+    ]
+    WebService.sharedInstance.addToCart(param: param) { list in
+      DispatchQueue.main.async {
+        CommonUtils.showToast(message: "Product Added to Cart Succesfully")
+      }
       completion(true)
     }
   }

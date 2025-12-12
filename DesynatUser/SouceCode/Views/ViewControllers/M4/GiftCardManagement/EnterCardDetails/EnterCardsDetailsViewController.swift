@@ -140,9 +140,9 @@ extension EnterCardsDetailsViewController: UITextFieldDelegate, UITextViewDelega
       if textView == wishMessageTextView {
         textView.placeholderTextView = "Enter wish message"
       }
-      if textView == noteTextView {
-        textView.placeholderTextView = "Enter note"
-      }
+//      if textView == noteTextView {
+//        textView.placeholderTextView = "Enter note"
+//      }
     }
   }
 }

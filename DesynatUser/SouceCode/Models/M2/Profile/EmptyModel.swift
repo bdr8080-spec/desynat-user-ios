@@ -12,3 +12,19 @@ import Foundation
 struct EmptyModel: Codable {
     
 }
+
+
+// MARK: - PromocodeApplied
+struct PromocodeApplied: Codable {
+    let discountCode, amount, discountPercentage: String?
+    let originalDiscount, applyDiscountValue, finalAmount: Double?
+
+    enum CodingKeys: String, CodingKey {
+        case discountCode = "discount_code"
+        case amount
+        case discountPercentage = "discount_percentage"
+        case originalDiscount = "original_discount"
+        case applyDiscountValue = "Apply_discount_value"
+        case finalAmount = "final_amount"
+    }
+}

@@ -9,6 +9,7 @@ import UIKit
 
 class ProductDetailViewController: UIViewController {
   
+  @IBOutlet weak var totalItemsInBagLabel: UILabel!
   @IBOutlet weak var womenDeatilsBottomLabel: UILabel!
   @IBOutlet weak var topSpaceForWomenDetails: UILabel!
   @IBOutlet weak var bottomSpaceForWomenDetails: UILabel!
@@ -90,6 +91,7 @@ class ProductDetailViewController: UIViewController {
   
   private lazy var viewModel = ProductDetailsViewModel(hostVC: self)
   var productId: Int? = 0
+  var bagCount: Int = 0
 //  var storeName: String? = ""
   private var selectedColourIndex = 0
   private var selectedSizeIndex = 0
@@ -141,12 +143,21 @@ class ProductDetailViewController: UIViewController {
   }
   
   @IBAction func viewMyBagDidTapped(_ sender: Any) {
-    
+    self.navigationController?.popToRootViewController(animated: false)
+    DispatchQueue.main.async {
+      if let tabBarVC = self.findTabBarVC() {
+        tabBarVC.updateTabSelection(forTag: 3)
+      } else {
+        print("TabBarVC not found")
+      }
+    }
   }
   
   @IBAction func addToBagDidTapped(_ sender: Any) {
     quantity = 1
     addProductToCart(forIncrement: true)
+    bagCount = bagCount + 1
+    totalItemsInBagLabel.text = "(\(bagCount) Items) View My Bag"
   }
   
   
@@ -159,6 +170,8 @@ class ProductDetailViewController: UIViewController {
       addToBagView.isHidden = false
       incrementDecrementView.isHidden = true
       bagItemCountView.isHidden = true
+      bagCount = bagCount - 1
+      totalItemsInBagLabel.text = "(\(bagCount) Items) View My Bag"
     }
   }
   
@@ -168,12 +181,27 @@ class ProductDetailViewController: UIViewController {
   }
   
   @IBAction func buyNowDidTapped(_ sender: Any) {
-    self.navigationController?.popToRootViewController(animated: false)
-    DispatchQueue.main.async {
-      if let tabBarVC = self.findTabBarVC() {
-        tabBarVC.updateTabSelection(forTag: 3)
+    quantity = 1
+//    addProductToCart(forIncrement: true)
+//    
+//     
+    
+    guard let productId = productDetails?.id else { return }
+    let selectedVariant = filteredVariants[selectedSizeIndex]
+    let variantId = selectedVariant.id ?? 0
+    viewModel.buyNow(productId: productId, variantId: variantId, quantity: quantity) { [weak self] success in
+      guard let self = self else { return }
+      if success {
+        self.navigationController?.popToRootViewController(animated: false)
+        DispatchQueue.main.async {
+          if let tabBarVC = self.findTabBarVC() {
+            tabBarVC.updateTabSelection(forTag: 3)
+          } else {
+            print("TabBarVC not found")
+          }
+        }
       } else {
-        print("TabBarVC not found")
+        showAlert(msg: "Failed to add item to cart. Please try again.")
       }
     }
   }
@@ -318,6 +346,8 @@ class ProductDetailViewController: UIViewController {
     specificationTableView.reloadData()
     checkDeliveryTableView.reloadData()
     checkAndUpdateCartStatus()
+    bagCount = productDetails?.addtocartTotalProduct ?? 0
+    totalItemsInBagLabel.text = "(\(productDetails?.addtocartTotalProduct ?? 0) Items) View My Bag"
   }
   
   private func updateUIForSelectedVariant() {

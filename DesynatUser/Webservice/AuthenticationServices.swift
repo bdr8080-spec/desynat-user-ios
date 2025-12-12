@@ -583,9 +583,9 @@ extension WebService {
       }
   }
   
-  func applyPromocodeApi(param: [String: Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+  func applyPromocodeApi(param: [String: Any], completion:@escaping (_ user: PromocodeApplied)-> Void) {
       CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI: .endpoint(.applyPromocode), requestMethod: .post, requestParams: param, requestModel:  EmptyModel.self) { result, code in
+      NetworkManager.shared.request(withAPI: .endpoint(.applyPromocode), requestMethod: .post, requestParams: param, requestModel:  PromocodeApplied.self) { result, code in
           CommonUtils.showHud(show: false)
           self.evaluateWebServiceResponse(response: result) { response, message,error in
               guard let user = response else {
@@ -650,6 +650,22 @@ extension WebService {
   func completeOrderApi(param: [String: Any], completion:@escaping (_ user: OrderPlaceDataModel)-> Void) {
       CommonUtils.showHud(show: true)
       NetworkManager.shared.request(withAPI: .endpoint(.completePayment), requestMethod: .post, requestParams: param, requestModel:  OrderPlaceDataModel.self) { result, code in
+          CommonUtils.showHud(show: false)
+          self.evaluateWebServiceResponse(response: result) { response, message,error in
+              guard let user = response else {
+                  if let error {
+                      UIApplication.shared.topViewController()?.showAlert(msg: error)
+                  }
+                  return
+              }
+              completion(user)
+          }
+      }
+  }
+  
+  func getWalletAmount(completion:@escaping (_ user: WalletAmountDataModel)-> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI: .endpoint(.getWalletAmount), requestMethod: .get, requestModel:  WalletAmountDataModel.self) { result, code in
           CommonUtils.showHud(show: false)
           self.evaluateWebServiceResponse(response: result) { response, message,error in
               guard let user = response else {

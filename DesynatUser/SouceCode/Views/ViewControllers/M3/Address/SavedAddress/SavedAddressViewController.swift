@@ -9,6 +9,7 @@ import UIKit
 
 class SavedAddressViewController: UIViewController {
   
+  @IBOutlet weak var proceedButtonView: UIView!
   @IBOutlet weak var noDataFoundLabel: UILabel!
   @IBOutlet weak var savedAddressTableView: UITableView! {
     didSet {
@@ -18,6 +19,7 @@ class SavedAddressViewController: UIViewController {
   private var selectedAddressIndex = 0
   private lazy var viewModel = SavedAddressViewModel(hostVC: self)
   var onAddressSelected: ((SavedAddressList) -> Void)?
+  var comingFromBag: Bool = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -27,6 +29,11 @@ class SavedAddressViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     viewModel.getSavedAddressListAPI()
+    if comingFromBag {
+      proceedButtonView.isHidden = false
+    } else {
+      proceedButtonView.isHidden = true
+    }
   }
   
   @IBAction func backDidTapped(_ sender: Any) {
@@ -38,6 +45,11 @@ class SavedAddressViewController: UIViewController {
     vc.comingReason = .forAddNewAddress
     self.navigationController?.pushViewController(vc, animated: false)
   }
+  
+  @IBAction func proceedDidTapped(_ sender: Any) {
+    self.navigationController?.popViewController(animated: true)
+  }
+  
 }
 
 extension SavedAddressViewController: UITableViewDelegate, UITableViewDataSource {

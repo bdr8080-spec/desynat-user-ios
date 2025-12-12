@@ -42,5 +42,11 @@ struct PaymentMethodForPlaceOrder {
   let paymentMethodImage: String
   let paymentMethodTitle: String
   let showDescription: Bool
-  let description: String
+  var description: String
+}
+
+
+// MARK: - WalletAmountDataModel
+struct WalletAmountDataModel: Codable {
+    let balance: Double?
 }

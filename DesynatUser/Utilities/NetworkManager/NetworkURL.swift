@@ -68,6 +68,7 @@ enum NetworkEndPoint: String {
   case applyGiftCard                   = "api/user/apply-gift-card"
   case singleOrderSummary              = "api/user/single-order-summary"
   case completePayment                 = "api/user/product-order-complete-payment"
+  case getWalletAmount                 = "api/user/waller-balance"
   
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

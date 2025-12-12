@@ -829,8 +829,8 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2dV-rC-X4d">
                                                 <rect key="frame" x="0.0" y="148.00000000000003" width="345" height="30"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expected Delivery Date : 12 SEP 25" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xGX-fd-bpJ">
-                                                        <rect key="frame" x="72.666666666666686" y="6.6666666666666288" width="200" height="17"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expected Delivery Date : 3-5 working days" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xGX-fd-bpJ">
+                                                        <rect key="frame" x="46" y="6.6666666666666288" width="253" height="17"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -861,17 +861,17 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dXy-3Y-mjn">
-                                        <rect key="frame" x="93.666666666666671" y="350.66666666666669" width="205.66666666666663" height="28"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dXy-3Y-mjn">
+                                        <rect key="frame" x="20" y="350.66666666666669" width="353" height="28"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300.00 KD" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TRr-Jz-eNT">
-                                                <rect key="frame" x="0.0" y="0.0" width="100.33333333333333" height="28"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300.00 KD" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="18" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TRr-Jz-eNT">
+                                                <rect key="frame" x="0.0" y="0.0" width="174" height="28"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="20"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount Paid" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCk-Qj-1sk">
-                                                <rect key="frame" x="105.33333333333334" y="0.0" width="100.33333333333334" height="28"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount Paid" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PCk-Qj-1sk">
+                                                <rect key="frame" x="179" y="0.0" width="174" height="28"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -1038,6 +1038,7 @@
                             <constraint firstItem="E6W-FE-Qpq" firstAttribute="leading" secondItem="7Fj-Ed-wd1" secondAttribute="leading" constant="24" id="7wu-Fd-2G6"/>
                             <constraint firstItem="789-Wv-47b" firstAttribute="trailing" secondItem="E6W-FE-Qpq" secondAttribute="trailing" id="8sf-yg-3IB"/>
                             <constraint firstItem="7Fj-Ed-wd1" firstAttribute="trailing" secondItem="ihu-b0-Uxa" secondAttribute="trailing" constant="26" id="BrI-Go-yQ6"/>
+                            <constraint firstItem="dXy-3Y-mjn" firstAttribute="leading" secondItem="7Fj-Ed-wd1" secondAttribute="leading" constant="20" id="R5t-yJ-fue"/>
                             <constraint firstItem="789-Wv-47b" firstAttribute="leading" secondItem="7gS-h5-9qT" secondAttribute="leading" id="RAw-RS-8xp"/>
                             <constraint firstItem="7Fj-Ed-wd1" firstAttribute="trailing" secondItem="E6W-FE-Qpq" secondAttribute="trailing" constant="24" id="VsC-Xd-sC5"/>
                             <constraint firstItem="ihu-b0-Uxa" firstAttribute="leading" secondItem="7Fj-Ed-wd1" secondAttribute="leading" constant="26" id="ZXh-He-40y"/>
@@ -1053,10 +1054,13 @@
                     </view>
                     <connections>
                         <outlet property="addressDescriptionLabel" destination="4S2-Cn-5lY" id="s5K-o8-oR6"/>
-                        <outlet property="amountPaidLabel" destination="TRr-Jz-eNT" id="e3U-pi-YQc"/>
+                        <outlet property="amountPaidLabel" destination="TRr-Jz-eNT" id="7h5-0C-hvM"/>
                         <outlet property="deliveryDateLabel" destination="xGX-fd-bpJ" id="7zJ-dl-7Xz"/>
                         <outlet property="deliveryDateView" destination="2dV-rC-X4d" id="uI2-ZB-FMl"/>
+                        <outlet property="imageVideo" destination="gUD-AM-I72" id="SaK-nd-Ws0"/>
                         <outlet property="locationLabel" destination="0iZ-P6-5tz" id="PW9-bj-A85"/>
+                        <outlet property="payentDoneOrNotLabel" destination="PCk-Qj-1sk" id="VbP-Fk-zsa"/>
+                        <outlet property="paymentAmountStackView" destination="dXy-3Y-mjn" id="VkN-aK-1Ky"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g92-am-y8J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

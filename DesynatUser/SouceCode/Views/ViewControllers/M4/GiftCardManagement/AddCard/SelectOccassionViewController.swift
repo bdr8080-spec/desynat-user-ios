@@ -33,7 +33,7 @@ class SelectOccassionViewController: UIViewController {
   
   @IBAction func continueDidTapped(_ sender: Any) {
     guard let _ = selectedIndex else {
-      showAlert(msg: "Please select an occasion")
+      showAlert(msg: "Please select gift card category")
       return
     }
     let vc = EnterCardsDetailsViewController.instantiate(fromAppStoryboard: .Profile)

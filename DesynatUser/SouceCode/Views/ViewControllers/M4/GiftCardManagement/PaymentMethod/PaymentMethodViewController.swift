@@ -10,13 +10,9 @@ import MFSDK
 
 class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCellDelegate {
   
-  func didReceivePaymentError(_ message: String) {
-    showAlert(msg: message)
-  }
-  
   @IBOutlet weak var viewCreditCard: UIView!
   @IBOutlet weak var viewPayment: MFPaymentCardView!
-  @IBOutlet weak var cardButtonOutlet: UIButton!
+  @IBOutlet weak var cardSelectionImageView: UIImageView!
   @IBOutlet weak var paymnetTableviewHieghtConstraint: NSLayoutConstraint!
   @IBOutlet weak var cardsTableViewHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var cardsTableiew: UITableView! {
@@ -32,22 +28,22 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
   var getToastMessage: String = ""
   var paymentTransactionDetails: (transactionID: String, invoiceId: String, paymentGateway: String)?
   var paymentCompleted: Bool = false
-  var supplierId: String? = "34897305"
   var payAmount: Double = 0.0
   var orderId: String = ""
   //  var selectedCardID: Int? = 0
   var isCardIsSlecteed: Bool = false
   var selectedPaymentMethodID: Int? = nil
-  var paymentMethods: [PaymentMethod] = [PaymentMethod(paymentMethodImage: "paymentMethods", paymentMethodTitle: "Pay by KNET", showDescription: true),
-                                         PaymentMethod(paymentMethodImage: "applePay", paymentMethodTitle: "Apple Pay", showDescription: true),
-                                         PaymentMethod(paymentMethodImage: "vispay", paymentMethodTitle: "Visapay", showDescription: true),
-                                        // PaymentMethod(paymentMethodImage: "samsungPay", paymentMethodTitle: "Samsung Pay", showDescription: true),
-                                         PaymentMethod(paymentMethodImage: "inAppWallet", paymentMethodTitle: "In -App Wallet", showDescription: false)]
+ 
   private lazy var viewModel = PaymentMethodViewModel(hostVC: self)
   
   override func viewDidLoad() {
     super.viewDidLoad()
     viewCreditCard.isHidden = true
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    viewModel.getWalletAmountApi()
   }
   
   override func viewDidLayoutSubviews() {
@@ -61,130 +57,105 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
   }
   
   @IBAction func proceedDidTapped(_ sender: Any) {
-    if isCardIsSlecteed == false && selectedPaymentMethodID == nil {
-      showAlert(msg: "Please select a payment option")
-      return
-    }
-    
-    if isCardIsSlecteed {
-            guard paymentCompleted, let details = paymentTransactionDetails else {
-                showAlert(msg: "Please fill the card details for payment")
-                return
+    guard selectedPaymentMethodID != nil || isCardIsSlecteed else {
+            showAlert(msg: "Please select a payment option")
+            return
+        }
+
+        if isCardIsSlecteed {
+            // Handle saved card payment
+            if paymentCompleted, let details = paymentTransactionDetails {
+              viewModel.payForAddingCard(transactionId: details.transactionID, paymentId: 1)
+//                presentSuccessScreen()
+            } else {
+                showAlert(msg: "Please complete card payment")
             }
-            // Use the completed payment
-            viewModel.payForAddingCard(transactionId: details.transactionID)
-    } else if selectedPaymentMethodID == 1 {
-      guard paymentCompleted, let details = paymentTransactionDetails else {
-        if !getToastMessage.isEmpty {
-          showToast(msg: getToastMessage)
-        } else {
-          showAlert(msg: "Please complete the payment")
         }
-        return
-      }
-      print("details, \(details)")
-      viewModel.payForAddingCard(transactionId: details.transactionID)
-    } else if selectedPaymentMethodID == 0 {
-      guard paymentCompleted, let details = paymentTransactionDetails else {
-        if !getToastMessage.isEmpty {
-          showToast(msg: getToastMessage)
-        } else {
-          showAlert(msg: "Please complete the payment")
+        else if let methodId = selectedPaymentMethodID {
+            switch methodId {
+            case 3: // Wallet
+                let walletBalance = viewModel.walletAmount ?? 0
+                if walletBalance < payAmount {
+                    showToast(msg: "Insufficient wallet balance")
+                    return
+                }
+                viewModel.payForAddingCard(transactionId: "773957935", paymentId: 2)
+//                presentSuccessScreen()
+
+            default:
+                // Other methods already handled automatically on selection
+                if paymentCompleted, let details = paymentTransactionDetails {
+                  viewModel.payForAddingCard(transactionId: details.transactionID, paymentId: 1)
+//                    presentSuccessScreen()
+                } else {
+                    showAlert(msg: "Payment not completed")
+                }
+            }
         }
-        return
-      }
-      print("details, \(details)")
-      viewModel.payForAddingCard(transactionId: details.transactionID)
-    } else if selectedPaymentMethodID == 2 {
-      guard paymentCompleted, let details = paymentTransactionDetails else {
-        if !getToastMessage.isEmpty {
-          showToast(msg: getToastMessage)
-        } else {
-          showAlert(msg: "Please complete the payment")
-        }
-        return
-      }
-      print("details, \(details)")
-      viewModel.payForAddingCard(transactionId: details.transactionID)
-    }
   }
   
   @IBAction func cardButtonAction(_ sender: Any) {
-    cardButtonOutlet.setImage(UIImage(named: "radioSelected"), for: .normal)
-    isCardIsSlecteed = true
-//    viewCreditCard.isHidden = false
-    
-//    cardPay()
-    creditDebitCardPayment(
-      invoiceValue: Decimal(payAmount),
-      orderId: orderId,
-      supplierId: "4897397403" // Or param["supplier_id"]
-  ) { [weak self] response, invoiceId, error in
-      guard let self = self else { return }
-      if let err = error {
-          self.showAlert(msg: err.localizedDescription)
-          return
-      }
-      // Optionally handle successful payment here
-  }
+    let supplierId = String(Int.random(in: 1000...9999))
+        cardSelectionImageView.image = UIImage(named: "radioSelected")
+        isCardIsSlecteed = true
+        selectedPaymentMethodID = nil
+        
+        // Reload payment methods table to unselect any previously selected method
+        paymentMethodsTableView.reloadData()
+        
+        creditDebitCardPayment(
+            invoiceValue: Decimal(payAmount),
+            orderId: orderId,
+            supplierId: supplierId
+        ) { [weak self] response, invoiceId, error in
+            guard let self = self else { return }
+            if let err = error {
+                self.showAlert(msg: err.localizedDescription)
+                return
+            }
+        }
   }
   
   func creditDebitCardPayment(invoiceValue: Decimal,
                               orderId: String,
                               supplierId: String?,
                               completion: @escaping (MFPaymentStatusResponse?, String?, Error?) -> Void) {
-                
-                guard let supplierIDString = supplierId,
-                      let supplierCode = Int(supplierIDString) else {
-                    completion(nil, nil, NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid supplier ID."]))
-                    return
-                }
-                
-                // Payment method ID 2 for VisaPay
-                let request = MFExecutePaymentRequest(invoiceValue: invoiceValue, paymentMethod: 2)
-                request.customerReference = orderId
-                
-                let supplier = MFSupplier(supplierCode: 4, invoiceShare: invoiceValue)
-                request.suppliers = [supplier]
-                request.displayCurrencyIso = .uAE_AED // Or your currency
-
-                MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { result, invoiceId in
-                    switch result {
-                    case .success(let paymentStatus):
-                        completion(paymentStatus, invoiceId, nil)
-                        
-                        let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
-                        let paymentGateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "VisaPay"
-                        
-                      DispatchQueue.main.async {
-                          self.paymentTransactionDetails = (transactionID, invoiceId ?? "", paymentGateway)
-                          self.paymentCompleted = true
-                      }
-
-                        
-                    case .failure(let error):
-                        completion(nil, invoiceId,
-                                   NSError(domain: "", code: 0,
-                                           userInfo: [NSLocalizedDescriptionKey: error.errorDescription]))
-                    }
-                }
-            }
+    let supplierId = Int.random(in: 1000...9999)
+    let request = MFExecutePaymentRequest(invoiceValue: invoiceValue, paymentMethod: 8)
+    request.customerReference = orderId
+    
+    let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: invoiceValue)
+    request.suppliers = [supplier]
+    request.displayCurrencyIso = .uAE_AED
+    MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { result, invoiceId in
+      switch result {
+      case .success(let paymentStatus):
+        completion(paymentStatus, invoiceId, nil)
+        
+        let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
+        let paymentGateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "VisaPay"
+        
+        DispatchQueue.main.async {
+          self.paymentTransactionDetails = (transactionID, invoiceId ?? "", paymentGateway)
+          self.paymentCompleted = true
+          self.handlePaymentCompletion(transactionID: transactionID, invoiceId: invoiceId ?? "", gateway: paymentGateway)
+                          
+        }
+      case .failure(let error):
+        completion(nil, invoiceId,
+                   NSError(domain: "", code: 0,
+                           userInfo: [NSLocalizedDescriptionKey: error.errorDescription]))
+      }
+    }
+  }
   
   func paymentDoneWithCard() {
     let invoiceValue = Decimal(payAmount)
-    
     let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
-    
     request.customerReference = self.orderId
-    
-    guard let supplierIDString = self.supplierId,
-          let supplierCode = Int(supplierIDString) else {
-      self.showAlert(msg: "Invalid supplier ID.")
-      return
-    }
-    
+    let supplierId = Int.random(in: 1000...9999)
     let supplier = MFSupplier(
-      supplierCode: supplierCode, invoiceShare: invoiceValue
+      supplierCode: supplierId, invoiceShare: invoiceValue
     )
     request.suppliers = [supplier]
     
@@ -194,22 +165,36 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
       switch response {
       case .success(let paymentStatus):
         print("Payment successful with invoiceId: \(invoiceId ?? "N/A")")
-        
         let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
         let paymentGateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "card"
         paymentTransactionDetails = (transactionID, invoiceId ?? "", paymentGateway)
         paymentCompleted = true
-        viewModel.payForAddingCard(transactionId: transactionID)
-        // customerrefence - orderif  or supplier id
-        //            self.checkOutOrder(transactionId: transactionID, paymentMethod: paymentGateway)
-        //            self.orderPlaced(with: paymentStatus)
-        
+        self.handlePaymentCompletion(transactionID: transactionID, invoiceId: invoiceId ?? "", gateway: paymentGateway)
+                        
+//        viewModel.payForAddingCard(transactionId: transactionID)
       case .failure(let error):
         print("Payment Error: \(error.errorDescription)")
         self.showAlert(msg: "Payment Failed: \(error.errorDescription)")
       }
     }
   }
+  
+  func didReceivePaymentError(_ message: String) {
+    showAlert(msg: message)
+  }
+  
+  func handlePaymentCompletion(transactionID: String, invoiceId: String, gateway: String) {
+      paymentTransactionDetails = (transactionID, invoiceId, gateway)
+      paymentCompleted = true
+
+      // Automatically call API for all non-wallet payments
+      if selectedPaymentMethodID != 3 { // 3 = Wallet
+        viewModel.payForAddingCard(transactionId: transactionID, paymentId: 1)
+      }
+  }
+
+
+
   
 }
 
@@ -218,209 +203,91 @@ extension PaymentMethodViewController: UITableViewDelegate, UITableViewDataSourc
     if tableView == cardsTableiew {
       return 2
     }
-    return paymentMethods.count
+    return viewModel.paymentMethods.count
   }
-  
-//  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//    
-//    if tableView == cardsTableiew {
-//      let cell = tableView.dequeueReusableCell(withIdentifier: "CreditCardTableViewCell", for: indexPath) as! CreditCardTableViewCell
-//      //        cell.selectedRadioImageView.image =
-//      //            (indexPath.row == selectedCardID) ? UIImage(named: "radioSelected") : UIImage(named: "radioUnselected")
-//      return cell
-//    }
-//    
-//    let cell = tableView.dequeueReusableCell(withIdentifier: "PaymentMethodsTableViewCell", for: indexPath) as! PaymentMethodsTableViewCell
-//    
-//    let data = paymentMethods[indexPath.row]
-//    cell.delegate = self
-//    cell.configData(data: data)
-//    cell.viewApple.isHidden = true
-//    // Radio button
-//    cell.radioButonOutlet.setImage(
-//      (indexPath.row == selectedPaymentMethodID)
-//      ? UIImage(named: "radioSelected")
-//      : UIImage(named: "radioUnselected"),
-//      for: .normal
-//    )
-//    if indexPath.row == 0 {
-//      if selectedPaymentMethodID == 0 {
-//        cell.payByKNET(
-//          invoiceValue: Decimal(payAmount),
-//          orderId: orderId,
-//          supplierId: "4897397403"
-//        ) { [weak self] response, invoiceId, error in
-//          
-//          guard let self = self else { return }
-//          
-//          if let err = error {
-//            self.showAlert(msg: err.localizedDescription)
-//            return
-//          }
-//        }
-//      }
-//    }else if indexPath.row == 1 {
-//      if selectedPaymentMethodID == 1 {
-//        cell.viewApple.isHidden = false
-//        cell.setupApplePay()
-//        cell.startApplePaySession()
-//      } else {
-//        cell.viewApple.isHidden = true
-//      }
-//    } else if indexPath.row == 2 {
-//      if selectedPaymentMethodID == 2 {
-//        cell.payByVisaPay(
-//          invoiceValue: Decimal(payAmount),
-//          orderId: orderId,
-//          supplierId: "4897397403" // Or param["supplier_id"]
-//        ) { [weak self] response, invoiceId, error in
-//          guard let self = self else { return }
-//          if let err = error {
-//            self.showAlert(msg: err.localizedDescription)
-//            return
-//          }
-//        }
-//      }
-//    }
-//    return cell
-//  }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      
       if tableView == cardsTableiew {
           let cell = tableView.dequeueReusableCell(withIdentifier: "CreditCardTableViewCell", for: indexPath) as! CreditCardTableViewCell
-          // Configure card cell if needed
           return cell
       }
-      
+
       let cell = tableView.dequeueReusableCell(withIdentifier: "PaymentMethodsTableViewCell", for: indexPath) as! PaymentMethodsTableViewCell
-      
-      let data = paymentMethods[indexPath.row]
+      let data = viewModel.paymentMethods[indexPath.row]
       cell.delegate = self
       cell.configData(data: data)
-      
-      // Reset Apple Pay view by default
       cell.viewApple.isHidden = true
-      
-      // Radio button selection
+
+      // Just update radio button – NO payment call here!
       cell.radioButonOutlet.setImage(
-          (indexPath.row == selectedPaymentMethodID)
-          ? UIImage(named: "radioSelected")
-          : UIImage(named: "radioUnselected"),
+          (indexPath.row == selectedPaymentMethodID) ? UIImage(named: "radioSelected") : UIImage(named: "radioUnselected"),
           for: .normal
       )
-      
-      // Handle each payment method
-      switch indexPath.row {
-      case 0: // KNET
-          if selectedPaymentMethodID == 0 {
-              cell.payByKNET(
-                  invoiceValue: Decimal(payAmount),
-                  orderId: orderId,
-                  supplierId: supplierId ?? ""
-              ) { [weak self] response, invoiceId, error in
-                  guard let self = self else { return }
-                  if let err = error {
-                      self.showAlert(msg: err.localizedDescription)
-                  }
-              }
-          }
-          
-      case 1: // Apple Pay
-          if selectedPaymentMethodID == 1 {
-              cell.viewApple.isHidden = false
-              cell.setupApplePay()
-              cell.startApplePaySession()
-          }
-          
-      case 2: // VisaPay
-          if selectedPaymentMethodID == 2 {
-              cell.payByVisaPay(
-                  invoiceValue: Decimal(payAmount),
-                  orderId: orderId,
-                  supplierId: supplierId ?? ""
-              ) { [weak self] response, invoiceId, error in
-                  guard let self = self else { return }
-                  if let err = error {
-                      self.showAlert(msg: err.localizedDescription)
-                  }
-              }
-          }
-          
-      case 3: // Samsung Pay (if implemented)
-          if selectedPaymentMethodID == 3 {
-              // You can implement Samsung Pay session here
-          }
-          
-      case 4: // In-App Wallet
-          if selectedPaymentMethodID == 4 {
-              // Handle In-App Wallet UI or logic
-          }
-          
-      default:
-          break
+    
+    if indexPath.row == 1 { // Apple Pay row
+      if selectedPaymentMethodID == 1 {
+        cell.viewApple.isHidden = false
+        cell.setupApplePay()
+        cell.startApplePaySession()
       }
-      
+    }
+
       return cell
   }
-
   
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if tableView == cardsTableiew {
-      //          selectedCardID = indexPath.row
-      //          selectedPaymentMethodID = nil
-      //          cardButtonOutlet.setImage(UIImage(named: "radioSelected"), for: .normal)
-      //          paymentMethodsTableView.reloadData()
-      //          cardsTableiew.reloadData()
-    }else {
-      selectedPaymentMethodID = indexPath.row
-      //          selectedCardID = nil
-      viewCreditCard.isHidden = true
+      if tableView == cardsTableiew {
+          // Handle saved card selection if needed
+          return
+      }
+
+      // Reset previous selections
       isCardIsSlecteed = false
-      cardButtonOutlet.setImage(UIImage(named: "radioUnselected"), for: .normal)
-      cardsTableiew.reloadData()
+      cardSelectionImageView.image = UIImage(named: "radioUnselected")
+      viewCreditCard.isHidden = true
+
+      selectedPaymentMethodID = indexPath.row
+
+      // Reload to update radio buttons
       paymentMethodsTableView.reloadData()
-    }
+
+      // Start payment immediately for selected method (except Wallet)
+      if let methodId = selectedPaymentMethodID {
+          switch methodId {
+          case 0: // KNET
+              startKNETPayment()
+          case 1: // Apple Pay
+            //startApplePay()
+            print("apple pay")
+          case 2: // VisaPay
+              startVisaPayPayment()
+          case 3: // Wallet – do nothing here, proceed button will handle
+              break
+          default:
+              break
+          }
+      }
   }
-  
 }
 
-struct PaymentMethod {
-  let paymentMethodImage: String
-  let paymentMethodTitle: String
-  let showDescription: Bool
-}
+
 
 extension PaymentMethodViewController {
   func cardPay() {
-    var configure = MFCardConfigureBuilder.default
-    // but you can create yours
-    // set placeholders
+    let configure = MFCardConfigureBuilder.default
     configure.setPlaceholder(MFCardPlaceholder(cardHolderNamePlaceholder: "Name", cardNumberPlaceholder: "Number", expiryDatePlaceholder: "MM / YY", cvvPlaceholder: "CVV"))
-    // set labels
     configure.setLabel(MFCardLabel(cardHolderNameLabel: "Card holder name", cardNumberLabel: "Card number", expiryDateLabel: "MM / YY", cvvLabel: "CVV", showLabels: true, fontWeight: .normal))
-    // set theme
     let theme = MFCardTheme(inputColor: .black, labelColor: .black, errorColor: .red, borderColor: .black)
-    theme.language = .english // select .arabic for rtl vie
+    theme.language = .english
     configure.setTheme(theme)
-    // set height and margin of card inputs
     configure.setCardInput(MFCardInput(inputHeight: 32, inputMargin: 15))
-    
-    // set labels and texts font size
     configure.setFontSize(15)
-    // set border width
     configure.setBorderWidth(1)
-    // set border radius for input fields
     configure.setBorderRadius(8)
-    // set the display of card icons
     configure.setHideCardIcon(false)
-    // set Font Family
     configure.setFontFamily(.timesNewRoman)
-    // set box shadow
     configure.setBoxShadow(MFBoxShadow(hOffset: 0, vOffset: 0, blur: 0, spread: 0, color: .gray))
-    
-    // create the new configure and assigned to payment card view
     viewPayment.configure = configure.build()
     cardPayInitiation()
   }
@@ -434,10 +301,189 @@ extension PaymentMethodViewController {
         }
       case .failure(let error):
         print(error)
-        //self?.showToast(error)
       }
     }
   }
   
+  func startVisaPayPayment() {
+      let supplierId = Int.random(in: 1000...9999)
+      let request = MFExecutePaymentRequest(invoiceValue: Decimal(payAmount), paymentMethod: 2)
+      request.customerReference = orderId
+      request.displayCurrencyIso = .uAE_AED
+
+      let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: Decimal(payAmount))
+      request.suppliers = [supplier]
+
+      MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { [weak self] result, invoiceId in
+          guard let self = self else { return }
+          switch result {
+          case .success(let paymentStatus):
+              let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
+              let gateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "VisaPay"
+
+              self.paymentTransactionDetails = (transactionID, invoiceId ?? "", gateway)
+              self.paymentCompleted = true
+
+              // Automatically complete backend registration
+            self.viewModel.payForAddingCard(transactionId: transactionID, paymentId: 1)
+
+              // Present success screen immediately
+//              self.presentSuccessScreen()
+
+          case .failure(let error):
+              self.showAlert(msg: error.errorDescription ?? "Payment failed")
+          }
+      }
+  }
+
+  func startKNETPayment() {
+      let supplierId = Int.random(in: 1000...9999)
+      let request = MFExecutePaymentRequest(invoiceValue: Decimal(payAmount), paymentMethod: 1)
+      request.customerReference = orderId
+      request.displayCurrencyIso = .kuwait_KWD
+
+      let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: Decimal(payAmount))
+      request.suppliers = [supplier]
+
+      MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { [weak self] result, invoiceId in
+          guard let self = self else { return }
+          switch result {
+          case .success(let paymentStatus):
+              let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
+              let gateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "KNET"
+
+              self.paymentTransactionDetails = (transactionID, invoiceId ?? "", gateway)
+              self.paymentCompleted = true
+            self.viewModel.payForAddingCard(transactionId: transactionID, paymentId: 1)
+//              self.presentSuccessScreen()
+          case .failure(let error):
+              self.showAlert(msg: error.errorDescription ?? "Payment failed")
+          }
+      }
+  }
+  
+  // In PaymentMethodViewController
+
+//  func startApplePay() {
+//      guard let cell = paymentMethodsTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? PaymentMethodsTableViewCell else {
+//          print("Apple Pay cell not found")
+//          return
+//      }
+//
+//      // Show Apple Pay button
+//      cell.viewApple.isHidden = false
+//      cell.setupApplePay()
+//
+//      // Start Apple Pay session
+//      let invoiceValue = Decimal(payAmount)
+//      let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
+//      request.displayCurrencyIso = .uAE_AED
+//      request.customerName = "Customer"
+//      request.customerReference = orderId  // Important: use your real orderId
+//      request.userDefinedField = "ORDER-\(orderId)"
+//
+//      MFPaymentRequest.shared.initiateSession(apiLanguage: .english) { [weak self] response in
+//          guard let self = self else { return }
+//          switch response {
+//          case .success(let session):
+//              print("Apple Pay session initiated")
+//              cell.applePayButton.load(session, request, .english,
+//                                       startLoading: {
+//                  print("Starting Apple Pay loading...")
+//              },
+//                                       completion: { result, invoiceId in
+//                  switch result {
+//                  case .success(let executeResponse):
+//                      print("Apple Pay success: Invoice \(invoiceId ?? "N/A")")
+//                      let transactionID = executeResponse.invoiceTransactions?.first?.transactionID ?? ""
+//                      let gateway = executeResponse.invoiceTransactions?.first?.paymentGateway ?? "ApplePay"
+//
+//                      self.paymentTransactionDetails = (transactionID, invoiceId ?? "", gateway)
+//                      self.paymentCompleted = true
+//
+//                      // Auto-complete backend registration and show success screen
+//                      self.viewModel.payForAddingCard(transactionId: transactionID)
+////                      self.presentSuccessScreen()
+//
+//                  case .failure(let error):
+//                      print("Apple Pay failed: \(error.errorDescription)")
+//                      self.showAlert(msg: "Apple Pay failed: \(error.errorDescription)")
+////                      self.delegate?.didReceivePaymentError("Apple Pay failed: \(error.errorDescription)")
+//                  }
+//              })
+//
+//          case .failure(let error):
+//              print("Failed to initiate Apple Pay session: \(error.localizedDescription)")
+//              self.showAlert(msg: "Failed to start Apple Pay session")
+//          }
+//      }
+//  }
+  
+  func startApplePay() {
+      // Show loading indicator
+
+      // Find the Apple Pay cell (row 1)
+      guard let indexPath = IndexPath(row: 1, section: 0) as? IndexPath,
+            let cell = paymentMethodsTableView.cellForRow(at: indexPath) as? PaymentMethodsTableViewCell else {
+          showToast(msg: "Apple Pay not available")
+          return
+      }
+
+      // Show Apple Pay button container
+      cell.viewApple.isHidden = false
+      cell.setupApplePay() // Add button to view
+
+      // Force layout update so button appears immediately
+      cell.layoutIfNeeded()
+      paymentMethodsTableView.layoutIfNeeded()
+
+      let invoiceValue = Decimal(payAmount)
+      let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
+      request.displayCurrencyIso = .uAE_AED
+      request.customerName = "Customer"
+      request.customerReference = orderId
+      request.userDefinedField = "ORDER-\(orderId ?? "unknown")"
+
+      MFPaymentRequest.shared.initiateSession(apiLanguage: .english) { [weak self] response in
+          guard let self = self else { return }
+
+          DispatchQueue.main.async {
+              switch response {
+              case .success(let session):
+                  print("Apple Pay session initiated successfully")
+                  // Load the button with session
+                  cell.applePayButton.load(session, request, .english,
+                                           startLoading: {
+                      print("Apple Pay button loading...")
+                  },
+                                           completion: { result, invoiceId in
+                      DispatchQueue.main.async {
+                          switch result {
+                          case .success(let executeResponse):
+                              print("Apple Pay payment successful")
+                              let transactionID = executeResponse.invoiceTransactions?.first?.transactionID ?? ""
+                              let gateway = executeResponse.invoiceTransactions?.first?.paymentGateway ?? "ApplePay"
+
+                              self.paymentTransactionDetails = (transactionID, invoiceId ?? "", gateway)
+                              self.paymentCompleted = true
+
+                              // Complete backend registration & show success
+                            self.viewModel.payForAddingCard(transactionId: transactionID, paymentId: 1)
+
+                          case .failure(let error):
+                              print("Apple Pay payment failed: \(error.errorDescription)")
+                              self.showToast(msg: "Apple Pay failed: \(error.errorDescription)")
+                          }
+                      }
+                  })
+
+              case .failure(let error):
+                  print("Failed to initiate Apple Pay session: \(error.localizedDescription)")
+                  self.showToast(msg: "Unable to start Apple Pay: \(error.localizedDescription)")
+                  cell.viewApple.isHidden = true // Hide button on failure
+              }
+          }
+      }
+  }
   
 }

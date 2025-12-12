@@ -95,6 +95,7 @@ class ProfileViewController: UIViewController {
     
     @IBAction func savedAddressDidTapped(_ sender: Any) {
         let vc = SavedAddressViewController.instantiate(fromAppStoryboard: .Profile)
+      vc.comingFromBag = false
         self.navigationController?.pushViewController(vc, animated: false)
     }
   

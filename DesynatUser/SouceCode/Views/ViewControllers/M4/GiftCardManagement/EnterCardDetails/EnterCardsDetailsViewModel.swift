@@ -65,12 +65,12 @@ class EnterCardsDetailsViewModel {
       }
     }
     
-    let noteMessage = String.getString(hostVC.noteTextView.text).trimmingCharacters(in: .whitespacesAndNewlines)
-    if errorMessage == .none {
-      if noteMessage.isEmpty {
-        errorMessage = .EnterNote
-      }
-    }
+//    let noteMessage = String.getString(hostVC.noteTextView.text).trimmingCharacters(in: .whitespacesAndNewlines)
+//    if errorMessage == .none {
+//      if noteMessage.isEmpty {
+//        errorMessage = .EnterNote
+//      }
+//    }
     
     if errorMessage != .none {
       hostVC.showAlert(msg: errorMessage.rawValue)
