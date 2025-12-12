@@ -61,12 +61,6 @@ class PlaceOrderPaymentMethodsViewModel {
         guard let self else { return }
         let nextVC = OrderPlacedViewController.instantiate(fromAppStoryboard: .MyBag)
         nextVC.orderId = response.orderID
-//        let paymnetMethod = selectedMethod.apiValue
-//        if paymnetMethod == 3 {
-//          nextVC.isCashOnDelivery = true
-//        } else {
-//          nextVC.isCashOnDelivery = false
-//        }
           nextVC.selectedMethod = selectedMethod.apiValue
         self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
       }

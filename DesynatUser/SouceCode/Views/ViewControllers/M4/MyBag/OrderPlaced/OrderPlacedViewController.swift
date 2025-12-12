@@ -56,21 +56,66 @@ class OrderPlacedViewController: UIViewController {
         self.navigationController?.popToRootViewController(animated: true)
     }
     
+//    func configData(data: OrderSummaryDataModel?) {
+//        deliveryDateLabel.text = data?.createdAt
+//        amountPaidLabel.text = "\(data?.totalAmount ?? "") KD"
+//        locationLabel.text = data?.deliveryDetails?.name
+//        let selectedAddress = data?.deliveryDetails
+//        let addressLine = "\(selectedAddress?.houseNo ?? ""), \(selectedAddress?.streetNo ?? ""), \(selectedAddress?.city ?? ""), \(selectedAddress?.state ?? ""), \(selectedAddress?.countryName ?? "")-\(selectedAddress?.postalCode ?? "")"
+//        addressDescriptionLabel.text = addressLine
+//        
+//        if selectedMethod == 1 {
+//            payentDoneOrNotLabel.text = "Paid Online"
+//        } else if selectedMethod == 2 {
+//            payentDoneOrNotLabel.text = "Paid Using Wallet"
+//        } else if selectedMethod == 3 {
+//            payentDoneOrNotLabel.text = "Cash on Delivery (COD)"
+//        }
+//    }
+    
     func configData(data: OrderSummaryDataModel?) {
-        deliveryDateLabel.text = data?.createdAt
-        amountPaidLabel.text = "\(data?.totalAmount ?? "") KD"
-        locationLabel.text = data?.deliveryDetails?.name
-        let selectedAddress = data?.deliveryDetails
-        let addressLine = "\(selectedAddress?.houseNo ?? ""), \(selectedAddress?.streetNo ?? ""), \(selectedAddress?.city ?? ""), \(selectedAddress?.state ?? ""), \(selectedAddress?.countryName ?? "")-\(selectedAddress?.postalCode ?? "")"
-        addressDescriptionLabel.text = addressLine
-        
+
+        let amount = "\(data?.totalAmount ?? "") KD"
+
+        var paymentMethodText = ""
         if selectedMethod == 1 {
-            payentDoneOrNotLabel.text = "Paid Online"
+            paymentMethodText = "Paid Online"
         } else if selectedMethod == 2 {
-            payentDoneOrNotLabel.text = "Paid Using Wallet"
+            paymentMethodText = "Paid Using Wallet"
         } else if selectedMethod == 3 {
-            payentDoneOrNotLabel.text = "Cash on Delivery (COD)"
+            paymentMethodText = "Cash on Delivery (COD)"
         }
+
+        let finalText = "\(amount) \(paymentMethodText)"
+
+        let attributedString = NSMutableAttributedString(string: finalText)
+
+        // Amount styling — Poppins Medium 16
+        attributedString.addAttribute(
+            .font,
+            value: UIFont(name: "Poppins-Medium", size: 18)!,
+            range: (finalText as NSString).range(of: amount)
+        )
+
+        // Payment method styling — Poppins Regular 12
+        attributedString.addAttribute(
+            .font,
+            value: UIFont(name: "Poppins-Regular", size: 13)!,
+            range: (finalText as NSString).range(of: paymentMethodText)
+        )
+
+        // Center alignment
+        let style = NSMutableParagraphStyle()
+        style.alignment = .center
+        attributedString.addAttribute(
+            .paragraphStyle,
+            value: style,
+            range: NSMakeRange(0, attributedString.length)
+        )
+
+        amountPaidLabel.attributedText = attributedString
     }
+
+
     
 }

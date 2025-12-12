@@ -19,12 +19,15 @@ class MyBagViewModel: NSObject {
   
   func getBagDetailsApi(){
     WebService.sharedInstance.gteBagDetails { [self] list in
-      self.bagDetails = list
-      self.hostVC.bagTableView.reloadData()
-      self.hostVC.condifData(data: list)
-      self.hostVC.noDataFoundLabel.isHidden = !(self.bagDetails?.cartData?.isEmpty ?? true)
-      self.hostVC.bagDetailsView.isHidden = self.bagDetails?.cartData?.isEmpty ?? true
-      self.hostVC.totoalAmountPriceView.isHidden = self.bagDetails?.cartData?.isEmpty ?? true
+        DispatchQueue.main.async {
+            
+            self.bagDetails = list
+            self.hostVC.bagTableView.reloadData()
+            self.hostVC.condifData(data: list)
+            self.hostVC.noDataFoundLabel.isHidden = !(self.bagDetails?.cartData?.isEmpty ?? true)
+            self.hostVC.bagDetailsView.isHidden = self.bagDetails?.cartData?.isEmpty ?? true
+            self.hostVC.totoalAmountPriceView.isHidden = self.bagDetails?.cartData?.isEmpty ?? true
+        }
     }
   }
   
