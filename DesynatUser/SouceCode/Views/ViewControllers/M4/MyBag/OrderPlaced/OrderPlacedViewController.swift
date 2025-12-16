@@ -12,7 +12,6 @@ class OrderPlacedViewController: UIViewController {
     
 
     @IBOutlet weak var payentDoneOrNotLabel: UILabel!
-    
     @IBOutlet weak var imageVideo: UIImageView!
     @IBOutlet weak var paymentAmountStackView: UIStackView!
     @IBOutlet weak var addressDescriptionLabel: UILabel!
@@ -74,8 +73,13 @@ class OrderPlacedViewController: UIViewController {
 //    }
     
     func configData(data: OrderSummaryDataModel?) {
-
-        let amount = "\(data?.totalAmount ?? "") KD"
+      locationLabel.text = data?.deliveryDetails?.name
+      let selectedAddress = data?.deliveryDetails
+      let addressLine = "\(selectedAddress?.houseNo ?? ""), \(selectedAddress?.streetNo ?? ""), \(selectedAddress?.city ?? ""), \(selectedAddress?.state ?? ""), \(selectedAddress?.countryName ?? "")-\(selectedAddress?.postalCode ?? "")"
+      addressDescriptionLabel.text = addressLine
+//        let amount = "\(data?.totalAmount ?? "") KD"
+      let amountValue = Double(data?.totalAmount ?? "0")
+      let amount = formatPrice(amountValue)
 
         var paymentMethodText = ""
         if selectedMethod == 1 {
@@ -115,6 +119,19 @@ class OrderPlacedViewController: UIViewController {
 
         amountPaidLabel.attributedText = attributedString
     }
+  
+  func formatPrice(_ amount: Double?, currency: String = "KD") -> String {
+      guard let amount = amount else { return "0 \(currency)" }
+      
+      let roundedAmount = round(amount * 100) / 100   // Round to 2 decimal places
+      if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
+          // If whole number, show without decimal
+          return "\(Int(roundedAmount)) \(currency)"
+      } else {
+          // Show up to 2 decimal places
+          return String(format: "%.2f", roundedAmount) + " \(currency)"
+      }
+  }
 
 
     
