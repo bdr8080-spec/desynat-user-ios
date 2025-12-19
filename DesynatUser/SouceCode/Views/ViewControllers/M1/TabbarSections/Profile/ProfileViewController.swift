@@ -103,7 +103,11 @@ class ProfileViewController: UIViewController {
     let vc = GiftCardsListViewController.instantiate(fromAppStoryboard: .Profile)
     self.navigationController?.pushViewController(vc, animated: false)
   }
-  
+    
+    @IBAction func btnMyOrder(_ sender: Any) {
+        let vc = MyOrderVC.instantiate(fromAppStoryboard: .MyOrder)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
 }
 
