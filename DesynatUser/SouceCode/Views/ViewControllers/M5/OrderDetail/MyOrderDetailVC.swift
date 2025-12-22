@@ -41,6 +41,10 @@ class MyOrderDetailVC: UIViewController {
     @IBOutlet weak var txtStoreReview: UITextField!
     @IBOutlet weak var orderTableView: TableViewDynamicHeight!
     
+    lazy private var viewModel = MyOrderDetailVM(hostVC: self)
+    var orderData: OrderModel?
+    var orderId: Int?
+    var orderDetailId: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +83,23 @@ extension MyOrderDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OrderDetailTableCell", for: indexPath) as! OrderDetailTableCell
+        cell.onTapCancel = {
+            let vc = SelectReasonVC.instantiate(fromAppStoryboard: .MyOrder)
+            vc.screenType = .cancelOrder
+            self.navigationController?.present(vc, animated: true)
+        }
+        
+        cell.onTapExchange = {
+            let vc = SelectReasonVC.instantiate(fromAppStoryboard: .MyOrder)
+            vc.screenType = .exchangePro
+            self.navigationController?.present(vc, animated: true)
+        }
+        
+        cell.onTapReturn = {
+            let vc = SelectReasonVC.instantiate(fromAppStoryboard: .MyOrder)
+            vc.screenType = .returnPro
+            self.navigationController?.present(vc, animated: true)
+        }
         return cell
     }
     

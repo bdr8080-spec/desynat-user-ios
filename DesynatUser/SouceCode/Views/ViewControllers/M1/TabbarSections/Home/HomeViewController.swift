@@ -155,7 +155,12 @@ class HomeViewController: UIViewController {
           sender.tintColor = .systemRed // optional: show it's active
       }
   }
-
+    
+    @IBAction func btnSearch(_ sender: Any) {
+        let vc = SearchVC.instantiate(fromAppStoryboard: .MyOrder)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
   // MARK: - Start Listening (Speech → Text)
   private func startListening() {
       // Reset everything

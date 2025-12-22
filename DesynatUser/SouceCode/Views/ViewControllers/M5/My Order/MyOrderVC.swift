@@ -23,11 +23,13 @@ class MyOrderVC: UIViewController {
     lazy private var viewModel = MyOrderVM(hostVC: self)
     var orderData: [OrderModel] = []
     var selectedOrderType: OrderType = .order
+    var orderId: Int?
+    var orderDetailId: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         registerXib()
-        //viewModel.getOrders()
+        viewModel.getOrders()
         btnSelectOrderType(btnOrder)
     }
     
@@ -62,24 +64,30 @@ class MyOrderVC: UIViewController {
     }
     
     @IBAction func btnFilter(_ sender: Any) {
+        let vc = FilterVC.instantiate(fromAppStoryboard: .MyOrder)
+        self.navigationController?.present(vc, animated: true)
     }
     
 }
 
 extension MyOrderVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return orderData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyOrderTableCell", for: indexPath) as! MyOrderTableCell
-//        let order = orderData[indexPath.row]
-//        cell.configure(with: order)
+        let order = orderData[indexPath.row]
+        self.orderId = order.order?.id ?? 0
+        self.orderDetailId = order.id ?? 0
+        cell.configure(with: order)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = MyOrderDetailVC.instantiate(fromAppStoryboard: .MyOrder)
+        vc.orderId = self.orderId
+        vc.orderDetailId = self.orderDetailId
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

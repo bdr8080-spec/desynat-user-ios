@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="LatestSearchCollectionCell" customModule="DesynatUser" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="183" height="59"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="183" height="59"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nKM-vG-6OR" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="183" height="59"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="T-Shirt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xh9-tb-AqN" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="183" height="59"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="xh9-tb-AqN" firstAttribute="top" secondItem="nKM-vG-6OR" secondAttribute="top" id="2qr-7N-FsU"/>
+                            <constraint firstAttribute="bottom" secondItem="xh9-tb-AqN" secondAttribute="bottom" id="MU6-RE-039"/>
+                            <constraint firstAttribute="trailing" secondItem="xh9-tb-AqN" secondAttribute="trailing" id="SZO-aT-oUA"/>
+                            <constraint firstItem="xh9-tb-AqN" firstAttribute="leading" secondItem="nKM-vG-6OR" secondAttribute="leading" id="UWF-lg-bGa"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="0.5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.1041324013" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="nKM-vG-6OR" secondAttribute="trailing" id="71m-EB-8MT"/>
+                <constraint firstAttribute="bottom" secondItem="nKM-vG-6OR" secondAttribute="bottom" id="YeG-EH-25y"/>
+                <constraint firstItem="nKM-vG-6OR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bhF-r2-8QZ"/>
+                <constraint firstItem="nKM-vG-6OR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="shH-gg-Q69"/>
+            </constraints>
+            <size key="customSize" width="183" height="59"/>
+            <point key="canvasLocation" x="147.32824427480915" y="23.591549295774648"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -7,6 +7,45 @@
 
 // MARK: - Datum
 struct OrderModel: Codable {
+    let id, orderID, userID, productID: Int?
+    let variantsID, quantity: Int?
+    let amount, status, createdAt, updatedAt: String?
+    let returnType, rEApprove: String?
+    let returnReason, returnImage, exchangeReason, exchangeNewSize: String?
+    let exchangeOldSize: String?
+    let paymentStatus, deliveryStatus: String?
+    let order: Order?
+    let productDetails: ProductDetails?
+    let variationDetails: VariationDetails?
+    let userRatingReviewProvide: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case orderID = "order_id"
+        case userID = "user_id"
+        case productID = "product_id"
+        case variantsID = "variants_id"
+        case quantity, amount, status
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case returnType = "return_type"
+        case rEApprove = "r_e_approve"
+        case returnReason = "return_reason"
+        case returnImage = "return_image"
+        case exchangeReason = "exchange_reason"
+        case exchangeNewSize = "exchange_new_size"
+        case exchangeOldSize = "exchange_old_size"
+        case paymentStatus = "payment_status"
+        case deliveryStatus = "delivery_status"
+        case order
+        case productDetails = "product_details"
+        case variationDetails = "variation_details"
+        case userRatingReviewProvide = "user_rating_review_provide"
+    }
+}
+
+// MARK: - Order
+struct Order: Codable {
     let id: Int?
     let orderID: String?
     let userID, deliveryAddress: Int?
@@ -15,10 +54,12 @@ struct OrderModel: Codable {
     let shippingFees, tax: String?
     let walletAmount: String?
     let totalAmount, paymentStatus, paymentMethod, deliveryStatus: String?
-    let transactionID: String?
+    let transactionID, deliveryBoyID: String?
+    let assignStatus: String?
+    let assignDate, notDeliveredReason: String?
     let createdAt, updatedAt: String?
     let deliveryDetails: DeliveryDetails?
-    let orderDetails: [OrderDetail1]?
+    let giftCardDetails, promocodeDetails: String?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -40,45 +81,15 @@ struct OrderModel: Codable {
         case paymentMethod = "payment_method"
         case deliveryStatus = "delivery_status"
         case transactionID = "transaction_id"
+        case deliveryBoyID = "delivery_boy_id"
+        case assignStatus = "assign_status"
+        case assignDate = "assign_date"
+        case notDeliveredReason = "not_delivered_reason"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case deliveryDetails = "delivery_details"
-        case orderDetails = "order_details"
-    }
-}
-
-// MARK: - OrderDetail
-struct OrderDetail1: Codable {
-    let id, orderID, userID, productID: Int?
-    let variantsID, quantity: Int?
-    let amount, status, createdAt, updatedAt: String?
-    let returnType, rEApprove: String?
-    let returnReason, returnImage, exchangeReason, exchangeNewSize: String?
-    let exchangeOldSize: String?
-    let paymentStatus, deliveryStatus: String?
-    let productDetails: ProductDetails?
-    let variationDetails: VariationDetails?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case orderID = "order_id"
-        case userID = "user_id"
-        case productID = "product_id"
-        case variantsID = "variants_id"
-        case quantity, amount, status
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
-        case returnType = "return_type"
-        case rEApprove = "r_e_approve"
-        case returnReason = "return_reason"
-        case returnImage = "return_image"
-        case exchangeReason = "exchange_reason"
-        case exchangeNewSize = "exchange_new_size"
-        case exchangeOldSize = "exchange_old_size"
-        case paymentStatus = "payment_status"
-        case deliveryStatus = "delivery_status"
-        case productDetails = "product_details"
-        case variationDetails = "variation_details"
+        case giftCardDetails = "gift_card_details"
+        case promocodeDetails = "promocode_details"
     }
 }
 

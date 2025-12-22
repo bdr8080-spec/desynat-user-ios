@@ -10,18 +10,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="337" id="KGk-i7-Jjw" customClass="OrderDetailTableCell" customModule="DesynatUser" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="332" height="337"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="478" id="KGk-i7-Jjw" customClass="OrderDetailTableCell" customModule="DesynatUser" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="332" height="478"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="332" height="337"/>
+                <rect key="frame" x="0.0" y="0.0" width="332" height="478"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eoC-JD-1D4" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="332" height="337"/>
+                        <rect key="frame" x="0.0" y="0.0" width="332" height="468.33333333333331"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="chE-qD-Nx5">
-                                <rect key="frame" x="0.0" y="0.0" width="332" height="337"/>
+                                <rect key="frame" x="0.0" y="0.0" width="332" height="468.33333333333331"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2qD-5r-nq7">
                                         <rect key="frame" x="0.0" y="0.0" width="332" height="80"/>
@@ -129,10 +129,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="60K-99-4Ma">
-                                        <rect key="frame" x="0.0" y="80" width="332" height="48"/>
+                                        <rect key="frame" x="0.0" y="80" width="332" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14 days return available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TjT-ix-11h" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="10" y="12" width="312" height="36"/>
+                                                <rect key="frame" x="10" y="12" width="312" height="38"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                 <color key="textColor" red="0.090196078430000007" green="0.52156862749999999" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -150,7 +150,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gw9-Qn-Pr4">
-                                        <rect key="frame" x="0.0" y="128" width="332" height="60"/>
+                                        <rect key="frame" x="0.0" y="130" width="332" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EwA-oX-3BS" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="10" y="10" width="312" height="38"/>
@@ -173,6 +173,9 @@
                                                         <color key="value" red="0.83529411760000005" green="0.23137254900000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="btnCancel:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="WpQ-yN-aKn"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -184,7 +187,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="388-an-7RK">
-                                        <rect key="frame" x="0.0" y="188" width="332" height="74"/>
+                                        <rect key="frame" x="0.0" y="190" width="332" height="74"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gmk-WX-TA9" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="10" y="10" width="312" height="64"/>
@@ -230,12 +233,12 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DNz-Fk-ACp">
-                                        <rect key="frame" x="0.0" y="262" width="332" height="64"/>
+                                        <rect key="frame" x="0.0" y="264" width="332" height="64"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Fzu-hj-sTw">
                                                 <rect key="frame" x="10" y="16" width="312" height="38"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L0S-Mj-x1G" customClass="CustomButton" customModule="DesynatDealer" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L0S-Mj-x1G" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="148" height="38"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="38" id="74J-dO-6Fb"/>
@@ -256,8 +259,11 @@
                                                                 <color key="value" red="0.83529411760000005" green="0.23137254900000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="btnExchange:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="QLI-9L-Pwt"/>
+                                                        </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZeA-Hw-RZO" customClass="CustomButton" customModule="DesynatDealer" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZeA-Hw-RZO" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                         <rect key="frame" x="164" y="0.0" width="148" height="38"/>
                                                         <color key="backgroundColor" red="0.83529411760000005" green="0.23137254900000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
@@ -279,6 +285,9 @@
                                                                 <color key="value" red="0.43137254899999999" green="0.27058823529999998" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="btnReturn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Vb3-A1-LTX"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -294,8 +303,112 @@
                                             <constraint firstAttribute="trailing" secondItem="Fzu-hj-sTw" secondAttribute="trailing" constant="10" id="TzE-96-nEY"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UUp-in-0Oj">
+                                        <rect key="frame" x="0.0" y="328" width="332" height="129.33333333333337"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="chI-UF-Az9">
+                                                <rect key="frame" x="0.0" y="0.0" width="332" height="129.33333333333334"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w6n-v4-hJh">
+                                                        <rect key="frame" x="0.0" y="0.0" width="332" height="129.33333333333334"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="52K-1W-tza" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                <rect key="frame" x="8" y="20" width="100" height="24.333333333333329"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="100" id="01p-dN-Fr3"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="290" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCW-1h-Ciy" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                <rect key="frame" x="108" y="20" width="216" height="14.333333333333336"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uIC-AJ-7Eb" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                <rect key="frame" x="8" y="60.333333333333321" width="100" height="14.333333333333336"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="100" id="Vkq-rO-Urg"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sector 63, Bismilla Apartment, Kuwait" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVl-Vb-yco" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                <rect key="frame" x="108" y="60.333333333333321" width="216" height="14.333333333333336"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom deatils" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwj-d9-HTR" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                <rect key="frame" x="8" y="90.666666666666686" width="100" height="14.333333333333329"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="100" id="14m-cA-GPf"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lorem ipsum dolor sit amet, elit dolor sectetur adipisicing elit, eiusmod ." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yWh-Iz-pFN" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                <rect key="frame" x="108" y="90.666666666666686" width="216" height="28.666666666666671"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstItem="52K-1W-tza" firstAttribute="top" secondItem="w6n-v4-hJh" secondAttribute="top" constant="20" id="12h-kB-cyi"/>
+                                                            <constraint firstItem="vwj-d9-HTR" firstAttribute="leading" secondItem="uIC-AJ-7Eb" secondAttribute="leading" id="2w6-VD-9TJ"/>
+                                                            <constraint firstItem="vwj-d9-HTR" firstAttribute="top" secondItem="uIC-AJ-7Eb" secondAttribute="bottom" constant="16" id="53G-dZ-20p"/>
+                                                            <constraint firstItem="ZVl-Vb-yco" firstAttribute="leading" secondItem="TCW-1h-Ciy" secondAttribute="leading" id="5GK-sm-gZV"/>
+                                                            <constraint firstItem="52K-1W-tza" firstAttribute="leading" secondItem="w6n-v4-hJh" secondAttribute="leading" constant="8" id="8KR-w4-wOy"/>
+                                                            <constraint firstItem="ZVl-Vb-yco" firstAttribute="top" secondItem="uIC-AJ-7Eb" secondAttribute="top" id="9nI-1X-gFN"/>
+                                                            <constraint firstItem="ZVl-Vb-yco" firstAttribute="trailing" secondItem="TCW-1h-Ciy" secondAttribute="trailing" id="9vg-SO-7yn"/>
+                                                            <constraint firstItem="yWh-Iz-pFN" firstAttribute="trailing" secondItem="ZVl-Vb-yco" secondAttribute="trailing" id="MTs-AD-rMJ"/>
+                                                            <constraint firstItem="TCW-1h-Ciy" firstAttribute="top" secondItem="52K-1W-tza" secondAttribute="top" id="O65-02-5wh"/>
+                                                            <constraint firstItem="uIC-AJ-7Eb" firstAttribute="top" secondItem="52K-1W-tza" secondAttribute="bottom" constant="16" id="P0z-xP-SnV"/>
+                                                            <constraint firstAttribute="bottom" secondItem="yWh-Iz-pFN" secondAttribute="bottom" constant="10" id="Vhb-5Z-cvl"/>
+                                                            <constraint firstAttribute="trailing" secondItem="TCW-1h-Ciy" secondAttribute="trailing" constant="8" id="VpB-TQ-2gv"/>
+                                                            <constraint firstItem="yWh-Iz-pFN" firstAttribute="top" secondItem="vwj-d9-HTR" secondAttribute="top" id="bgF-Au-KON"/>
+                                                            <constraint firstItem="yWh-Iz-pFN" firstAttribute="leading" secondItem="ZVl-Vb-yco" secondAttribute="leading" id="sQC-eZ-m1V"/>
+                                                            <constraint firstItem="uIC-AJ-7Eb" firstAttribute="leading" secondItem="52K-1W-tza" secondAttribute="leading" id="ttV-0e-MyH"/>
+                                                            <constraint firstItem="TCW-1h-Ciy" firstAttribute="leading" secondItem="52K-1W-tza" secondAttribute="trailing" id="zQ3-HF-hxn"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="chI-UF-Az9" secondAttribute="bottom" id="6JC-qf-10N"/>
+                                            <constraint firstItem="chI-UF-Az9" firstAttribute="top" secondItem="UUp-in-0Oj" secondAttribute="top" id="6jo-52-rmM"/>
+                                            <constraint firstAttribute="trailing" secondItem="chI-UF-Az9" secondAttribute="trailing" id="O5s-0V-Gh0"/>
+                                            <constraint firstItem="chI-UF-Az9" firstAttribute="leading" secondItem="UUp-in-0Oj" secondAttribute="leading" id="TSX-iz-D2c"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yng-KN-Lbr">
-                                        <rect key="frame" x="0.0" y="326" width="332" height="11"/>
+                                        <rect key="frame" x="0.0" y="457.33333333333331" width="332" height="11"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcs-2c-6X2">
                                                 <rect key="frame" x="0.0" y="10" width="332" height="1"/>
@@ -344,7 +457,25 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="-22.900763358778626" y="122.1830985915493"/>
+            <connections>
+                <outlet property="imgProduct" destination="YDV-Nq-kQU" id="nUV-vx-C2w"/>
+                <outlet property="lblAddress" destination="ZVl-Vb-yco" id="0dL-1x-PZ8"/>
+                <outlet property="lblDetails" destination="yWh-Iz-pFN" id="vPI-31-Ivc"/>
+                <outlet property="lblDisPrice" destination="1fj-ff-kJs" id="gH5-Vr-bP7"/>
+                <outlet property="lblPrice" destination="2u7-qo-CVR" id="tzD-qs-9Ur"/>
+                <outlet property="lblProductName" destination="mQ6-3G-yob" id="PdE-Zb-Xic"/>
+                <outlet property="lblReturnAvail" destination="TjT-ix-11h" id="Ag8-9a-uMt"/>
+                <outlet property="lblSize" destination="wxM-fU-njX" id="yGB-nz-LdD"/>
+                <outlet property="lblTotalQuantity" destination="TCW-1h-Ciy" id="cTP-l2-DPi"/>
+                <outlet property="line" destination="hcs-2c-6X2" id="ag5-Iu-R8Z"/>
+                <outlet property="viewCancel" destination="gw9-Qn-Pr4" id="ecV-vh-VOw"/>
+                <outlet property="viewCustom" destination="UUp-in-0Oj" id="PKs-kZ-3uq"/>
+                <outlet property="viewLine" destination="Yng-KN-Lbr" id="Z4C-tK-Yo0"/>
+                <outlet property="viewRate" destination="388-an-7RK" id="NFv-WX-z0o"/>
+                <outlet property="viewReturnDays" destination="60K-99-4Ma" id="FYm-5M-6C2"/>
+                <outlet property="viewReturnEx" destination="DNz-Fk-ACp" id="FUD-HV-WGp"/>
+            </connections>
+            <point key="canvasLocation" x="-22.900763358778626" y="171.83098591549296"/>
         </tableViewCell>
     </objects>
     <resources>

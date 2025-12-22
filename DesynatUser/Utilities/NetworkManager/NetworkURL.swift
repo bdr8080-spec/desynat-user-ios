@@ -72,7 +72,8 @@ enum NetworkEndPoint: String {
     
     
     //M5
-    case getOrders                          = "/api/user/All-order"
+    case getOrders                          = "api/user/All-order"
+    //case orderSummary                       = "api/user/single-order-summary"
     
     
     func withBaseURL() -> String {

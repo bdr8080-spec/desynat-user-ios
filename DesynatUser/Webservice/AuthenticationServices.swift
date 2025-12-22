@@ -681,7 +681,23 @@ extension WebService {
     
     func getOrdersApi(param: [String: Any], completion: @escaping (_ user: [OrderModel])-> Void) {
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI: .endpoint(.getOrders), requestMethod: .post, requestParams: param, requestModel:  [OrderModel].self) { result, code in
+        NetworkManager.shared.request(withAPI: .endpoint(.getOrders), requestMethod: .post, requestParams: param, requestModel: [OrderModel].self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getOrderDetail(param: [String: Any], completion: @escaping (_ user: OrderModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.singleOrderSummary), requestMethod: .post, requestParams: param, requestModel: OrderModel.self) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
