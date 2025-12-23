@@ -130,3 +130,122 @@ struct VariationDetails: Codable {
         case color, size
     }
 }
+
+// MARK: - Datum
+struct RejectReasonModel: Codable {
+    let id: Int?
+    let reasonEnglish, reasonArabic: String?
+    let type, status: Int?
+    let createdAt, updatedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case reasonEnglish = "reason_english"
+        case reasonArabic = "reason_arabic"
+        case type, status
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+}
+
+struct RecentDataModel: Codable {
+    let id, userID: Int?
+    let name, createdAt, updatedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case userID = "user_id"
+        case name
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+}
+
+// MARK: - DataClass
+struct SearchModel: Codable {
+    let currentPage: Int?
+    let data: [DataModel]?
+    let firstPageURL: String?
+    let from, lastPage: Int?
+    let lastPageURL: String?
+    let links: [Link]?
+    let nextPageURL: String?
+    let path: String?
+    let perPage: Int?
+    let prevPageURL: String?
+    let to, total: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case currentPage = "current_page"
+        case data
+        case firstPageURL = "first_page_url"
+        case from
+        case lastPage = "last_page"
+        case lastPageURL = "last_page_url"
+        case links
+        case nextPageURL = "next_page_url"
+        case path
+        case perPage = "per_page"
+        case prevPageURL = "prev_page_url"
+        case to, total
+    }
+}
+
+// MARK: - Datum
+struct DataModel: Codable {
+    let id: Int?
+    let sellerID, storeID, categoryID, subcategoryID: String?
+    let brandID: String?
+    let otherEn, otherAr: String?
+    let productNameEn, productNameAr, descriptionEn, descriptionAr: String?
+    let minCardQuantity, maxCardQuantity, productReturn: String?
+    let returnDays: String?
+    let productExchangable: String?
+    let exchangableDays: String?
+    let reviewRating, affiliatedProduct: String?
+    let affiliatedCommission: String?
+    let customizedProduct, readyToShip, cashOnDelivery: String?
+    let uploadSizeChart: String?
+    let productActiveStatus: Int?
+    let createdAt, updatedAt: String?
+    let wishlist: Int?
+    let brand: Brand?
+    let category: Category?
+    let subcategory: Brand?
+    let productSpecifications: [ProductSpecification]?
+    let productVariants: [ProductVariant]?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case sellerID = "seller_id"
+        case storeID = "store_id"
+        case categoryID = "category_id"
+        case subcategoryID = "subcategory_id"
+        case brandID = "brand_id"
+        case otherEn = "other_en"
+        case otherAr = "other_ar"
+        case productNameEn = "product_name_en"
+        case productNameAr = "product_name_ar"
+        case descriptionEn = "description_en"
+        case descriptionAr = "description_ar"
+        case minCardQuantity = "min_card_quantity"
+        case maxCardQuantity = "max_card_quantity"
+        case productReturn = "product_return"
+        case returnDays = "return_days"
+        case productExchangable = "product_exchangable"
+        case exchangableDays = "exchangable_days"
+        case reviewRating = "review_rating"
+        case affiliatedProduct = "affiliated_product"
+        case affiliatedCommission = "affiliated_commission"
+        case customizedProduct = "customized_product"
+        case readyToShip = "ready_to_ship"
+        case cashOnDelivery = "cash_on_delivery"
+        case uploadSizeChart = "upload_size_chart"
+        case productActiveStatus = "product_active_status"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case wishlist, brand, category, subcategory
+        case productSpecifications = "product_specifications"
+        case productVariants = "product_variants"
+    }
+}

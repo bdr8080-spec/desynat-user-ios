@@ -14,6 +14,11 @@ class FilterVC: UIViewController {
     
     var filtersOptions = ["All", "Ongoing", "Delivered", "Cancelled", "Return"]
     var selectedIndex: Int = 0
+    weak var delegate: FilterDelegate?
+    
+    var selectedFilter: OrderFilterType {
+        return OrderFilterType(rawValue: selectedIndex + 1) ?? .all
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +43,13 @@ class FilterVC: UIViewController {
     }
     
     @IBAction func btnClear(_ sender: Any) {
+        selectedIndex = 0
+        filterTableview.reloadData()
     }
     
     @IBAction func btnApply(_ sender: Any) {
+        delegate?.didApplyFilter(selectedFilter)
+        dismiss(animated: true)
     }
     
 }

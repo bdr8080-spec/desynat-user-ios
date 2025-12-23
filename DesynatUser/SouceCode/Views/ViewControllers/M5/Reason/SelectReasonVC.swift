@@ -33,17 +33,27 @@ class SelectReasonVC: UIViewController {
     @IBOutlet weak var viewSize: UIView!
     @IBOutlet weak var viewRateProduct: UIView!
     
+    lazy private var viewModel = SelectReasonVM(hostVC: self)
     var reasonArr = ["Reason 1", "Reason 2", "Reason 3", "Other"]
     var sizeArr = ["S", "M", "L", "XL"]
     var selectedIndex: Int = 0
     var selectedIndex1: Int = 0
     var screenType: SelectScreenType = .cancelOrder
+    var orderId: Int?
+    var orderDetailId: Int?
+    var rejectReasonData: [RejectReasonModel] = []
+    weak var delegate: SelectReasonDelegate?
+    var selectedProfileImageUrl: String = ""
+    var onCancel: (()->())?
+    var onReturn: (()->())?
+    var onExchange: (()->())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         registerXib()
         initialSetup()
         configureScreen()
+        viewModel.rejectReason()
     }
     
     func registerXib() {
@@ -103,9 +113,42 @@ class SelectReasonVC: UIViewController {
     }
     
     @IBAction func btnUploadImg(_ sender: Any) {
+        ImagePickerManager().pickImage(self) { [weak self] image, fileName, url in
+            guard let self = self else { return }
+            self.viewModel.uploadDocument(file: image, isImage: true) { [weak self] uploadedUrl in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    self.selectedProfileImageUrl = uploadedUrl
+                    self.imgProfilePic.image = image
+                }
+            }
+        }
     }
     
     @IBAction func btnSubmit(_ sender: Any) {
+        switch screenType {
+        
+        case .cancelOrder:
+            viewModel.cancelOrder {
+                self.onCancel?()
+                self.delegate?.didUpdateOrder(status: .cancelOrder)
+            }
+        
+        case .returnPro:
+            viewModel.returnExOrder(type: screenType) {
+                self.onReturn?()
+                self.delegate?.didUpdateOrder(status: .cancelOrder)
+            }
+        
+        case .exchangePro:
+            viewModel.returnExOrder(type: screenType) {
+                self.onExchange?()
+                self.delegate?.didUpdateOrder(status: .cancelOrder)
+            }
+        
+        case .rating, .customCancel:
+            return
+        }
     }
     
 }
@@ -114,7 +157,7 @@ extension SelectReasonVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case reasonTableView:
-            return reasonArr.count
+            return rejectReasonData.count + 1
             
         case sizeTableView:
             return sizeArr.count
@@ -128,7 +171,16 @@ extension SelectReasonVC: UITableViewDelegate, UITableViewDataSource {
         switch tableView {
         case reasonTableView:
             let cell = reasonTableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
-            cell.titleLabel.text = reasonArr[indexPath.row]
+            
+            let isOtherRow = indexPath.row == rejectReasonData.count
+            
+            if isOtherRow {
+                cell.titleLabel.text = "Others"
+            } else {
+                let data = rejectReasonData[indexPath.row]
+                cell.titleLabel.text = data.reasonEnglish ?? ""
+            }
+            
             if selectedIndex == indexPath.row {
                 cell.selectionImageView.image = UIImage(named: "radioSelected")
             } else {
@@ -155,10 +207,9 @@ extension SelectReasonVC: UITableViewDelegate, UITableViewDataSource {
         switch tableView {
         case reasonTableView:
             selectedIndex = indexPath.row
-            if indexPath.row == reasonArr.count - 1 {
-                viewOtherReason.isHidden = false
-            } else {
-                viewOtherReason.isHidden = true
+            let isOtherSelected = indexPath.row == rejectReasonData.count
+            viewOtherReason.isHidden = !isOtherSelected
+            if !isOtherSelected {
                 txtReason.text = ""
             }
             reasonTableView.reloadData()

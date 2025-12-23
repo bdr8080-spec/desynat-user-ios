@@ -17,9 +17,11 @@ class MyOrderTableCell: UITableViewCell {
     @IBOutlet weak var lblModelPiece: CustomLabelFont!
     @IBOutlet weak var lblSize: CustomLabelFont!
     @IBOutlet weak var lblPlacedDate: CustomLabelFont!
+    @IBOutlet weak var lblReturn: CustomLabelFont!
     @IBOutlet weak var lblReturnDate: CustomLabelFont!
     @IBOutlet weak var lblOrderDate: CustomLabelFont!
     @IBOutlet weak var viewReturn: UIView!
+    @IBOutlet weak var viewExchange: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,6 +45,115 @@ class MyOrderTableCell: UITableViewCell {
         setColorBox(size: data.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data.quantity ?? 0)")
         
         lblPlacedDate.text = data.createdAt?.formattedOrderDate() ?? ""
+        configureStatus(with: data)
+    }
+    
+    func configureStatus(with data: OrderModel) {
+        lblStatus.text = ""
+        viewExchange.isHidden = true
+        viewReturn.isHidden = true
+        //let status = data.order?.deliveryStatus
+        
+        let paymentMethod = data.order?.paymentMethod
+        let paymentStatus = data.order?.paymentStatus
+        let deliveryStatus = data.order?.deliveryStatus
+        
+        if paymentMethod == "1" || paymentMethod == "2" {
+            if paymentStatus == "1" {
+                switch deliveryStatus {
+                case "1": //Pending
+                    lblStatus.text = "Pending"
+                    lblStatus.textColor = UIColor(hexString: "#FF5F1B")
+                    
+                case "2": //Ongoing
+                    lblStatus.text = "Ongoing"
+                    lblStatus.textColor = UIColor(hexString: "#FF5F1B")
+                    viewExchange.isHidden = false
+                    viewExchange.backgroundColor = UIColor(hexString: "#FF5F1B").withAlphaComponent(0.1)
+                    lblOrderDate.textColor = UIColor(hexString: "#FF5F1B")
+                    
+                case "3": //Delivered
+                    lblStatus.text = "Delivered"
+                    lblStatus.textColor = UIColor(hexString: "#16B364")
+                    viewExchange.isHidden = false
+                    viewExchange.backgroundColor = UIColor(hexString: "#16B364").withAlphaComponent(0.1)
+                    lblOrderDate.textColor = UIColor(hexString: "#16B364")
+                    handleReturnExchange(data: data)
+                    
+                case "4": //Cancelled
+                    lblStatus.text = "Cancelled"
+                    lblStatus.textColor = UIColor(hexString: "#E70000")
+                    viewExchange.isHidden = false
+                    viewExchange.backgroundColor = UIColor(hexString: "#F4DDDD")
+                    lblOrderDate.textColor = UIColor(hexString: "#E70000")
+                    
+                default:
+                    return
+                }
+            } else if paymentStatus == "3" {
+                lblStatus.text = "Refund"
+                lblStatus.textColor = UIColor(hexString: "#E70000")
+                viewExchange.isHidden = false
+                viewExchange.backgroundColor = UIColor(hexString: "#F4DDDD")
+                lblOrderDate.textColor = UIColor(hexString: "#E70000")
+            }
+        } else if paymentMethod == "3" {
+            if paymentStatus == "0" {
+                switch deliveryStatus {
+                case "1": //Pending
+                    lblStatus.text = "Pending"
+                    lblStatus.textColor = UIColor(hexString: "#FF5F1B")
+                    
+                case "2": //Ongoing
+                    lblStatus.text = "Ongoing"
+                    lblStatus.textColor = UIColor(hexString: "#FF5F1B")
+                    viewExchange.isHidden = false
+                    viewExchange.backgroundColor = UIColor(hexString: "#FF5F1B").withAlphaComponent(0.1)
+                    lblOrderDate.textColor = UIColor(hexString: "#FF5F1B")
+                    
+                case "3": //Delivered
+                    lblStatus.text = "Delivered"
+                    lblStatus.textColor = UIColor(hexString: "#16B364")
+                    viewExchange.isHidden = false
+                    viewExchange.backgroundColor = UIColor(hexString: "#16B364").withAlphaComponent(0.1)
+                    lblOrderDate.textColor = UIColor(hexString: "#16B364")
+                    handleReturnExchange(data: data)
+                    
+                case "4": //Cancelled
+                    lblStatus.text = "Cancelled"
+                    lblStatus.textColor = UIColor(hexString: "#E70000")
+                    viewExchange.isHidden = false
+                    viewExchange.backgroundColor = UIColor(hexString: "#F4DDDD")
+                    lblOrderDate.textColor = UIColor(hexString: "#E70000")
+                    
+                default:
+                    return
+                }
+            } else if paymentStatus == "2" {
+                lblStatus.text = "Cancelled"
+                lblStatus.textColor = UIColor(hexString: "#E70000")
+                viewExchange.isHidden = false
+                viewExchange.backgroundColor = UIColor(hexString: "#F4DDDD")
+                lblOrderDate.textColor = UIColor(hexString: "#E70000")
+            }
+        }
+    }
+    
+    func handleReturnExchange(data: OrderModel) {
+        let isReturnAllowed = data.productDetails?.productReturn == "1"
+        let isExchangeAllowed = data.productDetails?.productExchangable == "1"
+        
+        viewReturn.isHidden = true
+        
+        if isReturnAllowed {
+            viewReturn.isHidden = false
+            lblReturn.text = "Return Request"
+            lblReturnDate.text = data.variationDetails?.createdAt?.formattedOrderDate() ?? ""
+        } else if isExchangeAllowed {
+            viewReturn.isHidden = false
+            lblReturn.text = "Exchange Request"
+            lblReturnDate.text = data.variationDetails?.createdAt?.formattedOrderDate() ?? ""
+        }
     }
     
 }

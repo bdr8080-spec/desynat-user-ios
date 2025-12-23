@@ -12,12 +12,15 @@ class SuccessMsgVC: UIViewController {
     @IBOutlet weak var lblSuccesMsg: CustomLabelFont!
     
     var message: String = ""
+    var OnDismiss: (()->())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         lblSuccesMsg.text = message
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            self.dismiss(animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+            self.dismiss(animated: true) {
+                self.OnDismiss?()
+            }
         }
     }
     

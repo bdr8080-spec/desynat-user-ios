@@ -23,6 +23,7 @@ class MyOrderDetailVM: NSObject {
         
         WebService.sharedInstance.getOrderDetail(param: params) { data in
             self.hostVC.orderData = data
+            self.hostVC.setData()
         }
     }
 }

@@ -18,7 +18,7 @@ class MyOrderVM: NSObject {
     func getOrders() {
         var params: [String: Any] = [
             // "search":"r8219788",
-            "filter": "1" // 1 all 2 onging 3 delivered 4 cancelled 5 return
+            "filter": hostVC.selectedFilter.rawValue // 1 all 2 onging 3 delivered 4 cancelled 5 return
         ]
         
         if !searchText.isEmpty {
@@ -28,7 +28,7 @@ class MyOrderVM: NSObject {
         WebService.sharedInstance.getOrdersApi(param: params) { data in
             self.hostVC.orderData = data
             self.hostVC.orderTableView.reloadData()
-            self.hostVC.lblNoData.isHidden = !data.isEmpty
+            self.hostVC.updateUI()
         }
     }
 }

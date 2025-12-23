@@ -13,20 +13,26 @@ class SearchVC: UIViewController {
     @IBOutlet weak var latestSearchCollectionView: CollViewAdjustedHeight!
     @IBOutlet weak var recommendedCollectionView: CollViewAdjustedHeight!
     @IBOutlet weak var RecentSearchTableView: TableViewDynamicHeight!
+    @IBOutlet weak var lblNoData: CustomLabelFont!
+    
+    lazy private var viewModel = SearchVM(hostVC: self)
+    var recentData: [RecentDataModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         registerXib()
+        viewModel.getRecentData()
+        lblNoData.isHidden = true
     }
     
     func registerXib() {
-        latestSearchCollectionView.delegate = self
-        latestSearchCollectionView.dataSource = self
-        latestSearchCollectionView.register(UINib(nibName: "LatestSearchCollectionCell", bundle: nil), forCellWithReuseIdentifier: "LatestSearchCollectionCell")
-        
-        recommendedCollectionView.delegate = self
-        recommendedCollectionView.dataSource = self
-        recommendedCollectionView.register(UINib(nibName: "RecommendCollectionCell", bundle: nil), forCellWithReuseIdentifier: "RecommendCollectionCell")
+//        latestSearchCollectionView.delegate = self
+//        latestSearchCollectionView.dataSource = self
+//        latestSearchCollectionView.register(UINib(nibName: "LatestSearchCollectionCell", bundle: nil), forCellWithReuseIdentifier: "LatestSearchCollectionCell")
+//        
+//        recommendedCollectionView.delegate = self
+//        recommendedCollectionView.dataSource = self
+//        recommendedCollectionView.register(UINib(nibName: "RecommendCollectionCell", bundle: nil), forCellWithReuseIdentifier: "RecommendCollectionCell")
         
         RecentSearchTableView.delegate = self
         RecentSearchTableView.dataSource = self
@@ -48,41 +54,43 @@ class SearchVC: UIViewController {
 
 extension SearchVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return recentData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = RecentSearchTableView.dequeueReusableCell(withIdentifier: "RecentSearchTableCell", for: indexPath) as! RecentSearchTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RecentSearchTableCell", for: indexPath) as! RecentSearchTableCell
+        let data = recentData[indexPath.row]
+        cell.lblName.text = data.name ?? ""
         return cell
     }
 }
 
-extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch UICollectionView() {
-        case latestSearchCollectionView:
-            return 6
-            
-        case recommendedCollectionView:
-            return 4
-            
-        default:
-            return 0
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch UICollectionView() {
-        case latestSearchCollectionView:
-            let cell = latestSearchCollectionView.dequeueReusableCell(withReuseIdentifier: "LatestSearchCollectionCell", for: indexPath) as! LatestSearchCollectionCell
-            return cell
-            
-        case recommendedCollectionView:
-            let cell = recommendedCollectionView.dequeueReusableCell(withReuseIdentifier: "RecommendCollectionCell", for: indexPath) as! RecommendCollectionCell
-            return cell
-            
-        default:
-            return UICollectionViewCell()
-        }
-    }
-}
+//extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource {
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        switch UICollectionView() {
+//        case latestSearchCollectionView:
+//            return 6
+//            
+//        case recommendedCollectionView:
+//            return 4
+//            
+//        default:
+//            return 0
+//        }
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        switch UICollectionView() {
+//        case latestSearchCollectionView:
+//            let cell = latestSearchCollectionView.dequeueReusableCell(withReuseIdentifier: "LatestSearchCollectionCell", for: indexPath) as! LatestSearchCollectionCell
+//            return cell
+//            
+//        case recommendedCollectionView:
+//            let cell = recommendedCollectionView.dequeueReusableCell(withReuseIdentifier: "RecommendCollectionCell", for: indexPath) as! RecommendCollectionCell
+//            return cell
+//            
+//        default:
+//            return UICollectionViewCell()
+//        }
+//    }
+//}

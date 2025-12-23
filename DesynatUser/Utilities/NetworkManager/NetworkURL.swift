@@ -74,7 +74,12 @@ enum NetworkEndPoint: String {
     //M5
     case getOrders                          = "api/user/All-order"
     //case orderSummary                       = "api/user/single-order-summary"
-    
+    case cancelProduct                      = "api/user/cancelled-single-product"
+    case rejectReason                       = "api/user/get-reject-reason"
+    case OrderReturnEx                      = "api/user/return-exchange-product-after-delivered"
+    case orderRating                        = "api/user/product-rating"
+    case recentSearch                       = "api/user/get-recent-search-data"
+    case homeSearch                         = "api/user/home-page-search"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"
