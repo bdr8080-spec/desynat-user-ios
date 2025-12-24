@@ -1,0 +1,70 @@
+//
+//  RateProductOrderViewController.swift
+//  DesynatUser
+//
+//  Created by fluper on 24/12/25.
+//
+
+import UIKit
+import Cosmos
+
+class RateProductOrderViewController: UIViewController {
+
+  @IBOutlet weak var storeRatingView: CosmosView!
+  @IBOutlet weak var productRatingView: CosmosView!
+  @IBOutlet weak var titleView: UIView!
+  @IBOutlet weak var productReviewTF: UITextField!
+  @IBOutlet weak var storeReviewTF: UITextField!
+  
+  private lazy var viewModel = RateProductOrderViewModel(hostVC: self)
+//  var orderData: OrderModel?
+  var orderId: Int?
+  var orderDetailId: Int?
+  var ratingDone: (() -> Void)?
+  
+  override func viewDidLoad() {
+        super.viewDidLoad()
+      initialSetup()
+    }
+  
+  private func initialSetup() {
+      titleView.clipsToBounds = true
+      titleView.layer.cornerRadius = 32
+      titleView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+  }
+    
+  @IBAction func dismissDidTapped(_ sender: Any) {
+    self.dismiss(animated: true)
+  }
+  
+  @IBAction func submitDidTapped(_ sender: Any) {
+    guard viewModel.validateInputs() else { return }
+    let productRating = productRatingView.rating
+    let storeRating = storeRatingView.rating
+    let param: [String: Any] = ["order_id": orderId ?? "",
+                                "orderdetails_id": orderDetailId ?? "",
+                                "product_rating": productRating,
+                                "product_review": productReviewTF.text ?? "",
+//                                "product_image"
+                                "store_rating": storeRating,
+                                "store_review": storeReviewTF.text ?? "",
+//                                "store_image"
+    ]
+    viewModel.addRatingToRequest(param: param)
+  }
+  
+  func showSuccess() {
+      let successVC = SuccessMsgVC.instantiate(fromAppStoryboard: .MyOrder)
+      successVC.message = "Review submitted successfully!"
+      
+      successVC.OnDismiss = { [weak self] in
+          self?.dismiss(animated: true) {
+              self?.ratingDone?()
+          }
+      }
+
+      present(successVC, animated: true)
+  }
+
+  
+}

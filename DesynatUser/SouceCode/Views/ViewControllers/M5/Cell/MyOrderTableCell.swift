@@ -65,7 +65,7 @@ class MyOrderTableCell: UITableViewCell {
                     lblStatus.text = "Pending"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     
-                case "2": //Ongoing
+                case "2", "7": //Ongoing
                     lblStatus.text = "Ongoing"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewExchange.isHidden = false
@@ -104,7 +104,7 @@ class MyOrderTableCell: UITableViewCell {
                     lblStatus.text = "Pending"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     
-                case "2": //Ongoing
+                case "2", "7": //Ongoing, Picked
                     lblStatus.text = "Ongoing"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewExchange.isHidden = false
@@ -125,6 +125,8 @@ class MyOrderTableCell: UITableViewCell {
                     viewExchange.isHidden = false
                     viewExchange.backgroundColor = UIColor(hexString: "#F4DDDD")
                     lblOrderDate.textColor = UIColor(hexString: "#E70000")
+                  
+              
                     
                 default:
                     return

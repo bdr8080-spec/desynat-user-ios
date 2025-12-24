@@ -21,5 +21,6 @@ pod 'GooglePlaces'
     pod 'ScalingCarousel'
     pod 'RangeSeekSlider'
     pod 'MyFatoorah'
+    pod 'GoogleMLKit/ObjectDetection'
     
 end

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Speech
 
 class SearchVC: UIViewController {
 
@@ -17,38 +18,131 @@ class SearchVC: UIViewController {
     
     lazy private var viewModel = SearchVM(hostVC: self)
     var recentData: [RecentDataModel] = []
+    // MARK: - Speech Recognition
+    private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
+    private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    private var recognitionTask: SFSpeechRecognitionTask?
+    private let audioEngine = AVAudioEngine()
+    private var isListening = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         registerXib()
         viewModel.getRecentData()
         lblNoData.isHidden = true
+        requestPermissions()
     }
     
     func registerXib() {
-//        latestSearchCollectionView.delegate = self
-//        latestSearchCollectionView.dataSource = self
-//        latestSearchCollectionView.register(UINib(nibName: "LatestSearchCollectionCell", bundle: nil), forCellWithReuseIdentifier: "LatestSearchCollectionCell")
-//        
-//        recommendedCollectionView.delegate = self
-//        recommendedCollectionView.dataSource = self
-//        recommendedCollectionView.register(UINib(nibName: "RecommendCollectionCell", bundle: nil), forCellWithReuseIdentifier: "RecommendCollectionCell")
-        
         RecentSearchTableView.delegate = self
         RecentSearchTableView.dataSource = self
         RecentSearchTableView.register(UINib(nibName: "RecentSearchTableCell", bundle: nil), forCellReuseIdentifier: "RecentSearchTableCell")
+    }
+    
+    private func requestPermissions() {
+        SFSpeechRecognizer.requestAuthorization { _ in }
+        AVAudioSession.sharedInstance().requestRecordPermission { _ in }
     }
     
     @IBAction func btnSearch(_ sender: Any) {
     }
     
     @IBAction func btnGo(_ sender: Any) {
+        guard let searchText = txtSearch.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+              !searchText.isEmpty else {
+            showAlert(msg: "Please search something")
+            return
+        }
+        let nextVC = SearchProductListViewController.instantiate(fromAppStoryboard: .MyOrder)
+        nextVC.viewModel.searchText = self.txtSearch.text?.trimmed() ?? ""
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @IBAction func btnCamera(_ sender: Any) {
     }
     
-    @IBAction func btnMic(_ sender: Any) {
+    @IBAction func btnMic(_ sender: UIButton) {
+        if isListening {
+            stopListening()
+            sender.setImage(UIImage(systemName: "mic"), for: .normal)
+        } else {
+            startListening()
+            sender.setImage(UIImage(systemName: "mic.fill"), for: .normal)
+            sender.tintColor = .systemRed // optional: show it's active
+        }
+    }
+    
+    @IBAction func backDidTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    // MARK: - Start Listening (Speech → Text)
+    private func startListening() {
+        // Reset everything
+        recognitionTask?.cancel()
+        recognitionTask = nil
+        recognitionRequest = nil
+
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
+            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+        } catch {
+            print("Audio session error: \(error)")
+            return
+        }
+
+        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+        guard let request = recognitionRequest else { return }
+        request.shouldReportPartialResults = true
+
+        recognitionTask = speechRecognizer?.recognitionTask(with: request) { [weak self] result, error in
+            guard let self = self else { return }
+
+            if let result = result {
+                let text = result.bestTranscription.formattedString
+                self.txtSearch.text = text
+                // CALL API HERE FOR SEARCHs
+            }
+
+            if error != nil || result?.isFinal == true {
+                self.stopListening()
+                DispatchQueue.main.async {
+                    (self.txtSearch.inputView as? UIButton)?.setImage(UIImage(systemName: "mic"), for: .normal)
+                }
+            }
+        }
+
+        let inputNode = audioEngine.inputNode
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
+            request.append(buffer)
+        }
+
+        audioEngine.prepare()
+        do {
+            try audioEngine.start()
+            isListening = true
+            txtSearch.becomeFirstResponder() // optional: show cursor
+        } catch {
+            print("Failed to start audio engine: \(error)")
+            stopListening()
+        }
+    }
+
+    // MARK: - Stop Listening
+    private func stopListening() {
+        audioEngine.stop()
+        audioEngine.inputNode.removeTap(onBus: 0)
+        recognitionRequest?.endAudio()
+        recognitionRequest = nil
+        recognitionTask?.cancel()
+        recognitionTask = nil
+        isListening = false
+    }
+
+    deinit {
+        stopListening()
     }
 }
 
@@ -62,6 +156,10 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
         let data = recentData[indexPath.row]
         cell.lblName.text = data.name ?? ""
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        txtSearch.text = recentData[indexPath.row].name
     }
 }
 

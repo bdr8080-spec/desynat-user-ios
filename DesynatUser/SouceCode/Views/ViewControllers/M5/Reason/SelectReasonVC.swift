@@ -107,6 +107,29 @@ class SelectReasonVC: UIViewController {
         titleView.layer.cornerRadius = 32
         titleView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
+  
+  func showExchangeSuccess() {
+      let successVC = SuccessMsgVC.instantiate(fromAppStoryboard: .MyOrder)
+      successVC.message = "Order Exchange Request Sent successfully!"
+
+      successVC.OnDismiss = { [weak self] in
+          self?.dismiss(animated: true)
+      }
+
+      present(successVC, animated: true)
+  }
+
+func showReturnSuccess() {
+      let successVC = SuccessMsgVC.instantiate(fromAppStoryboard: .MyOrder)
+      successVC.message = "Order Return Request Sent successfully!"
+
+      successVC.OnDismiss = { [weak self] in
+          self?.dismiss(animated: true)
+      }
+
+      present(successVC, animated: true)
+  }
+
 
     @IBAction func btnDismis(_ sender: Any) {
         self.dismiss(animated: true)
@@ -136,15 +159,21 @@ class SelectReasonVC: UIViewController {
         
         case .returnPro:
             viewModel.returnExOrder(type: screenType) {
+              DispatchQueue.main.async {
+                self.showReturnSuccess()
                 self.onReturn?()
                 self.delegate?.didUpdateOrder(status: .cancelOrder)
+              }
             }
         
         case .exchangePro:
-            viewModel.returnExOrder(type: screenType) {
-                self.onExchange?()
-                self.delegate?.didUpdateOrder(status: .cancelOrder)
-            }
+          viewModel.returnExOrder(type: screenType) {
+                  DispatchQueue.main.async {
+                      self.showExchangeSuccess()
+                      self.onExchange?()
+                      self.delegate?.didUpdateOrder(status: .cancelOrder)
+                  }
+              }
         
         case .rating, .customCancel:
             return

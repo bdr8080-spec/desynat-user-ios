@@ -11,13 +11,13 @@ struct OrderModel: Codable {
     let variantsID, quantity: Int?
     let amount, status, createdAt, updatedAt: String?
     let returnType, rEApprove: String?
-    let returnReason, returnImage, exchangeReason, exchangeNewSize: String?
+    let returnReason, returnImage, exchangeReason, cancelReason, exchangeNewSize: String?
     let exchangeOldSize: String?
     let paymentStatus, deliveryStatus: String?
     let order: Order?
     let productDetails: ProductDetails?
     let variationDetails: VariationDetails?
-    let userRatingReviewProvide: String?
+    let userRatingReviewProvide: UserRatingReviewProvide?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -33,6 +33,7 @@ struct OrderModel: Codable {
         case returnReason = "return_reason"
         case returnImage = "return_image"
         case exchangeReason = "exchange_reason"
+        case cancelReason = "cancel_reason"
         case exchangeNewSize = "exchange_new_size"
         case exchangeOldSize = "exchange_old_size"
         case paymentStatus = "payment_status"
@@ -41,6 +42,33 @@ struct OrderModel: Codable {
         case productDetails = "product_details"
         case variationDetails = "variation_details"
         case userRatingReviewProvide = "user_rating_review_provide"
+    }
+}
+
+// MARK: - UserRatingReviewProvide
+struct UserRatingReviewProvide: Codable {
+    let id, userID, orderID, orderdetailsID: Int?
+    let productID: Int?
+    let productRating, productReview, productImage: String?
+    let storeID: Int?
+    let storeRating, storeReview, storeImage, createdAt: String?
+    let updatedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case userID = "user_id"
+        case orderID = "order_id"
+        case orderdetailsID = "orderdetails_id"
+        case productID = "product_id"
+        case productRating = "product_rating"
+        case productReview = "product_review"
+        case productImage = "product_image"
+        case storeID = "store_id"
+        case storeRating = "store_rating"
+        case storeReview = "store_review"
+        case storeImage = "store_image"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
     }
 }
 
@@ -164,7 +192,7 @@ struct RecentDataModel: Codable {
 // MARK: - DataClass
 struct SearchModel: Codable {
     let currentPage: Int?
-    let data: [DataModel]?
+    let data: [ProductList]?
     let firstPageURL: String?
     let from, lastPage: Int?
     let lastPageURL: String?
@@ -192,60 +220,60 @@ struct SearchModel: Codable {
 }
 
 // MARK: - Datum
-struct DataModel: Codable {
-    let id: Int?
-    let sellerID, storeID, categoryID, subcategoryID: String?
-    let brandID: String?
-    let otherEn, otherAr: String?
-    let productNameEn, productNameAr, descriptionEn, descriptionAr: String?
-    let minCardQuantity, maxCardQuantity, productReturn: String?
-    let returnDays: String?
-    let productExchangable: String?
-    let exchangableDays: String?
-    let reviewRating, affiliatedProduct: String?
-    let affiliatedCommission: String?
-    let customizedProduct, readyToShip, cashOnDelivery: String?
-    let uploadSizeChart: String?
-    let productActiveStatus: Int?
-    let createdAt, updatedAt: String?
-    let wishlist: Int?
-    let brand: Brand?
-    let category: Category?
-    let subcategory: Brand?
-    let productSpecifications: [ProductSpecification]?
-    let productVariants: [ProductVariant]?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case sellerID = "seller_id"
-        case storeID = "store_id"
-        case categoryID = "category_id"
-        case subcategoryID = "subcategory_id"
-        case brandID = "brand_id"
-        case otherEn = "other_en"
-        case otherAr = "other_ar"
-        case productNameEn = "product_name_en"
-        case productNameAr = "product_name_ar"
-        case descriptionEn = "description_en"
-        case descriptionAr = "description_ar"
-        case minCardQuantity = "min_card_quantity"
-        case maxCardQuantity = "max_card_quantity"
-        case productReturn = "product_return"
-        case returnDays = "return_days"
-        case productExchangable = "product_exchangable"
-        case exchangableDays = "exchangable_days"
-        case reviewRating = "review_rating"
-        case affiliatedProduct = "affiliated_product"
-        case affiliatedCommission = "affiliated_commission"
-        case customizedProduct = "customized_product"
-        case readyToShip = "ready_to_ship"
-        case cashOnDelivery = "cash_on_delivery"
-        case uploadSizeChart = "upload_size_chart"
-        case productActiveStatus = "product_active_status"
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
-        case wishlist, brand, category, subcategory
-        case productSpecifications = "product_specifications"
-        case productVariants = "product_variants"
-    }
-}
+//struct DataModel: Codable {
+//    let id: Int?
+//    let sellerID, storeID, categoryID, subcategoryID: String?
+//    let brandID: String?
+//    let otherEn, otherAr: String?
+//    let productNameEn, productNameAr, descriptionEn, descriptionAr: String?
+//    let minCardQuantity, maxCardQuantity, productReturn: String?
+//    let returnDays: String?
+//    let productExchangable: String?
+//    let exchangableDays: String?
+//    let reviewRating, affiliatedProduct: String?
+//    let affiliatedCommission: String?
+//    let customizedProduct, readyToShip, cashOnDelivery: String?
+//    let uploadSizeChart: String?
+//    let productActiveStatus: Int?
+//    let createdAt, updatedAt: String?
+//    let wishlist: Int?
+//    let brand: Brand?
+//    let category: Category?
+//    let subcategory: Brand?
+//    let productSpecifications: [ProductSpecification]?
+//    let productVariants: [ProductVariant]?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id
+//        case sellerID = "seller_id"
+//        case storeID = "store_id"
+//        case categoryID = "category_id"
+//        case subcategoryID = "subcategory_id"
+//        case brandID = "brand_id"
+//        case otherEn = "other_en"
+//        case otherAr = "other_ar"
+//        case productNameEn = "product_name_en"
+//        case productNameAr = "product_name_ar"
+//        case descriptionEn = "description_en"
+//        case descriptionAr = "description_ar"
+//        case minCardQuantity = "min_card_quantity"
+//        case maxCardQuantity = "max_card_quantity"
+//        case productReturn = "product_return"
+//        case returnDays = "return_days"
+//        case productExchangable = "product_exchangable"
+//        case exchangableDays = "exchangable_days"
+//        case reviewRating = "review_rating"
+//        case affiliatedProduct = "affiliated_product"
+//        case affiliatedCommission = "affiliated_commission"
+//        case customizedProduct = "customized_product"
+//        case readyToShip = "ready_to_ship"
+//        case cashOnDelivery = "cash_on_delivery"
+//        case uploadSizeChart = "upload_size_chart"
+//        case productActiveStatus = "product_active_status"
+//        case createdAt = "created_at"
+//        case updatedAt = "updated_at"
+//        case wishlist, brand, category, subcategory
+//        case productSpecifications = "product_specifications"
+//        case productVariants = "product_variants"
+//    }
+//}

@@ -44,11 +44,19 @@ class MyOrderVC: UIViewController, FilterDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         registerXib()
-        viewModel.getOrders()
-        btnSelectOrderType(btnOrder)
-        lblNoData.isHidden = true
-        orderTableView.isHidden = true
+//        viewModel.getOrders()
+//        btnSelectOrderType(btnOrder)
+//        lblNoData.isHidden = true
+//        orderTableView.isHidden = true
     }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    viewModel.getOrders()
+    btnSelectOrderType(btnOrder)
+    lblNoData.isHidden = true
+    orderTableView.isHidden = true
+  }
     
     func registerXib() {
         orderTableView.delegate = self
