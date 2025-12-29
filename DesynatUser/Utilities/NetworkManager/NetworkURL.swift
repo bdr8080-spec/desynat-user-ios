@@ -73,7 +73,6 @@ enum NetworkEndPoint: String {
     
     //M5
     case getOrders                          = "api/user/All-order"
-    //case orderSummary                       = "api/user/single-order-summary"
     case cancelProduct                      = "api/user/cancelled-single-product"
     case rejectReason                       = "api/user/get-reject-reason"
     case OrderReturnEx                      = "api/user/return-exchange-product-after-delivered"

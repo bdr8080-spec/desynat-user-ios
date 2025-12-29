@@ -92,7 +92,6 @@ class ProductDetailViewController: UIViewController {
   private lazy var viewModel = ProductDetailsViewModel(hostVC: self)
   var productId: Int? = 0
   var bagCount: Int = 0
-//  var storeName: String? = ""
   private var selectedColourIndex = 0
   private var selectedSizeIndex = 0
   private var checkDelivery: [CheckDeliveryModel] = [CheckDeliveryModel(image: "calender", title: "Get it by 24/12/2024"),
@@ -107,7 +106,6 @@ class ProductDetailViewController: UIViewController {
   var selectedVariant: ProductVariant? {
     guard !filteredVariants.isEmpty else { return nil }
     guard selectedSizeIndex >= 0 else { return filteredVariants[0] }
-    
     let safeIndex = min(selectedSizeIndex, filteredVariants.count - 1)
     return filteredVariants[safeIndex]
   }
@@ -182,10 +180,6 @@ class ProductDetailViewController: UIViewController {
   
   @IBAction func buyNowDidTapped(_ sender: Any) {
     quantity = 1
-//    addProductToCart(forIncrement: true)
-//    
-//     
-    
     guard let productId = productDetails?.id else { return }
     let selectedVariant = filteredVariants[selectedSizeIndex]
     let variantId = selectedVariant.id ?? 0
@@ -217,7 +211,6 @@ class ProductDetailViewController: UIViewController {
     viewModel.addToWishlist(productId: productId) { [weak self] success in
       guard let self = self else { return }
       if success {
-        // Toggle local value only after success
         let currentStatus = self.productDetails?.wishlist ?? 0
         let newStatus = currentStatus == 1 ? 0 : 1
         self.productDetails?.wishlist = newStatus
@@ -322,7 +315,7 @@ class ProductDetailViewController: UIViewController {
     colorsCollectionView.reloadData()
     sizeCollectionView.reloadData()
     productImageCollectionView.reloadData()
-    
+    ratingsTableView.reloadData()
     let wishlist = productDetails?.wishlist ?? 1
     if wishlist == 1 {
       wishlistButtonOutlet.setImage(UIImage(systemName: "heart.fill"), for: .normal)
@@ -332,106 +325,105 @@ class ProductDetailViewController: UIViewController {
     
     specificationTableView.reloadData()
     checkDeliveryTableView.reloadData()
-//    checkAndUpdateCartStatus()
-      checkAndPreselectCartVariant()
+    //    checkAndUpdateCartStatus()
+    checkAndPreselectCartVariant()
     bagCount = productDetails?.addtocartTotalProduct ?? 0
     totalItemsInBagLabel.text = "(\(productDetails?.addtocartTotalProduct ?? 0) Items) View My Bag"
-
   }
-    
-    private func checkAndUpdateCartStatus() {
-        guard let productDetails = productDetails,
-              let cartItem = productDetails.addtocart,
-              let currentVariantId = selectedVariant?.id,
-              cartItem.productID == productDetails.id,
-              cartItem.variantsID == currentVariantId,
-              (cartItem.quantity ?? 0) > 0 else {
-            // Not in cart or different variant
-            quantity = 0
-            addToBagView.isHidden = false
-            bagItemCountView.isHidden = true
-            incrementDecrementView.isHidden = true
-            return
-        }
-
-        // Already in cart and matches current selection
-        quantity = cartItem.quantity ?? 1
-        addToBagView.isHidden = true
-        bagItemCountView.isHidden = false
-        incrementDecrementView.isHidden = false
-        itemCountLabel.text = "\(quantity)"
-    }
   
-    private func checkAndPreselectCartVariant() {
-        guard let productDetails = productDetails,
-              let cartItem = productDetails.addtocart,
-              let variants = productDetails.productVariants,
-              !variants.isEmpty,
-              (cartItem.quantity ?? 0) > 0 else {
-            // No item in cart → use default flow
-            selectedColourIndex = 0
-            filterVariantsForSelectedColor()
-            checkAndUpdateCartStatus() // this will hide/show Add to Bag correctly
-            return
-        }
-
-        let cartVariantId = cartItem.variantsID
-        let cartProductId = cartItem.productID
-
-        guard cartProductId == productDetails.id else { return }
-
-        // Find the variant that matches the one in cart
-        if let matchingVariant = variants.first(where: { $0.id == cartVariantId }) {
-            // Step 1: Select the correct COLOR
-            if let colorId = matchingVariant.color?.id,
-               let colorIndex = uniqueColors.firstIndex(where: { $0.id == colorId }) {
-                selectedColourIndex = colorIndex
-            }
-
-            // Step 2: Filter variants for selected color
-            filterVariantsForSelectedColor()
-
-            // Step 3: Now select the correct SIZE within filtered variants
-            if let sizeIndex = filteredVariants.firstIndex(where: { $0.id == cartVariantId }) {
-                selectedSizeIndex = sizeIndex
-            }
-
-            // Step 4: Update images, price, measurements, etc.
-            updateImagesForSelectedSize()
-            updateUIForSelectedVariant()
-
-            // Step 5: Update quantity from cart
-            quantity = cartItem.quantity ?? 1
-
-            // Step 6: Update UI to show increment/decrement view
-            addToBagView.isHidden = true
-            incrementDecrementView.isHidden = false
-            bagItemCountView.isHidden = false
-            itemCountLabel.text = "\(quantity)"
-
-            // Step 7: Scroll and highlight selected color & size
-            DispatchQueue.main.async {
-                if self.uniqueColors.count > self.selectedColourIndex {
-                    let colorIndexPath = IndexPath(item: self.selectedColourIndex, section: 0)
-                    self.colorsCollectionView.selectItem(at: colorIndexPath, animated: false, scrollPosition: .centeredHorizontally)
-                }
-                if self.selectedSizeIndex >= 0 && self.selectedSizeIndex < self.filteredVariants.count {
-                    let sizeIndexPath = IndexPath(item: self.selectedSizeIndex, section: 0)
-                    self.sizeCollectionView.selectItem(at: sizeIndexPath, animated: false, scrollPosition: .centeredHorizontally)
-                }
-            }
-        } else {
-            // Cart item exists but variant not found → fallback to default
-            selectedColourIndex = 0
-            filterVariantsForSelectedColor()
-            checkAndUpdateCartStatus()
-        }
-
-        // Reload collections to reflect selection
-        colorsCollectionView.reloadData()
-        sizeCollectionView.reloadData()
+  private func checkAndUpdateCartStatus() {
+    guard let productDetails = productDetails,
+          let cartItem = productDetails.addtocart,
+          let currentVariantId = selectedVariant?.id,
+          cartItem.productID == productDetails.id,
+          cartItem.variantsID == currentVariantId,
+          (cartItem.quantity ?? 0) > 0 else {
+      // Not in cart or different variant
+      quantity = 0
+      addToBagView.isHidden = false
+      bagItemCountView.isHidden = true
+      incrementDecrementView.isHidden = true
+      return
     }
     
+    // Already in cart and matches current selection
+    quantity = cartItem.quantity ?? 1
+    addToBagView.isHidden = true
+    bagItemCountView.isHidden = false
+    incrementDecrementView.isHidden = false
+    itemCountLabel.text = "\(quantity)"
+  }
+  
+  private func checkAndPreselectCartVariant() {
+    guard let productDetails = productDetails,
+          let cartItem = productDetails.addtocart,
+          let variants = productDetails.productVariants,
+          !variants.isEmpty,
+          (cartItem.quantity ?? 0) > 0 else {
+      // No item in cart → use default flow
+      selectedColourIndex = 0
+      filterVariantsForSelectedColor()
+      checkAndUpdateCartStatus() // this will hide/show Add to Bag correctly
+      return
+    }
+    
+    let cartVariantId = cartItem.variantsID
+    let cartProductId = cartItem.productID
+    
+    guard cartProductId == productDetails.id else { return }
+    
+    // Find the variant that matches the one in cart
+    if let matchingVariant = variants.first(where: { $0.id == cartVariantId }) {
+      // Step 1: Select the correct COLOR
+      if let colorId = matchingVariant.color?.id,
+         let colorIndex = uniqueColors.firstIndex(where: { $0.id == colorId }) {
+        selectedColourIndex = colorIndex
+      }
+      
+      // Step 2: Filter variants for selected color
+      filterVariantsForSelectedColor()
+      
+      // Step 3: Now select the correct SIZE within filtered variants
+      if let sizeIndex = filteredVariants.firstIndex(where: { $0.id == cartVariantId }) {
+        selectedSizeIndex = sizeIndex
+      }
+      
+      // Step 4: Update images, price, measurements, etc.
+      updateImagesForSelectedSize()
+      updateUIForSelectedVariant()
+      
+      // Step 5: Update quantity from cart
+      quantity = cartItem.quantity ?? 1
+      
+      // Step 6: Update UI to show increment/decrement view
+      addToBagView.isHidden = true
+      incrementDecrementView.isHidden = false
+      bagItemCountView.isHidden = false
+      itemCountLabel.text = "\(quantity)"
+      
+      // Step 7: Scroll and highlight selected color & size
+      DispatchQueue.main.async {
+        if self.uniqueColors.count > self.selectedColourIndex {
+          let colorIndexPath = IndexPath(item: self.selectedColourIndex, section: 0)
+          self.colorsCollectionView.selectItem(at: colorIndexPath, animated: false, scrollPosition: .centeredHorizontally)
+        }
+        if self.selectedSizeIndex >= 0 && self.selectedSizeIndex < self.filteredVariants.count {
+          let sizeIndexPath = IndexPath(item: self.selectedSizeIndex, section: 0)
+          self.sizeCollectionView.selectItem(at: sizeIndexPath, animated: false, scrollPosition: .centeredHorizontally)
+        }
+      }
+    } else {
+      // Cart item exists but variant not found → fallback to default
+      selectedColourIndex = 0
+      filterVariantsForSelectedColor()
+      checkAndUpdateCartStatus()
+    }
+    
+    // Reload collections to reflect selection
+    colorsCollectionView.reloadData()
+    sizeCollectionView.reloadData()
+  }
+  
   private func updateUIForSelectedVariant() {
     guard let selectedVariant = self.selectedVariant else { return }
     
@@ -462,66 +454,65 @@ class ProductDetailViewController: UIViewController {
   }
   
   private func filterVariantsForSelectedColor() {
-      guard let variants = productDetails?.productVariants,
-            !variants.isEmpty,
-            selectedColourIndex < uniqueColors.count else {
-          return
+    guard let variants = productDetails?.productVariants,
+          !variants.isEmpty,
+          selectedColourIndex < uniqueColors.count else {
+      return
+    }
+    
+    let selectedColor = uniqueColors[selectedColourIndex]
+    
+    // Filter variants for selected color
+    filteredVariants = variants.filter { $0.color?.id == selectedColor.id }
+    
+    // Select first available size
+    selectFirstAvailableSize()
+    
+    // Reset Add to Bag state every time color changes
+    addToBagView.alpha = 1
+    addToBagView.isUserInteractionEnabled = true
+    
+    if selectedSizeIndex >= 0 {
+      // At least one size IN STOCK
+      updateImagesForSelectedSize()
+      updateUIForSelectedVariant()
+    } else {
+      // No size in stock
+      selectedVariantImages = []
+      productImageCollectionView.reloadData()
+      
+      finalPriceLAbel.text = "-"
+      actualPriceLAbel.text = "-"
+      discountPercentageLabel.text = ""
+      
+      // Disable Add to Bag (no sizes)
+      addToBagView.isHidden = false
+      addToBagView.alpha = 0.4
+      addToBagView.isUserInteractionEnabled = false
+    }
+    
+    // Reload UI
+    sizeCollectionView.reloadData()
+    colorsCollectionView.reloadData()
+    resetImageCarouselToFirst()
+    
+    // Highlight selected size ONLY if in-stock
+    if selectedSizeIndex >= 0 {
+      DispatchQueue.main.async {
+        let indexPath = IndexPath(item: self.selectedSizeIndex, section: 0)
+        self.sizeCollectionView.selectItem(at: indexPath,
+                                           animated: false,
+                                           scrollPosition: .centeredHorizontally)
       }
-      
-      let selectedColor = uniqueColors[selectedColourIndex]
-      
-      // Filter variants for selected color
-      filteredVariants = variants.filter { $0.color?.id == selectedColor.id }
-      
-      // Select first available size
-      selectFirstAvailableSize()
-      
-      // Reset Add to Bag state every time color changes
-      addToBagView.alpha = 1
-      addToBagView.isUserInteractionEnabled = true
-      
-      if selectedSizeIndex >= 0 {
-          // At least one size IN STOCK
-          updateImagesForSelectedSize()
-          updateUIForSelectedVariant()
-      } else {
-          // No size in stock
-          selectedVariantImages = []
-          productImageCollectionView.reloadData()
-
-          finalPriceLAbel.text = "-"
-          actualPriceLAbel.text = "-"
-          discountPercentageLabel.text = ""
-
-          // Disable Add to Bag (no sizes)
-          addToBagView.isHidden = false
-          addToBagView.alpha = 0.4
-          addToBagView.isUserInteractionEnabled = false
-      }
-      
-      // Reload UI
-      sizeCollectionView.reloadData()
-      colorsCollectionView.reloadData()
-      resetImageCarouselToFirst()
-      
-      // Highlight selected size ONLY if in-stock
-      if selectedSizeIndex >= 0 {
-          DispatchQueue.main.async {
-              let indexPath = IndexPath(item: self.selectedSizeIndex, section: 0)
-              self.sizeCollectionView.selectItem(at: indexPath,
-                                                 animated: false,
-                                                 scrollPosition: .centeredHorizontally)
-          }
-      }
-      
-      sizeCollectionView.reloadData()
-      colorsCollectionView.reloadData()
-      resetImageCarouselToFirst()
-
-      // Add this:
-      checkAndUpdateCartStatus()
+    }
+    
+    sizeCollectionView.reloadData()
+    colorsCollectionView.reloadData()
+    resetImageCarouselToFirst()
+    
+    // Add this:
+    checkAndUpdateCartStatus()
   }
-
   
   private func updateImagesForSelectedSize() {
     guard !filteredVariants.isEmpty else {
@@ -598,45 +589,16 @@ class ProductDetailViewController: UIViewController {
     incrementDecrementView.isHidden = true
   }
   
-//  private func checkAndUpdateCartStatus() {
-//    guard let productDetails = productDetails,
-//          let variants = productDetails.productVariants,
-//          !variants.isEmpty else { return }
-//    
-//    let currentVariant = selectedVariant ?? filteredVariants.first
-//    let variantId = currentVariant?.id ?? 0
-//    let productId = productDetails.id ?? 0
-//    
-//    if let cartItem = productDetails.addtocart,
-//       cartItem.productID == productId,
-//       cartItem.variantsID == variantId,
-//       let qty = cartItem.quantity, qty > 0 {
-//      
-//      quantity = qty
-//      addToBagView.isHidden = true
-//      bagItemCountView.isHidden = false
-//      incrementDecrementView.isHidden = false
-//      itemCountLabel.text = "\(quantity)"
-//    } else {
-//      quantity = 0
-//      addToBagView.isHidden = false
-//      bagItemCountView.isHidden = true
-//      incrementDecrementView.isHidden = true
-//    }
-//  }
-  
   private func selectFirstAvailableSize() {
-      // Find first size with stock > 0
-      if let index = filteredVariants.firstIndex(where: {
-          (Int($0.totalStock ?? "0") ?? 0) > 0
-      }) {
-          selectedSizeIndex = index
-      } else {
-          // If NO SIZE is in stock
-          selectedSizeIndex = -1
-      }
+    if let index = filteredVariants.firstIndex(where: {
+      (Int($0.totalStock ?? "0") ?? 0) > 0
+    }) {
+      selectedSizeIndex = index
+    } else {
+      // If NO SIZE is in stock
+      selectedSizeIndex = -1
+    }
   }
-
   
 }
 
@@ -678,16 +640,16 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
       let variant = filteredVariants[indexPath.row]
       cell.titleLabel.text = variant.size?.name
       let stock = Int(variant.totalStock ?? "0") ?? 0
-          if stock > 0 {
-              cell.titleLabel.textColor = .black
-              cell.mainView.alpha = 1.0
-              cell.mainView.layer.borderColor =
-              (selectedSizeIndex == indexPath.row ? UIColor.darkBrown : UIColor.lightGray).cgColor
-          } else {
-              cell.titleLabel.textColor = .gray
-              cell.mainView.layer.borderColor = UIColor.lightGray.cgColor
-              cell.mainView.alpha = 0.5
-          }
+      if stock > 0 {
+        cell.titleLabel.textColor = .black
+        cell.mainView.alpha = 1.0
+        cell.mainView.layer.borderColor =
+        (selectedSizeIndex == indexPath.row ? UIColor.darkBrown : UIColor.lightGray).cgColor
+      } else {
+        cell.titleLabel.textColor = .gray
+        cell.mainView.layer.borderColor = UIColor.lightGray.cgColor
+        cell.mainView.alpha = 0.5
+      }
       return cell
     case similarProductCollectionView:
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BestSellingsCollectionViewCell", for: indexPath) as! BestSellingsCollectionViewCell
@@ -709,17 +671,17 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
       colorsCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
       checkAndUpdateCartStatus()
     case sizeCollectionView:
-        let variant = filteredVariants[indexPath.row]
-            let stock = Int(variant.totalStock ?? "0") ?? 0
-            guard stock > 0 else { return }
-
-            selectedSizeIndex = indexPath.row
-            updateUIForSelectedVariant()
-            updateImagesForSelectedSize() // if you want images to update
-            sizeCollectionView.reloadData()
-            
-            // Add this:
-            checkAndUpdateCartStatus()
+      let variant = filteredVariants[indexPath.row]
+      let stock = Int(variant.totalStock ?? "0") ?? 0
+      guard stock > 0 else { return }
+      
+      selectedSizeIndex = indexPath.row
+      updateUIForSelectedVariant()
+      updateImagesForSelectedSize() // if you want images to update
+      sizeCollectionView.reloadData()
+      
+      // Add this:
+      checkAndUpdateCartStatus()
     case similarProductCollectionView:
       print("")
     default:
@@ -764,7 +726,7 @@ extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegat
     case checkDeliveryTableView:
       return checkDelivery.count
     case ratingsTableView:
-      return 2
+      return productDetails?.review?.count ?? 0
     default:
       return 0
     }
@@ -803,18 +765,18 @@ extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegat
         
         var title = ""
         if returnable == "1" {
-            let days = productDetails?.returnDays ?? "0"
-            title += "\(days) Days Return"
+          let days = productDetails?.returnDays ?? "0"
+          title += "\(days) Days Return"
         } else {
-            title += "Non Returnable"
+          title += "Non Returnable"
         }
-
+        
         title += " & "
         if exchangable == "1" {
-            let days = productDetails?.exchangableDays ?? "0"
-            title += "\(days) Days Exchange"
+          let days = productDetails?.exchangableDays ?? "0"
+          title += "\(days) Days Exchange"
         } else {
-            title += "Non Exchangeable"
+          title += "Non Exchangeable"
         }
         cell.titleLabel.text = title
       default:
@@ -824,6 +786,8 @@ extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegat
       
     case ratingsTableView:
       let cell = tableView.dequeueReusableCell(withIdentifier: "ProductRatingTableViewCell", for: indexPath) as! ProductRatingTableViewCell
+      let data = productDetails?.review?[indexPath.row]
+      cell.configData(data: data)
       return cell
     default:
       return UITableViewCell()

@@ -64,17 +64,4 @@ class ProductDetailsViewModel: NSObject {
     }
   }
   
-  //    func incrementDecrement(productId: Int, variantId: Int, quantity: Int, completion: @escaping (Bool) -> Void) {
-  //
-  //        let param: [String: Any] = [
-  //            "product_id": productId,
-  //            "variants_id": variantId,
-  //            "quantity": quantity
-  //        ]
-  //
-  //        WebService.sharedInstance.incrementDecrement(param: param) { list in
-  //            completion(true)
-  //        }
-  //    }
-  
 }
