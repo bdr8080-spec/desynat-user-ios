@@ -18,14 +18,27 @@ PODS:
   - FTIndicator/FTNotificationIndicator (1.2.9)
   - FTIndicator/FTProgressIndicator (1.2.9)
   - FTIndicator/FTToastIndicator (1.2.9)
+  - GoogleDataTransport (10.1.0):
+    - nanopb (~> 3.30910.0)
+    - PromisesObjC (~> 2.4)
   - GoogleMaps (10.3.0):
     - GoogleMaps/Maps (= 10.3.0)
+  - GoogleMLKit/MLKitCore (8.0.0):
+    - MLKitCommon (~> 13.0.0)
+  - GoogleMLKit/ObjectDetection (8.0.0):
+    - GoogleMLKit/MLKitCore
+    - MLKitObjectDetection (~> 7.0.0)
   - GooglePlaces (10.1.0)
   - GoogleSignIn (9.0.0):
     - AppAuth (~> 2.0)
     - AppCheckCore (~> 11.0)
     - GTMAppAuth (~> 5.0)
     - GTMSessionFetcher/Core (~> 3.3)
+  - GoogleToolboxForMac/Defines (4.2.1)
+  - GoogleToolboxForMac/Logger (4.2.1):
+    - GoogleToolboxForMac/Defines (= 4.2.1)
+  - "GoogleToolboxForMac/NSData+zlib (4.2.1)":
+    - GoogleToolboxForMac/Defines (= 4.2.1)
   - GoogleUtilities/Environment (8.1.0):
     - GoogleUtilities/Privacy
   - GoogleUtilities/Logger (8.1.0):
@@ -48,7 +61,42 @@ PODS:
     - JXPageControl/Common
   - JXPageControl/Transform (0.1.5):
     - JXPageControl/Common
+  - MLImage (1.0.0-beta7)
+  - MLKitCommon (13.0.0):
+    - GoogleDataTransport (~> 10.0)
+    - GoogleToolboxForMac/Logger (< 5.0, >= 4.2.1)
+    - "GoogleToolboxForMac/NSData+zlib (< 5.0, >= 4.2.1)"
+    - GoogleUtilities/Logger (~> 8.0)
+    - GoogleUtilities/UserDefaults (~> 8.0)
+    - GTMSessionFetcher/Core (< 4.0, >= 3.3.2)
+  - MLKitImageLabelingCommon (9.0.0):
+    - MLKitCommon (~> 13.0)
+    - MLKitVision (~> 9.0)
+  - MLKitObjectDetection (7.0.0):
+    - MLKitCommon (~> 13.0)
+    - MLKitObjectDetectionCommon (~> 9.0)
+    - MLKitVision (~> 9.0)
+    - MLKitVisionKit (~> 10.0)
+  - MLKitObjectDetectionCommon (9.0.0):
+    - MLKitCommon (~> 13.0)
+    - MLKitVision (~> 9.0)
+  - MLKitVision (9.0.0):
+    - GoogleToolboxForMac/Logger (< 5.0, >= 4.2.1)
+    - "GoogleToolboxForMac/NSData+zlib (< 5.0, >= 4.2.1)"
+    - GTMSessionFetcher/Core (< 4.0, >= 3.3.2)
+    - MLImage (= 1.0.0-beta7)
+    - MLKitCommon (~> 13.0)
+  - MLKitVisionKit (10.0.0):
+    - MLKitCommon (~> 13.0)
+    - MLKitImageLabelingCommon (~> 9.0)
+    - MLKitObjectDetectionCommon (~> 9.0)
+    - MLKitVision (~> 9.0)
   - MyFatoorah (2.0.161)
+  - nanopb (3.30910.0):
+    - nanopb/decode (= 3.30910.0)
+    - nanopb/encode (= 3.30910.0)
+  - nanopb/decode (3.30910.0)
+  - nanopb/encode (3.30910.0)
   - PromisesObjC (2.4.0)
   - RangeSeekSlider (1.8.0)
   - ScalingCarousel (3.2.0)
@@ -66,6 +114,7 @@ DEPENDENCIES:
   - DropDown
   - FTIndicator
   - GoogleMaps
+  - GoogleMLKit/ObjectDetection (= 8.0.0)
   - GooglePlaces
   - GoogleSignIn
   - JXPageControl
@@ -84,14 +133,25 @@ SPEC REPOS:
     - Cosmos
     - DropDown
     - FTIndicator
+    - GoogleDataTransport
     - GoogleMaps
+    - GoogleMLKit
     - GooglePlaces
     - GoogleSignIn
+    - GoogleToolboxForMac
     - GoogleUtilities
     - GTMAppAuth
     - GTMSessionFetcher
     - JXPageControl
+    - MLImage
+    - MLKitCommon
+    - MLKitImageLabelingCommon
+    - MLKitObjectDetection
+    - MLKitObjectDetectionCommon
+    - MLKitVision
+    - MLKitVisionKit
     - MyFatoorah
+    - nanopb
     - PromisesObjC
     - RangeSeekSlider
     - ScalingCarousel
@@ -106,14 +166,25 @@ SPEC CHECKSUMS:
   Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   FTIndicator: f7f071fd159e5befa1d040a9ef2e3ab53fa9322c
+  GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
   GoogleMaps: 197af8911284ddf36db063c74faee4c4ab15e9d9
+  GoogleMLKit: ddd51d7dff36ff28defa69afedd9cdce684fd857
   GooglePlaces: 049b41d9c8b7685d3a3a145fdab3069684655533
   GoogleSignIn: c7f09cfbc85a1abf69187be091997c317cc33b77
+  GoogleToolboxForMac: d1a2cbf009c453f4d6ded37c105e2f67a32206d8
   GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
   GTMAppAuth: 217a876b249c3c585a54fd6f73e6b58c4f5c4238
   GTMSessionFetcher: 5aea5ba6bd522a239e236100971f10cb71b96ab6
   JXPageControl: e9487b39e2e58fc17790833214f3b8e935bef98b
+  MLImage: 2ab9c968e75f57911c16f4c9d9e8a8e9604a86a1
+  MLKitCommon: 26b779f072a182c1603d4c88a101c350cac837b1
+  MLKitImageLabelingCommon: 30fb7c613cd8dfd281f0456cb1c58758743cccb6
+  MLKitObjectDetection: dd631b8a5e24d521d25cff0f52475e2711f1ed01
+  MLKitObjectDetectionCommon: 90b0e94db1c66f51196b487befa01f195106fa15
+  MLKitVision: fa8dea9012ac59497c79ddbe9ebf32051047ac4c
+  MLKitVisionKit: e8244baf4d19cf7669c65da7907662c402adcb05
   MyFatoorah: 3e8f229fe02ef0ea91420972e949375ebb454b16
+  nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RangeSeekSlider: 650b11fa1edcb92e1e0ede797669d98622570fb5
   ScalingCarousel: d40f0ce438af5cfb2225e2f723f7161597961128
@@ -122,6 +193,6 @@ SPEC CHECKSUMS:
   SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: 9b9527cece3c04de711b571e7881841b6dd2d6a0
+PODFILE CHECKSUM: 7b6b69c3e79ce94518f1e7faead828bd8b79604f
 
 COCOAPODS: 1.16.2

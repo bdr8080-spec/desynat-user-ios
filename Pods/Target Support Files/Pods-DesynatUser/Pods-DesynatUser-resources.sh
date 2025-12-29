@@ -98,10 +98,14 @@ EOM
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/GooglePlaces/GooglePlacesResources.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/MLKitObjectDetection/MLKitObjectDetectionResources.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/MLKitObjectDetectionCommon/MLKitObjectDetectionCommonResources.bundle"
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/MyFatoorah/MyFatoorah.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/GooglePlaces/GooglePlacesResources.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/MLKitObjectDetection/MLKitObjectDetectionResources.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/MLKitObjectDetectionCommon/MLKitObjectDetectionCommonResources.bundle"
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/MyFatoorah/MyFatoorah.bundle"
 fi
 
