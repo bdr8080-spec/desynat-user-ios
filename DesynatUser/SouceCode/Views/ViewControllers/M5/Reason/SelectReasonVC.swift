@@ -47,7 +47,8 @@ class SelectReasonVC: UIViewController {
     var onCancel: (()->())?
     var onReturn: (()->())?
     var onExchange: (()->())?
-    
+  var cancelReason: String? = ""
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         registerXib()
@@ -147,12 +148,29 @@ func showReturnSuccess() {
             }
         }
     }
+  
+  private func getSelectedCancelReason() -> String? {
+      let isOtherSelected = selectedIndex == rejectReasonData.count
+
+      if isOtherSelected {
+          let otherReason = txtReason.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+          return (otherReason?.isEmpty == false) ? otherReason : nil
+      } else {
+          guard rejectReasonData.indices.contains(selectedIndex) else { return nil }
+          return rejectReasonData[selectedIndex].reasonEnglish
+      }
+  }
+
     
     @IBAction func btnSubmit(_ sender: Any) {
         switch screenType {
         
         case .cancelOrder:
-            viewModel.cancelOrder {
+          guard let reason = getSelectedCancelReason() else {
+                      showAlert(msg: "Please select or enter a reason")
+                      return
+                  }
+          viewModel.cancelOrder(reason: reason) {
                 self.onCancel?()
                 self.delegate?.didUpdateOrder(status: .cancelOrder)
             }

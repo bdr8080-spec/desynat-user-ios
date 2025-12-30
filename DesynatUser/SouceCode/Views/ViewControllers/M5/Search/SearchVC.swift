@@ -65,15 +65,19 @@ class SearchVC: UIViewController {
     }
     let nextVC = SearchProductListViewController.instantiate(fromAppStoryboard: .MyOrder)
     nextVC.viewModel.searchText = self.txtSearch.text?.trimmed() ?? ""
+    nextVC.comingFromImageScanner = false
     self.navigationController?.pushViewController(nextVC, animated: true)
   }
   
   @IBAction func btnCamera(_ sender: Any) {
-    let picker = UIImagePickerController()
-    picker.sourceType = .camera
-    picker.cameraCaptureMode = .photo
-    picker.delegate = self
-    present(picker, animated: true)
+//    let picker = UIImagePickerController()
+//    picker.sourceType = .camera
+//    picker.cameraCaptureMode = .photo
+//    picker.delegate = self
+//    present(picker, animated: true)
+    
+    let vc = WatchScannerVc.viewFromNIB
+    self.navigationController?.pushViewController(vc, animated: true)
   }
   
   @IBAction func btnMic(_ sender: UIButton) {

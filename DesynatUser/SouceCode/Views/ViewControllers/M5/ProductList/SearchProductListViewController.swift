@@ -31,6 +31,7 @@ class SearchProductListViewController: UIViewController, SortByStoresViewControl
     lazy var viewModel = SearchProductListViewModel(hostVC: self)
     var appliedSortFilter: Int?
     private var searchWorkItem: DispatchWorkItem?
+  var comingFromImageScanner: Bool = false
 //    var searchKey: String
     
     override func viewDidLoad() {
@@ -72,7 +73,11 @@ class SearchProductListViewController: UIViewController, SortByStoresViewControl
     }
     
     @IBAction func backDidTapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+//      if comingFromImageScanner {
+        self.navigationController?.popToViewController(ofType: SearchVC.self)
+//      } else {
+//        self.navigationController?.popViewController(animated: true)
+//      }
     }
     
     @IBAction func sortDidTapped(_ sender: Any) {

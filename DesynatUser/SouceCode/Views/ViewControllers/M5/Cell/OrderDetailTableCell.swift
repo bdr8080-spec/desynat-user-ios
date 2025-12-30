@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class OrderDetailTableCell: UITableViewCell {
 
@@ -46,4 +47,20 @@ class OrderDetailTableCell: UITableViewCell {
     @IBAction func btnReturn(_ sender: Any) {
         onTapReturn?()
     }
+  
+  func configData(data: AllOtherOrderVarient?) {
+    if let imageUrl = data?.variationDetails?.variantImage?.first, let url = URL(string: imageUrl) {
+      imgProduct.sd_imageIndicator = SDWebImageActivityIndicator.gray
+      imgProduct.sd_imageIndicator?.startAnimatingIndicator()
+      imgProduct.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+    } else {
+      imgProduct.image = UIImage(named: "")
+    }
+    
+    //lblDisPrice.text = data.am
+    lblDisPrice.text = "\(data?.variationDetails?.finalPrice ?? "") KD"
+    CommonUtils.setStrikethrough(label: lblPrice, text: "\(data?.variationDetails?.actualPrice ?? "0") KD")
+    lblProductName.text = data?.productDetails?.productNameEn
+    setColorBox(size: data?.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data?.quantity ?? 0)")
+  }
 }

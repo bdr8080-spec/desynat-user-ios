@@ -216,6 +216,9 @@
 		D1CF05AD2EF96E39005DB273 /* LatestSearchCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1CF05AB2EF96E39005DB273 /* LatestSearchCollectionCell.xib */; };
 		D1CF05B02EF9706E005DB273 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CF05AF2EF9706E005DB273 /* SearchVC.swift */; };
 		D1CF06402EF9852B005DB273 /* MyOrderDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CF063F2EF98522005DB273 /* MyOrderDetailVM.swift */; };
+		D1D97F5B2F03B31C006490C1 /* ScanHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D97F592F03B31C006490C1 /* ScanHelper.swift */; };
+		D1D97F5C2F03B31C006490C1 /* WatchScannerVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D97F572F03B31C006490C1 /* WatchScannerVc.swift */; };
+		D1D97F5D2F03B31C006490C1 /* WatchScannerVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1D97F582F03B31C006490C1 /* WatchScannerVc.xib */; };
 		D1DAB9692EE0056A009ECA61 /* GiftCardsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DAB9672EE0056A009ECA61 /* GiftCardsListTableViewCell.swift */; };
 		D1DAB96A2EE0056A009ECA61 /* GiftCardsListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1DAB9682EE0056A009ECA61 /* GiftCardsListTableViewCell.xib */; };
 		D1DAB9932EE00F5F009ECA61 /* UITextViewPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DAB9922EE00F5F009ECA61 /* UITextViewPlaceholder.swift */; };
@@ -441,6 +444,9 @@
 		D1CF05AB2EF96E39005DB273 /* LatestSearchCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LatestSearchCollectionCell.xib; sourceTree = "<group>"; };
 		D1CF05AF2EF9706E005DB273 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		D1CF063F2EF98522005DB273 /* MyOrderDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrderDetailVM.swift; sourceTree = "<group>"; };
+		D1D97F572F03B31C006490C1 /* WatchScannerVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchScannerVc.swift; sourceTree = "<group>"; };
+		D1D97F582F03B31C006490C1 /* WatchScannerVc.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WatchScannerVc.xib; sourceTree = "<group>"; };
+		D1D97F592F03B31C006490C1 /* ScanHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanHelper.swift; sourceTree = "<group>"; };
 		D1DAB9672EE0056A009ECA61 /* GiftCardsListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftCardsListTableViewCell.swift; sourceTree = "<group>"; };
 		D1DAB9682EE0056A009ECA61 /* GiftCardsListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GiftCardsListTableViewCell.xib; sourceTree = "<group>"; };
 		D1DAB9922EE00F5F009ECA61 /* UITextViewPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewPlaceholder.swift; sourceTree = "<group>"; };
@@ -1238,6 +1244,7 @@
 		D182E44A2EF539B10002E850 /* M5 */ = {
 			isa = PBXGroup;
 			children = (
+				D1D97F5A2F03B31C006490C1 /* WatchScanner */,
 				D1BCAF192EFBFB6A00117D0A /* RateProduct */,
 				D10054492EFBBE6500956DBA /* ProductList */,
 				D1CF05AE2EF97055005DB273 /* Search */,
@@ -1335,6 +1342,16 @@
 				D162B7802EFAD44F00149E3E /* SearchVM.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		D1D97F5A2F03B31C006490C1 /* WatchScanner */ = {
+			isa = PBXGroup;
+			children = (
+				D1D97F572F03B31C006490C1 /* WatchScannerVc.swift */,
+				D1D97F582F03B31C006490C1 /* WatchScannerVc.xib */,
+				D1D97F592F03B31C006490C1 /* ScanHelper.swift */,
+			);
+			path = WatchScanner;
 			sourceTree = "<group>";
 		};
 		D1DAB95B2EE004E7009ECA61 /* M4 */ = {
@@ -1468,6 +1485,7 @@
 				D1DABB432EE05E14009ECA61 /* PromoCodeTableViewCell.xib in Resources */,
 				6B8C937E2EBDBEAF00BC4DC8 /* SideMenuTableViewCell.xib in Resources */,
 				6B95F1B72EB5DB5E00391509 /* LaunchScreen.storyboard in Resources */,
+				D1D97F5D2F03B31C006490C1 /* WatchScannerVc.xib in Resources */,
 				6B95F1B82EB5DB5E00391509 /* Main.storyboard in Resources */,
 				6B95F1B92EB5DB5E00391509 /* BestSellingsCollectionViewCell.xib in Resources */,
 				6B95F1BA2EB5DB5E00391509 /* CategoriesCollectionViewCell.xib in Resources */,
@@ -1757,6 +1775,8 @@
 				6B95F2252EB5DB5E00391509 /* ISO8601WithFractionalSecondsStrategy.swift in Sources */,
 				6B95F2262EB5DB5E00391509 /* LosslessArray.swift in Sources */,
 				49F3239D2ED69DBA0027A573 /* AddaddressViewModel.swift in Sources */,
+				D1D97F5B2F03B31C006490C1 /* ScanHelper.swift in Sources */,
+				D1D97F5C2F03B31C006490C1 /* WatchScannerVc.swift in Sources */,
 				6B95F2272EB5DB5E00391509 /* LosslessValue.swift in Sources */,
 				7AE4F38B2ECB0792004CBD53 /* StoresFiltersViewController.swift in Sources */,
 				6B95F2282EB5DB5E00391509 /* LossyArray.swift in Sources */,

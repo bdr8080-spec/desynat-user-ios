@@ -12,8 +12,9 @@ struct OrderModel: Codable {
     let amount, status, createdAt, updatedAt: String?
     let returnType, rEApprove: String?
     let returnReason, returnImage, exchangeReason, cancelReason, exchangeNewSize: String?
-    let exchangeOldSize: String?
+    let exchangeOldSize, notDeliveredReason: String?
     let paymentStatus, deliveryStatus: String?
+    let allOtherOrderVarient: [AllOtherOrderVarient]?
     let order: Order?
     let productDetails: ProductDetails?
     let variationDetails: VariationDetails?
@@ -30,6 +31,7 @@ struct OrderModel: Codable {
         case updatedAt = "updated_at"
         case returnType = "return_type"
         case rEApprove = "r_e_approve"
+        case allOtherOrderVarient
         case returnReason = "return_reason"
         case returnImage = "return_image"
         case exchangeReason = "exchange_reason"
@@ -42,6 +44,53 @@ struct OrderModel: Codable {
         case productDetails = "product_details"
         case variationDetails = "variation_details"
         case userRatingReviewProvide = "user_rating_review_provide"
+      case notDeliveredReason = "not_delivered_reason"
+    }
+}
+
+// MARK: - AllOtherOrderVarient
+struct AllOtherOrderVarient: Codable {
+    let id, orderID, userID, productID: Int?
+    let variantsID, quantity: Int?
+    let amount, status, createdAt, updatedAt: String?
+    let returnType, rEApprove: String?
+    let returnReason, returnImage, exchangeReason, exchangeNewSize: String?
+    let exchangeOldSize: String?
+    let paymentStatus, deliveryStatus: String?
+    let deliveryBoyID: String?
+    let assignStatus: String?
+    let assignDate, cancelReason: String?
+    let isPicked: String?
+    let notDeliveredReason: String?
+    let productDetails: ProductDetails?
+    let variationDetails: VariationDetails?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case orderID = "order_id"
+        case userID = "user_id"
+        case productID = "product_id"
+        case variantsID = "variants_id"
+        case quantity, amount, status
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case returnType = "return_type"
+        case rEApprove = "r_e_approve"
+        case returnReason = "return_reason"
+        case returnImage = "return_image"
+        case exchangeReason = "exchange_reason"
+        case exchangeNewSize = "exchange_new_size"
+        case exchangeOldSize = "exchange_old_size"
+        case paymentStatus = "payment_status"
+        case deliveryStatus = "delivery_status"
+        case deliveryBoyID = "delivery_boy_id"
+        case assignStatus = "assign_status"
+        case assignDate = "assign_date"
+        case cancelReason = "cancel_reason"
+        case isPicked = "is_picked"
+        case notDeliveredReason = "not_delivered_reason"
+        case productDetails = "product_details"
+        case variationDetails = "variation_details"
     }
 }
 

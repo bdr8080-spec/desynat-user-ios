@@ -31,9 +31,11 @@ class SelectReasonVM: NSObject {
         }
     }
 
-    func cancelOrder(completion: @escaping () -> Void) {
+  func cancelOrder(reason: String, completion: @escaping () -> Void) {
         let params: [String: Any] = [
-            "order_id": hostVC.orderId ?? ""
+            "order_id": hostVC.orderId ?? "",
+            "orderdetails_id": hostVC.orderDetailId ?? "",
+            "cancel_reason": reason
         ]
         WebService.sharedInstance.cancelOrder(param: params) { data in
             completion()

@@ -21,6 +21,10 @@ extension UIViewController {
 //        }))
 //        self.present(alert, animated: true)
 //    }
+  
+  static var viewFromNIB : Self {
+      return Self(nibName: String(describing: Self.self), bundle: nil) as Self
+  }
     
     public func showAlert(msg: String, completion: (() -> Void)? = nil) {
             // Prevent multiple alerts

@@ -38,7 +38,7 @@ class MyOrderTableCell: UITableViewCell {
             imgOrder.image = UIImage(named: "")
         }
         
-        lblOrderId.text = "\(data.orderID ?? 0)"
+        lblOrderId.text = "#\(data.id ?? 0)"
         lblPrice.text = "\(data.amount ?? "") KD"
         lblModelPiece.text = data.productDetails?.productNameEn ?? ""
         
@@ -55,8 +55,8 @@ class MyOrderTableCell: UITableViewCell {
         //let status = data.order?.deliveryStatus
         
         let paymentMethod = data.order?.paymentMethod
-        let paymentStatus = data.order?.paymentStatus
-        let deliveryStatus = data.order?.deliveryStatus
+      let paymentStatus = data.paymentStatus //data.order?.paymentStatus
+      let deliveryStatus = data.deliveryStatus //data.order?.deliveryStatus
         
         if paymentMethod == "1" || paymentMethod == "2" {
             if paymentStatus == "1" {
@@ -64,14 +64,16 @@ class MyOrderTableCell: UITableViewCell {
                 case "1": //Pending
                     lblStatus.text = "Pending"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
-                    
+                  lblOrderDate.text = "Expected Delivery Date : 3-5 days"
+                  
                 case "2", "7": //Ongoing
                     lblStatus.text = "Ongoing"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewExchange.isHidden = false
                     viewExchange.backgroundColor = UIColor(hexString: "#FF5F1B").withAlphaComponent(0.1)
                     lblOrderDate.textColor = UIColor(hexString: "#FF5F1B")
-                    
+                  lblOrderDate.text = "Expected Delivery Date : 3-5 days"
+                  
                 case "3": //Delivered
                     lblStatus.text = "Delivered"
                     lblStatus.textColor = UIColor(hexString: "#16B364")
@@ -79,14 +81,16 @@ class MyOrderTableCell: UITableViewCell {
                     viewExchange.backgroundColor = UIColor(hexString: "#16B364").withAlphaComponent(0.1)
                     lblOrderDate.textColor = UIColor(hexString: "#16B364")
                     handleReturnExchange(data: data)
-                    
+                  lblOrderDate.text = "Delivered On : 12 SEP 25"
+                  
                 case "4": //Cancelled
                     lblStatus.text = "Cancelled"
                     lblStatus.textColor = UIColor(hexString: "#E70000")
                     viewExchange.isHidden = false
                     viewExchange.backgroundColor = UIColor(hexString: "#F4DDDD")
                     lblOrderDate.textColor = UIColor(hexString: "#E70000")
-                    
+                  lblOrderDate.text = "Cancelled  Date : 12 SEP 25"
+                  
                 default:
                     return
                 }
@@ -96,20 +100,27 @@ class MyOrderTableCell: UITableViewCell {
                 viewExchange.isHidden = false
                 viewExchange.backgroundColor = UIColor(hexString: "#F4DDDD")
                 lblOrderDate.textColor = UIColor(hexString: "#E70000")
+              lblOrderDate.text = "Pickup Date : 12 SEP 25"
+              
             }
         } else if paymentMethod == "3" {
-            if paymentStatus == "0" {
+            if paymentStatus == "0" || paymentStatus == "1" {
                 switch deliveryStatus {
                 case "1": //Pending
-                    lblStatus.text = "Pending"
+                    lblStatus.text = "Ongoing"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
-                    
+                  viewExchange.isHidden = false
+                  viewExchange.backgroundColor = UIColor(hexString: "#FF5F1B").withAlphaComponent(0.1)
+                  lblOrderDate.textColor = UIColor(hexString: "#FF5F1B")
+                  lblOrderDate.text = "Expected Delivery Date : 3-5 days"
+                  
                 case "2", "7": //Ongoing, Picked
                     lblStatus.text = "Ongoing"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewExchange.isHidden = false
                     viewExchange.backgroundColor = UIColor(hexString: "#FF5F1B").withAlphaComponent(0.1)
                     lblOrderDate.textColor = UIColor(hexString: "#FF5F1B")
+                  lblOrderDate.text = "Expected Delivery Date : 3-5 days"
                     
                 case "3": //Delivered
                     lblStatus.text = "Delivered"
@@ -118,14 +129,15 @@ class MyOrderTableCell: UITableViewCell {
                     viewExchange.backgroundColor = UIColor(hexString: "#16B364").withAlphaComponent(0.1)
                     lblOrderDate.textColor = UIColor(hexString: "#16B364")
                     handleReturnExchange(data: data)
-                    
-                case "4": //Cancelled
+                  lblOrderDate.text = "Delivered On : 12 SEP 25"
+                  
+                case "4", "8": //Cancelled
                     lblStatus.text = "Cancelled"
                     lblStatus.textColor = UIColor(hexString: "#E70000")
                     viewExchange.isHidden = false
                     viewExchange.backgroundColor = UIColor(hexString: "#F4DDDD")
                     lblOrderDate.textColor = UIColor(hexString: "#E70000")
-                  
+                  lblOrderDate.text = "Cancelled  Date : 12 SEP 25"
               
                     
                 default:
@@ -137,6 +149,7 @@ class MyOrderTableCell: UITableViewCell {
                 viewExchange.isHidden = false
                 viewExchange.backgroundColor = UIColor(hexString: "#F4DDDD")
                 lblOrderDate.textColor = UIColor(hexString: "#E70000")
+              lblOrderDate.text = "Cancelled  Date : 12 SEP 25"
             }
         }
     }
@@ -148,10 +161,12 @@ class MyOrderTableCell: UITableViewCell {
         viewReturn.isHidden = true
         
         if isReturnAllowed {
+          lblStatus.text = "Return Req."
             viewReturn.isHidden = false
             lblReturn.text = "Return Request"
             lblReturnDate.text = data.variationDetails?.createdAt?.formattedOrderDate() ?? ""
         } else if isExchangeAllowed {
+          lblStatus.text = "Return Req."
             viewReturn.isHidden = false
             lblReturn.text = "Exchange Request"
             lblReturnDate.text = data.variationDetails?.createdAt?.formattedOrderDate() ?? ""
