@@ -305,12 +305,13 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
           viewReturnEx.isHidden = false
           viewPaidBy.isHidden = false
           viewDownloadInvoice.isHidden = false
-          handleReturnExchange(data: data)
+          
           
           activateStep(0, title: "Confirmed")
           activateStep(1, title: "Shipped")
           activateStep(2, title: "On the Way")
           activateStep(3, title: "Delivered")
+          handleReturnExchange(data: data)
           
           
         case "4": //Cancelled
@@ -400,12 +401,13 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
           viewPaidBy.isHidden = false
           viewDownloadInvoice.isHidden = false
           viewCancelDetail.isHidden = true
-          handleReturnExchange(data: data)
+          
           
           activateStep(0, title: "Confirmed")
           activateStep(1, title: "Shipped")
           activateStep(2, title: "On the Way")
           activateStep(3, title: "Delivered")
+          handleReturnExchange(data: data)
           
           
         case "4": //Cancelled
@@ -497,35 +499,37 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
       exchangeReturnHeightConstrint.constant = 64
     }
     if isReturnAllowed {
+      resetStepper()
       lblStatus.text = "Return Request"
       lblStatus.textColor = UIColor(hexString: "#FF5F1B")
       viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
       activateStep(0, title: "Confirmed")
       activateStep(1, title: "In Progress")
-      activateStep(2, title: "Pickup")
-      activateStep(3, title: "Complete")
+//      activateStep(2, title: "Pickup")
+//      activateStep(3, title: "Complete")
     } else if isExchangeAllowed {
+      resetStepper()
       lblStatus.text = "Return Request"
       lblStatus.textColor = UIColor(hexString: "#FF5F1B")
       viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
       activateStep(0, title: "Confirmed")
       activateStep(1, title: "In Progress")
-      activateStep(2, title: "Pickup & Exchange")
-      activateStep(3, title: "Complete")
+//      activateStep(2, title: "Pickup & Exchange")
+//      activateStep(3, title: "Complete")
     }
     let returnStatus = data.returnType ?? "0"
     
     switch returnStatus {
     case "1":
       viewReturnEx.isHidden = true
-      exchangeReturnDescriptionView.isHidden = false
-      exchangeReturnDescriptionLabel.text = "Order is in return process"
+//      exchangeReturnDescriptionView.isHidden = false
+//      exchangeReturnDescriptionLabel.text = "Order is in return process"
       viewReturnDetail.isHidden = false
       viewReason.isHidden = false
     case "2":
       viewReturnEx.isHidden = true
-      exchangeReturnDescriptionView.isHidden = false
-      exchangeReturnDescriptionLabel.text = "Order is in exchange process"
+//      exchangeReturnDescriptionView.isHidden = false
+//      exchangeReturnDescriptionLabel.text = "Order is in exchange process"
       viewExchangeDetail.isHidden = false
       viewReason.isHidden = false
     default:
@@ -563,11 +567,9 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
     let vc = RateProductOrderViewController.instantiate(fromAppStoryboard: .MyOrder)
     vc.orderId = self.orderId
     vc.orderDetailId = self.orderDetailId
-    
     vc.ratingDone = { [weak self] in
       self?.viewModel.getOrderDetail()
     }
-    
     navigationController?.present(vc, animated: true)
   }
   

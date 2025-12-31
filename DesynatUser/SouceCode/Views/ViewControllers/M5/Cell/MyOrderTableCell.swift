@@ -80,8 +80,9 @@ class MyOrderTableCell: UITableViewCell {
                     viewExchange.isHidden = false
                     viewExchange.backgroundColor = UIColor(hexString: "#16B364").withAlphaComponent(0.1)
                     lblOrderDate.textColor = UIColor(hexString: "#16B364")
-                    handleReturnExchange(data: data)
+                    
                   lblOrderDate.text = "Delivered On : 12 SEP 25"
+                  handleReturnExchange(data: data)
                   
                 case "4": //Cancelled
                     lblStatus.text = "Cancelled"
@@ -128,8 +129,9 @@ class MyOrderTableCell: UITableViewCell {
                     viewExchange.isHidden = false
                     viewExchange.backgroundColor = UIColor(hexString: "#16B364").withAlphaComponent(0.1)
                     lblOrderDate.textColor = UIColor(hexString: "#16B364")
-                    handleReturnExchange(data: data)
+
                   lblOrderDate.text = "Delivered On : 12 SEP 25"
+                  handleReturnExchange(data: data)
                   
                 case "4", "8": //Cancelled
                     lblStatus.text = "Cancelled"
@@ -162,14 +164,24 @@ class MyOrderTableCell: UITableViewCell {
         
         if isReturnAllowed {
           lblStatus.text = "Return Req."
+          lblStatus.textColor = UIColor(hexString: "#FF5F1B")
+          lblStatus.backgroundColor = UIColor(hexString: "#FF5F1B").withAlphaComponent(0.1)
             viewReturn.isHidden = false
             lblReturn.text = "Return Request"
             lblReturnDate.text = data.variationDetails?.createdAt?.formattedOrderDate() ?? ""
+          lblOrderDate.text = "Pickup On : 12 SEP 25"
+          viewExchange.backgroundColor = UIColor(hexString: "#FF5F1B").withAlphaComponent(0.1)
+          lblOrderDate.textColor = UIColor(hexString: "#FF5F1B")
         } else if isExchangeAllowed {
           lblStatus.text = "Return Req."
+          lblStatus.textColor = UIColor(hexString: "#FF5F1B")
+          lblStatus.backgroundColor = UIColor(hexString: "#FF5F1B").withAlphaComponent(0.1)
             viewReturn.isHidden = false
             lblReturn.text = "Exchange Request"
             lblReturnDate.text = data.variationDetails?.createdAt?.formattedOrderDate() ?? ""
+          lblOrderDate.text = "Pickup On : 12 SEP 25"
+          viewExchange.backgroundColor = UIColor(hexString: "#FF5F1B").withAlphaComponent(0.1)
+          lblOrderDate.textColor = UIColor(hexString: "#FF5F1B")
         }
     }
     
