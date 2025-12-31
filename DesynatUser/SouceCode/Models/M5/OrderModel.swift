@@ -136,7 +136,8 @@ struct Order: Codable {
     let assignDate, notDeliveredReason: String?
     let createdAt, updatedAt: String?
     let deliveryDetails: DeliveryDetails?
-    let giftCardDetails, promocodeDetails: String?
+  let giftCardDetails: String?
+    let promocodeDetails: PromocodeDetails?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -167,6 +168,35 @@ struct Order: Codable {
         case deliveryDetails = "delivery_details"
         case giftCardDetails = "gift_card_details"
         case promocodeDetails = "promocode_details"
+    }
+}
+
+// MARK: - PromocodeDetails
+struct PromocodeDetails: Codable {
+    let id, countryID: Int?
+    let nameEnglish, nameArabic, descriptionEnglish, descriptionArabic: String?
+    let applicableFor: Int?
+    let discountPercent, minOrderValue, uptoDiscount, startDate: String?
+    let endDate: String?
+    let status: Int?
+    let createdAt, updatedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case countryID = "country_id"
+        case nameEnglish = "name_english"
+        case nameArabic = "name_arabic"
+        case descriptionEnglish = "description_english"
+        case descriptionArabic = "description_arabic"
+        case applicableFor = "applicable_for"
+        case discountPercent = "discount_percent"
+        case minOrderValue = "min_order_value"
+        case uptoDiscount = "upto_discount"
+        case startDate = "start_date"
+        case endDate = "end_date"
+        case status
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
     }
 }
 

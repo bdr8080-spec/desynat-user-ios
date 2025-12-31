@@ -5,6 +5,228 @@
 //  Created by Navanindra Vats on 28/09/25.
 //
 
+//import UIKit
+//import AVFoundation
+//
+//class WatchScannerVc : UIViewController {
+//    
+//    @IBOutlet weak var cameraPreview: UIView!  // The square view you placed in storyboard
+//    
+//    private var captureSession: AVCaptureSession?
+//    private var videoPreviewLayer: AVCaptureVideoPreviewLayer?
+//    private var captureDevice: AVCaptureDevice?
+//    private var photoOutput = AVCapturePhotoOutput()
+//    private var isFlashOn = false
+//
+//    var viewModel:WatchRecognizer!
+//    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        self.viewModel = .init()
+//        setupCamera()
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(focusTap(_:)))
+//        cameraPreview.addGestureRecognizer(tapGesture)
+//    }
+//    
+//    private func setupCamera() {
+//        captureSession = AVCaptureSession()
+//        captureSession?.sessionPreset = .photo
+//        
+//        // Get the primary (back) camera
+//        guard let device = AVCaptureDevice.default(.builtInWideAngleCamera,
+//                                                   for: .video,
+//                                                   position: .back) else {
+//          self.showAlert(msg: "Camera not found"){
+//              self.navigationController?.popViewController(animated: true)
+//          }
+//            return
+//        }
+//        
+//        do {
+//            let input = try AVCaptureDeviceInput(device: device)
+//            if captureSession!.canAddInput(input) {
+//                captureSession!.addInput(input)
+//            }
+//            if captureSession!.canAddOutput(photoOutput) {
+//                captureSession!.addOutput(photoOutput)
+//            }
+//            
+//            // Enable autofocus, auto exposure, auto white balance
+//            try device.lockForConfiguration()
+//            if device.isFocusModeSupported(.continuousAutoFocus) {
+//                device.focusMode = .continuousAutoFocus
+//            }
+//            if device.isExposureModeSupported(.continuousAutoExposure) {
+//                device.exposureMode = .continuousAutoExposure
+//            }
+//            if device.isWhiteBalanceModeSupported(.continuousAutoWhiteBalance) {
+//                device.whiteBalanceMode = .continuousAutoWhiteBalance
+//            }
+//            device.unlockForConfiguration()
+//            captureDevice = device
+//            
+//            // Preview layer
+//            videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
+//            videoPreviewLayer?.videoGravity = .resizeAspectFill
+//            videoPreviewLayer?.frame = cameraPreview.bounds
+//            cameraPreview.layer.addSublayer(videoPreviewLayer!)
+//            
+//            // Start session
+//            captureSession?.startRunning()
+//        } catch {
+//          self.showAlert(msg: "❌ Error setting up camera") {
+//            self.navigationController?.popViewController(animated: true)
+//          }
+//        }
+//    }
+//    
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        videoPreviewLayer?.frame = cameraPreview.bounds
+//    }
+//    
+//    @objc private func focusTap(_ gesture: UITapGestureRecognizer) {
+//        let location = gesture.location(in: cameraPreview)
+//        focus(at: location)
+//        showFocusRing(at: location)
+//    }
+//    
+//    private func showFocusRing(at point: CGPoint) {
+//        let focusRing = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+//        focusRing.center = point
+//        focusRing.layer.borderColor = UIColor.yellow.cgColor
+//        focusRing.layer.borderWidth = 2
+//        focusRing.layer.cornerRadius = 40
+//        focusRing.alpha = 0.0
+//        cameraPreview.addSubview(focusRing)
+//        
+//        UIView.animate(withDuration: 0.2, animations: {
+//            focusRing.alpha = 1.0
+//            focusRing.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+//        }) { _ in
+//            UIView.animate(withDuration: 0.3, delay: 0.5, options: [], animations: {
+//                focusRing.alpha = 0.0
+//                focusRing.transform = CGAffineTransform.identity
+//            }, completion: { _ in
+//                focusRing.removeFromSuperview()
+//            })
+//        }
+//    }
+//    
+//    private func focus(at point: CGPoint) {
+//        guard let device = captureDevice else { return }
+//        
+//        // Convert tap location to camera coordinates (0–1 range)
+//        let focusPoint = CGPoint(x: point.x / cameraPreview.bounds.size.width,
+//                                 y: point.y / cameraPreview.bounds.size.height)
+//        
+//        do {
+//            try device.lockForConfiguration()
+//            
+//            if device.isFocusPointOfInterestSupported {
+//                device.focusPointOfInterest = focusPoint
+//                device.focusMode = .autoFocus
+//            }
+//            
+//            if device.isExposurePointOfInterestSupported {
+//                device.exposurePointOfInterest = focusPoint
+//                device.exposureMode = .autoExpose
+//            }
+//            
+//            device.unlockForConfiguration()
+//        } catch {
+//            print("❌ Focus error: \(error)")
+//        }
+//    }
+//    
+//}
+//
+//extension WatchScannerVc {
+//    @IBAction private func galleryWatch(_ sender:UIButton) {
+////        let pick = AssetPickerController(with: [.ImageLibrary])
+////        pick.initializeAssetPickerOn(controller: self, imageCompletion:  { result in
+////            self.checkForImage(image: result)
+////        })
+//    }
+//    
+//    @IBAction func captureImage(_ sender: UIButton) {
+//        let settings = AVCapturePhotoSettings()
+//        if captureDevice?.isFlashAvailable == true {
+//            settings.flashMode = isFlashOn ? .on : .off
+//        }
+//        photoOutput.capturePhoto(with: settings, delegate: self)
+//    }
+//    
+//    @IBAction func toggleFlash(_ sender: UIButton) {
+//        guard let device = captureDevice, device.hasTorch else { return }
+//        
+//        do {
+//            try device.lockForConfiguration()
+//            
+//            if isFlashOn {
+//                device.torchMode = .off
+//            } else {
+//                try device.setTorchModeOn(level: 1.0)
+//            }
+//            
+//            isFlashOn.toggle()
+//            device.unlockForConfiguration()
+//            
+//        } catch {
+//            print("❌ Torch error: \(error)")
+//        }
+//    }
+//    
+//    @IBAction func btnTapBack(_ sender: Any) {
+//        self.navigationController?.popViewController(animated: true)
+//    }
+//}
+//
+//extension WatchScannerVc {
+//    func checkForImage(image:UIImage) {
+////        self.viewModel.detectBrandAndModel( image: image, completion: { brand, model, colors in
+////                DispatchQueue.main.async {
+////                  print("brand===>\(brand)")
+////                  print("model===>\(model)")
+////                  print("colors===>\(colors)")
+//                  let nextVC = SearchProductListViewController.instantiate(fromAppStoryboard: .MyOrder)
+//                  nextVC.comingFromImageScanner = true
+////                  if let brandName = brand?.name {
+//                    nextVC.viewModel.searchText = model ?? ""
+////                  }
+//                  self.navigationController?.pushViewController(nextVC, animated: true)
+////                }
+////            }, errCompletion: {
+////                DispatchQueue.main.async {
+////                    self.showAlert(msg: "This is not a watch")
+////                }
+////            }
+////        )
+//      self.viewModel.detectProduct(image: image) { productType, colors in
+//          DispatchQueue.main.async {
+//              let vc = SearchProductListViewController.instantiate(fromAppStoryboard: .MyOrder)
+//              vc.viewModel.searchText = productType.rawValue
+//              self.navigationController?.pushViewController(vc, animated: true)
+//          }
+//      } errCompletion: {
+//          DispatchQueue.main.async {
+//              self.showAlert(msg: "Product not recognized")
+//          }
+//      }
+//
+//    }
+//}
+//
+//extension WatchScannerVc : AVCapturePhotoCaptureDelegate {
+//    func photoOutput(_ output: AVCapturePhotoOutput,
+//                     didFinishProcessingPhoto photo: AVCapturePhoto,
+//                     error: Error?) {
+//        guard let imageData = photo.fileDataRepresentation(), let image = UIImage(data: imageData) else { return }
+//        self.checkForImage(image: image)
+//    }
+//}
+
+
 import UIKit
 import AVFoundation
 
@@ -18,7 +240,9 @@ class WatchScannerVc : UIViewController {
     private var photoOutput = AVCapturePhotoOutput()
     private var isFlashOn = false
     
+    //    var viewModel = WatchScannerViewModel()
     var viewModel:WatchRecognizer!
+//    var type:ScannerResultNavigationType = .addWatch
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +260,9 @@ class WatchScannerVc : UIViewController {
         guard let device = AVCaptureDevice.default(.builtInWideAngleCamera,
                                                    for: .video,
                                                    position: .back) else {
-            self.showAlert(msg: "Camera not found"){
-                self.navigationController?.popViewController(animated: true)
-            }
+          self.showAlert(msg: "Camera not found"){
+              self.navigationController?.popViewController(animated: true)
+          }
             return
         }
         
@@ -90,7 +314,7 @@ class WatchScannerVc : UIViewController {
         focus(at: location)
         showFocusRing(at: location)
     }
-
+    
     private func showFocusRing(at point: CGPoint) {
         let focusRing = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
         focusRing.center = point
@@ -138,7 +362,7 @@ class WatchScannerVc : UIViewController {
             print("❌ Focus error: \(error)")
         }
     }
-
+    
 }
 
 extension WatchScannerVc {
@@ -184,21 +408,22 @@ extension WatchScannerVc {
 
 extension WatchScannerVc {
     func checkForImage(image:UIImage) {
-        self.viewModel.detectBrandAndModel(image: image) { (brand, model, colors) in
-            DispatchQueue.main.async {
-//              print(brand)
-//              print(model)
-//              print(colors)
-              let nextVC = SearchProductListViewController.instantiate(fromAppStoryboard: .MyOrder)
-              nextVC.comingFromImageScanner = true
-              if let brandName = brand?.name {
-                  nextVC.viewModel.searchText = brandName
-              }
-              self.navigationController?.pushViewController(nextVC, animated: true)
+        self.viewModel.detectBrandAndModel( image: image, completion: { brand, model, colors in
+                DispatchQueue.main.async {
+                  let nextVC = SearchProductListViewController.instantiate(fromAppStoryboard: .MyOrder)
+                  nextVC.comingFromImageScanner = true
+//                  if let brandName = brand?.name {
+                    nextVC.viewModel.searchText = model ?? ""
+//                  }
+                  self.navigationController?.pushViewController(nextVC, animated: true)
+                }
+            }, errCompletion: {
+                DispatchQueue.main.async {
+                    self.showAlert(msg: "This is not a watch")
+                }
             }
-        }
+        )
     }
-
 }
 
 extension WatchScannerVc : AVCapturePhotoCaptureDelegate {

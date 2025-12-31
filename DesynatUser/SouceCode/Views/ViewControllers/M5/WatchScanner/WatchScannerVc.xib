@@ -50,8 +50,8 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dEn-IX-fhp" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                            <rect key="frame" x="66" y="8.6666666666666732" width="267" height="22.666666666666671"/>
-                            <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                            <rect key="frame" x="66" y="7.3333333333333268" width="267" height="25.333333333333329"/>
+                            <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="18"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                             <userDefinedRuntimeAttributes>
@@ -70,14 +70,14 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NJo-ik-ie5">
-                    <rect key="frame" x="26" y="280.66666666666669" width="341" height="341.00000000000006"/>
+                    <rect key="frame" x="20" y="274.66666666666669" width="353" height="353.00000000000006"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="NJo-ik-ie5" secondAttribute="height" id="JAG-Zc-LwH"/>
                     </constraints>
                 </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scanner" translatesAutoresizingMaskIntoConstraints="NO" id="95s-hP-dfh">
-                    <rect key="frame" x="26" y="280.66666666666669" width="341" height="341.00000000000006"/>
+                    <rect key="frame" x="20" y="274.66666666666669" width="353" height="353.00000000000006"/>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="NVb-YX-VMj">
                     <rect key="frame" x="25" y="706" width="343" height="78"/>
@@ -126,11 +126,11 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="NJo-ik-ie5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="26" id="1O3-z0-BbM"/>
+                <constraint firstItem="NJo-ik-ie5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="1O3-z0-BbM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="NVb-YX-VMj" secondAttribute="bottom" id="8Ao-Uo-6wd"/>
                 <constraint firstItem="15R-l9-7Ko" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="8P9-ib-Zr1"/>
                 <constraint firstItem="95s-hP-dfh" firstAttribute="trailing" secondItem="NJo-ik-ie5" secondAttribute="trailing" id="8l0-3u-RGd"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NJo-ik-ie5" secondAttribute="trailing" constant="26" id="9po-jj-f56"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NJo-ik-ie5" secondAttribute="trailing" constant="20" id="9po-jj-f56"/>
                 <constraint firstItem="Bau-im-9XL" firstAttribute="trailing" secondItem="15R-l9-7Ko" secondAttribute="trailing" id="H2H-LJ-lzD"/>
                 <constraint firstItem="95s-hP-dfh" firstAttribute="leading" secondItem="NJo-ik-ie5" secondAttribute="leading" id="L71-cH-NKs"/>
                 <constraint firstItem="95s-hP-dfh" firstAttribute="bottom" secondItem="NJo-ik-ie5" secondAttribute="bottom" id="MQc-0n-MWX"/>

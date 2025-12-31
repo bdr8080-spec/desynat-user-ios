@@ -171,6 +171,9 @@ class MyBagViewController: UIViewController {
           return String(format: "%.2f", roundedAmount) + " \(currency)"
       }
   }
+  
+  
+
 
   
 }

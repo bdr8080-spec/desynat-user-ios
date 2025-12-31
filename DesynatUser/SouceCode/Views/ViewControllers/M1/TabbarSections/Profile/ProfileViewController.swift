@@ -106,6 +106,7 @@ class ProfileViewController: UIViewController {
     
     @IBAction func btnMyOrder(_ sender: Any) {
         let vc = MyOrderVC.instantiate(fromAppStoryboard: .MyOrder)
+      vc.comingFromOrderTracking = false
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
