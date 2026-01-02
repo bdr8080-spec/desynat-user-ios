@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="183" height="59"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="T-Shirt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xh9-tb-AqN" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="183" height="59"/>
+                                <rect key="frame" x="10" y="8" width="163" height="43"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -32,10 +32,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="xh9-tb-AqN" firstAttribute="top" secondItem="nKM-vG-6OR" secondAttribute="top" id="2qr-7N-FsU"/>
-                            <constraint firstAttribute="bottom" secondItem="xh9-tb-AqN" secondAttribute="bottom" id="MU6-RE-039"/>
-                            <constraint firstAttribute="trailing" secondItem="xh9-tb-AqN" secondAttribute="trailing" id="SZO-aT-oUA"/>
-                            <constraint firstItem="xh9-tb-AqN" firstAttribute="leading" secondItem="nKM-vG-6OR" secondAttribute="leading" id="UWF-lg-bGa"/>
+                            <constraint firstItem="xh9-tb-AqN" firstAttribute="top" secondItem="nKM-vG-6OR" secondAttribute="top" constant="8" id="2qr-7N-FsU"/>
+                            <constraint firstAttribute="bottom" secondItem="xh9-tb-AqN" secondAttribute="bottom" constant="8" id="MU6-RE-039"/>
+                            <constraint firstAttribute="trailing" secondItem="xh9-tb-AqN" secondAttribute="trailing" constant="10" id="SZO-aT-oUA"/>
+                            <constraint firstItem="xh9-tb-AqN" firstAttribute="leading" secondItem="nKM-vG-6OR" secondAttribute="leading" constant="10" id="UWF-lg-bGa"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -59,6 +59,9 @@
                 <constraint firstItem="nKM-vG-6OR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="shH-gg-Q69"/>
             </constraints>
             <size key="customSize" width="183" height="59"/>
+            <connections>
+                <outlet property="titleLabel" destination="xh9-tb-AqN" id="hbP-KV-CV8"/>
+            </connections>
             <point key="canvasLocation" x="147.32824427480915" y="23.591549295774648"/>
         </collectionViewCell>
     </objects>

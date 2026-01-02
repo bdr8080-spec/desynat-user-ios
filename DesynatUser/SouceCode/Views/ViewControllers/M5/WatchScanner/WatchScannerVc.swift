@@ -407,23 +407,60 @@ extension WatchScannerVc {
 }
 
 extension WatchScannerVc {
-    func checkForImage(image:UIImage) {
-        self.viewModel.detectBrandAndModel( image: image, completion: { brand, model, colors in
-                DispatchQueue.main.async {
-                  let nextVC = SearchProductListViewController.instantiate(fromAppStoryboard: .MyOrder)
-                  nextVC.comingFromImageScanner = true
-//                  if let brandName = brand?.name {
-                    nextVC.viewModel.searchText = model ?? ""
-//                  }
-                  self.navigationController?.pushViewController(nextVC, animated: true)
-                }
-            }, errCompletion: {
-                DispatchQueue.main.async {
-                    self.showAlert(msg: "This is not a watch")
-                }
-            }
-        )
-    }
+//    func checkForImage(image:UIImage) {
+//        self.viewModel.detectBrandAndModel( image: image, completion: { brand, model, colors in
+//          print("brand, \(brand)")
+//          print("model, \(model)")
+//          print("colors, \(colors)")
+//          
+//                DispatchQueue.main.async {
+//                  let nextVC = SearchProductListViewController.instantiate(fromAppStoryboard: .MyOrder)
+//                  nextVC.comingFromImageScanner = true
+////                  if let brandName = brand?.name {
+//                    nextVC.viewModel.searchText = model ?? ""
+////                  }
+//                  self.navigationController?.pushViewController(nextVC, animated: true)
+//                }
+//            }, errCompletion: {
+//                DispatchQueue.main.async {
+//                    self.showAlert(msg: "This is not a watch")
+//                }
+//            }
+//        )
+//    }
+  
+  func checkForImage(image: UIImage) {
+
+      viewModel.recognizeProduct(image: image) { result in
+          guard let result = result else {
+              self.showAlert(msg: "Product not recognized")
+              return
+          }
+
+          print("CATEGORY:", result.category ?? "")
+          print("BRAND:", result.brand ?? "")
+          print("PRODUCT:", result.productName ?? "")
+          print("ATTRIBUTES:", result.attributes)
+          print("COLORS:", result.colors)
+
+          DispatchQueue.main.async {
+              let nextVC = SearchProductListViewController
+                  .instantiate(fromAppStoryboard: .MyOrder)
+
+              nextVC.comingFromImageScanner = true
+
+              // ✅ BEST SEARCH STRING
+//              nextVC.viewModel.searchText =
+//                  [result.brand, result.productName]
+//                  .compactMap { $0 }
+//                  .joined(separator: " ")
+            nextVC.viewModel.attributeText = result.attributes
+
+              self.navigationController?.pushViewController(nextVC, animated: true)
+          }
+      }
+  }
+
 }
 
 extension WatchScannerVc : AVCapturePhotoCaptureDelegate {

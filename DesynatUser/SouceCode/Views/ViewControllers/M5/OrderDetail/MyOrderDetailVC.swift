@@ -98,8 +98,6 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
   @IBOutlet weak var viewDownloadInvoice: UIView!
   @IBOutlet weak var viewCancelBtn: UIView!
   @IBOutlet weak var viewUploadImg: UIView!
-  
-  @IBOutlet weak var lblDeliveredOnDate: CustomLabelFont!
   @IBOutlet weak var lbl1: UILabel!
   @IBOutlet weak var img1: UIImageView!
   @IBOutlet weak var lbl2: UILabel!
@@ -112,18 +110,15 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
   @IBOutlet weak var rateThisProductLabel: CustomLabelFont!
   @IBOutlet weak var anotherOrdersView: CustomView!
   @IBOutlet weak var allOrdersLabel: CustomLabelFont!
-  
+  @IBOutlet weak var extraSpaceLabel: UILabel!
+  @IBOutlet weak var couponDiscountView: UIView!
+  @IBOutlet weak var discountPercentageLabel: UILabel!
   
   lazy private var viewModel = MyOrderDetailVM(hostVC: self)
   var orderData: OrderModel?
   var orderId: Int?
   var orderDetailId: Int?
-  
-  var isPromoCodeApplied: Bool = false
   var selectedPromoCode: PromocodeApplied?
-  //    var slecetedPromocodeID: Int? = 0
-  //    var totalAmount: Double = 0.0
-  //    var totalMRPDiscountValue: Double = 0.0
   lazy var stepImages: [StepImage] = [
     StepImage(selected: "confirmedOrder", unselected: "confirmedOrder"),
     StepImage(selected: "shippedDone", unselected: "shipped"),
@@ -189,18 +184,49 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
     totalPaidAmount = lblTotalAmount.text
     let totalPrice = formatPrice(Double(data.order?.totalMrp ?? "0"))
     CommonUtils.setStrikethrough(label: lblPrice, text: totalPrice)
-    // FIX: Only use API value when promo NOT applied
-    if isPromoCodeApplied, let selected = selectedPromoCode {
-      lblCouponDis.text = formatPrice(selected.applyDiscountValue)
-      lblTotalAmount.text = formatPrice(selected.finalAmount)
-      totalPaidAmount = lblTotalAmount.text
+    let isReturnAllowed = data.productDetails?.productReturn == "1"
+    if isReturnAllowed {
+      lblReturnAvail.text = "\(data.productDetails?.returnDays ?? "1") days return available"
     } else {
-      lblCouponDis.text = "0"//formatPrice(data.discountCoupon)
-      lblTotalAmount.text = formatPrice(Double(data.order?.totalAmount ?? "0"))
-      let savingAmount = Double(data.order?.discountMrp ?? "0")// - (data.totalAmount ?? 0)
-      totalPaidAmount = lblTotalAmount.text
-      lblSavedAmount.text = "You saved \(formatPrice(savingAmount)) on this"
+      lblReturnAvail.text = "No return available"
     }
+    
+    let discountType = data.variationDetails?.discountType ?? "1"
+    if discountType == "1" {
+      discountPercentageLabel.text = "\(data.variationDetails?.discountValue ?? "")% Off"
+    } else {
+      discountPercentageLabel.text = "\(data.variationDetails?.discountValue ?? "") KD Off"
+    }
+    
+    // FIX: Only use API value when promo NOT applied
+//    if let selected = selectedPromoCode {
+//      lblCouponDis.text = formatPrice(selected.applyDiscountValue)
+//      lblTotalAmount.text = formatPrice(selected.finalAmount)
+//      totalPaidAmount = lblTotalAmount.text
+//    } else {
+//      lblCouponDis.text = "0"//formatPrice(data.discountCoupon)
+//      lblTotalAmount.text = formatPrice(Double(data.order?.totalAmount ?? "0"))
+//      let savingAmount = Double(data.order?.discountMrp ?? "0")// - (data.totalAmount ?? 0)
+//      totalPaidAmount = lblTotalAmount.text
+//      lblSavedAmount.text = "You saved \(formatPrice(savingAmount)) on this"
+//    }
+    
+    if let selected = selectedPromoCode {
+        // Promo code applied
+        couponDiscountView.isHidden = false
+        lblCouponDis.text = formatPrice(selected.applyDiscountValue)
+        lblTotalAmount.text = formatPrice(selected.finalAmount)
+        totalPaidAmount = lblTotalAmount.text
+    } else {
+        // No promo code applied
+        couponDiscountView.isHidden = true
+        lblCouponDis.text = "0" // or formatPrice(data.discountCoupon)
+        lblTotalAmount.text = formatPrice(Double(data.order?.totalAmount ?? "0"))
+        let savingAmount = Double(data.order?.discountMrp ?? "0") // - (data.totalAmount ?? 0)
+        totalPaidAmount = lblTotalAmount.text
+        lblSavedAmount.text = "You saved \(formatPrice(savingAmount)) on this"
+    }
+
     
     //lblDeliveryInst.text = data
     let selectedAddress = data.order?.deliveryDetails
@@ -214,6 +240,14 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
       imgProduct.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
     } else {
       imgProduct.image = UIImage(named: "")
+    }
+    
+    if let returnImg = data.returnImage, let returnImgUrl = URL(string: returnImg) {
+      imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
+      imgProfile.sd_imageIndicator?.startAnimatingIndicator()
+      imgProfile.sd_setImage(with: returnImgUrl, placeholderImage: UIImage(named: ""))
+    } else {
+      imgProfile.image = UIImage(named: "")
     }
     
     //lblDisPrice.text = data.am
@@ -235,9 +269,11 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
     if otherOrdersCount == 0 {
       anotherOrdersView.isHidden = true
       allOrdersLabel.isHidden = true
+      extraSpaceLabel.isHidden = true
     } else {
       anotherOrdersView.isHidden = false
       allOrdersLabel.isHidden = false
+      extraSpaceLabel.isHidden = false
     }
     orderTableView.reloadData()
   }
@@ -259,7 +295,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
     viewPaidBy.isHidden = true
     viewDownloadInvoice.isHidden = true
     viewCancelBtn.isHidden = true
-    
+    lblReturnAvail.isHidden = false
     let paymentMethod = data.order?.paymentMethod
     let paymentStatus = data.paymentStatus//order?.paymentStatus
     let deliveryStatus = data.deliveryStatus//order?.deliveryStatus
@@ -276,7 +312,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
       if paymentStatus == "1" {
         switch deliveryStatus {
         case "1": //Pending
-          lblStatus.text = "Pending"
+          lblStatus.text = "Ongoing"
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
           viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
           viewReturnDays.isHidden = false
@@ -294,7 +330,6 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
           viewPaidBy.isHidden = false
           activateStep(0, title: "Confirmed")
           activateStep(1, title: "Shipped")
-          //                    activateStep(2, title: "On the Way")
           
         case "3": //Delivered
           lblStatus.text = "Delivered"
@@ -305,14 +340,39 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
           viewReturnEx.isHidden = false
           viewPaidBy.isHidden = false
           viewDownloadInvoice.isHidden = false
-          
-          
           activateStep(0, title: "Confirmed")
           activateStep(1, title: "Shipped")
           activateStep(2, title: "On the Way")
           activateStep(3, title: "Delivered")
           handleReturnExchange(data: data)
-          
+          if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
+            lblDeliveredOn.text = "Delivered On : \(isoDate)"
+          } else {
+            lblDeliveredOn.text = "Delivered On : -"
+          }
+          if data.returnType == "1"{ //Return Request
+            lblStatus.text = "Return Request"
+            lblStatus.textColor = UIColor(hexString: "#FF5F1B")
+            viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
+            resetStepper()
+            activateStep(0, title: "Confirmed")
+            activateStep(1, title: "In Progress")
+            lbl3.text = "Picked Up"
+            lbl4.text = "Completed"
+            if let isoDate = isoStringAddingDays(data.updatedAt, days: 6) {
+              lblDeliveredOn.text = "Pickup Date : \(isoDate)"
+            } else {
+              lblDeliveredOn.text = "Pickup Date : -"
+            }
+            
+            let returnImgeUpload = data.returnImage ?? ""
+            if returnImgeUpload.isEmpty {
+              viewUploadImg.isHidden = true
+            } else {
+              viewUploadImg.isHidden = false
+            }
+            lblPlacedDate.text = "Return request \(data.updatedAt?.formattedPlacedDate() ?? "")"
+          }
           
         case "4": //Cancelled
           lblStatus.text = "Cancelled"
@@ -322,18 +382,27 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
           viewReason.isHidden = false
           viewPaidBy.isHidden = false
           hideStep(2)
+          hideStep(1)
           activateStep(0, title: "Confirmed")
-          activateStep(1, title: "In Progress")
+//          activateStep(1, title: "In Progress")
           activateStep(3, title: "Cancelled")
+          img4.image = UIImage(named: "canclledOrdreRed")
+          lbl4.textColor = UIColor(hexString: "#D72E04")
+          if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
+            lblDeliveredOn.text = "Cancelled Date : \(isoDate)"
+          } else {
+            lblDeliveredOn.text = "Cancelled Date : -"
+          }
+          lblReturnAvail.isHidden = true
           
         case "7": //Picked
-          lblStatus.text = "Picked"
+          lblStatus.text = "Ongoing"
           lblStatus.textColor = UIColor(hexString: "#E70000")
           viewStatus.borderColor = UIColor(hexString: "#E70000")
           viewCancelDetail.isHidden = true
           viewReason.isHidden = true
           viewPaidBy.isHidden = false
-//          hideStep(3)
+          viewReturnDays.isHidden = false
           activateStep(0, title: "Confirmed")
           activateStep(1, title: "Shipped")
           activateStep(2, title: "On the Way")
@@ -346,25 +415,43 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
           reasonLabel.text = data.notDeliveredReason
           viewReason.isHidden = false
           viewPaidBy.isHidden = false
-//          hideStep(2)
+          hideStep(2)
+          hideStep(1)
           activateStep(0, title: "Confirmed")
-          activateStep(1, title: "In Progress")
-          activateStep(2, title: "On the Way")
+//          activateStep(1, title: "In Progress")
+//          activateStep(2, title: "On the Way")
           activateStep(3, title: "Cancelled")
+          img4.image = UIImage(named: "canclledOrdreRed")
+          lbl4.textColor = UIColor(hexString: "#D72E04")
+          if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
+            lblDeliveredOn.text = "Cancelled Date : \(isoDate)"
+          } else {
+            lblDeliveredOn.text = "Cancelled Date : -"
+          }
+          lblReturnAvail.isHidden = true
         default:
           return
         }
       } else if paymentStatus == "3" {
-        lblStatus.text = "Refund"
+        lblStatus.text = "Cancelled"
         lblStatus.textColor = UIColor(hexString: "#E70000")
         viewStatus.borderColor = UIColor(hexString: "#E70000")
         viewCancelDetail.isHidden = false
         viewReason.isHidden = false
         viewPaidBy.isHidden = false
         hideStep(2)
+        hideStep(1)
         activateStep(0, title: "Confirmed")
-        activateStep(1, title: "In Progress")
-        activateStep(3, title: "Refund")
+//        activateStep(1, title: "In Progress")
+        activateStep(3, title: "Cancelled")
+        img4.image = UIImage(named: "canclledOrdreRed")
+        lbl4.textColor = UIColor(hexString: "#D72E04")
+        if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
+          lblDeliveredOn.text = "Cancelled Date : \(isoDate)"
+        } else {
+          lblDeliveredOn.text = "Cancelled Date : -"
+        }
+        lblReturnAvail.isHidden = true
       }
       
     } else if paymentMethod == "3" {
@@ -389,7 +476,6 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
           viewPaidBy.isHidden = false
           activateStep(0, title: "Confirmed")
           activateStep(1, title: "Shipped")
-          //                    activateStep(2, title: "On the Way")
           
         case "3": //Delivered
           lblStatus.text = "Delivered"
@@ -401,14 +487,38 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
           viewPaidBy.isHidden = false
           viewDownloadInvoice.isHidden = false
           viewCancelDetail.isHidden = true
-          
-          
           activateStep(0, title: "Confirmed")
           activateStep(1, title: "Shipped")
           activateStep(2, title: "On the Way")
           activateStep(3, title: "Delivered")
           handleReturnExchange(data: data)
-          
+          if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
+            lblDeliveredOn.text = "Delivered On : \(isoDate)"
+          } else {
+            lblDeliveredOn.text = "Delivered On : -"
+          }
+          if data.returnType == "1"{ //Return Request
+            lblStatus.text = "Return Request"
+            lblStatus.textColor = UIColor(hexString: "#FF5F1B")
+            viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
+            resetStepper()
+            activateStep(0, title: "Confirmed")
+            activateStep(1, title: "In Progress")
+            lbl3.text = "Picked Up"
+            lbl4.text = "Completed"
+            if let isoDate = isoStringAddingDays(data.updatedAt, days: 6) {
+              lblDeliveredOn.text = "Pickup Date : \(isoDate)"
+            } else {
+              lblDeliveredOn.text = "Pickup Date : -"
+            }
+            lblPlacedDate.text = "Return request \(data.updatedAt?.formattedPlacedDate() ?? "")"
+            let returnImgeUpload = data.returnImage ?? ""
+            if returnImgeUpload.isEmpty {
+              viewUploadImg.isHidden = true
+            } else {
+              viewUploadImg.isHidden = false
+            }
+          }
           
         case "4": //Cancelled
           lblStatus.text = "Cancelled"
@@ -418,18 +528,27 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
           viewReason.isHidden = false
           viewPaidBy.isHidden = false
           hideStep(2)
+          hideStep(1)
           activateStep(0, title: "Confirmed")
-          activateStep(1, title: "In Progress")
+//          activateStep(1, title: "In Progress")
           activateStep(3, title: "Cancelled")
-          
+          img4.image = UIImage(named: "canclledOrdreRed")
+          lbl4.textColor = UIColor(hexString: "#D72E04")
+          if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
+            lblDeliveredOn.text = "Cancelled Date : \(isoDate)"
+          } else {
+            lblDeliveredOn.text = "Cancelled Date : -"
+          }
+          lblReturnAvail.isHidden = true
+
         case "7": //Picked
-          lblStatus.text = "Picked"
+          lblStatus.text = "Ongoing"
           lblStatus.textColor = UIColor(hexString: "#E70000")
           viewStatus.borderColor = UIColor(hexString: "#E70000")
-          viewCancelDetail.isHidden = false
-          viewReason.isHidden = false
+          viewCancelDetail.isHidden = true
+          viewReason.isHidden = true
           viewPaidBy.isHidden = false
-//          hideStep(3)
+          viewReturnDays.isHidden = false
           activateStep(0, title: "Confirmed")
           activateStep(1, title: "Shipped")
           activateStep(2, title: "On the Way")
@@ -442,12 +561,20 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
           reasonLabel.text = data.order?.notDeliveredReason
           viewReason.isHidden = false
           viewPaidBy.isHidden = false
-//          hideStep(2)
+          hideStep(2)
+          hideStep(1)
           activateStep(0, title: "Confirmed")
-          activateStep(1, title: "In Progress")
-          activateStep(2, title: "On the Way")
+//          activateStep(1, title: "In Progress")
+//          activateStep(2, title: "On the Way")
           activateStep(3, title: "Cancelled")
-        
+          img4.image = UIImage(named: "canclledOrdreRed")
+          lbl4.textColor = UIColor(hexString: "#D72E04")
+          if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
+            lblDeliveredOn.text = "Cancelled Date : \(isoDate)"
+          } else {
+            lblDeliveredOn.text = "Cancelled Date : -"
+          }
+          lblReturnAvail.isHidden = true
         default:
           return
         }
@@ -458,16 +585,51 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
         viewCancelDetail.isHidden = false
         viewReason.isHidden = false
         viewPaidBy.isHidden = false
-//        hideStep(2)
+        hideStep(2)
+        hideStep(1)
         activateStep(0, title: "Confirmed")
-        activateStep(1, title: "In Progress")
-        activateStep(2, title: "On the Way")
+//        activateStep(1, title: "In Progress")
+//        activateStep(2, title: "On the Way")
         activateStep(3, title: "Cancelled")
+        img4.image = UIImage(named: "canclledOrdreRed")
+        lbl4.textColor = UIColor(hexString: "#D72E04")
+        lblReturnAvail.isHidden = true
+        if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
+          lblDeliveredOn.text = "Cancelled Date : \(isoDate)"
+        } else {
+          lblDeliveredOn.text = "Cancelled Date : -"
+        }
       }
       lblPaidByCard.text = "COD"
       lblTransactionId.isHidden = true
+      
+      
     }
     
+  }
+  
+  func isoStringAddingDays(_ isoString: String?, days: Int = 0) -> String? {
+    guard let isoString = isoString else { return nil }
+    
+    // 1️⃣ Parse the ISO date string from API
+    let isoFormatter = DateFormatter()
+    isoFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
+    isoFormatter.locale = Locale(identifier: "en_US_POSIX")
+    isoFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+    
+    guard let date = isoFormatter.date(from: isoString) else { return nil }
+    
+    // 2️⃣ Add days if needed
+    let calendar = Calendar(identifier: .gregorian)
+    let newDate = calendar.date(byAdding: .day, value: days, to: date) ?? date
+    
+    // 3️⃣ Format to desired output: 12 SEP 25
+    let outputFormatter = DateFormatter()
+    outputFormatter.dateFormat = "dd MMM yy"
+    outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+    outputFormatter.timeZone = TimeZone.current
+    
+    return outputFormatter.string(from: newDate)
   }
   
   func handleReturnExchange(data: OrderModel) {
@@ -498,38 +660,15 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
       viewReturnEx.isHidden = false
       exchangeReturnHeightConstrint.constant = 64
     }
-    if isReturnAllowed {
-      resetStepper()
-      lblStatus.text = "Return Request"
-      lblStatus.textColor = UIColor(hexString: "#FF5F1B")
-      viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
-      activateStep(0, title: "Confirmed")
-      activateStep(1, title: "In Progress")
-//      activateStep(2, title: "Pickup")
-//      activateStep(3, title: "Complete")
-    } else if isExchangeAllowed {
-      resetStepper()
-      lblStatus.text = "Return Request"
-      lblStatus.textColor = UIColor(hexString: "#FF5F1B")
-      viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
-      activateStep(0, title: "Confirmed")
-      activateStep(1, title: "In Progress")
-//      activateStep(2, title: "Pickup & Exchange")
-//      activateStep(3, title: "Complete")
-    }
     let returnStatus = data.returnType ?? "0"
     
     switch returnStatus {
     case "1":
       viewReturnEx.isHidden = true
-//      exchangeReturnDescriptionView.isHidden = false
-//      exchangeReturnDescriptionLabel.text = "Order is in return process"
       viewReturnDetail.isHidden = false
       viewReason.isHidden = false
     case "2":
       viewReturnEx.isHidden = true
-//      exchangeReturnDescriptionView.isHidden = false
-//      exchangeReturnDescriptionLabel.text = "Order is in exchange process"
       viewExchangeDetail.isHidden = false
       viewReason.isHidden = false
     default:
@@ -560,7 +699,72 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
   }
   
   @IBAction func btnDownloadInvoice(_ sender: Any) {
+//    guard let urlString = viewModel.invoiceDetailsUrl,
+//              let url = URL(string: urlString) else {
+//            showAlert(msg: "Invoice not available")
+//            return
+//        }
+//
+//        downloadPDF(from: url)
+    let orderId = orderData?.order?.orderID ?? ""
+    let urlString = "http://157.241.119.72/Invoice/\(orderId)"
+
+        guard let url = URL(string: urlString) else {
+            showAlert(msg: "Invalid invoice URL")
+            return
+        }
+
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
   }
+  
+  private func downloadPDF(from url: URL) {
+      let session = URLSession(configuration: .default)
+
+      let task = session.downloadTask(with: url) { [weak self] tempURL, response, error in
+          guard let self = self else { return }
+
+          if let error = error {
+              DispatchQueue.main.async {
+                  self.showAlert(msg: error.localizedDescription)
+              }
+              return
+          }
+
+          guard let tempURL = tempURL else { return }
+
+          do {
+              let fileManager = FileManager.default
+              let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+              let destinationURL = documentsURL.appendingPathComponent("Invoice.pdf")
+
+              // Remove existing file if any
+              if fileManager.fileExists(atPath: destinationURL.path) {
+                  try fileManager.removeItem(at: destinationURL)
+              }
+
+              try fileManager.moveItem(at: tempURL, to: destinationURL)
+
+              DispatchQueue.main.async {
+                  self.showAlert(msg: "Invoice downloaded successfully")
+                  self.openPDF(at: destinationURL)
+              }
+
+          } catch {
+              DispatchQueue.main.async {
+                  self.showAlert(msg: "Failed to save invoice")
+              }
+          }
+      }
+
+      task.resume()
+  }
+
+  private func openPDF(at url: URL) {
+      let controller = UIDocumentInteractionController(url: url)
+      controller.delegate = self
+      controller.presentPreview(animated: true)
+  }
+
   
   
   @IBAction func rateThisProductDidTapped(_ sender: Any) {
@@ -697,7 +901,10 @@ extension MyOrderDetailVC: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "OrderDetailTableCell", for: indexPath) as! OrderDetailTableCell
     let data = orderData?.allOtherOrderVarient?[indexPath.row]
-    cell.configData(data: data)
+    let paymentMethod = orderData?.order?.paymentMethod ?? "1"
+    let paymentStatus = data?.paymentStatus ?? "1"
+    let deliveryStatus = data?.deliveryStatus ?? "1"
+    cell.configData(data: data, paymentMethod: paymentMethod, paymentStatus: paymentStatus, deliveryStatus: deliveryStatus)
 //    cell.onTapCancel = {
 //      let vc = SelectReasonVC.instantiate(fromAppStoryboard: .MyOrder)
 //      vc.screenType = .cancelOrder
@@ -741,3 +948,8 @@ extension String {
   }
 }
 
+extension MyOrderDetailVC: UIDocumentInteractionControllerDelegate {
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        return self
+    }
+}

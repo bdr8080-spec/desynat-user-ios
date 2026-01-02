@@ -360,14 +360,151 @@ import UIKit
 class WatchRecognizer {
     
   var recentData: [RecentDataModel] = []
+  private var lastVisionResponse: [String: Any]?
 
     private let apiKey = "AIzaSyBk1iHVph8nvXAn0uigTvPzKDpb9cslR18"
-
+//  private let apiKey = "AIzaSyBq0c5p91bGWHgKKusc9CP5cQOIM-z1iuo" //Desynat User Api key
     init() {
         WebService.sharedInstance.getRecentSearch { list in
             self.recentData = list
         }
     }
+  
+  private func detectProductName(
+      webDetection: [String: Any],
+      brand: String?
+  ) -> String? {
+
+      if let bestGuess = webDetection["bestGuessLabels"] as? [[String: Any]],
+         let label = bestGuess.first?["label"] as? String {
+
+          if let brand = brand {
+              return label.replacingOccurrences(
+                  of: brand,
+                  with: "",
+                  options: .caseInsensitive
+              ).trimmingCharacters(in: .whitespaces)
+          }
+          return label
+      }
+      return nil
+  }
+
+  
+  private func extractAttributes(from labels: [[String: Any]]) -> [String] {
+
+      let ignored = ["clothing", "product", "fashion", "textile"]
+      
+      return labels.compactMap {
+          let text = ($0["description"] as? String)?.lowercased()
+          return ignored.contains(text ?? "") ? nil : text
+      }
+  }
+
+  
+//  func recognizeProduct(
+//      image: UIImage,
+//      completion: @escaping (ProductRecognitionResult?) -> Void
+//  ) {
+//
+//      detectBrandAndModel(image: image) { _, _, colors in
+//          
+//          guard
+//              let json = self.lastVisionResponse,
+//              let first = (json["responses"] as? [[String: Any]])?.first
+//          else {
+//              completion(nil)
+//              return
+//          }
+//
+//          let category = self.detectCategory(from: first)
+//          let webDetection = first["webDetection"] as? [String: Any]
+//          let brand = webDetection.flatMap { self.detectBrand(from: $0) }
+//          let productName = webDetection.flatMap {
+//              self.detectProductName(webDetection: $0, brand: brand)
+//          }
+//
+//          let attributes = self.extractAttributes(
+//              from: first["labelAnnotations"] as? [[String: Any]] ?? []
+//          )
+//
+//          completion(
+//              ProductRecognitionResult(
+//                  category: category,
+//                  brand: brand,
+//                  productName: productName,
+//                  attributes: attributes,
+//                  colors: colors
+//              )
+//          )
+//      }
+//  }
+  
+  private func detectCategory(from response: [String: Any]) -> String? {
+
+      // 1️⃣ Prefer web entities (most accurate for ecommerce)
+      if let webDetection = response["webDetection"] as? [String: Any],
+         let entities = webDetection["webEntities"] as? [[String: Any]] {
+
+          let sorted = entities.sorted {
+              ($0["score"] as? Double ?? 0) >
+              ($1["score"] as? Double ?? 0)
+          }
+
+          return sorted.first?["description"] as? String
+      }
+
+      // 2️⃣ Fallback to labels
+      if let labels = response["labelAnnotations"] as? [[String: Any]] {
+          return labels.first?["description"] as? String
+      }
+
+      return nil
+  }
+
+  
+  func recognizeProduct(
+      image: UIImage,
+      completion: @escaping (ProductRecognitionResult?) -> Void
+  ) {
+
+      detectBrandAndModel(image: image) { _, _, colors in
+
+          guard
+              let json = self.lastVisionResponse,
+              let first = (json["responses"] as? [[String: Any]])?.first
+          else {
+              completion(nil)
+              return
+          }
+
+          let category = self.detectCategory(from: first)
+
+          let webDetection = first["webDetection"] as? [String: Any]
+          let brand = webDetection.flatMap { self.detectBrand(from: $0) }
+          let productName = webDetection.flatMap {
+              self.detectProductName(webDetection: $0, brand: brand)
+          }
+
+          let attributes = self.extractAttributes(
+              from: first["labelAnnotations"] as? [[String: Any]] ?? []
+          )
+
+          completion(
+              ProductRecognitionResult(
+                  category: category,
+                  brand: brand,
+                  productName: productName,
+                  attributes: attributes,
+                  colors: colors
+              )
+          )
+      } errCompletion: {
+          completion(nil)
+      }
+  }
+
+
 
     // MARK: - Public
     func detectBrandAndModel( image: UIImage,
@@ -417,13 +554,25 @@ class WatchRecognizer {
                 return
             }
 
-            guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-                  let responses = json["responses"] as? [[String: Any]],
-                  let firstResponse = responses.first
-            else {
-                completion(nil, nil, [])
-                return
-            }
+//            guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+//                  let responses = json["responses"] as? [[String: Any]],
+//                  let firstResponse = responses.first
+//            else {
+//                completion(nil, nil, [])
+//                return
+//            }
+          
+          guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                let responses = json["responses"] as? [[String: Any]],
+                let firstResponse = responses.first
+          else {
+              completion(nil, nil, [])
+              return
+          }
+
+          // ✅ STORE RESPONSE
+          self.lastVisionResponse = json
+
 
             printInConsole("Watches Scan: \(json)")
             
@@ -488,6 +637,20 @@ class WatchRecognizer {
 
         }.resume()
     }
+  
+  private func detectBrand(from webDetection: [String: Any]) -> String? {
+
+      if let entities = webDetection["webEntities"] as? [[String: Any]] {
+          let candidates = entities
+              .filter { ($0["score"] as? Double ?? 0) > 0.6 }
+              .compactMap { $0["description"] as? String }
+
+          return candidates.first
+      }
+      return nil
+  }
+
+
 
     // MARK: - Helpers
 
@@ -561,4 +724,12 @@ extension WatchRecognizer {
             )
         }
     }
+}
+
+struct ProductRecognitionResult {
+    let category: String?
+    let brand: String?
+    let productName: String?
+    let attributes: [String]
+    let colors: [DominantColor]
 }

@@ -10,6 +10,7 @@ import Speech
 
 class StoresViewController: UIViewController {
     
+  @IBOutlet weak var btnMicOutlet: UIButton!
   @IBOutlet weak var noResultFoundLabel: UILabel!
   @IBOutlet weak var searchTF: UITextField!
   @IBOutlet weak var storesCollectionViewHeightConstriant: NSLayoutConstraint!
@@ -179,6 +180,8 @@ class StoresViewController: UIViewController {
       recognitionTask?.cancel()
       recognitionTask = nil
       isListening = false
+    btnMicOutlet.setImage(UIImage(systemName: "mic"), for: .normal)
+    btnMicOutlet.tintColor = .label
   }
 
   deinit {

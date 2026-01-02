@@ -38,6 +38,28 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blA-BT-r6R">
+                                                <rect key="frame" x="0.0" y="0.0" width="57" height="16"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ongoing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFj-7d-iWx" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                        <rect key="frame" x="8" y="0.0" width="41" height="16"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                        <color key="textColor" red="1" green="0.37254901959999998" blue="0.1058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="eFj-7d-iWx" firstAttribute="leading" secondItem="blA-BT-r6R" secondAttribute="leading" constant="8" id="4oI-n9-0hO"/>
+                                                    <constraint firstItem="eFj-7d-iWx" firstAttribute="top" secondItem="blA-BT-r6R" secondAttribute="top" id="Giq-5z-PWg"/>
+                                                    <constraint firstAttribute="height" constant="16" id="ONb-jK-8O3"/>
+                                                    <constraint firstAttribute="bottom" secondItem="eFj-7d-iWx" secondAttribute="bottom" id="UDE-BD-7G3"/>
+                                                    <constraint firstAttribute="trailing" secondItem="eFj-7d-iWx" secondAttribute="trailing" constant="8" id="hjV-B3-A54"/>
+                                                </constraints>
+                                            </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="7jT-Ia-rVf">
                                                 <rect key="frame" x="86" y="12" width="236" height="68"/>
                                                 <subviews>
@@ -104,12 +126,20 @@
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ij2-x7-3Q8">
+                                                                <rect key="frame" x="98.333333333333343" y="11.333333333333336" width="0.0" height="0.0"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                <color key="textColor" red="0.90980392160000001" green="0.043137254899999998" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="2u7-qo-CVR" firstAttribute="leading" secondItem="1fj-ff-kJs" secondAttribute="trailing" constant="8" id="DP0-rl-xTc"/>
                                                             <constraint firstItem="2u7-qo-CVR" firstAttribute="centerY" secondItem="1fj-ff-kJs" secondAttribute="centerY" id="GRP-lr-LMs"/>
+                                                            <constraint firstItem="ij2-x7-3Q8" firstAttribute="leading" secondItem="2u7-qo-CVR" secondAttribute="trailing" constant="5" id="Jk0-81-TWz"/>
                                                             <constraint firstItem="1fj-ff-kJs" firstAttribute="leading" secondItem="pdd-Du-jLa" secondAttribute="leading" id="qoe-Qo-bIM"/>
+                                                            <constraint firstItem="ij2-x7-3Q8" firstAttribute="centerY" secondItem="2u7-qo-CVR" secondAttribute="centerY" id="vhL-Hf-OVw"/>
                                                             <constraint firstAttribute="bottom" secondItem="1fj-ff-kJs" secondAttribute="bottom" id="wj1-OU-l2E"/>
                                                             <constraint firstItem="1fj-ff-kJs" firstAttribute="top" secondItem="pdd-Du-jLa" secondAttribute="top" id="y0Y-tb-1XI"/>
                                                         </constraints>
@@ -119,8 +149,10 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="blA-BT-r6R" firstAttribute="leading" secondItem="2qD-5r-nq7" secondAttribute="leading" id="1ls-j6-MHJ"/>
                                             <constraint firstItem="7jT-Ia-rVf" firstAttribute="top" secondItem="YDV-Nq-kQU" secondAttribute="top" id="HPM-8G-iQ4"/>
                                             <constraint firstItem="7jT-Ia-rVf" firstAttribute="leading" secondItem="YDV-Nq-kQU" secondAttribute="trailing" constant="8" id="RoE-cI-tuU"/>
+                                            <constraint firstItem="blA-BT-r6R" firstAttribute="top" secondItem="2qD-5r-nq7" secondAttribute="top" id="SxC-Ot-Aef"/>
                                             <constraint firstAttribute="trailing" secondItem="7jT-Ia-rVf" secondAttribute="trailing" constant="10" id="W1H-PI-q66"/>
                                             <constraint firstItem="YDV-Nq-kQU" firstAttribute="leading" secondItem="2qD-5r-nq7" secondAttribute="leading" constant="10" id="ZYN-4y-bA3"/>
                                             <constraint firstAttribute="bottom" secondItem="YDV-Nq-kQU" secondAttribute="bottom" id="fkD-t5-4g5"/>
@@ -458,6 +490,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="discountPercentageLabel" destination="ij2-x7-3Q8" id="Vxo-q1-z9k"/>
                 <outlet property="imgProduct" destination="YDV-Nq-kQU" id="nUV-vx-C2w"/>
                 <outlet property="lblAddress" destination="ZVl-Vb-yco" id="0dL-1x-PZ8"/>
                 <outlet property="lblDetails" destination="yWh-Iz-pFN" id="vPI-31-Ivc"/>
@@ -466,6 +499,7 @@
                 <outlet property="lblProductName" destination="mQ6-3G-yob" id="PdE-Zb-Xic"/>
                 <outlet property="lblReturnAvail" destination="TjT-ix-11h" id="Ag8-9a-uMt"/>
                 <outlet property="lblSize" destination="wxM-fU-njX" id="yGB-nz-LdD"/>
+                <outlet property="lblStatus" destination="eFj-7d-iWx" id="P11-1K-uLX"/>
                 <outlet property="lblTotalQuantity" destination="TCW-1h-Ciy" id="cTP-l2-DPi"/>
                 <outlet property="line" destination="hcs-2c-6X2" id="ag5-Iu-R8Z"/>
                 <outlet property="viewCancel" destination="gw9-Qn-Pr4" id="ecV-vh-VOw"/>

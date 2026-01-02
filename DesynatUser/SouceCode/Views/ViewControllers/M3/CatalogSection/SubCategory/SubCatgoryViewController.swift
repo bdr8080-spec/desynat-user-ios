@@ -11,7 +11,8 @@ import AVFoundation
 
 class SubCatgoryViewController: UIViewController {
 
-    @IBOutlet weak var searchTF: UITextField!
+  @IBOutlet weak var btnMicOutlet: UIButton!
+  @IBOutlet weak var searchTF: UITextField!
     @IBOutlet weak var noDataFoundLabel: UILabel!
     @IBOutlet weak var subCatgeoryTableView: UICollectionView! {
         didSet {
@@ -135,6 +136,8 @@ class SubCatgoryViewController: UIViewController {
         recognitionTask?.cancel()
         recognitionTask = nil
         isListening = false
+      btnMicOutlet.setImage(UIImage(systemName: "mic"), for: .normal)
+      btnMicOutlet.tintColor = .label
     }
 
     deinit {

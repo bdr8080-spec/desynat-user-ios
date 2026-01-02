@@ -298,6 +298,25 @@ struct SearchModel: Codable {
     }
 }
 
+
+// MARK: - RecommenedeSearch
+struct RecommenedeSearch: Codable {
+    let id: Int?
+    let nameEnglish, nameArabic: String?
+    let image: String?
+    let status: Int?
+    let createdAt, updatedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case nameEnglish = "name_english"
+        case nameArabic = "name_arabic"
+        case image, status
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+}
+
 // MARK: - Datum
 //struct DataModel: Codable {
 //    let id: Int?

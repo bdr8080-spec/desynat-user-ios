@@ -13,14 +13,19 @@ import MLKitVision
 
 class SearchVC: UIViewController {
   
+  @IBOutlet weak var latstSearchCollectionViewHieghtConstriant: NSLayoutConstraint!
   @IBOutlet weak var txtSearch: UITextField!
   @IBOutlet weak var latestSearchCollectionView: CollViewAdjustedHeight!
   @IBOutlet weak var recommendedCollectionView: CollViewAdjustedHeight!
   @IBOutlet weak var RecentSearchTableView: TableViewDynamicHeight!
   @IBOutlet weak var lblNoData: CustomLabelFont!
+  @IBOutlet weak var btnMicOutlet: UIButton!
+  @IBOutlet weak var noLatesSearchFoundLabel: CustomLabelFont!
+  @IBOutlet weak var noReconmmendedDataFoundLAbel: CustomLabelFont!
   
   lazy private var viewModel = SearchVM(hostVC: self)
   var recentData: [RecentDataModel] = []
+  var recommendedData: [RecommenedeSearch] = []
   // MARK: - Speech Recognition
   private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
   private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
@@ -39,14 +44,27 @@ class SearchVC: UIViewController {
     super.viewDidLoad()
     registerXib()
     viewModel.getRecentData()
+    viewModel.getRecommendedSearchData()
     lblNoData.isHidden = true
     requestPermissions()
   }
+  
+  override func viewDidLayoutSubviews() {
+      super.viewDidLayoutSubviews()
+      updateLatestSearchCollectionHeight()
+  }
+
   
   func registerXib() {
     RecentSearchTableView.delegate = self
     RecentSearchTableView.dataSource = self
     RecentSearchTableView.register(UINib(nibName: "RecentSearchTableCell", bundle: nil), forCellReuseIdentifier: "RecentSearchTableCell")
+    latestSearchCollectionView.delegate = self
+    latestSearchCollectionView.dataSource = self
+    latestSearchCollectionView.registerCellFromNib(cellID: "LatestSearchCollectionCell")
+    recommendedCollectionView.delegate = self
+    recommendedCollectionView.dataSource = self
+    recommendedCollectionView.registerCellFromNib(cellID: "RecommendCollectionCell")
   }
   
   private func requestPermissions() {
@@ -58,6 +76,7 @@ class SearchVC: UIViewController {
   }
   
   @IBAction func btnGo(_ sender: Any) {
+    stopListening()
     guard let searchText = txtSearch.text?.trimmingCharacters(in: .whitespacesAndNewlines),
           !searchText.isEmpty else {
       showAlert(msg: "Please search something")
@@ -70,12 +89,6 @@ class SearchVC: UIViewController {
   }
   
   @IBAction func btnCamera(_ sender: Any) {
-//    let picker = UIImagePickerController()
-//    picker.sourceType = .camera
-//    picker.cameraCaptureMode = .photo
-//    picker.delegate = self
-//    present(picker, animated: true)
-    
     let vc = WatchScannerVc.viewFromNIB
     self.navigationController?.pushViewController(vc, animated: true)
   }
@@ -92,6 +105,7 @@ class SearchVC: UIViewController {
   }
   
   @IBAction func backDidTapped(_ sender: Any) {
+    stopListening()
     self.navigationController?.popViewController(animated: true)
   }
   
@@ -122,6 +136,16 @@ class SearchVC: UIViewController {
         let text = result.bestTranscription.formattedString
         self.txtSearch.text = text
         // CALL API HERE FOR SEARCHs
+        self.stopListening()
+        guard let searchText = txtSearch.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+              !searchText.isEmpty else {
+          showAlert(msg: "Please search something")
+          return
+        }
+        let nextVC = SearchProductListViewController.instantiate(fromAppStoryboard: .MyOrder)
+        nextVC.viewModel.searchText = self.txtSearch.text?.trimmed() ?? ""
+        nextVC.comingFromImageScanner = false
+        self.navigationController?.pushViewController(nextVC, animated: true)
       }
       
       if error != nil || result?.isFinal == true {
@@ -158,6 +182,8 @@ class SearchVC: UIViewController {
     recognitionTask?.cancel()
     recognitionTask = nil
     isListening = false
+    btnMicOutlet.setImage(UIImage(systemName: "mic"), for: .normal)
+    btnMicOutlet.tintColor = .label
   }
   
   deinit {
@@ -178,8 +204,83 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    txtSearch.text = recentData[indexPath.row].name
+    let nextVC = SearchProductListViewController.instantiate(fromAppStoryboard: .MyOrder)
+    nextVC.viewModel.searchText = recentData[indexPath.row].name ?? ""
+    nextVC.comingFromImageScanner = false
+    self.navigationController?.pushViewController(nextVC, animated: true)
   }
+}
+
+extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    if collectionView == latestSearchCollectionView {
+      return recentData.count
+    } else {
+      return recommendedData.count
+    }
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    if collectionView == latestSearchCollectionView {
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LatestSearchCollectionCell", for: indexPath) as! LatestSearchCollectionCell
+      cell.titleLabel.text = recentData[indexPath.row].name
+      return cell
+    } else {
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecommendCollectionCell", for: indexPath) as! RecommendCollectionCell
+      cell.configData(data: recommendedData[indexPath.row])
+      return cell
+    }
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    if collectionView == latestSearchCollectionView {
+//      txtSearch.text = recentData[indexPath.row].name
+      let nextVC = SearchProductListViewController.instantiate(fromAppStoryboard: .MyOrder)
+      nextVC.viewModel.searchText = recentData[indexPath.row].name ?? ""
+      nextVC.comingFromImageScanner = false
+      self.navigationController?.pushViewController(nextVC, animated: true)
+    } else {
+//      txtSearch.text = recommendedData[indexPath.row].name
+      let nextVC = SearchProductListViewController.instantiate(fromAppStoryboard: .MyOrder)
+      nextVC.viewModel.searchText = recommendedData[indexPath.row].nameEnglish ?? ""
+      nextVC.comingFromImageScanner = false
+      self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+  }
+  
+
+      func collectionView(_ collectionView: UICollectionView,
+                          layout collectionViewLayout: UICollectionViewLayout,
+                          sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+          if collectionView == recommendedCollectionView {
+              return CGSize(width: 120, height: 50) // adjust as needed
+            
+          } else if collectionView == latestSearchCollectionView {
+            let width = (latestSearchCollectionView.frame.width - 12) / 3
+            let height: CGFloat = 38
+            return CGSize(width: width, height: height)
+//            let text = recentData[indexPath.row].name ?? ""
+//                    let font = UIFont.systemFont(ofSize: 14, weight: .medium)
+//
+//                    let textWidth = text.size(withAttributes: [.font: font]).width
+//                    let horizontalPadding: CGFloat = 12 // left + right padding inside cell
+//                    let width = textWidth + horizontalPadding
+//
+//                    return CGSize(width: width, height: 20)
+          }
+          return CGSize(width: 100, height: 40)
+      }
+  
+   func updateLatestSearchCollectionHeight() {
+      latestSearchCollectionView.layoutIfNeeded()
+      latstSearchCollectionViewHieghtConstriant.constant =
+          latestSearchCollectionView.collectionViewLayout.collectionViewContentSize.height
+  }
+
+
+  
+  
 }
 
 extension SearchVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

@@ -12,6 +12,7 @@ class SearchProductListViewModel {
     private var hostVC: SearchProductListViewController?
     var productDetails: [ProductList]?
     var searchText: String = ""
+    var attributeText: [String] = [""]
     var selectedCategoryIDs: [String] = []
     var selectedBrandIDs: [String] = []
     var selectedColorIDs: [String] = []
@@ -37,6 +38,7 @@ class SearchProductListViewModel {
     
     func getProductsApi() {
         var param: [String: Any] = [:]
+      if !attributeText.isEmpty { param["attributes_data"] = attributeText }
         if !searchText.isEmpty { param["search"] = searchText }
         if let sort = hostVC?.appliedSortFilter { param["sort_filter"] = sort }
         if !selectedCategoryIDs.isEmpty { param["category_id"] = selectedCategoryIDs }

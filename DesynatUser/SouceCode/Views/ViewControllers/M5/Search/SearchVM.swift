@@ -14,13 +14,42 @@ class SearchVM: NSObject {
         self.hostVC = hostVC
     }
     
-    func getRecentData() {
-        WebService.sharedInstance.getRecentSearch { data in
-            self.hostVC.recentData = data
-            self.hostVC.lblNoData.isHidden = !data.isEmpty
-            self.hostVC.RecentSearchTableView.reloadData()
-        }
-    }
+//    func getRecentData() {
+//        WebService.sharedInstance.getRecentSearch { data in
+//            self.hostVC.recentData = data
+//            self.hostVC.lblNoData.isHidden = !data.isEmpty
+//            self.hostVC.RecentSearchTableView.reloadData()
+//          self.hostVC.latestSearchCollectionView.reloadData()
+//          self.hostVC.noLatesSearchFoundLabel.isHidden = !data.isEmpty
+//        }
+//    }
+  
+  func getRecommendedSearchData() {
+      WebService.sharedInstance.getRecommendedSearch { data in
+          DispatchQueue.main.async {
+              self.hostVC.recommendedData = data
+              self.hostVC.noReconmmendedDataFoundLAbel.isHidden = !data.isEmpty
+              self.hostVC.recommendedCollectionView.reloadData()
+              self.hostVC.recommendedCollectionView.layoutIfNeeded()
+          }
+      }
+  }
+
+  func getRecentData() {
+      WebService.sharedInstance.getRecentSearch { data in
+          DispatchQueue.main.async {
+              self.hostVC.recentData = data
+              self.hostVC.lblNoData.isHidden = !data.isEmpty
+              self.hostVC.noLatesSearchFoundLabel.isHidden = !data.isEmpty
+
+              self.hostVC.RecentSearchTableView.reloadData()
+              self.hostVC.latestSearchCollectionView.reloadData()
+
+              self.hostVC.updateLatestSearchCollectionHeight()
+          }
+      }
+  }
+
     
     func homeSearch() {
         let params: [String: Any] = [:

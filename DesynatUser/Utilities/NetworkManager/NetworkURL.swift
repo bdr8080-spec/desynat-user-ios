@@ -67,6 +67,7 @@ enum NetworkEndPoint: String {
     case applyPromocode                     = "api/user/Apply-promocode"
     case applyGiftCard                      = "api/user/apply-gift-card"
     case singleOrderSummary                 = "api/user/single-order-summary"
+    case singleOrderSummaryInvoice          = "api/user/get-Invoice"
     case completePayment                    = "api/user/product-order-complete-payment"
     case getWalletAmount                    = "api/user/waller-balance"
     
@@ -78,6 +79,7 @@ enum NetworkEndPoint: String {
     case OrderReturnEx                      = "api/user/return-exchange-product-after-delivered"
     case orderRating                        = "api/user/product-rating"
     case recentSearch                       = "api/user/get-recent-search-data"
+    case recommendedSearch                  = "api/user/get-recommnded-search-data"
     case homeSearch                         = "api/user/home-page-search"
     
     func withBaseURL() -> String {

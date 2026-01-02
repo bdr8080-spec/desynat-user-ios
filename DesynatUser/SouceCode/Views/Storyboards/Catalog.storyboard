@@ -182,6 +182,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnMicOutlet" destination="vfH-4L-YH6" id="vf0-sl-rmP"/>
                         <outlet property="noDataFoundLabel" destination="7jv-Ys-gas" id="qn4-Hr-Ko1"/>
                         <outlet property="searchTF" destination="swT-N2-uAy" id="18H-9d-IF0"/>
                         <outlet property="subCatgeoryTableView" destination="dft-hj-QHQ" id="jzG-i0-Muf"/>
@@ -448,6 +449,7 @@
                     <connections>
                         <outlet property="bannerCollectionView" destination="Kr4-r2-1pd" id="cpG-Tr-kdU"/>
                         <outlet property="bannerPageController" destination="G5o-g8-Rfm" id="m03-aA-wo4"/>
+                        <outlet property="btnMicOutlet" destination="ghX-jD-Og5" id="INt-IO-7b7"/>
                         <outlet property="noResultFoundLabel" destination="I2G-MM-Ehi" id="ONX-Iz-iFz"/>
                         <outlet property="searchTF" destination="HYj-Qj-r3t" id="ibb-1G-6Hi"/>
                         <outlet property="storesCollectionView" destination="4Ln-Ev-zOu" id="R8V-1D-NRY"/>
