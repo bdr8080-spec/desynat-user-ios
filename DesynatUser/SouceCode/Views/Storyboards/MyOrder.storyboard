@@ -3638,6 +3638,9 @@
                                                 </constraints>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" image="homeCamera"/>
+                                                <connections>
+                                                    <action selector="cameraDidTapped:" destination="oqg-dz-1Kb" eventType="touchUpInside" id="esU-QP-Vej"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NF8-EY-oBQ">
                                                 <rect key="frame" x="253" y="1" width="51" height="34"/>

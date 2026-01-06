@@ -64,6 +64,7 @@ enum AlertConstant: String {
   case EnterAmount = "Please enter amount"
   case EnterRecepientName = "Please enter recepient name"
   case EnterRecepientEmail = "Please enter recepient email"
+  case EnterRecepientWhatsapp = "Please enter recepient whatsapp number"
   case EnterFromName = "Please enter your name"
   case EnterWishMessage = "Please enter wish message"
   case EnterNote = "Please enter note"

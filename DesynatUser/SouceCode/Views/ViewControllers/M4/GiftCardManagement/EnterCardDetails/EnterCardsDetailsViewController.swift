@@ -9,6 +9,8 @@ import UIKit
 
 class EnterCardsDetailsViewController: UIViewController {
   
+  @IBOutlet weak var countryCodeTF: UITextField!
+  @IBOutlet weak var whatsAppNumberTF: UITextField!
   @IBOutlet weak var enterAmountTF: UITextField!
   @IBOutlet weak var nameTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
@@ -31,6 +33,7 @@ class EnterCardsDetailsViewController: UIViewController {
     super.viewDidLoad()
     enterAmountView.isHidden = true
     setDelegateMethod()
+    viewModel.getALlUserCountryListApi()
   }
   
   @IBAction func backDidTapped(_ sender: Any) {
@@ -43,6 +46,22 @@ class EnterCardsDetailsViewController: UIViewController {
     }
 //    let nextVC = PaymentMethodViewController.instantiate(fromAppStoryboard: .Profile)
 //    navigationController?.pushViewController(nextVC, animated: true)
+  }
+  
+  
+  @IBAction func countryDidTapped(_ sender: UIButton) {
+    let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
+        let name = country.name ?? ""
+        let dialCode = country.dialCode ?? ""
+        let flag = country.flag1 ?? "🇰🇼"
+        return "\(flag)  \(name) (\(dialCode))"
+    }
+
+    kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+        let selectedCountry = self.viewModel.getAllUSerCountryList[index]
+        let code = selectedCountry.dialCode ?? "+965"
+      self.countryCodeTF.text = code
+    }
   }
   
   func setDelegateMethod() {

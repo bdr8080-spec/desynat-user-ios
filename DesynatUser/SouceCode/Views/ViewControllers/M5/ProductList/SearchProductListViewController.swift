@@ -44,11 +44,12 @@ class SearchProductListViewController: UIViewController, SortByStoresViewControl
     } else {
       searchTF.text = viewModel.searchText
     }
+    viewModel.getProductsApi()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    viewModel.getProductsApi()
+    
   }
   
   @IBAction func filterDidTapped(_ sender: Any) {
@@ -101,6 +102,19 @@ class SearchProductListViewController: UIViewController, SortByStoresViewControl
       sender.setImage(UIImage(systemName: "mic.fill"), for: .normal)
       sender.tintColor = .systemRed // optional: show it's active
     }
+  }
+  
+  @IBAction func cameraDidTapped(_ sender: Any) {
+    let vc = WatchScannerVc.viewFromNIB
+    vc.comingFromSearchProduct = true
+    vc.onImageRecognized = { [weak self] attributes in
+      guard let self = self else { return }
+      self.comingFromImageScanner = true
+      self.viewModel.attributeText = attributes
+      self.searchTF.text = attributes.joined(separator: ", ")
+      self.viewModel.getProductsApi()
+    }
+    self.navigationController?.pushViewController(vc, animated: true)
   }
   
   private func requestPermissions() {

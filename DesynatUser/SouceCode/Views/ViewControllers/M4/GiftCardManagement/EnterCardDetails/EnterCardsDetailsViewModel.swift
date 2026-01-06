@@ -10,6 +10,7 @@ import Foundation
 class EnterCardsDetailsViewModel {
   
   private var hostVC: EnterCardsDetailsViewController
+  var getAllUSerCountryList:[GetAllUserCountryModel] = []
   
   init(hostVC: EnterCardsDetailsViewController) {
     self.hostVC = hostVC
@@ -48,6 +49,15 @@ class EnterCardsDetailsViewModel {
         errorMessage = .EnterRecepientEmail
       } else if !recepientEmail.isValidEmail() {
         errorMessage = .EnterValidEmailAddress
+      }
+    }
+    
+    let recepientMobile = hostVC.whatsAppNumberTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+    if errorMessage == .none {
+      if recepientMobile.isEmpty {
+        errorMessage = .EnterRecepientWhatsapp
+      } else if !recepientMobile.isValidPhoneNumber() {
+        errorMessage = .validMobileNumber
       }
     }
     
@@ -104,4 +114,10 @@ class EnterCardsDetailsViewModel {
       self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
     }
   }
+  
+  func getALlUserCountryListApi(){
+        WebService.sharedInstance.getAllUserscountryList { list in
+            self.getAllUSerCountryList = list
+        }
+    }
 }

@@ -663,7 +663,12 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     switch collectionView {
     case productImageCollectionView:
-      print("")
+      guard let images = selectedVariant?.variantImage else { return }
+      let vc = FullscreenGalleryViewController()
+      vc.images = images
+      vc.startIndex = indexPath.row
+      vc.modalPresentationStyle = .fullScreen
+      present(vc, animated: true)
     case colorsCollectionView:
       selectedColourIndex = indexPath.row
       filterVariantsForSelectedColor()
