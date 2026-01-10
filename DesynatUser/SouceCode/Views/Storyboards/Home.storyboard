@@ -22,7 +22,7 @@
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" id="Y6W-OH-hqX" customClass="HomeViewController" customModule="DesynatUser" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="1200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vlr-qW-eSA">
@@ -88,6 +88,9 @@
                                                         </constraints>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" image="message"/>
+                                                        <connections>
+                                                            <action selector="chatDidTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="UyU-0t-aZM"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U8z-Vc-LJB">
                                                         <rect key="frame" x="35" y="0.0" width="35" height="35"/>
@@ -256,7 +259,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NDC-LM-KJ8">
-                                <rect key="frame" x="0.0" y="199" width="393" height="873"/>
+                                <rect key="frame" x="0.0" y="199" width="393" height="525"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rVi-hT-ogN">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="1964.6666666666667"/>
@@ -553,7 +556,6 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="NDC-LM-KJ8" secondAttribute="bottom" constant="60" id="z3F-9a-9wF"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="393" height="1200"/>
                     <connections>
                         <outlet property="bannerCollectionView" destination="QZC-Zv-zEd" id="EpN-4G-jqS"/>
                         <outlet property="bannerPageController" destination="fAB-1h-t7V" id="mPx-oa-3zk"/>
@@ -579,7 +581,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1521" y="87"/>
+            <point key="canvasLocation" x="-1485" y="-35"/>
         </scene>
         <!--Tab BarVC-->
         <scene sceneID="HoA-D3-9Ij">
@@ -1763,6 +1765,96 @@ Let's add some items. </string>
             </objects>
             <point key="canvasLocation" x="1627" y="-35"/>
         </scene>
+        <!--Full Screen Banner View Controller-->
+        <scene sceneID="kZi-60-fa1">
+            <objects>
+                <viewController storyboardIdentifier="FullScreenBannerViewController" modalPresentationStyle="overFullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tX6-Km-sKv" customClass="FullScreenBannerViewController" customModule="DesynatUser" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VMw-9t-GnG">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cH6-tf-cRW" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                                <rect key="frame" x="16" y="24" width="361" height="804"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wee-fL-gjZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="361" height="804"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="5K8-QI-ftd">
+                                            <size key="itemSize" width="128" height="128"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="tX6-Km-sKv" id="egG-hP-7yv"/>
+                                            <outlet property="delegate" destination="tX6-Km-sKv" id="F9N-xI-6KZ"/>
+                                        </connections>
+                                    </collectionView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u6C-Y6-cVL" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
+                                        <rect key="frame" x="296" y="30" width="50" height="25"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="vg4-n8-c08"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Skip">
+                                            <color key="titleColor" name="171717"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="skipDidTapped:" destination="tX6-Km-sKv" eventType="touchUpInside" id="zAp-yL-a08"/>
+                                        </connections>
+                                    </button>
+                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="lCR-GL-l2r">
+                                        <rect key="frame" x="126.33333333333334" y="714" width="108.33333333333334" height="10"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="Kh3-51-ldM"/>
+                                        </constraints>
+                                        <color key="pageIndicatorTintColor" systemColor="systemGray4Color"/>
+                                        <color key="currentPageIndicatorTintColor" white="0.00066432823130000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="pagecontrollDidTapped:" destination="tX6-Km-sKv" eventType="valueChanged" id="z7B-9C-Avs"/>
+                                        </connections>
+                                    </pageControl>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="wee-fL-gjZ" firstAttribute="top" secondItem="cH6-tf-cRW" secondAttribute="top" id="0ej-Yx-wbD"/>
+                                    <constraint firstAttribute="bottom" secondItem="wee-fL-gjZ" secondAttribute="bottom" id="3cV-9i-M3A"/>
+                                    <constraint firstItem="wee-fL-gjZ" firstAttribute="leading" secondItem="cH6-tf-cRW" secondAttribute="leading" id="G1v-g7-TQk"/>
+                                    <constraint firstItem="u6C-Y6-cVL" firstAttribute="top" secondItem="cH6-tf-cRW" secondAttribute="top" constant="30" id="GaR-Js-wSU"/>
+                                    <constraint firstItem="lCR-GL-l2r" firstAttribute="centerX" secondItem="cH6-tf-cRW" secondAttribute="centerX" id="IYJ-9m-711"/>
+                                    <constraint firstAttribute="bottom" secondItem="lCR-GL-l2r" secondAttribute="bottom" constant="80" id="IeV-fJ-cZX"/>
+                                    <constraint firstAttribute="trailing" secondItem="u6C-Y6-cVL" secondAttribute="trailing" constant="15" id="h5n-gm-i0G"/>
+                                    <constraint firstAttribute="trailing" secondItem="wee-fL-gjZ" secondAttribute="trailing" id="n6E-dt-pt0"/>
+                                    <constraint firstItem="u6C-Y6-cVL" firstAttribute="width" secondItem="u6C-Y6-cVL" secondAttribute="height" multiplier="2:1" id="pbt-Ck-o2D"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="32"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="YSy-gP-Ekq"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.60420115890000003" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="cH6-tf-cRW" firstAttribute="top" secondItem="VMw-9t-GnG" secondAttribute="top" constant="24" id="FPZ-UH-Awh"/>
+                            <constraint firstItem="cH6-tf-cRW" firstAttribute="leading" secondItem="YSy-gP-Ekq" secondAttribute="leading" constant="16" id="Qp4-0r-0M6"/>
+                            <constraint firstItem="YSy-gP-Ekq" firstAttribute="trailing" secondItem="cH6-tf-cRW" secondAttribute="trailing" constant="16" id="b6Y-wg-bev"/>
+                            <constraint firstAttribute="bottom" secondItem="cH6-tf-cRW" secondAttribute="bottom" constant="24" id="pPQ-M9-h4u"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bannerCollectionView" destination="wee-fL-gjZ" id="oMe-Nm-vT3"/>
+                        <outlet property="pageControl" destination="lCR-GL-l2r" id="z5g-IV-FrW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RYI-XE-ntW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1486" y="651"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bagSelected" width="52" height="44"/>
@@ -1790,6 +1882,9 @@ Let's add some items. </string>
         <image name="rightArrow" width="17.666666030883789" height="13.666666984558105"/>
         <image name="search" width="20" height="20"/>
         <image name="show" width="52.666667938232422" height="52.666667938232422"/>
+        <namedColor name="171717">
+            <color red="0.090196078431372548" green="0.090196078431372548" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="E80B26">
             <color red="0.90980392156862744" green="0.043137254901960784" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -1797,16 +1892,16 @@ Let's add some items. </string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

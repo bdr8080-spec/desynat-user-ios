@@ -19,6 +19,7 @@ extension SceneDelegate {
     public func navigateToUserHomeVc() {
         let vc = TabBarVC.instantiate(fromAppStoryboard: .Home)
         navigateTo(vc: vc)
+      
     }
     
     public func navigateToWelcomeScreen() {

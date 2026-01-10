@@ -81,6 +81,9 @@ enum NetworkEndPoint: String {
     case recentSearch                       = "api/user/get-recent-search-data"
     case recommendedSearch                  = "api/user/get-recommnded-search-data"
     case homeSearch                         = "api/user/home-page-search"
+  
+  //M6
+    case homeFullScreenBanner               = "api/user/popUp-Home-screen-Banner"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

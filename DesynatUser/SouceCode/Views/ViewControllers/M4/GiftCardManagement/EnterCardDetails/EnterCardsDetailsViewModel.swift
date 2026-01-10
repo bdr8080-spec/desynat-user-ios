@@ -96,6 +96,8 @@ class EnterCardsDetailsViewModel {
       "receiver_name": hostVC.nameTextField.text ?? "",
       "receiver_email": hostVC.emailTextField.text ?? "",
       "sender_name": hostVC.fromNameTextField.text ?? "",
+      "country_code": hostVC.countryCodeTF.text ?? "",
+      "mobile": hostVC.whatsAppNumberTF.text ?? "",
       //"sender_email": hostVC.wishMessageTextView.text ?? "",
       "wish_message": hostVC.wishMessageTextView.text ?? "",
       "notes": hostVC.noteTextView.text ?? ""]
