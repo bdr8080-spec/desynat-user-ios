@@ -40,7 +40,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Levis" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewj-H6-0x2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Levis" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewj-H6-0x2">
                                 <rect key="frame" x="86" y="10.000000000000002" width="34.333333333333343" height="19.666666666666671"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -81,21 +81,30 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7D-fL-OVy">
-                                <rect key="frame" x="160" y="5.3333333333333321" width="183" height="28.999999999999996"/>
+                                <rect key="frame" x="263" y="5.3333333333333321" width="80" height="28.999999999999996"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4EY-23-l5f">
-                                        <rect key="frame" x="0.0" y="0.0" width="92" height="29"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4EY-23-l5f" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="29"/>
+                                        <color key="backgroundColor" red="0.52941176469999995" green="0.36078431370000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="uXv-14-CY2"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Send Request">
-                                            <color key="titleColor" red="0.52941176469999995" green="0.36078431370000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Send Req">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="sendRequestDidTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="exa-4r-gbb"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8p8-Bv-Elh">
-                                        <rect key="frame" x="92" y="0.0" width="91" height="29"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8p8-Bv-Elh">
+                                        <rect key="frame" x="80" y="0.0" width="0.0" height="29"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="View Request">
@@ -104,6 +113,23 @@
                                         <connections>
                                             <action selector="viewRequestDidTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="EHy-L1-lPL"/>
                                         </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N6K-eX-TS1" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
+                                        <rect key="frame" x="80" y="0.0" width="80" height="29"/>
+                                        <color key="backgroundColor" red="1" green="0.64313725490196072" blue="0.10588235294117647" alpha="0.12885346283783783" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="yTM-r7-oaq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Waiting">
+                                            <color key="titleColor" red="1" green="0.64313725490196072" blue="0.10588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -120,6 +146,7 @@
                             <constraint firstItem="FaA-Ky-iyP" firstAttribute="top" secondItem="pxi-Ie-Pod" secondAttribute="bottom" constant="5" id="nKu-RU-tsd"/>
                             <constraint firstItem="Omm-a2-Hkd" firstAttribute="top" secondItem="lPv-gm-nof" secondAttribute="top" constant="8" id="ohE-fg-qP2"/>
                             <constraint firstItem="pxi-Ie-Pod" firstAttribute="leading" secondItem="ewj-H6-0x2" secondAttribute="leading" id="qs3-gB-Ss3"/>
+                            <constraint firstItem="r7D-fL-OVy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ewj-H6-0x2" secondAttribute="trailing" constant="10" id="rGW-jP-3ei"/>
                             <constraint firstAttribute="trailing" secondItem="pxi-Ie-Pod" secondAttribute="trailing" constant="5" id="tOr-tj-0A1"/>
                             <constraint firstItem="ewj-H6-0x2" firstAttribute="leading" secondItem="Omm-a2-Hkd" secondAttribute="trailing" constant="8" id="uWS-Kf-4uR"/>
                         </constraints>
@@ -141,8 +168,15 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="sendRequestButtonOutlet" destination="4EY-23-l5f" id="kPk-HA-Zit"/>
+                <outlet property="actualPriceLabel" destination="OdA-FB-Pch" id="0HR-ip-XY0"/>
+                <outlet property="discountPriceLabel" destination="pwi-Et-ZNo" id="M0T-6s-Jwz"/>
+                <outlet property="finalPriceLabel" destination="wHg-st-OLy" id="FVF-Fe-v9Q"/>
+                <outlet property="productDetailsLabel" destination="pxi-Ie-Pod" id="9uS-sm-CHL"/>
+                <outlet property="productImageView" destination="Omm-a2-Hkd" id="01g-1Q-zUF"/>
+                <outlet property="productNameLabel" destination="ewj-H6-0x2" id="mqs-TI-tqG"/>
+                <outlet property="sendRequestButtonOutlet" destination="4EY-23-l5f" id="8RO-Nz-sz3"/>
                 <outlet property="viewRequestButtonOutlet" destination="8p8-Bv-Elh" id="pqf-XR-EEP"/>
+                <outlet property="waitingButtonOutlet" destination="N6K-eX-TS1" id="6Zr-ag-pwK"/>
             </connections>
             <point key="canvasLocation" x="168.70229007633588" y="135.56338028169014"/>
         </tableViewCell>

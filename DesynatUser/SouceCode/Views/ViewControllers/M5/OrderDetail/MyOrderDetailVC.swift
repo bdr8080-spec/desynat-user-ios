@@ -23,6 +23,15 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
     viewModel.getOrderDetail()
   }
   
+  
+  @IBOutlet weak var customOrderRquestView: UIView!
+  @IBOutlet weak var customOrderRequestIdLabel: CustomLabelFont!
+  @IBOutlet weak var customOrderDetailsstackView: UIStackView!
+  
+  @IBOutlet weak var quantityLAbel: UILabel!
+  @IBOutlet weak var customDetailLabel: UILabel!
+  @IBOutlet weak var addressLabel: UILabel!
+  
   @IBOutlet weak var returnDateLabel: CustomLabelFont!
   @IBOutlet weak var returnIdLabel: CustomLabelFont!
   @IBOutlet weak var exchangeDateLabel: CustomLabelFont!
@@ -116,6 +125,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
   
   lazy private var viewModel = MyOrderDetailVM(hostVC: self)
   var orderData: OrderModel?
+  var isCustomOrder: Bool = false
   var orderId: Int?
   var orderDetailId: Int?
   var selectedPromoCode: PromocodeApplied?
@@ -134,6 +144,13 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
     registerXib()
     viewModel.getOrderDetail()
     viewItemPrice.isHidden = true
+    if isCustomOrder {
+      customOrderRquestView.isHidden = false
+      customOrderDetailsstackView.isHidden = false
+    } else{
+      customOrderRquestView.isHidden = true
+      customOrderDetailsstackView.isHidden = true
+    }
   }
   
   private func resetStepper() {
@@ -173,7 +190,9 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
   func setData() {
     guard let data = orderData else { return }
     lblOrderId.text = "#\(data.id ?? 0)"
+    customOrderRequestIdLabel.text = "Request id #\(data.id ?? 0)"
     lblPlacedDate.text = "Placed on \(data.createdAt?.formattedPlacedDate() ?? "")"
+    quantityLAbel.text = data.quantity?.description
     
     lblTotalMrp.text = formatPrice(Double(data.order?.totalMrp ?? "0"))
     lblDiscountMrp.text = formatPrice(Double(data.order?.discountMrp ?? "0"))
@@ -198,18 +217,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
       discountPercentageLabel.text = "\(data.variationDetails?.discountValue ?? "") KD Off"
     }
     
-    // FIX: Only use API value when promo NOT applied
-//    if let selected = selectedPromoCode {
-//      lblCouponDis.text = formatPrice(selected.applyDiscountValue)
-//      lblTotalAmount.text = formatPrice(selected.finalAmount)
-//      totalPaidAmount = lblTotalAmount.text
-//    } else {
-//      lblCouponDis.text = "0"//formatPrice(data.discountCoupon)
-//      lblTotalAmount.text = formatPrice(Double(data.order?.totalAmount ?? "0"))
-//      let savingAmount = Double(data.order?.discountMrp ?? "0")// - (data.totalAmount ?? 0)
-//      totalPaidAmount = lblTotalAmount.text
-//      lblSavedAmount.text = "You saved \(formatPrice(savingAmount)) on this"
-//    }
+    
     
     if let selected = selectedPromoCode {
         // Promo code applied
@@ -227,12 +235,11 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
         lblSavedAmount.text = "You saved \(formatPrice(savingAmount)) on this"
     }
 
-    
-    //lblDeliveryInst.text = data
     let selectedAddress = data.order?.deliveryDetails
     let addressLine = "\(selectedAddress?.name ?? "")-\(selectedAddress?.houseNo ?? ""), \(selectedAddress?.streetNo ?? ""), \(selectedAddress?.city ?? ""), \(selectedAddress?.state ?? ""), \(selectedAddress?.countryName ?? "")-\(selectedAddress?.postalCode ?? "")"
     lblShippingAdd.text = addressLine
-    
+    addressLabel.text = addressLine
+    customDetailLabel.text = data.chatroomRecordtable?.customDetails
     let img = data.variationDetails?.variantImage
     if let imageUrl = img?.first, let url = URL(string: imageUrl) {
       imgProduct.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -250,8 +257,6 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
       imgProfile.image = UIImage(named: "")
     }
     
-    //lblDisPrice.text = data.am
-//    lblPrice.text = "\(data.amount ?? "") KD"
     lblProductName.text = data.productDetails?.productNameEn ?? ""
     setColorBox(size: data.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data.quantity ?? 0)")
     configureStatus(with: data)
@@ -277,6 +282,22 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
     }
     orderTableView.reloadData()
   }
+  
+  func isWithinThreeHours(from createdAt: String) -> Bool {
+      let formatter = ISO8601DateFormatter()
+      formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+
+      guard let createdDate = formatter.date(from: createdAt) else {
+          return false
+      }
+
+      let currentDate = Date()
+      let timeDifference = currentDate.timeIntervalSince(createdDate)
+
+      // 3 hours = 3 * 60 * 60 seconds
+      return timeDifference <= (3 * 60 * 60)
+  }
+
   
   func configureStatus(with data: OrderModel) {
     resetStepper()
@@ -316,7 +337,12 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
           viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
           viewReturnDays.isHidden = false
-          viewCancel.isHidden = false
+          if isCustomOrder {
+            let canCancel = isWithinThreeHours(from: data.createdAt ?? "")
+            viewCancel.isHidden = !canCancel
+          } else {
+            viewCancel.isHidden = false
+          }
           viewPaidBy.isHidden = false
           activateStep(0, title: "Confirmed")
           activateStep(1, title: "Shipped")
@@ -326,7 +352,13 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
           viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
           viewReturnDays.isHidden = false
-          viewCancel.isHidden = false
+//          viewCancel.isHidden = false
+          if isCustomOrder {
+            let canCancel = isWithinThreeHours(from: data.createdAt ?? "")
+            viewCancel.isHidden = !canCancel
+          } else {
+            viewCancel.isHidden = false
+          }
           viewPaidBy.isHidden = false
           activateStep(0, title: "Confirmed")
           activateStep(1, title: "Shipped")
@@ -337,7 +369,8 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
           viewStatus.borderColor = UIColor(hexString: "#16B364")
           viewReturnDays.isHidden = false
           viewRate.isHidden = false
-          viewReturnEx.isHidden = false
+          
+          viewReturnEx.isHidden = isCustomOrder//false
           viewPaidBy.isHidden = false
           viewDownloadInvoice.isHidden = false
           activateStep(0, title: "Confirmed")
@@ -378,7 +411,13 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
           lblStatus.text = "Cancelled"
           lblStatus.textColor = UIColor(hexString: "#E70000")
           viewStatus.borderColor = UIColor(hexString: "#E70000")
-          viewCancelDetail.isHidden = false
+//          viewCancelDetail.isHidden = false
+          if isCustomOrder {
+            let canCancel = isWithinThreeHours(from: data.createdAt ?? "")
+            viewCancel.isHidden = !canCancel
+          } else {
+            viewCancel.isHidden = false
+          }
           viewReason.isHidden = false
           viewPaidBy.isHidden = false
           hideStep(2)
@@ -462,7 +501,13 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
           viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
           viewReturnDays.isHidden = false
-          viewCancel.isHidden = false
+//          viewCancel.isHidden = false
+          if isCustomOrder {
+            let canCancel = isWithinThreeHours(from: data.createdAt ?? "")
+            viewCancel.isHidden = !canCancel
+          } else {
+            viewCancel.isHidden = false
+          }
           viewPaidBy.isHidden = false
           activateStep(0, title: "Confirmed")
           activateStep(1, title: "Shipped")
@@ -472,7 +517,13 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
           viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
           viewReturnDays.isHidden = false
-          viewCancel.isHidden = false
+//          viewCancel.isHidden = false
+          if isCustomOrder {
+            let canCancel = isWithinThreeHours(from: data.createdAt ?? "")
+            viewCancel.isHidden = !canCancel
+          } else {
+            viewCancel.isHidden = false
+          }
           viewPaidBy.isHidden = false
           activateStep(0, title: "Confirmed")
           activateStep(1, title: "Shipped")
@@ -483,7 +534,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
           viewStatus.borderColor = UIColor(hexString: "#16B364")
           viewReturnDays.isHidden = false
           viewRate.isHidden = false
-          viewReturnEx.isHidden = false
+          viewReturnEx.isHidden = isCustomOrder//false
           viewPaidBy.isHidden = false
           viewDownloadInvoice.isHidden = false
           viewCancelDetail.isHidden = true
@@ -654,25 +705,25 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
     exchangeProductButtonOutlet.isHidden = !isExchangeAllowed
     
     if !isReturnAllowed && !isExchangeAllowed {
-      viewReturnEx.isHidden = true
+      viewReturnEx.isHidden = isCustomOrder//true
       exchangeReturnHeightConstrint.constant = 0
     } else {
-      viewReturnEx.isHidden = false
+      viewReturnEx.isHidden = isCustomOrder//false
       exchangeReturnHeightConstrint.constant = 64
     }
     let returnStatus = data.returnType ?? "0"
     
     switch returnStatus {
     case "1":
-      viewReturnEx.isHidden = true
+      viewReturnEx.isHidden = isCustomOrder//true
       viewReturnDetail.isHidden = false
       viewReason.isHidden = false
     case "2":
-      viewReturnEx.isHidden = true
+      viewReturnEx.isHidden = isCustomOrder//true
       viewExchangeDetail.isHidden = false
       viewReason.isHidden = false
     default:
-      viewReturnEx.isHidden = false
+      viewReturnEx.isHidden = isCustomOrder//false
       exchangeReturnDescriptionView.isHidden = true
       viewReturnDetail.isHidden = true
       viewExchangeDetail.isHidden = true
@@ -699,13 +750,6 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
   }
   
   @IBAction func btnDownloadInvoice(_ sender: Any) {
-//    guard let urlString = viewModel.invoiceDetailsUrl,
-//              let url = URL(string: urlString) else {
-//            showAlert(msg: "Invoice not available")
-//            return
-//        }
-//
-//        downloadPDF(from: url)
     let orderId = orderData?.order?.orderID ?? ""
     let urlString = "http://157.241.119.72/Invoice/\(orderId)"
 
@@ -776,45 +820,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
     }
     navigationController?.present(vc, animated: true)
   }
-  
-  
-  
-  //    @IBAction func btnExchnge(_ sender: Any) {
-  //        let vc = SelectReasonVC.instantiate(fromAppStoryboard: .MyOrder)
-  //        vc.screenType = .cancelOrder
-  //        vc.orderId = orderId ?? 0
-  //        vc.orderDetailId = orderDetailId ?? 0
-  //        vc.delegate = self
-  //        vc.onExchange = {
-  //            let vc = SuccessMsgVC.instantiate(fromAppStoryboard: .MyOrder)
-  //            vc.message = "Order Exchange Request Sent successfully!"
-  //            vc.OnDismiss = {
-  //                self.dismiss(animated: true) {
-  //                    self.navigationController?.present(vc, animated: true)
-  //                }
-  //            }
-  //        }
-  //        self.navigationController?.present(vc, animated: true)
-  //    }
-  //
-  //    @IBAction func btnReturn(_ sender: Any) {
-  //        let vc = SelectReasonVC.instantiate(fromAppStoryboard: .MyOrder)
-  //        vc.screenType = .cancelOrder
-  //        vc.orderId = orderId ?? 0
-  //        vc.orderDetailId = orderDetailId ?? 0
-  //        vc.delegate = self
-  //        vc.onReturn = {
-  //            let vc = SuccessMsgVC.instantiate(fromAppStoryboard: .MyOrder)
-  //            vc.message = "Order Return Request Sent successfully!"
-  //            vc.OnDismiss = {
-  //                self.dismiss(animated: true) {
-  //                    self.navigationController?.present(vc, animated: true)
-  //                }
-  //            }
-  //        }
-  //        self.navigationController?.present(vc, animated: true)
-  //    }
-  
+
   @IBAction func btnCancelOrder(_ sender: Any) {
     let vc = SelectReasonVC.instantiate(fromAppStoryboard: .MyOrder)
     vc.screenType = .cancelOrder
@@ -862,23 +868,6 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
   }
   
   @IBAction func btnReturnn(_ sender: Any) {
-//    let vc = SelectReasonVC.instantiate(fromAppStoryboard: .MyOrder)
-//    vc.screenType = .returnPro
-//    vc.orderId = orderId ?? 0
-//    vc.orderDetailId = orderDetailId ?? 0
-//    vc.delegate = self
-//    vc.onReturn = {
-//      let vc = SuccessMsgVC.instantiate(fromAppStoryboard: .MyOrder)
-//      vc.message = "Order Return Request Sent successfully!"
-//      vc.OnDismiss = {
-//        self.dismiss(animated: true) {
-//          self.navigationController?.present(vc, animated: true)
-//        }
-//      }
-//    }
-//    self.navigationController?.present(vc, animated: true)
-    
-    
     let vc = SelectReasonVC.instantiate(fromAppStoryboard: .MyOrder)
         vc.screenType = .returnPro
         vc.orderId = orderId ?? 0
@@ -904,24 +893,7 @@ extension MyOrderDetailVC: UITableViewDelegate, UITableViewDataSource {
     let paymentMethod = orderData?.order?.paymentMethod ?? "1"
     let paymentStatus = data?.paymentStatus ?? "1"
     let deliveryStatus = data?.deliveryStatus ?? "1"
-    cell.configData(data: data, paymentMethod: paymentMethod, paymentStatus: paymentStatus, deliveryStatus: deliveryStatus)
-//    cell.onTapCancel = {
-//      let vc = SelectReasonVC.instantiate(fromAppStoryboard: .MyOrder)
-//      vc.screenType = .cancelOrder
-//      self.navigationController?.present(vc, animated: true)
-//    }
-//    
-//    cell.onTapExchange = {
-//      let vc = SelectReasonVC.instantiate(fromAppStoryboard: .MyOrder)
-//      vc.screenType = .exchangePro
-//      self.navigationController?.present(vc, animated: true)
-//    }
-//    
-//    cell.onTapReturn = {
-//      let vc = SelectReasonVC.instantiate(fromAppStoryboard: .MyOrder)
-//      vc.screenType = .returnPro
-//      self.navigationController?.present(vc, animated: true)
-//    }
+    cell.configData(data: data, paymentMethod: paymentMethod, paymentStatus: paymentStatus, deliveryStatus: deliveryStatus, isCustomOrder: isCustomOrder)
     return cell
   }
   

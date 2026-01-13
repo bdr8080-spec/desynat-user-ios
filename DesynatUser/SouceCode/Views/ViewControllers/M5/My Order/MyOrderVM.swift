@@ -15,7 +15,7 @@ class MyOrderVM: NSObject {
         self.hostVC = hostVC
     }
     
-    func getOrders() {
+  func getOrders(type: Int) {
         var params: [String: Any] = [
             // "search":"r8219788",
             "filter": hostVC.selectedFilter.rawValue // 1 all 2 onging 3 delivered 4 cancelled 5 return
@@ -24,6 +24,8 @@ class MyOrderVM: NSObject {
         if !searchText.isEmpty {
           params["search"] = searchText
         }
+    
+    params["type"] = type
         
         WebService.sharedInstance.getOrdersApi(param: params) { data in
             self.hostVC.orderData = data

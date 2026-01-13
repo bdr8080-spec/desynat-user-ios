@@ -49,7 +49,7 @@ class HomeViewModel: NSObject {
    func getAllFullscreenBannersList() {
     let hasShownFullscreenBanner = UserDefaults.standard.string(forKey: "hasShownFullscreenBanner") ?? "false"
     if hasShownFullscreenBanner == "true" {
-      hostVC.showToast(msg: hasShownFullscreenBanner)
+//      hostVC.showToast(msg: hasShownFullscreenBanner)
       WebService.sharedInstance.getAllFullscreenBannersList() { list in
         self.fullScreenBannersList = list
         if !list.isEmpty {

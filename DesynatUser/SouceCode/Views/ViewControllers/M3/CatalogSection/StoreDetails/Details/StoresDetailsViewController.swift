@@ -16,7 +16,6 @@ class StoresDetailsViewController: UIViewController, SortByStoresViewControllerD
     self.viewModel.getSingleStoresApi()   // call API again
   }
   
-  
   @IBOutlet weak var noReelsFound: UILabel!
   @IBOutlet weak var statusView: CustomView!
   @IBOutlet weak var searchTF: UITextField!
@@ -63,6 +62,7 @@ class StoresDetailsViewController: UIViewController, SortByStoresViewControllerD
   private var recognitionTask: SFSpeechRecognitionTask?
   private let audioEngine = AVAudioEngine()
   private var isListening = false
+  private var sellerId: Int = 0
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -88,6 +88,10 @@ class StoresDetailsViewController: UIViewController, SortByStoresViewControllerD
   
   @IBAction func bakDidTapped(_ sender: Any) {
     self.navigationController?.popViewController(animated: true)
+  }
+  
+  @IBAction func chatDidTapped(_ sender: Any) {
+    viewModel.createNormalChatSercie(sellerId: sellerId)
   }
   
   @IBAction func productDidTapped(_ sender: Any) {
@@ -239,7 +243,7 @@ class StoresDetailsViewController: UIViewController, SortByStoresViewControllerD
     pageTitleLabel.text = data.storeName
     storeTitleLabel.text = fullName
     brandLabel.text = data.storeName
-    
+    sellerId = data.sellerID ?? 0
     if let imageUrlString = data.storeImage,
        let url = URL(string: imageUrlString) {
       

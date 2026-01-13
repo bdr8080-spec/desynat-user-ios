@@ -33,6 +33,15 @@ class PlaceOrderPaymentMethodsViewModel {
     }
   }
   
+  func placeCustomOrderApi(param: [String: Any]) {
+    WebService.sharedInstance.createCustomOrderRequest(param: param) { response in
+      DispatchQueue.main.async { [weak self] in
+        guard let self else { return }
+        completeOrderApi(orderID: response.orderID ?? "")
+      }
+    }
+  }
+  
   func getWalletAmountApi() {
     WebService.sharedInstance.getWalletAmount() { response in
       DispatchQueue.main.async { [weak self] in
@@ -66,6 +75,7 @@ class PlaceOrderPaymentMethodsViewModel {
       }
     }
   }
+
   
   private func formatAmount(_ amount: Double) -> String {
       let formatter = NumberFormatter()

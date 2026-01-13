@@ -856,6 +856,55 @@ extension WebService {
       }
     }
   }
+  
+  func createNormalChatSercie(param: [String: Any], completion:@escaping (_ user:CreateChatThreadWithDealer)-> Void) {
+    CommonUtils.showHud(show: true)
+    NetworkManager.shared.request(withAPI: .endpoint(.sendInMessageChatNormalChat), requestMethod: .post, requestParams: param, requestModel:CreateChatThreadWithDealer.self) { result, code in
+      CommonUtils.showHud(show: false)
+      self.evaluateWebServiceResponse(response: result) { response, message,error in
+        guard let user = response else {
+          if let error {
+            UIApplication.shared.topViewController()?.showAlert(msg: error)
+          }
+          return
+        }
+        completion(user)
+      }
+    }
+  }
+  
+  func createCustomOrder(param: [String: Any], completion:@escaping (_ user: CreateChatThreadWithDealer)-> Void) {
+    CommonUtils.showHud(show: true)
+    NetworkManager.shared.request(withAPI: .endpoint(.createCustomOrder), requestMethod: .post, requestParams: param, requestModel: CreateChatThreadWithDealer.self) { result, code in
+      CommonUtils.showHud(show: false)
+      self.evaluateWebServiceResponse(response: result) { response, message,error in
+        guard let user = response else {
+          if let error {
+            UIApplication.shared.topViewController()?.showAlert(msg: error)
+          }
+          return
+        }
+        completion(user)
+      }
+    }
+  }
+  
+  func sendCustomOrderRequest(param: [String: Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+    CommonUtils.showHud(show: true)
+    NetworkManager.shared.request(withAPI:.endpoint(.sendCustomOrderRequest), requestMethod: .post, requestParams: param,  requestModel: EmptyModel.self) { result, code in
+      
+      CommonUtils.showHud(show: false)
+      self.evaluateWebServiceResponse(response: result) { response, message,error in
+        guard let user = response else {
+          if let error {
+            UIApplication.shared.topViewController()?.showAlert(msg: error)
+          }
+          return
+        }
+        completion(user)
+      }
+    }
+  }
 }
 
 

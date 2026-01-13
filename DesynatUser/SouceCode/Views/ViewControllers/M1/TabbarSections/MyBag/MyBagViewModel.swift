@@ -19,15 +19,15 @@ class MyBagViewModel: NSObject {
   
   func getBagDetailsApi(){
     WebService.sharedInstance.gteBagDetails { [self] list in
-        DispatchQueue.main.async {
-            
-            self.bagDetails = list
-            self.hostVC.bagTableView.reloadData()
-            self.hostVC.condifData(data: list)
-            self.hostVC.noDataFoundLabel.isHidden = !(self.bagDetails?.cartData?.isEmpty ?? true)
-            self.hostVC.bagDetailsView.isHidden = self.bagDetails?.cartData?.isEmpty ?? true
-            self.hostVC.totoalAmountPriceView.isHidden = self.bagDetails?.cartData?.isEmpty ?? true
-        }
+      DispatchQueue.main.async {
+        
+        self.bagDetails = list
+        self.hostVC.bagTableView.reloadData()
+        self.hostVC.condifData(data: list)
+        self.hostVC.noDataFoundLabel.isHidden = !(self.bagDetails?.cartData?.isEmpty ?? true)
+        self.hostVC.bagDetailsView.isHidden = self.bagDetails?.cartData?.isEmpty ?? true
+        self.hostVC.totoalAmountPriceView.isHidden = self.bagDetails?.cartData?.isEmpty ?? true
+      }
     }
   }
   
@@ -54,8 +54,8 @@ class MyBagViewModel: NSObject {
   }
   
   func placeOrderApi() {
-      let finalPriceText = hostVC.finalPriceLabel.text?.replacingOccurrences(of: " KD", with: "") ?? "0.0"
-      let finalPrice = Double(finalPriceText) ?? 0.0
+    let finalPriceText = hostVC.finalPriceLabel.text?.replacingOccurrences(of: " KD", with: "") ?? "0.0"
+    let finalPrice = Double(finalPriceText) ?? 0.0
     var param: [String: Any] = [
       "delivery_address": hostVC.deliveryId,
       "total_mrp": bagDetails?.totalMrp ?? 0,
@@ -63,7 +63,7 @@ class MyBagViewModel: NSObject {
       "promocode_status": hostVC.isPromoCodeApplied ? "yes" : "no",
       "shipping_fees": bagDetails?.shippingFees ?? 0,
       "tax": bagDetails?.tax ?? 0,
-      "total_amount": finalPrice]//bagDetails?.totalAmount ?? 0]
+      "total_amount": finalPrice]
     if hostVC.isPromoCodeApplied {
       param["promocode_id"] = hostVC.slecetedPromocodeID ?? 0
       param["promocode_value"] = hostVC.selectedPromoCode?.applyDiscountValue
@@ -72,10 +72,9 @@ class MyBagViewModel: NSObject {
       guard let self = self else { return }
       let nextVC = PlaceOrderPaymentMethodsViewController.instantiate(fromAppStoryboard: .MyBag)
       nextVC.param = param
-//      nextVC.orderID =
       nextVC.totalAmountToPay = finalPrice
       self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
+    }
   }
-}
 }
 

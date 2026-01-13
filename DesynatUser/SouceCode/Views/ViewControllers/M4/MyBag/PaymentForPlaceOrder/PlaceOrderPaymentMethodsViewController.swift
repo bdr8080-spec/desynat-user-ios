@@ -37,7 +37,9 @@ class PlaceOrderPaymentMethodsViewController: UIViewController, PlaceOrderPaymen
     var getToastMessage: String = ""
     var totalAmountToPay: Double = 0.0
     var orderID: String = "46464646"
-    
+  var customChatUniqueId: String = ""
+  var comingForCustomeOrderPlace: Bool = false
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         paymnetTableView.rowHeight = UITableView.automaticDimension
@@ -96,13 +98,21 @@ class PlaceOrderPaymentMethodsViewController: UIViewController, PlaceOrderPaymen
         }
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
-    
+  
     func proceedToPay() {
-        guard let selectedMethod = selectedPaymentMethod else { return }
+      guard let selectedMethod = selectedPaymentMethod else { return }
+      if comingForCustomeOrderPlace {
+        let customOrderParam: [String :Any] = ["unique_id": customChatUniqueId,
+                                               "giftcard_id": giftCardDetails?.id ?? "",
+                                               "giftcard_amount": giftCardDetails?.giftCardAmount ?? "",
+                                               "Payment_method": selectedMethod.apiValue]
+        viewModel.placeCustomOrderApi(param: customOrderParam)
+      } else {
         param["Payment_method"] = selectedMethod.apiValue
         param["giftcard_amount"] = giftCardDetails?.giftCardAmount
         param["giftcard_id"] = giftCardDetails?.id
         viewModel.placeOrderApi(param: param)
+      }
     }
     
     func handlePaymentMethodSelection(for method: PaymentMethodType) {

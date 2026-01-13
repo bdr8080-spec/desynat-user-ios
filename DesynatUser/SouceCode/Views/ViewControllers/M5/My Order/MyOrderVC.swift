@@ -27,7 +27,11 @@ import UIKit
 class MyOrderVC: UIViewController, FilterDelegate {
   func didApplyFilter(_ filter: OrderFilterType) {
     selectedFilter = filter
-    viewModel.getOrders()
+    if isCustomOrderSeleced {
+      viewModel.getOrders(type: 1)
+    } else {
+      viewModel.getOrders(type: 1)
+    }
   }
   
   @IBOutlet weak var btnOrder: CustomButton!
@@ -41,6 +45,7 @@ class MyOrderVC: UIViewController, FilterDelegate {
   var selectedOrderType: OrderType = .order
   var selectedFilter: OrderFilterType = .all
   var comingFromOrderTracking: Bool = false
+  var isCustomOrderSeleced : Bool = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -49,7 +54,7 @@ class MyOrderVC: UIViewController, FilterDelegate {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    viewModel.getOrders()
+    viewModel.getOrders(type: 1)
     btnSelectOrderType(btnOrder)
     lblNoData.isHidden = true
     orderTableView.isHidden = true
@@ -109,7 +114,10 @@ class MyOrderVC: UIViewController, FilterDelegate {
       btnCustomOrder.setBackgroundImage(nil, for: .normal)
       btnOrder.setTitleColor(.white, for: .normal)
       btnCustomOrder.setTitleColor(.black, for: .normal)
-      viewModel.getOrders()
+      isCustomOrderSeleced = false
+              orderData.removeAll()
+              orderTableView.reloadData()
+              viewModel.getOrders(type: 1)
       
     case 1:
       btnOrder.setBackgroundImage(nil, for: .normal)
@@ -117,8 +125,11 @@ class MyOrderVC: UIViewController, FilterDelegate {
       btnOrder.setTitleColor(.black, for: .normal)
       btnCustomOrder.setTitleColor(.white, for: .normal)
       orderData.removeAll()
-      orderTableView.reloadData()
-      updateUI()
+//      orderTableView.reloadData()
+      isCustomOrderSeleced = true
+              orderData.removeAll()
+              orderTableView.reloadData()
+              viewModel.getOrders(type: 2)
       
     default:
       break
@@ -150,6 +161,7 @@ extension MyOrderVC: UITableViewDelegate, UITableViewDataSource {
     let vc = MyOrderDetailVC.instantiate(fromAppStoryboard: .MyOrder)
     vc.orderId = order.order?.id ?? 0
     vc.orderDetailId = order.id ?? 0
+    vc.isCustomOrder = isCustomOrderSeleced
     self.navigationController?.pushViewController(vc, animated: true)
   }
 }

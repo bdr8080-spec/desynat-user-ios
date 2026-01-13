@@ -64,4 +64,17 @@ class ProductDetailsViewModel: NSObject {
     }
   }
   
+  func createCustomOrder(productId: Int, variantId: Int) {
+    let param: [String: Any] = [
+      "product_id": productId,
+      "variation_id": variantId]
+    WebService.sharedInstance.createCustomOrder(param: param) { list in
+      DispatchQueue.main.async {
+        let nextVC = ChatDetailsViewController.instantiate(fromAppStoryboard: .Chat)
+        nextVC.viewModel.chatDetailsUniqueId = list.uniqueID ?? ""
+        self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
+      }
+    }
+  }
+  
 }

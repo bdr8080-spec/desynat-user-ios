@@ -50,3 +50,39 @@ struct PaymentMethodForPlaceOrder {
 struct WalletAmountDataModel: Codable {
     let balance: Double?
 }
+
+
+// MARK: - CustomOrderPlaceOrderDetail
+struct CustomOrderPlaceOrderDetail: Codable {
+    let orderID, orderType: String?
+    let userID, deliveryAddress: Int?
+    let totalMrp: String?
+    let discountMrp: Int?
+    let promocodeStatus: String?
+    let promocodeID, promocodeValue: String?
+    let shippingFees, tax, totalAmount: String?
+    let giftcardID, giftcardAmount: String?
+    let paymentMethod, updatedAt, createdAt: String?
+    let id: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case orderID = "order_id"
+        case orderType = "order_type"
+        case userID = "user_id"
+        case deliveryAddress = "delivery_address"
+        case totalMrp = "total_mrp"
+        case discountMrp = "discount_mrp"
+        case promocodeStatus = "promocode_status"
+        case promocodeID = "promocode_id"
+        case promocodeValue = "promocode_value"
+        case shippingFees = "shipping_fees"
+        case tax
+        case totalAmount = "total_amount"
+        case giftcardID = "giftcard_id"
+        case giftcardAmount = "giftcard_amount"
+        case paymentMethod = "Payment_method"
+        case updatedAt = "updated_at"
+        case createdAt = "created_at"
+        case id
+    }
+}

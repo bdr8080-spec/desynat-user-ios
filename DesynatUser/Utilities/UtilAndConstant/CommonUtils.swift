@@ -17,6 +17,45 @@ class CommonUtils {
         }
     }
   
+  static func formatPriceStringInput(_ amount: String?, currency: String = "KD") -> String {
+      guard
+          let amount = amount,
+          let doubleAmount = Double(amount)
+      else {
+          return "0 \(currency)"
+      }
+
+      let roundedAmount = round(doubleAmount * 100) / 100
+
+      if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
+          return "\(Int(roundedAmount)) \(currency)"
+      } else {
+          return String(format: "%.2f", roundedAmount) + " \(currency)"
+      }
+  }
+  
+  static func getDictionary(_ dictData: Any?) -> Dictionary<String, Any> {
+      guard let dict = dictData as? Dictionary<String, Any> else {
+          guard let arr = dictData as? [Any] else {
+              return ["":""]
+          }
+          return getDictionary(arr.count > 0 ? arr[0] : ["":""])
+      }
+      return dict
+  }
+  
+  
+  static func getModelFromAny<T:Decodable>(model:T.Type, data:Any, completion:(T)->()) {
+      do {
+          if let data = try? JSONSerialization.data(withJSONObject: data, options: .prettyPrinted) {
+              let final = try JSONDecoder().decode(model, from: data)
+              completion(final)
+          }
+      } catch let err {
+          debugPrint("Err:\(err)")
+      }
+  }
+  
   static func setStrikethrough(label: UILabel, text: String) {
       let attributeString = NSMutableAttributedString(string: text)
       
@@ -294,5 +333,17 @@ class CommonUtils {
         FTIndicator.showNotification(withTitle: Bundle.main.ApplicationName ?? "",
         message: message.count>0 ? message: "Message")
         
+    }
+}
+
+extension Date {
+    public enum DateCustomFormat : String {
+      case dd_MMM_yy_h_mm_a           = "dd MMM yy, h:mm a"
+    }
+    
+    func change_DateIntoString(format:DateCustomFormat) -> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format.rawValue
+        return dateFormatter.string(from: self)
     }
 }

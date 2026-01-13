@@ -65,4 +65,15 @@ class StoreDetailsViewModel: NSObject {
           completion(true)
         }
     }
+  
+  func createNormalChatSercie(sellerId: Int) {
+    let param: [String: Any] = ["seller_id": sellerId]
+    WebService.sharedInstance.createNormalChatSercie(param: param) { list in
+      DispatchQueue.main.async {
+        let nextVC = ChatDetailsViewController.instantiate(fromAppStoryboard: .Chat)
+        nextVC.viewModel.chatDetailsUniqueId = list.uniqueID ?? ""
+        self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
+      }
+    }
+  }
 }

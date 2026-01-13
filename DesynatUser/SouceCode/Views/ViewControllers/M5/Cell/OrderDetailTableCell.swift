@@ -50,7 +50,7 @@ class OrderDetailTableCell: UITableViewCell {
     onTapReturn?()
   }
   
-  func configData(data: AllOtherOrderVarient?, paymentMethod: String, paymentStatus: String, deliveryStatus: String) {
+  func configData(data: AllOtherOrderVarient?, paymentMethod: String, paymentStatus: String, deliveryStatus: String, isCustomOrder: Bool) {
     if let imageUrl = data?.variationDetails?.variantImage?.first, let url = URL(string: imageUrl) {
       imgProduct.sd_imageIndicator = SDWebImageActivityIndicator.gray
       imgProduct.sd_imageIndicator?.startAnimatingIndicator()
@@ -70,7 +70,11 @@ class OrderDetailTableCell: UITableViewCell {
     lblDisPrice.text = "\(data?.variationDetails?.finalPrice ?? "") KD"
     CommonUtils.setStrikethrough(label: lblPrice, text: "\(data?.variationDetails?.actualPrice ?? "0") KD")
     lblProductName.text = data?.productDetails?.productNameEn
-    setColorBox(size: data?.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data?.quantity ?? 0)")
+    if isCustomOrder {
+      setColorBoxWithQuanity(size: data?.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF")
+    } else {
+      setColorBox(size: data?.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data?.quantity ?? 0)")
+    }
     let isReturnAllowed = data?.productDetails?.productReturn == "1"
     if isReturnAllowed {
       lblReturnAvail.text = "\(data?.productDetails?.returnDays ?? "1") days return available"

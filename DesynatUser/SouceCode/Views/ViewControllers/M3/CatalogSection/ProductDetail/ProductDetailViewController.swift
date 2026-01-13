@@ -228,6 +228,13 @@ class ProductDetailViewController: UIViewController {
     }
   }
   
+  @IBAction func customOrderDidTapped(_ sender: Any) {
+    guard let productId = productDetails?.id else { return }
+    let selectedVariant = filteredVariants[selectedSizeIndex]
+    let variantId = selectedVariant.id ?? 0
+    viewModel.createCustomOrder(productId: productId, variantId: variantId)
+  }
+  
   private func addProductToCart(forIncrement: Bool) {
     guard let productId = productDetails?.id else { return }
     let selectedVariant = filteredVariants[selectedSizeIndex]
