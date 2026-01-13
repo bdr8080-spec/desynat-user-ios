@@ -44,6 +44,9 @@ class ChatDetailsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     initialUISetup()
+//      NotificationCenter.default.addObserver(self,selector: #selector(self.keyboardNotification(notification:)),
+//                                             name: UIResponder.keyboardWillChangeFrameNotification,
+//                                             object: nil)
   }
   
   @IBAction func backDidTapped(_ sender: Any) {
@@ -105,6 +108,47 @@ class ChatDetailsViewController: UIViewController {
       productDetailsActionButtonStackView.isHidden = true
     }
   }
+    
+//    @objc func keyboardNotification(notification: NSNotification) {
+//        guard let userInfo = notification.userInfo else { return }
+//        let endFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+//        let endFrameY = endFrame?.origin.y ?? 0
+//        let duration:TimeInterval = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+//        let animationCurveRawNSN = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
+//        let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
+//        let animationCurve:UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
+//        if endFrameY >= UIScreen.main.bounds.size.height {
+//            UIView.animate(withDuration: 0.1) {
+//                self.bottomMessageViewHeightConstraint?.constant = 30.0
+//                self.view.layoutIfNeeded()
+//            }
+//        } else {
+//            UIView.animate(withDuration: 0.1) {
+//                self.bottomMessageViewHeightConstraint?.constant = (endFrame?.size.height ?? 0.0)
+//                self.view.layoutIfNeeded()
+//            }
+//        }
+//        
+//        UIView.animate(
+//            withDuration: duration,
+//            delay: TimeInterval(0),
+//            options: animationCurve,
+//            animations: { self.view.layoutIfNeeded() },
+//            completion: {_ in
+//                self.scrollToBottom()
+//            })
+//    }
+
+    
+//    func scrollToBottom(){
+//        DispatchQueue.main.async {
+//            let count = self.chatDataToPopulate.count
+//            if count > 0 {
+//                let indexPath = IndexPath(row: (self.chatDataToPopulate.last?.data?.count ?? 1) - 1, section: count - 1)
+//                self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+//            }
+//        }
+//    }
   
 }
 
@@ -124,6 +168,10 @@ extension ChatDetailsViewController: UITableViewDelegate, UITableViewDataSource 
         let nextVC = CustomOrderDetailsPopupViewController.instantiate(fromAppStoryboard: .Chat)
         self.navigationController?.present(nextVC, animated: true)
       }
+        cell.onSendRequestTap = {
+          let nextVC = CustomOrderPopupViewController.instantiate(fromAppStoryboard: .Chat)
+          self.navigationController?.present(nextVC, animated: true)
+        }
       return cell
     } else {
       if indexPath.row % 2 == 0 {

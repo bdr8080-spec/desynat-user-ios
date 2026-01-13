@@ -9,7 +9,11 @@ import UIKit
 
 class OrderForChatTableViewCell: UITableViewCell {
 
-  var onViewRequestTap :(() -> Void)?
+    @IBOutlet weak var viewRequestButtonOutlet: UIButton!
+    @IBOutlet weak var sendRequestButtonOutlet: UIButton!
+    
+    var onViewRequestTap :(() -> Void)?
+    var onSendRequestTap :(() -> Void)?
   
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,5 +29,10 @@ class OrderForChatTableViewCell: UITableViewCell {
   @IBAction func viewRequestDidTapped(_ sender: Any) {
     onViewRequestTap?()
   }
-  
+    
+    
+    @IBAction func sendRequestDidTapped(_ sender: Any) {
+        onSendRequestTap?()
+    }
+    
 }

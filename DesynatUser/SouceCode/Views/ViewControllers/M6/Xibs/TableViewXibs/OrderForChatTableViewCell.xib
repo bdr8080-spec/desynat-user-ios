@@ -80,27 +80,43 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4EY-23-l5f">
-                                <rect key="frame" x="252" y="5.3333333333333321" width="91" height="28.999999999999996"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="View Request">
-                                    <color key="titleColor" red="0.52941176469999995" green="0.36078431370000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="viewRequestDidTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5Xo-T4-Cv2"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7D-fL-OVy">
+                                <rect key="frame" x="160" y="5.3333333333333321" width="183" height="28.999999999999996"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4EY-23-l5f">
+                                        <rect key="frame" x="0.0" y="0.0" width="92" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Send Request">
+                                            <color key="titleColor" red="0.52941176469999995" green="0.36078431370000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="sendRequestDidTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="exa-4r-gbb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8p8-Bv-Elh">
+                                        <rect key="frame" x="92" y="0.0" width="91" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="View Request">
+                                            <color key="titleColor" red="0.52941176469999995" green="0.36078431370000003" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="viewRequestDidTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="EHy-L1-lPL"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="FaA-Ky-iyP" firstAttribute="leading" secondItem="ewj-H6-0x2" secondAttribute="leading" id="1Sx-00-amg"/>
-                            <constraint firstItem="4EY-23-l5f" firstAttribute="centerY" secondItem="ewj-H6-0x2" secondAttribute="centerY" id="3PJ-Q5-sXe"/>
                             <constraint firstItem="pxi-Ie-Pod" firstAttribute="centerY" secondItem="Omm-a2-Hkd" secondAttribute="centerY" id="5ew-kK-YWE"/>
                             <constraint firstItem="pxi-Ie-Pod" firstAttribute="top" secondItem="ewj-H6-0x2" secondAttribute="bottom" constant="5" id="7to-u6-wcg"/>
-                            <constraint firstAttribute="trailing" secondItem="4EY-23-l5f" secondAttribute="trailing" constant="8" id="Exz-cm-FZX"/>
+                            <constraint firstAttribute="trailing" secondItem="r7D-fL-OVy" secondAttribute="trailing" constant="8" id="Lzf-Pt-xxw"/>
                             <constraint firstItem="Omm-a2-Hkd" firstAttribute="leading" secondItem="lPv-gm-nof" secondAttribute="leading" constant="8" id="NPD-S5-XsX"/>
                             <constraint firstItem="Omm-a2-Hkd" firstAttribute="centerY" secondItem="lPv-gm-nof" secondAttribute="centerY" id="OSy-MF-h8v"/>
+                            <constraint firstItem="r7D-fL-OVy" firstAttribute="centerY" secondItem="ewj-H6-0x2" secondAttribute="centerY" id="c6N-IK-3mc"/>
                             <constraint firstItem="FaA-Ky-iyP" firstAttribute="top" secondItem="pxi-Ie-Pod" secondAttribute="bottom" constant="5" id="nKu-RU-tsd"/>
                             <constraint firstItem="Omm-a2-Hkd" firstAttribute="top" secondItem="lPv-gm-nof" secondAttribute="top" constant="8" id="ohE-fg-qP2"/>
                             <constraint firstItem="pxi-Ie-Pod" firstAttribute="leading" secondItem="ewj-H6-0x2" secondAttribute="leading" id="qs3-gB-Ss3"/>
@@ -124,6 +140,10 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="sendRequestButtonOutlet" destination="4EY-23-l5f" id="kPk-HA-Zit"/>
+                <outlet property="viewRequestButtonOutlet" destination="8p8-Bv-Elh" id="pqf-XR-EEP"/>
+            </connections>
             <point key="canvasLocation" x="168.70229007633588" y="135.56338028169014"/>
         </tableViewCell>
     </objects>

