@@ -22,7 +22,8 @@ class OrderPlacedViewController: UIViewController {
   var orderId: String? = ""
   lazy var viewModel = OrderPlacedViewModel(hostVC: self)
   var selectedMethod: Int = 0
-  
+    var isCustomOrderSeleced: Bool = false
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     viewModel.getOrderSummary()
@@ -53,6 +54,7 @@ class OrderPlacedViewController: UIViewController {
   @IBAction func trackYourOrderDidTapped(_ sender: Any) {
     let vc = MyOrderVC.instantiate(fromAppStoryboard: .MyOrder)
     vc.comingFromOrderTracking = true
+    vc.isCustomOrderSeleced = isCustomOrderSeleced
     self.navigationController?.pushViewController(vc, animated: true)
   }
   

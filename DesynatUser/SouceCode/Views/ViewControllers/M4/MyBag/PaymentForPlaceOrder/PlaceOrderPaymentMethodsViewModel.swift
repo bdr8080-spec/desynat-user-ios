@@ -71,6 +71,7 @@ class PlaceOrderPaymentMethodsViewModel {
         let nextVC = OrderPlacedViewController.instantiate(fromAppStoryboard: .MyBag)
         nextVC.orderId = response.orderID
           nextVC.selectedMethod = selectedMethod.apiValue
+          nextVC.isCustomOrderSeleced = hostVC.comingForCustomeOrderPlace
         self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
       }
     }

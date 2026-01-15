@@ -44,7 +44,7 @@ class SelectReasonVC: UIViewController {
   var orderDetailId: Int?
   var rejectReasonData: [RejectReasonModel] = []
   weak var delegate: SelectReasonDelegate?
-  var selectedProfileImageUrl: String = ""
+  var selectedProfileImageUrl: [String] = []
   var onCancel: (()->())?
   var onReturn: (()->())?
   var onExchange: (()->())?
@@ -147,7 +147,7 @@ class SelectReasonVC: UIViewController {
       self.viewModel.uploadDocument(file: image, isImage: true) { [weak self] uploadedUrl in
         guard let self = self else { return }
         DispatchQueue.main.async {
-          self.selectedProfileImageUrl = uploadedUrl
+            self.selectedProfileImageUrl.append(uploadedUrl)
           self.imgProfilePic.image = image
         }
       }

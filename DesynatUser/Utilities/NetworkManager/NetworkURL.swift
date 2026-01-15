@@ -94,6 +94,7 @@ enum NetworkEndPoint: String {
   case createCustomOrder                = "api/user/create-Custom-order"
   case sendCustomOrderRequest           = "api/user/send-custom-order-request"
   case createCustomOrderRequest         = "api/user/custom-create-order"
+  case getAllHomeScreenBannersList      = "api/user/Home-screen-Banner-catgory-banner"
   
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

@@ -59,7 +59,7 @@ class FullScreenBannerViewController: UIViewController {
       // Completed one full cycle
       autoScrollTimer?.invalidate()
       
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
         self.dismiss(animated: true)
       }
       return

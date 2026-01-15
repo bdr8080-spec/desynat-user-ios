@@ -9,9 +9,10 @@
 struct OrderModel: Codable {
     let id, orderID, userID, productID: Int?
     let variantsID, quantity: Int?
-    let amount, status, createdAt, updatedAt: String?
+    let amount, status, createdAt,isPicked, updatedAt: String?
     let returnType, rEApprove: String?
-    let returnReason, returnImage, exchangeReason, cancelReason, exchangeNewSize: String?
+    let returnReason, exchangeReason, cancelReason, exchangeNewSize: String?
+    let returnImage: [String]?
     let exchangeOldSize, notDeliveredReason: String?
     let paymentStatus, deliveryStatus: String?
     let allOtherOrderVarient: [AllOtherOrderVarient]?
@@ -42,6 +43,7 @@ struct OrderModel: Codable {
         case paymentStatus = "payment_status"
         case deliveryStatus = "delivery_status"
         case order
+        case isPicked = "is_picked"
         case productDetails = "product_details"
         case variationDetails = "variation_details"
         case userRatingReviewProvide = "user_rating_review_provide"
@@ -86,7 +88,8 @@ struct AllOtherOrderVarient: Codable {
     let variantsID, quantity: Int?
     let amount, status, createdAt, updatedAt: String?
     let returnType, rEApprove: String?
-    let returnReason, returnImage, exchangeReason, exchangeNewSize: String?
+    let returnReason, exchangeReason, exchangeNewSize: String?
+    let returnImage: [String]?
     let exchangeOldSize: String?
     let paymentStatus, deliveryStatus: String?
     let deliveryBoyID: String?
@@ -158,7 +161,7 @@ struct Order: Codable {
     let id: Int?
     let orderID: String?
     let userID, deliveryAddress: Int?
-    let totalMrp, discountMrp, promocodeStatus: String?
+    let totalMrp, amount, discountMrp, promocodeStatus: String?
     let promocodeID, promocodeValue, giftcardAmount, giftcardID: String?
     let shippingFees, tax: String?
     let walletAmount: String?
@@ -185,6 +188,7 @@ struct Order: Codable {
         case giftcardID = "giftcard_id"
         case shippingFees = "shipping_fees"
         case tax
+        case amount
         case walletAmount = "wallet_amount"
         case totalAmount = "total_amount"
         case paymentStatus = "payment_status"

@@ -132,12 +132,14 @@ nextVC.comingForCustomeOrderPlace = true
       productPriceView.isHidden = true
       detailsView.backgroundColor = .white
       detailsStackView.isHidden = true
+        detailsView.isHidden = true
     } else {
       productTableView.isHidden = false
       detailsStackView.isHidden = false
       payNowView.isHidden = true
       mainHeaderView.backgroundColor = UIColor(hex: "#FFF7EA")
       detailsView.backgroundColor = UIColor(hex: "#FFF7EA")
+        detailsView.isHidden = false
       productDetailsView.isHidden = false
       productDetailsActionButtonStackView.isHidden = false
       requestIdLabel.isHidden = false
@@ -149,13 +151,15 @@ nextVC.comingForCustomeOrderPlace = true
       itemPriceLabel.text = CommonUtils.formatPriceStringInput(quotationData?.price)
       shippingPriceLabel.text = CommonUtils.formatPriceStringInput(quotationData?.shipping)
       taxLabel.text = CommonUtils.formatPriceStringInput(quotationData?.tax)
-      totalAmountLabel.text = CommonUtils.formatPriceStringInput(quotationData?.totalAmount)
+        totalAmountLabel.text = quotationData?.totalAmount//CommonUtils.formatPriceStringInput(quotationData?.totalAmount)
       switch actiontype {
       case "0": //user sent chat for customization new
+          requestIdLabel.isHidden = true
         productDetailsView.isHidden = true
         productPriceView.isHidden = true
         productDetailsActionButtonStackView.isHidden = true
         if requestType == "1" {
+            requestIdLabel.isHidden = false
           productDetailsView.isHidden = false
         }
       case "1": //"Quotation Sent"
@@ -190,6 +194,7 @@ nextVC.comingForCustomeOrderPlace = true
         productDetailsActionButtonStackView.isHidden = true
         requestIdLabel.isHidden = true
         detailsView.backgroundColor = .white
+          detailsView.isHidden = true
         productTableView.reloadData()
       }
     }

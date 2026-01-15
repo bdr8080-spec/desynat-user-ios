@@ -38,6 +38,8 @@ class RegisterationSuccessViewController: UIViewController {
             descriptionLabel.text = "Email Address Changed\nsuccessfully !"
         case .giftCardPurchased:
           descriptionLabel.text = "Gift card purchased\nsuccessfully!"
+        case .quotationSentForCustomization:
+          descriptionLabel.text = "Request sent\nsuccessfully!"
         }
     }
 
@@ -50,4 +52,5 @@ enum ComingReasonAtRegisterationSuccess {
     case changeMobileNumber
     case changeEmailAddress
     case giftCardPurchased
+    case quotationSentForCustomization
 }

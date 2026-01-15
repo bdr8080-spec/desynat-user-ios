@@ -49,7 +49,8 @@ class MyOrderTableCell: UITableViewCell {
   }
   
   func configureStatus(with data: OrderModel) {
-    lblStatus.text = ""
+    lblStatus.text = "Ongoing"
+    lblStatus.textColor = UIColor(hexString: "#FF5F1B")
     viewReturn.isHidden = true
     
     let paymentMethod = data.order?.paymentMethod
@@ -66,7 +67,7 @@ class MyOrderTableCell: UITableViewCell {
           lblOrderDate.textColor = UIColor(hexString: "#17854C")
           lblOrderDate.text = "Expected Delivery Date : 3-5 working days"
           
-        case "2", "7": //Ongoing
+        case "2", "2.1", "7": //Ongoing
           lblStatus.text = "Ongoing"
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
           viewExchange.backgroundColor = UIColor(hexString: "#17854C").withAlphaComponent(0.1)
@@ -85,7 +86,7 @@ class MyOrderTableCell: UITableViewCell {
           } else {
             lblOrderDate.text = "Delivered On : -"
           }
-          if data.returnType == "1" {
+            if data.returnType == "1" || data.returnType == "2" {
             handleReturnExchange(data: data)
           }
           
@@ -134,7 +135,7 @@ class MyOrderTableCell: UITableViewCell {
           lblOrderDate.textColor = UIColor(hexString: "#17854C")
           lblOrderDate.text = "Expected Delivery Date : 3-5 working days"
           
-        case "2", "7": //Ongoing, Picked
+        case "2","2.1", "7": //Ongoing, Picked
           lblStatus.text = "Ongoing"
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
           //                    viewExchange.isHidden = false
@@ -157,7 +158,7 @@ class MyOrderTableCell: UITableViewCell {
           }
           
           
-          if data.returnType == "1" {
+            if data.returnType == "1" || data.returnType == "2"{
             handleReturnExchange(data: data)
           }
           
@@ -222,7 +223,7 @@ class MyOrderTableCell: UITableViewCell {
       viewExchange.backgroundColor = UIColor(hexString: "#FF5F1B").withAlphaComponent(0.1)
       lblOrderDate.textColor = UIColor(hexString: "#FF5F1B")
     } else if isExchangeAllowed {
-      lblStatus.text = "Return Req."
+      lblStatus.text = "Exchange Req."
       lblStatus.textColor = UIColor(hexString: "#FF5F1B")
       //          lblStatus.backgroundColor = UIColor(hexString: "#FF5F1B").withAlphaComponent(0.1)
       viewReturn.isHidden = false
@@ -237,6 +238,13 @@ class MyOrderTableCell: UITableViewCell {
       viewExchange.backgroundColor = UIColor(hexString: "#FF5F1B").withAlphaComponent(0.1)
       lblOrderDate.textColor = UIColor(hexString: "#FF5F1B")
     }
+      if data.returnType == "1" {
+          lblStatus.text = "Return Req."
+          lblStatus.textColor = UIColor(hexString: "#FF5F1B")
+      } else if data.returnType == "2" {
+          lblStatus.text = "Exchange Req."
+          lblStatus.textColor = UIColor(hexString: "#FF5F1B")
+      }
   }
   
   //  func isoStringAddingDays(_ isoString: String?, days: Int = 0) -> String? {

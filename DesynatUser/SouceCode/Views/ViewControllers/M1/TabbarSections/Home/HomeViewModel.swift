@@ -14,6 +14,8 @@ class HomeViewModel: NSObject {
   var categoriesSection:[CategoriesDataModel] = []
   var subCategoriesSection:[SubCategoriesDataModel] = []
   var fullScreenBannersList: [FullscreenBannersList]?
+  var homeScreenAllBannersList: [HomescreenBannersList] = []
+  var homeCenterScreenAllBannersList: [HomescreenBannersList] = []
   
   var selectedCategoriesSection = 0 {
     didSet {
@@ -64,5 +66,30 @@ class HomeViewModel: NSObject {
       }
     }
   }
+  
+  func getTopHomeBannersListApi() {
+    let param: [String: Any] = ["type": 1]
+    WebService.sharedInstance.getHomeScreenAllBannersListService(param: param) { list in
+      DispatchQueue.main.async {
+          self.homeScreenAllBannersList = list
+          self.hostVC.bannerCollectionView.reloadData()
+          self.hostVC.bannerPageController.numberOfPages = self.homeScreenAllBannersList.count
+//          self.hostVC.noTopHomeBannersFoundLabel.isHidden = !self.homeScreenAllBannersList.isEmpty
+      }
+    }
+  }
+    
+    func getCenterHomeBannersListApi() {
+      let param: [String: Any] = ["type": 2]
+      WebService.sharedInstance.getHomeScreenAllBannersListService(param: param) { list in
+        DispatchQueue.main.async {
+            self.homeCenterScreenAllBannersList = list
+            self.hostVC.browsePrimiumCollectionView.reloadData()
+            self.hostVC.browsePrimiumPageController.numberOfPages = self.homeCenterScreenAllBannersList.count
+//            self.hostVC.noCnterHomeBannersFoundLabel.isHidden = !self.homeCenterScreenAllBannersList.isEmpty
+//            self.hostVC.browseBannersView.isHidden = self.homeCenterScreenAllBannersList.isEmpty
+          }
+      }
+    }
 }
 

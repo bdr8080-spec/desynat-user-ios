@@ -92,6 +92,7 @@ class OrderForChatTableViewCell: UITableViewCell {
       case "4":
         waitingButtonOutlet.isHidden = false
         waitingButtonOutlet.setTitle("Rejected", for: .normal)
+          
       default:
         print("")
       }

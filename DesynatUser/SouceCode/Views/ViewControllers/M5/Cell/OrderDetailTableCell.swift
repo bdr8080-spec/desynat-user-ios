@@ -106,7 +106,8 @@ class OrderDetailTableCell: UITableViewCell {
           lblStatus.textColor = UIColor(hexString: "#E70000")
           lblReturnAvail.isHidden = true
         default:
-          return
+            lblStatus.text = "Confirmed"
+            lblStatus.textColor = UIColor(hexString: "#FF5F1B")
         }
       } else if paymentStatus == "3" {
         lblStatus.text = "Cancelled"
@@ -138,7 +139,8 @@ class OrderDetailTableCell: UITableViewCell {
           lblStatus.textColor = UIColor(hexString: "#E70000")
           lblReturnAvail.isHidden = true
         default:
-          return
+            lblStatus.text = "Confirmed"
+            lblStatus.textColor = UIColor(hexString: "#FF5F1B")
         }
       } else if paymentStatus == "2" {
         lblStatus.text = "Cancelled"

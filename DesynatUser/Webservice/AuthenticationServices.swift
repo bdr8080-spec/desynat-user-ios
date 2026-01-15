@@ -905,6 +905,23 @@ extension WebService {
       }
     }
   }
+  
+  func getHomeScreenAllBannersListService(param: [String:Any], completion:@escaping (_ user:[HomescreenBannersList])-> Void) {
+    CommonUtils.showHud(show: true)
+    NetworkManager.shared.request(withAPI:.endpoint(.getAllHomeScreenBannersList), requestMethod: .post, requestParams: param, requestModel:[HomescreenBannersList].self) { result, code in
+      
+      CommonUtils.showHud(show: false)
+      self.evaluateWebServiceResponse(response: result) { response, message,error in
+        guard let user = response else {
+          if let error {
+            UIApplication.shared.topViewController()?.showAlert(msg: error)
+          }
+          return
+        }
+        completion(user)
+      }
+    }
+  }
 }
 
 

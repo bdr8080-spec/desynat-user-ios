@@ -47,6 +47,39 @@ class ChatInboxTableViewCell: UITableViewCell {
     timeLabel.text = formattedChatTime(from: data?.updatedAt ?? "")
     let messageType = data?.type ?? "1" // normal msg, customization send
 //    let productRequest = data?.productRequest ?? "1"
+      
+//      if messageType != "1" {
+//        switch actiontype {
+//        case "0": //user sent chat for customization new
+//          sendRequestButtonOutlet.isHidden = false
+//          if requestType == "1" {
+//            waitingButtonOutlet.isHidden = false
+//            waitingButtonOutlet.setTitle("Waiting", for: .normal)
+//            sendRequestButtonOutlet.isHidden = true
+//          }
+//        case "2", "5":
+//          viewRequestButtonOutlet.isHidden = false
+//          if actiontype == "5" {
+//            let isOrderPlaced = data?.orderCreateStatus?.id != nil
+//            if isOrderPlaced {
+//              viewRequestButtonOutlet.isHidden = true
+//              waitingButtonOutlet.isHidden = false
+//              waitingButtonOutlet.setTitle("Placed", for: .normal)
+//            }
+//          }
+//        case "4":
+//          waitingButtonOutlet.isHidden = false
+//          waitingButtonOutlet.setTitle("Rejected", for: .normal)
+//        default:
+//          print("")
+//        }
+      
+      
+      
+      
+      
+      
+      let requestType = data?.productRequest ?? "1"
     let actiontype = data?.action ?? "1"
     if messageType == "1" {
       messageTypeStatusView.isHidden = true
@@ -54,22 +87,35 @@ class ChatInboxTableViewCell: UITableViewCell {
       messageTypeStatusView.isHidden = false
       switch actiontype {
       case "0":
-        messageTypeLabel.text = "New"
-        messageTypeLabel.textColor = UIColor(hex: "#EA9413") // orange
-        messageTypeStatusView.backgroundColor = UIColor(hex: "#EA9413").withAlphaComponent(0.25)
+          messageTypeStatusView.isHidden = true
+          if requestType == "1" {
+              messageTypeStatusView.isHidden = false
+              messageTypeLabel.text = "Waiting"
+              messageTypeLabel.textColor = UIColor(hex: "#EA9413") // orange
+              messageTypeStatusView.backgroundColor = UIColor(hex: "#EA9413").withAlphaComponent(0.15)
+          }
       case "1":
         messageTypeLabel.text = "Quotation Sent"
         messageTypeLabel.textColor = UIColor(hex: "#172B85") // dark blue
-        messageTypeStatusView.backgroundColor = UIColor(hex: "#172B85").withAlphaComponent(0.25)
+        messageTypeStatusView.backgroundColor = UIColor(hex: "#172B85").withAlphaComponent(0.15)
       case "2":
-        let readyToship = data?.productVariation?.productDetails?.readyToShip ?? "1"
-        if readyToship == "1"{
-          messageTypeStatusView.isHidden = true
-        } else {
-          messageTypeLabel.text = "Quotation Modified"
-          messageTypeLabel.textColor = UIColor(hex: "#16B364") // green
-          messageTypeStatusView.backgroundColor = UIColor(hex: "#16B364").withAlphaComponent(0.25)
-        }
+          messageTypeLabel.text = "Quotation Received"
+          messageTypeLabel.textColor = UIColor(hex: "#172B85") // dark blue
+          messageTypeStatusView.backgroundColor = UIColor(hex: "#172B85").withAlphaComponent(0.15)
+      case "4":
+          messageTypeLabel.text = "Rejected"
+          messageTypeLabel.textColor = UIColor(hex: "#EA9413") // red
+          messageTypeStatusView.backgroundColor = UIColor(hex: "#EA9413").withAlphaComponent(0.15)
+      case "5":
+          messageTypeLabel.text = "Quotation Accepted"
+          messageTypeLabel.textColor = UIColor(hex: "#17854C") // green
+          messageTypeStatusView.backgroundColor = UIColor(hex: "#17854C").withAlphaComponent(0.15)
+          let isOrderPlaced = data?.orderCreateStatus?.id != nil
+          if isOrderPlaced {
+              messageTypeLabel.text = "Placed"
+              messageTypeLabel.textColor = UIColor(hex: "#EA9413") // red
+              messageTypeStatusView.backgroundColor = UIColor(hex: "#EA9413").withAlphaComponent(0.15)
+          }
       default:
         messageTypeStatusView.isHidden = true
       }

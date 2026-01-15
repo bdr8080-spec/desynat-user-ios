@@ -559,28 +559,28 @@ Apartment, Kuwait</string>
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="576"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PLS-zn-hng">
-                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1121"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="576"/>
                                                         <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="YdI-7y-fFy">
-                                                                <rect key="frame" x="0.0" y="0.0" width="393" height="1120"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="YdI-7y-fFy">
+                                                                <rect key="frame" x="0.0" y="0.0" width="393" height="492.66666666666669"/>
                                                                 <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ifc-Oa-7vi">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="607.33333333333337"/>
+                                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ifc-Oa-7vi">
+                                                                        <rect key="frame" x="0.0" y="-20" width="393" height="20"/>
                                                                         <subviews>
-                                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Ksh-xe-qnG">
-                                                                                <rect key="frame" x="20" y="10" width="353" height="587.33333333333337"/>
+                                                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Ksh-xe-qnG">
+                                                                                <rect key="frame" x="20" y="10" width="353" height="0.0"/>
                                                                                 <subviews>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Request Id #23618" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZM-z1-3fe">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="353" height="30"/>
+                                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Request Id #23618" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZM-z1-3fe">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="865.33333333333337" height="18"/>
                                                                                         <constraints>
-                                                                                            <constraint firstAttribute="height" constant="30" id="W16-bL-Hau"/>
+                                                                                            <constraint firstAttribute="height" constant="18" id="W16-bL-Hau"/>
                                                                                         </constraints>
                                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
-                                                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="w6M-5h-LS9">
-                                                                                        <rect key="frame" x="0.0" y="45" width="353" height="100"/>
+                                                                                    <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="w6M-5h-LS9">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="865.33333333333337" height="100"/>
                                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="height" constant="100" id="25x-4r-h6f"/>
@@ -590,23 +590,23 @@ Apartment, Kuwait</string>
                                                                                             <outlet property="delegate" destination="cLw-h5-ydK" id="j7J-6z-4lI"/>
                                                                                         </connections>
                                                                                     </tableView>
-                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cVf-My-ccB" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="160" width="353" height="147.33333333333337"/>
+                                                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cVf-My-ccB" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="865.33333333333337" height="46"/>
                                                                                         <subviews>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wHS-du-hc0">
-                                                                                                <rect key="frame" x="15" y="14.999999999999993" width="323" height="117.33333333333331"/>
+                                                                                                <rect key="frame" x="15" y="15" width="835.33333333333337" height="16"/>
                                                                                                 <subviews>
                                                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tXQ-2h-NEp">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="323" height="17"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="835.33333333333337" height="0.0"/>
                                                                                                         <subviews>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Quantity" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GyO-Nu-DRw">
-                                                                                                                <rect key="frame" x="0.0" y="0.0" width="161.66666666666666" height="17"/>
+                                                                                                                <rect key="frame" x="0.0" y="0.0" width="417.66666666666669" height="0.0"/>
                                                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                 <nil key="highlightedColor"/>
                                                                                                             </label>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="210" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDS-DQ-YjT">
-                                                                                                                <rect key="frame" x="161.66666666666663" y="0.0" width="161.33333333333337" height="17"/>
+                                                                                                                <rect key="frame" x="417.66666666666663" y="0.0" width="417.66666666666663" height="0.0"/>
                                                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                 <nil key="highlightedColor"/>
@@ -614,16 +614,16 @@ Apartment, Kuwait</string>
                                                                                                         </subviews>
                                                                                                     </stackView>
                                                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ikk-mo-uci">
-                                                                                                        <rect key="frame" x="0.0" y="24.999999999999996" width="323" height="33.666666666666657"/>
+                                                                                                        <rect key="frame" x="0.0" y="8" width="835.33333333333337" height="0.0"/>
                                                                                                         <subviews>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAP-jV-ukI">
-                                                                                                                <rect key="frame" x="0.0" y="0.0" width="161.66666666666666" height="33.666666666666664"/>
+                                                                                                                <rect key="frame" x="0.0" y="0.0" width="417.66666666666669" height="0.0"/>
                                                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                 <nil key="highlightedColor"/>
                                                                                                             </label>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H4d-pP-37h">
-                                                                                                                <rect key="frame" x="161.66666666666663" y="0.0" width="161.33333333333337" height="33.666666666666664"/>
+                                                                                                                <rect key="frame" x="417.66666666666663" y="0.0" width="417.66666666666663" height="0.0"/>
                                                                                                                 <string key="text">Sector 63, Bismilla
 Apartment, Kuwait</string>
                                                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
@@ -633,16 +633,16 @@ Apartment, Kuwait</string>
                                                                                                         </subviews>
                                                                                                     </stackView>
                                                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G0p-DB-0qC">
-                                                                                                        <rect key="frame" x="0.0" y="66.666666666666686" width="323" height="50.666666666666657"/>
+                                                                                                        <rect key="frame" x="0.0" y="16" width="835.33333333333337" height="0.0"/>
                                                                                                         <subviews>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom details" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOF-dP-Q4u">
-                                                                                                                <rect key="frame" x="0.0" y="0.0" width="161.66666666666666" height="50.666666666666664"/>
+                                                                                                                <rect key="frame" x="0.0" y="0.0" width="417.66666666666669" height="0.0"/>
                                                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                 <nil key="highlightedColor"/>
                                                                                                             </label>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lorem ipsum dolor sit amet, sectetur adipisicing elit, sed do eiusmod . " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jM-7E-4eJ">
-                                                                                                                <rect key="frame" x="161.66666666666663" y="0.0" width="161.33333333333337" height="50.666666666666664"/>
+                                                                                                                <rect key="frame" x="417.66666666666663" y="0.0" width="417.66666666666663" height="0.0"/>
                                                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                 <nil key="highlightedColor"/>
@@ -665,23 +665,23 @@ Apartment, Kuwait</string>
                                                                                             </userDefinedRuntimeAttribute>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </view>
-                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Npa-SI-oAw" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="322.33333333333331" width="353" height="164"/>
+                                                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Npa-SI-oAw" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="865.33333333333337" height="164"/>
                                                                                         <subviews>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ac9-Rt-2GE">
-                                                                                                <rect key="frame" x="15" y="15" width="323" height="134"/>
+                                                                                                <rect key="frame" x="15" y="15" width="835.33333333333337" height="134"/>
                                                                                                 <subviews>
                                                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tw3-Az-HGa">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="323" height="25"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="835.33333333333337" height="25"/>
                                                                                                         <subviews>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Per Item Price" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zXP-fT-spd">
-                                                                                                                <rect key="frame" x="0.0" y="0.0" width="161.66666666666666" height="25"/>
+                                                                                                                <rect key="frame" x="0.0" y="0.0" width="417.66666666666669" height="25"/>
                                                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                                                                                 <color key="textColor" white="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                 <nil key="highlightedColor"/>
                                                                                                             </label>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400 KD" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gF5-fb-Hae">
-                                                                                                                <rect key="frame" x="161.66666666666663" y="0.0" width="161.33333333333337" height="25"/>
+                                                                                                                <rect key="frame" x="417.66666666666663" y="0.0" width="417.66666666666663" height="25"/>
                                                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                 <nil key="highlightedColor"/>
@@ -692,10 +692,10 @@ Apartment, Kuwait</string>
                                                                                                         </constraints>
                                                                                                     </stackView>
                                                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlV-8b-6a0">
-                                                                                                        <rect key="frame" x="0.0" y="33.000000000000057" width="323" height="25"/>
+                                                                                                        <rect key="frame" x="0.0" y="33" width="835.33333333333337" height="25"/>
                                                                                                         <subviews>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gte-lx-5Me">
-                                                                                                                <rect key="frame" x="0.0" y="0.0" width="161.66666666666666" height="25"/>
+                                                                                                                <rect key="frame" x="0.0" y="0.0" width="417.66666666666669" height="25"/>
                                                                                                                 <string key="text">Shipping Fees
 </string>
                                                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
@@ -703,7 +703,7 @@ Apartment, Kuwait</string>
                                                                                                                 <nil key="highlightedColor"/>
                                                                                                             </label>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400 KD" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bOk-JI-uGC">
-                                                                                                                <rect key="frame" x="161.66666666666663" y="0.0" width="161.33333333333337" height="25"/>
+                                                                                                                <rect key="frame" x="417.66666666666663" y="0.0" width="417.66666666666663" height="25"/>
                                                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                 <nil key="highlightedColor"/>
@@ -714,16 +714,16 @@ Apartment, Kuwait</string>
                                                                                                         </constraints>
                                                                                                     </stackView>
                                                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DWJ-RE-aOE">
-                                                                                                        <rect key="frame" x="0.0" y="66.000000000000057" width="323" height="25"/>
+                                                                                                        <rect key="frame" x="0.0" y="66" width="835.33333333333337" height="25"/>
                                                                                                         <subviews>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tax " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="itE-ZJ-CrV">
-                                                                                                                <rect key="frame" x="0.0" y="0.0" width="161.66666666666666" height="25"/>
+                                                                                                                <rect key="frame" x="0.0" y="0.0" width="417.66666666666669" height="25"/>
                                                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                                                                                 <color key="textColor" white="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                 <nil key="highlightedColor"/>
                                                                                                             </label>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400 KD" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fsc-x0-JOV">
-                                                                                                                <rect key="frame" x="161.66666666666663" y="0.0" width="161.33333333333337" height="25"/>
+                                                                                                                <rect key="frame" x="417.66666666666663" y="0.0" width="417.66666666666663" height="25"/>
                                                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                 <nil key="highlightedColor"/>
@@ -734,10 +734,10 @@ Apartment, Kuwait</string>
                                                                                                         </constraints>
                                                                                                     </stackView>
                                                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2of-nH-Ah1">
-                                                                                                        <rect key="frame" x="0.0" y="99.000000000000057" width="323" height="35"/>
+                                                                                                        <rect key="frame" x="0.0" y="99" width="835.33333333333337" height="35"/>
                                                                                                         <subviews>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMv-RN-w5R">
-                                                                                                                <rect key="frame" x="0.0" y="0.0" width="323" height="0.66666666666666663"/>
+                                                                                                                <rect key="frame" x="0.0" y="0.0" width="835.33333333333337" height="0.66666666666666663"/>
                                                                                                                 <color key="backgroundColor" white="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                 <constraints>
                                                                                                                     <constraint firstAttribute="height" constant="0.5" id="61T-Ue-kSs"/>
@@ -747,16 +747,16 @@ Apartment, Kuwait</string>
                                                                                                                 <nil key="highlightedColor"/>
                                                                                                             </label>
                                                                                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZZO-uv-BUm">
-                                                                                                                <rect key="frame" x="0.0" y="10.666666666666627" width="323" height="24.333333333333329"/>
+                                                                                                                <rect key="frame" x="0.0" y="10.666666666666684" width="835.33333333333337" height="24.333333333333329"/>
                                                                                                                 <subviews>
                                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Amount" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KoF-xd-Cqd">
-                                                                                                                        <rect key="frame" x="0.0" y="0.0" width="161.66666666666666" height="24.333333333333332"/>
+                                                                                                                        <rect key="frame" x="0.0" y="0.0" width="417.66666666666669" height="24.333333333333332"/>
                                                                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                                                                                         <color key="textColor" white="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                         <nil key="highlightedColor"/>
                                                                                                                     </label>
                                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400 KD" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J4O-H2-DEe">
-                                                                                                                        <rect key="frame" x="161.66666666666663" y="0.0" width="161.33333333333337" height="24.333333333333332"/>
+                                                                                                                        <rect key="frame" x="417.66666666666663" y="0.0" width="417.66666666666663" height="24.333333333333332"/>
                                                                                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                         <nil key="highlightedColor"/>
@@ -790,17 +790,17 @@ Apartment, Kuwait</string>
                                                                                             </userDefinedRuntimeAttribute>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </view>
-                                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lzr-Yb-o6C">
-                                                                                        <rect key="frame" x="0.0" y="501.33333333333337" width="353" height="86"/>
+                                                                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lzr-Yb-o6C">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="865.33333333333337" height="86"/>
                                                                                         <subviews>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="OqK-Ec-9Yr">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="353" height="38"/>
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="865.33333333333337" height="38"/>
                                                                                                 <subviews>
                                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UOK-wk-69j" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="166.66666666666666" height="38"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="422.66666666666669" height="38"/>
                                                                                                         <subviews>
                                                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vUy-2L-87c" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
-                                                                                                                <rect key="frame" x="0.0" y="0.0" width="166.66666666666666" height="38"/>
+                                                                                                                <rect key="frame" x="0.0" y="0.0" width="422.66666666666669" height="38"/>
                                                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                 <constraints>
                                                                                                                     <constraint firstAttribute="height" constant="38" id="A8m-sr-ZGY"/>
@@ -818,7 +818,7 @@ Apartment, Kuwait</string>
                                                                                                                 </connections>
                                                                                                             </button>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reject" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8IX-yp-kUt">
-                                                                                                                <rect key="frame" x="61.333333333333329" y="9.3333333333332593" width="43.666666666666671" height="19.666666666666671"/>
+                                                                                                                <rect key="frame" x="189.66666666666666" y="9.3333333333333446" width="43.666666666666657" height="19.666666666666671"/>
                                                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                                                                 <color key="textColor" name="darkBrown"/>
                                                                                                                 <nil key="highlightedColor"/>
@@ -846,10 +846,10 @@ Apartment, Kuwait</string>
                                                                                                         </userDefinedRuntimeAttributes>
                                                                                                     </view>
                                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrH-Bq-Pol">
-                                                                                                        <rect key="frame" x="186.66666666666663" y="0.0" width="166.33333333333337" height="38"/>
+                                                                                                        <rect key="frame" x="442.66666666666663" y="0.0" width="422.66666666666663" height="38"/>
                                                                                                         <subviews>
                                                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbr-oS-tc3" customClass="CustomButton">
-                                                                                                                <rect key="frame" x="0.0" y="0.0" width="166.33333333333334" height="38"/>
+                                                                                                                <rect key="frame" x="0.0" y="0.0" width="422.66666666666669" height="38"/>
                                                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                 <constraints>
                                                                                                                     <constraint firstAttribute="height" constant="38" id="zb4-uR-i4h"/>
@@ -867,7 +867,7 @@ Apartment, Kuwait</string>
                                                                                                                 </connections>
                                                                                                             </button>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Accept" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYS-kH-5Ii">
-                                                                                                                <rect key="frame" x="15" y="9.3333333333332593" width="136.33333333333334" height="19.666666666666671"/>
+                                                                                                                <rect key="frame" x="15" y="9.3333333333333446" width="392.66666666666669" height="19.666666666666671"/>
                                                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                 <nil key="highlightedColor"/>
@@ -887,10 +887,10 @@ Apartment, Kuwait</string>
                                                                                                 </subviews>
                                                                                             </stackView>
                                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XPy-zk-U8p">
-                                                                                                <rect key="frame" x="0.0" y="48" width="353" height="38"/>
+                                                                                                <rect key="frame" x="0.0" y="48" width="865.33333333333337" height="38"/>
                                                                                                 <subviews>
                                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cpv-bD-vAT" customClass="CustomButton">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="353" height="38"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="865.33333333333337" height="38"/>
                                                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <constraints>
                                                                                                             <constraint firstAttribute="height" constant="38" id="9eg-8e-gDJ"/>
@@ -908,7 +908,7 @@ Apartment, Kuwait</string>
                                                                                                         </connections>
                                                                                                     </button>
                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay Now" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbY-ew-1Pk">
-                                                                                                        <rect key="frame" x="15" y="9.3333333333332593" width="323" height="19.666666666666671"/>
+                                                                                                        <rect key="frame" x="15" y="9.3333333333333446" width="835.33333333333337" height="19.666666666666671"/>
                                                                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <nil key="highlightedColor"/>
@@ -938,16 +938,16 @@ Apartment, Kuwait</string>
                                                                             <constraint firstItem="Ksh-xe-qnG" firstAttribute="top" secondItem="Ifc-Oa-7vi" secondAttribute="top" constant="10" id="Wvg-4x-jUe"/>
                                                                         </constraints>
                                                                     </view>
-                                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qNn-bS-d0e" customClass="TableViewDynamicHeight" customModule="DesynatUser" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="627.33333333333337" width="393" height="272.66666666666663"/>
+                                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qNn-bS-d0e" customClass="TableViewDynamicHeight" customModule="DesynatUser" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="272.66666666666669"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <connections>
                                                                             <outlet property="dataSource" destination="cLw-h5-ydK" id="XcU-sg-BMt"/>
                                                                             <outlet property="delegate" destination="cLw-h5-ydK" id="Afu-Ae-tAR"/>
                                                                         </connections>
                                                                     </tableView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no chat found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K1X-tR-o5O">
-                                                                        <rect key="frame" x="0.0" y="920" width="393" height="200"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="no chat found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K1X-tR-o5O">
+                                                                        <rect key="frame" x="0.0" y="292.66666666666669" width="393" height="200"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="200" id="IEQ-nx-z6i"/>
                                                                         </constraints>
@@ -957,8 +957,8 @@ Apartment, Kuwait</string>
                                                                     </label>
                                                                 </subviews>
                                                             </stackView>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pQU-bv-CN0">
-                                                                <rect key="frame" x="0.0" y="1120" width="393" height="1"/>
+                                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pQU-bv-CN0">
+                                                                <rect key="frame" x="0.0" y="957.66666666666674" width="393" height="1"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="XSr-Ok-k7L"/>

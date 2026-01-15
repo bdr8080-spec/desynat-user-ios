@@ -28,7 +28,7 @@ class MyOrderVC: UIViewController, FilterDelegate {
   func didApplyFilter(_ filter: OrderFilterType) {
     selectedFilter = filter
     if isCustomOrderSeleced {
-      viewModel.getOrders(type: 1)
+      viewModel.getOrders(type: 2)
     } else {
       viewModel.getOrders(type: 1)
     }
@@ -54,22 +54,33 @@ class MyOrderVC: UIViewController, FilterDelegate {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    viewModel.getOrders(type: 1)
-    btnSelectOrderType(btnOrder)
-    lblNoData.isHidden = true
-    orderTableView.isHidden = true
+      if comingFromOrderTracking {
+          if isCustomOrderSeleced {
+              btnOrder.setBackgroundImage(nil, for: .normal)
+              btnCustomOrder.setBackgroundImage(UIImage(named: "btnGradient"), for: .normal)
+              btnOrder.setTitleColor(.black, for: .normal)
+              btnCustomOrder.setTitleColor(.white, for: .normal)
+              viewModel.getOrders(type: 2)
+          } else {
+              btnOrder.setBackgroundImage(UIImage(named: "btnGradient"), for: .normal)
+              btnCustomOrder.setBackgroundImage(nil, for: .normal)
+              btnOrder.setTitleColor(.white, for: .normal)
+              btnCustomOrder.setTitleColor(.black, for: .normal)
+              viewModel.getOrders(type: 1)
+          }
+      } else {
+          btnOrder.setBackgroundImage(UIImage(named: "btnGradient"), for: .normal)
+          btnCustomOrder.setBackgroundImage(nil, for: .normal)
+          btnOrder.setTitleColor(.white, for: .normal)
+          btnCustomOrder.setTitleColor(.black, for: .normal)
+          viewModel.getOrders(type: 1)
+      }
   }
   
   func registerXib() {
     orderTableView.delegate = self
     orderTableView.dataSource = self
     orderTableView.register(UINib(nibName: "MyOrderTableCell", bundle: nil), forCellReuseIdentifier: "MyOrderTableCell")
-  }
-  
-  func updateUI() {
-    let hasData = !orderData.isEmpty
-    lblNoData.isHidden = hasData
-    orderTableView.isHidden = !hasData
   }
   
   @IBAction func btnBack(_ sender: Any) {
@@ -85,7 +96,7 @@ class MyOrderVC: UIViewController, FilterDelegate {
     } else {
       self.navigationController?.popViewController(animated: true)
     }
-  
+    
   }
   
   private func findTabBarVC() -> TabBarVC? {
@@ -115,21 +126,17 @@ class MyOrderVC: UIViewController, FilterDelegate {
       btnOrder.setTitleColor(.white, for: .normal)
       btnCustomOrder.setTitleColor(.black, for: .normal)
       isCustomOrderSeleced = false
-              orderData.removeAll()
-              orderTableView.reloadData()
-              viewModel.getOrders(type: 1)
+      orderData.removeAll()
+      viewModel.getOrders(type: 1)
       
     case 1:
       btnOrder.setBackgroundImage(nil, for: .normal)
       btnCustomOrder.setBackgroundImage(UIImage(named: "btnGradient"), for: .normal)
       btnOrder.setTitleColor(.black, for: .normal)
       btnCustomOrder.setTitleColor(.white, for: .normal)
-      orderData.removeAll()
-//      orderTableView.reloadData()
       isCustomOrderSeleced = true
-              orderData.removeAll()
-              orderTableView.reloadData()
-              viewModel.getOrders(type: 2)
+      orderData.removeAll()
+      viewModel.getOrders(type: 2)
       
     default:
       break
@@ -162,6 +169,7 @@ extension MyOrderVC: UITableViewDelegate, UITableViewDataSource {
     vc.orderId = order.order?.id ?? 0
     vc.orderDetailId = order.id ?? 0
     vc.isCustomOrder = isCustomOrderSeleced
+      isCustomOrderSeleced = false
     self.navigationController?.pushViewController(vc, animated: true)
   }
 }
