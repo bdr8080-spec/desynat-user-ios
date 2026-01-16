@@ -241,9 +241,55 @@ class MyOrderTableCell: UITableViewCell {
       if data.returnType == "1" {
           lblStatus.text = "Return Req."
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
+          if data.rEApprove == "1" {
+              if data.deliveryStatus == "3"{
+                  lblStatus.text = "Returned"
+                  lblStatus.textColor = UIColor(hexString: "#16B364")
+                  viewExchange.backgroundColor = UIColor(hexString: "#16B364").withAlphaComponent(0.1)
+                  lblOrderDate.textColor = UIColor(hexString: "#16B364")
+                  if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
+                      lblOrderDate.text = "Returned On : \(isoDate)"
+                  } else {
+                      lblOrderDate.text = "Returned On : -"
+                  }
+              }
+          } else if data.rEApprove == "2" {
+              lblStatus.text = "Delivered"
+              lblStatus.textColor = UIColor(hexString: "#16B364")
+              viewExchange.backgroundColor = UIColor(hexString: "#16B364").withAlphaComponent(0.1)
+              lblOrderDate.textColor = UIColor(hexString: "#16B364")
+              if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
+                lblOrderDate.text = "Delivered On : \(isoDate)"
+              } else {
+                lblOrderDate.text = "Delivered On : -"
+              }
+          }
       } else if data.returnType == "2" {
           lblStatus.text = "Exchange Req."
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
+          if data.rEApprove == "1" {
+              if data.deliveryStatus == "3"{
+                  lblStatus.text = "Exchange Req."
+                  lblStatus.textColor = UIColor(hexString: "#FF5F1B")
+                  viewExchange.backgroundColor = UIColor(hexString: "#FF5F1B").withAlphaComponent(0.1)
+                  lblOrderDate.textColor = UIColor(hexString: "#FF5F1B")
+                  if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
+                      lblOrderDate.text = "Delivered On : \(isoDate)"
+                  } else {
+                      lblOrderDate.text = "Delivered On : -"
+                  }
+              }
+          } else if data.rEApprove == "2" {
+                  lblStatus.text = "Delivered"
+                  lblStatus.textColor = UIColor(hexString: "#16B364")
+                  viewExchange.backgroundColor = UIColor(hexString: "#16B364").withAlphaComponent(0.1)
+                  lblOrderDate.textColor = UIColor(hexString: "#16B364")
+              if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
+                lblOrderDate.text = "Delivered On : \(isoDate)"
+              } else {
+                lblOrderDate.text = "Delivered On : -"
+              }
+          }
       }
   }
   

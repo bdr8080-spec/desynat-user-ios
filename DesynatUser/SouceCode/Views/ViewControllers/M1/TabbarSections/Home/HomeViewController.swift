@@ -14,7 +14,6 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var noCnterHomeBannersFoundLabel: UILabel!
     @IBOutlet weak var noTopHomeBannersFoundLabel: UILabel!
-    
     @IBOutlet weak var browseBannersView: UIView!
     @IBOutlet weak var searchTF: UITextField!
     @IBOutlet weak var noCatgeoriesFoundLabel: UILabel!
@@ -93,6 +92,9 @@ class HomeViewController: UIViewController {
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
     private var isListening = false
+    private var bannerAutoScrollTimer: Timer?
+    private var currentBannerIndex = 0
+    private let bannerAutoScrollDelay: TimeInterval = 1.5
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,7 +104,11 @@ class HomeViewController: UIViewController {
         requestPermissions()
         viewModel.getTopHomeBannersListApi()
         viewModel.getCenterHomeBannersListApi()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        startBannerAutoScroll()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -111,7 +117,10 @@ class HomeViewController: UIViewController {
         
     }
     
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopBannerAutoScroll()
+    }
     
     private func requestPermissions() {
         SFSpeechRecognizer.requestAuthorization { _ in }
@@ -127,9 +136,18 @@ class HomeViewController: UIViewController {
     
     // MARK: - Page Control Tap Handling
     @IBAction func pageControlChanged(_ sender: UIPageControl) {
-        let page = sender.currentPage
-        let indexPath = IndexPath(item: page, section: 0)
-        bannerCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+//        let page = sender.currentPage
+//        let indexPath = IndexPath(item: page, section: 0)
+//        bannerCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        
+        currentBannerIndex = sender.currentPage
+            
+            let indexPath = IndexPath(item: currentBannerIndex, section: 0)
+            bannerCollectionView.scrollToItem(
+                at: indexPath,
+                at: .centeredHorizontally,
+                animated: true
+            )
     }
     
     @IBAction func browsePrimiumChanges(_ sender: UIPageControl) {
@@ -246,9 +264,49 @@ class HomeViewController: UIViewController {
         isListening = false
     }
     
+     func startBannerAutoScroll() {
+        stopBannerAutoScroll() // prevent duplicate timers
+        
+        bannerAutoScrollTimer = Timer.scheduledTimer(
+            timeInterval: bannerAutoScrollDelay,
+            target: self,
+            selector: #selector(autoScrollBanner),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+
+    private func stopBannerAutoScroll() {
+        bannerAutoScrollTimer?.invalidate()
+        bannerAutoScrollTimer = nil
+    }
+
+    
     deinit {
         stopListening()
     }
+    
+    @objc private func autoScrollBanner() {
+        let totalItems = viewModel.homeScreenAllBannersList.count
+        guard totalItems > 1 else { return }
+
+        currentBannerIndex += 1
+
+        if currentBannerIndex >= totalItems {
+            currentBannerIndex = 0
+        }
+
+        let indexPath = IndexPath(item: currentBannerIndex, section: 0)
+
+        bannerCollectionView.scrollToItem(
+            at: indexPath,
+            at: .centeredHorizontally,
+            animated: true
+        )
+
+        bannerPageController.currentPage = currentBannerIndex
+    }
+
     
     
     private func updateCollectionsHeight() {
@@ -476,7 +534,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == bannerCollectionView {
             let pageIndex = Int(round(scrollView.contentOffset.x / bannerCollectionView.frame.width))
-            bannerPageController.currentPage = pageIndex
+                    bannerPageController.currentPage = pageIndex
+                    currentBannerIndex = pageIndex
         } else if scrollView == browsePrimiumCollectionView {
             let pageIndex = Int(round(scrollView.contentOffset.x / browsePrimiumCollectionView.frame.width))
             browsePrimiumPageController.currentPage = pageIndex

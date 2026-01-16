@@ -1087,7 +1087,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="0 KD" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2A8-98-WAT">
-                                                                        <rect key="frame" x="125.33333333333336" y="0.0" width="195.66666666666663" height="19.666666666666668"/>
+                                                                        <rect key="frame" x="125.33333333333337" y="0.0" width="195.66666666666663" height="19.666666666666668"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                         <color key="textColor" name="E80B26"/>
                                                                         <nil key="highlightedColor"/>
@@ -1825,23 +1825,44 @@ Let's add some items. </string>
                                             <outlet property="delegate" destination="tX6-Km-sKv" id="F9N-xI-6KZ"/>
                                         </connections>
                                     </collectionView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u6C-Y6-cVL" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
-                                        <rect key="frame" x="308" y="60" width="50" height="25"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N5Z-kq-w0O">
+                                        <rect key="frame" x="268" y="80" width="100" height="38"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFT-wA-A4W" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="38"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="38" id="TI1-hJ-LZY"/>
+                                                </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="skipDidTapped:" destination="tX6-Km-sKv" eventType="touchUpInside" id="Rht-Bg-mAj"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skip" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHf-rl-pst">
+                                                <rect key="frame" x="35.333333333333314" y="9.3333333333333304" width="29.666666666666671" height="19.666666666666671"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="u6C-Y6-cVL" secondAttribute="height" multiplier="2:1" id="pbt-Ck-o2D"/>
-                                            <constraint firstAttribute="height" constant="25" id="vg4-n8-c08"/>
+                                            <constraint firstAttribute="bottom" secondItem="jFT-wA-A4W" secondAttribute="bottom" id="UuG-X4-1kn"/>
+                                            <constraint firstItem="NHf-rl-pst" firstAttribute="centerY" secondItem="N5Z-kq-w0O" secondAttribute="centerY" id="Y5M-MQ-X7v"/>
+                                            <constraint firstAttribute="trailing" secondItem="jFT-wA-A4W" secondAttribute="trailing" id="a8C-lj-7JO"/>
+                                            <constraint firstItem="NHf-rl-pst" firstAttribute="centerX" secondItem="N5Z-kq-w0O" secondAttribute="centerX" id="n76-nx-2x7"/>
+                                            <constraint firstItem="jFT-wA-A4W" firstAttribute="top" secondItem="N5Z-kq-w0O" secondAttribute="top" id="nM6-5V-u1g"/>
+                                            <constraint firstItem="jFT-wA-A4W" firstAttribute="leading" secondItem="N5Z-kq-w0O" secondAttribute="leading" id="npP-IT-CdW"/>
+                                            <constraint firstAttribute="width" constant="100" id="oPq-5V-6PJ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Skip">
-                                            <color key="titleColor" name="171717"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="skipDidTapped:" destination="tX6-Km-sKv" eventType="touchUpInside" id="zAp-yL-a08"/>
-                                        </connections>
-                                    </button>
+                                    </view>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="lCR-GL-l2r">
                                         <rect key="frame" x="142.33333333333334" y="762" width="108.33333333333334" height="10"/>
                                         <constraints>
@@ -1858,11 +1879,11 @@ Let's add some items. </string>
                                     <constraint firstItem="wee-fL-gjZ" firstAttribute="top" secondItem="cH6-tf-cRW" secondAttribute="top" id="0ej-Yx-wbD"/>
                                     <constraint firstAttribute="bottom" secondItem="wee-fL-gjZ" secondAttribute="bottom" id="3cV-9i-M3A"/>
                                     <constraint firstItem="wee-fL-gjZ" firstAttribute="leading" secondItem="cH6-tf-cRW" secondAttribute="leading" id="G1v-g7-TQk"/>
-                                    <constraint firstItem="u6C-Y6-cVL" firstAttribute="top" secondItem="cH6-tf-cRW" secondAttribute="top" constant="60" id="GaR-Js-wSU"/>
                                     <constraint firstItem="lCR-GL-l2r" firstAttribute="centerX" secondItem="cH6-tf-cRW" secondAttribute="centerX" id="IYJ-9m-711"/>
                                     <constraint firstAttribute="bottom" secondItem="lCR-GL-l2r" secondAttribute="bottom" constant="80" id="IeV-fJ-cZX"/>
-                                    <constraint firstAttribute="trailing" secondItem="u6C-Y6-cVL" secondAttribute="trailing" constant="35" id="h5n-gm-i0G"/>
                                     <constraint firstAttribute="trailing" secondItem="wee-fL-gjZ" secondAttribute="trailing" id="n6E-dt-pt0"/>
+                                    <constraint firstItem="N5Z-kq-w0O" firstAttribute="top" secondItem="cH6-tf-cRW" secondAttribute="top" constant="80" id="qBu-cA-6pZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="N5Z-kq-w0O" secondAttribute="trailing" constant="25" id="rvy-K8-6In"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -1916,9 +1937,6 @@ Let's add some items. </string>
         <image name="rightArrow" width="17.666666030883789" height="13.666666984558105"/>
         <image name="search" width="20" height="20"/>
         <image name="show" width="52.666667938232422" height="52.666667938232422"/>
-        <namedColor name="171717">
-            <color red="0.090196078431372548" green="0.090196078431372548" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="E80B26">
             <color red="0.90980392156862744" green="0.043137254901960784" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -1926,16 +1944,16 @@ Let's add some items. </string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

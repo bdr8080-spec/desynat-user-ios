@@ -16,7 +16,6 @@ class ChatDetailsViewController: UIViewController {
   @IBOutlet weak var detailsStackView: UIStackView!
   @IBOutlet weak var payNowView: UIView!
   @IBOutlet weak var detailsView: UIView!
-  @IBOutlet weak var noChatFoundLabel: UILabel!
   @IBOutlet weak var baseScrollView:UIScrollView!
   @IBOutlet weak var baseBottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var productDetailsView: CustomView!
@@ -181,7 +180,7 @@ nextVC.comingForCustomeOrderPlace = true
         actionButtonView.isHidden = true
         let isOrderPlaced = quotationData?.orderCreateStatus?.id != nil
         if isOrderPlaced {
-          productPriceView.isHidden = true
+          productPriceView.isHidden = false
           productDetailsActionButtonStackView.isHidden = true
         }
       case "4":
@@ -268,7 +267,7 @@ nextVC.comingForCustomeOrderPlace = true
   
   private func updateNoChatUI() {
     let hasChats = !chatList.isEmpty
-    noChatFoundLabel.isHidden = hasChats
+//    noChatFoundLabel.isHidden = hasChats
     chatDetailsTableView.isHidden = !hasChats
   }
   

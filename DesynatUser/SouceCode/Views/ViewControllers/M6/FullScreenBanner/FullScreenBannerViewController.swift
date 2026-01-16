@@ -13,7 +13,7 @@ class FullScreenBannerViewController: UIViewController {
   @IBOutlet weak var pageControl: UIPageControl!
   @IBOutlet weak var bannerCollectionView: UICollectionView! {
     didSet {
-      bannerCollectionView.registerCellFromNib(cellID: "HomeBannerCollectionViewCell")
+      bannerCollectionView.registerCellFromNib(cellID: "FullScreenBannersCollectionViewCell")
     }
   }
   
@@ -88,7 +88,7 @@ extension FullScreenBannerViewController: UICollectionViewDelegate, UICollection
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeBannerCollectionViewCell", for: indexPath) as! HomeBannerCollectionViewCell
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FullScreenBannersCollectionViewCell", for: indexPath) as! FullScreenBannersCollectionViewCell
     let data = viewModel.fullScreenBannersList?[indexPath.row]
     if let imageUrlString = data?.image,
        let url = URL(string: imageUrlString) {

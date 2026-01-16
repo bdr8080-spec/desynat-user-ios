@@ -74,6 +74,7 @@ class HomeViewModel: NSObject {
           self.homeScreenAllBannersList = list
           self.hostVC.bannerCollectionView.reloadData()
           self.hostVC.bannerPageController.numberOfPages = self.homeScreenAllBannersList.count
+//          self.hostVC.startBannerAutoScroll()
 //          self.hostVC.noTopHomeBannersFoundLabel.isHidden = !self.homeScreenAllBannersList.isEmpty
       }
     }

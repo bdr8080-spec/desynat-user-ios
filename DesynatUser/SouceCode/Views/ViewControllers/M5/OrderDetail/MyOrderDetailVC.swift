@@ -390,12 +390,14 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                     lblStatus.text = "Ongoing"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
-                    viewReturnDays.isHidden = false
+                    
                     if isCustomOrder {
                         let canCancel = isWithinThreeHours(from: data.createdAt ?? "")
                         viewCancel.isHidden = !canCancel
+                        viewReturnDays.isHidden = true
                     } else {
                         viewCancel.isHidden = false
+                        viewReturnDays.isHidden = false
                     }
                     viewPaidBy.isHidden = false
                     activateStep(0, title: "Confirmed")
@@ -405,13 +407,15 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                     lblStatus.text = "Ongoing"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
-                    viewReturnDays.isHidden = false
+                    
                     //          viewCancel.isHidden = false
                     if isCustomOrder {
                         let canCancel = isWithinThreeHours(from: data.createdAt ?? "")
                         viewCancel.isHidden = !canCancel
+                        viewReturnDays.isHidden = true
                     } else {
                         viewCancel.isHidden = false
+                        viewReturnDays.isHidden = false
                     }
                     viewPaidBy.isHidden = false
                     activateStep(0, title: "Confirmed")
@@ -421,7 +425,12 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                     lblStatus.text = "Ongoing"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
-                    viewReturnDays.isHidden = false
+                    if isCustomOrder {
+                        viewReturnDays.isHidden = true
+                    } else {
+                        viewReturnDays.isHidden = false
+                    }
+                    
                     //          viewCancel.isHidden = false
                     if isCustomOrder {
                         let canCancel = isWithinThreeHours(from: data.createdAt ?? "")
@@ -437,7 +446,12 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                     lblStatus.text = "Delivered"
                     lblStatus.textColor = UIColor(hexString: "#16B364")
                     viewStatus.borderColor = UIColor(hexString: "#16B364")
-                    viewReturnDays.isHidden = false
+//                    viewReturnDays.isHidden = false
+                    if isCustomOrder {
+                        viewReturnDays.isHidden = true
+                    } else {
+                        viewReturnDays.isHidden = false
+                    }
                     viewRate.isHidden = false
                     
                     viewReturnEx.isHidden = isCustomOrder//false
@@ -463,8 +477,10 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                         viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
                         viewReturnEx.isHidden = true
                         resetStepper()
-                        activateStep(0, title: "Confirmed")
-                        activateStep(1, title: "In Progress")
+//                        activateStep(0, title: "Confirmed")
+//                        activateStep(1, title: "In Progress")
+                        img1.image = .unconfiremdOrder
+                        img2.image = .shipped
                         lbl3.text = "Picked Up"
                         lbl4.text = "Completed"
                         if let isoDate = isoStringAddingDays(data.updatedAt, days: 6) {
@@ -483,17 +499,35 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                         if data.rEApprove == "1" {
 //                            lblStatus.text = "Return Request"
                             if data.returnType == "1" {
-                                lblStatus.text = "Return Request"
+                                lblStatus.text = "Returned"//"Return Request"
                                 activateStep(1, title: "Shipped")
                                 activateStep(2, title: "Picked up")
-                                activateStep(2, title: "Completed")
+                                activateStep(3, title: "Completed")
+                                lblStatus.textColor = UIColor(hexString: "#16B364")
+                                viewStatus.borderColor = UIColor(hexString: "#16B364")
                             } else if data.returnType == "2"{
                                 lblStatus.text = "Exchange Request"
                                 activateStep(1, title: "In Progress")
                                 lbl3.text = "Picked &\nexchange"
                                 lbl4.text = "Completed"
+                                if data.isPicked == "1" {
+                                    activateStep(2, title: "Picked &\nexchange")
+                                    let exchangeOrderDetails = data.exchangeOrderDetails?.deliveryStatus ?? "0"
+                                    if exchangeOrderDetails == "3" {
+                                        activateStep(3, title: "Completed")
+                                        lblStatus.text = "Delivered"
+                                        lblStatus.textColor = UIColor(hexString: "#16B364")
+                                        viewStatus.borderColor = UIColor(hexString: "#16B364")
+                                    }
+                                }
                             }
 //                            lbl4.text = "Completed"
+                        } else if data.rEApprove == "2" {
+                            lblStatus.text = "Delivered"//"Return Request"
+                            activateStep(1, title: "Shipped")
+                            activateStep(2, title: "On the way")
+                            activateStep(3, title: "Delivered") //
+                            viewReturnEx.isHidden = false
                         }
                     }
                     
@@ -531,7 +565,12 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                     viewCancelDetail.isHidden = true
                     viewReason.isHidden = true
                     viewPaidBy.isHidden = false
-                    viewReturnDays.isHidden = false
+//                    viewReturnDays.isHidden = false
+                    if isCustomOrder {
+                        viewReturnDays.isHidden = true
+                    } else {
+                        viewReturnDays.isHidden = false
+                    }
                     activateStep(0, title: "Confirmed")
                     activateStep(1, title: "Shipped")
                     activateStep(2, title: "On the Way")
@@ -628,7 +667,12 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                     lblStatus.text = "Ongoing"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
-                    viewReturnDays.isHidden = false
+//                    viewReturnDays.isHidden = false
+                    if isCustomOrder {
+                        viewReturnDays.isHidden = true
+                    } else {
+                        viewReturnDays.isHidden = false
+                    }
                     //          viewCancel.isHidden = false
                     if isCustomOrder {
                         let canCancel = isWithinThreeHours(from: data.createdAt ?? "")
@@ -654,7 +698,12 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                     lblStatus.text = "Ongoing"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
-                    viewReturnDays.isHidden = false
+//                    viewReturnDays.isHidden = false
+                    if isCustomOrder {
+                        viewReturnDays.isHidden = true
+                    } else {
+                        viewReturnDays.isHidden = false
+                    }
                     //          viewCancel.isHidden = false
                     if isCustomOrder {
                         let canCancel = isWithinThreeHours(from: data.createdAt ?? "")
@@ -670,13 +719,15 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                     lblStatus.text = "Ongoing"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
-                    viewReturnDays.isHidden = false
+                    
                     //          viewCancel.isHidden = false
                     if isCustomOrder {
                         let canCancel = isWithinThreeHours(from: data.createdAt ?? "")
                         viewCancel.isHidden = !canCancel
+                        viewReturnDays.isHidden = true
                     } else {
                         viewCancel.isHidden = false
+                        viewReturnDays.isHidden = false
                     }
                     viewPaidBy.isHidden = false
                     activateStep(0, title: "Confirmed")
@@ -686,7 +737,12 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                     lblStatus.text = "Delivered"
                     lblStatus.textColor = UIColor(hexString: "#16B364")
                     viewStatus.borderColor = UIColor(hexString: "#16B364")
-                    viewReturnDays.isHidden = false
+//                    viewReturnDays.isHidden = false
+                    if isCustomOrder {
+                        viewReturnDays.isHidden = true
+                    } else {
+                        viewReturnDays.isHidden = false
+                    }
                     viewRate.isHidden = false
                     viewReturnEx.isHidden = isCustomOrder//false
                     viewPaidBy.isHidden = false
@@ -713,8 +769,12 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                         viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
                         viewReturnEx.isHidden = true
                         resetStepper()
-                        activateStep(0, title: "Confirmed")
-                        activateStep(1, title: "In Progress")
+//                        activateStep(0, title: "Confirmed")
+//                        activateStep(1, title: "In Progress")
+//                        lbl3.text = "Picked Up"
+//                        lbl4.text = "Completed"
+                        img1.image = .unconfiremdOrder//.confirmedOrder
+                        img2.image = .shipped
                         lbl3.text = "Picked Up"
                         lbl4.text = "Completed"
                         if let isoDate = isoStringAddingDays(data.updatedAt, days: 6) {
@@ -732,17 +792,37 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                         if data.rEApprove == "1" {
 //                            lblStatus.text = "Return Request"
                             if data.returnType == "1" {
-                                lblStatus.text = "Return Request"
+                                lblStatus.text = "Returned"
+                                activateStep(0, title: "Confirmed")
                                 activateStep(1, title: "Shipped")
                                 activateStep(2, title: "Picked up")
                                 activateStep(3, title: "Completed")
+                                lblStatus.textColor = UIColor(hexString: "#16B364")
+                                viewStatus.borderColor = UIColor(hexString: "#16B364")
                             } else if data.returnType == "2"{
                                 lblStatus.text = "Exchange Request"
+                                activateStep(0, title: "Confirmed")
                                 activateStep(1, title: "In Progress")
                                 lbl3.text = "Picked &\nexchange"
                                 lbl4.text = "Completed"
+                                if data.isPicked == "1" {
+                                    activateStep(2, title: "Picked &\nexchange")
+                                    let exchangeOrderDetails = data.exchangeOrderDetails?.deliveryStatus ?? "0"
+                                    if exchangeOrderDetails == "3" {
+                                        activateStep(3, title: "Completed")
+                                        lblStatus.text = "Delivered"
+                                    }
+                                }
                             }
 //                            lbl4.text = "Completed"
+                        } else if data.rEApprove == "2" {
+                            lblStatus.text = "Delivered"//"Return Request"
+                            activateStep(1, title: "Shipped")
+                            activateStep(2, title: "On the way")
+                            activateStep(3, title: "Delivered") //
+                            viewReturnEx.isHidden = false
+                            lblStatus.textColor = UIColor(hexString: "#16B364")
+                            viewStatus.borderColor = UIColor(hexString: "#16B364")
                         }
                     }
                     
@@ -774,7 +854,12 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                     viewCancelDetail.isHidden = true
                     viewReason.isHidden = true
                     viewPaidBy.isHidden = false
-                    viewReturnDays.isHidden = false
+//                    viewReturnDays.isHidden = false
+                    if isCustomOrder {
+                        viewReturnDays.isHidden = true
+                    } else {
+                        viewReturnDays.isHidden = false
+                    }
                     activateStep(0, title: "Confirmed")
                     activateStep(1, title: "Shipped")
                     activateStep(2, title: "On the Way")

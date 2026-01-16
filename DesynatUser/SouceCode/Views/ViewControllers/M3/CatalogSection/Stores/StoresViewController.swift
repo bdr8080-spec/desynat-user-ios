@@ -39,6 +39,9 @@ class StoresViewController: UIViewController {
     private let audioEngine = AVAudioEngine()
     private var isListening = false
     var slecetedCategoryID: Int = 0
+    private var bannerAutoScrollTimer: Timer?
+    private var currentBannerIndex = 0
+    private let bannerAutoScrollDelay: TimeInterval = 1.5
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +55,13 @@ class StoresViewController: UIViewController {
         super.viewWillAppear(animated)
         viewModel.getStoresListApi()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopBannerAutoScroll()
+        startBannerAutoScroll()
+    }
+
     
     private func requestPermissions() {
         SFSpeechRecognizer.requestAuthorization { _ in }
@@ -93,9 +103,14 @@ class StoresViewController: UIViewController {
     
     // MARK: - Page Control Tap Handling
     @IBAction func pageControlChanged(_ sender: UIPageControl) {
-        let page = sender.currentPage
-        let indexPath = IndexPath(item: page, section: 0)
-        bannerCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        currentBannerIndex = sender.currentPage
+
+            let indexPath = IndexPath(item: currentBannerIndex, section: 0)
+            bannerCollectionView.scrollToItem(
+                at: indexPath,
+                at: .centeredHorizontally,
+                animated: true
+            )
     }
     
     
@@ -114,6 +129,45 @@ class StoresViewController: UIViewController {
     func updateCollectionsHeight() {
         storesCollectionViewHeightConstriant.constant = storesCollectionView.contentSize.height
     }
+    
+    private func startBannerAutoScroll() {
+        stopBannerAutoScroll()
+
+        bannerAutoScrollTimer = Timer.scheduledTimer(
+            timeInterval: bannerAutoScrollDelay,
+            target: self,
+            selector: #selector(autoScrollBanner),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+
+    private func stopBannerAutoScroll() {
+        bannerAutoScrollTimer?.invalidate()
+        bannerAutoScrollTimer = nil
+    }
+    
+    @objc private func autoScrollBanner() {
+        let totalItems = viewModel.homeScreenAllBannersList.count
+        guard totalItems > 1 else { return }
+
+        currentBannerIndex += 1
+        if currentBannerIndex >= totalItems {
+            currentBannerIndex = 0
+        }
+
+        let indexPath = IndexPath(item: currentBannerIndex, section: 0)
+
+        bannerCollectionView.scrollToItem(
+            at: indexPath,
+            at: .centeredHorizontally,
+            animated: true
+        )
+
+        bannerPageController.currentPage = currentBannerIndex
+    }
+
+
     
     // MARK: - Start Listening (Speech → Text)
     private func startListening() {
@@ -266,8 +320,10 @@ extension StoresViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if scrollView == bannerCollectionView {
             let pageIndex = Int(round(scrollView.contentOffset.x / bannerCollectionView.frame.width))
             bannerPageController.currentPage = pageIndex
+            currentBannerIndex = pageIndex
         }
     }
+
     
 }
 

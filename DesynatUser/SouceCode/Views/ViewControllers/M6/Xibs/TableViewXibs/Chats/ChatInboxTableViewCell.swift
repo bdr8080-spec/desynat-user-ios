@@ -42,7 +42,7 @@ class ChatInboxTableViewCell: UITableViewCell {
     if data?.messageType == "1" {
       messageLabel.text = "Sent an attachment"
     } else {
-      messageLabel.text = data?.lastChat ?? "Sent an attachment"
+      messageLabel.text = data?.lastChat ?? ""
     }
     timeLabel.text = formattedChatTime(from: data?.updatedAt ?? "")
     let messageType = data?.type ?? "1" // normal msg, customization send
