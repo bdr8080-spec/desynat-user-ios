@@ -66,6 +66,14 @@ class MyOrderTableCell: UITableViewCell {
           viewExchange.backgroundColor = UIColor(hexString: "#17854C").withAlphaComponent(0.1)
           lblOrderDate.textColor = UIColor(hexString: "#17854C")
           lblOrderDate.text = "Expected Delivery Date : 3-5 working days"
+            
+            if data.returnType == "1" || data.returnType == "2" {
+                let approveType = data.rEApprove ?? "1"
+                if approveType == "1" {
+                    lblStatus.text = "Return Req."
+//                    lblOrderDate.text = "Expected Pickup Date : 3-5 working days"
+                }
+            }
           
         case "2", "2.1", "7": //Ongoing
           lblStatus.text = "Ongoing"
@@ -73,6 +81,14 @@ class MyOrderTableCell: UITableViewCell {
           viewExchange.backgroundColor = UIColor(hexString: "#17854C").withAlphaComponent(0.1)
           lblOrderDate.textColor = UIColor(hexString: "#17854C")
           lblOrderDate.text = "Expected Delivery Date : 3-5 working days"
+            
+            if data.deliveryStatus == "7" && (data.returnType == "1" || data.returnType == "2") {
+                let approveType = data.rEApprove ?? "1"
+                if approveType == "1" {
+                    lblStatus.text = "Return Req."
+//                    lblOrderDate.text = "Expected Pickup Date : 3-5 working days"
+                }
+            }
           
         case "3": //Delivered
           lblStatus.text = "Delivered"
@@ -134,6 +150,14 @@ class MyOrderTableCell: UITableViewCell {
           viewExchange.backgroundColor = UIColor(hexString: "#17854C").withAlphaComponent(0.1)
           lblOrderDate.textColor = UIColor(hexString: "#17854C")
           lblOrderDate.text = "Expected Delivery Date : 3-5 working days"
+            
+            if data.returnType == "1" || data.returnType == "2" {
+                let approveType = data.rEApprove ?? "1"
+                if approveType == "1" {
+                    lblStatus.text = "Return Req."
+//                    lblOrderDate.text = "Expected Pickup Date : 3-5 working days"
+                }
+            }
           
         case "2","2.1", "7": //Ongoing, Picked
           lblStatus.text = "Ongoing"
@@ -143,6 +167,14 @@ class MyOrderTableCell: UITableViewCell {
           lblOrderDate.textColor = UIColor(hexString: "#17854C")
           lblOrderDate.text = "Expected Delivery Date : 3-5 working days"
           
+            if data.deliveryStatus == "7" && (data.returnType == "1" || data.returnType == "2") {
+                let approveType = data.rEApprove ?? "1"
+                if approveType == "1" {
+                    lblStatus.text = "Return Req."
+//                    lblOrderDate.text = "Expected Pickup Date : 3-5 working days"
+                }
+            }
+            
         case "3": //Delivered
           lblStatus.text = "Delivered"
           lblStatus.textColor = UIColor(hexString: "#16B364")

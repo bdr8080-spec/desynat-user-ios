@@ -207,8 +207,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
         let unitPrice = Double(data.amount ?? "") ?? 0
         let quantity = data.quantity ?? 1
         let totalPriceforCustom = unitPrice * Double(quantity)
-        
-        itemPriceLabelForCustomOrder.text = "Item Price (\(unitPrice) × \(quantity))"
+        itemPriceLabelForCustomOrder.text = "Item Price (\(formatPrice(Double(unitPrice)))KD × \(quantity))"
         lblTotalMrp.text = formatPrice(totalPriceforCustom)
         customOrderItemPriceLabel.text = formatPrice(Double(totalPriceforCustom))
         lblDiscountMrp.text = formatPrice(Double(data.order?.discountMrp ?? "0"))
@@ -500,6 +499,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
 //                            lblStatus.text = "Return Request"
                             if data.returnType == "1" {
                                 lblStatus.text = "Returned"//"Return Request"
+                                activateStep(0, title: "Confirmed")
                                 activateStep(1, title: "Shipped")
                                 activateStep(2, title: "Picked up")
                                 activateStep(3, title: "Completed")
@@ -507,6 +507,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                                 viewStatus.borderColor = UIColor(hexString: "#16B364")
                             } else if data.returnType == "2"{
                                 lblStatus.text = "Exchange Request"
+                                activateStep(0, title: "Confirmed")
                                 activateStep(1, title: "In Progress")
                                 lbl3.text = "Picked &\nexchange"
                                 lbl4.text = "Completed"
@@ -524,6 +525,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
 //                            lbl4.text = "Completed"
                         } else if data.rEApprove == "2" {
                             lblStatus.text = "Delivered"//"Return Request"
+                            activateStep(0, title: "Confirmed")
                             activateStep(1, title: "Shipped")
                             activateStep(2, title: "On the way")
                             activateStep(3, title: "Delivered") //
@@ -817,6 +819,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
 //                            lbl4.text = "Completed"
                         } else if data.rEApprove == "2" {
                             lblStatus.text = "Delivered"//"Return Request"
+                            activateStep(0, title: "Confirmed")
                             activateStep(1, title: "Shipped")
                             activateStep(2, title: "On the way")
                             activateStep(3, title: "Delivered") //
