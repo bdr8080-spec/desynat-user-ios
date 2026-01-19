@@ -41,7 +41,7 @@ class StoresViewController: UIViewController {
     var slecetedCategoryID: Int = 0
     private var bannerAutoScrollTimer: Timer?
     private var currentBannerIndex = 0
-    private let bannerAutoScrollDelay: TimeInterval = 1.5
+    private let bannerAutoScrollDelay: TimeInterval = 4
     
     override func viewDidLoad() {
         super.viewDidLoad()

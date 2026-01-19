@@ -94,7 +94,14 @@ class HomeViewController: UIViewController {
     private var isListening = false
     private var bannerAutoScrollTimer: Timer?
     private var currentBannerIndex = 0
-    private let bannerAutoScrollDelay: TimeInterval = 1.5
+  private var premiumAutoScrollTimer: Timer?
+  private var discountAutoScrollTimer: Timer?
+
+  private var currentPremiumIndex = 0
+  private var currentDiscountIndex = 0
+
+  private let autoScrollDelay: TimeInterval = 4
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,7 +115,9 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        startBannerAutoScroll()
+      startBannerAutoScroll()
+          startPremiumAutoScroll()
+          startDiscountAutoScroll()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -119,7 +128,9 @@ class HomeViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        stopBannerAutoScroll()
+      stopBannerAutoScroll()
+          stopPremiumAutoScroll()
+          stopDiscountAutoScroll()
     }
     
     private func requestPermissions() {
@@ -266,9 +277,8 @@ class HomeViewController: UIViewController {
     
      func startBannerAutoScroll() {
         stopBannerAutoScroll() // prevent duplicate timers
-        
         bannerAutoScrollTimer = Timer.scheduledTimer(
-            timeInterval: bannerAutoScrollDelay,
+            timeInterval: autoScrollDelay,
             target: self,
             selector: #selector(autoScrollBanner),
             userInfo: nil,
@@ -280,6 +290,78 @@ class HomeViewController: UIViewController {
         bannerAutoScrollTimer?.invalidate()
         bannerAutoScrollTimer = nil
     }
+  
+  func startPremiumAutoScroll() {
+      stopPremiumAutoScroll()
+      premiumAutoScrollTimer = Timer.scheduledTimer(
+          timeInterval: autoScrollDelay,
+          target: self,
+          selector: #selector(autoScrollPremium),
+          userInfo: nil,
+          repeats: true
+      )
+  }
+
+  func stopPremiumAutoScroll() {
+      premiumAutoScrollTimer?.invalidate()
+      premiumAutoScrollTimer = nil
+  }
+
+  @objc private func autoScrollPremium() {
+      let totalItems = viewModel.homeCenterScreenAllBannersList.count
+      guard totalItems > 1 else { return }
+
+      currentPremiumIndex += 1
+      if currentPremiumIndex >= totalItems {
+          currentPremiumIndex = 0
+      }
+
+      let indexPath = IndexPath(item: currentPremiumIndex, section: 0)
+      browsePrimiumCollectionView.scrollToItem(
+          at: indexPath,
+          at: .centeredHorizontally,
+          animated: true
+      )
+
+      browsePrimiumPageController.currentPage = currentPremiumIndex
+  }
+  
+  func startDiscountAutoScroll() {
+      stopDiscountAutoScroll()
+      discountAutoScrollTimer = Timer.scheduledTimer(
+          timeInterval: autoScrollDelay,
+          target: self,
+          selector: #selector(autoScrollDiscount),
+          userInfo: nil,
+          repeats: true
+      )
+  }
+
+  func stopDiscountAutoScroll() {
+      discountAutoScrollTimer?.invalidate()
+      discountAutoScrollTimer = nil
+  }
+
+  @objc private func autoScrollDiscount() {
+      let totalItems = bannerCount // or your actual data source count
+      guard totalItems > 1 else { return }
+
+      currentDiscountIndex += 1
+      if currentDiscountIndex >= totalItems {
+          currentDiscountIndex = 0
+      }
+
+      let indexPath = IndexPath(item: currentDiscountIndex, section: 0)
+      bowseSomeDisCountCollectionView.scrollToItem(
+          at: indexPath,
+          at: .centeredHorizontally,
+          animated: true
+      )
+
+      browseDiscountPageController.currentPage = currentDiscountIndex
+  }
+
+
 
     
     deinit {
@@ -537,12 +619,15 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     bannerPageController.currentPage = pageIndex
                     currentBannerIndex = pageIndex
         } else if scrollView == browsePrimiumCollectionView {
-            let pageIndex = Int(round(scrollView.contentOffset.x / browsePrimiumCollectionView.frame.width))
-            browsePrimiumPageController.currentPage = pageIndex
-        } else if scrollView == bowseSomeDisCountCollectionView {
-            let pageIndex = Int(round(scrollView.contentOffset.x / bowseSomeDisCountCollectionView.frame.width))
-            browseDiscountPageController.currentPage = pageIndex
-        }
+          let pageIndex = Int(round(scrollView.contentOffset.x / browsePrimiumCollectionView.frame.width))
+          browsePrimiumPageController.currentPage = pageIndex
+          currentPremiumIndex = pageIndex
+      } else if scrollView == bowseSomeDisCountCollectionView {
+          let pageIndex = Int(round(scrollView.contentOffset.x / bowseSomeDisCountCollectionView.frame.width))
+          browseDiscountPageController.currentPage = pageIndex
+          currentDiscountIndex = pageIndex
+      }
+
     }
     
 }
