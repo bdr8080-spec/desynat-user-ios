@@ -25,13 +25,23 @@ protocol FilterDelegate: AnyObject {
 import UIKit
 
 class MyOrderVC: UIViewController, FilterDelegate {
+//  func didApplyFilter(_ filter: OrderFilterType) {
+//    selectedFilter = filter
+//    if isCustomOrderSeleced {
+//      viewModel.getOrders(type: 2)
+//    } else {
+//      viewModel.getOrders(type: 1)
+//    }
+//  }
+  
   func didApplyFilter(_ filter: OrderFilterType) {
-    selectedFilter = filter
-    if isCustomOrderSeleced {
-      viewModel.getOrders(type: 2)
-    } else {
-      viewModel.getOrders(type: 1)
-    }
+      if isCustomOrderSeleced {
+          customOrderFilter = filter
+          viewModel.getOrders(type: 2)
+      } else {
+          normalOrderFilter = filter
+          viewModel.getOrders(type: 1)
+      }
   }
   
   @IBOutlet weak var btnOrder: CustomButton!
@@ -43,13 +53,17 @@ class MyOrderVC: UIViewController, FilterDelegate {
   lazy private var viewModel = MyOrderVM(hostVC: self)
   var orderData: [OrderModel] = []
   var selectedOrderType: OrderType = .order
-  var selectedFilter: OrderFilterType = .all
+//  var selectedFilter: OrderFilterType = .all
+  var normalOrderFilter: OrderFilterType = .all
+  var customOrderFilter: OrderFilterType = .all
+  private var searchWorkItem: DispatchWorkItem?
   var comingFromOrderTracking: Bool = false
   var isCustomOrderSeleced : Bool = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
     registerXib()
+    txtSearch.delegate = self
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -144,9 +158,18 @@ class MyOrderVC: UIViewController, FilterDelegate {
   }
   
   @IBAction func btnFilter(_ sender: Any) {
+//    let vc = FilterVC.instantiate(fromAppStoryboard: .MyOrder)
+//    vc.delegate = self
+//    self.navigationController?.present(vc, animated: true)
     let vc = FilterVC.instantiate(fromAppStoryboard: .MyOrder)
-    vc.delegate = self
-    self.navigationController?.present(vc, animated: true)
+        vc.delegate = self
+
+        // Pass correct preselected filter
+        vc.preselectedFilter = isCustomOrderSeleced
+            ? customOrderFilter
+            : normalOrderFilter
+
+        self.navigationController?.present(vc, animated: true)
   }
   
 }
@@ -172,4 +195,25 @@ extension MyOrderVC: UITableViewDelegate, UITableViewDataSource {
       isCustomOrderSeleced = false
     self.navigationController?.pushViewController(vc, animated: true)
   }
+}
+
+extension MyOrderVC: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+        searchWorkItem?.cancel()
+        let workItem = DispatchWorkItem { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.searchText = currentText
+          if isCustomOrderSeleced {
+//              customOrderFilter = filter
+              viewModel.getOrders(type: 2)
+          } else {
+//              normalOrderFilter = filter
+              viewModel.getOrders(type: 1)
+          }
+        }
+        searchWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
+        return true
+    }
 }

@@ -86,6 +86,7 @@ class ProfileViewController: UIViewController {
     
     @IBAction func pencilButtonAction(_ sender: Any) {
         if isGuestLogin == "true" {
+          UserDefaults.standard.setValue("false", forKey:"isGuestLogin")
             kSharedSceneDelegate.navigateToLoginVc()
         } else {
             let vc = ProfileDetailsViewController.instantiate(fromAppStoryboard: .Profile)

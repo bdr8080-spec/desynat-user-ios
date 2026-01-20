@@ -15,16 +15,25 @@ class FilterVC: UIViewController {
     var filtersOptions = ["All", "Ongoing", "Delivered", "Cancelled", "Return"]
     var selectedIndex: Int = 0
     weak var delegate: FilterDelegate?
-    
-    var selectedFilter: OrderFilterType {
-        return OrderFilterType(rawValue: selectedIndex + 1) ?? .all
-    }
+  var preselectedFilter: OrderFilterType = .all
+
+  var selectedFilter: OrderFilterType {
+      return OrderFilterType(rawValue: selectedIndex + 1) ?? .all
+  }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         registerXib()
         initialSetup()
+      applyPreselection()
     }
+  
+  private func applyPreselection() {
+      selectedIndex = max(preselectedFilter.rawValue - 1, 0)
+      filterTableview.reloadData()
+  }
+
     
     func registerXib() {
         filterTableview.dataSource = self

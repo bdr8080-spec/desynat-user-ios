@@ -12,6 +12,7 @@ import DropDown
 extension SceneDelegate {
     
     public func navigateToLoginVc() {
+      
         navigateTo(vc: LoginViewController.instantiate(fromAppStoryboard: .Main))
     }
     

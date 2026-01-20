@@ -49,21 +49,24 @@ class HomeViewModel: NSObject {
   }
   
    func getAllFullscreenBannersList() {
+    let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
+     if isGuestUser != "true" {
     let hasShownFullscreenBanner = UserDefaults.standard.string(forKey: "hasShownFullscreenBanner") ?? "false"
-    if hasShownFullscreenBanner == "true" {
-//      hostVC.showToast(msg: hasShownFullscreenBanner)
-      WebService.sharedInstance.getAllFullscreenBannersList() { list in
-        self.fullScreenBannersList = list
-        if !list.isEmpty {
-          let nextVC = FullScreenBannerViewController.instantiate(fromAppStoryboard: .Home)
-          nextVC.viewModel.fullScreenBannersList = self.fullScreenBannersList
-          DispatchQueue.main.async {
-            self.hostVC.navigationController?.present(nextVC, animated: true) {
-              UserDefaults.standard.set("false", forKey: "hasShownFullscreenBanner")
-            }
-          }
-        }
-      }
+       if hasShownFullscreenBanner == "true" {
+         //      hostVC.showToast(msg: hasShownFullscreenBanner)
+         WebService.sharedInstance.getAllFullscreenBannersList() { list in
+           self.fullScreenBannersList = list
+           if !list.isEmpty {
+             let nextVC = FullScreenBannerViewController.instantiate(fromAppStoryboard: .Home)
+             nextVC.viewModel.fullScreenBannersList = self.fullScreenBannersList
+             DispatchQueue.main.async {
+               self.hostVC.navigationController?.present(nextVC, animated: true) {
+                 UserDefaults.standard.set("false", forKey: "hasShownFullscreenBanner")
+               }
+             }
+           }
+         }
+       }
     }
   }
   

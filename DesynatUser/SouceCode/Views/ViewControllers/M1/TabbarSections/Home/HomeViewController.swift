@@ -184,8 +184,14 @@ class HomeViewController: UIViewController {
     
     
     @IBAction func lieDidTapped(_ sender: Any) {
+      let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
+      if isGuestUser != "true" {
         let vc = FavoruitesViewController.instantiate(fromAppStoryboard: .Catalog)
         self.navigationController?.pushViewController(vc, animated: true)
+      } else {
+        UserDefaults.standard.setValue("false", forKey:"isGuestLogin")
+        kSharedSceneDelegate.navigateToLoginVc()
+      }
     }
     
     @IBAction func micDidTapped(_ sender: UIButton) {
@@ -205,8 +211,14 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func chatDidTapped(_ sender: Any) {
+      let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
+      if isGuestUser != "true" {
         let nextVC = ChatInboxListViewController.instantiate(fromAppStoryboard: .Chat)
         self.navigationController?.pushViewController(nextVC, animated: true)
+      } else {
+        UserDefaults.standard.setValue("false", forKey:"isGuestLogin")
+        kSharedSceneDelegate.navigateToLoginVc()
+      }
     }
     
     

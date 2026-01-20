@@ -38,19 +38,26 @@ class FullScreenBannerViewController: UIViewController {
   }
   
   func startAutoScroll() {
-    autoScrollTimer?.invalidate()
-    autoScrollTimer = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(scrollToNextPage), userInfo: nil, repeats: true)
+      autoScrollTimer?.invalidate()
+
+      autoScrollTimer = Timer.scheduledTimer(withTimeInterval: 4.0, repeats: true) { [weak self] _ in
+          self?.scrollToNextPage()
+      }
+
+      RunLoop.main.add(autoScrollTimer!, forMode: .common)
   }
+
   
   func setupAfterDataLoad() {
-    pageControl.numberOfPages = viewModel.fullScreenBannersList?.count ?? 0
-    pageControl.currentPage = 0
-    currentIndex = 0
-    
-    if pageControl.numberOfPages > 1 {
-      startAutoScroll()
-    }
+      pageControl.numberOfPages = viewModel.fullScreenBannersList?.count ?? 0
+      pageControl.currentPage = 0
+      currentIndex = 0
+
+      if pageControl.numberOfPages > 1 {
+          startAutoScroll()
+      }
   }
+
   
   @objc private func scrollToNextPage() {
     guard pageControl.numberOfPages > 0 else { return }
@@ -87,25 +94,55 @@ extension FullScreenBannerViewController: UICollectionViewDelegate, UICollection
     return viewModel.fullScreenBannersList?.count ?? 0
   }
   
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FullScreenBannersCollectionViewCell", for: indexPath) as! FullScreenBannersCollectionViewCell
-    let data = viewModel.fullScreenBannersList?[indexPath.row]
-    if let imageUrlString = data?.image,
-       let url = URL(string: imageUrlString) {
+//  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FullScreenBannersCollectionViewCell", for: indexPath) as! FullScreenBannersCollectionViewCell
+//    let data = viewModel.fullScreenBannersList?[indexPath.row]
+//    if let imageUrlString = data?.image,
+//       let url = URL(string: imageUrlString) {
+//      cell.mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+//      cell.mainImageView.sd_imageIndicator?.startAnimatingIndicator()
+//      cell.mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+//    }
+//    return cell
+//  }
+  
+  func collectionView(_ collectionView: UICollectionView,
+                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+      let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: "FullScreenBannersCollectionViewCell",
+          for: indexPath
+      ) as! FullScreenBannersCollectionViewCell
+
+      let data = viewModel.fullScreenBannersList?[indexPath.row]
+
       cell.mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-      cell.mainImageView.sd_imageIndicator?.startAnimatingIndicator()
-      cell.mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
-    }
-    return cell
+
+      if let imageUrlString = data?.image,
+         let url = URL(string: imageUrlString) {
+
+          cell.mainImageView.sd_setImage(with: url, placeholderImage: nil) { [weak self] _, _, _, _ in
+              guard let self = self else { return }
+
+              // ✅ Start auto scroll ONLY after first image loads
+              if indexPath.row == 0 && self.autoScrollTimer == nil {
+                  self.setupAfterDataLoad()
+              }
+          }
+      }
+
+      return cell
   }
+
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: bannerCollectionView.frame.width, height: bannerCollectionView.frame.height)
   }
   
   func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-    autoScrollTimer?.invalidate()
+      autoScrollTimer?.invalidate()
   }
+
   
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     currentIndex = Int(scrollView.contentOffset.x / scrollView.frame.width)

@@ -82,13 +82,16 @@ extension TabBarVC {
   }
   
   func getBagDetailsApi(){
-    WebService.sharedInstance.gteBagDetails { [self] list in
-      let productCount = list.cartData?.count ?? 0
-      if productCount > 0 {
-        self.bagCountView.isHidden = false
-        self.bagCountLabel.text = "\(productCount)"
-      } else {
-        self.bagCountView.isHidden = true
+    let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
+    if isGuestUser != "true" {
+      WebService.sharedInstance.gteBagDetails { [self] list in
+        let productCount = list.cartData?.count ?? 0
+        if productCount > 0 {
+          self.bagCountView.isHidden = false
+          self.bagCountLabel.text = "\(productCount)"
+        } else {
+          self.bagCountView.isHidden = true
+        }
       }
     }
   }
