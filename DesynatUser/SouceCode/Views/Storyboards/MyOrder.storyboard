@@ -47,7 +47,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Order" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="olx-nm-Lou">
-                                        <rect key="frame" x="66" y="8.6666666666666732" width="267" height="22.666666666666671"/>
+                                        <rect key="frame" x="66" y="10.666666666666659" width="267" height="18.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -205,7 +205,7 @@
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </tableView>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Result found " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GDF-61-D8J">
-                                                <rect key="frame" x="131.33333333333337" y="281.66666666666669" width="130.66666666666663" height="22.666666666666686"/>
+                                                <rect key="frame" x="136.33333333333334" y="283.66666666666669" width="120.33333333333334" height="18.666666666666686"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -1195,8 +1195,8 @@ Apartment, Kuwait</string>
                                                                                 <rect key="frame" x="0.0" y="200" width="361" height="50"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7C-uz-oyP" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="8" y="12" width="84.333333333333329" height="38"/>
-                                                                                        <string key="text">Shipping Fee
+                                                                                        <rect key="frame" x="8" y="12" width="79.666666666666671" height="38"/>
+                                                                                        <string key="text">Delivery Fee
 </string>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.80101768090000003" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -2224,7 +2224,7 @@ Apartment, Kuwait</string>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="26C-kI-goN">
                                                         <rect key="frame" x="0.0" y="1957" width="393" height="98.333333333333485"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shipping Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hEO-oj-1fS" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivery Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hEO-oj-1fS" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="16" y="20" width="361" height="19.333333333333329"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                                 <nil key="textColor"/>
@@ -2593,13 +2593,13 @@ Apartment, Kuwait</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gv8-rA-CRJ" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="371.33333333333326" width="393" height="480.66666666666674"/>
+                                <rect key="frame" x="0.0" y="375.33333333333326" width="393" height="476.66666666666674"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sqK-FI-sAu">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="62.666666666666664"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="58.666666666666664"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KO0-BW-chh" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="19.999999999999996" y="18" width="38.666666666666657" height="22.666666666666671"/>
+                                                <rect key="frame" x="20.000000000000004" y="18" width="35.333333333333343" height="18.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -2608,7 +2608,7 @@ Apartment, Kuwait</string>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oly-CK-ait">
-                                                <rect key="frame" x="341" y="15.333333333333371" width="28" height="28"/>
+                                                <rect key="frame" x="341" y="13.333333333333371" width="28" height="28"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="nzu-X6-IXn"/>
                                                     <constraint firstAttribute="width" constant="28" id="rbC-te-5B5"/>
@@ -2630,11 +2630,11 @@ Apartment, Kuwait</string>
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="345" placeholderIntrinsicHeight="320" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="rvN-w8-ELa" customClass="TableViewDynamicHeight" customModule="DesynatUser" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="72.666666666666686" width="345" height="320"/>
+                                        <rect key="frame" x="24" y="68.666666666666686" width="345" height="320"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="n9r-Dq-l6h">
-                                        <rect key="frame" x="16" y="412.66666666666669" width="361" height="38"/>
+                                        <rect key="frame" x="16" y="408.66666666666669" width="361" height="38"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ukz-0v-D7A" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="173" height="38"/>
@@ -2755,7 +2755,7 @@ Apartment, Kuwait</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="00K-Qa-VCW">
-                                        <rect key="frame" x="66" y="8.6666666666666732" width="267" height="22.666666666666671"/>
+                                        <rect key="frame" x="66" y="10.666666666666659" width="267" height="18.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -3162,7 +3162,7 @@ Apartment, Kuwait</string>
                                                                         <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Reason" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fL1-uJ-Ckn" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                <rect key="frame" x="19.999999999999993" y="18" width="113.33333333333331" height="16"/>
+                                                                                <rect key="frame" x="20.000000000000007" y="18" width="103.66666666666669" height="16"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
@@ -3854,7 +3854,7 @@ Apartment, Kuwait</string>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a8v-wz-h2W">
-                                                        <rect key="frame" x="40.000000000000007" y="16.333333333333343" width="117.66666666666669" height="19.666666666666671"/>
+                                                        <rect key="frame" x="40.000000000000007" y="18" width="117.66666666666669" height="16.333333333333329"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -3884,7 +3884,7 @@ Apartment, Kuwait</string>
                                                 <rect key="frame" x="187.66666666666663" y="0.0" width="157.33333333333337" height="52"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PKG-KQ-ltN">
-                                                        <rect key="frame" x="0.0" y="16.333333333333343" width="117.33333333333333" height="19.666666666666671"/>
+                                                        <rect key="frame" x="0.0" y="18" width="117.33333333333333" height="16.333333333333329"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -3945,7 +3945,7 @@ Apartment, Kuwait</string>
                                 </connections>
                             </collectionView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No product Found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y7Z-gi-Ca8">
-                                <rect key="frame" x="124.33333333333333" y="439.66666666666669" width="144.33333333333337" height="22.666666666666686"/>
+                                <rect key="frame" x="131" y="441.66666666666669" width="131.33333333333337" height="18.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -3988,13 +3988,13 @@ Apartment, Kuwait</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Vp-XK-vFM" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="260" width="393" height="592"/>
+                                <rect key="frame" x="0.0" y="264" width="393" height="588"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ay3-3D-pEE">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="62.666666666666664"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="58.666666666666664"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate this product" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bvr-l1-LmJ" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="18" width="138.33333333333334" height="22.666666666666671"/>
+                                                <rect key="frame" x="19.999999999999993" y="18" width="123.33333333333331" height="18.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -4003,7 +4003,7 @@ Apartment, Kuwait</string>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzr-pp-hyv">
-                                                <rect key="frame" x="341" y="15.333333333333314" width="28" height="28"/>
+                                                <rect key="frame" x="341" y="13.333333333333314" width="28" height="28"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="28" id="kdI-TH-UBj"/>
                                                     <constraint firstAttribute="height" constant="28" id="ye1-mp-zsT"/>
@@ -4025,7 +4025,7 @@ Apartment, Kuwait</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yJd-xd-0QX">
-                                        <rect key="frame" x="10" y="82.666666666666671" width="373" height="200.66666666666663"/>
+                                        <rect key="frame" x="10" y="78.666666666666671" width="373" height="200.66666666666663"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate Nike T- Shirt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZt-zh-PMS" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="20" width="341" height="19.333333333333329"/>
@@ -4119,7 +4119,7 @@ Apartment, Kuwait</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="88H-7c-Zfl">
-                                        <rect key="frame" x="10" y="283.33333333333337" width="373" height="220.66666666666663"/>
+                                        <rect key="frame" x="10" y="279.33333333333337" width="373" height="220.66666666666663"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate Store" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Qs-Qu-HfA" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="40" width="341" height="19.333333333333329"/>
@@ -4213,7 +4213,7 @@ Apartment, Kuwait</string>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="aP2-jN-cGj">
-                                        <rect key="frame" x="24" y="524" width="345" height="38"/>
+                                        <rect key="frame" x="24" y="520" width="345" height="38"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXl-qR-LFp" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="38"/>
@@ -4323,7 +4323,7 @@ Apartment, Kuwait</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
