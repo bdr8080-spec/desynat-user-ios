@@ -100,7 +100,7 @@ class HomeViewController: UIViewController {
   private var currentPremiumIndex = 0
   private var currentDiscountIndex = 0
 
-  private let autoScrollDelay: TimeInterval = 4
+  private let autoScrollDelay: TimeInterval = 6
 
     
     override func viewDidLoad() {

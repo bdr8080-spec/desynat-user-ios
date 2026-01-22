@@ -78,11 +78,21 @@ extension String {
         return emailPred.evaluate(with: self)
     }
     
+//    func isValidPassword() -> Bool {
+//        // Minimum 8 characters, at least 1 uppercase, 1 lowercase, and 1 special character
+//        let passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?\":{}|<>]).{8,}$"
+//        return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: self)
+//    }
+    
     func isValidPassword() -> Bool {
-        // Minimum 8 characters, at least 1 uppercase, 1 lowercase, and 1 special character
-        let passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?\":{}|<>]).{8,}$"
-        return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: self)
+        // Minimum 8 characters, must contain at least 1 letter and 1 digit
+        // Special characters are allowed but not required
+        let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d).{8,}$"
+        return NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+            .evaluate(with: self)
     }
+
+
     
     func isNumber() -> Bool {
         if self.isStringEmpty() {

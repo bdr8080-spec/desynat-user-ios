@@ -42,7 +42,6 @@ class SignupViewModel: NSObject {
             }
         }
         
-        
         let email = String.getString(hostVC.emailTextField.text).trimmingCharacters(in: .whitespacesAndNewlines)
         if errorMessage == .none {
             if email.isEmpty {
@@ -57,10 +56,9 @@ class SignupViewModel: NSObject {
         if errorMessage == .none {
             if password.isEmpty {
                 errorMessage = .EnterPassword
+            }else if !password.isValidPassword() {
+                errorMessage = .InvalidPasswordFormat
             }
-//            else if !password.isValidPassword() {
-//                errorMessage = .InvalidPasswordFormat
-//            }
         }
         
         let confirmPassword = String.getString(hostVC.confirmPasswordTextField.text).trimmingCharacters(in: .whitespacesAndNewlines)

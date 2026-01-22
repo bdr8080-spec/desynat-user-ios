@@ -40,7 +40,7 @@ class FullScreenBannerViewController: UIViewController {
   func startAutoScroll() {
       autoScrollTimer?.invalidate()
 
-      autoScrollTimer = Timer.scheduledTimer(withTimeInterval: 4.0, repeats: true) { [weak self] _ in
+      autoScrollTimer = Timer.scheduledTimer(withTimeInterval: 6.0, repeats: true) { [weak self] _ in
           self?.scrollToNextPage()
       }
 
