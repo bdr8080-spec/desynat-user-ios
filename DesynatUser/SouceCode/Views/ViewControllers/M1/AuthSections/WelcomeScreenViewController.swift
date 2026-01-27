@@ -16,9 +16,9 @@ class WelcomeScreenViewController: UIViewController {
     @IBOutlet weak var ellipse: BannerPageControl!
     @IBOutlet weak var walkthroghtCollectionView: UICollectionView!
     @IBOutlet weak var previousButtonOutlet: UIButton!
-
+    
     var bannerArray: [WalkthroughModel] = [
-        WalkthroughModel(image: UIImage(named: "walk1") ?? UIImage(systemName: "photo")!, // Fallback to system image
+        WalkthroughModel(image: UIImage(named: "walk1") ?? UIImage(systemName: "photo")!,
                          name: "Order Item".localiz(),
                          description: "Lorem ipsum dolor sit amet consectetur. Mi ultrices diam sociis volutpat orci non. Commodo pretium urna ut augue ac amet sed.".localiz()),
         WalkthroughModel(image: UIImage(named: "walk2") ?? UIImage(systemName: "photo")!,
@@ -28,7 +28,20 @@ class WelcomeScreenViewController: UIViewController {
                          name: "Item Tracking".localiz(),
                          description: "Lorem ipsum dolor sit amet consectetur. Mi ultrices diam sociis volutpat orci non. Commodo pretium urna ut augue ac amet sed.".localiz())
     ]
+    
+    var affiliatedUserArray: [WalkthroughModel] = [
+        WalkthroughModel(image: UIImage(named: "walk1") ?? UIImage(systemName: "photo")!,
+                         name: "Earn Money".localiz(),
+                         description: "Lorem ipsum dolor sit amet consectetur. Mi ultrices diam sociis volutpat orci non. Commodo pretium urna ut augue ac amet sed.".localiz()),
+        WalkthroughModel(image: UIImage(named: "walk2") ?? UIImage(systemName: "photo")!,
+                         name: "Track Commission".localiz(),
+                         description: "Lorem ipsum dolor sit amet consectetur. Mi ultrices diam sociis volutpat orci non. Commodo pretium urna ut augue ac amet sed.".localiz()),
+        WalkthroughModel(image: UIImage(named: "walk3") ?? UIImage(systemName: "photo")!,
+                         name: "Share Product Link".localiz(),
+                         description: "Lorem ipsum dolor sit amet consectetur. Mi ultrices diam sociis volutpat orci non. Commodo pretium urna ut augue ac amet sed.".localiz())
+    ]
     var currentCellIndex = 0
+    var comingUserRole: UserType = .normalUser
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,16 +50,26 @@ class WelcomeScreenViewController: UIViewController {
         updateUI(for: 0)
         // Force initial reload to ensure correct cell display
         walkthroghtCollectionView.reloadData()
-        print("Initial load: bannerArray images - \(bannerArray.map { $0.image })")
     }
     
     @IBAction func forwardNextButtonDidTapped(_ sender: Any) {
-        if currentCellIndex < bannerArray.count - 1 {
-            moveToPage(currentCellIndex + 1)
-        } else {
-            let vc = LoginViewController.instantiate(fromAppStoryboard: .Main)
-            self.navigationController?.pushViewController(vc, animated: true)
-            UserDefaults.standard.setValue("false", forKey: "isAppInstall")
+        switch comingUserRole {
+        case .normalUser:
+            if currentCellIndex < bannerArray.count - 1 {
+                moveToPage(currentCellIndex + 1)
+            } else {
+                let vc = LoginViewController.instantiate(fromAppStoryboard: .Main)
+                self.navigationController?.pushViewController(vc, animated: true)
+                UserDefaults.standard.setValue("false", forKey: "isAppInstall")
+            }
+        case .affiliateUser:
+            if currentCellIndex < affiliatedUserArray.count - 1 {
+                moveToPage(currentCellIndex + 1)
+            } else {
+                let vc = LoginViewController.instantiate(fromAppStoryboard: .Main)
+                self.navigationController?.pushViewController(vc, animated: true)
+                UserDefaults.standard.setValue("false", forKey: "isAppInstall")
+            }
         }
     }
     
@@ -76,7 +99,12 @@ class WelcomeScreenViewController: UIViewController {
     }
     
     func configurePageControl() {
-        ellipse.numberOfPages = bannerArray.count
+        switch comingUserRole {
+        case .normalUser:
+            ellipse.numberOfPages = bannerArray.count
+        case .affiliateUser:
+            ellipse.numberOfPages = affiliatedUserArray.count
+        }
         ellipse.currentPage = 0
         ellipse.activeSize = CGSize(width: 16, height: 8)
         ellipse.inactiveSize = CGSize(width: 8, height: 8)
@@ -86,39 +114,70 @@ class WelcomeScreenViewController: UIViewController {
     }
     
     private func moveToPage(_ index: Int) {
-        guard bannerArray.indices.contains(index) else {
-            return
+        switch comingUserRole {
+        case .normalUser:
+            guard bannerArray.indices.contains(index) else {
+                return
+            }
+        case .affiliateUser:
+            guard affiliatedUserArray.indices.contains(index) else {
+                return
+            }
         }
         currentCellIndex = index
         let indexPath = IndexPath(item: currentCellIndex, section: 0)
         walkthroghtCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                self.updateUI(for: self.currentCellIndex)
-                self.walkthroghtCollectionView.reloadItems(at: [indexPath])
-            }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.updateUI(for: self.currentCellIndex)
+            self.walkthroghtCollectionView.reloadItems(at: [indexPath])
+        }
     }
     
     func updateUI(for index: Int) {
-        guard bannerArray.indices.contains(index) else { return }
-        titleLabel.text = bannerArray[index].name
-        descriptionLabel.text = bannerArray[index].description
-        ellipse.currentPage = index
-        skipButtonOutlet.isHidden = (index == bannerArray.count - 1)
-        previousButtonOutlet.isHidden = (index == 0)
+        switch comingUserRole {
+        case .normalUser:
+            guard bannerArray.indices.contains(index) else { return }
+            titleLabel.text = bannerArray[index].name
+            descriptionLabel.text = bannerArray[index].description
+            ellipse.currentPage = index
+            skipButtonOutlet.isHidden = (index == bannerArray.count - 1)
+            previousButtonOutlet.isHidden = (index == 0)
+        case .affiliateUser:
+            guard affiliatedUserArray.indices.contains(index) else { return }
+            titleLabel.text = affiliatedUserArray[index].name
+            descriptionLabel.text = affiliatedUserArray[index].description
+            ellipse.currentPage = index
+            skipButtonOutlet.isHidden = (index == affiliatedUserArray.count - 1)
+            previousButtonOutlet.isHidden = (index == 0)
+        }
+        
     }
-
+    
 }
 
 extension WelcomeScreenViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return bannerArray.count
+        switch comingUserRole {
+        case .normalUser:
+            return bannerArray.count
+        case .affiliateUser:
+            return affiliatedUserArray.count
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WalkThroughCell", for: indexPath) as! WalkThroughCell
-        let data = bannerArray[indexPath.row]
-        cell.imageWalk.image = nil
-        cell.imageWalk.image = data.image
+        switch comingUserRole {
+        case .normalUser:
+            let data = bannerArray[indexPath.row]
+            cell.imageWalk.image = nil
+            cell.imageWalk.image = data.image
+        case .affiliateUser:
+            let data = affiliatedUserArray[indexPath.row]
+            cell.imageWalk.image = nil
+            cell.imageWalk.image = data.image
+        }
         return cell
     }
     
@@ -148,7 +207,7 @@ extension WelcomeScreenViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: collectionView.frame.width,
                       height: collectionView.frame.height)
     }
-
+    
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,

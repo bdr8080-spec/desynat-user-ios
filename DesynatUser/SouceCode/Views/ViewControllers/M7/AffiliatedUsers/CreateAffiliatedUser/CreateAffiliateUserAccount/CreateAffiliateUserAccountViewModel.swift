@@ -1,0 +1,125 @@
+//
+//  CreateAffiliateUserAccountViewModel.swift
+//  DesynatUser
+//
+//  Created by fluper_mac3 on 27/01/26.
+//
+
+import Foundation
+
+class CreateAffiliateUserAccountViewModel: NSObject {
+    
+    private var hostVC: CreateAffiliateUserAccountViewController
+    var countryList:[CountryModel] = []
+    
+    init(hostVC: CreateAffiliateUserAccountViewController) {
+        self.hostVC = hostVC
+    }
+    
+    func validFields() -> Bool {
+        var errorMessage: AlertConstant = .none
+        
+        if hostVC.selectedImage == nil {
+            errorMessage = .SelectProfileImage
+        }
+        
+        let fullName = String.getString(hostVC.fullNameTextField.text).trimmingCharacters(in: .whitespacesAndNewlines)
+        if errorMessage == .none {
+            if fullName.isEmpty {
+                errorMessage = .EnterFullName
+            }
+        }
+        
+        let mobile = String.getString(hostVC.mobileTextField.text).trimmingCharacters(in: .whitespacesAndNewlines)
+        if errorMessage == .none {
+            if mobile.isEmpty {
+                errorMessage = .EnterMobileNumber
+            } else if !mobile.isValidPhoneNumber() {
+                errorMessage = .validMobileNumber
+            }
+        }
+        
+        
+        let email = String.getString(hostVC.emailTextField.text).trimmingCharacters(in: .whitespacesAndNewlines)
+        if errorMessage == .none {
+            if email.isEmpty {
+                errorMessage = .EnterEmail
+            } else if !email.isValidEmail() {
+                errorMessage = .EnterValidEmailAddress
+            }
+        }
+        
+        if hostVC.selectedImageDoc1 == nil {
+            errorMessage = .UplaodDoc1
+        }
+        
+        if hostVC.selectedImageDoc2 == nil {
+            errorMessage = .UplaodDoc2
+        }
+        
+        let password = String.getString(hostVC.txtCreatePassword.text).trimmingCharacters(in: .whitespacesAndNewlines)
+        if errorMessage == .none {
+            if password.isEmpty {
+                errorMessage = .EnterPassword
+            }else if !password.isValidPassword() {
+                errorMessage = .InvalidPasswordFormat
+            }
+        }
+        
+        let confirmPassword = String.getString(hostVC.txtConfirmPassword.text).trimmingCharacters(in: .whitespacesAndNewlines)
+        if errorMessage == .none {
+            if confirmPassword.isEmpty {
+                errorMessage = .EnterConfirmPassword
+            } else if confirmPassword != password {
+                errorMessage = .PasswordNotMatched
+            }
+        }
+        
+        if errorMessage == .none {
+            if !hostVC.isTermsAccepted {
+                errorMessage = .AcceptTermsAndConditions
+            }
+        }
+        
+        if errorMessage != .none {
+            hostVC.showAlert(msg: errorMessage.rawValue)
+        }
+        
+        hostVC.view.endEditing(true)
+        return errorMessage == .none
+    }
+    
+    //Mark:->SignUpAPi
+    func signUpApi(){
+//        let params:[String:Any] = [
+//            APIKeys.profilePic:hostVC.profileImage,
+//            APIKeys.firstName:hostVC.firstNameTextField.text ?? "",
+//            APIKeys.countryCode:hostVC.countryCode,
+//            APIKeys.lastName:hostVC.lastNameTextField.text ?? "",
+//            APIKeys.mobile:hostVC.mobileTextField.text ?? "",
+//            APIKeys.email:hostVC.emailTextField.text ?? "",
+//            APIKeys.password:hostVC.txtCreatePassword.text ?? "",
+//            APIKeys.confirmPassword:hostVC.txtConfirmPassword.text ?? "",
+//            APIKeys.acceptTerms:"1",
+//            APIKeys.deviceType:"1",
+//            APIKeys.deviceToken:""
+//        ]
+//        
+//        WebService.sharedInstance.signUpService(withParams:params) { user in
+            let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
+            vc.comingReason = .accountCreateAffiliateUser
+//            vc.phoneNumber = self.hostVC.mobileTextField.text?.trimmed() ?? ""
+//            vc.countryCode = self.hostVC.countryCode
+//            vc.isEnteredPhoneNumber = true
+//            vc.userId = "\(response.id ?? 0)"
+            self.hostVC.navigationController?.pushViewController(vc, animated: true)
+//        }
+    }
+    
+
+    func countryListApi(){
+        WebService.sharedInstance.countryListService { list in
+            self.countryList = list
+        }
+    }
+}

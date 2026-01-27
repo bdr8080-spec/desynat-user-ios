@@ -12,9 +12,8 @@ import UIKit
 class LoginViewModel: NSObject {
     
     private var loginHostVC: LoginViewController
-//    var countryList:[CountryModel] = []
-  var getAllUSerCountryList:[GetAllUserCountryModel] = []
-  
+    var getAllUSerCountryList:[GetAllUserCountryModel] = []
+    
     init(loginHostVC: LoginViewController) {
         self.loginHostVC = loginHostVC
     }
@@ -43,9 +42,9 @@ class LoginViewModel: NSObject {
             if password.isEmpty {
                 errorMessage = .EnterPassword
             }
-//            else if !password.isValidPassword() {
-//                errorMessage = .InvalidPasswordFormat
-//            }
+            //            else if !password.isValidPassword() {
+            //                errorMessage = .InvalidPasswordFormat
+            //            }
         }
         
         if errorMessage != .none {
@@ -58,38 +57,38 @@ class LoginViewModel: NSObject {
     
     func loginApi() {
         let input = loginHostVC.emailTextField.text?.trimmed() ?? ""
-            let password = loginHostVC.passwordTextField.text?.trimmed() ?? ""
-            
-            var params: [String: Any] = [
-                "password": password,
-                "email_mobile": input]
-            if input.isEmail() {
-                params["type"] = "1"
-            } else if input.isPhoneNumber() {
-                params["country_code"] = loginHostVC.countryCode
-                params["type"] = "0"
-            } else {
-                loginHostVC.showAlert(msg: AlertConstant.EnterValidEmailorMobile.rawValue)
-                return
-            }
+        let password = loginHostVC.passwordTextField.text?.trimmed() ?? ""
+        
+        var params: [String: Any] = [
+            "password": password,
+            "email_mobile": input]
+        if input.isEmail() {
+            params["type"] = "1"
+        } else if input.isPhoneNumber() {
+            params["country_code"] = loginHostVC.countryCode
+            params["type"] = "0"
+        } else {
+            loginHostVC.showAlert(msg: AlertConstant.EnterValidEmailorMobile.rawValue)
+            return
+        }
         WebService.sharedInstance.loginUserService(withParams: params) { (response) in
             UserDefaults.standard.setValue("Yes", forKey:"isLogin")
             UserDefaults.standard.setValue("false", forKey:"isGuestLogin")
             kSharedSceneDelegate.navigateToUserHomeVc()
         }
     }
-  
-  
-  func getALlUserCountryListApi(){
+    
+    
+    func getALlUserCountryListApi(){
         WebService.sharedInstance.getAllUserscountryList { list in
             self.getAllUSerCountryList = list
         }
     }
-
-//    func countryListApi(){
-//        WebService.sharedInstance.countryListService { list in
-//            self.countryList = list
-//        }
-//    }
+    
+    //    func countryListApi(){
+    //        WebService.sharedInstance.countryListService { list in
+    //            self.countryList = list
+    //        }
+    //    }
 }
 

@@ -20,6 +20,7 @@ class ForgotPasswordViewController: UIViewController {
     var mobileIsSelected: Bool = true
     private lazy var viewModel = ForgotPasswordViewModel(hostVC: self)
     var countryCode: String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
+    var comingUserRole: UserType = .normalUser
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,12 @@ class ForgotPasswordViewController: UIViewController {
     
     @IBAction func continueDidTapped(_ sender: Any) {
         if viewModel.validFields(mobileIsSelected: mobileIsSelected) {
-            viewModel.forgotPasswordApi(mobileIsSelected: mobileIsSelected)
+            switch comingUserRole {
+            case .normalUser:
+                viewModel.forgotPasswordApi(mobileIsSelected: mobileIsSelected)
+            case .affiliateUser:
+                viewModel.forgotPasswordApiForAffiliatedUser(mobileIsSelected: mobileIsSelected)
+            }
         }
     }
     
@@ -114,4 +120,9 @@ extension ForgotPasswordViewController: UITextFieldDelegate {
         
         return true
     }
+}
+
+enum UserType {
+    case normalUser
+    case affiliateUser
 }

@@ -40,6 +40,7 @@ class OTPViewModel: NSObject {
                 kSharedSceneDelegate.navigateToUserHomeVc()
             case .forgotPassword:
                 let vc = ResetPasswordViewController.instantiate(fromAppStoryboard: .Main)
+                vc.comingUserRole = .normalUser
                 vc.userId = self.hostVC.userId
                 self.hostVC.navigationController?.pushViewController(vc, animated: true)
             case .changeOldMobileNumber:
@@ -50,8 +51,26 @@ class OTPViewModel: NSObject {
                 print("api called")
             case .setNewEmail:
                 print("api called")
+            case .forgotPasswordForAffiliatedUser:
+                print("api called")
+            case .accountCreateAffiliateUser:
+                print("api called")
             }
         }
+    }
+    
+    func verifyOtpAPIForAffiliatedUser(type: String) {
+//        let params: [String: Any] = [
+//            "user_id": hostVC.userId,
+//            "otp": hostVC.otpDigits,
+//            "type": type
+//        ]
+//        WebService.sharedInstance.verifyOTPService(withParams: params) { otp in
+                let vc = ResetPasswordViewController.instantiate(fromAppStoryboard: .Main)
+//                vc.userId = self.hostVC.userId
+        vc.comingUserRole = .affiliateUser
+                self.hostVC.navigationController?.pushViewController(vc, animated: true)
+//        }
     }
 
     func resendOtpAPI() {
@@ -66,6 +85,20 @@ class OTPViewModel: NSObject {
         WebService.sharedInstance.resendOTPService(withParams: params){ otp in
             
         }
+    }
+    
+    func resendOtpAPIForAffiliatedUser() {
+//        var params: [String: Any] = ["email_mobile": hostVC.phoneNumber ?? ""]
+//        if hostVC.isEnteredPhoneNumber {
+//            params["country_code"] = hostVC.countryCode
+//            params["type"] = "0"
+//        } else {
+//            params["type"] = "1"
+//        }
+//    
+//        WebService.sharedInstance.resendOTPService(withParams: params){ otp in
+//            
+//        }
     }
     
     func userVerifyOtpApi(){
@@ -87,10 +120,6 @@ class OTPViewModel: NSObject {
                 let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
                 vc.comingReason = .changeMobileNumber
                 vc.callBackDismiss = {
-//                    self.hostVC.callBackForProfileDetails?(user.mobile ?? "",user.countryCode ?? "","")
-//                    print("user.mobile:\(user.mobile ?? "")")
-//                    print("user.countryCode:\(user.countryCode ?? "")")
-//                    self.hostVC.navigationController?.popToViewController(ofClass: ProfileDetailsViewController.self, animated: true)
                     if let navController = self.hostVC.navigationController {
                         for controller in navController.viewControllers {
                             if let profileVC = controller as? ProfileDetailsViewController {
@@ -102,11 +131,6 @@ class OTPViewModel: NSObject {
                             }
                         }
                     }
-
-                  //  self.hostVC.callBackForProfileDetails?(user.mobile ?? "",user.countryCode ?? "","")
-                    
-
-                    
                 }
                 self.hostVC.navigationController?.present(vc, animated: true)
             }else if self.hostVC.comingReason == .setNewEmail{

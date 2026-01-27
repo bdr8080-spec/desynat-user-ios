@@ -17,7 +17,6 @@ class LoginViewController: UIViewController {
     
     private lazy var viewModel = LoginViewModel(loginHostVC: self)
     var countryCode: String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
-//    var countryCode: String = "+965"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +28,6 @@ class LoginViewController: UIViewController {
         viewCountryCode.isHidden = true
         self.txtFieldLeading.constant = -65
         emailMobileImageView.image = UIImage(named: "email")
-//        viewModel.countryListApi()
     }
     
 
@@ -41,6 +39,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func forgotPasswordDidTapped(_ sender: Any) {
         let vc = ForgotPasswordViewController.instantiate(fromAppStoryboard: .Main)
+        vc.comingUserRole = .normalUser
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

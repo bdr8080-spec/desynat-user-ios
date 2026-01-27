@@ -14,6 +14,7 @@ class ResetPasswordViewController: UIViewController {
     
     lazy private var viewModel = ResetPasswordViewModel(hostVC: self)
     var userId: String? = ""
+    var comingUserRole: UserType = .normalUser
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +24,12 @@ class ResetPasswordViewController: UIViewController {
     
     @IBAction func doneDidTapped(_ sender: Any) {
         if viewModel.validFields() {
-            viewModel.resetPasswordOTPApi()
+            switch comingUserRole {
+            case .normalUser:
+                viewModel.resetPasswordOTPApi()
+            case .affiliateUser:
+                viewModel.resetPasswordOTPApiForAffiliatedUser()
+            }
         }
     }
     

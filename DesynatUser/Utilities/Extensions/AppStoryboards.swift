@@ -15,6 +15,7 @@ enum AppStoryboard : String {
   case MyBag
   case MyOrder
   case Chat
+  case AffiliateUser
 }
 
 extension AppStoryboard {

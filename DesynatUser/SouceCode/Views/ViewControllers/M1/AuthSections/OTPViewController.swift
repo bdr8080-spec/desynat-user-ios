@@ -10,6 +10,8 @@ import UIKit
 class OTPViewController: UIViewController {
     
     // MARK: - Outlets
+    
+    @IBOutlet weak var stepImageView: UIImageView!
     @IBOutlet weak var view1: UIView!
     @IBOutlet weak var textField1: UITextField!
     @IBOutlet weak var view2: UIView!
@@ -52,6 +54,12 @@ class OTPViewController: UIViewController {
         } else {
             phoneNumberLabel.text = phoneNumber
         }
+        switch comingReason {
+        case .accountCreateAffiliateUser:
+            stepImageView.isHidden = false
+        default:
+            stepImageView.isHidden = true
+        }
         
     }
     
@@ -77,12 +85,20 @@ class OTPViewController: UIViewController {
             viewModel.userVerifyOtpApi()
         case .setNewEmail:
             viewModel.userVerifyOtpApi()
+        case .forgotPasswordForAffiliatedUser:
+            viewModel.verifyOtpAPIForAffiliatedUser(type: "")
+        case .accountCreateAffiliateUser:
+            // step 2for account createion of affiliated user
         }
     }
     
     @IBAction func buttonResend(_ sender: UIButton) {
         startTimer()
-        viewModel.resendOtpAPI()
+        if comingReason == .forgotPasswordForAffiliatedUser {
+            viewModel.resendOtpAPIForAffiliatedUser()
+        } else {
+            viewModel.resendOtpAPI()
+        }
     }
     
     // MARK: - Timer Handling
@@ -198,4 +214,6 @@ enum ComingReasonAtOTPScreen {
     case changeOldEmail
     case setNewMobileNumber
     case setNewEmail
+    case forgotPasswordForAffiliatedUser
+    case accountCreateAffiliateUser
 }

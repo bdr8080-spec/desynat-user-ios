@@ -69,6 +69,8 @@ enum AlertConstant: String {
   case EnterFromName = "Please enter your name"
   case EnterWishMessage = "Please enter wish message"
   case EnterNote = "Please enter note"
+  case UplaodDoc1 = "Please upload document 1"
+  case UplaodDoc2 = "Please upload document 2"
   
   
   func value() -> String {

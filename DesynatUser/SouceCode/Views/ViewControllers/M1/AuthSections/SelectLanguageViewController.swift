@@ -17,20 +17,7 @@ class SelectLanguageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         LocationManager.sharedInstance.startUpdatingLocation()
-//        let vc = LocationPermissionViewController.instantiate(fromAppStoryboard: .Main)
-//                vc.onPermissionCompletion = { [weak self] in
-//                    self?.showNotificationPermission()
-//                }
-//                self.present(vc, animated: true)
     }
-    
-//    private func showNotificationPermission() {
-//        let vc = NotificationPermissionViewController.instantiate(fromAppStoryboard: .Main)
-//        vc.onPermissionCompletion = { [weak self] in
-//            print("allowed")
-//        }
-//        self.present(vc, animated: true)
-//    }
     
     @IBAction func btnSelectLanguage(_ sender: UIButton) {
         if sender.tag == 0 {

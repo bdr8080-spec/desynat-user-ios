@@ -130,7 +130,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         if isGuestLogin == "true" {
             kSharedSceneDelegate.navigateToLoginVc()
         } else {
-            
             let selectedItem = sideMenuData[indexPath.row].title
             
             switch selectedItem {
@@ -168,7 +167,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 print("✅ Selected: Support")
                 
             case "Become An Affiliate":
-                print("✅ Selected: Become An Affiliate")
+                let nextVC = BecomeAnAffiliatedUserViewController.instantiate(fromAppStoryboard: .Home)
+                self.navigationController?.pushViewController(nextVC, animated: true)
                 
             case "Settings":
                 print("✅ Selected: Settings")
