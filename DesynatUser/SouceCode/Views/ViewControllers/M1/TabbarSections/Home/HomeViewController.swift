@@ -147,12 +147,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - Page Control Tap Handling
     @IBAction func pageControlChanged(_ sender: UIPageControl) {
-//        let page = sender.currentPage
-//        let indexPath = IndexPath(item: page, section: 0)
-//        bannerCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        
         currentBannerIndex = sender.currentPage
-            
             let indexPath = IndexPath(item: currentBannerIndex, section: 0)
             bannerCollectionView.scrollToItem(
                 at: indexPath,
@@ -176,7 +171,7 @@ class HomeViewController: UIViewController {
     @IBAction func changeLocationButtonAction(_ sender: Any) {
         let vc = LocationViewController.instantiate(fromAppStoryboard: .Profile)
         vc.comingReason = .fromHome
-        vc.locationCallBack = { fullAddress, locality, city, state, country, pincode, latitude, longitude in
+        vc.locationCallBack = { fullAddress,  localityName, locality, city, state, country, pincode, latitude, longitude in
             self.lblLocatioin.text = fullAddress
         }
         self.navigationController?.pushViewController(vc, animated: true)
@@ -422,20 +417,11 @@ class HomeViewController: UIViewController {
     private func showUserData() {
         if isGuestLogin == "true" {
             lblUserName.text = "Hello Guest"
-            //            imgProfile.image = UIImage(named: "userProfile")
         } else {
             lblUserName.text = "Deliver to \(Global.shared.user?.fullName ?? "")"
             imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.medium
-            //            imgProfile.sd_imageIndicator?.startAnimatingIndicator()
-            //            imgProfile.sd_setImage(
-            //                with: URL(string: Global.shared.user?.profileImage ?? "userProfile"),
-            //                placeholderImage: UIImage(named: "userProfile")
-            //            ) { [weak imgProfile] _, _, _, _ in
-            //                imgProfile?.sd_imageIndicator?.stopAnimatingIndicator()
-            //            }
         }
     }
-    
     
 }
 

@@ -167,8 +167,18 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 print("✅ Selected: Support")
                 
             case "Become An Affiliate":
-                let nextVC = BecomeAnAffiliatedUserViewController.instantiate(fromAppStoryboard: .Home)
-                self.navigationController?.pushViewController(nextVC, animated: true)
+                if let userdetails = viewModel.savedUserProfile {
+                    if userdetails.affiliatedUserdetails == nil {
+                        let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
+                        vc.comingUserRole = .affiliateUser
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    } else {
+                        let nextVC = AffiliatedUserLoginViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+                        self.navigationController?.pushViewController(nextVC, animated: true)
+                    }
+                }
+//                let nextVC = BecomeAnAffiliatedUserViewController.instantiate(fromAppStoryboard: .Home)
+//                self.navigationController?.pushViewController(nextVC, animated: true)
                 
             case "Settings":
                 print("✅ Selected: Settings")

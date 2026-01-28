@@ -11,7 +11,7 @@ import UIKit
 class AffiliatedUserLoginViewModel {
     
     private var loginHostVC: AffiliatedUserLoginViewController
-    var getAllUSerCountryList:[GetAllUserCountryModel] = []
+    var getAllUSerCountryList:[CountryModel] = []
     
     init(loginHostVC: AffiliatedUserLoginViewController) {
         self.loginHostVC = loginHostVC
@@ -41,9 +41,6 @@ class AffiliatedUserLoginViewModel {
             if password.isEmpty {
                 errorMessage = .EnterPassword
             }
-            //            else if !password.isValidPassword() {
-            //                errorMessage = .InvalidPasswordFormat
-            //            }
         }
         
         if errorMessage != .none {
@@ -60,6 +57,7 @@ class AffiliatedUserLoginViewModel {
         
         var params: [String: Any] = [
             "password": password,
+            "lang":"en",
             "email_mobile": input]
         if input.isEmail() {
             params["type"] = "1"
@@ -70,25 +68,34 @@ class AffiliatedUserLoginViewModel {
             loginHostVC.showAlert(msg: AlertConstant.EnterValidEmailorMobile.rawValue)
             return
         }
-//        WebService.sharedInstance.loginUserService(withParams: params) { (response) in
-//            UserDefaults.standard.setValue("Yes", forKey:"isLogin")
-//            UserDefaults.standard.setValue("false", forKey:"isGuestLogin")
-//            kSharedSceneDelegate.navigateToUserHomeVc()
-//        }
-    }
-    
-    
-    func getALlUserCountryListApi(){
-        WebService.sharedInstance.getAllUserscountryList { list in
-            self.getAllUSerCountryList = list
+        WebService.sharedInstance.loginWithPasswordForAffiliatedUser(withParams: params) { (response) in
+            if response.addressUpdateStatus == "0" {
+                let nextVC = AffiliatedUserAddressAdditionViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+                self.loginHostVC.navigationController?.pushViewController(nextVC, animated: true)
+            } else if response.bankUpdateStatus == "0" {
+                let nextVC = AddBankDetailsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+                self.loginHostVC.navigationController?.pushViewController(nextVC, animated: true)
+            } else if response.adminVerify == "2" {
+                kSharedSceneDelegate.navigateToAffiliatedUserHomeVc()
+            } else {
+                let nextVC = AccountCreationDoneViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+                self.loginHostVC.navigationController?.pushViewController(nextVC, animated: true)
+            }
         }
     }
     
-    //    func countryListApi(){
-    //        WebService.sharedInstance.countryListService { list in
-    //            self.countryList = list
-    //        }
-    //    }
+//    
+//    func getALlUserCountryListApi(){
+//        WebService.sharedInstance.getAllUserscountryList { list in
+//            self.getAllUSerCountryList = list
+//        }
+//    }
+    
+        func countryListApi(){
+            WebService.sharedInstance.countryListService { list in
+                self.getAllUSerCountryList = list
+            }
+        }
 }
 
 extension AffiliatedUserLoginViewController: UITextFieldDelegate {

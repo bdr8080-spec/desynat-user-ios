@@ -79,7 +79,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
     @IBOutlet weak var lblPaidByCard: CustomLabelFont!
     @IBOutlet weak var imgCard: UIImageView!
     @IBOutlet weak var viewItemPrice: UIView!
-//    @IBOutlet weak var lblItemPrice: CustomLabelFont!
+    //    @IBOutlet weak var lblItemPrice: CustomLabelFont!
     @IBOutlet weak var orderTableView: TableViewDynamicHeight!
     
     @IBOutlet weak var imgProduct: CustomImageView!
@@ -445,7 +445,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                     lblStatus.text = "Delivered"
                     lblStatus.textColor = UIColor(hexString: "#16B364")
                     viewStatus.borderColor = UIColor(hexString: "#16B364")
-//                    viewReturnDays.isHidden = false
+                    //                    viewReturnDays.isHidden = false
                     if isCustomOrder {
                         viewReturnDays.isHidden = true
                     } else {
@@ -476,8 +476,8 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                         viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
                         viewReturnEx.isHidden = true
                         resetStepper()
-//                        activateStep(0, title: "Confirmed")
-//                        activateStep(1, title: "In Progress")
+                        //                        activateStep(0, title: "Confirmed")
+                        //                        activateStep(1, title: "In Progress")
                         img1.image = .unconfiremdOrder
                         img2.image = .shipped
                         lbl3.text = "Picked Up"
@@ -496,7 +496,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                         }
                         lblPlacedDate.text = "Return request \(data.updatedAt?.formattedPlacedDate() ?? "")"
                         if data.rEApprove == "1" {
-//                            lblStatus.text = "Return Request"
+                            //                            lblStatus.text = "Return Request"
                             if data.returnType == "1" {
                                 lblStatus.text = "Returned"//"Return Request"
                                 activateStep(0, title: "Confirmed")
@@ -522,7 +522,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                                     }
                                 }
                             }
-//                            lbl4.text = "Completed"
+                            //                            lbl4.text = "Completed"
                         } else if data.rEApprove == "2" {
                             lblStatus.text = "Delivered"//"Return Request"
                             activateStep(0, title: "Confirmed")
@@ -567,7 +567,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                     viewCancelDetail.isHidden = true
                     viewReason.isHidden = true
                     viewPaidBy.isHidden = false
-//                    viewReturnDays.isHidden = false
+                    //                    viewReturnDays.isHidden = false
                     if isCustomOrder {
                         viewReturnDays.isHidden = true
                     } else {
@@ -669,7 +669,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                     lblStatus.text = "Ongoing"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
-//                    viewReturnDays.isHidden = false
+                    //                    viewReturnDays.isHidden = false
                     if isCustomOrder {
                         viewReturnDays.isHidden = true
                     } else {
@@ -700,7 +700,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                     lblStatus.text = "Ongoing"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
-//                    viewReturnDays.isHidden = false
+                    //                    viewReturnDays.isHidden = false
                     if isCustomOrder {
                         viewReturnDays.isHidden = true
                     } else {
@@ -739,7 +739,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                     lblStatus.text = "Delivered"
                     lblStatus.textColor = UIColor(hexString: "#16B364")
                     viewStatus.borderColor = UIColor(hexString: "#16B364")
-//                    viewReturnDays.isHidden = false
+                    //                    viewReturnDays.isHidden = false
                     if isCustomOrder {
                         viewReturnDays.isHidden = true
                     } else {
@@ -771,10 +771,10 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                         viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
                         viewReturnEx.isHidden = true
                         resetStepper()
-//                        activateStep(0, title: "Confirmed")
-//                        activateStep(1, title: "In Progress")
-//                        lbl3.text = "Picked Up"
-//                        lbl4.text = "Completed"
+                        //                        activateStep(0, title: "Confirmed")
+                        //                        activateStep(1, title: "In Progress")
+                        //                        lbl3.text = "Picked Up"
+                        //                        lbl4.text = "Completed"
                         img1.image = .unconfiremdOrder//.confirmedOrder
                         img2.image = .shipped
                         lbl3.text = "Picked Up"
@@ -792,7 +792,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                             viewUploadImg.isHidden = false
                         }
                         if data.rEApprove == "1" {
-//                            lblStatus.text = "Return Request"
+                            //                            lblStatus.text = "Return Request"
                             if data.returnType == "1" {
                                 lblStatus.text = "Returned"
                                 activateStep(0, title: "Confirmed")
@@ -816,7 +816,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                                     }
                                 }
                             }
-//                            lbl4.text = "Completed"
+                            //                            lbl4.text = "Completed"
                         } else if data.rEApprove == "2" {
                             lblStatus.text = "Delivered"//"Return Request"
                             activateStep(0, title: "Confirmed")
@@ -857,7 +857,7 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
                     viewCancelDetail.isHidden = true
                     viewReason.isHidden = true
                     viewPaidBy.isHidden = false
-//                    viewReturnDays.isHidden = false
+                    //                    viewReturnDays.isHidden = false
                     if isCustomOrder {
                         viewReturnDays.isHidden = true
                     } else {

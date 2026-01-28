@@ -11,6 +11,7 @@ import GooglePlaces
 
 class LocationViewController: UIViewController, UITextFieldDelegate {
     
+    @IBOutlet weak var buttonTitleLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var txtSearch: UITextField!
     @IBOutlet weak var viewMap: GMSMapView!
@@ -21,10 +22,11 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
     var latitude:Double?
     var longitude:Double?
     let ZOOM_LEVEL_HIGH:Float = 16.0
-    var locationCallBack: ((String, String, String, String, String, String, Double, Double) -> ())?
+    var locationCallBack: ((String,String, String, String, String, String, String, Double, Double) -> ())?
     var currentLatLong = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
     var locationManager = CLLocationManager()
     var address = ""
+    var localityName = ""
     var locality = ""
     var city = ""
     var state = ""
@@ -33,43 +35,43 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
     var locationMarker = GMSMarker()
     lazy private var viewModel = LocationViewModel(hostVC: self)
     var comingReason: ComingReasonAtLocationScreen = .fromHome
-  var preSelectedLat: Double?
-  var preSelectedLng: Double?
-  
-  override func viewDidLoad() {
-      super.viewDidLoad()
-      
-      txtSearch.delegate = self
-      viewMap.delegate = self
-      
-      // Setup location manager
-      locationManager.delegate = self
-      locationManager.desiredAccuracy = kCLLocationAccuracyBest
-      locationManager.requestWhenInUseAuthorization()
-      locationManager.startUpdatingLocation()
-      
-      // Smart: Use pre-selected > current location > fallback
-      let targetLat: Double
-      let targetLng: Double
-      let zoom: Float
-      
-      if let lat = preSelectedLat, let lng = preSelectedLng, lat != 0, lng != 0 {
-          targetLat = lat
-          targetLng = lng
-          zoom = ZOOM_LEVEL_HIGH  // Zoom in if user already picked a place
-      } else {
-          targetLat = LocationManager.sharedInstance.location?.latitude ?? 28.6139  // Default: Delhi (or your city)
-          targetLng = LocationManager.sharedInstance.location?.longitude ?? 77.2090
-          zoom = 12
-      }
-      
-      let camera = GMSCameraPosition.camera(withLatitude: targetLat, longitude: targetLng, zoom: zoom)
-      viewMap.camera = camera
-//      locationMarker.position = CLLocationCoordinate2D(latitude: targetLat, longitude: targetLng)
-//      locationMarker.map = viewMap
-      reverseGeocodeCoordinate(CLLocationCoordinate2D(latitude: targetLat, longitude: targetLng))
+    var preSelectedLat: Double?
+    var preSelectedLng: Double?
     
-  }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        txtSearch.delegate = self
+        viewMap.delegate = self
+        
+        // Setup location manager
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
+        // Smart: Use pre-selected > current location > fallback
+        let targetLat: Double
+        let targetLng: Double
+        let zoom: Float
+        
+        if let lat = preSelectedLat, let lng = preSelectedLng, lat != 0, lng != 0 {
+            targetLat = lat
+            targetLng = lng
+            zoom = ZOOM_LEVEL_HIGH  // Zoom in if user already picked a place
+        } else {
+            targetLat = LocationManager.sharedInstance.location?.latitude ?? 28.6139  // Default: Delhi (or your city)
+            targetLng = LocationManager.sharedInstance.location?.longitude ?? 77.2090
+            zoom = 12
+        }
+        
+        let camera = GMSCameraPosition.camera(withLatitude: targetLat, longitude: targetLng, zoom: zoom)
+        viewMap.camera = camera
+        //      locationMarker.position = CLLocationCoordinate2D(latitude: targetLat, longitude: targetLng)
+        //      locationMarker.map = viewMap
+        reverseGeocodeCoordinate(CLLocationCoordinate2D(latitude: targetLat, longitude: targetLng))
+        initialSetup()
+    }
     
     @IBAction func btnBack(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -86,6 +88,7 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
         let fullAddress = lblLocation.text ?? address
         locationCallBack?(
             fullAddress,
+            localityName,
             locality,
             city,
             state,
@@ -96,52 +99,57 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
         )
         self.navigationController?.popViewController(animated: true)
     }
-  
-  func googleMapSetup() {
-      viewMap.isMyLocationEnabled = false
-      viewMap.delegate = self
-
-      // If preselected location exists, show it
-      if let preLat = preSelectedLat, let preLong = preSelectedLng {
-          self.latitude = preLat
-          self.longitude = preLong
-//        viewMap.settings.myLocationButton = false
-          let camera = GMSCameraPosition.camera(withLatitude: preLat, longitude: preLong, zoom: 12)
-          self.viewMap.camera = camera
-//          addMarker(at: CLLocationCoordinate2D(latitude: preLat, longitude: preLong))
-      }
-  }
+    
+    func googleMapSetup() {
+        viewMap.isMyLocationEnabled = false
+        viewMap.delegate = self
+        
+        // If preselected location exists, show it
+        if let preLat = preSelectedLat, let preLong = preSelectedLng {
+            self.latitude = preLat
+            self.longitude = preLong
+            //        viewMap.settings.myLocationButton = false
+            let camera = GMSCameraPosition.camera(withLatitude: preLat, longitude: preLong, zoom: 12)
+            self.viewMap.camera = camera
+            //          addMarker(at: CLLocationCoordinate2D(latitude: preLat, longitude: preLong))
+        }
+    }
     
     private func initialSetup() {
         switch comingReason {
         case .fromHome:
             titleLabel.text = "Change Location"
+            buttonTitleLabel.text = "Continue"
         case .fromAddAddress:
             titleLabel.text = "Set Location"
+            buttonTitleLabel.text = "Continue"
+        case .affiliateUserAccountCreation:
+            titleLabel.text = "Add Address"
+            buttonTitleLabel.text = "Save"
         }
     }
 }
 
 extension LocationViewController: CLLocationManagerDelegate,GMSMapViewDelegate {
-  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-      guard let location = locations.last else { return }
-
-      // Only move camera if no preselected location
-      if preSelectedLat == nil && preSelectedLng == nil {
-          let coordinate = location.coordinate
-          self.latitude = coordinate.latitude
-          self.longitude = coordinate.longitude
-
-          let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude,
-                                                longitude: coordinate.longitude,
-                                                zoom: 12)
-          self.viewMap.animate(to: camera)
-//          addMarker(at: coordinate)
-      }
-
-      locationManager.stopUpdatingLocation()
-  }
-
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return }
+        
+        // Only move camera if no preselected location
+        if preSelectedLat == nil && preSelectedLng == nil {
+            let coordinate = location.coordinate
+            self.latitude = coordinate.latitude
+            self.longitude = coordinate.longitude
+            
+            let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude,
+                                                  longitude: coordinate.longitude,
+                                                  zoom: 12)
+            self.viewMap.animate(to: camera)
+            //          addMarker(at: coordinate)
+        }
+        
+        locationManager.stopUpdatingLocation()
+    }
+    
     
     func mapView(_ mapView: GMSMapView, idleAt cameraPosition: GMSCameraPosition) {
         self.latitude = cameraPosition.target.latitude
@@ -182,6 +190,7 @@ extension LocationViewController: CLLocationManagerDelegate,GMSMapViewDelegate {
                 .joined(separator: ", ")
             
             // 🔹 Assign values (always non-nil)
+            self.localityName = name.isEmpty ? "" : name
             self.locality = subLocality.isEmpty ? "" : subLocality
             self.city = locality.isEmpty ? "" : locality
             self.state = state.isEmpty ? "" : state
@@ -196,8 +205,8 @@ extension LocationViewController: CLLocationManagerDelegate,GMSMapViewDelegate {
             }
         }
     }
-
-
+    
+    
     
     
 }
@@ -234,4 +243,5 @@ extension LocationViewController: GMSAutocompleteViewControllerDelegate {
 enum ComingReasonAtLocationScreen {
     case fromHome
     case fromAddAddress
+    case affiliateUserAccountCreation
 }

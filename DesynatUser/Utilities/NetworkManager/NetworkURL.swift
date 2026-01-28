@@ -96,6 +96,18 @@ enum NetworkEndPoint: String {
   case createCustomOrderRequest         = "api/user/custom-create-order"
   case getAllHomeScreenBannersList      = "api/user/Home-screen-Banner-catgory-banner"
   
+    
+    //M7
+    case createAffiliatedAccountUser    = "api/user/create-a-affilated-account"
+    case verifyAffiliatedAccountUser    = "api/user/affilated-verify-otp"
+    case affilatedAddAddress            = "api/affiliate/affilated-add-address"
+    case affilatedAddBankDetails        = "api/affiliate/affilated-add-Bank-details"
+    case resendOTPAffiliatedUser        = "api/affiliate/resend_otp"
+    case affiliatedLoginWithPassword    = "api/affiliate/affiliated-login"
+    case affiliatedLoginWithOTP         = "api/affiliate/affiliate-login-with-otp"
+    case affiliatedForgotPassword       = "api/affiliate/forgot_password"
+    case affiliatedCreatePassword       = "api/affiliate/create_password"
+    
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"
     }

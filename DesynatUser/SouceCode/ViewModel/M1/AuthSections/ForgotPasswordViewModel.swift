@@ -90,19 +90,19 @@ class ForgotPasswordViewModel: NSObject {
                     "email": hostVC.emailAddressTextField.text?.trimmed() ?? ""
                 ]
             }
-//        WebService.sharedInstance.forgotPasswordService(withParams: params) { (response) in
+        WebService.sharedInstance.forgotPasswordForAffiliatedUserService(withParams: params) { (response) in
             let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
             vc.comingReason = .forgotPasswordForAffiliatedUser
-//            if mobileIsSelected {
-//                vc.phoneNumber = self.hostVC.mobileTextField.text?.trimmed() ?? ""
-//                vc.countryCode = self.hostVC.countryCode
-//            } else{
-//                vc.phoneNumber = self.hostVC.emailAddressTextField.text?.trimmed() ?? ""
-//            }
-//            vc.isEnteredPhoneNumber = mobileIsSelected
-//            vc.userId = "\(response.id ?? 0)"
+            if mobileIsSelected {
+                vc.phoneNumber = self.hostVC.mobileTextField.text?.trimmed() ?? ""
+                vc.countryCode = self.hostVC.countryCode
+            } else{
+                vc.phoneNumber = self.hostVC.emailAddressTextField.text?.trimmed() ?? ""
+            }
+            vc.isEnteredPhoneNumber = mobileIsSelected
+            vc.userId = "\(response.id ?? 0)"
             self.hostVC.navigationController?.pushViewController(vc, animated: true)
-//        }
+        }
     }
     
   func getALlUserCountryListApi(){

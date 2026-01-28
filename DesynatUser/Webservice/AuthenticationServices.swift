@@ -922,6 +922,149 @@ extension WebService {
       }
     }
   }
+    
+    func createAffiliatedAccountService(param: [String:Any], completion:@escaping (_ user: AffiliateCreateAccountDataModel)-> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI:.endpoint(.createAffiliatedAccountUser), requestMethod: .post, requestParams: param, requestModel: AffiliateCreateAccountDataModel.self) { result, code in
+        
+        CommonUtils.showHud(show: false)
+        self.evaluateWebServiceResponse(response: result) { response, message,error in
+          guard let user = response else {
+            if let error {
+              UIApplication.shared.topViewController()?.showAlert(msg: error)
+            }
+            return
+          }
+          completion(user)
+        }
+      }
+    }
+    
+    func verifyAffiliatedAccountService(param: [String:Any], completion:@escaping (_ user: AffiliateCreateAccountDataModel)-> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI:.endpoint(.verifyAffiliatedAccountUser), requestMethod: .post, requestParams: param, requestModel: AffiliateCreateAccountDataModel.self) { result, code in
+        CommonUtils.showHud(show: false)
+        self.evaluateWebServiceResponse(response: result) { response, message,error in
+          guard let user = response else {
+            if let error {
+              UIApplication.shared.topViewController()?.showAlert(msg: error)
+            }
+            return
+          }
+          completion(user)
+        }
+      }
+    }
+    
+    func addAddressAffiliatedAccountService(param: [String:Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+      CommonUtils.showHud(show: true)
+    let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+      NetworkManager.shared.request(withAPI:.endpoint(.affilatedAddAddress), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
+        CommonUtils.showHud(show: false)
+        self.evaluateWebServiceResponse(response: result) { response, message,error in
+          guard let user = response else {
+            if let error {
+              UIApplication.shared.topViewController()?.showAlert(msg: error)
+            }
+            return
+          }
+          completion(user)
+        }
+      }
+    }
+    
+    func addBankDetailsAffiliatedUserService(param: [String:Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+      CommonUtils.showHud(show: true)
+    let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+      NetworkManager.shared.request(withAPI:.endpoint(.affilatedAddBankDetails), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
+        CommonUtils.showHud(show: false)
+        self.evaluateWebServiceResponse(response: result) { response, message,error in
+          guard let user = response else {
+            if let error {
+              UIApplication.shared.topViewController()?.showAlert(msg: error)
+            }
+            return
+          }
+          completion(user)
+        }
+      }
+    }
+    
+    func resendOTPServiceForAffiliatedUser(withParams dictParams: Dictionary<String, Any>, completion: @escaping (_ user: AffiliateCreateAccountDataModel) -> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI: .endpoint(.resendOTPAffiliatedUser), requestMethod: .post, requestParams: dictParams, encoding: JSONEncoding.default, requestModel: AffiliateCreateAccountDataModel.self) { result, code in
+        CommonUtils.showHud(show: false)
+        self.evaluateWebServiceResponse(response: result) { response, message, error in
+          if let error {
+            UIApplication.shared.topViewController()?.showAlert(msg: error)
+          } else if let response {
+            CommonUtils.showToast(message: "OTP resent succesfully")
+            completion(response)
+          }
+        }
+      }
+    }
+    
+    func loginWithPasswordForAffiliatedUser(withParams dictParams: Dictionary<String, Any>, completion: @escaping (_ user: AffiliateCreateAccountDataModel) -> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI: .endpoint(.affiliatedLoginWithPassword), requestMethod: .post, requestParams: dictParams, encoding: JSONEncoding.default, requestModel: AffiliateCreateAccountDataModel.self) { result, code in
+        CommonUtils.showHud(show: false)
+        self.evaluateWebServiceResponse(response: result) { response, message, error in
+          if let error {
+            UIApplication.shared.topViewController()?.showAlert(msg: error)
+          } else if let response {
+//            CommonUtils.showToast(message: "OTP resent succesfully")
+            completion(response)
+          }
+        }
+      }
+    }
+    
+    func affiliatedLoginWithOTPService(withParams dictParams: Dictionary<String, Any>, completion: @escaping (_ user: AffiliateCreateAccountDataModel) -> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI: .endpoint(.affiliatedLoginWithOTP), requestMethod: .post, requestParams: dictParams, encoding: JSONEncoding.default, requestModel: AffiliateCreateAccountDataModel.self) { result, code in
+        CommonUtils.showHud(show: false)
+        self.evaluateWebServiceResponse(response: result) { response, message, error in
+          if let error {
+            UIApplication.shared.topViewController()?.showAlert(msg: error)
+          } else if let response {
+            CommonUtils.showToast(message: "OTP resent succesfully")
+            completion(response)
+          }
+        }
+      }
+    }
+    
+    func forgotPasswordForAffiliatedUserService(withParams dictParams: Dictionary<String, Any>, completion: @escaping (_ user: AffiliateCreateAccountDataModel) -> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI: .endpoint(.affiliatedForgotPassword), requestMethod: .post, requestParams: dictParams, encoding: JSONEncoding.default, requestModel: AffiliateCreateAccountDataModel.self) { result, code in
+        CommonUtils.showHud(show: false)
+        self.evaluateWebServiceResponse(response: result) { response, message, error in
+          if let error {
+            UIApplication.shared.topViewController()?.showAlert(msg: error)
+          } else if let response {
+            DispatchQueue.main.async {
+              CommonUtils.showToast(message: "OTP sent successfully")
+            }
+            completion(response)
+          }
+        }
+      }
+    }
+    
+    func createPasswordForAffiliatedUserService(withParams dictParams: Dictionary<String, Any>, completion: @escaping (_ user: AffiliateCreateAccountDataModel) -> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI: .endpoint(.affiliatedCreatePassword), requestMethod: .post, requestParams: dictParams, encoding: JSONEncoding.default, requestModel: AffiliateCreateAccountDataModel.self) { result, code in
+        CommonUtils.showHud(show: false)
+        self.evaluateWebServiceResponse(response: result) { response, message, error in
+          if let error {
+            UIApplication.shared.topViewController()?.showAlert(msg: error)
+          } else if let response {
+            completion(response)
+          }
+        }
+      }
+    }
 }
 
 

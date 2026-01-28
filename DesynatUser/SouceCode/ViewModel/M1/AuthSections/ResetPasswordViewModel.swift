@@ -62,18 +62,18 @@ class ResetPasswordViewModel: NSObject {
     }
     
     func resetPasswordOTPApiForAffiliatedUser() {
-//        let params: [String:Any] = [
-//            "id": hostVC.userId ?? "",
-//            "password": hostVC.createPasswordTextField.text?.trimmed() ?? "",
-//            "confirm_password": hostVC.confirmPasswordTextField.text?.trimmed() ?? ""]
-//        WebService.sharedInstance.createPasswordService(withParams: params) { (response) in
+        let params: [String:Any] = [
+            "id": hostVC.userId ?? "",
+            "password": hostVC.createPasswordTextField.text?.trimmed() ?? "",
+            "confirm_password": hostVC.confirmPasswordTextField.text?.trimmed() ?? ""]
+        WebService.sharedInstance.createPasswordForAffiliatedUserService(withParams: params) { (response) in
             let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
             vc.comingReason = .passwordUpdated
             vc.callBackDismiss = {
                 self.hostVC.navigationController?.popToViewController(ofClass: AffiliatedUserLoginViewController.self, animated: true)
             }
             self.hostVC.navigationController?.present(vc, animated: true)
-//        }
+        }
     }
 }
 

@@ -85,10 +85,10 @@ class LoginViewModel: NSObject {
         }
     }
     
-    //    func countryListApi(){
-    //        WebService.sharedInstance.countryListService { list in
-    //            self.countryList = list
-    //        }
-    //    }
+//        func countryListApi(){
+//            WebService.sharedInstance.countryListService { list in
+//                self.countryList = list
+//            }
+//        }
 }
 

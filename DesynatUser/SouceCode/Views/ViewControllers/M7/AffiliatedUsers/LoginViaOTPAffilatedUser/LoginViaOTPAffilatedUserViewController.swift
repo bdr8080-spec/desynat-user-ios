@@ -56,7 +56,7 @@ class LoginViaOTPAffilatedUserViewController: UIViewController {
       let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
           let name = country.name ?? ""
           let dialCode = country.dialCode ?? ""
-          let flag = country.flag1 ?? "🇰🇼"
+          let flag = country.flag ?? "🇰🇼"
           return "\(flag)  \(name) (\(dialCode))"
       }
 

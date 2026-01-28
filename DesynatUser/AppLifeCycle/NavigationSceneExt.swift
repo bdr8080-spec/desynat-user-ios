@@ -35,21 +35,15 @@ extension SceneDelegate {
 
 //    /// Logout current user and navigate to loginVc
     func logoutUser() {
-//        let roleName = Global.shared.user?.role?.name?.lowercased()
-//        Global.shared.user = nil
-//        kSharedUserDefaults.clearAllData(except: [.deviceToken,.selectedLanguage,.defaultLanguage,.language, .userId])
-//        UserDefaults.standard.set("no", forKey: "login")
-//        switch roleName{
-//            case "landlord":
-//            navigateToLandLordLoginVc()
-//        case "agent":
-//            navigateToAgentLoginVc()
-//        default:
-//            self.navigateToGuestLoginVc()
-//        }
-        
+        kSharedUserDefaults.clearAllData(except: [.deviceToken,.userLocation,.selectedLanguage, .defaultLanguage, .language])
+        Global.shared.user = nil
     }
-//    
+    
+    public func navigateToAffiliatedUserHomeVc() {
+        let vc = AffiliatedUserTabbarViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+        navigateTo(vc: vc)
+    }
+//
 //    ///Pass custom vc to make it root controller
     public func navigateTo(vc:UIViewController) {
         let nc = UINavigationController(rootViewController: vc)

@@ -12,6 +12,7 @@ import SDWebImage
 class ProfileViewModel {
     
     private var hostVC: ProfileViewController
+    var savedUserProfile: UserModel?
     
     init(hostVC: ProfileViewController) {
         self.hostVC = hostVC
@@ -25,20 +26,40 @@ class ProfileViewModel {
         }
     }
     
-    func getUserData() {
-        if let savedUser: UserModel = kSharedUserDefaults.retrieveModelFor(key: .user, model: UserModel.self) {
-            hostVC.usernameLabel.text = savedUser.fullName
-            hostVC.emailLabel.text = savedUser.email
-            hostVC.userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.medium
-            (hostVC.userProfileImageView.sd_imageIndicator as? SDWebImageActivityIndicator)?.indicatorView.color = .gray
+//    func getUserData() {
+//        if let savedUser: UserModel = kSharedUserDefaults.retrieveModelFor(key: .user, model: UserModel.self) {
+//            hostVC.usernameLabel.text = savedUser.fullName
+//            hostVC.emailLabel.text = savedUser.email
+//            hostVC.userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.medium
+//            (hostVC.userProfileImageView.sd_imageIndicator as? SDWebImageActivityIndicator)?.indicatorView.color = .gray
+//            if let imageUrlString = savedUser.profileImage,
+//               let url = URL(string: imageUrlString) {
+//                hostVC.userProfileImageView.sd_setImage(
+//                    with: url,
+//                    placeholderImage: UIImage(named: "userProfile")
+//                )
+//            } else {
+//                hostVC.userProfileImageView.image = UIImage(named: "userProfile")
+//            }
+//        }
+//    }
+    
+    //Mark->:GetProfileDetailsApi
+    func getUserData(){
+        WebService.sharedInstance.getProfileService { savedUser in
+            self.savedUserProfile = savedUser
+            self.hostVC.usernameLabel.text = savedUser.fullName
+            self.hostVC.emailLabel.text = savedUser.email
+            self.hostVC.userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.medium
+            (self.hostVC.userProfileImageView.sd_imageIndicator as? SDWebImageActivityIndicator)?.indicatorView.color = .gray
             if let imageUrlString = savedUser.profileImage,
                let url = URL(string: imageUrlString) {
-                hostVC.userProfileImageView.sd_setImage(
+                self.hostVC.userProfileImageView.sd_setImage(
                     with: url,
                     placeholderImage: UIImage(named: "userProfile")
                 )
             } else {
-                hostVC.userProfileImageView.image = UIImage(named: "userProfile")
+                self.hostVC.userProfileImageView.image = UIImage(named: "userProfile")
             }
         }
     }

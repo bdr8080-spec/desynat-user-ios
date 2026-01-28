@@ -12,7 +12,7 @@ class LoginViaOTPAffiliatedUserViewModel: NSObject {
     
     private var loginHostVC: LoginViaOTPAffilatedUserViewController
     private var isEnterPhoneNumber: Bool = false
-    var getAllUSerCountryList: [GetAllUserCountryModel] = []
+    var getAllUSerCountryList: [CountryModel] = []
     
     init(loginHostVC: LoginViaOTPAffilatedUserViewController) {
         self.loginHostVC = loginHostVC
@@ -40,19 +40,21 @@ class LoginViaOTPAffiliatedUserViewModel: NSObject {
     
     func loginViaOTPApi() {
         let input = loginHostVC.phoneTextField.text?.trimmed() ?? ""
-        var params: [String:Any] = ["email_mobile": loginHostVC.phoneTextField.text?.trimmed() ?? ""]
+        var params: [String:Any] = [:]
         if input.isEmail() {
             isEnterPhoneNumber = false
             params["type"] = "1"
+            params["email"] = loginHostVC.phoneTextField.text?.trimmed() ?? ""
         }else if input.isPhoneNumber() {
             isEnterPhoneNumber = true
             params["country_code"] = loginHostVC.countryCode
+            params["mobile"] = loginHostVC.phoneTextField.text?.trimmed() ?? ""
             params["type"] = "0"
         }
         
-        WebService.sharedInstance.loginUserViaOTPService(withParams: params) { (response) in
+        WebService.sharedInstance.affiliatedLoginWithOTPService(withParams: params) { (response) in
             let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
-            vc.comingReason = .loginViaOTP
+            vc.comingReason = .loginViaOTPForAffiliatedUser
             vc.phoneNumber = self.loginHostVC.phoneTextField.text?.trimmed() ?? ""
             vc.userId = "\(response.id ?? 0)"
             vc.countryCode = self.loginHostVC.countryCode
@@ -62,7 +64,7 @@ class LoginViaOTPAffiliatedUserViewModel: NSObject {
     }
     
     func getALlUserCountryListApi(){
-        WebService.sharedInstance.getAllUserscountryList { list in
+        WebService.sharedInstance.countryListService { list in
             self.getAllUSerCountryList = list
         }
     }

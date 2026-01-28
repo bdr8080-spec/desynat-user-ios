@@ -19,6 +19,7 @@ enum UserDefaultsKey : String {
     case language
     case sessionToken
     case userId
+    case affiliatedAccessToken
 }
 
 extension UserDefaults {

@@ -55,24 +55,62 @@ class OTPViewModel: NSObject {
                 print("api called")
             case .accountCreateAffiliateUser:
                 print("api called")
+            case .loginViaOTPForAffiliatedUser:
+                print("api called")
             }
         }
     }
     
-    func verifyOtpAPIForAffiliatedUser(type: String) {
-//        let params: [String: Any] = [
-//            "user_id": hostVC.userId,
-//            "otp": hostVC.otpDigits,
-//            "type": type
-//        ]
-//        WebService.sharedInstance.verifyOTPService(withParams: params) { otp in
+    
+    func verifyAffiliatedAccountService(type: String) {
+        let params: [String: Any] = [
+            "id": hostVC.userId,
+            "otp": hostVC.otpDigits,
+            "type": type]
+        WebService.sharedInstance.verifyAffiliatedAccountService(param: params) { response in
+            kSharedUserDefaults.saveStringFor(Key: .affiliatedAccessToken, value: String.getString(response.affiliatedAccessToken))
+            switch self.hostVC.comingReason {
+            case .accountCreateAffiliateUser:
+                let nextVC = AffiliatedUserAddressAdditionViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+                self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
+            case .loginViaOTPForAffiliatedUser:
+                if response.addressUpdateStatus == "0" {
+                    let nextVC = AffiliatedUserAddressAdditionViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+                    self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
+                } else if response.bankUpdateStatus == "0" {
+                    let nextVC = AddBankDetailsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+                    self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
+                } else if response.adminVerify == "2" {
+                    kSharedSceneDelegate.navigateToAffiliatedUserHomeVc()
+                } else {
+                    let nextVC = AccountCreationDoneViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+                    self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
+                }
+            case .forgotPasswordForAffiliatedUser:
                 let vc = ResetPasswordViewController.instantiate(fromAppStoryboard: .Main)
-//                vc.userId = self.hostVC.userId
-        vc.comingUserRole = .affiliateUser
+                vc.userId = self.hostVC.userId
+                vc.comingUserRole = .affiliateUser
                 self.hostVC.navigationController?.pushViewController(vc, animated: true)
-//        }
+            default:
+                print("")
+            }
+        }
     }
-
+    
+//    func verifyOtpAPIForAffiliatedUser(type: String) {
+//        //        let params: [String: Any] = [
+//        //            "user_id": hostVC.userId,
+//        //            "otp": hostVC.otpDigits,
+//        //            "type": type
+//        //        ]
+//        //        WebService.sharedInstance.verifyOTPService(withParams: params) { otp in
+//        let vc = ResetPasswordViewController.instantiate(fromAppStoryboard: .Main)
+//        //                vc.userId = self.hostVC.userId
+//        vc.comingUserRole = .affiliateUser
+//        self.hostVC.navigationController?.pushViewController(vc, animated: true)
+//        //        }
+//    }
+    
     func resendOtpAPI() {
         var params: [String: Any] = ["email_mobile": hostVC.phoneNumber ?? ""]
         if hostVC.isEnteredPhoneNumber {
@@ -81,24 +119,22 @@ class OTPViewModel: NSObject {
         } else {
             params["type"] = "1"
         }
-    
         WebService.sharedInstance.resendOTPService(withParams: params){ otp in
             
         }
     }
     
     func resendOtpAPIForAffiliatedUser() {
-//        var params: [String: Any] = ["email_mobile": hostVC.phoneNumber ?? ""]
-//        if hostVC.isEnteredPhoneNumber {
-//            params["country_code"] = hostVC.countryCode
-//            params["type"] = "0"
-//        } else {
-//            params["type"] = "1"
-//        }
-//    
-//        WebService.sharedInstance.resendOTPService(withParams: params){ otp in
-//            
-//        }
+        var params: [String: Any] = ["email_mobile": hostVC.phoneNumber ?? ""]
+        if hostVC.isEnteredPhoneNumber {
+            params["country_code"] = hostVC.countryCode
+            params["type"] = "0"
+        } else {
+            params["type"] = "1"
+        }
+        WebService.sharedInstance.resendOTPServiceForAffiliatedUser(withParams: params){ otp in
+            
+        }
     }
     
     func userVerifyOtpApi(){

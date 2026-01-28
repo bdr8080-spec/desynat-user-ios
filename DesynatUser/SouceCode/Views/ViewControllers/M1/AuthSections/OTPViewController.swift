@@ -86,17 +86,20 @@ class OTPViewController: UIViewController {
         case .setNewEmail:
             viewModel.userVerifyOtpApi()
         case .forgotPasswordForAffiliatedUser:
-            viewModel.verifyOtpAPIForAffiliatedUser(type: "")
+            viewModel.verifyAffiliatedAccountService(type: "0")
         case .accountCreateAffiliateUser:
-            // step 2for account createion of affiliated user
+            viewModel.verifyAffiliatedAccountService(type: "1")
+        case .loginViaOTPForAffiliatedUser:
+            viewModel.verifyAffiliatedAccountService(type: "1")
         }
     }
     
     @IBAction func buttonResend(_ sender: UIButton) {
         startTimer()
-        if comingReason == .forgotPasswordForAffiliatedUser {
+        switch comingReason {
+        case .forgotPasswordForAffiliatedUser, .accountCreateAffiliateUser, .loginViaOTPForAffiliatedUser:
             viewModel.resendOtpAPIForAffiliatedUser()
-        } else {
+        default:
             viewModel.resendOtpAPI()
         }
     }
@@ -216,4 +219,5 @@ enum ComingReasonAtOTPScreen {
     case setNewEmail
     case forgotPasswordForAffiliatedUser
     case accountCreateAffiliateUser
+    case loginViaOTPForAffiliatedUser
 }

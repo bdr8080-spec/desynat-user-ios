@@ -21,13 +21,12 @@ class BecomeAnAffiliatedUserViewController: UIViewController {
     }
     
     @IBAction func existingUserDidTapped(_ sender: Any) {
-        let nextVC = AffiliatedUserLoginViewController.instantiate(fromAppStoryboard: .AffiliateUser)
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        
     }
     
     @IBAction func newUserDidTapped(_ sender: Any) {
-        let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
-        vc.comingUserRole = .affiliateUser
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
+//        vc.comingUserRole = .affiliateUser
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -1369,6 +1369,7 @@ want to continue with</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonTitleLabel" destination="aFv-9V-LYh" id="yGN-KQ-yZo"/>
                         <outlet property="lblLocation" destination="ihN-Xv-LUf" id="JFn-Ce-Uej"/>
                         <outlet property="titleLabel" destination="xqN-Fd-UXU" id="afD-h0-ZqH"/>
                         <outlet property="txtSearch" destination="meQ-ye-gKo" id="cnT-dt-7r8"/>
@@ -3966,7 +3967,7 @@ want to continue with</string>
         <image name="search" width="20" height="20"/>
         <image name="userProfile" width="32" height="32.333332061767578"/>
         <namedColor name="AccentColor">
-            <color red="0.4309999942779541" green="0.27099999785423279" blue="0.15299999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="darkBrown">
             <color red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3978,10 +3979,10 @@ want to continue with</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

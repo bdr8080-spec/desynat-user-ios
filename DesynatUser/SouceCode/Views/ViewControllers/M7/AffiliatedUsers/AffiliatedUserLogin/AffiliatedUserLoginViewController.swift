@@ -21,7 +21,7 @@ class AffiliatedUserLoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      viewModel.getALlUserCountryListApi()
+      viewModel.countryListApi()
         countryCodeLabel.text = countryCode
         passwordTextField.isSecureTextEntry = true
         passwordTextField.delegate = self
@@ -72,7 +72,7 @@ class AffiliatedUserLoginViewController: UIViewController {
       let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
           let name = country.name ?? ""
           let dialCode = country.dialCode ?? ""
-          let flag = country.flag1 ?? "🇰🇼"
+          let flag = country.flag ?? "🇰🇼"
           return "\(flag)  \(name) (\(dialCode))"
       }
 

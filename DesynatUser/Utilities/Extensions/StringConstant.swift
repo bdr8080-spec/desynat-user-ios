@@ -72,7 +72,22 @@ enum AlertConstant: String {
   case UplaodDoc1 = "Please upload document 1"
   case UplaodDoc2 = "Please upload document 2"
   
-  
+    case UploadAccountHolderImage   = "Please upload proof of account"
+    case SelectAccountType          = "Please select an account type"
+    case EnterIBAN                  = "Please enter IBAN number"
+    case EnterSWIFT                 = "Please enter SWIFT/BIC number"
+    case EnterBankName              = "Please enter bank name"
+    case EnterAccountHolder         = "Please enter account holder name"
+    case EnterAccountNumber         = "Please enter account number"
+    case EnterConfirmAccountNumber  = "Please enter confirm account number"
+    case chooseCountry              = "Please select country"
+    case chooseLocation             = "Please select location"
+    case addressLine1               = "Please enter address line 1"
+    case addressLine2               = "Please enter address line 2"
+    case enterPincode               = "Please enter pin code"
+    case enterlocalityTown          = "Please enter locality town"
+    case AccountNumberNotMatch      = "Account number don not match"
+    
   func value() -> String {
     return self.rawValue
   }

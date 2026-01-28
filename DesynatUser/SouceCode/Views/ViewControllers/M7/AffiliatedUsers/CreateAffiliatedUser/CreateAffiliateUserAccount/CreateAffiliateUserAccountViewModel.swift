@@ -49,12 +49,16 @@ class CreateAffiliateUserAccountViewModel: NSObject {
             }
         }
         
-        if hostVC.selectedImageDoc1 == nil {
-            errorMessage = .UplaodDoc1
+        if errorMessage == .none {
+            if hostVC.selectedImageDoc1 == nil {
+                errorMessage = .UplaodDoc1
+            }
         }
         
-        if hostVC.selectedImageDoc2 == nil {
-            errorMessage = .UplaodDoc2
+        if errorMessage == .none {
+            if hostVC.selectedImageDoc2 == nil {
+                errorMessage = .UplaodDoc2
+            }
         }
         
         let password = String.getString(hostVC.txtCreatePassword.text).trimmingCharacters(in: .whitespacesAndNewlines)
@@ -88,38 +92,39 @@ class CreateAffiliateUserAccountViewModel: NSObject {
         hostVC.view.endEditing(true)
         return errorMessage == .none
     }
-    
+
     //Mark:->SignUpAPi
     func signUpApi(){
-//        let params:[String:Any] = [
-//            APIKeys.profilePic:hostVC.profileImage,
-//            APIKeys.firstName:hostVC.firstNameTextField.text ?? "",
-//            APIKeys.countryCode:hostVC.countryCode,
-//            APIKeys.lastName:hostVC.lastNameTextField.text ?? "",
-//            APIKeys.mobile:hostVC.mobileTextField.text ?? "",
-//            APIKeys.email:hostVC.emailTextField.text ?? "",
-//            APIKeys.password:hostVC.txtCreatePassword.text ?? "",
-//            APIKeys.confirmPassword:hostVC.txtConfirmPassword.text ?? "",
-//            APIKeys.acceptTerms:"1",
-//            APIKeys.deviceType:"1",
-//            APIKeys.deviceToken:""
-//        ]
-//        
-//        WebService.sharedInstance.signUpService(withParams:params) { user in
+        let params:[String:Any] = [
+            "profile_image": hostVC.profileImage,
+            "full_name": hostVC.fullNameTextField.text ?? "",
+            "country_code": hostVC.countryCode,
+            "mobile": hostVC.mobileTextField.text ?? "",
+            "email": hostVC.emailTextField.text ?? "",
+            "password": hostVC.txtCreatePassword.text ?? "",
+            "confirm_password": hostVC.txtConfirmPassword.text ?? "",
+            "document1": hostVC.uplaodDocuOneImage,
+            "document2": hostVC.uploadDocTwoImage,
+            "accept": 1,
+            "device_type": "1",
+            "device_token":""
+        ]
+        
+        WebService.sharedInstance.createAffiliatedAccountService(param:params) { response in
             let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
             vc.comingReason = .accountCreateAffiliateUser
-//            vc.phoneNumber = self.hostVC.mobileTextField.text?.trimmed() ?? ""
-//            vc.countryCode = self.hostVC.countryCode
-//            vc.isEnteredPhoneNumber = true
-//            vc.userId = "\(response.id ?? 0)"
+            vc.phoneNumber = self.hostVC.mobileTextField.text?.trimmed() ?? ""
+            vc.countryCode = self.hostVC.countryCode
+            vc.isEnteredPhoneNumber = true
+            vc.userId = "\(response.id ?? 0)"
             self.hostVC.navigationController?.pushViewController(vc, animated: true)
-//        }
+        }
     }
     
-
     func countryListApi(){
         WebService.sharedInstance.countryListService { list in
             self.countryList = list
         }
     }
+    
 }

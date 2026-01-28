@@ -66,9 +66,8 @@ class WelcomeScreenViewController: UIViewController {
             if currentCellIndex < affiliatedUserArray.count - 1 {
                 moveToPage(currentCellIndex + 1)
             } else {
-                let vc = LoginViewController.instantiate(fromAppStoryboard: .Main)
+                let vc = CreateAffiliateUserAccountViewController.instantiate(fromAppStoryboard: .AffiliateUser)
                 self.navigationController?.pushViewController(vc, animated: true)
-                UserDefaults.standard.setValue("false", forKey: "isAppInstall")
             }
         }
     }
@@ -80,9 +79,16 @@ class WelcomeScreenViewController: UIViewController {
     }
     
     @IBAction func skipDidTapped(_ sender: Any) {
-        let vc = LoginViewController.instantiate(fromAppStoryboard: .Main)
-        self.navigationController?.pushViewController(vc, animated: true)
-        UserDefaults.standard.setValue("false", forKey: "isAppInstall")
+        switch comingUserRole {
+        case .normalUser:
+            let vc = LoginViewController.instantiate(fromAppStoryboard: .Main)
+            self.navigationController?.pushViewController(vc, animated: true)
+            UserDefaults.standard.setValue("false", forKey: "isAppInstall")
+        case .affiliateUser:
+            let nextVC = CreateAffiliateUserAccountViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+        
     }
     
     private func setupCollectionView() {

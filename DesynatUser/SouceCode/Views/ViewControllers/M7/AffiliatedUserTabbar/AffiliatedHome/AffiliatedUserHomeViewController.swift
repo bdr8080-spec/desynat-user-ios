@@ -1,0 +1,36 @@
+//
+//  AffiliatedUserHomeViewController.swift
+//  DesynatUser
+//
+//  Created by fluper_mac3 on 28/01/26.
+//
+
+import UIKit
+
+class AffiliatedUserHomeViewController: UIViewController {
+    
+    @IBOutlet weak var btnToday: UIButton!
+    @IBOutlet weak var btnThisWeek: UIButton!
+    @IBOutlet weak var btnThisMonth: UIButton!
+    
+    private var dateButtons: [UIButton] { [btnToday, btnThisWeek, btnThisMonth]}
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func btnSelectDate(_ sender: UIButton) {
+      updateRadioSelection(for: dateButtons, selectedButton: sender)
+    }
+    
+    private func updateRadioSelection(for buttons: [UIButton], selectedButton: UIButton) {
+      for button in buttons {
+        if button == selectedButton {
+          button.setImage(UIImage(named: "radioHome"), for: .normal)
+        } else {
+          button.setImage(UIImage(named: "unselcetdRadioHome"), for: .normal)
+        }
+      }
+    }
+}

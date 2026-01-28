@@ -19,7 +19,8 @@ final class NetworkManager {
                                requestMethod method: HTTPMethod = .get,
                                requestParams params: Dictionary<String, Any>? = nil,
                                encoding:ParameterEncoding? = URLEncoding.default,
-                               requestModel model: T.Type,kkk
+                               requestModel model: T.Type,
+                               affiliatedUserToken: String? = "",
                                completion: @escaping ResultHandler<BaseResponse<T>>) {
         
         guard NetworkReachabilityManager()?.isReachable == true else {
@@ -27,7 +28,7 @@ final class NetworkManager {
             return
         }
         
-        let header = getHeaders()
+        let header = getHeaders(affiliatedUserToken: affiliatedUserToken)
         
         var url = ""
         switch apiName {
@@ -166,20 +167,42 @@ final class NetworkManager {
     }
     
     /// returns header details
-    private func getHeaders() -> HTTPHeaders {
+//    private func getHeaders() -> HTTPHeaders {
+//        var headers: HTTPHeaders = []
+//        if let accessToken = kSharedUserDefaults.getStringFor(key: .accessToken) {
+//            let bearerToken = "Bearer \(accessToken)"
+//            headers.add(HTTPHeader(name: APIKeys.accessToken, value: bearerToken))
+//        }
+//        
+//        //Add Session Token
+//        if let sessionToken = kSharedUserDefaults.getStringFor(key: .sessionToken) {
+//            headers.add(name: "session_token", value: sessionToken)
+//        }
+//    
+//        return headers
+//    }
+    
+    private func getHeaders(affiliatedUserToken: String? = "") -> HTTPHeaders {
         var headers: HTTPHeaders = []
-        if let accessToken = kSharedUserDefaults.getStringFor(key: .accessToken) {
+        if let affiliatedAccessToken = affiliatedUserToken,
+           !affiliatedAccessToken.isEmpty {
+            let bearerToken = "Bearer \(affiliatedAccessToken)"
+            headers.add(HTTPHeader(name: APIKeys.accessToken, value: bearerToken))
+        } else if let accessToken = kSharedUserDefaults.getStringFor(key: .accessToken),
+                  !accessToken.isEmpty {
             let bearerToken = "Bearer \(accessToken)"
             headers.add(HTTPHeader(name: APIKeys.accessToken, value: bearerToken))
         }
-        
-        //Add Session Token
-        if let sessionToken = kSharedUserDefaults.getStringFor(key: .sessionToken) {
+
+        // Add Session Token
+        if let sessionToken = kSharedUserDefaults.getStringFor(key: .sessionToken),
+           !sessionToken.isEmpty {
             headers.add(name: "session_token", value: sessionToken)
         }
-    
+
         return headers
     }
+
     
     private func ErrorResponseHandle(response:Data?,
                                      completion: @escaping (ErrorResponse?)->Void) {
