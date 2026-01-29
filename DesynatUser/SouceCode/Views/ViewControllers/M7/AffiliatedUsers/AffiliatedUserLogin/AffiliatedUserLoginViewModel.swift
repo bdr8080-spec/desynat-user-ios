@@ -69,6 +69,7 @@ class AffiliatedUserLoginViewModel {
             return
         }
         WebService.sharedInstance.loginWithPasswordForAffiliatedUser(withParams: params) { (response) in
+            kSharedUserDefaults.saveStringFor(Key: .affiliatedAccessToken, value: String.getString(response.affiliatedAccessToken))
             if response.addressUpdateStatus == "0" {
                 let nextVC = AffiliatedUserAddressAdditionViewController.instantiate(fromAppStoryboard: .AffiliateUser)
                 self.loginHostVC.navigationController?.pushViewController(nextVC, animated: true)
@@ -76,8 +77,14 @@ class AffiliatedUserLoginViewModel {
                 let nextVC = AddBankDetailsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
                 self.loginHostVC.navigationController?.pushViewController(nextVC, animated: true)
             } else if response.adminVerify == "2" {
+                kSharedUserDefaults.saveModelFor(key: .affiliatedUserDeatils, value: response)
+                UserDefaults.standard.setValue("true", forKey: "affiliatedAccountIsLoggedIn")
                 kSharedSceneDelegate.navigateToAffiliatedUserHomeVc()
-            } else {
+            } else if response.adminVerify == "4" {
+                self.loginHostVC.showAlert(msg: "Document Rejected. Please Reupload it.")
+                let nextVC = AffiliatedUserAddressAdditionViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+                self.loginHostVC.navigationController?.pushViewController(nextVC, animated: true)
+            }else {
                 let nextVC = AccountCreationDoneViewController.instantiate(fromAppStoryboard: .AffiliateUser)
                 self.loginHostVC.navigationController?.pushViewController(nextVC, animated: true)
             }

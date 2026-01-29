@@ -18,9 +18,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let islogin = UserDefaults.standard.string(forKey:"isLogin")
         let isAppInstalled = UserDefaults.standard.string(forKey:"isAppInstall")
+//        UserDefaults.standard.setValue("true", forKey: "affiliatedAccountIsLoggedIn")
+        let isAffiliatedUserLoggedIn = UserDefaults.standard.string(forKey:"affiliatedAccountIsLoggedIn")
       UserDefaults.standard.set("true", forKey: "hasShownFullscreenBanner")
-        if islogin == "Yes"{
-            kSharedSceneDelegate.navigateToUserHomeVc()
+        if islogin == "Yes" {
+            if isAffiliatedUserLoggedIn == "true" {
+                kSharedSceneDelegate.navigateToAffiliatedUserHomeVc()
+            } else {
+                kSharedSceneDelegate.navigateToUserHomeVc()
+            }
         }else{
             if isAppInstalled == "true"{
                 kSharedSceneDelegate.navigateToWelcomeScreen()

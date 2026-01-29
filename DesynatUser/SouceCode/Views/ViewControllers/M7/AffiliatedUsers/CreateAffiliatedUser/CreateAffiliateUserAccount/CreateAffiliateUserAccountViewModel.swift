@@ -73,7 +73,7 @@ class CreateAffiliateUserAccountViewModel: NSObject {
         let confirmPassword = String.getString(hostVC.txtConfirmPassword.text).trimmingCharacters(in: .whitespacesAndNewlines)
         if errorMessage == .none {
             if confirmPassword.isEmpty {
-                errorMessage = .EnterConfirmPassword
+                errorMessage = .confirmPasswordForAffiliate
             } else if confirmPassword != password {
                 errorMessage = .PasswordNotMatched
             }

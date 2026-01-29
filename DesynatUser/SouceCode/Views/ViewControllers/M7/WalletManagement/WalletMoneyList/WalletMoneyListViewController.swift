@@ -1,0 +1,73 @@
+//
+//  WalletMoneyListViewController.swift
+//  DesynatUser
+//
+//  Created by fluper_mac3 on 29/01/26.
+//
+
+import UIKit
+
+class WalletMoneyListViewController: UIViewController {
+
+//    @IBOutlet weak var heightOfTableViewConstaint: NSLayoutConstraint!
+    @IBOutlet weak var noDataFoundLabel: UILabel!
+    @IBOutlet weak var totalamountLabel: UILabel!
+    @IBOutlet weak var walletTableView: UITableView! {
+        didSet {
+            walletTableView.registerCellFromNib(cellID: "WalletMoneyListTableViewCell")
+        }
+    }
+    
+    private lazy var viewModel = WalletMoneyListViewModel(hostVC: self)
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.getWalletHistory()
+    }
+
+    @IBAction func addMoneyDidTapped(_ sender: Any) {
+        let nextVC = AddMoneyViewController.instantiate(fromAppStoryboard: .Profile)
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @IBAction func reedemGiftDidTapped(_ sender: Any) {
+        let nextVC = RedeemGiftCardViewController.instantiate(fromAppStoryboard: .Profile)
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @IBAction func backDidTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func updateTableViewHieght() {
+//        DispatchQueue.main.async {
+//            self.walletTableView.layoutIfNeeded()
+//            self.heightOfTableViewConstaint.constant = self.walletTableView.contentSize.height
+//        }
+    }
+    
+    func setData() {
+        totalamountLabel.text = CommonUtils.formatPriceStringInput(viewModel.walletData?.walletBalance, currency: "KD")
+    }
+    
+}
+
+extension WalletMoneyListViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.walletData?.history?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WalletMoneyListTableViewCell", for: indexPath) as! WalletMoneyListTableViewCell
+        let data = viewModel.walletData?.history?[indexPath.row]
+        cell.configData(data: data)
+        return cell
+    }
+    
+    
+}

@@ -107,6 +107,10 @@ enum NetworkEndPoint: String {
     case affiliatedLoginWithOTP         = "api/affiliate/affiliate-login-with-otp"
     case affiliatedForgotPassword       = "api/affiliate/forgot_password"
     case affiliatedCreatePassword       = "api/affiliate/create_password"
+    case getWalletHistory               = "api/user/wallet-history"
+    case addMoneyInWallet               = "api/user/Add-money-in-wallet"
+    case completeAddMoneyWallet         = "api/user/complete-add-money-in-wallet"
+    case redeemGiftCardWallet           = "api/user/redeem-gift-card-in-wallet"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

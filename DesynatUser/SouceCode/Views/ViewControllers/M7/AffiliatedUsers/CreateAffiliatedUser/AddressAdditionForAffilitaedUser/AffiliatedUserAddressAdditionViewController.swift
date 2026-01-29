@@ -84,7 +84,8 @@ class AffiliatedUserAddressAdditionViewController: UIViewController {
     @IBAction func countryDidTapped(_ sender: UIButton) {
         let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
             let name = country.name ?? ""
-            return name
+            let flag = country.flag ?? "🇰🇼"
+            return "\(flag) \(name)"
         }
         kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
             let selectedCountry = self.viewModel.getAllUSerCountryList[index]

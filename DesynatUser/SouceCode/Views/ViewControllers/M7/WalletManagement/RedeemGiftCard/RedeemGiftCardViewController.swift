@@ -1,0 +1,60 @@
+//
+//  RedeemGiftCardViewController.swift
+//  DesynatUser
+//
+//  Created by fluper_mac3 on 29/01/26.
+//
+
+
+import UIKit
+
+class RedeemGiftCardViewController: UIViewController {
+  
+  @IBOutlet weak var cardNumberTF: UITextField!
+  @IBOutlet weak var pinTF: UITextField!
+  
+  var onRedeem: ((_ cardNumber: String, _ pin: String, _ giftCard: UseGiftCardDataModel) -> Void)?
+  private lazy var viewModel = RedeemGiftCardViewModel(hostVC: self)
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    cardNumberTF.delegate = self
+    pinTF.delegate = self
+  }
+  
+  @IBAction func redeemDidTapped(_ sender: Any) {
+    guard let cardNumber = cardNumberTF.text, !cardNumber.isEmpty else {
+      showAlert(msg: "Please enter 16 Digit gift card number")
+      return
+    }
+    guard let pin = pinTF.text, !pin.isEmpty else {
+      showAlert(msg: "Please enter PIN")
+      return
+    }
+    viewModel.addGiftCardApi(cardNumber: cardNumber, giftCardPin: pin)
+  }
+  
+  @IBAction func backDidTapped(_ sender: Any) {
+    self.navigationController?.popViewController(animated: true)
+  }
+}
+
+extension RedeemGiftCardViewController: UITextFieldDelegate {
+  func textField(_ textField: UITextField,
+                 shouldChangeCharactersIn range: NSRange,
+                 replacementString string: String) -> Bool {
+    if string.contains(" ") { return false }
+    let currentText = textField.text ?? ""
+    guard let stringRange = Range(range, in: currentText) else { return false }
+    let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+    let isNumeric = updatedText.allSatisfy { $0.isNumber }
+    if !isNumeric { return false }
+    if textField == cardNumberTF {
+      return updatedText.count <= 16
+    } else if textField == pinTF {
+      return updatedText.count <= 4
+    }
+    return true
+  }
+}
+

@@ -17,7 +17,7 @@ class AffiliatedUserLoginViewController: UIViewController {
     @IBOutlet weak var viewCountryCode: UIView!
     
     private lazy var viewModel = AffiliatedUserLoginViewModel(loginHostVC: self)
-    var countryCode: String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
+    var countryCode: String = "+965"
     
     override func viewDidLoad() {
         super.viewDidLoad()

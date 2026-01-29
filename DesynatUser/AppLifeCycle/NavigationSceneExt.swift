@@ -39,6 +39,10 @@ extension SceneDelegate {
         Global.shared.user = nil
     }
     
+    func logoutAfffiliatedUser() {
+        kSharedUserDefaults.removeValue(for: .affiliatedAccessToken)
+    }
+    
     public func navigateToAffiliatedUserHomeVc() {
         let vc = AffiliatedUserTabbarViewController.instantiate(fromAppStoryboard: .AffiliateUser)
         navigateTo(vc: vc)

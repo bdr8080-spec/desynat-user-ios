@@ -566,6 +566,38 @@ extension WebService {
       }
     }
   }
+    
+    func paymentForAddMoneyInWalletApi(param: [String: Any], completion:@escaping (_ user: PaymentMoneyInWalletMoneyDataModel)-> Void) {
+    CommonUtils.showHud(show: true)
+    NetworkManager.shared.request(withAPI: .endpoint(.addMoneyInWallet), requestMethod: .post, requestParams: param, requestModel:  PaymentMoneyInWalletMoneyDataModel.self) { result, code in
+      CommonUtils.showHud(show: false)
+      self.evaluateWebServiceResponse(response: result) { response, message,error in
+        guard let user = response else {
+          if let error {
+            UIApplication.shared.topViewController()?.showAlert(msg: error)
+          }
+          return
+        }
+        completion(user)
+      }
+    }
+  }
+    
+    func completePaymentForAddMoneyInWalletApi(param: [String: Any], completion:@escaping (_ user: PaymentMoneyInWalletMoneyDataModel)-> Void) {
+    CommonUtils.showHud(show: true)
+    NetworkManager.shared.request(withAPI: .endpoint(.completeAddMoneyWallet), requestMethod: .post, requestParams: param, requestModel:  PaymentMoneyInWalletMoneyDataModel.self) { result, code in
+      CommonUtils.showHud(show: false)
+      self.evaluateWebServiceResponse(response: result) { response, message,error in
+        guard let user = response else {
+          if let error {
+            UIApplication.shared.topViewController()?.showAlert(msg: error)
+          }
+          return
+        }
+        completion(user)
+      }
+    }
+  }
   
   func getAllPromocodeListApi(param: [String: Any], completion:@escaping (_ user: [GetPromoCodeListDataModel])-> Void) {
     CommonUtils.showHud(show: true)
@@ -618,6 +650,22 @@ extension WebService {
   func addGiftCardApi(param: [String: Any], completion:@escaping (_ user: UseGiftCardDataModel)-> Void) {
     CommonUtils.showHud(show: true)
     NetworkManager.shared.request(withAPI: .endpoint(.applyGiftCard), requestMethod: .post, requestParams: param, requestModel:  UseGiftCardDataModel.self) { result, code in
+      CommonUtils.showHud(show: false)
+      self.evaluateWebServiceResponse(response: result) { response, message,error in
+        guard let user = response else {
+          if let error {
+            UIApplication.shared.topViewController()?.showAlert(msg: error)
+          }
+          return
+        }
+        completion(user)
+      }
+    }
+  }
+    
+    func redeemGiftCardWallet(param: [String: Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+    CommonUtils.showHud(show: true)
+    NetworkManager.shared.request(withAPI: .endpoint(.redeemGiftCardWallet), requestMethod: .post, requestParams: param, requestModel:  EmptyModel.self) { result, code in
       CommonUtils.showHud(show: false)
       self.evaluateWebServiceResponse(response: result) { response, message,error in
         guard let user = response else {
@@ -1055,6 +1103,20 @@ extension WebService {
     func createPasswordForAffiliatedUserService(withParams dictParams: Dictionary<String, Any>, completion: @escaping (_ user: AffiliateCreateAccountDataModel) -> Void) {
       CommonUtils.showHud(show: true)
       NetworkManager.shared.request(withAPI: .endpoint(.affiliatedCreatePassword), requestMethod: .post, requestParams: dictParams, encoding: JSONEncoding.default, requestModel: AffiliateCreateAccountDataModel.self) { result, code in
+        CommonUtils.showHud(show: false)
+        self.evaluateWebServiceResponse(response: result) { response, message, error in
+          if let error {
+            UIApplication.shared.topViewController()?.showAlert(msg: error)
+          } else if let response {
+            completion(response)
+          }
+        }
+      }
+    }
+    
+    func getWalletHistorySerivice(completion: @escaping (_ user: WalletMoneyHistoryDataModel) -> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI: .endpoint(.getWalletHistory), requestMethod: .get, encoding: JSONEncoding.default, requestModel: WalletMoneyHistoryDataModel.self) { result, code in
         CommonUtils.showHud(show: false)
         self.evaluateWebServiceResponse(response: result) { response, message, error in
           if let error {

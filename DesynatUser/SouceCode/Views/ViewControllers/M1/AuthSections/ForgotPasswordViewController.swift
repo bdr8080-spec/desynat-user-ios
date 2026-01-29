@@ -19,16 +19,23 @@ class ForgotPasswordViewController: UIViewController {
     
     var mobileIsSelected: Bool = true
     private lazy var viewModel = ForgotPasswordViewModel(hostVC: self)
-    var countryCode: String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
+    var countryCode: String = "+965"
     var comingUserRole: UserType = .normalUser
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        countryCodeTextField.text = countryCode
         mobileIsSelected = true
         mobileTextField.delegate = self
         emailAddressTextField.delegate = self
-        viewModel.getALlUserCountryListApi()
+        switch comingUserRole {
+        case .normalUser:
+            viewModel.getALlUserCountryListApi()
+            countryCode = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
+        case .affiliateUser:
+            viewModel.sevenCountryListApi()
+            countryCode = "+965"
+        }
+        countryCodeTextField.text = countryCode
     }
     
     @IBAction func continueDidTapped(_ sender: Any) {
@@ -64,20 +71,37 @@ class ForgotPasswordViewController: UIViewController {
     
     
     @IBAction func countryDidTapped(_ sender: UIButton) {
-      let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
-          let name = country.name ?? ""
-          let dialCode = country.dialCode ?? ""
-          let flag = country.flag1 ?? "🇰🇼"
-          return "\(flag)  \(name) (\(dialCode))"
-      }
-
-      kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
-          let selectedCountry = self.viewModel.getAllUSerCountryList[index]
-          let code = selectedCountry.dialCode ?? "+965"
-         
-        self.setUpCountryCode(code: code)
-          self.countryCode = code
-      }
+        switch comingUserRole {
+        case .normalUser:
+            let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
+                let name = country.name ?? ""
+                let dialCode = country.dialCode ?? ""
+                let flag = country.flag1 ?? "🇰🇼"
+                return "\(flag)  \(name) (\(dialCode))"
+            }
+            kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+                let selectedCountry = self.viewModel.getAllUSerCountryList[index]
+                let code = selectedCountry.dialCode ?? "+965"
+               
+              self.setUpCountryCode(code: code)
+                self.countryCode = code
+            }
+        case .affiliateUser:
+            let countryNames = viewModel.getSevenCountryList.map { country -> String in
+                let name = country.name ?? ""
+                let dialCode = country.dialCode ?? ""
+                let flag = country.flag ?? "🇰🇼"
+                return "\(flag)  \(name) (\(dialCode))"
+            }
+            kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+                let selectedCountry = self.viewModel.getSevenCountryList[index]
+                let code = selectedCountry.dialCode ?? "+965"
+               
+              self.setUpCountryCode(code: code)
+                self.countryCode = code
+            }
+        }
+      
     }
     
     func setUpCountryCode(code: String) {

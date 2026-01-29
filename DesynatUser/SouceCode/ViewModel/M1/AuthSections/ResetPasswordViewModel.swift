@@ -45,6 +45,36 @@ class ResetPasswordViewModel: NSObject {
         hostVC.view.endEditing(true)
             return errorMessage == .none
         }
+    
+    func validFieldsForAffilated() -> Bool {
+            var errorMessage: AlertConstant = .none
+            
+            let createPassword = String.getString(hostVC.createPasswordTextField.text)
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            let confirmPassword = String.getString(hostVC.confirmPasswordTextField.text)
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            // Validate create password
+            if createPassword.isEmpty {
+                errorMessage = .EnterNewPassowrdAffliate
+            }
+//        else if !createPassword.isValidPassword() {
+//                errorMessage = .InvalidPasswordFormat
+//            }
+            // Validate confirm password
+            else if confirmPassword.isEmpty {
+                errorMessage = .EnterReEnterPassowrdAffliate
+            } else if createPassword != confirmPassword {
+                errorMessage = .PasswordNotMatched
+            }
+            
+            if errorMessage != .none {
+                hostVC.showAlert(msg: errorMessage.rawValue)
+            }
+            
+        hostVC.view.endEditing(true)
+            return errorMessage == .none
+        }
   
     func resetPasswordOTPApi() {
         let params: [String:Any] = [

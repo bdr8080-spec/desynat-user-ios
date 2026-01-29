@@ -134,7 +134,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
             switch selectedItem {
             case "My Wallet":
-                print("✅ Selected: My Wallet")
+                let nextVC = WalletMoneyListViewController.instantiate(fromAppStoryboard: .Profile)
+                self.navigationController?.pushViewController(nextVC, animated: true)
                 
             case "Terms & Condition":
                 print("✅ Selected: Terms & Condition")

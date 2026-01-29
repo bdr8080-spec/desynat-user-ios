@@ -43,3 +43,26 @@ struct PaymentMethod {
   let showDescription: Bool
   var description: String
 }
+
+
+// MARK: - PaymentMoneyInWalletMoneyDataModel
+struct PaymentMoneyInWalletMoneyDataModel: Codable {
+    let uniqueID: String?
+    let userID: Int?
+//    let type: Int?
+    let amount, paymentMethod, paymentStatus: String?
+    let addedby, updatedAt, createdAt: String?
+    let id: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case uniqueID = "unique_id"
+        case userID = "user_id"
+        case amount//, type
+        case paymentMethod = "payment_method"
+        case paymentStatus = "payment_status"
+        case addedby
+        case updatedAt = "updated_at"
+        case createdAt = "created_at"
+        case id
+    }
+}

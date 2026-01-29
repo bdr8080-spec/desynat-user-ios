@@ -23,11 +23,13 @@ class ResetPasswordViewController: UIViewController {
     }
     
     @IBAction func doneDidTapped(_ sender: Any) {
-        if viewModel.validFields() {
-            switch comingUserRole {
-            case .normalUser:
+        switch comingUserRole {
+        case .normalUser:
+            if viewModel.validFields() {
                 viewModel.resetPasswordOTPApi()
-            case .affiliateUser:
+            }
+        case .affiliateUser:
+            if viewModel.validFieldsForAffilated() {
                 viewModel.resetPasswordOTPApiForAffiliatedUser()
             }
         }

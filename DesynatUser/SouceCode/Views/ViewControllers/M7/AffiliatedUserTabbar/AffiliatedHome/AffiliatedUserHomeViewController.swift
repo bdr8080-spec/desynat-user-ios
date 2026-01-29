@@ -9,14 +9,18 @@ import UIKit
 
 class AffiliatedUserHomeViewController: UIViewController {
     
+    @IBOutlet weak var userProfileImageView: CustomImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var btnToday: UIButton!
     @IBOutlet weak var btnThisWeek: UIButton!
     @IBOutlet weak var btnThisMonth: UIButton!
     
     private var dateButtons: [UIButton] { [btnToday, btnThisWeek, btnThisMonth]}
+    private lazy var viewModel = AffiliatedUserHomeViewModel(hostVC: self)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        viewModel.getUserData()
         // Do any additional setup after loading the view.
     }
     

@@ -170,11 +170,19 @@ extension CreateAffiliateUserAccountViewController: UITextFieldDelegate {
             validation = StringValidation(string: updatedText, characterCount: 15, validation: .mobileNo)
         }
         
-        else if textField == fullNameTextField {
-            let englishPattern = "^[A-Za-z]*$"
-            if string.range(of: englishPattern, options: .regularExpression) == nil {
+//        else if textField == fullNameTextField {
+//            let englishPattern = "^[A-Za-z]*$"
+//            if string.range(of: englishPattern, options: .regularExpression) == nil {
+//                return false
+//            }
+//        }
+        
+        if textField == fullNameTextField {
+            if currentText.isEmpty && string == " " {
                 return false
             }
+            let allowedCharacterSet = CharacterSet.letters.union(.whitespaces)
+            return string.rangeOfCharacter(from: allowedCharacterSet.inverted) == nil
         }
         
         // Perform validation if applicable

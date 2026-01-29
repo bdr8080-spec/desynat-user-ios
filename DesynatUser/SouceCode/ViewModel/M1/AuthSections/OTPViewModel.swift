@@ -81,6 +81,8 @@ class OTPViewModel: NSObject {
                     let nextVC = AddBankDetailsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
                     self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
                 } else if response.adminVerify == "2" {
+                    kSharedUserDefaults.saveModelFor(key: .affiliatedUserDeatils, value: response)
+                    UserDefaults.standard.setValue("true", forKey: "affiliatedAccountIsLoggedIn")
                     kSharedSceneDelegate.navigateToAffiliatedUserHomeVc()
                 } else {
                     let nextVC = AccountCreationDoneViewController.instantiate(fromAppStoryboard: .AffiliateUser)

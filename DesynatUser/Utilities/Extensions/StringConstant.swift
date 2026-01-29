@@ -86,7 +86,10 @@ enum AlertConstant: String {
     case addressLine2               = "Please enter address line 2"
     case enterPincode               = "Please enter pin code"
     case enterlocalityTown          = "Please enter locality town"
-    case AccountNumberNotMatch      = "Account number don not match"
+    case AccountNumberNotMatch      = "Account number and confirm account number didn't match"
+    case confirmPasswordForAffiliate      = "Please Reenter password"
+    case EnterNewPassowrdAffliate      = "Please Enter New Password"
+    case EnterReEnterPassowrdAffliate      = "Please ReEnter New Password"
     
   func value() -> String {
     return self.rawValue

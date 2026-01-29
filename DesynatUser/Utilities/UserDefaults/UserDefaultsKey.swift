@@ -13,6 +13,7 @@ enum UserDefaultsKey : String {
     case accessToken
     case userLocation
     case user
+    case affiliatedUserDeatils
     case isSkip
     case selectedLanguage
     case defaultLanguage
@@ -105,6 +106,13 @@ extension UserDefaults {
         }
         self.synchronize()
     }
+    
+    func removeValue(for key: UserDefaultsKey) {
+            UserDefaults.standard.removeObject(forKey: key.rawValue)
+            UserDefaults.standard.synchronize()
+        }
+    
+    
     func clearData(key:UserDefaultsKey) {
         self.removeObject(forKey: key.rawValue)
         self.synchronize()

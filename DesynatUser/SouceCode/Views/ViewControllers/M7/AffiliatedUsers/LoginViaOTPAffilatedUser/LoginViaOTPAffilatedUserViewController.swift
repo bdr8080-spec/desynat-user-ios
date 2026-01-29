@@ -16,7 +16,7 @@ class LoginViaOTPAffilatedUserViewController: UIViewController {
     @IBOutlet weak var countryCodeLabel: UILabel!
     
     private lazy var viewModel = LoginViaOTPAffiliatedUserViewModel(loginHostVC: self)
-    var countryCode: String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
+    var countryCode: String = "+965"
     
     override func viewDidLoad() {
         super.viewDidLoad()
