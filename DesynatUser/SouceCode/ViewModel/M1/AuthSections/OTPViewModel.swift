@@ -84,10 +84,18 @@ class OTPViewModel: NSObject {
                     kSharedUserDefaults.saveModelFor(key: .affiliatedUserDeatils, value: response)
                     UserDefaults.standard.setValue("true", forKey: "affiliatedAccountIsLoggedIn")
                     kSharedSceneDelegate.navigateToAffiliatedUserHomeVc()
-                } else {
+                } else if response.adminVerify == "4" {
+//                    self.hostVC.showAlert(msg: "Document Rejected. Please Reupload it.")
+                    self.hostVC.showAlert(msg: "Document Rejected. Please Reupload it.\n\(response.rejectReason ?? "")")
+                    let nextVC = CreateAffiliateUserAccountViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+                    nextVC.iscomingAfterDocumnetReject = true
+                    nextVC.affiliatedUserDetails = response
+                    self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
+                }else {
                     let nextVC = AccountCreationDoneViewController.instantiate(fromAppStoryboard: .AffiliateUser)
                     self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
                 }
+                
             case .forgotPasswordForAffiliatedUser:
                 let vc = ResetPasswordViewController.instantiate(fromAppStoryboard: .Main)
                 vc.userId = self.hostVC.userId

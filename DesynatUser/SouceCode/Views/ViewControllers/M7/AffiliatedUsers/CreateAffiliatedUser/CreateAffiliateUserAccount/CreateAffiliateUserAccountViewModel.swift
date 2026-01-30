@@ -39,7 +39,6 @@ class CreateAffiliateUserAccountViewModel: NSObject {
             }
         }
         
-        
         let email = String.getString(hostVC.emailTextField.text).trimmingCharacters(in: .whitespacesAndNewlines)
         if errorMessage == .none {
             if email.isEmpty {
@@ -107,8 +106,7 @@ class CreateAffiliateUserAccountViewModel: NSObject {
             "document2": hostVC.uploadDocTwoImage,
             "accept": 1,
             "device_type": "1",
-            "device_token":""
-        ]
+            "device_token":""]
         
         WebService.sharedInstance.createAffiliatedAccountService(param:params) { response in
             let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
@@ -118,6 +116,27 @@ class CreateAffiliateUserAccountViewModel: NSObject {
             vc.isEnteredPhoneNumber = true
             vc.userId = "\(response.id ?? 0)"
             self.hostVC.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func documentReupload(){
+        let params:[String:Any] = [
+            "profile_image": hostVC.profileImage,
+            "full_name": hostVC.fullNameTextField.text ?? "",
+//            "country_code": hostVC.countryCode,
+//            "mobile": hostVC.mobileTextField.text ?? "",
+//            "email": hostVC.emailTextField.text ?? "",
+            "password": hostVC.txtCreatePassword.text ?? "",
+            "confirm_password": hostVC.txtConfirmPassword.text ?? "",
+            "document1": hostVC.uplaodDocuOneImage,
+            "document2": hostVC.uploadDocTwoImage,
+            "accept": 1,
+            "device_type": "1",
+            "device_token":""]
+        
+        WebService.sharedInstance.reuploadDocumnetsAffiliatedAccountService(param:params) { response in
+            let nextVC = AccountCreationDoneViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+            self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
     

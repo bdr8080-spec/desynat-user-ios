@@ -20,7 +20,6 @@ class MyBagViewModel: NSObject {
   func getBagDetailsApi(){
     WebService.sharedInstance.gteBagDetails { [self] list in
       DispatchQueue.main.async {
-        
         self.bagDetails = list
         self.hostVC.bagTableView.reloadData()
         self.hostVC.condifData(data: list)

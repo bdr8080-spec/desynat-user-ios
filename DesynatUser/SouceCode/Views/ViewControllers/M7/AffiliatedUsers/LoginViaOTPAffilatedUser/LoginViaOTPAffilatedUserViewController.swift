@@ -49,7 +49,8 @@ class LoginViaOTPAffilatedUserViewController: UIViewController {
     }
     
     @IBAction func swithToUserDidTapped(_ sender: Any) {
-        self.navigationController?.popToRootViewController(animated: true)
+//        self.navigationController?.popToRootViewController(animated: true)
+        kSharedSceneDelegate.navigateToUserHomeVc(selectedIndex: 4)
     }
     
     @IBAction func countryDidTapped(_ sender: UIButton) {

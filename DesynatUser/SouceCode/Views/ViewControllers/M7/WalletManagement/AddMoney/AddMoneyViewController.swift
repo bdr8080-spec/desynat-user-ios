@@ -74,11 +74,11 @@ extension AddMoneyViewController: UICollectionViewDelegate, UICollectionViewData
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddMoneyCollectionViewCell", for: indexPath) as! AddMoneyCollectionViewCell
         let data = moneyList[indexPath.row]
         cell.titleLabel.text = data
-        if selectedMoneyIndex == indexPath.row {
-            cell.mainView.borderColor = .accent
-        } else {
-            cell.mainView.borderColor = .black.withAlphaComponent(0.1)
-        }
+//        if selectedMoneyIndex == indexPath.row {
+//            cell.mainView.borderColor = .accent
+//        } else {
+//            cell.mainView.borderColor = .black.withAlphaComponent(0.1)
+//        }
         return cell
     }
     

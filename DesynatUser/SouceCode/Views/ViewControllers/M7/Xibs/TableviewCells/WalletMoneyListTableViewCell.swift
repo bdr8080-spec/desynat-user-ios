@@ -30,8 +30,9 @@ class WalletMoneyListTableViewCell: UITableViewCell {
     }
     
     func configData(data: WalletMoneyHistoryList?) {
-        amountLabel.text = CommonUtils.formatPriceStringInput(data?.amount, currency: "KD")
+        
         transactionIdLabel.text = data?.transactionID
+        orderIdLabel.text = "#\(data?.orderId ?? "0")"
         creditDateLabel.text = formatDate(data?.createdAt ?? "")
 //        1 credit 2 debit 3 redeem
         
@@ -39,16 +40,18 @@ class WalletMoneyListTableViewCell: UITableViewCell {
         switch  type {
         case 1:
             statusLabel.text = "Credit"
-            statusLabel.textColor = .red
+            statusLabel.textColor = UIColor(hexString: "#17854C")
             creditedOnLabel.text = "Credited On"
             orderIdStackView.isHidden = true
             transactiontitleLabel.text = "Transaction Id"
+            amountLabel.text = "+\(CommonUtils.formatPriceStringInput(data?.amount, currency: "KD"))"
         case 2:
             statusLabel.text = "Debit"
-            statusLabel.textColor = UIColor(hexString: "#17854C")
+            statusLabel.textColor = .red
             creditedOnLabel.text = "Debited On"
             orderIdStackView.isHidden = false
             transactiontitleLabel.text = "Transaction Id"
+            amountLabel.text = "-\(CommonUtils.formatPriceStringInput(data?.amount, currency: "KD"))"
         case 3:
             statusLabel.text = "Redeemed Gift Card"
             statusLabel.textColor = UIColor(hexString: "#17854C")
@@ -56,12 +59,14 @@ class WalletMoneyListTableViewCell: UITableViewCell {
             orderIdStackView.isHidden = true
             transactiontitleLabel.text = "Gift Card No."
             transactionIdLabel.text = data?.giftcardno
+            amountLabel.text = "+\(CommonUtils.formatPriceStringInput(data?.amount, currency: "KD"))"
         default:
             statusLabel.text = "Credit"
-            statusLabel.textColor = .red
+            statusLabel.textColor = UIColor(hexString: "#17854C")
             creditedOnLabel.text = "Credited On"
             orderIdStackView.isHidden = true
             transactiontitleLabel.text = "Transaction Id"
+            amountLabel.text = "+\(CommonUtils.formatPriceStringInput(data?.amount, currency: "KD"))"
         }
     }
     

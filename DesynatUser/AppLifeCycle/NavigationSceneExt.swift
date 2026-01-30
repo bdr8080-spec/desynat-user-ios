@@ -17,11 +17,18 @@ extension SceneDelegate {
     }
     
     // Navigate to Home Vc
-    public func navigateToUserHomeVc() {
+//    public func navigateToUserHomeVc() {
+//        let vc = TabBarVC.instantiate(fromAppStoryboard: .Home)
+//        navigateTo(vc: vc)
+//      
+//    }
+    
+    public func navigateToUserHomeVc(selectedIndex: Int = 0) {
         let vc = TabBarVC.instantiate(fromAppStoryboard: .Home)
+        vc.initialTabIndex = selectedIndex   // ✅ set tab here
         navigateTo(vc: vc)
-      
     }
+
     
     public func navigateToWelcomeScreen() {
         let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
@@ -46,6 +53,10 @@ extension SceneDelegate {
     public func navigateToAffiliatedUserHomeVc() {
         let vc = AffiliatedUserTabbarViewController.instantiate(fromAppStoryboard: .AffiliateUser)
         navigateTo(vc: vc)
+    }
+    
+    public func navigateToLoginAffiliatedVc() {
+        navigateTo(vc: AffiliatedUserLoginViewController.instantiate(fromAppStoryboard: .AffiliateUser))
     }
 //
 //    ///Pass custom vc to make it root controller

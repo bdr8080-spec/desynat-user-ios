@@ -8,9 +8,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-
 class ChatDetailsViewController: UIViewController {
-  
   
   @IBOutlet weak var userNameLabel: UILabel!
   @IBOutlet weak var detailsStackView: UIStackView!
@@ -121,7 +119,7 @@ nextVC.comingForCustomeOrderPlace = true
     let messageType = quotationData?.type ?? "1" // normal msg, customization send
     let requestType = quotationData?.productRequest ?? "1"
     let actiontype = quotationData?.action ?? "1"
-    userNameLabel.text = quotationData?.userDetails?.fullName ?? ""
+    userNameLabel.text = "\(quotationData?.sellerDetails?.firstName ?? "") \(quotationData?.sellerDetails?.lastName ?? "")"
     if messageType == "1" {
       productTableView.isHidden = true
       mainHeaderView.backgroundColor = .white

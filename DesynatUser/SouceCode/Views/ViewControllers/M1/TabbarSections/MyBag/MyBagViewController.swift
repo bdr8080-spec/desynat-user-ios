@@ -49,9 +49,21 @@ class MyBagViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
 //    if !isPromoCodeApplied {
-            viewModel.getBagDetailsApi()
+      let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
+      if isGuestUser != "true" {
+          viewModel.getBagDetailsApi()
+      } else {
+          guestLoginUIHandle()
+      }
 //        }
   }
+    
+    private func guestLoginUIHandle() {
+        noDataFoundLabel.isHidden = false
+        noDataFoundLabel.text = "Please login to view your bag"
+        bagDetailsView.isHidden = true
+        totoalAmountPriceView.isHidden = true
+    }
   
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()

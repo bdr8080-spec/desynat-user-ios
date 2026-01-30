@@ -216,7 +216,8 @@ extension PlaceOrderPaymentMethodsViewController: UITableViewDelegate, UITableVi
         case .applePay:
             break
         case .creditDebitCard:
-            initiateCreditCardPayment()
+//            initiateCreditCardPayment()
+            initiateVisaPayPayment()
         case .visapay:
             initiateVisaPayPayment()
         case .inAppWallet, .cashOnDelivery:
@@ -250,32 +251,32 @@ extension PlaceOrderPaymentMethodsViewController {
         }
     }
     
-    private func initiateCreditCardPayment() {
-        let request = MFExecutePaymentRequest(invoiceValue: Decimal(totalAmountToPay), paymentMethod: 8)
-        request.customerReference = orderID
-        request.displayCurrencyIso = .uAE_AED
-        //    Int.random(in: 1000...9999)
-        let supplierId = Int.random(in: 1000...9999)
-        let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: Decimal(totalAmountToPay))
-        request.suppliers = [supplier]
-        
-        MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { [weak self] response, invoiceId in
-            guard let self = self else { return }
-            switch response {
-            case .success(let paymentStatus):
-                let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
-                let gateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "Card"
-                self.handlePaymentCompletion(transactionID: transactionID, invoiceId: invoiceId ?? "", gateway: gateway)
-            case .failure(let error):
-                self.didReceivePaymentError(error.errorDescription)
-            }
-        }
-    }
+//    private func initiateCreditCardPayment() {
+//        let request = MFExecutePaymentRequest(invoiceValue: Decimal(totalAmountToPay), paymentMethod: 8)
+//        request.customerReference = orderID
+//        request.displayCurrencyIso = .uAE_AED
+//        //    Int.random(in: 1000...9999)
+//        let supplierId = Int.random(in: 1000...9999)
+//        let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: Decimal(totalAmountToPay))
+//        request.suppliers = [supplier]
+//        
+//        MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { [weak self] response, invoiceId in
+//            guard let self = self else { return }
+//            switch response {
+//            case .success(let paymentStatus):
+//                let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
+//                let gateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "Card"
+//                self.handlePaymentCompletion(transactionID: transactionID, invoiceId: invoiceId ?? "", gateway: gateway)
+//            case .failure(let error):
+//                self.didReceivePaymentError(error.errorDescription)
+//            }
+//        }
+//    }
     
     private func initiateVisaPayPayment() {
         let request = MFExecutePaymentRequest(invoiceValue: Decimal(totalAmountToPay), paymentMethod: 2)
         request.customerReference = orderID
-        request.displayCurrencyIso = .uAE_AED
+        request.displayCurrencyIso = .kuwait_KWD
         let supplierId = Int.random(in: 1000...9999)
         let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: Decimal(totalAmountToPay))
         request.suppliers = [supplier]

@@ -60,7 +60,9 @@ class AffiliatedUserLoginViewController: UIViewController {
     }
     
     @IBAction func switchToUserDidTapped(_ sender: Any) {
-        self.navigationController?.popToRootViewController(animated: true)
+//        self.navigationController?.popToRootViewController(animated: true)
+//        kSharedSceneDelegate.navigateToUserHomeVc()
+        kSharedSceneDelegate.navigateToUserHomeVc(selectedIndex: 4)
     }
     
     @IBAction func btnTapEye(_ sender: UIButton) {

@@ -63,13 +63,14 @@ class PaymentMethodViewModel {
             "payment_method": "1"]
         
         WebService.sharedInstance.paymentForAddMoneyInWalletApi(param: params) { [weak self] response in
-            self?.completePaymentForAddingMoneyToWallet(uniqueID: response.uniqueID ?? "")
+            self?.completePaymentForAddingMoneyToWallet(transactionId: transactionId, uniqueID: response.uniqueID ?? "")
         }
     }
     
-    private func completePaymentForAddingMoneyToWallet(uniqueID: String) {
+    private func completePaymentForAddingMoneyToWallet(transactionId: String, uniqueID: String) {
         let params: [String: Any] = [
             "unique_id": uniqueID,
+            "transaction_id": transactionId,
             "payment_status": "1"]
         
         WebService.sharedInstance.completePaymentForAddMoneyInWalletApi(param: params) { [weak self] response in

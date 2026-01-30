@@ -14,29 +14,53 @@ class SelectLanguageViewController: UIViewController {
     @IBOutlet weak var imgArabic: UIImageView!
     @IBOutlet weak var imgEnglish: UIImageView!
     
+    private var selectedLanguage: String = "en"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         LocationManager.sharedInstance.startUpdatingLocation()
+//                applySavedLanguage()
     }
     
     @IBAction func btnSelectLanguage(_ sender: UIButton) {
+//        if sender.tag == 0 {
+//            imgArabic.image = UIImage(named: "radioUnselected")
+//            imgEnglish.image = UIImage(named: "radioSelected")
+//            arabicView.layer.borderColor = UIColor.lightGray.cgColor
+//            englishView.layer.borderColor = UIColor(named: "darkBrown")?.cgColor
+//        } else {
+//            imgArabic.image = UIImage(named: "radioSelected")
+//            imgEnglish.image = UIImage(named: "radioUnselected")
+//            arabicView.layer.borderColor = UIColor(named: "darkBrown")?.cgColor
+//            englishView.layer.borderColor = UIColor.lightGray.cgColor
+//        }
         if sender.tag == 0 {
-            imgArabic.image = UIImage(named: "radioUnselected")
-            imgEnglish.image = UIImage(named: "radioSelected")
-            arabicView.layer.borderColor = UIColor.lightGray.cgColor
-            englishView.layer.borderColor = UIColor(named: "darkBrown")?.cgColor
-        } else {
-            imgArabic.image = UIImage(named: "radioSelected")
-            imgEnglish.image = UIImage(named: "radioUnselected")
-            arabicView.layer.borderColor = UIColor(named: "darkBrown")?.cgColor
-            englishView.layer.borderColor = UIColor.lightGray.cgColor
-        }
+                // English selected
+                selectedLanguage = "en"
+
+                imgArabic.image = UIImage(named: "radioUnselected")
+                imgEnglish.image = UIImage(named: "radioSelected")
+
+                arabicView.layer.borderColor = UIColor.lightGray.cgColor
+                englishView.layer.borderColor = UIColor(named: "darkBrown")?.cgColor
+            } else {
+                // Arabic selected
+                selectedLanguage = "ar"
+
+                imgArabic.image = UIImage(named: "radioSelected")
+                imgEnglish.image = UIImage(named: "radioUnselected")
+
+                arabicView.layer.borderColor = UIColor(named: "darkBrown")?.cgColor
+                englishView.layer.borderColor = UIColor.lightGray.cgColor
+            }
     }
     
     @IBAction func btnTapContinue(_ sender: Any) {
-        let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
-        self.navigationController?.pushViewController(vc, animated: true)
-        UserDefaults.standard.setValue("true", forKey: "isAppInstall")
+
+        UserDefaults.standard.setValue(selectedLanguage, forKey: "AppLanguage")
+            UserDefaults.standard.setValue("true", forKey: "isAppInstall")
+            let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
+            self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }

@@ -10,6 +10,7 @@ import SDWebImage
 
 class CreateAffiliateUserAccountViewController: UIViewController {
     
+    @IBOutlet weak var countryCodeButton: UIButton!
     @IBOutlet weak var uploadDocumentSecondImageView: CustomImageView!
     @IBOutlet weak var uplaodDocumentOneImageView: CustomImageView!
     @IBOutlet weak var profilePicImageView: CustomImageView!
@@ -30,6 +31,8 @@ class CreateAffiliateUserAccountViewController: UIViewController {
     var uplaodDocuOneImage = ""
     var uploadDocTwoImage = ""
     var countryCode: String = "+965"
+    var iscomingAfterDocumnetReject: Bool = false
+    var affiliatedUserDetails: AffiliateCreateAccountDataModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,11 +41,23 @@ class CreateAffiliateUserAccountViewController: UIViewController {
         emailTextField.delegate = self
         fullNameTextField.delegate = self
         viewModel.countryListApi()
+        if iscomingAfterDocumnetReject {
+            getUserData()
+        }else {
+            emailTextField.isUserInteractionEnabled = true
+            txtCountryCode.isUserInteractionEnabled = true
+            mobileTextField.isUserInteractionEnabled = true
+            countryCodeButton.isUserInteractionEnabled = true
+        }
     }
     
     @IBAction func conitnueDidTapped(_ sender: Any) {
         if viewModel.validFields() {
-            viewModel.signUpApi()
+            if iscomingAfterDocumnetReject {
+                viewModel.documentReupload()
+            } else {
+                viewModel.signUpApi()
+            }
         }
     }
     
@@ -138,6 +153,61 @@ class CreateAffiliateUserAccountViewController: UIViewController {
     }
     
     @IBAction func termsAndConditionAction(_ sender: Any) {
+    }
+    
+    func getUserData() {
+        fullNameTextField.text = affiliatedUserDetails?.fullName
+        mobileTextField.text = affiliatedUserDetails?.mobile
+        countryCode = affiliatedUserDetails?.countryCode ?? "+965"
+        txtCountryCode.text = affiliatedUserDetails?.countryCode
+        emailTextField.text = affiliatedUserDetails?.email
+        emailTextField.isUserInteractionEnabled = false
+        txtCountryCode.isUserInteractionEnabled = false
+        mobileTextField.isUserInteractionEnabled = false
+        countryCodeButton.isUserInteractionEnabled = false
+        if let imageUrl = affiliatedUserDetails?.profileImage,
+           let url = URL(string: imageUrl) {
+            profileImage = affiliatedUserDetails?.profileImage ?? ""
+            profilePicImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            profilePicImageView.sd_imageIndicator?.startAnimatingIndicator()
+            profilePicImageView.sd_setImage(with: url, placeholderImage: nil) { [weak self] image, _, _, _ in
+                guard let self = self else { return }
+                self.selectedImage = image
+            }
+        } else {
+            profilePicImageView.image = UIImage(named: "profilePic")
+            selectedImage = nil
+        }
+        
+        if let imageUrl = affiliatedUserDetails?.document1,
+           let url = URL(string: imageUrl) {
+            uplaodDocuOneImage = affiliatedUserDetails?.document1 ?? ""
+            uplaodDocumentOneImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            uplaodDocumentOneImageView.sd_imageIndicator?.startAnimatingIndicator()
+            uplaodDocumentOneImageView.sd_setImage(with: url, placeholderImage: nil) { [weak self] image, _, _, _ in
+                guard let self = self else { return }
+                self.selectedImageDoc1 = image
+            }
+        } else {
+            uplaodDocumentOneImageView.image = UIImage(named: "uploadDoc1")
+            selectedImageDoc1 = nil
+        }
+
+        if let imageUrl = affiliatedUserDetails?.document2,
+           let url = URL(string: imageUrl) {
+            uploadDocTwoImage = affiliatedUserDetails?.document2 ?? ""
+            uploadDocumentSecondImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            uploadDocumentSecondImageView.sd_imageIndicator?.startAnimatingIndicator()
+            uploadDocumentSecondImageView.sd_setImage(with: url, placeholderImage: nil) { [weak self] image, _, _, _ in
+                guard let self = self else { return }
+                self.selectedImageDoc2 = image
+            }
+        } else {
+            uploadDocumentSecondImageView.image = UIImage(named: "uploaddoc2")
+            selectedImageDoc2 = nil
+        }
+        txtCreatePassword.text = affiliatedUserDetails?.passwordOld
+        txtConfirmPassword.text = affiliatedUserDetails?.passwordOld
     }
     
 }

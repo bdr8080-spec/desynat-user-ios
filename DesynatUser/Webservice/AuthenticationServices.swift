@@ -988,6 +988,24 @@ extension WebService {
       }
     }
     
+    func reuploadDocumnetsAffiliatedAccountService(param: [String:Any], completion:@escaping (_ user: AffiliateCreateAccountDataModel)-> Void) {
+      CommonUtils.showHud(show: true)
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+      NetworkManager.shared.request(withAPI:.endpoint(.reverifyDocument), requestMethod: .post, requestParams: param, requestModel: AffiliateCreateAccountDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
+        
+        CommonUtils.showHud(show: false)
+        self.evaluateWebServiceResponse(response: result) { response, message,error in
+          guard let user = response else {
+            if let error {
+              UIApplication.shared.topViewController()?.showAlert(msg: error)
+            }
+            return
+          }
+          completion(user)
+        }
+      }
+    }
+    
     func verifyAffiliatedAccountService(param: [String:Any], completion:@escaping (_ user: AffiliateCreateAccountDataModel)-> Void) {
       CommonUtils.showHud(show: true)
       NetworkManager.shared.request(withAPI:.endpoint(.verifyAffiliatedAccountUser), requestMethod: .post, requestParams: param, requestModel: AffiliateCreateAccountDataModel.self) { result, code in

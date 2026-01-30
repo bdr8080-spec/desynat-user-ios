@@ -86,6 +86,7 @@ class SignupViewModel: NSObject {
     
     func signupApi() {
         let params: [String:Any] = [
+            "lang": LanguageManager.currentLanguageCode,
             "full_name": hostVC.fullNameTextField.text?.trimmed() ?? "",
             "country_code": hostVC.countryCodeTextField.text?.trimmed() ?? "",
             "mobile": hostVC.mobileTextField.text?.trimmed() ?? "",

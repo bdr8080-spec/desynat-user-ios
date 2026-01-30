@@ -23,7 +23,7 @@ struct WalletMoneyHistoryList: Codable {
     let id: Int?
     let uniqueID: String?
     let userID, type: Int?
-    let transactionID, giftcardno: String?
+    let transactionID, giftcardno, orderId: String?
     let amount, addedby, createdAt, updatedAt: String?
     let paymentMethod, paymentStatus: String?
 
@@ -38,5 +38,6 @@ struct WalletMoneyHistoryList: Codable {
         case updatedAt = "updated_at"
         case paymentMethod = "payment_method"
         case paymentStatus = "payment_status"
+        case orderId = "order_id"
     }
 }

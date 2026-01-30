@@ -40,7 +40,8 @@ class LoginViaOTPViewModel: NSObject {
     
     func loginViaOTPApi() {
         let input = loginHostVC.phoneTextField.text?.trimmed() ?? ""
-        var params: [String:Any] = ["email_mobile": loginHostVC.phoneTextField.text?.trimmed() ?? ""]
+        var params: [String:Any] = ["email_mobile": loginHostVC.phoneTextField.text?.trimmed() ?? "",
+                                    "lang": LanguageManager.currentLanguageCode]
         if input.isEmail() {
             isEnterPhoneNumber = false
             params["type"] = "1"

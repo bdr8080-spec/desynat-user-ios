@@ -21,7 +21,8 @@ class AffilatedUserProfileViewModel {
     func logoutAPI(){
         //        WebService.sharedInstance.logoutService() { (response) in
         kSharedSceneDelegate.logoutAfffiliatedUser()
-        kSharedSceneDelegate.navigateToUserHomeVc()
+//        kSharedSceneDelegate.navigateToUserHomeVc()
+        kSharedSceneDelegate.navigateToLoginAffiliatedVc()
         UserDefaults.standard.setValue("No", forKey:"affiliatedAccountIsLoggedIn")
         //        }
     }

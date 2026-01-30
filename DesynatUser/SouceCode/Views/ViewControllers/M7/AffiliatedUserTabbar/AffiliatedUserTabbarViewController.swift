@@ -9,6 +9,7 @@ import UIKit
 
 class AffiliatedUserTabbarViewController: UIViewController {
 
+    @IBOutlet weak var paymnetTabImageView: CustomImageView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet var tabButtons: [UIButton]!
     
@@ -33,14 +34,118 @@ class AffiliatedUserTabbarViewController: UIViewController {
     }
     
     private func setUserButtonImages(selectedTag: Int) {
-      let unselectedImages = ["homeUnselected", "productsAffiliated", "showAffiliated", "paymentAffiliated", "profileUnselected"]
-      let selectedImages = ["homeSelected", "selectedProductAffiliated", "showAffiliated", "selectedPaymnetAffiliated", "profileSelected"]
-      
-      for button in tabButtons {
-        let imageName = (button.tag == selectedTag) ? selectedImages[button.tag] : unselectedImages[button.tag]
-        button.setImage(UIImage(named: imageName), for: .normal)
-      }
+        let unselectedImages = [
+            "homeUnselected",
+            "productsAffiliated",
+            "showAffiliated",
+            "paymentAffiliated",
+            "profileUnselected"
+        ]
+
+        let selectedImages = [
+            "homeSelected",
+            "selectedProductAffiliated",
+            "showAffiliated",
+            "selectedPaymnetAffiliated",
+            "profileSelected"
+        ]
+
+        let paymentTabIndex = 3
+
+        // ✅ Always control visibility first
+//        paymnetTabImageView.isHidden = selectedTag != paymentTabIndex
+
+        // ✅ Update payment image explicitly
+        let paymentImageName = (selectedTag == paymentTabIndex)
+            ? selectedImages[paymentTabIndex]
+            : unselectedImages[paymentTabIndex]
+
+        paymnetTabImageView.image = UIImage(named: paymentImageName)
+
+        // ✅ Update all button images except payment
+        for button in tabButtons {
+            if button.tag == paymentTabIndex {
+                button.setImage(nil, for: .normal) // image handled by imageView
+                continue
+            }
+
+            let imageName = (button.tag == selectedTag)
+                ? selectedImages[button.tag]
+                : unselectedImages[button.tag]
+
+            button.setImage(UIImage(named: imageName), for: .normal)
+        }
     }
+
+    
+//    private func setUserButtonImages(selectedTag: Int) {
+//        let unselectedImages = [
+//            "homeUnselected",
+//            "productsAffiliated",
+//            "showAffiliated",
+//            "paymentAffiliated",
+//            "profileUnselected"
+//        ]
+//        
+//        let selectedImages = [
+//            "homeSelected",
+//            "selectedProductAffiliated",
+//            "showAffiliated",
+//            "selectedPaymnetAffiliated",
+//            "profileSelected"
+//        ]
+//
+//        for button in tabButtons {
+//
+//            // ✅ Payment tab = tag 3
+//            if button.tag == 3 {
+//                button.setImage(nil, for: .normal)
+//
+//                let imageName = (selectedTag == 3)
+//                    ? selectedImages[3]
+//                    : unselectedImages[3]
+//
+//                paymnetTabImageView.image = UIImage(named: imageName)
+//                paymnetTabImageView.isHidden = false
+//            } else {
+//                let imageName = (button.tag == selectedTag)
+//                    ? selectedImages[button.tag]
+//                    : unselectedImages[button.tag]
+//
+//                button.setImage(UIImage(named: imageName), for: .normal)
+//            }
+//        }
+//    }
+
+    
+//    private func setUserButtonImages(selectedTag: Int) {
+//      let unselectedImages = ["homeUnselected", "productsAffiliated", "showAffiliated", "paymentAffiliated", "profileUnselected"]
+//      let selectedImages = ["homeSelected", "selectedProductAffiliated", "showAffiliated", "selectedPaymnetAffiliated", "profileSelected"]
+//      
+////      for button in tabButtons {
+////        let imageName = (button.tag == selectedTag) ? selectedImages[button.tag] : unselectedImages[button.tag]
+////        button.setImage(UIImage(named: imageName), for: .normal)
+////      }
+//        for button in tabButtons {
+//                // Special handling for index 4
+//                if button.tag == 4 {
+//                    button.setImage(nil, for: .normal) // optional: remove button image
+//                    
+//                    let imageName = (selectedTag == 4)
+//                        ? selectedImages[4]
+//                        : unselectedImages[4]
+//                    
+//                    paymnetTabImageView.image = UIImage(named: imageName)
+//                    paymnetTabImageView.isHidden = false
+//                } else {
+//                    let imageName = (button.tag == selectedTag)
+//                        ? selectedImages[button.tag]
+//                        : unselectedImages[button.tag]
+//                    
+//                    button.setImage(UIImage(named: imageName), for: .normal)
+//                }
+//            }
+//    }
   }
 
   // MARK: - Load Child VC
@@ -61,11 +166,11 @@ class AffiliatedUserTabbarViewController: UIViewController {
       case 0:
         childVC = AffiliatedUserHomeViewController.instantiate(fromAppStoryboard: .AffiliateUser)
       case 1:
-        childVC = CatalogViewController.instantiate(fromAppStoryboard: .Home)
+        childVC = AffiliatedUserProductViewController.instantiate(fromAppStoryboard: .AffiliateUser)
       case 2:
-        childVC = ShowViewController.instantiate(fromAppStoryboard: .Home)
+        childVC = AffiliatedUserShowViewController.instantiate(fromAppStoryboard: .AffiliateUser)
       case 3:
-        childVC = MyBagViewController.instantiate(fromAppStoryboard: .Home)
+        childVC = AffiliatedUserPaymentsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
       case 4:
         childVC = AffiliatedUserProfileViewController.instantiate(fromAppStoryboard: .AffiliateUser)
       default:

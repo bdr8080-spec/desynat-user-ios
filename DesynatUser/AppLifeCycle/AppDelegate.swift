@@ -26,13 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     GMSServices.provideAPIKey("AIzaSyBlCfJlRuxElolt6l-4erdJPR9ySUB8Jwk")    // Our google map API
     GMSPlacesClient.provideAPIKey("AIzaSyAekJV3oxQlPy_OWHCxPYfFw5CnrD-Wzkg")
     FirebaseApp.configure()
-    MFSettings.shared.configure(token: "SK_KWT_vVZlnnAqu8jRByOWaRPNId4ShzEDNt256dvnjebuyzo52dXjAfRx2ixW5umjWSUx", country: .kuwait, environment: MFEnvironment.test
-    )
-    
+    MFSettings.shared.configure(token: "SK_KWT_vVZlnnAqu8jRByOWaRPNId4ShzEDNt256dvnjebuyzo52dXjAfRx2ixW5umjWSUx", country: .kuwait, environment: MFEnvironment.test)
     let them = MFTheme(navigationTintColor: .white, navigationBarTintColor: .lightGray, navigationTitle: "Payment", cancelButtonTitle: "Cancel")
-    
     MFSettings.shared.setTheme(theme: them)
-    
     return true
   }
   
@@ -63,15 +59,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     dropDown.dismissMode = .automatic
     dropDown.show()
     dropDown.selectionAction = {(index: Int, item: String) in
-      print("Selected item: \(item) at index: \(index)")
       completion(index,item)
-      
     }
   }
-  
 }
-
-
-
 
 //com.app.DesynatUser

@@ -1015,8 +1015,11 @@
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L9r-67-kPQ" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="166.66666666666666" height="120"/>
                                                                                 <subviews>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadDoc1" translatesAutoresizingMaskIntoConstraints="NO" id="HHF-dO-AB8" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="166.66666666666666" height="120"/>
+                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadDoc1" translatesAutoresizingMaskIntoConstraints="NO" id="HHF-dO-AB8" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="1.3333333333333286" y="0.0" width="164" height="120"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="width" constant="164" id="oia-Uq-fku"/>
+                                                                                        </constraints>
                                                                                         <userDefinedRuntimeAttributes>
                                                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                                 <real key="value" value="12"/>
@@ -1035,11 +1038,10 @@
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="bottom" secondItem="HHF-dO-AB8" secondAttribute="bottom" id="2d8-xw-vPT"/>
-                                                                                    <constraint firstAttribute="trailing" secondItem="HHF-dO-AB8" secondAttribute="trailing" id="9WN-3v-yyv"/>
+                                                                                    <constraint firstItem="HHF-dO-AB8" firstAttribute="centerX" secondItem="L9r-67-kPQ" secondAttribute="centerX" id="4Rb-bK-WsM"/>
                                                                                     <constraint firstItem="HHF-dO-AB8" firstAttribute="top" secondItem="L9r-67-kPQ" secondAttribute="top" id="Af1-dz-CdY"/>
                                                                                     <constraint firstItem="ldI-tE-Rdr" firstAttribute="leading" secondItem="L9r-67-kPQ" secondAttribute="leading" id="EPU-ez-CQS"/>
                                                                                     <constraint firstItem="ldI-tE-Rdr" firstAttribute="top" secondItem="L9r-67-kPQ" secondAttribute="top" id="IFR-P7-Xnr"/>
-                                                                                    <constraint firstItem="HHF-dO-AB8" firstAttribute="leading" secondItem="L9r-67-kPQ" secondAttribute="leading" id="TE9-FT-Zyx"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="ldI-tE-Rdr" secondAttribute="trailing" id="gLi-Te-x0Y"/>
                                                                                     <constraint firstAttribute="height" constant="120" id="lcD-fa-Hod"/>
                                                                                     <constraint firstAttribute="bottom" secondItem="ldI-tE-Rdr" secondAttribute="bottom" id="wRU-Ux-Lwu"/>
@@ -1069,8 +1071,11 @@
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e4W-Dk-6yD" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="166.33333333333334" height="120"/>
                                                                                 <subviews>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploaddoc2" translatesAutoresizingMaskIntoConstraints="NO" id="yBT-bh-QIP" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="166.33333333333334" height="120"/>
+                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploaddoc2" translatesAutoresizingMaskIntoConstraints="NO" id="yBT-bh-QIP" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="1" y="0.0" width="164" height="120"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="width" constant="164" id="lhj-8K-XsI"/>
+                                                                                        </constraints>
                                                                                         <userDefinedRuntimeAttributes>
                                                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                                 <real key="value" value="12"/>
@@ -1089,11 +1094,10 @@
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="bottom" secondItem="yBT-bh-QIP" secondAttribute="bottom" id="2Zz-Pn-9r7"/>
-                                                                                    <constraint firstItem="yBT-bh-QIP" firstAttribute="leading" secondItem="e4W-Dk-6yD" secondAttribute="leading" id="3kA-AI-LDx"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="IJx-ab-HK2" secondAttribute="trailing" id="H5f-0D-zMk"/>
                                                                                     <constraint firstItem="IJx-ab-HK2" firstAttribute="top" secondItem="e4W-Dk-6yD" secondAttribute="top" id="I4T-gs-JH9"/>
+                                                                                    <constraint firstItem="yBT-bh-QIP" firstAttribute="centerX" secondItem="e4W-Dk-6yD" secondAttribute="centerX" id="KJ3-9v-RHm"/>
                                                                                     <constraint firstAttribute="height" constant="120" id="QoC-Pb-mUl"/>
-                                                                                    <constraint firstAttribute="trailing" secondItem="yBT-bh-QIP" secondAttribute="trailing" id="hdA-2W-R69"/>
                                                                                     <constraint firstAttribute="bottom" secondItem="IJx-ab-HK2" secondAttribute="bottom" id="r5h-xI-x5k"/>
                                                                                     <constraint firstItem="IJx-ab-HK2" firstAttribute="leading" secondItem="e4W-Dk-6yD" secondAttribute="leading" id="sZz-KL-wTP"/>
                                                                                     <constraint firstItem="yBT-bh-QIP" firstAttribute="top" secondItem="e4W-Dk-6yD" secondAttribute="top" id="xFj-lU-af7"/>
@@ -1547,6 +1551,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="countryCodeButton" destination="5zN-6C-xI3" id="EW6-e5-Wzs"/>
                         <outlet property="emailTextField" destination="ndq-U8-H7H" id="9Fi-Zd-tL7"/>
                         <outlet property="fullNameTextField" destination="7Ed-KY-bTd" id="Dzs-TQ-lKL"/>
                         <outlet property="mobileTextField" destination="HFO-LK-lFO" id="DbC-hp-8e1"/>
@@ -2817,15 +2822,35 @@ you for your patience. Team Desynat App</string>
                                                 <rect key="frame" x="156.33333333333334" y="0.0" width="48.333333333333343" height="61"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
-                                            <button opaque="NO" tag="3" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bxw-KC-Gvc">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aCW-PP-x14">
                                                 <rect key="frame" x="234.66666666666663" y="0.0" width="48" height="61"/>
-                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" image="paymentAffiliated"/>
-                                                <state key="selected" image="bagSelected"/>
-                                                <connections>
-                                                    <action selector="tabBarAction:" destination="0EF-0B-Eed" eventType="touchUpInside" id="eNc-sK-1fp"/>
-                                                </connections>
-                                            </button>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="paymentAffiliated" translatesAutoresizingMaskIntoConstraints="NO" id="hyg-JL-n4Q" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                                        <rect key="frame" x="-7.3333333333333144" y="8.6666666666666288" width="63" height="44"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="44" id="fqi-yX-dwa"/>
+                                                            <constraint firstAttribute="width" constant="63" id="o7e-V7-ITZ"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <button opaque="NO" tag="3" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bxw-KC-Gvc">
+                                                        <rect key="frame" x="0.0" y="0.0" width="48" height="61"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="selected" image="bagSelected"/>
+                                                        <connections>
+                                                            <action selector="tabBarAction:" destination="0EF-0B-Eed" eventType="touchUpInside" id="eNc-sK-1fp"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="bxw-KC-Gvc" secondAttribute="bottom" id="2eG-OL-LdN"/>
+                                                    <constraint firstItem="hyg-JL-n4Q" firstAttribute="centerY" secondItem="aCW-PP-x14" secondAttribute="centerY" id="3wJ-H3-5Il"/>
+                                                    <constraint firstItem="hyg-JL-n4Q" firstAttribute="centerX" secondItem="aCW-PP-x14" secondAttribute="centerX" id="DhC-JP-PaI"/>
+                                                    <constraint firstAttribute="trailing" secondItem="bxw-KC-Gvc" secondAttribute="trailing" id="FG0-qa-pK8"/>
+                                                    <constraint firstItem="bxw-KC-Gvc" firstAttribute="leading" secondItem="aCW-PP-x14" secondAttribute="leading" id="H3i-1K-z1M"/>
+                                                    <constraint firstItem="bxw-KC-Gvc" firstAttribute="top" secondItem="aCW-PP-x14" secondAttribute="top" id="Xuf-Yv-3Dh"/>
+                                                </constraints>
+                                            </view>
                                             <button opaque="NO" tag="4" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lGO-YU-YMP">
                                                 <rect key="frame" x="312.66666666666669" y="0.0" width="48.333333333333314" height="61"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -2885,10 +2910,10 @@ you for your patience. Team Desynat App</string>
                     </view>
                     <connections>
                         <outlet property="containerView" destination="Los-NW-ASO" id="FCB-WM-yKc"/>
+                        <outlet property="paymnetTabImageView" destination="hyg-JL-n4Q" id="gzF-rG-aWX"/>
                         <outletCollection property="tabButtons" destination="cQz-4z-Tu2" collectionClass="NSMutableArray" id="Jq6-MG-Zff"/>
                         <outletCollection property="tabButtons" destination="Opt-SJ-zl5" collectionClass="NSMutableArray" id="OOu-NW-Bgt"/>
                         <outletCollection property="tabButtons" destination="STk-d7-QHf" collectionClass="NSMutableArray" id="Aic-r4-d68"/>
-                        <outletCollection property="tabButtons" destination="bxw-KC-Gvc" collectionClass="NSMutableArray" id="L86-Ux-mif"/>
                         <outletCollection property="tabButtons" destination="lGO-YU-YMP" collectionClass="NSMutableArray" id="Vga-t7-1rp"/>
                     </connections>
                 </viewController>
@@ -3984,7 +4009,7 @@ you for your patience. Team Desynat App</string>
         <image name="lineTabbar" width="375" height="79"/>
         <image name="myoredrs_selected" width="24" height="22"/>
         <image name="password" width="22" height="22"/>
-        <image name="paymentAffiliated" width="60" height="44"/>
+        <image name="paymentAffiliated" width="63" height="42.666667938232422"/>
         <image name="pencil" width="24" height="24"/>
         <image name="productsAffiliated" width="53" height="44"/>
         <image name="profilePic" width="120" height="120"/>

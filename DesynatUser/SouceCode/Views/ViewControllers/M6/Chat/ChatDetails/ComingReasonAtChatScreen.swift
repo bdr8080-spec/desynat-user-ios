@@ -33,7 +33,7 @@ struct Record: Codable {
   let updatedAt: String?
   let productVariation: ProductVariation?
   let userDetails: UserDetails?
-  let sellerDetails: UserDetails?
+  let sellerDetails: SellerDetails?
   let deliveryDetails: DeliveryDetails?
   let orderCreateStatus: OrderCreateStatus?
 

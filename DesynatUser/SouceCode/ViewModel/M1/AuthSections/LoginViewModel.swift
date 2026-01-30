@@ -60,6 +60,7 @@ class LoginViewModel: NSObject {
         let password = loginHostVC.passwordTextField.text?.trimmed() ?? ""
         
         var params: [String: Any] = [
+            "lang": LanguageManager.currentLanguageCode,
             "password": password,
             "email_mobile": input]
         if input.isEmail() {
