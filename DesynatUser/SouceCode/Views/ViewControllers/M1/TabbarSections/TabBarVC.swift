@@ -19,6 +19,7 @@ class TabBarVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     updateTabSelection(forTag: initialTabIndex)
+      NotificationCenter.default.addObserver(self, selector: #selector(handleGetBagDetailsApi), name: NSNotification.Name("ItemRemovedFromBag"), object: nil)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -80,6 +81,10 @@ extension TabBarVC {
     containerView.addSubview(childVC.view)
     childVC.didMove(toParent: self)
   }
+    
+    @objc func handleGetBagDetailsApi() {
+        getBagDetailsApi()
+    }
   
   func getBagDetailsApi(){
     let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"

@@ -19,6 +19,7 @@ import SDWebImage
 import Cosmos
 
 class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
+    
     func didUpdateOrder(status: SelectScreenType) {
         viewModel.getOrderDetail()
     }
@@ -34,15 +35,12 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
     @IBOutlet weak var quantityLAbel: UILabel!
     @IBOutlet weak var customDetailLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-    
     @IBOutlet weak var returnDateLabel: CustomLabelFont!
     @IBOutlet weak var returnIdLabel: CustomLabelFont!
     @IBOutlet weak var exchangeDateLabel: CustomLabelFont!
     @IBOutlet weak var exchangeIdLabel: CustomLabelFont!
     @IBOutlet weak var cancellationDateLabel: CustomLabelFont!
-    
     @IBOutlet weak var cancellationIDLabel: CustomLabelFont!
-    
     @IBOutlet weak var reasonLabel: CustomLabelFont!
     @IBOutlet weak var exchangeReturnHeightConstrint: NSLayoutConstraint!
     @IBOutlet weak var exchangeProductButtonOutlet: UIButton!
@@ -63,7 +61,6 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
     @IBOutlet weak var lblSavedAmount: CustomLabelFont!
     @IBOutlet weak var lblDeliveryInst: CustomLabelFont!
     @IBOutlet weak var lblDeliveredOn: CustomLabelFont!
-    
     @IBOutlet weak var imgConfirm: UIImageView!
     @IBOutlet weak var lblConfirm: UILabel!
     @IBOutlet weak var imgShip: UIImageView!
@@ -72,16 +69,13 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
     @IBOutlet weak var lblWay: UILabel!
     @IBOutlet weak var imgDelivered: UIImageView!
     @IBOutlet weak var lblDelivered: UILabel!
-    
     @IBOutlet weak var lblShippingAdd: CustomLabelFont!
     @IBOutlet weak var lblTransactionId: CustomLabelFont!
     @IBOutlet weak var lblPaidByCardAmount: CustomLabelFont!
     @IBOutlet weak var lblPaidByCard: CustomLabelFont!
     @IBOutlet weak var imgCard: UIImageView!
     @IBOutlet weak var viewItemPrice: UIView!
-    //    @IBOutlet weak var lblItemPrice: CustomLabelFont!
     @IBOutlet weak var orderTableView: TableViewDynamicHeight!
-    
     @IBOutlet weak var imgProduct: CustomImageView!
     @IBOutlet weak var lblProductName: CustomLabelFont!
     @IBOutlet weak var lblSize: CustomLabelFont!
@@ -98,7 +92,6 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
     @IBOutlet weak var lblTotalQuantity: CustomLabelFont!
     @IBOutlet weak var lblAddress: CustomLabelFont!
     @IBOutlet weak var lblDetails: CustomLabelFont!
-    
     @IBOutlet weak var viewReturnDetail: UIView!
     @IBOutlet weak var viewCancelDetail: UIView!
     @IBOutlet weak var viewExchangeDetail: UIView!
@@ -207,7 +200,8 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
         let unitPrice = Double(data.amount ?? "") ?? 0
         let quantity = data.quantity ?? 1
         let totalPriceforCustom = unitPrice * Double(quantity)
-        itemPriceLabelForCustomOrder.text = "Item Price (\(formatPrice(Double(unitPrice)))KD × \(quantity))"
+        itemPriceLabelForCustomOrder.text = "Item Price (\(formatPrice(Double(unitPrice))) × \(quantity))"
+        
         lblTotalMrp.text = formatPrice(totalPriceforCustom)
         customOrderItemPriceLabel.text = formatPrice(Double(totalPriceforCustom))
         lblDiscountMrp.text = formatPrice(Double(data.order?.discountMrp ?? "0"))
@@ -217,6 +211,15 @@ class MyOrderDetailVC: UIViewController, SelectReasonDelegate {
         lblTotalAmount.text = formatPrice(Double(data.order?.totalAmount ?? "0"))
         totalPaidAmount = lblTotalAmount.text
         let totalPrice = formatPrice(Double(data.order?.totalMrp ?? "0"))
+        if isCustomOrder {
+            lblDisPrice.text = "Per Item Price \(formatPrice(Double(unitPrice)))"
+            lblPrice.isHidden = true
+            discountPercentageLabel.isHidden = true
+        } else {
+            lblDisPrice.text = formatPrice(totalPriceforCustom)
+            lblPrice.isHidden = false
+            discountPercentageLabel.isHidden = false
+        }
         CommonUtils.setStrikethrough(label: lblPrice, text: totalPrice)
         let isReturnAllowed = data.productDetails?.productReturn == "1"
         if isReturnAllowed {

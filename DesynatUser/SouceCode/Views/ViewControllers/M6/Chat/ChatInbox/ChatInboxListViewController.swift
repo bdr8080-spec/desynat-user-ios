@@ -72,6 +72,7 @@ extension ChatInboxListViewController: UITableViewDelegate, UITableViewDataSourc
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let nextVC = ChatDetailsViewController.instantiate(fromAppStoryboard: .Chat)
+      nextVC.comingFromChatInbox = true
     nextVC.viewModel.chatDetailsUniqueId = viewModel.chatList?[indexPath.row].uniqueID ?? ""
     self.navigationController?.pushViewController(nextVC, animated: true)
   }

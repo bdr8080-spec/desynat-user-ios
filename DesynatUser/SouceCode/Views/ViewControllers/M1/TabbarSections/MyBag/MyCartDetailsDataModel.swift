@@ -32,13 +32,14 @@ struct CartItemList: Codable {
   let id, userID, productID: Int?
   var quantity: Int
   let variantsID: Int?
-  let amount, createdAt, updatedAt, checkStock: String?
+  let amount, createdAt, updatedAt, checkStock, orderType: String?
   let product: Product?
   let productVariants: ProductVariants?
   
   enum CodingKeys: String, CodingKey {
     case id
     case userID = "user_id"
+    case orderType = "order_type"
     case productID = "product_id"
     case quantity
     case variantsID = "variants_id"
