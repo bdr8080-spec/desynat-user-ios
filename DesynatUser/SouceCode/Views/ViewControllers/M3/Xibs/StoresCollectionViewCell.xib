@@ -84,7 +84,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Gpl-FW-zWK">
                                 <rect key="frame" x="10" y="180" width="90" height="15"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gIH-Ed-SbD" customClass="CosmosView" customModule="Cosmos">
+                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gIH-Ed-SbD" customClass="CosmosView" customModule="Cosmos">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="15"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <userDefinedRuntimeAttributes>

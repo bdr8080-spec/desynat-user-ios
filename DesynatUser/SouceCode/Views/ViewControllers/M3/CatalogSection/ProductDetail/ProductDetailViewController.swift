@@ -103,6 +103,7 @@ class ProductDetailViewController: UIViewController {
   var filteredVariants: [ProductVariant] = []
   var selectedVariantImages: [String] = []
   var productDetails: ProductDetailsDataModel?
+    let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
   var selectedVariant: ProductVariant? {
     guard !filteredVariants.isEmpty else { return nil }
     guard selectedSizeIndex >= 0 else { return filteredVariants[0] }
@@ -152,10 +153,14 @@ class ProductDetailViewController: UIViewController {
   }
   
   @IBAction func addToBagDidTapped(_ sender: Any) {
-    quantity = 1
-    addProductToCart(forIncrement: true)
-    bagCount = bagCount + 1
-    totalItemsInBagLabel.text = "(\(bagCount) Items) View My Bag"
+      if isGuestUser == "true" {
+          showLoginAlert()
+      } else {
+          quantity = 1
+          addProductToCart(forIncrement: true)
+          bagCount = bagCount + 1
+          totalItemsInBagLabel.text = "(\(bagCount) Items) View My Bag"
+      }
   }
   
   
@@ -179,25 +184,29 @@ class ProductDetailViewController: UIViewController {
   }
   
   @IBAction func buyNowDidTapped(_ sender: Any) {
-    quantity = 1
-    guard let productId = productDetails?.id else { return }
-    let selectedVariant = filteredVariants[selectedSizeIndex]
-    let variantId = selectedVariant.id ?? 0
-    viewModel.buyNow(productId: productId, variantId: variantId, quantity: quantity) { [weak self] success in
-      guard let self = self else { return }
-      if success {
-        self.navigationController?.popToRootViewController(animated: false)
-        DispatchQueue.main.async {
-          if let tabBarVC = self.findTabBarVC() {
-            tabBarVC.updateTabSelection(forTag: 3)
-          } else {
-            print("TabBarVC not found")
-          }
-        }
+      if isGuestUser == "true" {
+          showLoginAlert()
       } else {
-        showAlert(msg: "Failed to add item to cart. Please try again.")
+          quantity = 1
+          guard let productId = productDetails?.id else { return }
+          let selectedVariant = filteredVariants[selectedSizeIndex]
+          let variantId = selectedVariant.id ?? 0
+          viewModel.buyNow(productId: productId, variantId: variantId, quantity: quantity) { [weak self] success in
+              guard let self = self else { return }
+              if success {
+                  self.navigationController?.popToRootViewController(animated: false)
+                  DispatchQueue.main.async {
+                      if let tabBarVC = self.findTabBarVC() {
+                          tabBarVC.updateTabSelection(forTag: 3)
+                      } else {
+                          print("TabBarVC not found")
+                      }
+                  }
+              } else {
+                  showAlert(msg: "Failed to add item to cart. Please try again.")
+              }
+          }
       }
-    }
   }
   
   @IBAction func sizeGuideDidTapped(_ sender: Any) {
@@ -207,32 +216,40 @@ class ProductDetailViewController: UIViewController {
   }
   
   @IBAction func wishlistDidTapped(_ sender: Any) {
-    guard let productId = productDetails?.id else { return }
-    viewModel.addToWishlist(productId: productId) { [weak self] success in
-      guard let self = self else { return }
-      if success {
-        let currentStatus = self.productDetails?.wishlist ?? 0
-        let newStatus = currentStatus == 1 ? 0 : 1
-        self.productDetails?.wishlist = newStatus
-        let wishlist = productDetails?.wishlist ?? 1
-        if wishlist == 1 {
-          CommonUtils.showToast(message: "Product added to wishlist")
-          wishlistButtonOutlet.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        } else {
-          CommonUtils.showToast(message: "Product removed from wishlist")
-          wishlistButtonOutlet.setImage(UIImage(systemName: "heart"), for: .normal)
-        }
+      if isGuestUser == "true" {
+          showLoginAlert()
       } else {
-        print("Wishlist API failed")
+          guard let productId = productDetails?.id else { return }
+          viewModel.addToWishlist(productId: productId) { [weak self] success in
+              guard let self = self else { return }
+              if success {
+                  let currentStatus = self.productDetails?.wishlist ?? 0
+                  let newStatus = currentStatus == 1 ? 0 : 1
+                  self.productDetails?.wishlist = newStatus
+                  let wishlist = productDetails?.wishlist ?? 1
+                  if wishlist == 1 {
+                      CommonUtils.showToast(message: "Product added to wishlist")
+                      wishlistButtonOutlet.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                  } else {
+                      CommonUtils.showToast(message: "Product removed from wishlist")
+                      wishlistButtonOutlet.setImage(UIImage(systemName: "heart"), for: .normal)
+                  }
+              } else {
+                  print("Wishlist API failed")
+              }
+          }
       }
-    }
   }
   
   @IBAction func customOrderDidTapped(_ sender: Any) {
-    guard let productId = productDetails?.id else { return }
-    let selectedVariant = filteredVariants[selectedSizeIndex]
-    let variantId = selectedVariant.id ?? 0
-    viewModel.createCustomOrder(productId: productId, variantId: variantId)
+      if isGuestUser == "true" {
+          showLoginAlert()
+      } else {
+          guard let productId = productDetails?.id else { return }
+          let selectedVariant = filteredVariants[selectedSizeIndex]
+          let variantId = selectedVariant.id ?? 0
+          viewModel.createCustomOrder(productId: productId, variantId: variantId)
+      }
   }
   
   private func addProductToCart(forIncrement: Bool) {
@@ -559,25 +576,6 @@ class ProductDetailViewController: UIViewController {
     productImageCollectionView.scrollToItem(at: firstIndexPath,
                                             at: .centeredHorizontally,
                                             animated: false)
-  }
-  
-  private func findTabBarVC() -> TabBarVC? {
-    if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-      for window in scene.windows {
-        if let tabVC = window.rootViewController as? TabBarVC {
-          return tabVC
-        }
-        if let nav = window.rootViewController as? UINavigationController {
-          if let tabVC = nav.viewControllers.first(where: { $0 is TabBarVC }) as? TabBarVC {
-            return tabVC
-          }
-        }
-        if let presented = window.rootViewController?.presentedViewController as? TabBarVC {
-          return presented
-        }
-      }
-    }
-    return nil
   }
   
   private func updateUI() {

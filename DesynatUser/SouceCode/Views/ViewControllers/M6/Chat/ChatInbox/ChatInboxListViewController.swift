@@ -39,13 +39,11 @@ class ChatInboxListViewController: UIViewController {
     vc.onApplyFilter = { [weak self] filter in
       guard let self = self else { return }
       self.viewModel.appliedFilter = filter
-      //        self.viewModel.currentPage = 1
       self.viewModel.getChatInboxRequest()
     }
     vc.onClearFilter = { [weak self] in
       guard let self = self else { return }
       self.viewModel.appliedFilter = ChatsFilterModel()
-      //        self.viewModel.currentPage = 1
       self.viewModel.getChatInboxRequest()
     }
     self.navigationController?.present(vc, animated: false)

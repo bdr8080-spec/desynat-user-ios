@@ -57,7 +57,7 @@ class AffiliatedUserLoginViewModel {
         
         var params: [String: Any] = [
             "password": password,
-            "lang":"en",
+            "lang": LanguageManager.currentLanguageCode,
             "email_mobile": input]
         if input.isEmail() {
             params["type"] = "1"

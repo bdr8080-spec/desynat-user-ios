@@ -19,8 +19,7 @@ class MyOrderDetailVM: NSObject {
   func getOrderDetail() {
     let params: [String: Any] = [
       "order_id": hostVC.orderId ?? 0,
-      "orderdetails_id": hostVC.orderDetailId ?? 0
-    ]
+      "orderdetails_id": hostVC.orderDetailId ?? 0]
     
     WebService.sharedInstance.getOrderDetail(param: params) { data in
       self.hostVC.orderData = data

@@ -26,7 +26,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var lblLocatioin: UILabel!
     @IBOutlet weak var imgProfile: CustomImageView!
     @IBOutlet weak var lblUserName: UILabel!
-    
     @IBOutlet weak var bannerCollectionView: UICollectionView! {
         didSet {
             bannerCollectionView.registerCellFromNib(cellID: "HomeBannerCollectionViewCell")
@@ -78,34 +77,27 @@ class HomeViewController: UIViewController {
     private var bannerCount = 5
     private var bestSellCount = 5
     private var newProductCount = 6
-    //    private var categories = ["Abaya", "Kurti set", "Abaya", "Shoes", "Maxi Dress", "Cord Set"]
     private var suggestedStores = ["Abaya", "Kurti set", "Abaya", "Shoes", "Maxi", "Cord", "Abaya", "Shoes", "Maxi", "Cord"]
-    
     let isGuestLogin = UserDefaults.standard.string(forKey:"isGuestLogin")
-    //    private var categoriesSection = ["Men", "Women", "Kids"]
-    
     private lazy var viewModel = HomeViewModel(hostVC: self)
     var slecetdCategoryId: Int? = 0
+    private var bannerAutoScrollTimer: Timer?
+    private var currentBannerIndex = 0
+    private var premiumAutoScrollTimer: Timer?
+    private var discountAutoScrollTimer: Timer?
+    private var currentPremiumIndex = 0
+    private var currentDiscountIndex = 0
+    private let autoScrollDelay: TimeInterval = 6
     // MARK: - Speech Recognition
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
     private var isListening = false
-    private var bannerAutoScrollTimer: Timer?
-    private var currentBannerIndex = 0
-  private var premiumAutoScrollTimer: Timer?
-  private var discountAutoScrollTimer: Timer?
-
-  private var currentPremiumIndex = 0
-  private var currentDiscountIndex = 0
-
-  private let autoScrollDelay: TimeInterval = 6
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //    bannerPageController.numberOfPages = bannerCount
         viewModel.getCategoriesListApi()
         showUserData()
         requestPermissions()
@@ -115,9 +107,9 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-      startBannerAutoScroll()
-          startPremiumAutoScroll()
-          startDiscountAutoScroll()
+        startBannerAutoScroll()
+        startPremiumAutoScroll()
+        startDiscountAutoScroll()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -128,9 +120,9 @@ class HomeViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-      stopBannerAutoScroll()
-          stopPremiumAutoScroll()
-          stopDiscountAutoScroll()
+        stopBannerAutoScroll()
+        stopPremiumAutoScroll()
+        stopDiscountAutoScroll()
     }
     
     private func requestPermissions() {
@@ -148,12 +140,12 @@ class HomeViewController: UIViewController {
     // MARK: - Page Control Tap Handling
     @IBAction func pageControlChanged(_ sender: UIPageControl) {
         currentBannerIndex = sender.currentPage
-            let indexPath = IndexPath(item: currentBannerIndex, section: 0)
-            bannerCollectionView.scrollToItem(
-                at: indexPath,
-                at: .centeredHorizontally,
-                animated: true
-            )
+        let indexPath = IndexPath(item: currentBannerIndex, section: 0)
+        bannerCollectionView.scrollToItem(
+            at: indexPath,
+            at: .centeredHorizontally,
+            animated: true
+        )
     }
     
     @IBAction func browsePrimiumChanges(_ sender: UIPageControl) {
@@ -177,16 +169,14 @@ class HomeViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    
     @IBAction func lieDidTapped(_ sender: Any) {
-      let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
-      if isGuestUser != "true" {
-        let vc = FavoruitesViewController.instantiate(fromAppStoryboard: .Catalog)
-        self.navigationController?.pushViewController(vc, animated: true)
-      } else {
-        UserDefaults.standard.setValue("false", forKey:"isGuestLogin")
-        kSharedSceneDelegate.navigateToLoginVc()
-      }
+        let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
+        if isGuestUser != "true" {
+            let vc = FavoruitesViewController.instantiate(fromAppStoryboard: .Catalog)
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            showLoginAlert()
+        }
     }
     
     @IBAction func micDidTapped(_ sender: UIButton) {
@@ -201,25 +191,27 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func btnSearch(_ sender: Any) {
-        let vc = SearchVC.instantiate(fromAppStoryboard: .MyOrder)
-        self.navigationController?.pushViewController(vc, animated: true)
+        let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
+        if isGuestUser != "true" {
+            let vc = SearchVC.instantiate(fromAppStoryboard: .MyOrder)
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            showLoginAlert()
+        }
     }
     
     @IBAction func chatDidTapped(_ sender: Any) {
-      let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
-      if isGuestUser != "true" {
-        let nextVC = ChatInboxListViewController.instantiate(fromAppStoryboard: .Chat)
-        self.navigationController?.pushViewController(nextVC, animated: true)
-      } else {
-        UserDefaults.standard.setValue("false", forKey:"isGuestLogin")
-        kSharedSceneDelegate.navigateToLoginVc()
-      }
+        let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
+        if isGuestUser != "true" {
+            let nextVC = ChatInboxListViewController.instantiate(fromAppStoryboard: .Chat)
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        } else {
+            showLoginAlert()
+        }
     }
-    
     
     // MARK: - Start Listening (Speech → Text)
     private func startListening() {
-        // Reset everything
         recognitionTask?.cancel()
         recognitionTask = nil
         recognitionRequest = nil
@@ -282,7 +274,7 @@ class HomeViewController: UIViewController {
         isListening = false
     }
     
-     func startBannerAutoScroll() {
+    func startBannerAutoScroll() {
         stopBannerAutoScroll() // prevent duplicate timers
         bannerAutoScrollTimer = Timer.scheduledTimer(
             timeInterval: autoScrollDelay,
@@ -292,84 +284,81 @@ class HomeViewController: UIViewController {
             repeats: true
         )
     }
-
+    
     private func stopBannerAutoScroll() {
         bannerAutoScrollTimer?.invalidate()
         bannerAutoScrollTimer = nil
     }
-  
-  func startPremiumAutoScroll() {
-      stopPremiumAutoScroll()
-      premiumAutoScrollTimer = Timer.scheduledTimer(
-          timeInterval: autoScrollDelay,
-          target: self,
-          selector: #selector(autoScrollPremium),
-          userInfo: nil,
-          repeats: true
-      )
-  }
-
-  func stopPremiumAutoScroll() {
-      premiumAutoScrollTimer?.invalidate()
-      premiumAutoScrollTimer = nil
-  }
-
-  @objc private func autoScrollPremium() {
-      let totalItems = viewModel.homeCenterScreenAllBannersList.count
-      guard totalItems > 1 else { return }
-
-      currentPremiumIndex += 1
-      if currentPremiumIndex >= totalItems {
-          currentPremiumIndex = 0
-      }
-
-      let indexPath = IndexPath(item: currentPremiumIndex, section: 0)
-      browsePrimiumCollectionView.scrollToItem(
-          at: indexPath,
-          at: .centeredHorizontally,
-          animated: true
-      )
-
-      browsePrimiumPageController.currentPage = currentPremiumIndex
-  }
-  
-  func startDiscountAutoScroll() {
-      stopDiscountAutoScroll()
-      discountAutoScrollTimer = Timer.scheduledTimer(
-          timeInterval: autoScrollDelay,
-          target: self,
-          selector: #selector(autoScrollDiscount),
-          userInfo: nil,
-          repeats: true
-      )
-  }
-
-  func stopDiscountAutoScroll() {
-      discountAutoScrollTimer?.invalidate()
-      discountAutoScrollTimer = nil
-  }
-
-  @objc private func autoScrollDiscount() {
-      let totalItems = bannerCount // or your actual data source count
-      guard totalItems > 1 else { return }
-
-      currentDiscountIndex += 1
-      if currentDiscountIndex >= totalItems {
-          currentDiscountIndex = 0
-      }
-
-      let indexPath = IndexPath(item: currentDiscountIndex, section: 0)
-      bowseSomeDisCountCollectionView.scrollToItem(
-          at: indexPath,
-          at: .centeredHorizontally,
-          animated: true
-      )
-
-      browseDiscountPageController.currentPage = currentDiscountIndex
-  }
-
-
-
+    
+    func startPremiumAutoScroll() {
+        stopPremiumAutoScroll()
+        premiumAutoScrollTimer = Timer.scheduledTimer(
+            timeInterval: autoScrollDelay,
+            target: self,
+            selector: #selector(autoScrollPremium),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+    
+    func stopPremiumAutoScroll() {
+        premiumAutoScrollTimer?.invalidate()
+        premiumAutoScrollTimer = nil
+    }
+    
+    @objc private func autoScrollPremium() {
+        let totalItems = viewModel.homeCenterScreenAllBannersList.count
+        guard totalItems > 1 else { return }
+        
+        currentPremiumIndex += 1
+        if currentPremiumIndex >= totalItems {
+            currentPremiumIndex = 0
+        }
+        
+        let indexPath = IndexPath(item: currentPremiumIndex, section: 0)
+        browsePrimiumCollectionView.scrollToItem(
+            at: indexPath,
+            at: .centeredHorizontally,
+            animated: true
+        )
+        
+        browsePrimiumPageController.currentPage = currentPremiumIndex
+    }
+    
+    func startDiscountAutoScroll() {
+        stopDiscountAutoScroll()
+        discountAutoScrollTimer = Timer.scheduledTimer(
+            timeInterval: autoScrollDelay,
+            target: self,
+            selector: #selector(autoScrollDiscount),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+    
+    func stopDiscountAutoScroll() {
+        discountAutoScrollTimer?.invalidate()
+        discountAutoScrollTimer = nil
+    }
+    
+    @objc private func autoScrollDiscount() {
+        let totalItems = bannerCount // or your actual data source count
+        guard totalItems > 1 else { return }
+        
+        currentDiscountIndex += 1
+        if currentDiscountIndex >= totalItems {
+            currentDiscountIndex = 0
+        }
+        
+        let indexPath = IndexPath(item: currentDiscountIndex, section: 0)
+        bowseSomeDisCountCollectionView.scrollToItem(
+            at: indexPath,
+            at: .centeredHorizontally,
+            animated: true
+        )
+        
+        browseDiscountPageController.currentPage = currentDiscountIndex
+    }
     
     deinit {
         stopListening()
@@ -378,28 +367,16 @@ class HomeViewController: UIViewController {
     @objc private func autoScrollBanner() {
         let totalItems = viewModel.homeScreenAllBannersList.count
         guard totalItems > 1 else { return }
-
         currentBannerIndex += 1
-
         if currentBannerIndex >= totalItems {
             currentBannerIndex = 0
         }
-
         let indexPath = IndexPath(item: currentBannerIndex, section: 0)
-
-        bannerCollectionView.scrollToItem(
-            at: indexPath,
-            at: .centeredHorizontally,
-            animated: true
-        )
-
+        bannerCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally,animated: true)
         bannerPageController.currentPage = currentBannerIndex
     }
-
-    
     
     private func updateCollectionsHeight() {
-        
         heightConstraintOfSuggestedStoreCollectionView.constant = suggestedStoresCollectionView.contentSize.height
         heightConstraintOfNewestProductCollectionView.constant = newestProductsCollectionView.contentSize.height
     }
@@ -422,9 +399,7 @@ class HomeViewController: UIViewController {
             imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.medium
         }
     }
-    
 }
-
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -497,7 +472,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeBannerCollectionViewCell", for: indexPath) as! HomeBannerCollectionViewCell
             cell.mainImageView.layer.cornerRadius = 8
             let data = viewModel.homeCenterScreenAllBannersList
-//            cell.configData(data: data)
             if data.isEmpty {
                 cell.mainImageView.image = .noBannerFound
             } else {
@@ -539,11 +513,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
             
         case categoriesCollectionView:
-            //            let spacing: CGFloat = 10
-            //            let totalSpacing = spacing * 2
-            //            let width = (collectionView.frame.width - totalSpacing) / 3
-            //            let height: CGFloat = 125
-            //            return CGSize(width: width, height: height)
             let width = (categoriesCollectionView.frame.width - 40) / 3
             let height: CGFloat = 135
             return CGSize(width: width, height: height)
@@ -578,8 +547,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return CGSize(width: width, height: newestProductsCollectionView.frame.height)
             
         case categoriesSectionCollectionView:
-            //             let spacing: CGFloat = 2
-            //            let totalSpacing = spacing * 2 // 3 cells per row → 2 spaces between
             let width = (collectionView.frame.width - 0) / 3
             let height: CGFloat = 35
             return CGSize(width: width, height: height)
@@ -614,18 +581,16 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == bannerCollectionView {
             let pageIndex = Int(round(scrollView.contentOffset.x / bannerCollectionView.frame.width))
-                    bannerPageController.currentPage = pageIndex
-                    currentBannerIndex = pageIndex
+            bannerPageController.currentPage = pageIndex
+            currentBannerIndex = pageIndex
         } else if scrollView == browsePrimiumCollectionView {
-          let pageIndex = Int(round(scrollView.contentOffset.x / browsePrimiumCollectionView.frame.width))
-          browsePrimiumPageController.currentPage = pageIndex
-          currentPremiumIndex = pageIndex
-      } else if scrollView == bowseSomeDisCountCollectionView {
-          let pageIndex = Int(round(scrollView.contentOffset.x / bowseSomeDisCountCollectionView.frame.width))
-          browseDiscountPageController.currentPage = pageIndex
-          currentDiscountIndex = pageIndex
-      }
-
+            let pageIndex = Int(round(scrollView.contentOffset.x / browsePrimiumCollectionView.frame.width))
+            browsePrimiumPageController.currentPage = pageIndex
+            currentPremiumIndex = pageIndex
+        } else if scrollView == bowseSomeDisCountCollectionView {
+            let pageIndex = Int(round(scrollView.contentOffset.x / bowseSomeDisCountCollectionView.frame.width))
+            browseDiscountPageController.currentPage = pageIndex
+            currentDiscountIndex = pageIndex
+        }
     }
-    
 }

@@ -32,6 +32,15 @@ class MyBagViewModel: NSObject {
         }
     }
     
+    func removeCustomOrderFromCartSerivice(id: Int){
+        let param: [String:Any] = ["id": id]
+        WebService.sharedInstance.removeCustomOrderFromCartSerivice(param: param) { [self] list in
+            DispatchQueue.main.async {
+                self.getBagDetailsApi()
+            }
+        }
+    }
+    
     func filterCartData() {
         let cartData = bagDetails?.cartData ?? []
         normalOrders = cartData.filter { $0.orderType == "1" }

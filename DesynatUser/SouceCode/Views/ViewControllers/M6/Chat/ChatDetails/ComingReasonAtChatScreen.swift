@@ -29,7 +29,7 @@ struct Record: Codable {
   let userID, sellerID: Int?
   let productID, variationID, price, quantity: String?
   let deliveryAddress, shipping, tax, totalAmount: String?
-  let customDetails, productRequest, action, createdAt: String?
+  let customDetails, productRequest, action, addtocardStatus, createdAt: String?
   let updatedAt: String?
   let productVariation: ProductVariation?
   let userDetails: UserDetails?
@@ -51,7 +51,7 @@ struct Record: Codable {
       case totalAmount = "total_amount"
       case customDetails = "custom_details"
       case productRequest = "product_request"
-      case action
+      case action, addtocardStatus
       case createdAt = "created_at"
       case updatedAt = "updated_at"
       case productVariation = "product_variation"
@@ -65,7 +65,8 @@ struct Record: Codable {
 // MARK: - OrderCreateStatus
 struct OrderCreateStatus: Codable {
     let id: Int?
-    let orderType, orderID: String?
+    let orderType: String?
+//        let orderID: String?
     let userID, deliveryAddress: Int?
     let totalMrp, discountMrp, promocodeStatus: String?
     let promocodeID, promocodeValue, giftcardAmount, giftcardID: String?
@@ -82,7 +83,7 @@ struct OrderCreateStatus: Codable {
     enum CodingKeys: String, CodingKey {
         case id
         case orderType = "order_type"
-        case orderID = "order_id"
+//        case orderID = "order_id"
         case userID = "user_id"
         case deliveryAddress = "delivery_address"
         case totalMrp = "total_mrp"

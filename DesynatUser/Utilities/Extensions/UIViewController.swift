@@ -14,36 +14,28 @@ extension UIViewController {
     
     private static var isAlertVisible = false
     
-//    public func showAlert(msg:String, completion:(()->())? = nil) {
-//        let alert = UIAlertController(title: Bundle.main.ApplicationName ?? "", message: msg, preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: StringConstant.ok.value(), style: .default, handler: { _ in
-//            completion?()
-//        }))
-//        self.present(alert, animated: true)
-//    }
-  
-  static var viewFromNIB : Self {
-      return Self(nibName: String(describing: Self.self), bundle: nil) as Self
-  }
+    static var viewFromNIB : Self {
+        return Self(nibName: String(describing: Self.self), bundle: nil) as Self
+    }
     
     public func showAlert(msg: String, completion: (() -> Void)? = nil) {
-            // Prevent multiple alerts
-            guard !UIViewController.isAlertVisible else { return }
-            UIViewController.isAlertVisible = true
+        // Prevent multiple alerts
+        guard !UIViewController.isAlertVisible else { return }
+        UIViewController.isAlertVisible = true
+        
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: Bundle.main.ApplicationName ?? "",
+                                          message: msg,
+                                          preferredStyle: .alert)
             
-            DispatchQueue.main.async {
-                let alert = UIAlertController(title: Bundle.main.ApplicationName ?? "",
-                                              message: msg,
-                                              preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: StringConstant.ok.value(), style: .default, handler: { _ in
-                    UIViewController.isAlertVisible = false   // reset flag
-                    completion?()
-                }))
-                
-                self.present(alert, animated: true)
-            }
+            alert.addAction(UIAlertAction(title: StringConstant.ok.value(), style: .default, handler: { _ in
+                UIViewController.isAlertVisible = false   // reset flag
+                completion?()
+            }))
+            
+            self.present(alert, animated: true)
         }
+    }
     
     static func convertPDFToImages(pdfURL: URL) -> [UIImage]? {
         guard let pdfDocument = PDFDocument(url: pdfURL) else {
@@ -70,58 +62,58 @@ extension UIViewController {
         return images
     }
     
-//    public func showAlert(msg: String, completion: (() -> ())? = nil) {
-//        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-//
-//        // Image View
-//        let imageView = UIImageView(image: UIImage(named: "alertImg"))
-//        imageView.contentMode = .scaleAspectFit
-//        imageView.layer.cornerRadius = 6
-//        imageView.clipsToBounds = true
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
-//        imageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-//
-//        // Message Label
-//        let messageLabel = UILabel()
-//        messageLabel.text = msg
-//        messageLabel.numberOfLines = 0
-//        messageLabel.textAlignment = .center
-//        messageLabel.font = UIFont.systemFont(ofSize: 14)
-//        messageLabel.textColor = .label
-//        messageLabel.translatesAutoresizingMaskIntoConstraints = false
-//
-//        // Separator Line
-//        let separator = UIView()
-//        separator.backgroundColor = UIColor.systemGray4
-//        separator.translatesAutoresizingMaskIntoConstraints = false
-//        separator.heightAnchor.constraint(equalToConstant: 1).isActive = true
-//
-//        // Stack View
-//        let stackView = UIStackView(arrangedSubviews: [imageView, messageLabel, separator])
-//        stackView.axis = .vertical
-//        stackView.spacing = 12
-//        stackView.alignment = .fill
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        alert.view.addSubview(stackView)
-//
-//        NSLayoutConstraint.activate([
-//            stackView.topAnchor.constraint(equalTo: alert.view.topAnchor, constant: 20),
-//            stackView.leadingAnchor.constraint(equalTo: alert.view.leadingAnchor, constant: 20),
-//            stackView.trailingAnchor.constraint(equalTo: alert.view.trailingAnchor, constant: -20),
-//            stackView.bottomAnchor.constraint(lessThanOrEqualTo: alert.view.bottomAnchor, constant: -70),
-//            separator.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
-//            separator.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
-//        ])
-//
-//        // OK button
-//        alert.addAction(UIAlertAction(title: StringConstant.ok.value(), style: .default, handler: { _ in
-//            completion?()
-//        }))
-//
-//        self.present(alert, animated: true)
-//    }
+    //    public func showAlert(msg: String, completion: (() -> ())? = nil) {
+    //        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+    //
+    //        // Image View
+    //        let imageView = UIImageView(image: UIImage(named: "alertImg"))
+    //        imageView.contentMode = .scaleAspectFit
+    //        imageView.layer.cornerRadius = 6
+    //        imageView.clipsToBounds = true
+    //        imageView.translatesAutoresizingMaskIntoConstraints = false
+    //        imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
+    //        imageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+    //
+    //        // Message Label
+    //        let messageLabel = UILabel()
+    //        messageLabel.text = msg
+    //        messageLabel.numberOfLines = 0
+    //        messageLabel.textAlignment = .center
+    //        messageLabel.font = UIFont.systemFont(ofSize: 14)
+    //        messageLabel.textColor = .label
+    //        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+    //
+    //        // Separator Line
+    //        let separator = UIView()
+    //        separator.backgroundColor = UIColor.systemGray4
+    //        separator.translatesAutoresizingMaskIntoConstraints = false
+    //        separator.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    //
+    //        // Stack View
+    //        let stackView = UIStackView(arrangedSubviews: [imageView, messageLabel, separator])
+    //        stackView.axis = .vertical
+    //        stackView.spacing = 12
+    //        stackView.alignment = .fill
+    //        stackView.translatesAutoresizingMaskIntoConstraints = false
+    //
+    //        alert.view.addSubview(stackView)
+    //
+    //        NSLayoutConstraint.activate([
+    //            stackView.topAnchor.constraint(equalTo: alert.view.topAnchor, constant: 20),
+    //            stackView.leadingAnchor.constraint(equalTo: alert.view.leadingAnchor, constant: 20),
+    //            stackView.trailingAnchor.constraint(equalTo: alert.view.trailingAnchor, constant: -20),
+    //            stackView.bottomAnchor.constraint(lessThanOrEqualTo: alert.view.bottomAnchor, constant: -70),
+    //            separator.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+    //            separator.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+    //        ])
+    //
+    //        // OK button
+    //        alert.addAction(UIAlertAction(title: StringConstant.ok.value(), style: .default, handler: { _ in
+    //            completion?()
+    //        }))
+    //
+    //        self.present(alert, animated: true)
+    //    }
     
     public func showConfirmationAlert(
         msg: String,
@@ -130,31 +122,31 @@ extension UIViewController {
         // Prevent multiple alerts
         guard !UIViewController.isAlertVisible else { return }
         UIViewController.isAlertVisible = true
-
+        
         DispatchQueue.main.async {
             let alert = UIAlertController(
                 title: Bundle.main.ApplicationName ?? "",
                 message: msg,
                 preferredStyle: .alert
             )
-
+            
             // Yes Action
             let yesButton = UIAlertAction(title: "Yes", style: .default) { _ in
                 UIViewController.isAlertVisible = false
                 completion?()
             }
-
+            
             // Cancel Action (red color)
             let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { _ in
                 UIViewController.isAlertVisible = false
             }
-
+            
             // Apply red color to Cancel button text
             cancelButton.setValue(UIColor.red, forKey: "titleTextColor")
-
+            
             alert.addAction(yesButton)
             alert.addAction(cancelButton)
-
+            
             self.present(alert, animated: true)
         }
     }
@@ -167,15 +159,31 @@ extension UIViewController {
         dateFormatter.timeZone = TimeZone(identifier: "Asia/Kolkata")
         return dateFormatter.string(from: currentDate)
     }
-    public func showBlockAlert(msg:String, completion:(()->())? = nil) {
-        let alert = UIAlertController(title: Bundle.main.ApplicationName ?? "", message: msg, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: StringConstant.ok.value(), style: .default, handler: { _ in
+    
+    public func showLoginAlert(completion: (() -> ())? = nil) {
+        let alert = UIAlertController(
+            title: Bundle.main.ApplicationName ?? "",
+            message: "Please login to proceed",
+            preferredStyle: .alert
+        )
+        
+        // Login action
+        let loginAction = UIAlertAction(title: "Login", style: .default) { _ in
             completion?()
-            UserDefaults.standard.set("no", forKey: "isGuest")
-            kSharedSceneDelegate.logoutUser()
-        }))
+            UserDefaults.standard.setValue("false", forKey:"isGuestLogin")
+            kSharedSceneDelegate.navigateToLoginVc()
+        }
+        
+        // Cancel action
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
+        
+        alert.addAction(loginAction)
+        alert.addAction(cancelAction)
+        
         self.present(alert, animated: true)
     }
+    
     
     /// Show Toater Alert
     public func showToast(msg:String) {
@@ -216,8 +224,8 @@ extension UIViewController {
         }
         return "0.00"
     }
-
-
+    
+    
     func formattedMinimu(from amount: Float?) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -243,7 +251,7 @@ extension UIViewController {
         
         return "0.00"
     }
-
+    
     func formattedAmount(from amount: Double?) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -271,14 +279,14 @@ extension UIViewController {
         
         return "0.00"
     }
-
-
+    
+    
     func convertDateString(inputDateString: String, inputDateFormat: String, outputDateFormat: String) -> String? {
         // Step 1: Create a DateFormatter to parse the original string
         let originalDateFormatter = DateFormatter()
         originalDateFormatter.dateFormat = inputDateFormat
         originalDateFormatter.timeZone = TimeZone.current // Adjust timezone if necessary
-
+        
         // Step 2: Convert the string to a Date object
         if let date = originalDateFormatter.date(from: inputDateString) {
             
@@ -301,31 +309,31 @@ extension UIViewController {
     }
     
     func backController() {
-          let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-          self.navigationController!.popToViewController(viewControllers[viewControllers.count - 2], animated: true)
-      }
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+        self.navigationController!.popToViewController(viewControllers[viewControllers.count - 2], animated: true)
+    }
     func backTwoController() {
-          let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-          self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
-      }
-//    func backControllerOne() {
-//        guard let nav = self.navigationController else { return }
-//        let viewControllers = nav.viewControllers
-//        
-//        if viewControllers.count >= 2 {
-//            nav.popToViewController(viewControllers[viewControllers.count - 2], animated: true)
-//        } else {
-//            // No previous screen — decide what to do here
-//            // e.g., navigate to ProfileSelectionVC or dismiss
-//            let profileVC = ProfileSelectionVC.instantiate(fromAppStoryboard: .Main)
-//            let nc = UINavigationController(rootViewController: profileVC)
-//            nc.isNavigationBarHidden = true
-//            let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as! SceneDelegate
-//            sceneDelegate.window!.rootViewController = nc
-//            sceneDelegate.window!.makeKeyAndVisible()
-//        }
-//    }
-
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+        self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+    }
+    //    func backControllerOne() {
+    //        guard let nav = self.navigationController else { return }
+    //        let viewControllers = nav.viewControllers
+    //
+    //        if viewControllers.count >= 2 {
+    //            nav.popToViewController(viewControllers[viewControllers.count - 2], animated: true)
+    //        } else {
+    //            // No previous screen — decide what to do here
+    //            // e.g., navigate to ProfileSelectionVC or dismiss
+    //            let profileVC = ProfileSelectionVC.instantiate(fromAppStoryboard: .Main)
+    //            let nc = UINavigationController(rootViewController: profileVC)
+    //            nc.isNavigationBarHidden = true
+    //            let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as! SceneDelegate
+    //            sceneDelegate.window!.rootViewController = nc
+    //            sceneDelegate.window!.makeKeyAndVisible()
+    //        }
+    //    }
+    
     func setColorBox(size: String, label: UILabel, hexColor: String, quantity: String) {
         
         // Use this square → fully tintable solid square
@@ -367,48 +375,67 @@ extension UIViewController {
         
         label.attributedText = attributedString
     }
-  
-  func setColorBoxWithQuanityInView(size: String, label: UILabel, hexColor: String) {
-      
-      // Use this square → fully tintable solid square
-      let coloredSquare = "■"
-      let dot = "●"
-      
-      let fullText = "Size: \(size)  \(dot)  Color: \(coloredSquare)"
-      
-      let attributedString = NSMutableAttributedString(
-          string: fullText,
-          attributes: [
-              .font: UIFont(name: "Poppins-Light", size: 10.0) ?? UIFont.systemFont(ofSize: 10)
-          ]
-      )
-      
-      let grayColor = UIColor(hexString: "#D9D9D9") //?? UIColor.gray
-      let nsText = fullText as NSString
-      
-      // Gray dots
-      var searchRange = NSRange(location: 0, length: nsText.length)
-      while true {
-          let range = nsText.range(of: dot, options: [], range: searchRange)
-          if range.location == NSNotFound { break }
-          attributedString.addAttribute(.foregroundColor, value: grayColor, range: range)
-          
-          let nextLoc = range.location + range.length
-          searchRange = NSRange(location: nextLoc, length: nsText.length - nextLoc)
-      }
-      
-      // Colored square with API color + slightly larger
-      if let productColor = UIColor(hexStringBox: hexColor) {
-          let squareRange = nsText.range(of: coloredSquare)
-          if squareRange.location != NSNotFound {
-              attributedString.addAttribute(.foregroundColor, value: productColor, range: squareRange)
-              // Make the square pop (bigger + medium weight)
-              attributedString.addAttribute(.font, value: UIFont(name: "Poppins-Medium", size: 11) ?? UIFont.systemFont(ofSize: 11, weight: .medium), range: squareRange)
-          }
-      }
-      
-      label.attributedText = attributedString
-  }
+    
+    func setColorBoxWithQuanityInView(size: String, label: UILabel, hexColor: String) {
+        
+        // Use this square → fully tintable solid square
+        let coloredSquare = "■"
+        let dot = "●"
+        
+        let fullText = "Size: \(size)  \(dot)  Color: \(coloredSquare)"
+        
+        let attributedString = NSMutableAttributedString(
+            string: fullText,
+            attributes: [
+                .font: UIFont(name: "Poppins-Light", size: 10.0) ?? UIFont.systemFont(ofSize: 10)
+            ]
+        )
+        
+        let grayColor = UIColor(hexString: "#D9D9D9") //?? UIColor.gray
+        let nsText = fullText as NSString
+        
+        // Gray dots
+        var searchRange = NSRange(location: 0, length: nsText.length)
+        while true {
+            let range = nsText.range(of: dot, options: [], range: searchRange)
+            if range.location == NSNotFound { break }
+            attributedString.addAttribute(.foregroundColor, value: grayColor, range: range)
+            
+            let nextLoc = range.location + range.length
+            searchRange = NSRange(location: nextLoc, length: nsText.length - nextLoc)
+        }
+        
+        // Colored square with API color + slightly larger
+        if let productColor = UIColor(hexStringBox: hexColor) {
+            let squareRange = nsText.range(of: coloredSquare)
+            if squareRange.location != NSNotFound {
+                attributedString.addAttribute(.foregroundColor, value: productColor, range: squareRange)
+                // Make the square pop (bigger + medium weight)
+                attributedString.addAttribute(.font, value: UIFont(name: "Poppins-Medium", size: 11) ?? UIFont.systemFont(ofSize: 11, weight: .medium), range: squareRange)
+            }
+        }
+        
+        label.attributedText = attributedString
+    }
+    
+    func findTabBarVC() -> TabBarVC? {
+        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            for window in scene.windows {
+                if let tabVC = window.rootViewController as? TabBarVC {
+                    return tabVC
+                }
+                if let nav = window.rootViewController as? UINavigationController {
+                    if let tabVC = nav.viewControllers.first(where: { $0 is TabBarVC }) as? TabBarVC {
+                        return tabVC
+                    }
+                }
+                if let presented = window.rootViewController?.presentedViewController as? TabBarVC {
+                    return presented
+                }
+            }
+        }
+        return nil
+    }
 }
 
 extension UITableViewCell {
@@ -453,48 +480,48 @@ extension UITableViewCell {
         
         label.attributedText = attributedString
     }
-  
-  func setColorBoxWithQuanity(size: String, label: UILabel, hexColor: String) {
-      
-      // Use this square → fully tintable solid square
-      let coloredSquare = "■"
-      let dot = "●"
-      
-      let fullText = "Size: \(size)  \(dot)  Color: \(coloredSquare)"
-      
-      let attributedString = NSMutableAttributedString(
-          string: fullText,
-          attributes: [
-              .font: UIFont(name: "Poppins-Light", size: 10.0) ?? UIFont.systemFont(ofSize: 10)
-          ]
-      )
-      
-      let grayColor = UIColor(hexString: "#D9D9D9") //?? UIColor.gray
-      let nsText = fullText as NSString
-      
-      // Gray dots
-      var searchRange = NSRange(location: 0, length: nsText.length)
-      while true {
-          let range = nsText.range(of: dot, options: [], range: searchRange)
-          if range.location == NSNotFound { break }
-          attributedString.addAttribute(.foregroundColor, value: grayColor, range: range)
-          
-          let nextLoc = range.location + range.length
-          searchRange = NSRange(location: nextLoc, length: nsText.length - nextLoc)
-      }
-      
-      // Colored square with API color + slightly larger
-      if let productColor = UIColor(hexStringBox: hexColor) {
-          let squareRange = nsText.range(of: coloredSquare)
-          if squareRange.location != NSNotFound {
-              attributedString.addAttribute(.foregroundColor, value: productColor, range: squareRange)
-              // Make the square pop (bigger + medium weight)
-              attributedString.addAttribute(.font, value: UIFont(name: "Poppins-Medium", size: 11) ?? UIFont.systemFont(ofSize: 11, weight: .medium), range: squareRange)
-          }
-      }
-      
-      label.attributedText = attributedString
-  }
+    
+    func setColorBoxWithQuanity(size: String, label: UILabel, hexColor: String) {
+        
+        // Use this square → fully tintable solid square
+        let coloredSquare = "■"
+        let dot = "●"
+        
+        let fullText = "Size: \(size)  \(dot)  Color: \(coloredSquare)"
+        
+        let attributedString = NSMutableAttributedString(
+            string: fullText,
+            attributes: [
+                .font: UIFont(name: "Poppins-Light", size: 10.0) ?? UIFont.systemFont(ofSize: 10)
+            ]
+        )
+        
+        let grayColor = UIColor(hexString: "#D9D9D9") //?? UIColor.gray
+        let nsText = fullText as NSString
+        
+        // Gray dots
+        var searchRange = NSRange(location: 0, length: nsText.length)
+        while true {
+            let range = nsText.range(of: dot, options: [], range: searchRange)
+            if range.location == NSNotFound { break }
+            attributedString.addAttribute(.foregroundColor, value: grayColor, range: range)
+            
+            let nextLoc = range.location + range.length
+            searchRange = NSRange(location: nextLoc, length: nsText.length - nextLoc)
+        }
+        
+        // Colored square with API color + slightly larger
+        if let productColor = UIColor(hexStringBox: hexColor) {
+            let squareRange = nsText.range(of: coloredSquare)
+            if squareRange.location != NSNotFound {
+                attributedString.addAttribute(.foregroundColor, value: productColor, range: squareRange)
+                // Make the square pop (bigger + medium weight)
+                attributedString.addAttribute(.font, value: UIFont(name: "Poppins-Medium", size: 11) ?? UIFont.systemFont(ofSize: 11, weight: .medium), range: squareRange)
+            }
+        }
+        
+        label.attributedText = attributedString
+    }
 }
 
 
@@ -514,11 +541,10 @@ extension UINavigationController {
     }
     
     func popToViewController(ofClass: AnyClass, animated: Bool = true) {
-          if let vc = viewControllers.last(where: { $0.isKind(of: ofClass) }) {
+        if let vc = viewControllers.last(where: { $0.isKind(of: ofClass) }) {
             popToViewController(vc, animated: animated)
-          }
+        }
     }
-    
     
 }
 

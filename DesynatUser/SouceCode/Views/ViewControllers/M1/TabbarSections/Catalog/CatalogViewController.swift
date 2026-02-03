@@ -8,41 +8,34 @@
 import UIKit
 
 class CatalogViewController: UIViewController {
-
+    
     @IBOutlet weak var catalogTableView: UITableView! {
         didSet {
             catalogTableView.registerCellFromNib(cellID: "CatalogTableViewCell")
         }
     }
-  
-  private lazy var viewModel = CatalogViewModel(hostVC: self)
-  
-  
+    
+    private lazy var viewModel = CatalogViewModel(hostVC: self)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-      
     }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    viewModel.getCategoriesListApi()
-  }
-  
-  
-  
-
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.getCategoriesListApi()
+    }
 }
 
 extension CatalogViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return viewModel.categoriesSection.count
+        return viewModel.categoriesSection.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CatalogTableViewCell", for: indexPath) as! CatalogTableViewCell
-      cell.configData(data: viewModel.categoriesSection[indexPath.row])
+        cell.configData(data: viewModel.categoriesSection[indexPath.row])
         if indexPath.row % 2 == 0 {
             cell.leftImageView.isHidden = true
             cell.rightImageView.isHidden = false
@@ -61,10 +54,8 @@ extension CatalogViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nextVC = SubCatgoryViewController.instantiate(fromAppStoryboard: .Catalog)
-      nextVC.categoryId = viewModel.categoriesSection[indexPath.row].id
+        nextVC.categoryId = viewModel.categoriesSection[indexPath.row].id
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
-    
-    
 }
 

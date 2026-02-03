@@ -41,7 +41,6 @@ class ChatDetailsViewController: UIViewController {
             chatDetailsTableView.registerCellFromNib(cellID: "SenderChatForImageTableViewCell")
         }
     }
-    
     @IBOutlet weak var productTableView: UITableView! {
         didSet {
             productTableView.registerCellFromNib(cellID: "OrderForChatTableViewCell")
@@ -196,6 +195,9 @@ class ChatDetailsViewController: UIViewController {
 //                payNowView.isHidden = false
                 addToBagView.isHidden = false
                 actionButtonView.isHidden = true
+                if quotationData?.addtocardStatus == "1" {
+                    addToBagView.isHidden = true
+                }
                 let isOrderPlaced = quotationData?.orderCreateStatus?.id != nil
                 if isOrderPlaced {
                     productPriceView.isHidden = false
@@ -262,7 +264,6 @@ class ChatDetailsViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
     }
-    
     
     func scrollChatToBottom(animated: Bool = true) {
         DispatchQueue.main.async {

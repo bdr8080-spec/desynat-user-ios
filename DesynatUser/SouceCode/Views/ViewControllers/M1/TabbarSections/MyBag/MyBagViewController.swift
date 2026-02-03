@@ -40,6 +40,7 @@ class MyBagViewController: UIViewController {
             bagTableView.registerCellFromNib(cellID: "MyBagTableViewCell")
         }
     }
+    
     private lazy var viewModel = MyBagViewModel(hostVC: self)
     var deliveryId: Int = 0
     var isPromoCodeApplied: Bool = false
@@ -127,25 +128,6 @@ class MyBagViewController: UIViewController {
         viewModel.placeOrderApi()
     }
     
-    //  func condifData(data: MyCartDetailsDataModel) {
-    //    totalMRPDiscountValue = data.discountOnMrp ?? 0.0
-    //    totalMRP.text = formatPrice(data.totalMrp)//"\(data.totalMrp ?? 0) KD"
-    //    dricountOnMRP.text = formatPrice(data.discountOnMrp)//"\(data.discountOnMrp ?? 0) KD"
-    //    couponDidcountLabel.text = formatPrice(data.discountCoupon)//"\(data.discountCoupon ?? 0) KD"
-    //    shippingFeeLabel.text = formatPrice(data.shippingFees)//"\(data.shippingFees ?? 0) KD"
-    //    taxLabel.text = formatPrice(data.tax)//"\(data.tax ?? 0) KD"
-    //    totalAmount = data.totalAmount ?? 0.0
-    //    totalAmountLabel.text = formatPrice(data.totalAmount)//"\(data.totalAmount ?? 0) KD"
-    //    finalPriceLabel.text = formatPrice(data.totalAmount)//"\(data.totalAmount ?? 0) KD"
-    //    let selectedAddress = data.userAddress
-    //    deliveryId = selectedAddress?.id ?? 0
-    //    let addressLine = "\(selectedAddress?.name ?? "") \(selectedAddress?.houseNo ?? ""), \(selectedAddress?.streetNo ?? ""), \(selectedAddress?.city ?? ""), \(selectedAddress?.state ?? ""), \(selectedAddress?.countryName ?? "")-\(selectedAddress?.postalCode ?? "")"
-    //    addressLabel.text = addressLine
-    //    CommonUtils.setStrikethrough(label: actualPriceLAbel, text: formatPrice(data.totalMrp))//"\(data.totalMrp ?? 0) KD")
-    //    let savingAmount = (data.discountOnMrp ?? 0)// - (data.totalAmount ?? 0)
-    //    saveAmountLAbel.text = "You will save \(formatPrice(savingAmount)) KD on this"
-    //  }
-    
     func condifData(data: MyCartDetailsDataModel) {
         totalMRPDiscountValue = data.discountOnMrp ?? 0.0
         totalMRP.text = formatPrice(data.totalMrp)
@@ -169,12 +151,9 @@ class MyBagViewController: UIViewController {
         addressLabel.text = addressLine
         shippingFeeLabel.text = formatPrice(data.shippingFees)
         taxLabel.text = formatPrice(data.tax)
-        
         totalAmount = data.totalAmount ?? 0
-        
         CommonUtils.setStrikethrough(label: actualPriceLAbel, text: formatPrice(data.totalMrp))
     }
-    
     
     func formatPrice(_ amount: Double?, currency: String = "KD") -> String {
         guard let amount = amount else { return "0 \(currency)" }
@@ -189,17 +168,13 @@ class MyBagViewController: UIViewController {
         }
     }
     
-    
-    
-    
-    
 }
 
 extension MyBagViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == bagTableView {
-            return viewModel.normalOrders.count//viewModel.bagDetails?.cartData?.count ?? 0
+            return viewModel.normalOrders.count
         } else  {
             return viewModel.customOrders.count
         }
@@ -208,13 +183,9 @@ extension MyBagViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == bagTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyBagTableViewCell", for: indexPath) as! MyBagTableViewCell
-//            if let data = viewModel.bagDetails?.cartData?[indexPath.row] {
-//                cell.configData(data: data)
-//            }
             cell.configData(data: viewModel.normalOrders[indexPath.row])
-            let totalItems = viewModel.normalOrders.count//viewModel.bagDetails?.cartData?.count ?? 0
+            let totalItems = viewModel.normalOrders.count
             let isLastIndex = indexPath.row == totalItems - 1
-            
             if isLastIndex {
                 cell.shopMoreButtonOutlet.isHidden = false
                 cell.borderLabel.isHidden = true
@@ -222,7 +193,7 @@ extension MyBagViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.shopMoreButtonOutlet.isHidden = true
                 cell.borderLabel.isHidden = false
             }
-            let cartItem = viewModel.normalOrders[indexPath.row]//viewModel.bagDetails?.cartData?[indexPath.row]
+            let cartItem = viewModel.normalOrders[indexPath.row]
             cell.onIncrement = { [weak self] in
                 guard let cartID = cartItem.id else { return }
                 self?.viewModel.handleIncrementDecrement(cartID: cartID, type: "increment", index: indexPath.row)
@@ -244,8 +215,11 @@ extension MyBagViewController: UITableViewDelegate, UITableViewDataSource {
             customOrderCell.configData(data: viewModel.customOrders[indexPath.row])
             customOrderCell.onCustomDetailsTap = { [weak self] in
                 let nextVC = CustomOrderDetailsViewController.instantiate(fromAppStoryboard: .MyOrder)
-//                nextVC.customDetails = totalItems.
+                nextVC.customDetails = self?.viewModel.customOrders[indexPath.row].chatroomData?.customDetails
                 self?.navigationController?.present(nextVC, animated: true)
+            }
+            customOrderCell.onRemoveTap = { [weak self] in
+                self?.viewModel.removeCustomOrderFromCartSerivice(id: self?.viewModel.customOrders[indexPath.row].id ?? 0)
             }
             return customOrderCell
         }
@@ -253,9 +227,11 @@ extension MyBagViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nextVC = ProductDetailViewController.instantiate(fromAppStoryboard: .Catalog)
-        let productId = viewModel.bagDetails?.cartData?[indexPath.row].productID
-        //    viewModel.singleStoresSection?.allProduct?.data?[indexPath.row].id
-        nextVC.productId = productId
+        if tableView == bagTableView {
+            nextVC.productId = viewModel.normalOrders[indexPath.row].productID
+        } else {
+            nextVC.productId = viewModel.customOrders[indexPath.row].productID
+        }
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     

@@ -25,27 +25,12 @@ protocol FilterDelegate: AnyObject {
 import UIKit
 
 class MyOrderVC: UIViewController, FilterDelegate {
-    //  func didApplyFilter(_ filter: OrderFilterType) {
-    //    selectedFilter = filter
-    //    if isCustomOrderSeleced {
-    //      viewModel.getOrders(type: 2)
-    //    } else {
-    //      viewModel.getOrders(type: 1)
-    //    }
-    //  }
-    
+
     func didApplyFilter(_ filter: OrderFilterType) {
-        if isCustomOrderSeleced {
-            customOrderFilter = filter
-            viewModel.getOrders(type: 2)
-        } else {
-            normalOrderFilter = filter
-            viewModel.getOrders(type: 1)
-        }
+        normalOrderFilter = filter
+        viewModel.getOrders()
     }
     
-    @IBOutlet weak var btnOrder: CustomButton!
-    @IBOutlet weak var btnCustomOrder: CustomButton!
     @IBOutlet weak var txtSearch: UITextField!
     @IBOutlet weak var orderTableView: TableViewDynamicHeight!
     @IBOutlet weak var lblNoData: UILabel!
@@ -53,12 +38,9 @@ class MyOrderVC: UIViewController, FilterDelegate {
     lazy private var viewModel = MyOrderVM(hostVC: self)
     var orderData: [OrderModel] = []
     var selectedOrderType: OrderType = .order
-    //  var selectedFilter: OrderFilterType = .all
     var normalOrderFilter: OrderFilterType = .all
-    var customOrderFilter: OrderFilterType = .all
     private var searchWorkItem: DispatchWorkItem?
     var comingFromOrderTracking: Bool = false
-    var isCustomOrderSeleced : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,27 +50,7 @@ class MyOrderVC: UIViewController, FilterDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if comingFromOrderTracking {
-            if isCustomOrderSeleced {
-                btnOrder.setBackgroundImage(nil, for: .normal)
-                btnCustomOrder.setBackgroundImage(UIImage(named: "btnGradient"), for: .normal)
-                btnOrder.setTitleColor(.black, for: .normal)
-                btnCustomOrder.setTitleColor(.white, for: .normal)
-                viewModel.getOrders(type: 2)
-            } else {
-                btnOrder.setBackgroundImage(UIImage(named: "btnGradient"), for: .normal)
-                btnCustomOrder.setBackgroundImage(nil, for: .normal)
-                btnOrder.setTitleColor(.white, for: .normal)
-                btnCustomOrder.setTitleColor(.black, for: .normal)
-                viewModel.getOrders(type: 1)
-            }
-        } else {
-            btnOrder.setBackgroundImage(UIImage(named: "btnGradient"), for: .normal)
-            btnCustomOrder.setBackgroundImage(nil, for: .normal)
-            btnOrder.setTitleColor(.white, for: .normal)
-            btnCustomOrder.setTitleColor(.black, for: .normal)
-            viewModel.getOrders(type: 1)
-        }
+        viewModel.getOrders()
     }
     
     func registerXib() {
@@ -113,54 +75,10 @@ class MyOrderVC: UIViewController, FilterDelegate {
         
     }
     
-    private func findTabBarVC() -> TabBarVC? {
-        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-            for window in scene.windows {
-                if let tabVC = window.rootViewController as? TabBarVC {
-                    return tabVC
-                }
-                if let nav = window.rootViewController as? UINavigationController {
-                    if let tabVC = nav.viewControllers.first(where: { $0 is TabBarVC }) as? TabBarVC {
-                        return tabVC
-                    }
-                }
-                if let presented = window.rootViewController?.presentedViewController as? TabBarVC {
-                    return presented
-                }
-            }
-        }
-        return nil
-    }
-    
-    @IBAction func btnSelectOrderType(_ sender: UIButton) {
-        switch sender.tag {
-        case 0:
-            btnOrder.setBackgroundImage(UIImage(named: "btnGradient"), for: .normal)
-            btnCustomOrder.setBackgroundImage(nil, for: .normal)
-            btnOrder.setTitleColor(.white, for: .normal)
-            btnCustomOrder.setTitleColor(.black, for: .normal)
-            isCustomOrderSeleced = false
-            orderData.removeAll()
-            viewModel.getOrders(type: 1)
-            
-        case 1:
-            btnOrder.setBackgroundImage(nil, for: .normal)
-            btnCustomOrder.setBackgroundImage(UIImage(named: "btnGradient"), for: .normal)
-            btnOrder.setTitleColor(.black, for: .normal)
-            btnCustomOrder.setTitleColor(.white, for: .normal)
-            isCustomOrderSeleced = true
-            orderData.removeAll()
-            viewModel.getOrders(type: 2)
-            
-        default:
-            break
-        }
-    }
-    
     @IBAction func btnFilter(_ sender: Any) {
         let vc = FilterVC.instantiate(fromAppStoryboard: .MyOrder)
         vc.delegate = self
-        vc.preselectedFilter = isCustomOrderSeleced ? customOrderFilter : normalOrderFilter
+        vc.preselectedFilter = normalOrderFilter
         self.navigationController?.present(vc, animated: true)
     }
     
@@ -184,8 +102,11 @@ extension MyOrderVC: UITableViewDelegate, UITableViewDataSource {
         let vc = MyOrderDetailVC.instantiate(fromAppStoryboard: .MyOrder)
         vc.orderId = order.order?.id ?? 0
         vc.orderDetailId = order.id ?? 0
-        vc.isCustomOrder = isCustomOrderSeleced
-        isCustomOrderSeleced = false
+        if order.orderType == "2" {
+            vc.isCustomOrder = true
+        } else {
+            vc.isCustomOrder = false
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -198,11 +119,7 @@ extension MyOrderVC: UITextFieldDelegate {
         let workItem = DispatchWorkItem { [weak self] in
             guard let self = self else { return }
             self.viewModel.searchText = currentText
-            if isCustomOrderSeleced {
-                viewModel.getOrders(type: 2)
-            } else {
-                viewModel.getOrders(type: 1)
-            }
+            viewModel.getOrders()
         }
         searchWorkItem = workItem
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)

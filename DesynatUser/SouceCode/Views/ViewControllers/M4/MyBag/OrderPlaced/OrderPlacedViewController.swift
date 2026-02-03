@@ -54,7 +54,7 @@ class OrderPlacedViewController: UIViewController {
   @IBAction func trackYourOrderDidTapped(_ sender: Any) {
     let vc = MyOrderVC.instantiate(fromAppStoryboard: .MyOrder)
     vc.comingFromOrderTracking = true
-    vc.isCustomOrderSeleced = isCustomOrderSeleced
+//    vc.isCustomOrderSeleced = isCustomOrderSeleced
     self.navigationController?.pushViewController(vc, animated: true)
   }
   

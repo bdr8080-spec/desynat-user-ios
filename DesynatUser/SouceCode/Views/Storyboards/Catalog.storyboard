@@ -768,7 +768,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tcX-bN-oZ8">
                                                         <rect key="frame" x="82" y="54.333333333333314" width="90" height="15"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jKP-p7-3jn" customClass="CosmosView" customModule="Cosmos">
+                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jKP-p7-3jn" customClass="CosmosView" customModule="Cosmos">
                                                                 <rect key="frame" x="0.0" y="0.0" width="70" height="15"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <userDefinedRuntimeAttributes>
@@ -1708,7 +1708,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="LGX-gY-XxW">
                                                 <rect key="frame" x="24" y="486" width="95" height="14"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWQ-Kl-reZ" customClass="CosmosView" customModule="Cosmos">
+                                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWQ-Kl-reZ" customClass="CosmosView" customModule="Cosmos">
                                                         <rect key="frame" x="0.0" y="0.0" width="75" height="14"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>

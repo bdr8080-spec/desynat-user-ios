@@ -6,7 +6,6 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -69,7 +68,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VnF-Os-yQg">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="694"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sOE-Ak-onB" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sOE-Ak-onB" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="20" width="361" height="38"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="GEg-jt-PzM">
@@ -93,9 +92,6 @@
                                                                         <color key="value" red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
-                                                                <connections>
-                                                                    <action selector="btnSelectOrderType:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hjX-Im-jpE"/>
-                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dy3-RZ-7aC" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="180.66666666666663" y="0.0" width="180.33333333333337" height="38"/>
@@ -115,9 +111,6 @@
                                                                         <color key="value" red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
-                                                                <connections>
-                                                                    <action selector="btnSelectOrderType:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="c7i-9p-OA2"/>
-                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -143,7 +136,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4KS-yp-6v0" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="78" width="361" height="38"/>
+                                                <rect key="frame" x="16" y="20" width="361" height="38"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="jF5-Eh-Vmx">
                                                         <rect key="frame" x="12" y="10" width="18" height="18"/>
@@ -201,7 +194,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Iad-yb-rHU" customClass="TableViewDynamicHeight" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="136" width="361" height="538"/>
+                                                <rect key="frame" x="16" y="78" width="361" height="596"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </tableView>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Result found " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GDF-61-D8J">
@@ -215,7 +208,7 @@
                                         <constraints>
                                             <constraint firstItem="GDF-61-D8J" firstAttribute="centerX" secondItem="VnF-Os-yQg" secondAttribute="centerX" id="3n0-C5-w2c"/>
                                             <constraint firstItem="sOE-Ak-onB" firstAttribute="top" secondItem="VnF-Os-yQg" secondAttribute="top" constant="20" id="6La-R5-hyt"/>
-                                            <constraint firstItem="4KS-yp-6v0" firstAttribute="top" secondItem="sOE-Ak-onB" secondAttribute="bottom" constant="20" id="6vZ-qb-2BC"/>
+                                            <constraint firstItem="4KS-yp-6v0" firstAttribute="top" secondItem="VnF-Os-yQg" secondAttribute="top" constant="20" id="DyK-dJ-vyz"/>
                                             <constraint firstAttribute="bottom" secondItem="Iad-yb-rHU" secondAttribute="bottom" constant="20" id="KVT-cH-nGg"/>
                                             <constraint firstAttribute="trailing" secondItem="Iad-yb-rHU" secondAttribute="trailing" constant="16" id="Q8m-nJ-sJn"/>
                                             <constraint firstAttribute="trailing" secondItem="sOE-Ak-onB" secondAttribute="trailing" constant="16" id="TJ6-67-suC"/>
@@ -251,8 +244,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="btnCustomOrder" destination="Dy3-RZ-7aC" id="DXI-PO-gpJ"/>
-                        <outlet property="btnOrder" destination="QOr-mW-cPh" id="hK1-TY-TiP"/>
                         <outlet property="lblNoData" destination="GDF-61-D8J" id="tyO-Rg-Cge"/>
                         <outlet property="orderTableView" destination="Iad-yb-rHU" id="zat-xR-2Qq"/>
                         <outlet property="txtSearch" destination="kgH-ic-kZW" id="WPb-20-W19"/>
@@ -267,7 +258,7 @@
             <objects>
                 <viewController storyboardIdentifier="MyOrderDetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WhX-Ye-cah" customClass="MyOrderDetailVC" customModule="DesynatUser" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6of-r1-MMW">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="2500"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfq-Db-6yp">
@@ -311,10 +302,10 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T7A-29-DOj">
-                                <rect key="frame" x="0.0" y="158" width="393" height="2342"/>
+                                <rect key="frame" x="0.0" y="158" width="393" height="694"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CPW-8j-58N">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="2342"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="2324.6666666666665"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="idD-FQ-hr2">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="2324.6666666666665"/>
@@ -2482,7 +2473,6 @@ Apartment, Kuwait</string>
                             <constraint firstAttribute="trailing" secondItem="dfq-Db-6yp" secondAttribute="trailing" id="tpg-MP-ZA5"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="393" height="2500"/>
                     <connections>
                         <outlet property="addressLabel" destination="mhS-ZH-4u0" id="udb-m5-Xqk"/>
                         <outlet property="allOrdersLabel" destination="j0p-gO-sz2" id="F5x-WL-R1X"/>
@@ -2582,7 +2572,7 @@ Apartment, Kuwait</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W73-Pf-3bD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="717" y="577"/>
+            <point key="canvasLocation" x="729" y="-2"/>
         </scene>
         <!--FilterVC-->
         <scene sceneID="s9H-Pl-7xA">
@@ -2755,7 +2745,7 @@ Apartment, Kuwait</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="00K-Qa-VCW">
-                                        <rect key="frame" x="66" y="8.6666666666666732" width="267" height="22.666666666666671"/>
+                                        <rect key="frame" x="66" y="10.666666666666659" width="267" height="18.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2894,16 +2884,7 @@ Apartment, Kuwait</string>
                                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                 </collectionViewFlowLayout>
-                                                                <cells>
-                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="3PN-i3-HxN">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="6Ma-4j-7CZ">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                                            <autoresizingMask key="autoresizingMask"/>
-                                                                        </collectionViewCellContentView>
-                                                                    </collectionViewCell>
-                                                                </cells>
+                                                                <cells/>
                                                             </collectionView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Recent Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7IP-Vf-gAy" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="146" y="53" width="101.33333333333331" height="17"/>
@@ -2949,16 +2930,7 @@ Apartment, Kuwait</string>
                                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                 </collectionViewFlowLayout>
-                                                                <cells>
-                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="eUn-ck-SN5">
-                                                                        <rect key="frame" x="0.0" y="-39" width="128" height="128"/>
-                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8jD-Zs-95Y">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                                            <autoresizingMask key="autoresizingMask"/>
-                                                                        </collectionViewCellContentView>
-                                                                    </collectionViewCell>
-                                                                </cells>
+                                                                <cells/>
                                                             </collectionView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Recent Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VbT-yC-1ou" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="146" y="112.33333333333337" width="101.33333333333331" height="17"/>
@@ -4286,7 +4258,7 @@ Apartment, Kuwait</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="doq-Ig-GOO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1428" y="15"/>
+            <point key="canvasLocation" x="1453" y="-2"/>
         </scene>
         <!--Custom Order Details View Controller-->
         <scene sceneID="16f-Ly-xNS">
@@ -4297,7 +4269,7 @@ Apartment, Kuwait</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vlj-WF-rI9" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="620.66666666666663" width="393" height="231.33333333333337"/>
+                                <rect key="frame" x="0.0" y="580.66666666666663" width="393" height="271.33333333333337"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="72n-3p-JmG">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="62.666666666666664"/>
@@ -4331,7 +4303,7 @@ Apartment, Kuwait</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghR-tv-CF4" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="97.666666666666757" width="345" height="63.666666666666671"/>
+                                        <rect key="frame" x="24" y="107.66666666666676" width="345" height="63.666666666666671"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4lz-vz-m85">
                                                 <rect key="frame" x="15" y="15" width="315" height="33.666666666666664"/>
@@ -4367,12 +4339,12 @@ Apartment, Kuwait</string>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="ghR-tv-CF4" secondAttribute="bottom" constant="70" id="I87-d5-Hgs"/>
+                                    <constraint firstAttribute="bottom" secondItem="ghR-tv-CF4" secondAttribute="bottom" constant="100" id="I87-d5-Hgs"/>
                                     <constraint firstItem="72n-3p-JmG" firstAttribute="top" secondItem="vlj-WF-rI9" secondAttribute="top" id="VNl-QR-t3I"/>
                                     <constraint firstAttribute="trailing" secondItem="72n-3p-JmG" secondAttribute="trailing" id="Zp8-Ky-AhC"/>
                                     <constraint firstItem="ghR-tv-CF4" firstAttribute="leading" secondItem="vlj-WF-rI9" secondAttribute="leading" constant="24" id="pIy-DH-NbP"/>
                                     <constraint firstAttribute="trailing" secondItem="ghR-tv-CF4" secondAttribute="trailing" constant="24" id="qZh-LD-6He"/>
-                                    <constraint firstItem="ghR-tv-CF4" firstAttribute="top" secondItem="72n-3p-JmG" secondAttribute="bottom" constant="35" id="rOV-au-Nkp"/>
+                                    <constraint firstItem="ghR-tv-CF4" firstAttribute="top" secondItem="72n-3p-JmG" secondAttribute="bottom" constant="45" id="rOV-au-Nkp"/>
                                     <constraint firstItem="72n-3p-JmG" firstAttribute="leading" secondItem="vlj-WF-rI9" secondAttribute="leading" id="ra6-Lz-zCN"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -4398,7 +4370,7 @@ Apartment, Kuwait</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8aZ-1b-DPD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2158" y="15"/>
+            <point key="canvasLocation" x="2169" y="-2"/>
         </scene>
     </scenes>
     <resources>
@@ -4435,7 +4407,7 @@ Apartment, Kuwait</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

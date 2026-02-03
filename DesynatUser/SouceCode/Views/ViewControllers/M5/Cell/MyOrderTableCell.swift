@@ -298,10 +298,16 @@ class MyOrderTableCell: UITableViewCell {
           }
       } else if data.returnType == "2" {
           lblStatus.text = "Exchange Req."
+          lblReturn.text = "Exchange Request"
+          
+          
+          
+          
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
           if data.rEApprove == "1" {
               if data.deliveryStatus == "3"{
                   lblStatus.text = "Exchange Req."
+                  lblReturn.text = "Exchange Request"
                   lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                   viewExchange.backgroundColor = UIColor(hexString: "#FF5F1B").withAlphaComponent(0.1)
                   lblOrderDate.textColor = UIColor(hexString: "#FF5F1B")
@@ -324,22 +330,6 @@ class MyOrderTableCell: UITableViewCell {
           }
       }
   }
-  
-  //  func isoStringAddingDays(_ isoString: String?, days: Int = 0) -> String? {
-  //      guard let isoString = isoString else { return nil }
-  //
-  //      let isoFormatter = DateFormatter()
-  //      isoFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
-  //      isoFormatter.locale = Locale(identifier: "en_US_POSIX")
-  //      isoFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-  //
-  //      guard let date = isoFormatter.date(from: isoString) else { return nil }
-  //
-  //      let calendar = Calendar(identifier: .gregorian)
-  //      let newDate = calendar.date(byAdding: .day, value: days, to: date) ?? date
-  //
-  //      return isoFormatter.string(from: newDate)
-  //  }
   
   func isoStringAddingDays(_ isoString: String?, days: Int = 0) -> String? {
     guard let isoString = isoString else { return nil }

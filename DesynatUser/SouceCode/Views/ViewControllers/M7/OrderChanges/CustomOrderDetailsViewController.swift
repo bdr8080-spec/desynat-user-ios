@@ -20,7 +20,6 @@ class CustomOrderDetailsViewController: UIViewController {
         initialSetup()
     }
     
-    
     @IBAction func dismissDidTapped(_ sender: Any) {
         self.dismiss(animated: true)
     }

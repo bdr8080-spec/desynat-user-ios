@@ -40,7 +40,7 @@ class ChatEnquiryViewModel {
                 guard let self else { return }
                 self.hostVC?.navigationController?.popToRootViewController(animated: false)
                 DispatchQueue.main.async {
-                    if let tabBarVC = self.findTabBarVC() {
+                    if let tabBarVC = self.hostVC?.findTabBarVC() {
                         tabBarVC.updateTabSelection(forTag: 3)
                     } else {
                         print("TabBarVC not found")
@@ -56,7 +56,11 @@ class ChatEnquiryViewModel {
         WebService.sharedInstance.acceptAndRejectOrderQuotationDetails(param: param) { [weak self] response in
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
-                singleChatDetailRequest()
+                if status == "5" {
+                    CustomOrderAddToCardService()
+                } else {
+                    singleChatDetailRequest()
+                }
             }
         }
     }
@@ -194,25 +198,6 @@ class ChatEnquiryViewModel {
         }
         
         return addressParts.joined(separator: ", ")
-    }
-    
-    private func findTabBarVC() -> TabBarVC? {
-        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-            for window in scene.windows {
-                if let tabVC = window.rootViewController as? TabBarVC {
-                    return tabVC
-                }
-                if let nav = window.rootViewController as? UINavigationController {
-                    if let tabVC = nav.viewControllers.first(where: { $0 is TabBarVC }) as? TabBarVC {
-                        return tabVC
-                    }
-                }
-                if let presented = window.rootViewController?.presentedViewController as? TabBarVC {
-                    return presented
-                }
-            }
-        }
-        return nil
     }
 }
 

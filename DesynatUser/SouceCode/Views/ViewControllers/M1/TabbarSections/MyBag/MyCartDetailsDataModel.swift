@@ -35,6 +35,7 @@ struct CartItemList: Codable {
   let amount, createdAt, updatedAt, checkStock, orderType: String?
   let product: Product?
   let productVariants: ProductVariants?
+  let chatroomData: Record?
   
   enum CodingKeys: String, CodingKey {
     case id
@@ -49,6 +50,7 @@ struct CartItemList: Codable {
     case checkStock = "check_stock"
     case product
     case productVariants = "product_variants"
+    case chatroomData = "chatroom_data"
   }
 }
 

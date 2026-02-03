@@ -15,18 +15,19 @@ class MyOrderVM: NSObject {
         self.hostVC = hostVC
     }
 
-    func getCurrentFilter() -> OrderFilterType {
-        return hostVC.isCustomOrderSeleced
-            ? hostVC.customOrderFilter
-            : hostVC.normalOrderFilter
-    }
+//    func getCurrentFilter() -> OrderFilterType {
+//        return hostVC.isCustomOrderSeleced
+//            ? hostVC.customOrderFilter
+//            : hostVC.normalOrderFilter
+//    }
 
-    func getOrders(type: Int) {
-        let filter = getCurrentFilter()
+//    func getOrders(type: Int) {
+    func getOrders() {
+//        let filter = getCurrentFilter()
 
         var params: [String: Any] = [
-            "order_type": type,
-            "filter": filter.rawValue   // FIX HERE
+//            "order_type": type,
+            "filter": hostVC.normalOrderFilter.rawValue   // FIX HERE
         ]
 
         if !searchText.isEmpty {

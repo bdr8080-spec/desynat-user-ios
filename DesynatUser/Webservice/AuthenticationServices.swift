@@ -1145,15 +1145,18 @@ extension WebService {
         }
       }
     }
+    
+    func removeCustomOrderFromCartSerivice(param: [String: Any], completion: @escaping (_ user: EmptyModel) -> Void) {
+      CommonUtils.showHud(show: true)
+      NetworkManager.shared.request(withAPI: .endpoint(.CustomOrderRemoveFromCard), requestMethod: .post, requestParams: param, encoding: JSONEncoding.default, requestModel: EmptyModel.self) { result, code in
+        CommonUtils.showHud(show: false)
+        self.evaluateWebServiceResponse(response: result) { response, message, error in
+          if let error {
+            UIApplication.shared.topViewController()?.showAlert(msg: error)
+          } else if let response {
+            completion(response)
+          }
+        }
+      }
+    }
 }
-
-
-
-
-
-
-
-
-
-
-

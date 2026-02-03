@@ -72,6 +72,15 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func maySavedCardsDidTapped(_ sender: Any) {
+        if isGuestLogin == "true" {
+            showLoginAlert()
+        } else {
+            
+        }
+    }
+    
     @IBAction func btnTapLogout(_ sender: UIButton) {
         if isGuestLogin == "true" {
             kSharedSceneDelegate.navigateToLoginVc()
@@ -86,8 +95,7 @@ class ProfileViewController: UIViewController {
     
     @IBAction func pencilButtonAction(_ sender: Any) {
         if isGuestLogin == "true" {
-          UserDefaults.standard.setValue("false", forKey:"isGuestLogin")
-            kSharedSceneDelegate.navigateToLoginVc()
+            showLoginAlert()
         } else {
             let vc = ProfileDetailsViewController.instantiate(fromAppStoryboard: .Profile)
             self.navigationController?.pushViewController(vc, animated: false)
@@ -95,20 +103,32 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func savedAddressDidTapped(_ sender: Any) {
-        let vc = SavedAddressViewController.instantiate(fromAppStoryboard: .Profile)
-      vc.comingFromBag = false
-        self.navigationController?.pushViewController(vc, animated: false)
+        if isGuestLogin == "true" {
+            showLoginAlert()
+        } else {
+            let vc = SavedAddressViewController.instantiate(fromAppStoryboard: .Profile)
+            vc.comingFromBag = false
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
     }
   
   @IBAction func giftCardsDidTapped(_ sender: Any) {
-    let vc = GiftCardsListViewController.instantiate(fromAppStoryboard: .Profile)
-    self.navigationController?.pushViewController(vc, animated: false)
+      if isGuestLogin == "true" {
+          showLoginAlert()
+      } else {
+          let vc = GiftCardsListViewController.instantiate(fromAppStoryboard: .Profile)
+          self.navigationController?.pushViewController(vc, animated: false)
+      }
   }
     
     @IBAction func btnMyOrder(_ sender: Any) {
-        let vc = MyOrderVC.instantiate(fromAppStoryboard: .MyOrder)
-      vc.comingFromOrderTracking = false
-        self.navigationController?.pushViewController(vc, animated: true)
+        if isGuestLogin == "true" {
+            showLoginAlert()
+        } else {
+            let vc = MyOrderVC.instantiate(fromAppStoryboard: .MyOrder)
+            vc.comingFromOrderTracking = false
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
 }
@@ -128,7 +148,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isGuestLogin == "true" {
-            kSharedSceneDelegate.navigateToLoginVc()
+            showLoginAlert()
         } else {
             let selectedItem = sideMenuData[indexPath.row].title
             
@@ -178,8 +198,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                         self.navigationController?.pushViewController(nextVC, animated: true)
                     }
                 }
-//                let nextVC = BecomeAnAffiliatedUserViewController.instantiate(fromAppStoryboard: .Home)
-//                self.navigationController?.pushViewController(nextVC, animated: true)
                 
             case "Settings":
                 print("✅ Selected: Settings")

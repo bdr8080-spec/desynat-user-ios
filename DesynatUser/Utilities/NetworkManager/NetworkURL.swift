@@ -84,7 +84,7 @@ enum NetworkEndPoint: String {
   
   //M6
   
-  case homeFullScreenBanner               = "api/user/popUp-Home-screen-Banner"
+  case homeFullScreenBanner             = "api/user/popUp-Home-screen-Banner"
   case getAllChatsRecord                = "api/user/user-all-chats"
   case getSingleChats                   = "api/user/user-Single-chats"
   case qutationChatEdit                 = "api/seller/Modify-single-chats-records"
@@ -113,6 +113,7 @@ enum NetworkEndPoint: String {
     case redeemGiftCardWallet           = "api/user/redeem-gift-card-in-wallet"
     case reverifyDocument               = "api/affiliate/upload-Reverify-document"
     case CustomOrderAddToCard           = "api/user/custom-order-add-to-card"
+    case CustomOrderRemoveFromCard      = "api/user/remove-custom-product-add-to-card"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

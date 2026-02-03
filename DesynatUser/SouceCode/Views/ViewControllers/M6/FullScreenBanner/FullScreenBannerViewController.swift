@@ -39,14 +39,11 @@ class FullScreenBannerViewController: UIViewController {
   
   func startAutoScroll() {
       autoScrollTimer?.invalidate()
-
       autoScrollTimer = Timer.scheduledTimer(withTimeInterval: 6.0, repeats: true) { [weak self] _ in
           self?.scrollToNextPage()
       }
-
       RunLoop.main.add(autoScrollTimer!, forMode: .common)
   }
-
   
   func setupAfterDataLoad() {
       pageControl.numberOfPages = viewModel.fullScreenBannersList?.count ?? 0
@@ -57,13 +54,10 @@ class FullScreenBannerViewController: UIViewController {
           startAutoScroll()
       }
   }
-
   
   @objc private func scrollToNextPage() {
     guard pageControl.numberOfPages > 0 else { return }
-    
     if currentIndex == pageControl.numberOfPages - 1 {
-      // Completed one full cycle
       autoScrollTimer?.invalidate()
       
       DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -94,43 +88,23 @@ extension FullScreenBannerViewController: UICollectionViewDelegate, UICollection
     return viewModel.fullScreenBannersList?.count ?? 0
   }
   
-//  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FullScreenBannersCollectionViewCell", for: indexPath) as! FullScreenBannersCollectionViewCell
-//    let data = viewModel.fullScreenBannersList?[indexPath.row]
-//    if let imageUrlString = data?.image,
-//       let url = URL(string: imageUrlString) {
-//      cell.mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-//      cell.mainImageView.sd_imageIndicator?.startAnimatingIndicator()
-//      cell.mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
-//    }
-//    return cell
-//  }
-  
   func collectionView(_ collectionView: UICollectionView,
                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
       let cell = collectionView.dequeueReusableCell(
           withReuseIdentifier: "FullScreenBannersCollectionViewCell",
           for: indexPath
       ) as! FullScreenBannersCollectionViewCell
-
       let data = viewModel.fullScreenBannersList?[indexPath.row]
-
       cell.mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-
       if let imageUrlString = data?.image,
          let url = URL(string: imageUrlString) {
-
           cell.mainImageView.sd_setImage(with: url, placeholderImage: nil) { [weak self] _, _, _, _ in
               guard let self = self else { return }
-
-              // ✅ Start auto scroll ONLY after first image loads
               if indexPath.row == 0 && self.autoScrollTimer == nil {
                   self.setupAfterDataLoad()
               }
           }
       }
-
       return cell
   }
 
