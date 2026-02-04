@@ -21,7 +21,7 @@ class CustomOrderPopupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         handleUISetup()
-        getSavedAddressListAPI()
+//        getSavedAddressListAPI()
         quantityTF.delegate = self
     }
     
@@ -67,57 +67,23 @@ class CustomOrderPopupViewController: UIViewController {
         headerView.layer.cornerRadius = 24
         headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         headerView.clipsToBounds = true
-        
     }
     
-    //  func buildFullAddress(from details: DeliveryDetails?) -> String {
-    //      guard let details = details else { return "" }
-    //
-    //      var addressParts: [String] = []
-    //
-    //      // Base address (if API already provides)
-    //      if let baseAddress = details.address?.trimmingCharacters(in: .whitespacesAndNewlines),
-    //         !baseAddress.isEmpty {
-    //          addressParts.append(baseAddress)
-    //      }
-    //
-    //      let additionalParts = [
-    //          details.houseNo,
-    //          details.streetNo,
-    //          details.landmark,
-    //          details.city,
-    //          details.state,
-    //          details.countryName,
-    //          details.postalCode,
-    //      ]
-    //
-    //      for part in additionalParts {
-    //          guard let value = part?.trimmingCharacters(in: .whitespacesAndNewlines),
-    //                !value.isEmpty else { continue }
-    //
-    //          if !addressParts.joined(separator: " ").localizedCaseInsensitiveContains(value) {
-    //              addressParts.append(value)
-    //          }
-    //      }
-    //
-    //      return addressParts.joined(separator: ", ")
-    //  }
-    
-    func getSavedAddressListAPI(){
-        WebService.sharedInstance.getSavedAddressList { [self] list in
-            let defaultAddress = list.first(where: { ($0.setAsDefault == "1")})
-            let addressLine1 = "\(defaultAddress?.houseNo ?? ""), \(defaultAddress?.streetNo ?? ""), \(defaultAddress?.city ?? ""), \(defaultAddress?.state ?? ""), \(defaultAddress?.countryName ?? "")"
-            let postalCode = defaultAddress?.postalCode ?? ""
-            deliveryAddressId = defaultAddress?.id
-            deliveryAddressTF.text = "\(addressLine1)-\(postalCode)"
-        }
-    }
+//    func getSavedAddressListAPI(){
+//        WebService.sharedInstance.getSavedAddressList { [self] list in
+//            let defaultAddress = list.first(where: { ($0.setAsDefault == "1")})
+//            let addressLine1 = "\(defaultAddress?.houseNo ?? ""), \(defaultAddress?.streetNo ?? ""), \(defaultAddress?.city ?? ""), \(defaultAddress?.state ?? ""), \(defaultAddress?.countryName ?? "")"
+//            let postalCode = defaultAddress?.postalCode ?? ""
+//            deliveryAddressId = defaultAddress?.id
+//            deliveryAddressTF.text = "\(addressLine1)-\(postalCode)"
+//        }
+//    }
     
     func sendCustomOrderRequest(){
         let param: [String: Any] = ["unique_id": uniqueId ?? "",
                                     "quantity": quantityTF.text?.trimmed() ?? "",
-                                    "custom_details": customDetailsTextView.text.trimmed(),
-                                    "delivery_address": deliveryAddressId ?? ""]
+                                    "custom_details": customDetailsTextView.text.trimmed()]//,
+                                   // "delivery_address": deliveryAddressId ?? ""]
         WebService.sharedInstance.sendCustomOrderRequest(param: param) { [self] list in
             DispatchQueue.main.async {
                 let successVC = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
@@ -141,12 +107,12 @@ class CustomOrderPopupViewController: UIViewController {
             return false
         }
         
-        // Address
-        guard let address = deliveryAddressTF.text?.trimmingCharacters(in: .whitespaces),
-              !address.isEmpty else {
-            showAlert(msg: "Please select address")
-            return false
-        }
+//        // Address
+//        guard let address = deliveryAddressTF.text?.trimmingCharacters(in: .whitespaces),
+//              !address.isEmpty else {
+//            showAlert(msg: "Please select address")
+//            return false
+//        }
         
         // Custom details
         guard let details = customDetailsTextView.text?.trimmingCharacters(in: .whitespaces),

@@ -353,7 +353,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EXl-dt-r3M" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="537" width="393" height="315"/>
+                                <rect key="frame" x="0.0" y="578.66666666666663" width="393" height="273.33333333333337"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="no2-Yj-F0C">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="62.666666666666664"/>
@@ -387,10 +387,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhI-Wy-Fd8" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="97.666666666666643" width="345" height="147.33333333333337"/>
+                                        <rect key="frame" x="24" y="97.666666666666742" width="345" height="105.66666666666669"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PUh-lZ-RIV">
-                                                <rect key="frame" x="15" y="14.999999999999993" width="315" height="117.33333333333331"/>
+                                                <rect key="frame" x="15" y="15" width="315" height="75.666666666666686"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ool-2m-LCT">
                                                         <rect key="frame" x="0.0" y="0.0" width="315" height="17"/>
@@ -409,17 +409,17 @@
                                                             </label>
                                                         </subviews>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FR3-fD-ebb">
-                                                        <rect key="frame" x="0.0" y="24.999999999999996" width="315" height="33.666666666666657"/>
+                                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FR3-fD-ebb">
+                                                        <rect key="frame" x="0.0" y="21" width="315" height="0.0"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7JV-tj-OZn">
-                                                                <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="33.666666666666664"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="0.0"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cuL-Yv-JaB">
-                                                                <rect key="frame" x="157.66666666666663" y="0.0" width="157.33333333333337" height="33.666666666666664"/>
+                                                                <rect key="frame" x="157.66666666666663" y="0.0" width="157.33333333333337" height="0.0"/>
                                                                 <string key="text">Sector 63, Bismilla
 Apartment, Kuwait</string>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
@@ -429,7 +429,7 @@ Apartment, Kuwait</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="flN-EM-PSx">
-                                                        <rect key="frame" x="0.0" y="66.666666666666742" width="315" height="50.666666666666657"/>
+                                                        <rect key="frame" x="0.0" y="25" width="315" height="50.666666666666657"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom details" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZs-3R-UNc">
                                                                 <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="50.666666666666664"/>
@@ -591,10 +591,10 @@ Apartment, Kuwait</string>
                                                                                         </connections>
                                                                                     </tableView>
                                                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cVf-My-ccB" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="865.33333333333337" height="46"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="865.33333333333337" height="38"/>
                                                                                         <subviews>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wHS-du-hc0">
-                                                                                                <rect key="frame" x="15" y="15" width="835.33333333333337" height="16"/>
+                                                                                                <rect key="frame" x="15" y="15" width="835.33333333333337" height="8"/>
                                                                                                 <subviews>
                                                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tXQ-2h-NEp">
                                                                                                         <rect key="frame" x="0.0" y="0.0" width="835.33333333333337" height="0.0"/>
@@ -613,8 +613,8 @@ Apartment, Kuwait</string>
                                                                                                             </label>
                                                                                                         </subviews>
                                                                                                     </stackView>
-                                                                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ikk-mo-uci">
-                                                                                                        <rect key="frame" x="0.0" y="8" width="835.33333333333337" height="0.0"/>
+                                                                                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ikk-mo-uci">
+                                                                                                        <rect key="frame" x="0.0" y="4" width="835.33333333333337" height="0.0"/>
                                                                                                         <subviews>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAP-jV-ukI">
                                                                                                                 <rect key="frame" x="0.0" y="0.0" width="417.66666666666669" height="0.0"/>
@@ -633,7 +633,7 @@ Apartment, Kuwait</string>
                                                                                                         </subviews>
                                                                                                     </stackView>
                                                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G0p-DB-0qC">
-                                                                                                        <rect key="frame" x="0.0" y="16" width="835.33333333333337" height="0.0"/>
+                                                                                                        <rect key="frame" x="0.0" y="8" width="835.33333333333337" height="0.0"/>
                                                                                                         <subviews>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom details" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOF-dP-Q4u">
                                                                                                                 <rect key="frame" x="0.0" y="0.0" width="417.66666666666669" height="0.0"/>
@@ -666,10 +666,10 @@ Apartment, Kuwait</string>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </view>
                                                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Npa-SI-oAw" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="865.33333333333337" height="164"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="865.33333333333337" height="98"/>
                                                                                         <subviews>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ac9-Rt-2GE">
-                                                                                                <rect key="frame" x="15" y="15" width="835.33333333333337" height="134"/>
+                                                                                                <rect key="frame" x="15" y="15" width="835.33333333333337" height="68"/>
                                                                                                 <subviews>
                                                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tw3-Az-HGa">
                                                                                                         <rect key="frame" x="0.0" y="0.0" width="835.33333333333337" height="25"/>
@@ -691,8 +691,8 @@ Apartment, Kuwait</string>
                                                                                                             <constraint firstAttribute="height" constant="25" id="a9K-z6-s8y"/>
                                                                                                         </constraints>
                                                                                                     </stackView>
-                                                                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlV-8b-6a0">
-                                                                                                        <rect key="frame" x="0.0" y="33" width="835.33333333333337" height="25"/>
+                                                                                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlV-8b-6a0">
+                                                                                                        <rect key="frame" x="0.0" y="29" width="835.33333333333337" height="25"/>
                                                                                                         <subviews>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gte-lx-5Me">
                                                                                                                 <rect key="frame" x="0.0" y="0.0" width="417.66666666666669" height="25"/>
@@ -713,8 +713,8 @@ Apartment, Kuwait</string>
                                                                                                             <constraint firstAttribute="height" constant="25" id="5rx-pf-U7D"/>
                                                                                                         </constraints>
                                                                                                     </stackView>
-                                                                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DWJ-RE-aOE">
-                                                                                                        <rect key="frame" x="0.0" y="66" width="835.33333333333337" height="25"/>
+                                                                                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DWJ-RE-aOE">
+                                                                                                        <rect key="frame" x="0.0" y="29" width="835.33333333333337" height="25"/>
                                                                                                         <subviews>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tax " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="itE-ZJ-CrV">
                                                                                                                 <rect key="frame" x="0.0" y="0.0" width="417.66666666666669" height="25"/>
@@ -734,7 +734,7 @@ Apartment, Kuwait</string>
                                                                                                         </constraints>
                                                                                                     </stackView>
                                                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2of-nH-Ah1">
-                                                                                                        <rect key="frame" x="0.0" y="99" width="835.33333333333337" height="35"/>
+                                                                                                        <rect key="frame" x="0.0" y="33" width="835.33333333333337" height="35"/>
                                                                                                         <subviews>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMv-RN-w5R">
                                                                                                                 <rect key="frame" x="0.0" y="0.0" width="835.33333333333337" height="0.66666666666666663"/>
@@ -747,7 +747,7 @@ Apartment, Kuwait</string>
                                                                                                                 <nil key="highlightedColor"/>
                                                                                                             </label>
                                                                                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZZO-uv-BUm">
-                                                                                                                <rect key="frame" x="0.0" y="10.666666666666684" width="835.33333333333337" height="24.333333333333329"/>
+                                                                                                                <rect key="frame" x="0.0" y="10.666666666666655" width="835.33333333333337" height="24.333333333333329"/>
                                                                                                                 <subviews>
                                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Amount" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KoF-xd-Cqd">
                                                                                                                         <rect key="frame" x="0.0" y="0.0" width="417.66666666666669" height="24.333333333333332"/>
@@ -818,7 +818,7 @@ Apartment, Kuwait</string>
                                                                                                                 </connections>
                                                                                                             </button>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reject" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8IX-yp-kUt">
-                                                                                                                <rect key="frame" x="191.66666666666666" y="10.999999999999998" width="39.666666666666657" height="16.333333333333329"/>
+                                                                                                                <rect key="frame" x="189.66666666666666" y="9.3333333333333446" width="43.666666666666657" height="19.666666666666671"/>
                                                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                                                                 <color key="textColor" name="darkBrown"/>
                                                                                                                 <nil key="highlightedColor"/>
@@ -867,7 +867,7 @@ Apartment, Kuwait</string>
                                                                                                                 </connections>
                                                                                                             </button>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Accept" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYS-kH-5Ii">
-                                                                                                                <rect key="frame" x="15" y="10.999999999999998" width="392.66666666666669" height="16.333333333333329"/>
+                                                                                                                <rect key="frame" x="15" y="9.3333333333333446" width="392.66666666666669" height="19.666666666666671"/>
                                                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                 <nil key="highlightedColor"/>
@@ -908,7 +908,7 @@ Apartment, Kuwait</string>
                                                                                                         </connections>
                                                                                                     </button>
                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay Now" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbY-ew-1Pk">
-                                                                                                        <rect key="frame" x="15" y="10.999999999999998" width="835.33333333333337" height="16.333333333333329"/>
+                                                                                                        <rect key="frame" x="15" y="9.3333333333333446" width="835.33333333333337" height="19.666666666666671"/>
                                                                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <nil key="highlightedColor"/>
@@ -947,7 +947,7 @@ Apartment, Kuwait</string>
                                                                                                         </connections>
                                                                                                     </button>
                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add To Bag" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2C5-v1-hT8">
-                                                                                                        <rect key="frame" x="15" y="10.999999999999998" width="835.33333333333337" height="16.333333333333329"/>
+                                                                                                        <rect key="frame" x="15" y="9.3333333333333446" width="835.33333333333337" height="19.666666666666671"/>
                                                                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <nil key="highlightedColor"/>
@@ -1174,7 +1174,7 @@ Apartment, Kuwait</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="peY-Ub-d8X" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="350.33333333333326" width="393" height="501.66666666666674"/>
+                                <rect key="frame" x="0.0" y="450.33333333333326" width="393" height="401.66666666666674"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7kG-k2-SSC">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="62.666666666666664"/>
@@ -1209,10 +1209,10 @@ Apartment, Kuwait</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gaE-U5-aJI" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="87.666666666666686" width="345" height="384"/>
+                                        <rect key="frame" x="24" y="87.666666666666686" width="345" height="284"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="kVu-qL-R1a">
-                                                <rect key="frame" x="16" y="16" width="313" height="353"/>
+                                                <rect key="frame" x="16" y="16" width="313" height="253"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJM-fp-lUA">
                                                         <rect key="frame" x="0.0" y="0.0" width="313" height="75"/>
@@ -1264,20 +1264,20 @@ Apartment, Kuwait</string>
                                                             <constraint firstItem="UlP-7Q-Kd4" firstAttribute="top" secondItem="TJM-fp-lUA" secondAttribute="top" id="z0h-oB-lIo"/>
                                                         </constraints>
                                                     </view>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="DWm-gq-mwK">
-                                                        <rect key="frame" x="0.0" y="95" width="313" height="80"/>
+                                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="DWm-gq-mwK">
+                                                        <rect key="frame" x="0.0" y="85" width="313" height="55"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KqH-fD-5kW">
-                                                                <rect key="frame" x="0.0" y="0.0" width="313" height="80"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="313" height="55"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivering Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eas-EG-LUf">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="313" height="25"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="313" height="0.0"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wQU-UW-O6q" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="30" width="313" height="50"/>
+                                                                        <rect key="frame" x="0.0" y="5" width="313" height="50"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q9D-9V-Geh">
                                                                                 <rect key="frame" x="20" y="15" width="199" height="20"/>
@@ -1341,7 +1341,7 @@ Apartment, Kuwait</string>
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lga-th-2Bn">
-                                                        <rect key="frame" x="0.0" y="195" width="313" height="100"/>
+                                                        <rect key="frame" x="0.0" y="95" width="313" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ruM-1O-hGX">
                                                                 <rect key="frame" x="0.0" y="0.0" width="313" height="13"/>
@@ -1396,7 +1396,7 @@ Apartment, Kuwait</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qjk-CT-2sj">
-                                                        <rect key="frame" x="0.0" y="315" width="313" height="38"/>
+                                                        <rect key="frame" x="0.0" y="215" width="313" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFR-zQ-gmr" customClass="CustomButton">
                                                                 <rect key="frame" x="0.0" y="0.0" width="313" height="38"/>
@@ -2059,7 +2059,7 @@ Apartment, Kuwait</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
