@@ -86,6 +86,7 @@ class CommonUtils {
         }
     }
     
+    
     static func getDictionary(_ dictData: Any?) -> Dictionary<String, Any> {
         guard let dict = dictData as? Dictionary<String, Any> else {
             guard let arr = dictData as? [Any] else {

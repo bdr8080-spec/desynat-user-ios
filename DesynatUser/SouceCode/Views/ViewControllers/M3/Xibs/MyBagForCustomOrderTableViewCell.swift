@@ -20,7 +20,6 @@ class MyBagForCustomOrderTableViewCell: UITableViewCell {
     @IBOutlet weak var sellerNameLabel: UILabel!
     @IBOutlet weak var deliveryDateLabel: UILabel!
     @IBOutlet weak var finalPriceLabel: UILabel!
-    @IBOutlet weak var actaulPriceLabel: CustomLabelFont!
     
     var onIncrement: (() -> Void)?
     var onDecrement: (() -> Void)?
@@ -66,9 +65,13 @@ class MyBagForCustomOrderTableViewCell: UITableViewCell {
       countLabel.text = "\(data.quantity)"
       productNameLabel.text = data.product?.productNameEn
       sellerNameLabel.text = "\(data.product?.sellerDetails?.firstName ?? "") \(data.product?.sellerDetails?.lastName ?? "")"
-        finalPriceLabel.text = "Per Item Price \(data.amount ?? "0") KD"//"\(data.productVariants?.finalPrice ?? "0") KD"
-      CommonUtils.setStrikethrough(label: actaulPriceLabel, text: "\(data.productVariants?.actualPrice ?? "0") KD")
-      setColorBox(size: data.productVariants?.size?.name ?? "M", label: detailsLabel, hexColor: data.productVariants?.color?.hexCode ?? "#98ADFF", quantity: "\(data.quantity)")
+        let unitPrice = Double(data.amount ?? "") ?? 0
+        let totalPriceforCustom = unitPrice * Double(data.quantity)
+        let DetailForcustomName = "(\(CommonUtils.formatPrice(Double(unitPrice))) X \(data.quantity))"
+        let totalamount = CommonUtils.formatPrice(Double(totalPriceforCustom))
+//        finalPriceLabel.text = "Item Price \(DetailForcustomName) = \(totalamount)"
+        finalPriceLabel.text = totalamount
+        setColorBoxWithQuanity(size: data.productVariants?.size?.name ?? "M", label: detailsLabel, hexColor: data.productVariants?.color?.hexCode ?? "#98ADFF")
     }
     
 }

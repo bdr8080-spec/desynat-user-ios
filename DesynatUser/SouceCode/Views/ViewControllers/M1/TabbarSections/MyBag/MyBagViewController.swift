@@ -9,6 +9,10 @@ import UIKit
 
 class MyBagViewController: UIViewController {
     
+    @IBOutlet weak var discountOnMrpStackView: UIStackView!
+    @IBOutlet weak var totalMRPStackView: UIStackView!
+    @IBOutlet weak var customPriceStackView: UIStackView!
+    @IBOutlet weak var customOrderPriceLabel: UILabel!
     @IBOutlet weak var customOrderTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var customOrderTitleLabel: UILabel!
     @IBOutlet weak var cutomOrderTableView: UITableView! {
@@ -48,6 +52,7 @@ class MyBagViewController: UIViewController {
     var slecetedPromocodeID: Int? = 0
     var totalAmount: Double = 0.0
     var totalMRPDiscountValue: Double = 0.0
+    var isAnyItemRemovedFromCart: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,6 +98,7 @@ class MyBagViewController: UIViewController {
             self?.promocodeLabel.text = selectedPromo.discountCode
             self?.couponDiscountTitleLabel.text = "Coupon Discount (\(selectedPromo.discountCode ?? ""))"
             self?.couponDidcountLabel.text = self?.formatPrice(selectedPromo.applyDiscountValue)//"\(selectedPromo.applyDiscountValue ?? 0)"
+            self?.actualPriceLAbel.isHidden = false
             self?.isPromoCodeApplied = true
             self?.finalPriceLabel.text = self?.formatPrice(selectedPromo.finalAmount)
             let savingAmount = (self?.totalMRPDiscountValue ?? 0) + (selectedPromo.applyDiscountValue ?? 0)
@@ -105,12 +111,52 @@ class MyBagViewController: UIViewController {
         self.coupoanStackView.isHidden = true
         self.couponDidcountLabel.text = ""
         self.slecetedPromocodeID = 0
+        isPromoCodeApplied = false
         self.totalAmountLabel.text = formatPrice(totalAmount)
         self.finalPriceLabel.text = formatPrice(totalAmount)
         self.removeButtonOutlet.isHidden = true
         self.applyPromocodeButtonOutlet.isHidden = false
         let savingAmount = (self.totalMRPDiscountValue)
         self.saveAmountLAbel.text = "You will save \(self.formatPrice(savingAmount)) KD on this"
+        promocodeLabel.text = "Apply PromoCode"
+        let normalOrderCount = viewModel.normalOrders.count
+        if normalOrderCount == 0 {
+            actualPriceLAbel.isHidden = true
+            let totalPrice = viewModel.customOrders
+                .compactMap { $0.chatroomData?.totalAmount }
+                .compactMap { amount -> Double? in
+                    let cleaned = amount
+                        .replacingOccurrences(of: ",", with: "") // remove thousand separators
+                        .filter { "0123456789.".contains($0) }
+
+                    return Double(cleaned)
+                }
+                .reduce(0.0, +)
+            let finalAmountForCustomOrderOnly = max(0, (totalPrice) + (viewModel.bagDetails?.shippingFees ?? 0) + (viewModel.bagDetails?.tax ?? 0))
+            totalAmountLabel.text = formatPrice(finalAmountForCustomOrderOnly)
+            finalPriceLabel.text = formatPrice(finalAmountForCustomOrderOnly)
+        }
+        let customOrderCount = viewModel.customOrders.count
+        if normalOrderCount != 0 && customOrderCount != 0 {
+            let totalPrice = viewModel.customOrders.compactMap { $0.chatroomData?.totalAmount }.compactMap { amount -> Double? in
+                    let cleaned = amount
+                        .replacingOccurrences(of: ",", with: "") // remove thousand separators
+                        .filter { "0123456789.".contains($0) }
+
+                    return Double(cleaned)
+                }
+                .reduce(0.0, +)
+            let finalAmount = max(0, (viewModel.bagDetails?.totalAmount ?? 0) + (totalPrice))
+            totalAmountLabel.text = formatPrice(finalAmount)
+            finalPriceLabel.text = formatPrice(finalAmount)
+            let actualPriceWithputDiscount = max(0, (viewModel.bagDetails?.totalMrp ?? 0) + (totalPrice))
+            CommonUtils.setStrikethrough(label: actualPriceLAbel, text: formatPrice(actualPriceWithputDiscount))
+//            if isPromoCodeApplied, let selected = selectedPromoCode {
+//                let finalAmountAfterApplyingPromocode = max(0, (finalAmount) - (selected.applyDiscountValue ?? 0))
+//                totalAmountLabel.text = formatPrice(finalAmountAfterApplyingPromocode)
+//                finalPriceLabel.text = formatPrice(finalAmountAfterApplyingPromocode)
+//            }
+        }
     }
     
     @IBAction func deliveryAddressAction(_ sender: Any) {
@@ -138,6 +184,12 @@ class MyBagViewController: UIViewController {
             couponDidcountLabel.text = formatPrice(selected.applyDiscountValue)
             finalPriceLabel.text = formatPrice(selected.finalAmount)
             totalAmountLabel.text = formatPrice(selected.finalAmount)
+            if isAnyItemRemovedFromCart {
+                let finalAmount = max(0, (data.totalAmount ?? 0) - (selected.applyDiscountValue ?? 0))
+                finalPriceLabel.text = formatPrice(finalAmount)
+                totalAmountLabel.text = formatPrice(finalAmount)
+                isAnyItemRemovedFromCart = false
+            }
         } else {
             couponDidcountLabel.text = formatPrice(data.discountCoupon)
             finalPriceLabel.text = formatPrice(data.totalAmount)
@@ -153,6 +205,78 @@ class MyBagViewController: UIViewController {
         taxLabel.text = formatPrice(data.tax)
         totalAmount = data.totalAmount ?? 0
         CommonUtils.setStrikethrough(label: actualPriceLAbel, text: formatPrice(data.totalMrp))
+        let customOrderCount = viewModel.customOrders.count
+        if customOrderCount != 0 {
+            customPriceStackView.isHidden = false
+            let totalPrice = viewModel.customOrders
+                .compactMap { $0.chatroomData?.totalAmount }
+                .compactMap { amount -> Double? in
+                    let cleaned = amount
+                        .replacingOccurrences(of: ",", with: "") // remove thousand separators
+                        .filter { "0123456789.".contains($0) }
+
+                    return Double(cleaned)
+                }
+                .reduce(0.0, +)
+            customOrderPriceLabel.text = CommonUtils.formatPrice(Double(totalPrice))
+            
+        } else {
+            customPriceStackView.isHidden = true
+        }
+        let normalOrderCount = viewModel.normalOrders.count
+        if normalOrderCount != 0 {
+            totalMRPStackView.isHidden = false
+            discountOnMrpStackView.isHidden = false
+            saveAmountLAbel.isHidden = false
+            actualPriceLAbel.isHidden = false
+        } else {
+            totalMRPStackView.isHidden = true
+            discountOnMrpStackView.isHidden = true
+            saveAmountLAbel.isHidden = true
+            let totalPrice = viewModel.customOrders
+                .compactMap { $0.chatroomData?.totalAmount }
+                .compactMap { amount -> Double? in
+                    let cleaned = amount
+                        .replacingOccurrences(of: ",", with: "") // remove thousand separators
+                        .filter { "0123456789.".contains($0) }
+
+                    return Double(cleaned)
+                }
+                .reduce(0.0, +)
+            let finalAmountForCustomOrderOnly = max(0, (totalPrice) + (data.shippingFees ?? 0) + (data.tax ?? 0))
+            totalAmountLabel.text = formatPrice(finalAmountForCustomOrderOnly)
+            finalPriceLabel.text = formatPrice(finalAmountForCustomOrderOnly)
+            if isPromoCodeApplied, let selected = selectedPromoCode {
+                actualPriceLAbel.isHidden = false
+                let finalAmountForCustomOrderOnlyAfterApplyingPromo = max(0, (totalPrice) + (data.shippingFees ?? 0) + (data.tax ?? 0) - (selected.applyDiscountValue ?? 0))
+                totalAmountLabel.text = formatPrice(finalAmountForCustomOrderOnlyAfterApplyingPromo)
+                finalPriceLabel.text = formatPrice(finalAmountForCustomOrderOnlyAfterApplyingPromo)
+                CommonUtils.setStrikethrough(label: actualPriceLAbel, text: formatPrice(finalAmountForCustomOrderOnly))
+            } else {
+                actualPriceLAbel.isHidden = true
+            }
+        }
+        
+        if normalOrderCount != 0 && customOrderCount != 0 {
+            let totalPrice = viewModel.customOrders.compactMap { $0.chatroomData?.totalAmount }.compactMap { amount -> Double? in
+                    let cleaned = amount
+                        .replacingOccurrences(of: ",", with: "") // remove thousand separators
+                        .filter { "0123456789.".contains($0) }
+
+                    return Double(cleaned)
+                }
+                .reduce(0.0, +)
+            let finalAmount = max(0, (data.totalAmount ?? 0) + (totalPrice))
+            totalAmountLabel.text = formatPrice(finalAmount)
+            finalPriceLabel.text = formatPrice(finalAmount)
+            let actualPriceWithputDiscount = max(0, (data.totalMrp ?? 0) + (totalPrice))
+            CommonUtils.setStrikethrough(label: actualPriceLAbel, text: formatPrice(actualPriceWithputDiscount))
+            if isPromoCodeApplied, let selected = selectedPromoCode {
+                let finalAmountAfterApplyingPromocode = max(0, (finalAmount) - (selected.applyDiscountValue ?? 0))
+                totalAmountLabel.text = formatPrice(finalAmountAfterApplyingPromocode)
+                finalPriceLabel.text = formatPrice(finalAmountAfterApplyingPromocode)
+            }
+        }
     }
     
     func formatPrice(_ amount: Double?, currency: String = "KD") -> String {

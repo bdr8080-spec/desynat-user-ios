@@ -278,6 +278,7 @@ class MyOrderDetailVC: UIViewController {
         itemPriceLabelForCustomOrder.text = "Item Price (\(CommonUtils.formatPrice(Double(unitPrice))) × \(quantity))"
         
         lblTotalMrp.text = CommonUtils.formatPrice(totalPriceforCustom)
+        
         customOrderItemPriceLabel.text = CommonUtils.formatPrice(Double(totalPriceforCustom))
         lblDiscountMrp.text = CommonUtils.formatPrice(Double(data.order?.discountMrp ?? "0"))
         //lblCouponDis.text

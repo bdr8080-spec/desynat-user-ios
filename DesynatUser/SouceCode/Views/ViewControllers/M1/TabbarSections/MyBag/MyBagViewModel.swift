@@ -37,6 +37,7 @@ class MyBagViewModel: NSObject {
         WebService.sharedInstance.removeCustomOrderFromCartSerivice(param: param) { [self] list in
             DispatchQueue.main.async {
                 self.getBagDetailsApi()
+                self.hostVC.isAnyItemRemovedFromCart = true
             }
         }
     }
