@@ -18,6 +18,7 @@ struct OrderModel: Codable {
     let allOtherOrderVarient: [AllOtherOrderVarient]?
     let order: Order?
     let chatroomRecordtable: ChatroomRecordtable?
+    let chatroomRecordtableForOrdersListing: ChatroomRecordtable?
     let productDetails: ProductDetails?
     let variationDetails: VariationDetails?
     let userRatingReviewProvide: UserRatingReviewProvide?
@@ -51,6 +52,7 @@ struct OrderModel: Codable {
         case userRatingReviewProvide = "user_rating_review_provide"
         case notDeliveredReason = "not_delivered_reason"
         case chatroomRecordtable = "ChatroomRecordtable"
+        case chatroomRecordtableForOrdersListing = "chat_roomrecords"
         case exchangeOrderDetails = "exchange_order_details"
     }
 }
@@ -89,7 +91,7 @@ struct ChatroomRecordtable: Codable {
 struct AllOtherOrderVarient: Codable {
     let id, orderID, userID, productID: Int?
     let variantsID, quantity: Int?
-    let amount, status, createdAt, updatedAt: String?
+    let amount, status, createdAt, updatedAt, orderType: String?
     let returnType, rEApprove: String?
     let returnReason, exchangeReason, exchangeNewSize: String?
     let returnImage: [String]?
@@ -102,10 +104,12 @@ struct AllOtherOrderVarient: Codable {
     let notDeliveredReason: String?
     let productDetails: ProductDetails?
     let variationDetails: VariationDetails?
+    let chatroomRecordtable: ChatroomRecordtable?
     
     enum CodingKeys: String, CodingKey {
         case id
         case orderID = "order_id"
+        case orderType = "order_type"
         case userID = "user_id"
         case productID = "product_id"
         case variantsID = "variants_id"
@@ -129,6 +133,7 @@ struct AllOtherOrderVarient: Codable {
         case notDeliveredReason = "not_delivered_reason"
         case productDetails = "product_details"
         case variationDetails = "variation_details"
+        case chatroomRecordtable = "ChatroomRecordtable"
     }
 }
 

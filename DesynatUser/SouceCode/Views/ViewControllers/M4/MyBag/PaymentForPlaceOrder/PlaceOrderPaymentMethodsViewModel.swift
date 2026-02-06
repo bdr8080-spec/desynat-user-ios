@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import UIKit
 
 class PlaceOrderPaymentMethodsViewModel {
   
   var walletAmount: Double?
+    private var currentAlert: UIAlertController?
   private var hostVC: PlaceOrderPaymentMethodsViewController
   var paymentMethods: [PaymentMethodForPlaceOrder] = [PaymentMethodForPlaceOrder(paymentMethodImage: "paymentMethods", paymentMethodTitle: "Pay by KNET", showDescription: true, description: ""),
                                                       PaymentMethodForPlaceOrder(paymentMethodImage: "applePay", paymentMethodTitle: "Apple Pay", showDescription: true, description: ""),
@@ -86,6 +88,20 @@ class PlaceOrderPaymentMethodsViewModel {
       formatter.numberStyle = .decimal
       return formatter.string(from: NSNumber(value: amount)) ?? "\(amount)"
   }
+    
+    func showAlertAtPayment(msg: String) {
+        // Dismiss any existing alert first
+        if let alert = currentAlert {
+            alert.dismiss(animated: false)
+            currentAlert = nil
+        }
+
+        let alert = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        currentAlert = alert
+        self.hostVC.present(alert, animated: true)
+    }
 
 }
 

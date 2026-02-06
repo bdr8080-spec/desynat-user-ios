@@ -7,6 +7,11 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Regular.ttf">
+            <string>Poppins-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -18,10 +23,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eoC-JD-1D4" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="332" height="130"/>
+                        <rect key="frame" x="0.0" y="0.0" width="332" height="264.66666666666669"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="chE-qD-Nx5">
-                                <rect key="frame" x="0.0" y="0.0" width="332" height="130"/>
+                                <rect key="frame" x="0.0" y="0.0" width="332" height="264.66666666666669"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2qD-5r-nq7">
                                         <rect key="frame" x="0.0" y="0.0" width="332" height="80"/>
@@ -161,28 +166,110 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="60K-99-4Ma">
-                                        <rect key="frame" x="0.0" y="80" width="332" height="50"/>
+                                        <rect key="frame" x="0.0" y="79.999999999999986" width="332" height="184.66666666666663"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14 days return available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TjT-ix-11h" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="10" y="12" width="312" height="38"/>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
-                                                <color key="textColor" red="0.090196078430000007" green="0.52156862749999999" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="EVw-l1-w13">
+                                                <rect key="frame" x="15" y="10" width="302" height="173.66666666666666"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14 days return available" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TjT-ix-11h" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="302" height="39.333333333333336"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                                        <color key="textColor" red="0.090196078430000007" green="0.52156862749999999" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IOk-b6-1hm">
+                                                        <rect key="frame" x="0.0" y="39.333333333333343" width="302" height="134.33333333333334"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1TS-VE-S2z">
+                                                                <rect key="frame" x="5" y="0.0" width="292" height="129.33333333333334"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1x-aW-3ku" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="292" height="1"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="1" id="JWV-Ze-mcQ"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QP6-Wj-R7d" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="9" width="292" height="0.0"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" id="OsL-Ay-KXG"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </label>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7gk-ix-huQ">
+                                                                        <rect key="frame" x="0.0" y="17.000000000000004" width="292" height="62.333333333333343"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Quantity" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zj2-6J-zZI">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="146" height="62.333333333333336"/>
+                                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="210" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2o-dP-Dtr">
+                                                                                <rect key="frame" x="146" y="0.0" width="146" height="62.333333333333336"/>
+                                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                    </stackView>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYj-qX-gyp">
+                                                                        <rect key="frame" x="0.0" y="87.333333333333314" width="292" height="42"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom details" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6DS-Nk-kBN">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="146" height="42"/>
+                                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lorem ipsum dolor sit amet, sectetur adipisicing elit, sed do eiusmod . " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qq8-xK-9Bz">
+                                                                                <rect key="frame" x="146" y="0.0" width="146" height="42"/>
+                                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                    </stackView>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="1TS-VE-S2z" secondAttribute="trailing" constant="5" id="I9h-es-azJ"/>
+                                                            <constraint firstItem="1TS-VE-S2z" firstAttribute="leading" secondItem="IOk-b6-1hm" secondAttribute="leading" constant="5" id="Muc-h4-Ymy"/>
+                                                            <constraint firstItem="1TS-VE-S2z" firstAttribute="top" secondItem="IOk-b6-1hm" secondAttribute="top" id="XsP-so-xjS"/>
+                                                            <constraint firstAttribute="bottom" secondItem="1TS-VE-S2z" secondAttribute="bottom" constant="5" id="bDd-gg-1hu"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="TjT-ix-11h" secondAttribute="trailing" constant="10" id="OYf-br-VDG"/>
-                                            <constraint firstItem="TjT-ix-11h" firstAttribute="top" secondItem="60K-99-4Ma" secondAttribute="top" constant="12" id="rNP-WQ-8Pi"/>
-                                            <constraint firstAttribute="bottom" secondItem="TjT-ix-11h" secondAttribute="bottom" id="vqp-JC-JUT"/>
-                                            <constraint firstItem="TjT-ix-11h" firstAttribute="leading" secondItem="60K-99-4Ma" secondAttribute="leading" constant="10" id="wSz-vP-S6B"/>
+                                            <constraint firstAttribute="bottom" secondItem="EVw-l1-w13" secondAttribute="bottom" constant="1" id="4BF-bD-0fb"/>
+                                            <constraint firstItem="EVw-l1-w13" firstAttribute="leading" secondItem="60K-99-4Ma" secondAttribute="leading" constant="15" id="YUI-ks-lfH"/>
+                                            <constraint firstItem="EVw-l1-w13" firstAttribute="top" secondItem="60K-99-4Ma" secondAttribute="top" constant="10" id="afN-5r-VLr"/>
+                                            <constraint firstAttribute="trailing" secondItem="EVw-l1-w13" secondAttribute="trailing" constant="15" id="wAP-ga-LDd"/>
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gw9-Qn-Pr4">
-                                        <rect key="frame" x="0.0" y="130" width="332" height="60"/>
+                                        <rect key="frame" x="0.0" y="264.66666666666669" width="332" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EwA-oX-3BS" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="10" y="10" width="312" height="38"/>
@@ -219,7 +306,7 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="388-an-7RK">
-                                        <rect key="frame" x="0.0" y="130" width="332" height="74"/>
+                                        <rect key="frame" x="0.0" y="264.66666666666669" width="332" height="74"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gmk-WX-TA9" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="10" y="10" width="312" height="64"/>
@@ -265,7 +352,7 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DNz-Fk-ACp">
-                                        <rect key="frame" x="0.0" y="130" width="332" height="64"/>
+                                        <rect key="frame" x="0.0" y="264.66666666666669" width="332" height="64"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Fzu-hj-sTw">
                                                 <rect key="frame" x="10" y="16" width="312" height="38"/>
@@ -336,7 +423,7 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UUp-in-0Oj">
-                                        <rect key="frame" x="0.0" y="130" width="332" height="62"/>
+                                        <rect key="frame" x="0.0" y="264.66666666666669" width="332" height="62"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="chI-UF-Az9">
                                                 <rect key="frame" x="0.0" y="0.0" width="332" height="62"/>
@@ -440,7 +527,7 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yng-KN-Lbr">
-                                        <rect key="frame" x="0.0" y="130" width="332" height="11"/>
+                                        <rect key="frame" x="0.0" y="264.66666666666669" width="332" height="11"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcs-2c-6X2">
                                                 <rect key="frame" x="0.0" y="10" width="332" height="1"/>
@@ -490,6 +577,8 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="customDetailsLabel" destination="Qq8-xK-9Bz" id="ehn-hi-pZw"/>
+                <outlet property="customOrderStackView" destination="IOk-b6-1hm" id="wpS-Jo-5mG"/>
                 <outlet property="discountPercentageLabel" destination="ij2-x7-3Q8" id="Vxo-q1-z9k"/>
                 <outlet property="imgProduct" destination="YDV-Nq-kQU" id="nUV-vx-C2w"/>
                 <outlet property="lblAddress" destination="ZVl-Vb-yco" id="0dL-1x-PZ8"/>
@@ -502,6 +591,7 @@
                 <outlet property="lblStatus" destination="eFj-7d-iWx" id="P11-1K-uLX"/>
                 <outlet property="lblTotalQuantity" destination="TCW-1h-Ciy" id="cTP-l2-DPi"/>
                 <outlet property="line" destination="hcs-2c-6X2" id="ag5-Iu-R8Z"/>
+                <outlet property="totalQuntityLbel" destination="x2o-dP-Dtr" id="HEt-yB-d2M"/>
                 <outlet property="viewCancel" destination="gw9-Qn-Pr4" id="ecV-vh-VOw"/>
                 <outlet property="viewCustom" destination="UUp-in-0Oj" id="PKs-kZ-3uq"/>
                 <outlet property="viewLine" destination="Yng-KN-Lbr" id="Z4C-tK-Yo0"/>

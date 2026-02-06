@@ -990,6 +990,10 @@ Apartment, Kuwait</string>
                                                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="361" placeholderIntrinsicHeight="128" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ayj-51-3Ee" customClass="TableViewDynamicHeight" customModule="DesynatUser" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="15" width="361" height="0.0"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                <connections>
+                                                                                    <outlet property="dataSource" destination="WhX-Ye-cah" id="8EZ-3S-3ML"/>
+                                                                                    <outlet property="delegate" destination="WhX-Ye-cah" id="RGS-zC-ylg"/>
+                                                                                </connections>
                                                                             </tableView>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1050,41 +1054,8 @@ Apartment, Kuwait</string>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="p3M-Ml-xE9">
                                                                         <rect key="frame" x="0.0" y="0.0" width="361" height="400"/>
                                                                         <subviews>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r4q-U2-qWA">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="361" height="50"/>
-                                                                                <subviews>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Price (230 KD X 2)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pn9-Cv-zW1" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="8" y="12" width="153" height="38"/>
-                                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.80101768090000003" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                                                        <nil key="highlightedColor"/>
-                                                                                        <userDefinedRuntimeAttributes>
-                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
-                                                                                        </userDefinedRuntimeAttributes>
-                                                                                    </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400 KD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Vz-t2-fM3" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="302.66666666666669" y="12" width="50.333333333333314" height="38"/>
-                                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                                                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                        <nil key="highlightedColor"/>
-                                                                                        <userDefinedRuntimeAttributes>
-                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
-                                                                                        </userDefinedRuntimeAttributes>
-                                                                                    </label>
-                                                                                </subviews>
-                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                                <constraints>
-                                                                                    <constraint firstItem="4Vz-t2-fM3" firstAttribute="top" secondItem="r4q-U2-qWA" secondAttribute="top" constant="12" id="AVR-fg-hyh"/>
-                                                                                    <constraint firstItem="Pn9-Cv-zW1" firstAttribute="leading" secondItem="r4q-U2-qWA" secondAttribute="leading" constant="8" id="Ap3-Wm-hdj"/>
-                                                                                    <constraint firstItem="Pn9-Cv-zW1" firstAttribute="top" secondItem="r4q-U2-qWA" secondAttribute="top" constant="12" id="EL6-qC-lVK"/>
-                                                                                    <constraint firstAttribute="bottom" secondItem="4Vz-t2-fM3" secondAttribute="bottom" id="NyS-Xx-0bJ"/>
-                                                                                    <constraint firstItem="4Vz-t2-fM3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Pn9-Cv-zW1" secondAttribute="trailing" constant="20" id="bEN-D0-lwH"/>
-                                                                                    <constraint firstAttribute="trailing" secondItem="4Vz-t2-fM3" secondAttribute="trailing" constant="8" id="cZ8-Su-THy"/>
-                                                                                    <constraint firstAttribute="bottom" secondItem="Pn9-Cv-zW1" secondAttribute="bottom" id="yUy-6w-y8n"/>
-                                                                                </constraints>
-                                                                            </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Az-Kc-8SU">
-                                                                                <rect key="frame" x="0.0" y="50" width="361" height="50"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="361" height="50"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total MRP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ux-LP-ifh" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
                                                                                         <rect key="frame" x="8" y="12" width="65" height="38"/>
@@ -1117,7 +1088,7 @@ Apartment, Kuwait</string>
                                                                                 </constraints>
                                                                             </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XuM-Zf-UTX">
-                                                                                <rect key="frame" x="0.0" y="100" width="361" height="50"/>
+                                                                                <rect key="frame" x="0.0" y="50" width="361" height="50"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discout on MRP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4f-vd-Zb4" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
                                                                                         <rect key="frame" x="8" y="12" width="103" height="38"/>
@@ -1147,6 +1118,39 @@ Apartment, Kuwait</string>
                                                                                     <constraint firstItem="E4f-vd-Zb4" firstAttribute="top" secondItem="XuM-Zf-UTX" secondAttribute="top" constant="12" id="i69-bf-7BM"/>
                                                                                     <constraint firstItem="m7m-ID-076" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="E4f-vd-Zb4" secondAttribute="trailing" constant="20" id="jzC-pD-Cxt"/>
                                                                                     <constraint firstAttribute="bottom" secondItem="m7m-ID-076" secondAttribute="bottom" id="lQo-Wh-Xoe"/>
+                                                                                </constraints>
+                                                                            </view>
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r4q-U2-qWA">
+                                                                                <rect key="frame" x="0.0" y="100" width="361" height="50"/>
+                                                                                <subviews>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Price (230 KD X 2)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pn9-Cv-zW1" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="8" y="12" width="153" height="38"/>
+                                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.80101768090000003" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                                                        </userDefinedRuntimeAttributes>
+                                                                                    </label>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400 KD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Vz-t2-fM3" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="302.66666666666669" y="12" width="50.333333333333314" height="38"/>
+                                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                                                        </userDefinedRuntimeAttributes>
+                                                                                    </label>
+                                                                                </subviews>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                <constraints>
+                                                                                    <constraint firstItem="4Vz-t2-fM3" firstAttribute="top" secondItem="r4q-U2-qWA" secondAttribute="top" constant="12" id="AVR-fg-hyh"/>
+                                                                                    <constraint firstItem="Pn9-Cv-zW1" firstAttribute="leading" secondItem="r4q-U2-qWA" secondAttribute="leading" constant="8" id="Ap3-Wm-hdj"/>
+                                                                                    <constraint firstItem="Pn9-Cv-zW1" firstAttribute="top" secondItem="r4q-U2-qWA" secondAttribute="top" constant="12" id="EL6-qC-lVK"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="4Vz-t2-fM3" secondAttribute="bottom" id="NyS-Xx-0bJ"/>
+                                                                                    <constraint firstItem="4Vz-t2-fM3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Pn9-Cv-zW1" secondAttribute="trailing" constant="20" id="bEN-D0-lwH"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="4Vz-t2-fM3" secondAttribute="trailing" constant="8" id="cZ8-Su-THy"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="Pn9-Cv-zW1" secondAttribute="bottom" id="yUy-6w-y8n"/>
                                                                                 </constraints>
                                                                             </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GTw-dW-98W">

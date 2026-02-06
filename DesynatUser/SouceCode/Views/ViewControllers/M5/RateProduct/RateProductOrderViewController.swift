@@ -18,7 +18,6 @@ class RateProductOrderViewController: UIViewController {
   @IBOutlet weak var submitButton: UIButton!
   
   private lazy var viewModel = RateProductOrderViewModel(hostVC: self)
-  //  var orderData: OrderModel?
   var orderId: Int?
   var orderDetailId: Int?
   var ratingDone: (() -> Void)?

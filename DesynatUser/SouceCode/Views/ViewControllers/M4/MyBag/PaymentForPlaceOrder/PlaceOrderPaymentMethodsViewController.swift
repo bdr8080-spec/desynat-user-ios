@@ -36,10 +36,10 @@ class PlaceOrderPaymentMethodsViewController: UIViewController, PlaceOrderPaymen
     var paymentCompleted: Bool = false
     var getToastMessage: String = ""
     var totalAmountToPay: Double = 0.0
-    var orderID: String = "46464646"
-  var customChatUniqueId: String = ""
-  var comingForCustomeOrderPlace: Bool = false
-  
+    var orderID: String = ""
+    var customChatUniqueId: String = ""
+    var comingForCustomeOrderPlace: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         paymnetTableView.rowHeight = UITableView.automaticDimension
@@ -58,25 +58,31 @@ class PlaceOrderPaymentMethodsViewController: UIViewController, PlaceOrderPaymen
     
     @IBAction func placeOrderDidTapped(_ sender: Any) {
         guard let method = selectedPaymentMethod else {
-            showAlert(msg: "Please select a payment method")
+            viewModel.showAlertAtPayment(msg: "Please select a payment method")
             return
         }
         switch method {
-        case .cashOnDelivery:
-            proceedToPay()
+        case .payByKNET:
+            initiateKNETPayment()
+        case .visapay:
+            initiateVisaPayPayment()
+        case .creditDebitCard:
+            initiateVisaPayPayment()
         case .inAppWallet:
             let walletBalance = viewModel.walletAmount ?? 0.0
             let amountToPay = totalAmountToPay
             if walletBalance < amountToPay {
-                showAlert(msg: "Insufficient wallet balance. Available: \(walletBalance) KD")
+                viewModel.showAlertAtPayment(msg: "Insufficient wallet balance. Available: \(walletBalance) KD")
                 return
             }
+            proceedToPay()
+        case .cashOnDelivery:
             proceedToPay()
         default:
             if paymentCompleted, paymentTransactionDetails != nil {
                 proceedToPay()
             } else {
-                showAlert(msg: "Payment is being processed or not completed yet.")
+                viewModel.showAlertAtPayment(msg: "Payment is being processed or not completed yet.")
             }
         }
     }
@@ -98,29 +104,29 @@ class PlaceOrderPaymentMethodsViewController: UIViewController, PlaceOrderPaymen
         }
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
-  
+    
     func proceedToPay() {
-      guard let selectedMethod = selectedPaymentMethod else { return }
-      if comingForCustomeOrderPlace {
-        let customOrderParam: [String :Any] = ["unique_id": customChatUniqueId,
-                                               "giftcard_id": giftCardDetails?.id ?? "",
-                                               "giftcard_amount": giftCardDetails?.giftCardAmount ?? "",
-                                               "Payment_method": selectedMethod.apiValue]
-        viewModel.placeCustomOrderApi(param: customOrderParam)
-      } else {
-        param["Payment_method"] = selectedMethod.apiValue
-        param["giftcard_amount"] = giftCardDetails?.giftCardAmount
-        param["giftcard_id"] = giftCardDetails?.id
-        viewModel.placeOrderApi(param: param)
-      }
+        guard let selectedMethod = selectedPaymentMethod else { return }
+        if comingForCustomeOrderPlace {
+            let customOrderParam: [String :Any] = ["unique_id": customChatUniqueId,
+                                                   "giftcard_id": giftCardDetails?.id ?? "",
+                                                   "giftcard_amount": giftCardDetails?.giftCardAmount ?? "",
+                                                   "Payment_method": selectedMethod.apiValue]
+            viewModel.placeCustomOrderApi(param: customOrderParam)
+        } else {
+            param["Payment_method"] = selectedMethod.apiValue
+            param["giftcard_amount"] = giftCardDetails?.giftCardAmount
+            param["giftcard_id"] = giftCardDetails?.id
+            viewModel.placeOrderApi(param: param)
+        }
     }
     
     func handlePaymentMethodSelection(for method: PaymentMethodType) {
         guard paymentCompleted, let details = paymentTransactionDetails else {
             if !getToastMessage.isEmpty {
-                showAlert(msg: getToastMessage)
+                viewModel.showAlertAtPayment(msg: getToastMessage)
             } else {
-                showAlert(msg: "Please complete the payment")
+                viewModel.showAlertAtPayment(msg: "Please complete the payment")
             }
             return
         }
@@ -135,7 +141,7 @@ class PlaceOrderPaymentMethodsViewController: UIViewController, PlaceOrderPaymen
     }
     
     func didReceivePaymentError(_ message: String) {
-        showAlert(msg: message)
+        viewModel.showAlertAtPayment(msg: message)
     }
 }
 
@@ -212,16 +218,18 @@ extension PlaceOrderPaymentMethodsViewController: UITableViewDelegate, UITableVi
         paymentTransactionDetails = nil
         switch method {
         case .payByKNET:
-            initiateKNETPayment()
+            break
+            //initiateKNETPayment()
         case .applePay:
             break
         case .creditDebitCard:
-//            initiateCreditCardPayment()
-            initiateVisaPayPayment()
+            break
+            //initiateVisaPayPayment()
         case .visapay:
-            initiateVisaPayPayment()
+            //initiateVisaPayPayment()
+            break
         case .inAppWallet, .cashOnDelivery:
-            break // Handled by Place Order button
+            break
         }
     }
     
@@ -250,28 +258,6 @@ extension PlaceOrderPaymentMethodsViewController {
             }
         }
     }
-    
-//    private func initiateCreditCardPayment() {
-//        let request = MFExecutePaymentRequest(invoiceValue: Decimal(totalAmountToPay), paymentMethod: 8)
-//        request.customerReference = orderID
-//        request.displayCurrencyIso = .uAE_AED
-//        //    Int.random(in: 1000...9999)
-//        let supplierId = Int.random(in: 1000...9999)
-//        let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: Decimal(totalAmountToPay))
-//        request.suppliers = [supplier]
-//        
-//        MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { [weak self] response, invoiceId in
-//            guard let self = self else { return }
-//            switch response {
-//            case .success(let paymentStatus):
-//                let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
-//                let gateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "Card"
-//                self.handlePaymentCompletion(transactionID: transactionID, invoiceId: invoiceId ?? "", gateway: gateway)
-//            case .failure(let error):
-//                self.didReceivePaymentError(error.errorDescription)
-//            }
-//        }
-//    }
     
     private func initiateVisaPayPayment() {
         let request = MFExecutePaymentRequest(invoiceValue: Decimal(totalAmountToPay), paymentMethod: 2)

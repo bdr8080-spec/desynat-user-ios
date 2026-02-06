@@ -71,7 +71,11 @@ class MyOrderDetailVC: UIViewController {
     @IBOutlet weak var lblPaidByCard: CustomLabelFont!
     @IBOutlet weak var imgCard: UIImageView!
     @IBOutlet weak var viewItemPrice: UIView!
-    @IBOutlet weak var orderTableView: TableViewDynamicHeight!
+    @IBOutlet weak var orderTableView: TableViewDynamicHeight! {
+        didSet {
+            orderTableView.registerCellFromNib(cellID: "OrderDetailTableCell")
+        }
+    }
     @IBOutlet weak var imgProduct: CustomImageView!
     @IBOutlet weak var lblProductName: CustomLabelFont!
     @IBOutlet weak var lblSize: CustomLabelFont!
@@ -132,7 +136,6 @@ class MyOrderDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         showRatingView.settings.fillMode = .full
-        registerXib()
         viewModel.getOrderDetail()
         viewItemPrice.isHidden = true
         if isCustomOrder {
@@ -260,12 +263,6 @@ class MyOrderDetailVC: UIViewController {
         images[index]?.isHidden = true
     }
     
-    private func registerXib() {
-        orderTableView.delegate = self
-        orderTableView.dataSource = self
-        orderTableView.register(UINib(nibName: "OrderDetailTableCell", bundle: nil), forCellReuseIdentifier: "OrderDetailTableCell")
-    }
-    
     func setData() {
         guard let data = orderData else { return }
         lblOrderId.text = "#\(data.id ?? 0)"
@@ -275,28 +272,34 @@ class MyOrderDetailVC: UIViewController {
         let unitPrice = Double(data.amount ?? "") ?? 0
         let quantity = data.quantity ?? 1
         let totalPriceforCustom = unitPrice * Double(quantity)
-        itemPriceLabelForCustomOrder.text = "Item Price (\(CommonUtils.formatPrice(Double(unitPrice))) × \(quantity))"
+//        itemPriceLabelForCustomOrder.text = "Item Price (\(CommonUtils.formatPrice(Double(unitPrice))) × \(quantity))"
+        itemPriceLabelForCustomOrder.text = "Custom Items Price"
         
-        lblTotalMrp.text = CommonUtils.formatPrice(totalPriceforCustom)
+        lblTotalMrp.text = CommonUtils.formatPriceStringInput(data.order?.totalMrp, currency: "KD")
         
         customOrderItemPriceLabel.text = CommonUtils.formatPrice(Double(totalPriceforCustom))
         lblDiscountMrp.text = CommonUtils.formatPrice(Double(data.order?.discountMrp ?? "0"))
-        //lblCouponDis.text
         lblShippingFee.text = "\(data.order?.shippingFees ?? "0") KD"
         lblTax.text = "\(data.order?.tax ?? "0") KD"
         lblTotalAmount.text = CommonUtils.formatPrice(Double(data.order?.totalAmount ?? "0"))
         totalPaidAmount = lblTotalAmount.text
-        let totalPrice = CommonUtils.formatPrice(Double(data.order?.totalMrp ?? "0"))
         if isCustomOrder {
             lblDisPrice.text = "Per Item Price \(CommonUtils.formatPrice(Double(unitPrice)))"
             lblPrice.isHidden = true
             discountPercentageLabel.isHidden = true
         } else {
-            lblDisPrice.text = CommonUtils.formatPrice(totalPriceforCustom)
+            lblDisPrice.text = CommonUtils.formatPrice(Double(data.variationDetails?.finalPrice ?? "0"))
             lblPrice.isHidden = false
             discountPercentageLabel.isHidden = false
         }
-        CommonUtils.setStrikethrough(label: lblPrice, text: totalPrice)
+        let discountType = data.variationDetails?.discountType ?? "1"
+        if discountType == "1" {
+            discountPercentageLabel.text = "\(data.variationDetails?.discountValue ?? "")% Off"
+        } else {
+            discountPercentageLabel.text = "\(data.variationDetails?.discountValue ?? "") KD Off"
+        }
+        let orderProductPrice = CommonUtils.formatPrice(Double(data.variationDetails?.actualPrice ?? "0"))
+        CommonUtils.setStrikethrough(label: lblPrice, text: orderProductPrice)
         let isReturnAllowed = data.productDetails?.productReturn == "1"
         if isReturnAllowed {
             lblReturnAvail.text = "\(data.productDetails?.returnDays ?? "1") days return available"
@@ -304,24 +307,16 @@ class MyOrderDetailVC: UIViewController {
             lblReturnAvail.text = "No return available"
         }
         
-        let discountType = data.variationDetails?.discountType ?? "1"
-        if discountType == "1" {
-            discountPercentageLabel.text = "\(data.variationDetails?.discountValue ?? "")% Off"
-        } else {
-            discountPercentageLabel.text = "\(data.variationDetails?.discountValue ?? "") KD Off"
-        }
         if let selected = selectedPromoCode {
-            // Promo code applied
             couponDiscountView.isHidden = false
             lblCouponDis.text = CommonUtils.formatPrice(selected.applyDiscountValue)
             lblTotalAmount.text = CommonUtils.formatPrice(selected.finalAmount)
             totalPaidAmount = lblTotalAmount.text
         } else {
-            // No promo code applied
             couponDiscountView.isHidden = true
-            lblCouponDis.text = "0" // or formatPrice(data.discountCoupon)
+            lblCouponDis.text = "0"
             lblTotalAmount.text = CommonUtils.formatPrice(Double(data.order?.totalAmount ?? "0"))
-            let savingAmount = Double(data.order?.discountMrp ?? "0") // - (data.totalAmount ?? 0)
+            let savingAmount = Double(data.order?.discountMrp ?? "0")
             totalPaidAmount = lblTotalAmount.text
             lblSavedAmount.text = "You saved \(CommonUtils.formatPrice(savingAmount)) on this"
         }
@@ -379,6 +374,41 @@ class MyOrderDetailVC: UIViewController {
         if isCustomOrder {
             lblTotalAmount.text = CommonUtils.formatPrice(Double(data.order?.totalAmount ?? "0"))
         }
+        
+        let otherVarientOrders = data.allOtherOrderVarient ?? []
+        let customOrderType = otherVarientOrders.filter { $0.orderType == "2" }
+        if customOrderType.count > 0 {
+            customItemAndQuanoitytPriceView.isHidden = false
+            let totalPrice = customOrderType
+                .compactMap { $0.chatroomRecordtable?.totalAmount }
+                .compactMap { amount -> Double? in
+                    let cleaned = amount
+                        .replacingOccurrences(of: ",", with: "") // remove thousand separators
+                        .filter { "0123456789.".contains($0) }
+
+                    return Double(cleaned)
+                }
+                .reduce(0.0, +)
+            customOrderItemPriceLabel.text = CommonUtils.formatPrice(Double(totalPrice))
+        }
+        
+        let normalOrderType = otherVarientOrders.filter { $0.orderType == "1" }
+        if normalOrderType.count > 0 {
+            totalMRPView.isHidden = false
+            discountOnMRPView.isHidden = false
+            lblSavedAmount.isHidden = false
+//            let totalPrice = normalOrderType
+//                .compactMap { $0.chatroomRecordtable?.totalAmount }
+//                .compactMap { amount -> Double? in
+//                    let cleaned = amount
+//                        .replacingOccurrences(of: ",", with: "") // remove thousand separators
+//                        .filter { "0123456789.".contains($0) }
+//
+//                    return Double(cleaned)
+//                }
+//                .reduce(0.0, +)
+//            customOrderItemPriceLabel.text = CommonUtils.formatPrice(Double(totalPrice))
+        }
     }
     
     private func configureStatus(with data: OrderModel) {
@@ -402,8 +432,8 @@ class MyOrderDetailVC: UIViewController {
         viewCancelBtn.isHidden = true
         lblReturnAvail.isHidden = false
         let paymentMethod = data.order?.paymentMethod
-        let paymentStatus = data.paymentStatus//order?.paymentStatus
-        let deliveryStatus = data.deliveryStatus//order?.deliveryStatus
+        let paymentStatus = data.paymentStatus
+        let deliveryStatus = data.deliveryStatus
         
         if paymentMethod == "1" || paymentMethod == "2" {
             if paymentMethod == "1" {
@@ -460,14 +490,12 @@ class MyOrderDetailVC: UIViewController {
                     }
                     viewPaidBy.isHidden = false
                     activateStep(0, title: "Confirmed")
-                    //          activateStep(1, title: "Shipped")
                     
                 case "2": //Ongoing
                     lblStatus.text = "Ongoing"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
                     
-                    //          viewCancel.isHidden = false
                     if isCustomOrder {
                         let canCancel = CommonUtils.isWithinThreeHours(from: data.createdAt ?? "")
                         viewCancel.isHidden = !canCancel
@@ -478,8 +506,6 @@ class MyOrderDetailVC: UIViewController {
                     }
                     viewPaidBy.isHidden = false
                     activateStep(0, title: "Confirmed")
-                    //          activateStep(1, title: "Shipped")
-                    
                 case "2.1":
                     lblStatus.text = "Ongoing"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
@@ -489,8 +515,6 @@ class MyOrderDetailVC: UIViewController {
                     } else {
                         viewReturnDays.isHidden = false
                     }
-                    
-                    //          viewCancel.isHidden = false
                     if isCustomOrder {
                         let canCancel = CommonUtils.isWithinThreeHours(from: data.createdAt ?? "")
                         viewCancel.isHidden = !canCancel
@@ -505,7 +529,6 @@ class MyOrderDetailVC: UIViewController {
                     lblStatus.text = "Delivered"
                     lblStatus.textColor = UIColor(hexString: "#16B364")
                     viewStatus.borderColor = UIColor(hexString: "#16B364")
-                    //                    viewReturnDays.isHidden = false
                     if isCustomOrder {
                         viewReturnDays.isHidden = true
                     } else {
@@ -536,8 +559,6 @@ class MyOrderDetailVC: UIViewController {
                         viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
                         viewReturnEx.isHidden = true
                         resetStepper()
-                        //                        activateStep(0, title: "Confirmed")
-                        //                        activateStep(1, title: "In Progress")
                         img1.image = .unconfiremdOrder
                         img2.image = .shipped
                         lbl3.text = "Picked Up"
@@ -597,7 +618,6 @@ class MyOrderDetailVC: UIViewController {
                     lblStatus.text = "Cancelled"
                     lblStatus.textColor = UIColor(hexString: "#E70000")
                     viewStatus.borderColor = UIColor(hexString: "#E70000")
-                    //          viewCancelDetail.isHidden = false
                     if isCustomOrder {
                         let canCancel = CommonUtils.isWithinThreeHours(from: data.createdAt ?? "")
                         viewCancel.isHidden = !canCancel
@@ -609,7 +629,6 @@ class MyOrderDetailVC: UIViewController {
                     hideStep(2)
                     hideStep(1)
                     activateStep(0, title: "Confirmed")
-                    //          activateStep(1, title: "In Progress")
                     activateStep(3, title: "Cancelled")
                     img4.image = UIImage(named: "canclledOrdreRed")
                     lbl4.textColor = UIColor(hexString: "#D72E04")
@@ -627,7 +646,6 @@ class MyOrderDetailVC: UIViewController {
                     viewCancelDetail.isHidden = true
                     viewReason.isHidden = true
                     viewPaidBy.isHidden = false
-                    //                    viewReturnDays.isHidden = false
                     if isCustomOrder {
                         viewReturnDays.isHidden = true
                     } else {
@@ -658,8 +676,6 @@ class MyOrderDetailVC: UIViewController {
                     hideStep(2)
                     hideStep(1)
                     activateStep(0, title: "Confirmed")
-                    //          activateStep(1, title: "In Progress")
-                    //          activateStep(2, title: "On the Way")
                     activateStep(3, title: "Cancelled")
                     img4.image = UIImage(named: "canclledOrdreRed")
                     lbl4.textColor = UIColor(hexString: "#D72E04")
@@ -682,7 +698,6 @@ class MyOrderDetailVC: UIViewController {
                 hideStep(2)
                 hideStep(1)
                 activateStep(0, title: "Confirmed")
-                //        activateStep(1, title: "In Progress")
                 activateStep(3, title: "Cancelled")
                 img4.image = UIImage(named: "canclledOrdreRed")
                 lbl4.textColor = UIColor(hexString: "#D72E04")
@@ -729,13 +744,11 @@ class MyOrderDetailVC: UIViewController {
                     lblStatus.text = "Ongoing"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
-                    //                    viewReturnDays.isHidden = false
                     if isCustomOrder {
                         viewReturnDays.isHidden = true
                     } else {
                         viewReturnDays.isHidden = false
                     }
-                    //          viewCancel.isHidden = false
                     if isCustomOrder {
                         let canCancel = CommonUtils.isWithinThreeHours(from: data.createdAt ?? "")
                         viewCancel.isHidden = !canCancel
@@ -744,7 +757,6 @@ class MyOrderDetailVC: UIViewController {
                     }
                     viewPaidBy.isHidden = false
                     activateStep(0, title: "Confirmed")
-                    //          activateStep(1, title: "Shipped")
                     let returnType = data.returnType ?? "1"
                     if returnType == "1" || returnType == "2" {
                         let approveType = data.rEApprove ?? "1"
@@ -760,13 +772,11 @@ class MyOrderDetailVC: UIViewController {
                     lblStatus.text = "Ongoing"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
-                    //                    viewReturnDays.isHidden = false
                     if isCustomOrder {
                         viewReturnDays.isHidden = true
                     } else {
                         viewReturnDays.isHidden = false
                     }
-                    //          viewCancel.isHidden = false
                     if isCustomOrder {
                         let canCancel = CommonUtils.isWithinThreeHours(from: data.createdAt ?? "")
                         viewCancel.isHidden = !canCancel
@@ -775,14 +785,11 @@ class MyOrderDetailVC: UIViewController {
                     }
                     viewPaidBy.isHidden = false
                     activateStep(0, title: "Confirmed")
-                    //          activateStep(1, title: "Shipped")
                     
                 case "2.1":
                     lblStatus.text = "Ongoing"
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
-                    
-                    //          viewCancel.isHidden = false
                     if isCustomOrder {
                         let canCancel = CommonUtils.isWithinThreeHours(from: data.createdAt ?? "")
                         viewCancel.isHidden = !canCancel
@@ -799,7 +806,6 @@ class MyOrderDetailVC: UIViewController {
                     lblStatus.text = "Delivered"
                     lblStatus.textColor = UIColor(hexString: "#16B364")
                     viewStatus.borderColor = UIColor(hexString: "#16B364")
-                    //                    viewReturnDays.isHidden = false
                     if isCustomOrder {
                         viewReturnDays.isHidden = true
                     } else {
@@ -831,11 +837,7 @@ class MyOrderDetailVC: UIViewController {
                         viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
                         viewReturnEx.isHidden = true
                         resetStepper()
-                        //                        activateStep(0, title: "Confirmed")
-                        //                        activateStep(1, title: "In Progress")
-                        //                        lbl3.text = "Picked Up"
-                        //                        lbl4.text = "Completed"
-                        img1.image = .unconfiremdOrder//.confirmedOrder
+                        img1.image = .unconfiremdOrder
                         img2.image = .shipped
                         lbl3.text = "Picked Up"
                         lbl4.text = "Completed"
@@ -852,7 +854,6 @@ class MyOrderDetailVC: UIViewController {
                             viewUploadImg.isHidden = false
                         }
                         if data.rEApprove == "1" {
-                            //                            lblStatus.text = "Return Request"
                             if data.returnType == "1" {
                                 lblStatus.text = "Returned"
                                 activateStep(0, title: "Confirmed")
@@ -876,7 +877,6 @@ class MyOrderDetailVC: UIViewController {
                                     }
                                 }
                             }
-                            //                            lbl4.text = "Completed"
                         } else if data.rEApprove == "2" {
                             lblStatus.text = "Delivered"//"Return Request"
                             activateStep(0, title: "Confirmed")
@@ -899,7 +899,6 @@ class MyOrderDetailVC: UIViewController {
                     hideStep(2)
                     hideStep(1)
                     activateStep(0, title: "Confirmed")
-                    //          activateStep(1, title: "In Progress")
                     activateStep(3, title: "Cancelled")
                     img4.image = UIImage(named: "canclledOrdreRed")
                     lbl4.textColor = UIColor(hexString: "#D72E04")
@@ -917,7 +916,6 @@ class MyOrderDetailVC: UIViewController {
                     viewCancelDetail.isHidden = true
                     viewReason.isHidden = true
                     viewPaidBy.isHidden = false
-                    //                    viewReturnDays.isHidden = false
                     if isCustomOrder {
                         viewReturnDays.isHidden = true
                     } else {
@@ -948,8 +946,6 @@ class MyOrderDetailVC: UIViewController {
                     hideStep(2)
                     hideStep(1)
                     activateStep(0, title: "Confirmed")
-                    //          activateStep(1, title: "In Progress")
-                    //          activateStep(2, title: "On the Way")
                     activateStep(3, title: "Cancelled")
                     img4.image = UIImage(named: "canclledOrdreRed")
                     lbl4.textColor = UIColor(hexString: "#D72E04")
@@ -972,8 +968,6 @@ class MyOrderDetailVC: UIViewController {
                 hideStep(2)
                 hideStep(1)
                 activateStep(0, title: "Confirmed")
-                //        activateStep(1, title: "In Progress")
-                //        activateStep(2, title: "On the Way")
                 activateStep(3, title: "Cancelled")
                 img4.image = UIImage(named: "canclledOrdreRed")
                 lbl4.textColor = UIColor(hexString: "#D72E04")
@@ -1041,6 +1035,7 @@ class MyOrderDetailVC: UIViewController {
 }
 
 extension MyOrderDetailVC: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return orderData?.allOtherOrderVarient?.count ?? 0
     }
@@ -1051,7 +1046,7 @@ extension MyOrderDetailVC: UITableViewDelegate, UITableViewDataSource {
         let paymentMethod = orderData?.order?.paymentMethod ?? "1"
         let paymentStatus = data?.paymentStatus ?? "1"
         let deliveryStatus = data?.deliveryStatus ?? "1"
-        cell.configData(data: data, paymentMethod: paymentMethod, paymentStatus: paymentStatus, deliveryStatus: deliveryStatus, isCustomOrder: isCustomOrder)
+        cell.configData(data: data, paymentMethod: paymentMethod, paymentStatus: paymentStatus, deliveryStatus: deliveryStatus)
         return cell
     }
 }

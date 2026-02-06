@@ -33,13 +33,11 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
     var paymentCompleted: Bool = false
     var payAmount: Double = 0.0
     var orderId: String = ""
-    //  var selectedCardID: Int? = 0
     var isCardIsSlecteed: Bool = false
     var selectedPaymentMethodID: Int? = nil
     var comingFrom: ComingReason = .fromCardDetails
     var displayPaymentMethods: [PaymentMethod] {
         if comingFrom == .fromWalletMeonyAdd {
-            // Remove In-App Wallet
             return viewModel.paymentMethods.filter {
                 $0.paymentMethodTitle != "In -App Wallet"
             }
@@ -84,57 +82,13 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
     }
     
     @IBAction func proceedDidTapped(_ sender: Any) {
-//        guard selectedPaymentMethodID != nil || isCardIsSlecteed else {
-//            showAlertAtPayment(msg: "Please select a payment option")
-//            return
-//        }
-//        
-//        if isCardIsSlecteed {
-//            // Handle saved card payment
-//            if paymentCompleted, let details = paymentTransactionDetails {
-//                viewModel.payNowRequest(transactionId: details.transactionID, paymentId: 1)
-//            } else {
-//                showAlertAtPayment(msg: "Please complete card payment")
-//            }
-//        } else if let methodId = selectedPaymentMethodID {
-//            switch methodId {
-//            case 3: // Wallet
-//                let walletBalance = viewModel.walletAmount ?? 0
-//                if walletBalance < payAmount {
-//                    showToast(msg: "Insufficient wallet balance")
-//                    return
-//                }
-//                viewModel.payNowRequest(transactionId: "773957935", paymentId: 2)
-//                //                presentSuccessScreen()
-//                
-//            default:
-//                // Other methods already handled automatically on selection
-//                if paymentCompleted, let details = paymentTransactionDetails {
-//                    viewModel.payNowRequest(transactionId: details.transactionID, paymentId: 1)
-//                    //                    presentSuccessScreen()
-//                } else {
-//                    showAlertAtPayment(msg: "Payment not completed")
-//                }
-//            }
-//        }
         guard selectedPaymentMethodID != nil || isCardIsSlecteed else {
                showAlertAtPayment(msg: "Please select a payment option")
                return
            }
         
         if comingFrom == .fromWalletMeonyAdd, isCardIsSlecteed {
-//                let supplierId = String(Int.random(in: 1000...9999))
             startVisaPayPayment()
-//                creditDebitCardPayment(
-//                    invoiceValue: Decimal(payAmount),
-//                    orderId: orderId,
-//                    supplierId: supplierId
-//                ) { [weak self] response, invoiceId, error in
-//                    guard let self = self else { return }
-//                    if error != nil {
-//                        self.showAlertAtPayment(msg: "Payment failed")
-//                    }
-//                }
                 return
             }
 
@@ -201,51 +155,7 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
             return
         }
         startVisaPayPayment()
-//        creditDebitCardPayment(
-//            invoiceValue: Decimal(payAmount),
-//            orderId: orderId,
-//            supplierId: supplierId
-//        ) { [weak self] response, invoiceId, error in
-//            guard let self = self else { return }
-//            if let err = error {
-//                self.showAlertAtPayment(msg: "Payment is failed")
-//                return
-//            }
-//        }
     }
-    
-//    func creditDebitCardPayment(invoiceValue: Decimal,
-//                                orderId: String,
-//                                supplierId: String?,
-//                                completion: @escaping (MFPaymentStatusResponse?, String?, Error?) -> Void) {
-//        let supplierId = Int.random(in: 1000...9999)
-//        let request = MFExecutePaymentRequest(invoiceValue: invoiceValue, paymentMethod: 1)
-//        request.customerReference = orderId
-//        
-//        let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: invoiceValue)
-//        request.suppliers = [supplier]
-//        request.displayCurrencyIso = .kuwait_KWD
-//        MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { result, invoiceId in
-//            switch result {
-//            case .success(let paymentStatus):
-//                completion(paymentStatus, invoiceId, nil)
-//                
-//                let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
-//                let paymentGateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "VisaPay"
-//                
-//                DispatchQueue.main.async {
-//                    self.paymentTransactionDetails = (transactionID, invoiceId ?? "", paymentGateway)
-//                    self.paymentCompleted = true
-//                    self.handlePaymentCompletion(transactionID: transactionID, invoiceId: invoiceId ?? "", gateway: paymentGateway)
-//                    
-//                }
-//            case .failure(let error):
-//                completion(nil, invoiceId,
-//                           NSError(domain: "", code: 0,
-//                                   userInfo: [NSLocalizedDescriptionKey: error.errorDescription]))
-//            }
-//        }
-//    }
     
     private func showAlertAtPayment(msg: String) {
         // Dismiss any existing alert first
@@ -260,7 +170,6 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
         currentAlert = alert
         present(alert, animated: true)
     }
-
     
     func paymentDoneWithCard() {
         let invoiceValue = Decimal(payAmount)
@@ -311,10 +220,6 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
             viewModel.payNowRequest(transactionId: transactionID, paymentId: 1)
         }
     }
-    
-    
-    
-    
 }
 
 extension PaymentMethodViewController: UITableViewDelegate, UITableViewDataSource {
@@ -354,50 +259,6 @@ extension PaymentMethodViewController: UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if tableView == cardsTableiew {
-//            // Handle saved card selection if needed
-//            return
-//        }
-//        
-//        // Reset previous selections
-//        isCardIsSlecteed = false
-//        cardSelectionImageView.image = UIImage(named: "radioUnselected")
-//        viewCreditCard.isHidden = true
-//        
-//        selectedPaymentMethodID = indexPath.row
-//        
-//        // Reload to update radio buttons
-//        paymentMethodsTableView.reloadData()
-//        
-//        // Start payment immediately for selected method (except Wallet)
-//        let selectedMethod = displayPaymentMethods[indexPath.row]
-//        switch selectedMethod.paymentMethodTitle {
-//            case "Pay by KNET": // KNET
-//            switch comingFrom {
-//            case .fromCardDetails:
-//                startKNETPayment()
-//            default:
-//                print("")
-//            }
-//        case "Apple Pay": // Apple Pay
-//                //startApplePay()
-//                print("apple pay")
-//        case "Visapay": // VisaPay
-//            switch comingFrom {
-//            case .fromCardDetails:
-//                startVisaPayPayment()
-//            default:
-//                print("")
-//            }
-//        case "In -App Wallet": // Wallet – do nothing here, proceed button will handle
-//                break
-//            default:
-//                break
-//            }
-//        }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == cardsTableiew { return }
 
@@ -429,7 +290,7 @@ extension PaymentMethodViewController: UITableViewDelegate, UITableViewDataSourc
             startApplePay()
 
         case "In -App Wallet":
-            // ❌ Wallet must wait for Proceed button
+            // Wallet must wait for Proceed button
             break
 
         default:

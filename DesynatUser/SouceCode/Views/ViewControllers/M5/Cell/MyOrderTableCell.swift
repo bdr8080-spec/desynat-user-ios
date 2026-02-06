@@ -25,7 +25,7 @@ class MyOrderTableCell: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    // Initialization code
+      
   }
   
   func configure(with data: OrderModel) {
@@ -39,10 +39,17 @@ class MyOrderTableCell: UITableViewCell {
     }
     
     lblOrderId.text = "#\(data.id ?? 0)"
-    lblPrice.text = "\(data.amount ?? "") KD"
+    
+      if data.orderType == "2" {
+          lblPrice.text = CommonUtils.formatPriceStringInput(data.chatroomRecordtableForOrdersListing?.totalAmount)
+      } else {
+          lblPrice.text = CommonUtils.formatPriceStringInput(data.amount)//"\(data.amount ?? "") KD"
+      }
     lblModelPiece.text = data.productDetails?.productNameEn ?? ""
+          
     
     setColorBox(size: data.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data.quantity ?? 0)")
+      
     
     lblPlacedDate.text = data.createdAt?.formattedOrderDate() ?? ""
     configureStatus(with: data)
@@ -66,12 +73,10 @@ class MyOrderTableCell: UITableViewCell {
           viewExchange.backgroundColor = UIColor(hexString: "#17854C").withAlphaComponent(0.1)
           lblOrderDate.textColor = UIColor(hexString: "#17854C")
           lblOrderDate.text = "Expected Delivery Date : 3-5 working days"
-            
             if data.returnType == "1" || data.returnType == "2" {
                 let approveType = data.rEApprove ?? "1"
                 if approveType == "1" {
                     lblStatus.text = "Return Req."
-//                    lblOrderDate.text = "Expected Pickup Date : 3-5 working days"
                 }
             }
           
@@ -81,12 +86,10 @@ class MyOrderTableCell: UITableViewCell {
           viewExchange.backgroundColor = UIColor(hexString: "#17854C").withAlphaComponent(0.1)
           lblOrderDate.textColor = UIColor(hexString: "#17854C")
           lblOrderDate.text = "Expected Delivery Date : 3-5 working days"
-            
             if data.deliveryStatus == "7" && (data.returnType == "1" || data.returnType == "2") {
                 let approveType = data.rEApprove ?? "1"
                 if approveType == "1" {
                     lblStatus.text = "Return Req."
-//                    lblOrderDate.text = "Expected Pickup Date : 3-5 working days"
                 }
             }
           
@@ -95,8 +98,6 @@ class MyOrderTableCell: UITableViewCell {
           lblStatus.textColor = UIColor(hexString: "#16B364")
           viewExchange.backgroundColor = UIColor(hexString: "#16B364").withAlphaComponent(0.1)
           lblOrderDate.textColor = UIColor(hexString: "#16B364")
-          
-          //                  lblOrderDate.text = "Delivered On : 12 SEP 25"
           if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
             lblOrderDate.text = "Delivered On : \(isoDate)"
           } else {
@@ -109,19 +110,13 @@ class MyOrderTableCell: UITableViewCell {
         case "4": //Cancelled
           lblStatus.text = "Cancelled"
           lblStatus.textColor = UIColor(hexString: "#E70000")
-          //                    viewExchange.isHidden = false
           viewExchange.backgroundColor = UIColor(hexString: "#F4DDDD")
           lblOrderDate.textColor = UIColor(hexString: "#E70000")
-          //                  lblOrderDate.text = "Cancelled  Date : 12 SEP 25"
           if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
             lblOrderDate.text = "Cancelled Date : \(isoDate)"
           } else {
             lblOrderDate.text = "Cancelled Date : -"
           }
-          
-//        case "5": //Return Request
-//          handleReturnExchange(data: data)
-//          
           
         default:
           return
@@ -129,7 +124,6 @@ class MyOrderTableCell: UITableViewCell {
       } else if paymentStatus == "3" {
         lblStatus.text = "Cancelled"
         lblStatus.textColor = UIColor(hexString: "#E70000")
-        //                viewExchange.isHidden = false
         viewExchange.backgroundColor = UIColor(hexString: "#F4DDDD")
         lblOrderDate.textColor = UIColor(hexString: "#E70000")
         lblOrderDate.text = "Pickup Expected Delivery Date : 3-5 days"
@@ -146,23 +140,19 @@ class MyOrderTableCell: UITableViewCell {
         case "1": //Pending
           lblStatus.text = "Ongoing"
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
-          //                  viewExchange.isHidden = false
           viewExchange.backgroundColor = UIColor(hexString: "#17854C").withAlphaComponent(0.1)
           lblOrderDate.textColor = UIColor(hexString: "#17854C")
           lblOrderDate.text = "Expected Delivery Date : 3-5 working days"
-            
             if data.returnType == "1" || data.returnType == "2" {
                 let approveType = data.rEApprove ?? "1"
                 if approveType == "1" {
                     lblStatus.text = "Return Req."
-//                    lblOrderDate.text = "Expected Pickup Date : 3-5 working days"
                 }
             }
           
         case "2","2.1", "7": //Ongoing, Picked
           lblStatus.text = "Ongoing"
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
-          //                    viewExchange.isHidden = false
           viewExchange.backgroundColor = UIColor(hexString: "#17854C").withAlphaComponent(0.1)
           lblOrderDate.textColor = UIColor(hexString: "#17854C")
           lblOrderDate.text = "Expected Delivery Date : 3-5 working days"
@@ -171,18 +161,14 @@ class MyOrderTableCell: UITableViewCell {
                 let approveType = data.rEApprove ?? "1"
                 if approveType == "1" {
                     lblStatus.text = "Return Req."
-//                    lblOrderDate.text = "Expected Pickup Date : 3-5 working days"
                 }
             }
             
         case "3": //Delivered
           lblStatus.text = "Delivered"
           lblStatus.textColor = UIColor(hexString: "#16B364")
-          //                    viewExchange.isHidden = false
           viewExchange.backgroundColor = UIColor(hexString: "#16B364").withAlphaComponent(0.1)
           lblOrderDate.textColor = UIColor(hexString: "#16B364")
-          
-          //                  lblOrderDate.text = "Delivered On : 12 SEP 25"
           if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
             lblOrderDate.text = "Delivered On : \(isoDate)"
           } else {
@@ -197,20 +183,13 @@ class MyOrderTableCell: UITableViewCell {
         case "4", "8": //Cancelled
           lblStatus.text = "Cancelled"
           lblStatus.textColor = UIColor(hexString: "#E70000")
-          //                    viewExchange.isHidden = false
           viewExchange.backgroundColor = UIColor(hexString: "#F4DDDD")
           lblOrderDate.textColor = UIColor(hexString: "#E70000")
-          //                  lblOrderDate.text = "Cancelled  Date : 12 SEP 25"
           if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
             lblOrderDate.text = "Cancelled Date : \(isoDate)"
           } else {
             lblOrderDate.text = "Cancelled Date : -"
           }
-          
-//        case "5":
-          
-          
-          
           
         default:
           return
@@ -218,16 +197,13 @@ class MyOrderTableCell: UITableViewCell {
       } else if paymentStatus == "2" {
         lblStatus.text = "Cancelled"
         lblStatus.textColor = UIColor(hexString: "#E70000")
-        //                viewExchange.isHidden = false
         viewExchange.backgroundColor = UIColor(hexString: "#F4DDDD")
         lblOrderDate.textColor = UIColor(hexString: "#E70000")
-        //              lblOrderDate.text = "Cancelled  Date : 12 SEP 25"
         if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
           lblOrderDate.text = "Cancelled Date : \(isoDate)"
         } else {
           lblOrderDate.text = "Cancelled Date : -"
         }
-        
       }
     }
   }
@@ -241,11 +217,9 @@ class MyOrderTableCell: UITableViewCell {
     if isReturnAllowed {
       lblStatus.text = "Return Req."
       lblStatus.textColor = UIColor(hexString: "#FF5F1B")
-      //          lblStatus.backgroundColor = UIColor(hexString: "#FF5F1B").withAlphaComponent(0.1)
       viewReturn.isHidden = false
       lblReturn.text = "Return Request"
       lblReturnDate.text = data.variationDetails?.createdAt?.formattedOrderDate() ?? ""
-      //          lblOrderDate.text = "Pickup Expected Delivery Date : 3-5 days"//"Pickup On : 12 SEP 25"
       if let isoDate = isoStringAddingDays(data.updatedAt, days: 6) {
         lblOrderDate.text = "Pickup Date : \(isoDate)"
       } else {
@@ -257,11 +231,9 @@ class MyOrderTableCell: UITableViewCell {
     } else if isExchangeAllowed {
       lblStatus.text = "Exchange Req."
       lblStatus.textColor = UIColor(hexString: "#FF5F1B")
-      //          lblStatus.backgroundColor = UIColor(hexString: "#FF5F1B").withAlphaComponent(0.1)
       viewReturn.isHidden = false
       lblReturn.text = "Exchange Request"
       lblReturnDate.text = data.variationDetails?.createdAt?.formattedOrderDate() ?? ""
-      //          lblOrderDate.text = "Pickup Expected Delivery Date : 3-5 days"
       if let isoDate = isoStringAddingDays(data.updatedAt, days: 6) {
         lblOrderDate.text = "Pickup Date : \(isoDate)"
       } else {
@@ -299,10 +271,6 @@ class MyOrderTableCell: UITableViewCell {
       } else if data.returnType == "2" {
           lblStatus.text = "Exchange Req."
           lblReturn.text = "Exchange Request"
-          
-          
-          
-          
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
           if data.rEApprove == "1" {
               if data.deliveryStatus == "3"{

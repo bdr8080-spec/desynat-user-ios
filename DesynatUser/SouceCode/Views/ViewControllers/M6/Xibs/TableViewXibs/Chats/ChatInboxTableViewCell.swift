@@ -45,39 +45,7 @@ class ChatInboxTableViewCell: UITableViewCell {
       messageLabel.text = data?.lastChat ?? ""
     }
     timeLabel.text = formattedChatTime(from: data?.updatedAt ?? "")
-    let messageType = data?.type ?? "1" // normal msg, customization send
-//    let productRequest = data?.productRequest ?? "1"
-      
-//      if messageType != "1" {
-//        switch actiontype {
-//        case "0": //user sent chat for customization new
-//          sendRequestButtonOutlet.isHidden = false
-//          if requestType == "1" {
-//            waitingButtonOutlet.isHidden = false
-//            waitingButtonOutlet.setTitle("Waiting", for: .normal)
-//            sendRequestButtonOutlet.isHidden = true
-//          }
-//        case "2", "5":
-//          viewRequestButtonOutlet.isHidden = false
-//          if actiontype == "5" {
-//            let isOrderPlaced = data?.orderCreateStatus?.id != nil
-//            if isOrderPlaced {
-//              viewRequestButtonOutlet.isHidden = true
-//              waitingButtonOutlet.isHidden = false
-//              waitingButtonOutlet.setTitle("Placed", for: .normal)
-//            }
-//          }
-//        case "4":
-//          waitingButtonOutlet.isHidden = false
-//          waitingButtonOutlet.setTitle("Rejected", for: .normal)
-//        default:
-//          print("")
-//        }
-      
-      
-      
-      
-      
+    let messageType = data?.type ?? "1"
       
       let requestType = data?.productRequest ?? "1"
     let actiontype = data?.action ?? "1"
@@ -112,6 +80,11 @@ class ChatInboxTableViewCell: UITableViewCell {
           messageTypeStatusView.backgroundColor = UIColor(hex: "#17854C").withAlphaComponent(0.15)
           let isOrderPlaced = data?.orderCreateStatus?.id != nil
           if isOrderPlaced {
+              messageTypeLabel.text = "Placed"
+              messageTypeLabel.textColor = UIColor(hex: "#EA9413") // red
+              messageTypeStatusView.backgroundColor = UIColor(hex: "#EA9413").withAlphaComponent(0.15)
+          }
+          if data?.productBuyStatus == "1" {
               messageTypeLabel.text = "Placed"
               messageTypeLabel.textColor = UIColor(hex: "#EA9413") // red
               messageTypeStatusView.backgroundColor = UIColor(hex: "#EA9413").withAlphaComponent(0.15)
