@@ -73,12 +73,16 @@ class MyBagTableViewCell: UITableViewCell {
         } else {
             returnavaiableLabel.text = "Non returnable"
         }
-        let discountType = data.productVariants?.discountType ?? "1"
-        if discountType == "1" {
-            discountPercentageLabel.text = "\(data.productVariants?.discountValue ?? "")% Off"
-        } else {
-            discountPercentageLabel.text = "\(data.productVariants?.discountValue ?? "") KD Off"
-        }
+//        let discountType = data.productVariants?.discountType ?? "1"
+//        if discountType == "1" {
+//            discountPercentageLabel.text = "\(data.productVariants?.discountValue ?? "")% Off"
+//        } else {
+//            discountPercentageLabel.text = "\(data.productVariants?.discountValue ?? "") KD Off"
+//        }
+        
+        CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: actaulPriceLabel,
+                                                  discountType: data.productVariants?.discountType,
+                                                  discountValue: data.productVariants?.discountValue)
     }
     
 }

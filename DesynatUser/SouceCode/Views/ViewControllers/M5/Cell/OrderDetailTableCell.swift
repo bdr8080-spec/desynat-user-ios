@@ -61,12 +61,14 @@ class OrderDetailTableCell: UITableViewCell {
             imgProduct.image = UIImage(named: "")
         }
         
-        let discountType = data?.variationDetails?.discountType ?? "1"
-        if discountType == "1" {
-            discountPercentageLabel.text = "\(data?.variationDetails?.discountValue ?? "")% Off"
-        } else {
-            discountPercentageLabel.text = "\(data?.variationDetails?.discountValue ?? "") KD Off"
-        }
+//        let discountType = data?.variationDetails?.discountType ?? "1"
+//        if discountType == "1" {
+//            discountPercentageLabel.text = "\(data?.variationDetails?.discountValue ?? "")% Off"
+//        } else {
+//            discountPercentageLabel.text = "\(data?.variationDetails?.discountValue ?? "") KD Off"
+//        }
+        
+        
         
         if data?.orderType == "2" {
             customOrderStackView.isHidden = false
@@ -76,7 +78,7 @@ class OrderDetailTableCell: UITableViewCell {
             setColorBoxWithQuanity(size: data?.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF")
             let unitPrice = Double(data?.amount ?? "") ?? 0
             lblDisPrice.text = CommonUtils.formatPrice(unitPrice)
-            lblDisPrice.text = "Per Item Price \(CommonUtils.formatPrice(Double(unitPrice)))"
+            lblDisPrice.text = CommonUtils.formatPriceStringInput(data?.chatroomRecordtable?.totalAmount ?? "0")////"Per Item Price \(CommonUtils.formatPrice(Double(unitPrice)))"
             lblPrice.isHidden = true
             discountPercentageLabel.isHidden = true
         } else {
@@ -85,7 +87,10 @@ class OrderDetailTableCell: UITableViewCell {
             setColorBox(size: data?.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data?.quantity ?? 0)")
             lblDisPrice.text = CommonUtils.formatPriceStringInput(data?.variationDetails?.finalPrice, currency: "KD")
             lblPrice.isHidden = false
-            discountPercentageLabel.isHidden = false
+//            discountPercentageLabel.isHidden = false
+            CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: lblPrice,
+                                                      discountType: data?.variationDetails?.discountType,
+                                                      discountValue: data?.variationDetails?.discountValue)
         }
         
         CommonUtils.setStrikethrough(label: lblPrice, text: "\(data?.variationDetails?.actualPrice ?? "0") KD")

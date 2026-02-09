@@ -27,6 +27,10 @@
 		425EE0532F2B53F000EAD984 /* RedeemGiftCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425EE0522F2B53F000EAD984 /* RedeemGiftCardViewModel.swift */; };
 		425EE0552F2B56FC00EAD984 /* WalletMoneyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425EE0542F2B56FC00EAD984 /* WalletMoneyListViewModel.swift */; };
 		4268543D2F2CD795009437AC /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4268543C2F2CD795009437AC /* AppLanguage.swift */; };
+		4292363D2F39E0ED0040242C /* MyOrderDetailsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4292363C2F39E0ED0040242C /* MyOrderDetailsDataModel.swift */; };
+		4292363F2F39E15B0040242C /* MyOrderDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4292363E2F39E15A0040242C /* MyOrderDataModel.swift */; };
+		429236E02F39F7C60040242C /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429236DF2F39F7C60040242C /* Shimmer.swift */; };
+		429236E32F39F8C70040242C /* UIView-Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 429236E22F39F8C70040242C /* UIView-Shimmer */; };
 		429E49692F2A408100566FE8 /* AffiliatedUserTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429E49682F2A408100566FE8 /* AffiliatedUserTabbarViewController.swift */; };
 		429E49722F2A49F200566FE8 /* AffiliatedUserHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429E49712F2A49F200566FE8 /* AffiliatedUserHomeViewController.swift */; };
 		429E49752F2A4B3100566FE8 /* AffiliatedUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429E49742F2A4B3100566FE8 /* AffiliatedUserProfileViewController.swift */; };
@@ -350,6 +354,9 @@
 		425EE0522F2B53F000EAD984 /* RedeemGiftCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemGiftCardViewModel.swift; sourceTree = "<group>"; };
 		425EE0542F2B56FC00EAD984 /* WalletMoneyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMoneyListViewModel.swift; sourceTree = "<group>"; };
 		4268543C2F2CD795009437AC /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
+		4292363C2F39E0ED0040242C /* MyOrderDetailsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrderDetailsDataModel.swift; sourceTree = "<group>"; };
+		4292363E2F39E15A0040242C /* MyOrderDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrderDataModel.swift; sourceTree = "<group>"; };
+		429236DF2F39F7C60040242C /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
 		429E49682F2A408100566FE8 /* AffiliatedUserTabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserTabbarViewController.swift; sourceTree = "<group>"; };
 		429E49712F2A49F200566FE8 /* AffiliatedUserHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserHomeViewController.swift; sourceTree = "<group>"; };
 		429E49742F2A4B3100566FE8 /* AffiliatedUserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserProfileViewController.swift; sourceTree = "<group>"; };
@@ -628,6 +635,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		4292359B2F399EE10040242C /* ZoomandSwipeImage */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ZoomandSwipeImage;
+			sourceTree = "<group>";
+		};
 		7A6C74062ECAE8EE008F3779 /* Xibs */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Xibs;
@@ -670,6 +682,7 @@
 				D18B4B022F1637260029907C /* FirebaseAnalyticsIdentitySupport in Frameworks */,
 				D18B4B202F1637260029907C /* FirebaseMLModelDownloader in Frameworks */,
 				D18B4B1E2F1637260029907C /* FirebaseMessaging in Frameworks */,
+				429236E32F39F8C70040242C /* UIView-Shimmer in Frameworks */,
 				D18B4B182F1637260029907C /* FirebaseFunctionsCombine-Community in Frameworks */,
 				D18B4B142F1637260029907C /* FirebaseFirestoreCombine-Community in Frameworks */,
 				D18B4AFA2F1637260029907C /* FirebaseAI in Frameworks */,
@@ -788,6 +801,14 @@
 				425EE0522F2B53F000EAD984 /* RedeemGiftCardViewModel.swift */,
 			);
 			path = RedeemGiftCard;
+			sourceTree = "<group>";
+		};
+		429236DE2F39F7BF0040242C /* ShimmerEffect */ = {
+			isa = PBXGroup;
+			children = (
+				429236DF2F39F7C60040242C /* Shimmer.swift */,
+			);
+			path = ShimmerEffect;
 			sourceTree = "<group>";
 		};
 		429E49672F2A406E00566FE8 /* AffiliatedUserTabbar */ = {
@@ -1464,6 +1485,7 @@
 		6B95F1AF2EB5DB5E00391509 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				429236DE2F39F7BF0040242C /* ShimmerEffect */,
 				7A94BD262ECB5CC100511665 /* RangeSlider */,
 				6B95F1712EB5DB5E00391509 /* Extensions */,
 				6B95F1792EB5DB5E00391509 /* Libraries */,
@@ -1473,6 +1495,7 @@
 				6B95F1932EB5DB5E00391509 /* SocialLoginManager */,
 				6B95F1952EB5DB5E00391509 /* UserDefaults */,
 				6B95F1AE2EB5DB5E00391509 /* UtilAndConstant */,
+				4292359B2F399EE10040242C /* ZoomandSwipeImage */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1696,6 +1719,7 @@
 			children = (
 				D19CE09D2EF55E16008616D0 /* MyOrderVM.swift */,
 				D19CE0922EF54DDD008616D0 /* MyOrderVC.swift */,
+				4292363E2F39E15A0040242C /* MyOrderDataModel.swift */,
 			);
 			path = "My Order";
 			sourceTree = "<group>";
@@ -1730,6 +1754,7 @@
 			children = (
 				D19CE1CA2EF56FED008616D0 /* MyOrderDetailVC.swift */,
 				D1CF063F2EF98522005DB273 /* MyOrderDetailVM.swift */,
+				4292363C2F39E0ED0040242C /* MyOrderDetailsDataModel.swift */,
 			);
 			path = OrderDetail;
 			sourceTree = "<group>";
@@ -1769,7 +1794,6 @@
 		D1AF5FC42F125695009CE604 /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
-				D1AF5FC62F1256AA009CE604 /* CollectionViewXibs */,
 				D1AF5FC52F1256A0009CE604 /* TableViewXibs */,
 			);
 			path = Xibs;
@@ -1783,13 +1807,6 @@
 				D1AF5FCD2F1256B2009CE604 /* Chats */,
 			);
 			path = TableViewXibs;
-			sourceTree = "<group>";
-		};
-		D1AF5FC62F1256AA009CE604 /* CollectionViewXibs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CollectionViewXibs;
 			sourceTree = "<group>";
 		};
 		D1AF5FCD2F1256B2009CE604 /* Chats */ = {
@@ -1963,6 +1980,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				4292359B2F399EE10040242C /* ZoomandSwipeImage */,
 				7A6C74062ECAE8EE008F3779 /* Xibs */,
 				D19137F72ED888BC003B8EF0 /* Favourites */,
 				D1AF5FC12F125294009CE604 /* ChatFilter */,
@@ -1999,6 +2017,7 @@
 				D18B4B232F1637260029907C /* FirebaseRemoteConfig */,
 				D18B4B252F1637260029907C /* FirebaseStorage */,
 				D18B4B272F1637260029907C /* FirebaseStorageCombine-Community */,
+				429236E22F39F8C70040242C /* UIView-Shimmer */,
 			);
 			productName = DemoProject;
 			productReference = 495DBBA12E81528A00E61635 /* DesynatUser.app */;
@@ -2033,6 +2052,7 @@
 				49DBE5502EB0836A00DE95E8 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				D18E29192EE957E200F12D1F /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
 				D18B4AF82F1636DC0029907C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				429236E12F39F8C70040242C /* XCRemoteSwiftPackageReference "UIView-Shimmer" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 495DBBA22E81528A00E61635 /* Products */;
@@ -2209,6 +2229,7 @@
 			files = (
 				D1AF5F222F1247A0009CE604 /* FullScreenBannerViewModel.swift in Sources */,
 				425EDFA22F2B38D900EAD984 /* AffiliatedUserHomeViewModel.swift in Sources */,
+				4292363F2F39E15B0040242C /* MyOrderDataModel.swift in Sources */,
 				425EE0552F2B56FC00EAD984 /* WalletMoneyListViewModel.swift in Sources */,
 				6B95F1D52EB5DB5E00391509 /* AppDelegate.swift in Sources */,
 				425EDFAB2F2B439800EAD984 /* WalletMoneyListTableViewCell.swift in Sources */,
@@ -2254,6 +2275,7 @@
 				6B95F1E82EB5DB5E00391509 /* SelectLanguageViewController.swift in Sources */,
 				6B95F1E92EB5DB5E00391509 /* SignupViewController.swift in Sources */,
 				D19CE09E2EF55E1B008616D0 /* MyOrderVM.swift in Sources */,
+				4292363D2F39E0ED0040242C /* MyOrderDetailsDataModel.swift in Sources */,
 				6B95F1EA2EB5DB5E00391509 /* WelcomeScreenViewController.swift in Sources */,
 				D1BCB0022EFC034600117D0A /* RateProductViewModel.swift in Sources */,
 				7AC773102EBDAECF0047C46C /* HomeViewModel.swift in Sources */,
@@ -2339,6 +2361,7 @@
 				D100544D2EFBC05B00956DBA /* SearchProductListViewModel.swift in Sources */,
 				6B95F2062EB5DB5E00391509 /* ADCountry.swift in Sources */,
 				6B95F2072EB5DB5E00391509 /* ADCountryPicker.swift in Sources */,
+				429236E02F39F7C60040242C /* Shimmer.swift in Sources */,
 				7A94BD1C2ECB55D400511665 /* ProductsFiltersViewController.swift in Sources */,
 				4268543D2F2CD795009437AC /* AppLanguage.swift in Sources */,
 				6B95F2082EB5DB5E00391509 /* LocationManagerHandler.swift in Sources */,
@@ -2695,6 +2718,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		429236E12F39F8C70040242C /* XCRemoteSwiftPackageReference "UIView-Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/omerfarukozturk/UIView-Shimmer.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
 		495DBBD92E81562200E61635 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -2730,6 +2761,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		429236E22F39F8C70040242C /* UIView-Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 429236E12F39F8C70040242C /* XCRemoteSwiftPackageReference "UIView-Shimmer" */;
+			productName = "UIView-Shimmer";
+		};
 		495DBBDA2E81562200E61635 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 495DBBD92E81562200E61635 /* XCRemoteSwiftPackageReference "Alamofire" */;

@@ -63,7 +63,7 @@ class ChatInboxTableViewCell: UITableViewCell {
               messageTypeStatusView.backgroundColor = UIColor(hex: "#EA9413").withAlphaComponent(0.15)
           }
       case "1":
-        messageTypeLabel.text = "Quotation Sent"
+        messageTypeLabel.text = "Quotation Received"
         messageTypeLabel.textColor = UIColor(hex: "#172B85") // dark blue
         messageTypeStatusView.backgroundColor = UIColor(hex: "#172B85").withAlphaComponent(0.15)
       case "2":

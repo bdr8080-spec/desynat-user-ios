@@ -385,7 +385,6 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
         case storesCollectionView:
             let nextVC = ProductDetailViewController.instantiate(fromAppStoryboard: .Catalog)
             nextVC.productId = viewModel.singleStoresSection?.allProduct?.data?[indexPath.row].id
-            //      nextVC.storeName = pageTitleLabel.text?.trimmed()
             self.navigationController?.pushViewController(nextVC, animated: true)
         default:
             break
@@ -413,12 +412,6 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
             return CGSize(width: 0, height: 0)
         }
     }
-    
-    //    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-    //        if collectionView == storesCollectionView {
-    //            viewWillLayoutSubviews()
-    //        }
-    //    }
     
 }
 

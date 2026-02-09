@@ -176,7 +176,6 @@ extension PlaceOrderPaymentMethodsViewController: UITableViewDelegate, UITableVi
                 cell.viewApple.isHidden = false
                 cell.descriptionStackView.isHidden = false
                 cell.setupApplePayButton()
-                
                 cell.startApplePayOnButtonTap(
                     invoiceValue: Decimal(totalAmountToPay),
                     orderID: orderID
@@ -185,12 +184,10 @@ extension PlaceOrderPaymentMethodsViewController: UITableViewDelegate, UITableVi
                     if let paymentStatus = paymentStatusResponse {
                         let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
                         let gateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "ApplePay"
-                        
                         self.handlePaymentCompletion(
                             transactionID: transactionID,
                             invoiceId: invoiceId ?? "",
-                            gateway: gateway
-                        )
+                            gateway: gateway)
                     } else if let error = error {
                         self.didReceivePaymentError(error.localizedDescription)
                     } else {

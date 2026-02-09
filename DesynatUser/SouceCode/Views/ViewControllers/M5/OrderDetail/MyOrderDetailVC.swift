@@ -5,15 +5,6 @@
 //  Created by fluper on 19/12/25.
 //
 
-struct StepImage {
-    let selected: String
-    let unselected: String
-}
-
-protocol SelectReasonDelegate: AnyObject {
-    func didUpdateOrder(status: SelectScreenType)
-}
-
 import UIKit
 import SDWebImage
 import Cosmos
@@ -265,6 +256,7 @@ class MyOrderDetailVC: UIViewController {
     
     func setData() {
         guard let data = orderData else { return }
+        //CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: lblPrice,discountType: data.variationDetails?.discountType,discountValue: data.variationDetails?.discountValue)
         lblOrderId.text = "#\(data.id ?? 0)"
         customOrderRequestIdLabel.text = "Request id #\(data.id ?? 0)"
         lblPlacedDate.text = "Placed on \(data.createdAt?.formattedPlacedDate() ?? "")"
@@ -272,7 +264,7 @@ class MyOrderDetailVC: UIViewController {
         let unitPrice = Double(data.amount ?? "") ?? 0
         let quantity = data.quantity ?? 1
         let totalPriceforCustom = unitPrice * Double(quantity)
-//        itemPriceLabelForCustomOrder.text = "Item Price (\(CommonUtils.formatPrice(Double(unitPrice))) × \(quantity))"
+
         itemPriceLabelForCustomOrder.text = "Custom Items Price"
         
         lblTotalMrp.text = CommonUtils.formatPriceStringInput(data.order?.totalMrp, currency: "KD")
@@ -284,20 +276,24 @@ class MyOrderDetailVC: UIViewController {
         lblTotalAmount.text = CommonUtils.formatPrice(Double(data.order?.totalAmount ?? "0"))
         totalPaidAmount = lblTotalAmount.text
         if isCustomOrder {
-            lblDisPrice.text = "Per Item Price \(CommonUtils.formatPrice(Double(unitPrice)))"
+            lblDisPrice.text = CommonUtils.formatPriceStringInput(data.chatroomRecordtable?.totalAmount ?? "0")//"Per Item Price \(CommonUtils.formatPrice(Double(unitPrice)))"
             lblPrice.isHidden = true
             discountPercentageLabel.isHidden = true
         } else {
             lblDisPrice.text = CommonUtils.formatPrice(Double(data.variationDetails?.finalPrice ?? "0"))
             lblPrice.isHidden = false
-            discountPercentageLabel.isHidden = false
+//            discountPercentageLabel.isHidden = false
+            CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: lblPrice,discountType: data.variationDetails?.discountType,discountValue: data.variationDetails?.discountValue)
         }
-        let discountType = data.variationDetails?.discountType ?? "1"
-        if discountType == "1" {
-            discountPercentageLabel.text = "\(data.variationDetails?.discountValue ?? "")% Off"
-        } else {
-            discountPercentageLabel.text = "\(data.variationDetails?.discountValue ?? "") KD Off"
-        }
+//        let discountType = data.variationDetails?.discountType ?? "1"
+//        if discountType == "1" {
+//            discountPercentageLabel.text = "\(data.variationDetails?.discountValue ?? "")% Off"
+//        } else {
+//            discountPercentageLabel.text = "\(data.variationDetails?.discountValue ?? "") KD Off"
+//        }
+        
+        
+        
         let orderProductPrice = CommonUtils.formatPrice(Double(data.variationDetails?.actualPrice ?? "0"))
         CommonUtils.setStrikethrough(label: lblPrice, text: orderProductPrice)
         let isReturnAllowed = data.productDetails?.productReturn == "1"
@@ -389,7 +385,8 @@ class MyOrderDetailVC: UIViewController {
                     return Double(cleaned)
                 }
                 .reduce(0.0, +)
-            customOrderItemPriceLabel.text = CommonUtils.formatPrice(Double(totalPrice))
+            let mainOrderDetailsCustomPrice = (Double(data.chatroomRecordtable?.totalAmount ?? "0") ?? 0) + totalPrice
+            customOrderItemPriceLabel.text = CommonUtils.formatPrice(Double(mainOrderDetailsCustomPrice))
         }
         
         let normalOrderType = otherVarientOrders.filter { $0.orderType == "1" }
@@ -397,17 +394,6 @@ class MyOrderDetailVC: UIViewController {
             totalMRPView.isHidden = false
             discountOnMRPView.isHidden = false
             lblSavedAmount.isHidden = false
-//            let totalPrice = normalOrderType
-//                .compactMap { $0.chatroomRecordtable?.totalAmount }
-//                .compactMap { amount -> Double? in
-//                    let cleaned = amount
-//                        .replacingOccurrences(of: ",", with: "") // remove thousand separators
-//                        .filter { "0123456789.".contains($0) }
-//
-//                    return Double(cleaned)
-//                }
-//                .reduce(0.0, +)
-//            customOrderItemPriceLabel.text = CommonUtils.formatPrice(Double(totalPrice))
         }
     }
     
@@ -1063,3 +1049,4 @@ extension MyOrderDetailVC: SelectReasonDelegate {
         viewModel.getOrderDetail()
     }
 }
+

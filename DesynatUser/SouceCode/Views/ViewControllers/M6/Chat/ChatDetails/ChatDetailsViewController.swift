@@ -80,18 +80,17 @@ class ChatDetailsViewController: UIViewController {
     
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
-//              guard let navController = self.navigationController else { return }
-//        
-//                  // If ChatInbox exists in stack → pop to it
-//                  if let chatVC = navController.viewControllers.first(
-//                      where: { $0 is ChatInboxListViewController }
-//                  ) {
-//                      navController.popToViewController(chatVC, animated: true)
-//                  } else {
-//                      // Otherwise reset stack
-//                      let chatVC = ChatInboxListViewController()
-//                      navController.setViewControllers([chatVC], animated: true)
-//                  }
+//        guard let nav = navigationController else {
+//                dismiss(animated: true)
+//                return
+//            }
+//
+//            let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+//            let inboxVC = storyboard.instantiateViewController(
+//                withIdentifier: "ChatInboxListViewController"
+//            )
+//
+//            nav.setViewControllers([inboxVC], animated: true)
     }
     
     @IBAction func payNowDidTapped(_ sender: Any) {
@@ -179,8 +178,11 @@ class ChatDetailsViewController: UIViewController {
                 }
             case "1": //"Quotation Sent"
                 productDetailsView.isHidden = true
-                actionButtonView.isHidden = false
+                
                 productPriceView.isHidden = false
+                productDetailsActionButtonStackView.isHidden = false
+                addToBagView.isHidden = true
+                actionButtonView.isHidden = false
             case "2":
                 productDetailsView.isHidden = true
                 productPriceView.isHidden = false

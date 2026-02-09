@@ -5,23 +5,6 @@
 //  Created by fluper on 19/12/25.
 //
 
-enum OrderType {
-    case order
-    case customOrder
-}
-
-enum OrderFilterType: Int {
-    case all = 1
-    case ongoing = 2
-    case delivered = 3
-    case cancelled = 4
-    case returned = 5
-}
-
-protocol FilterDelegate: AnyObject {
-    func didApplyFilter(_ filter: OrderFilterType)
-}
-
 import UIKit
 
 class MyOrderVC: UIViewController, FilterDelegate {

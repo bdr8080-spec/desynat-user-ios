@@ -744,9 +744,11 @@ extension WebService {
   }
   
   func getOrderDetail(param: [String: Any], completion: @escaping (_ user: OrderModel)-> Void) {
-    CommonUtils.showHud(show: true)
+      Shimmer.shared.show(show: true)
+//    CommonUtils.showHud(show: true)
     NetworkManager.shared.request(withAPI: .endpoint(.singleOrderSummary), requestMethod: .post, requestParams: param, requestModel: OrderModel.self) { result, code in
-      CommonUtils.showHud(show: false)
+//      CommonUtils.showHud(show: false)
+        Shimmer.shared.show(show: false)
       self.evaluateWebServiceResponse(response: result) { response, message,error in
         guard let user = response else {
           if let error {
@@ -760,9 +762,9 @@ extension WebService {
   }
   
   func getOrderDetailInvoice(param: [String: Any], completion: @escaping (_ user: String)-> Void) {
-    CommonUtils.showHud(show: true)
+//    CommonUtils.showHud(show: true)
     NetworkManager.shared.request(withAPI: .endpoint(.singleOrderSummaryInvoice), requestMethod: .post, requestParams: param, requestModel: String.self) { result, code in
-      CommonUtils.showHud(show: false)
+//      CommonUtils.showHud(show: false)
       self.evaluateWebServiceResponse(response: result) { response, message,error in
         guard let user = response else {
           if let error {

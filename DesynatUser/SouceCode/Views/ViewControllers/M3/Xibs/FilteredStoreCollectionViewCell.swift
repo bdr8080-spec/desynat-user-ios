@@ -40,13 +40,14 @@ class FilteredStoreCollectionViewCell: UICollectionViewCell {
     }
     finalPriceLabel.text = "\(data?.productVariants?.first?.finalPrice ?? "") KD"
     CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productVariants?.first?.actualPrice ?? "") KD")
-    //    iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD"
-    let discountType = data?.productVariants?.first?.discountType ?? "1"
-    if discountType == "1" {
-      iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "")% Off"
-    } else {
-      iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD Off"
-    }
+//    let discountType = data?.productVariants?.first?.discountType ?? "1"
+//    if discountType == "1" {
+//      iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "")% Off"
+//    } else {
+//      iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD Off"
+//    }
+      
+      CommonUtils.updateDiscountPercentageLabel(iscountPriceLabel, actualAmountLabel: actualPriceLabel,discountType: data?.productVariants?.first?.discountType,discountValue: data?.productVariants?.first?.discountValue)
     
     if data?.wishlist == 1 {
       likeButtonOutlet.setImage(UIImage(named: "selectedHeartImage"), for: .normal)
@@ -68,12 +69,13 @@ class FilteredStoreCollectionViewCell: UICollectionViewCell {
     finalPriceLabel.text = "\(data?.productVariants?.first?.finalPrice ?? "") KD"
     CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productVariants?.first?.actualPrice ?? "") KD")
     //    iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD"
-    let discountType = data?.productVariants?.first?.discountType ?? "1"
-    if discountType == "1" {
-      iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "")% Off"
-    } else {
-      iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD Off"
-    }
+//    let discountType = data?.productVariants?.first?.discountType ?? "1"
+//    if discountType == "1" {
+//      iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "")% Off"
+//    } else {
+//      iscountPriceLabel.text = "\(data?.productVariants?.first?.discountValue ?? "") KD Off"
+//    }
+      CommonUtils.updateDiscountPercentageLabel(iscountPriceLabel, actualAmountLabel: actualPriceLabel,discountType: data?.productVariants?.first?.discountType,discountValue: data?.productVariants?.first?.discountValue)
     likeButtonOutlet.setImage(UIImage(named: "selectedHeartImage"), for: .normal)
   }
   

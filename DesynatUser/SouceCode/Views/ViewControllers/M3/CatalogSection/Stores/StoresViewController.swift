@@ -54,14 +54,13 @@ class StoresViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.getStoresListApi()
+        startBannerAutoScroll()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         stopBannerAutoScroll()
-        startBannerAutoScroll()
     }
-
     
     private func requestPermissions() {
         SFSpeechRecognizer.requestAuthorization { _ in }

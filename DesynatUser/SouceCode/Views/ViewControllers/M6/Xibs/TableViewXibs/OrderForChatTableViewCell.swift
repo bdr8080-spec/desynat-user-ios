@@ -52,12 +52,14 @@ class OrderForChatTableViewCell: UITableViewCell {
       productImageView.image = UIImage(named: "")
     }
     productNameLabel.text = data?.productVariation?.productDetails?.productNameEn ?? ""
-    let discountType = data?.productVariation?.discountType ?? "1"
-    if discountType == "1" {
-      discountPriceLabel.text = "\(data?.productVariation?.discountValue ?? "")% Off"
-    } else {
-      discountPriceLabel.text = "\(data?.productVariation?.discountValue ?? "") KD Off"
-    }
+//    let discountType = data?.productVariation?.discountType ?? "1"
+//    if discountType == "1" {
+//      discountPriceLabel.text = "\(data?.productVariation?.discountValue ?? "")% Off"
+//    } else {
+//      discountPriceLabel.text = "\(data?.productVariation?.discountValue ?? "") KD Off"
+//    }
+      
+      CommonUtils.updateDiscountPercentageLabel(discountPriceLabel, actualAmountLabel: actualPriceLabel,discountType: data?.productVariation?.discountType,discountValue: data?.productVariation?.discountValue)
     
     finalPriceLabel.text = "\(data?.productVariation?.finalPrice ?? "") KD"
     CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productVariation?.actualPrice ?? "0") KD")
@@ -79,7 +81,7 @@ class OrderForChatTableViewCell: UITableViewCell {
           waitingButtonOutlet.setTitle("Waiting", for: .normal)
           sendRequestButtonOutlet.isHidden = true
         }
-      case "2", "5":
+      case "1", "2", "5":
         viewRequestButtonOutlet.isHidden = false
         if actiontype == "5" {
           let isOrderPlaced = data?.orderCreateStatus?.id != nil

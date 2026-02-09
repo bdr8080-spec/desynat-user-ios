@@ -102,7 +102,7 @@ class MyBagViewController: UIViewController {
             self?.isPromoCodeApplied = true
             self?.finalPriceLabel.text = self?.formatPrice(selectedPromo.finalAmount)
             let savingAmount = (self?.totalMRPDiscountValue ?? 0) + (selectedPromo.applyDiscountValue ?? 0)
-            self?.saveAmountLAbel.text = "You will save \(self?.formatPrice(savingAmount) ?? "") KD on this"
+            self?.saveAmountLAbel.text = "You will save \(self?.formatPrice(savingAmount) ?? "") on this"
         }
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -117,7 +117,7 @@ class MyBagViewController: UIViewController {
         self.removeButtonOutlet.isHidden = true
         self.applyPromocodeButtonOutlet.isHidden = false
         let savingAmount = (self.totalMRPDiscountValue)
-        self.saveAmountLAbel.text = "You will save \(self.formatPrice(savingAmount)) KD on this"
+        self.saveAmountLAbel.text = "You will save \(self.formatPrice(savingAmount)) on this"
         promocodeLabel.text = "Apply PromoCode"
         let normalOrderCount = viewModel.normalOrders.count
         if normalOrderCount == 0 {
@@ -195,7 +195,7 @@ class MyBagViewController: UIViewController {
             finalPriceLabel.text = formatPrice(data.totalAmount)
             totalAmountLabel.text = formatPrice(data.totalAmount)
             let savingAmount = (data.discountOnMrp ?? 0)// - (data.totalAmount ?? 0)
-            saveAmountLAbel.text = "You will save \(formatPrice(savingAmount)) KD on this"
+            saveAmountLAbel.text = "You will save \(formatPrice(savingAmount)) on this"
         }
         let selectedAddress = data.userAddress
         deliveryId = selectedAddress?.id ?? 0

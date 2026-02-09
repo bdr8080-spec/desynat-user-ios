@@ -31,6 +31,14 @@ class ChatInboxListViewController: UIViewController {
   
   @IBAction func backDidTapped(_ sender: Any) {
     self.navigationController?.popViewController(animated: true)
+//      self.navigationController?.popToRootViewController(animated: false)
+//      DispatchQueue.main.async {
+//          if let tabBarVC = self.findTabBarVC() {
+//              tabBarVC.updateTabSelection(forTag: 4)
+//          } else {
+//              print("TabBarVC not found")
+//          }
+//      }
   }
   
   @IBAction func filtreDidTapped(_ sender: Any) {

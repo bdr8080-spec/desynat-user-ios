@@ -281,7 +281,7 @@
                                             <action selector="btnBack:" destination="WhX-Ye-cah" eventType="touchUpInside" id="atv-nP-UFp"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#23618" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tml-Cq-uMa" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tml-Cq-uMa" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="66" y="8.6666666666666732" width="267" height="22.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -313,8 +313,8 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kcB-cg-IIt">
                                                         <rect key="frame" x="0.0" y="0.0" width="393" height="599.33333333333337"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Placed on 02/02/24 at 10:00pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igh-i6-Wcq" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                <rect key="frame" x="16" y="20" width="175.66666666666666" height="14.333333333333336"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igh-i6-Wcq" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                <rect key="frame" x="16" y="20" width="6" height="14.333333333333336"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -323,10 +323,10 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2sG-RU-c0k" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                                <rect key="frame" x="319" y="20" width="58" height="20"/>
+                                                                <rect key="frame" x="361.33333333333331" y="20" width="15.666666666666686" height="20"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ongoing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFL-bb-MFh" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                        <rect key="frame" x="5" y="0.0" width="48" height="20"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFL-bb-MFh" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                        <rect key="frame" x="5" y="0.0" width="5.6666666666666679" height="20"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                         <color key="textColor" red="1" green="0.37254901959999998" blue="0.1058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -356,10 +356,10 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHE-xm-MfY" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                                <rect key="frame" x="16" y="50" width="361" height="519.33333333333337"/>
+                                                                <rect key="frame" x="16" y="50" width="361" height="321.33333333333331"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ixG-lf-Ucs">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="361" height="519.33333333333337"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="361" height="321.33333333333331"/>
                                                                         <subviews>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fMf-rl-Gge">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="361" height="40"/>
@@ -402,7 +402,7 @@
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dBV-uN-fC5">
                                                                                 <rect key="frame" x="0.0" y="40" width="361" height="92"/>
                                                                                 <subviews>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orderImg" translatesAutoresizingMaskIntoConstraints="NO" id="TR0-ch-Wc5" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImg" translatesAutoresizingMaskIntoConstraints="NO" id="TR0-ch-Wc5" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                                                                         <rect key="frame" x="10" y="12" width="68" height="68"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="height" constant="68" id="2Nl-2S-YZv"/>
@@ -420,7 +420,7 @@
                                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AW7-PL-IBt">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="265" height="22.666666666666668"/>
                                                                                                 <subviews>
-                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mooei 3 Pcs set" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBb-Q6-QIp" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBb-Q6-QIp" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
                                                                                                         <rect key="frame" x="0.0" y="0.0" width="265" height="22.666666666666668"/>
                                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                                                                         <nil key="textColor"/>
@@ -441,7 +441,7 @@
                                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="djp-qT-U49">
                                                                                                 <rect key="frame" x="0.0" y="22.666666666666686" width="265" height="22.666666666666671"/>
                                                                                                 <subviews>
-                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Size: M" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXh-b6-9Jr" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXh-b6-9Jr" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
                                                                                                         <rect key="frame" x="0.0" y="0.0" width="265" height="22.666666666666668"/>
                                                                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="10"/>
                                                                                                         <nil key="textColor"/>
@@ -462,8 +462,8 @@
                                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7hi-Sp-b10">
                                                                                                 <rect key="frame" x="0.0" y="45.333333333333314" width="265" height="22.666666666666671"/>
                                                                                                 <subviews>
-                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="239 KD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bvu-i7-hBy" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="43.333333333333336" height="22.666666666666668"/>
+                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bvu-i7-hBy" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="6" height="22.666666666666668"/>
                                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                                                                         <nil key="textColor"/>
                                                                                                         <nil key="highlightedColor"/>
@@ -471,8 +471,8 @@
                                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                                         </userDefinedRuntimeAttributes>
                                                                                                     </label>
-                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300 KD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CId-zC-oIJ" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                                        <rect key="frame" x="45.333333333333343" y="4.3333333333333721" width="42" height="14.333333333333336"/>
+                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CId-zC-oIJ" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                                        <rect key="frame" x="8" y="4.3333333333333721" width="6" height="14.333333333333336"/>
                                                                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                                                                         <nil key="textColor"/>
                                                                                                         <nil key="highlightedColor"/>
@@ -480,8 +480,8 @@
                                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                                         </userDefinedRuntimeAttributes>
                                                                                                     </label>
-                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gC-jS-ZW3">
-                                                                                                        <rect key="frame" x="89.333333333333343" y="11.333333333333371" width="0.0" height="0.0"/>
+                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gC-jS-ZW3">
+                                                                                                        <rect key="frame" x="15.999999999999998" y="4.3333333333333721" width="5.6666666666666661" height="14.333333333333336"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                                                         <color key="textColor" red="0.90980392160000001" green="0.043137254899999998" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                         <nil key="highlightedColor"/>
@@ -515,7 +515,7 @@
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrH-pG-Paf">
                                                                                 <rect key="frame" x="0.0" y="132" width="361" height="30"/>
                                                                                 <subviews>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14 days return available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCM-Ci-zYE" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCM-Ci-zYE" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
                                                                                         <rect key="frame" x="10" y="0.0" width="341" height="30"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                                                         <color key="textColor" red="0.090196078430000007" green="0.52156862749999999" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -567,16 +567,16 @@
                                                                                                 </userDefinedRuntimeAttributes>
                                                                                             </label>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6bY-xC-Ppx">
-                                                                                                <rect key="frame" x="0.0" y="21.999999999999996" width="331" height="58.666666666666657"/>
+                                                                                                <rect key="frame" x="0.0" y="21.999999999999993" width="331" height="92.333333333333314"/>
                                                                                                 <subviews>
                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Quantity" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IH0-7l-ldJ">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="165.66666666666666" height="58.666666666666664"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="165.66666666666666" height="92.333333333333329"/>
                                                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <nil key="highlightedColor"/>
                                                                                                     </label>
-                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="210" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNU-2x-syB">
-                                                                                                        <rect key="frame" x="165.66666666666663" y="0.0" width="165.33333333333337" height="58.666666666666664"/>
+                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNU-2x-syB">
+                                                                                                        <rect key="frame" x="165.66666666666663" y="0.0" width="165.33333333333337" height="92.333333333333329"/>
                                                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <nil key="highlightedColor"/>
@@ -584,7 +584,7 @@
                                                                                                 </subviews>
                                                                                             </stackView>
                                                                                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RRv-iO-XNn">
-                                                                                                <rect key="frame" x="0.0" y="84.666666666666686" width="331" height="0.0"/>
+                                                                                                <rect key="frame" x="0.0" y="118.33333333333331" width="331" height="0.0"/>
                                                                                                 <subviews>
                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agd-PJ-RTO">
                                                                                                         <rect key="frame" x="0.0" y="0.0" width="165.66666666666666" height="0.0"/>
@@ -603,16 +603,16 @@ Apartment, Kuwait</string>
                                                                                                 </subviews>
                                                                                             </stackView>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gy8-WO-qDb">
-                                                                                                <rect key="frame" x="0.0" y="88.666666666666686" width="331" height="50.666666666666657"/>
+                                                                                                <rect key="frame" x="0.0" y="122.33333333333331" width="331" height="17"/>
                                                                                                 <subviews>
                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom details" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G3b-v1-uIV">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="165.66666666666666" height="50.666666666666664"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="165.66666666666666" height="17"/>
                                                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <nil key="highlightedColor"/>
                                                                                                     </label>
-                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lorem ipsum dolor sit amet, sectetur adipisicing elit, sed do eiusmod . " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SZO-m3-qIQ">
-                                                                                                        <rect key="frame" x="165.66666666666663" y="0.0" width="165.33333333333337" height="50.666666666666664"/>
+                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SZO-m3-qIQ">
+                                                                                                        <rect key="frame" x="165.66666666666663" y="0.0" width="165.33333333333337" height="17"/>
                                                                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <nil key="highlightedColor"/>
@@ -630,7 +630,7 @@ Apartment, Kuwait</string>
                                                                                     <constraint firstAttribute="bottom" secondItem="h39-FJ-hqr" secondAttribute="bottom" constant="20" id="zSF-5X-lIP"/>
                                                                                 </constraints>
                                                                             </view>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="azX-rv-VxU">
+                                                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="azX-rv-VxU">
                                                                                 <rect key="frame" x="0.0" y="321.33333333333337" width="361" height="60"/>
                                                                                 <subviews>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KlQ-Np-wH9" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
@@ -666,8 +666,8 @@ Apartment, Kuwait</string>
                                                                                     <constraint firstItem="KlQ-Np-wH9" firstAttribute="leading" secondItem="azX-rv-VxU" secondAttribute="leading" constant="10" id="yPy-eh-b2Y"/>
                                                                                 </constraints>
                                                                             </view>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lro-Js-kLg">
-                                                                                <rect key="frame" x="0.0" y="381.33333333333337" width="361" height="74"/>
+                                                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lro-Js-kLg">
+                                                                                <rect key="frame" x="0.0" y="321.33333333333337" width="361" height="74"/>
                                                                                 <subviews>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7C-fX-afW" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                                                         <rect key="frame" x="10" y="10" width="341" height="64"/>
@@ -739,8 +739,8 @@ Apartment, Kuwait</string>
                                                                                     <constraint firstItem="l7C-fX-afW" firstAttribute="leading" secondItem="Lro-Js-kLg" secondAttribute="leading" constant="10" id="vvo-4R-5Hc"/>
                                                                                 </constraints>
                                                                             </view>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5J-XY-xXI">
-                                                                                <rect key="frame" x="0.0" y="455.33333333333337" width="361" height="64"/>
+                                                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5J-XY-xXI">
+                                                                                <rect key="frame" x="0.0" y="321.33333333333337" width="361" height="64"/>
                                                                                 <subviews>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="cxG-w0-dCZ">
                                                                                         <rect key="frame" x="10" y="16" width="341" height="38"/>
@@ -802,7 +802,7 @@ Apartment, Kuwait</string>
                                                                                 </constraints>
                                                                             </view>
                                                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ss4-Pq-xPh" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="519.33333333333337" width="361" height="50"/>
+                                                                                <rect key="frame" x="0.0" y="321.33333333333337" width="361" height="50"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ongoing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgx-ir-l0Z" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
                                                                                         <rect key="frame" x="24" y="25" width="313" height="0.0"/>
@@ -822,7 +822,7 @@ Apartment, Kuwait</string>
                                                                                 </constraints>
                                                                             </view>
                                                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gvT-C0-1Mo">
-                                                                                <rect key="frame" x="0.0" y="519.33333333333337" width="361" height="62"/>
+                                                                                <rect key="frame" x="0.0" y="321.33333333333337" width="361" height="62"/>
                                                                                 <subviews>
                                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="so0-ia-4by">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="361" height="62"/>
@@ -925,7 +925,7 @@ Apartment, Kuwait</string>
                                                                                 </constraints>
                                                                             </view>
                                                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c9R-1I-ceu">
-                                                                                <rect key="frame" x="0.0" y="519.33333333333337" width="361" height="11"/>
+                                                                                <rect key="frame" x="0.0" y="321.33333333333337" width="361" height="11"/>
                                                                                 <subviews>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ihr-c8-mwa">
                                                                                         <rect key="frame" x="0.0" y="10" width="361" height="1"/>
@@ -964,7 +964,7 @@ Apartment, Kuwait</string>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="m9C-Ni-NIP">
-                                                                <rect key="frame" x="16" y="569.33333333333337" width="361" height="30"/>
+                                                                <rect key="frame" x="16" y="371.33333333333337" width="361" height="228"/>
                                                                 <subviews>
                                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hCh-MJ-hfE">
                                                                         <rect key="frame" x="0.0" y="0.0" width="361" height="20"/>
@@ -978,7 +978,7 @@ Apartment, Kuwait</string>
                                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dm5-1x-x6h" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="361" height="27"/>
                                                                         <subviews>
-                                                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="     All Orders" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0p-gO-sz2" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="     Other items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0p-gO-sz2" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="10" width="361" height="0.0"/>
                                                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                                                 <nil key="textColor"/>
@@ -1066,8 +1066,8 @@ Apartment, Kuwait</string>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400 KD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mck-Nn-l2x" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="302.66666666666669" y="12" width="50.333333333333314" height="38"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mck-Nn-l2x" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="346.33333333333331" y="12" width="6.6666666666666856" height="38"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1099,8 +1099,8 @@ Apartment, Kuwait</string>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400 KD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7m-ID-076" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="302.66666666666669" y="12" width="50.333333333333314" height="38"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7m-ID-076" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="346.33333333333331" y="12" width="6.6666666666666856" height="38"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                                                         <color key="textColor" red="0.83529411760000005" green="0.23137254900000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1123,8 +1123,8 @@ Apartment, Kuwait</string>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r4q-U2-qWA">
                                                                                 <rect key="frame" x="0.0" y="100" width="361" height="50"/>
                                                                                 <subviews>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Price (230 KD X 2)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pn9-Cv-zW1" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="8" y="12" width="153" height="38"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom Items Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pn9-Cv-zW1" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="8" y="12" width="126" height="38"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.80101768090000003" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1132,8 +1132,8 @@ Apartment, Kuwait</string>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400 KD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Vz-t2-fM3" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="302.66666666666669" y="12" width="50.333333333333314" height="38"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Vz-t2-fM3" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="346.33333333333331" y="12" width="6.6666666666666856" height="38"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1156,8 +1156,8 @@ Apartment, Kuwait</string>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GTw-dW-98W">
                                                                                 <rect key="frame" x="0.0" y="150" width="361" height="50"/>
                                                                                 <subviews>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coupon Discount (FIR20)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kut-Zc-qnj" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="8" y="12" width="163.33333333333334" height="38"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coupon Discount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kut-Zc-qnj" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="8" y="12" width="111.66666666666667" height="38"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.80101768090000003" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1165,8 +1165,8 @@ Apartment, Kuwait</string>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400 KD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LHv-lU-jgp" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="302.66666666666669" y="12" width="50.333333333333314" height="38"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LHv-lU-jgp" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="346.33333333333331" y="12" width="6.6666666666666856" height="38"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                                                         <color key="textColor" red="0.83529411760000005" green="0.23137254900000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1200,8 +1200,8 @@ Apartment, Kuwait</string>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400 KD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ToG-TY-ed5" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="302.66666666666669" y="12" width="50.333333333333314" height="38"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ToG-TY-ed5" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="346.33333333333331" y="12" width="6.6666666666666856" height="38"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1233,8 +1233,8 @@ Apartment, Kuwait</string>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400 KD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztL-5K-Syq" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="302.66666666666669" y="12" width="50.333333333333314" height="38"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztL-5K-Syq" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="346.33333333333331" y="12" width="6.6666666666666856" height="38"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1285,8 +1285,8 @@ Apartment, Kuwait</string>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="400 KD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6e0-HJ-Eln" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="302.66666666666669" y="0.0" width="50.333333333333314" height="38"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6e0-HJ-Eln" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="346.33333333333331" y="0.0" width="6.6666666666666856" height="38"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1438,8 +1438,8 @@ Apartment, Kuwait</string>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#12435952652" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ktx-n7-XLz" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="238.66666666666671" y="0.0" width="98.333333333333343" height="12.666666666666666"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ktx-n7-XLz" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="330.33333333333331" y="0.0" width="6.6666666666666856" height="12.666666666666666"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1470,8 +1470,8 @@ Apartment, Kuwait</string>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="02/02/24 at 10:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tx3-ns-WBV" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="223.33333333333334" y="0.0" width="113.66666666666666" height="12.333333333333334"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tx3-ns-WBV" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="330.33333333333331" y="0.0" width="6.6666666666666856" height="12.333333333333334"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1555,8 +1555,8 @@ Apartment, Kuwait</string>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#12435952652" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gy7-rI-SVS" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="238.66666666666671" y="0.0" width="98.333333333333343" height="12.666666666666666"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gy7-rI-SVS" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="330.33333333333331" y="0.0" width="6.6666666666666856" height="12.666666666666666"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1587,8 +1587,8 @@ Apartment, Kuwait</string>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="02/02/24 at 10:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNN-Zx-JsY" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="223.33333333333334" y="0.0" width="113.66666666666666" height="12.333333333333334"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNN-Zx-JsY" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="330.33333333333331" y="0.0" width="6.6666666666666856" height="12.333333333333334"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1672,8 +1672,8 @@ Apartment, Kuwait</string>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#12435952652" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D8O-Zw-BQj" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="238.66666666666671" y="0.0" width="98.333333333333343" height="12.666666666666666"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D8O-Zw-BQj" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="330.33333333333331" y="0.0" width="6.6666666666666856" height="12.666666666666666"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1704,8 +1704,8 @@ Apartment, Kuwait</string>
                                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="02/02/24 at 10:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gkx-iG-pTK" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="223.33333333333334" y="0.0" width="113.66666666666666" height="12.333333333333334"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gkx-iG-pTK" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="330.33333333333331" y="0.0" width="6.6666666666666856" height="12.333333333333334"/>
                                                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1763,7 +1763,7 @@ Apartment, Kuwait</string>
                                                         <rect key="frame" x="0.0" y="1442" width="393" height="121.66666666666674"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reason" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Thu-HX-izc" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                <rect key="frame" x="16" y="20" width="361" height="19.333333333333329"/>
+                                                                <rect key="frame" x="16" y="19.999999999999996" width="361" height="52.666666666666657"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -1772,10 +1772,10 @@ Apartment, Kuwait</string>
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m9O-Vm-y06" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                                <rect key="frame" x="16" y="51.33333333333325" width="361" height="70.333333333333314"/>
+                                                                <rect key="frame" x="16" y="84.666666666666742" width="361" height="37"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lorem ipsum dolor sit amet, consectetur dolor do adipisicing elit, sed do eiusmod tempor elit incididunt et dolore magna." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDe-f1-vxG" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                        <rect key="frame" x="16" y="12.000000000000004" width="329" height="50.333333333333343"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDe-f1-vxG" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                        <rect key="frame" x="16" y="12" width="329" height="17"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -1839,8 +1839,8 @@ Apartment, Kuwait</string>
                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="L" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iD9-f3-my8" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                        <rect key="frame" x="345" y="11.666666666666742" width="8" height="17"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iD9-f3-my8" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                        <rect key="frame" x="346.33333333333331" y="11.666666666666742" width="6.6666666666666856" height="17"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -1905,7 +1905,7 @@ Apartment, Kuwait</string>
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </imageView>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orderImg" translatesAutoresizingMaskIntoConstraints="NO" id="jDt-ME-m4j" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImg" translatesAutoresizingMaskIntoConstraints="NO" id="jDt-ME-m4j" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                                                         <rect key="frame" x="146.66666666666666" y="12" width="68" height="68"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="68" id="a1t-15-MBc"/>
@@ -2238,7 +2238,7 @@ Apartment, Kuwait</string>
                                                                             <constraint firstAttribute="height" constant="20" id="K8A-hG-RJ6"/>
                                                                         </constraints>
                                                                     </imageView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saleem Raza- 142 Block D, Noida" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7Y-eD-b9M" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7Y-eD-b9M" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
                                                                         <rect key="frame" x="43" y="15" width="303" height="17"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <nil key="textColor"/>
@@ -2296,8 +2296,8 @@ Apartment, Kuwait</string>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5nw-98-vHz" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="16" y="51.33333333333303" width="361" height="45"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="299 KD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CD7-5O-4UF" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                        <rect key="frame" x="7.9999999999999964" y="0.0" width="56.666666666666657" height="45"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CD7-5O-4UF" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                        <rect key="frame" x="8" y="0.0" width="7.6666666666666679" height="45"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -2346,8 +2346,8 @@ Apartment, Kuwait</string>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction Id: 124359526" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2v-KG-9B6" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                <rect key="frame" x="224.66666666666663" y="20" width="152.33333333333337" height="14.333333333333336"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2v-KG-9B6" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                <rect key="frame" x="371.33333333333331" y="20" width="5.6666666666666856" height="14.333333333333336"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                 <color key="textColor" red="0.43137254899999999" green="0.27058823529999998" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -4392,7 +4392,6 @@ Apartment, Kuwait</string>
         <image name="leftVector" width="9.6666669845581055" height="17.666666030883789"/>
         <image name="mic" width="20" height="20"/>
         <image name="ontheWay" width="29" height="29"/>
-        <image name="orderImg" width="95" height="95"/>
         <image name="paperclip" width="20" height="20"/>
         <image name="rating" width="280" height="40"/>
         <image name="search" width="20" height="20"/>
