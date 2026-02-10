@@ -79,7 +79,7 @@ class AddaddressViewModel: NSObject {
       "mobile": String.getString(hostVC.mobileTF.text),
       "address": String.getString(hostVC.addressTF.text),
       "house_no": String.getString(hostVC.houseNoTF.text),
-      "street_no": String.getString(hostVC.streetTF.text),
+//      "street_no": String.getString(hostVC.streetTF.text),
       "postal_code": String.getString(hostVC.postalCodeTF.text),
       "city": String.getString(hostVC.cityTF.text),
       "state": String.getString(hostVC.stateTF.text),

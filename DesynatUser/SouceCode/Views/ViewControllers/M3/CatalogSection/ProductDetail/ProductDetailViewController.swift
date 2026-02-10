@@ -9,6 +9,7 @@ import UIKit
 
 class ProductDetailViewController: UIViewController {
     
+    @IBOutlet weak var noDataFoundLabel: UILabel!
     @IBOutlet weak var separtaorInPriceLabel: UILabel!
     @IBOutlet weak var totalItemsInBagLabel: UILabel!
     @IBOutlet weak var womenDeatilsBottomLabel: UILabel!
@@ -345,6 +346,7 @@ class ProductDetailViewController: UIViewController {
         sizeCollectionView.reloadData()
         productImageCollectionView.reloadData()
         ratingsTableView.reloadData()
+        
         let wishlist = productDetails?.wishlist ?? 1
         if wishlist == 1 {
             wishlistButtonOutlet.setImage(UIImage(systemName: "heart.fill"), for: .normal)

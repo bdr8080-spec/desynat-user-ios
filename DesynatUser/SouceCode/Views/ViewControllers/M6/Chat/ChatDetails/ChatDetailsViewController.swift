@@ -228,23 +228,17 @@ class ChatDetailsViewController: UIViewController {
             let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,
             let curveRaw = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt
         else { return }
-        
         let keyboardHeight = keyboardFrame.height - view.safeAreaInsets.bottom
         let inputViewHeight = messageTF.superview?.bounds.height ?? 0
         let curve = UIView.AnimationOptions(rawValue: curveRaw << 16)
-        
         UIView.animate(withDuration: duration, delay: 0, options: curve) {
-            
-            // 1️⃣ Move input view above keyboard (inverted constraint)
+            // Move input view above keyboard (inverted constraint)
             self.baseBottomConstraint.constant = -keyboardHeight - 15
-            
-            // 2️⃣ ScrollView inset = input view height ONLY
+            // ScrollView inset = input view height ONLY
             self.baseScrollView.contentInset.bottom = inputViewHeight
             self.baseScrollView.verticalScrollIndicatorInsets.bottom = inputViewHeight
-            
             self.view.layoutIfNeeded()
         }
-        
         scrollToBottom()
     }
     
@@ -288,7 +282,6 @@ class ChatDetailsViewController: UIViewController {
     
     private func updateNoChatUI() {
         let hasChats = !chatList.isEmpty
-        //    noChatFoundLabel.isHidden = hasChats
         chatDetailsTableView.isHidden = !hasChats
     }
     

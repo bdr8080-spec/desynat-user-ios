@@ -875,9 +875,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yhF-Pa-lQk">
-                                <rect key="frame" x="0.0" y="150.66666666666666" width="393" height="458.33333333333337"/>
+                                <rect key="frame" x="0.0" y="150.66666666666666" width="393" height="458.33333333333326"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QlT-Cw-HBc">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QlT-Cw-HBc">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="857"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HcY-lF-35B">
@@ -1304,7 +1304,7 @@
                                         </constraints>
                                     </view>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="or2-jE-djv">
-                                        <rect key="frame" x="80.333333333333329" y="278" width="232.66666666666669" height="45"/>
+                                        <rect key="frame" x="80.333333333333329" y="511" width="232.66666666666669" height="45"/>
                                         <string key="text">There is nothing in your bag. 
 Let's add some items. </string>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
@@ -1322,7 +1322,7 @@ Let's add some items. </string>
                                 <viewLayoutGuide key="contentLayoutGuide" id="yt4-pz-w4K"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="uA5-Kc-WAs"/>
                             </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yOf-2M-FON">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yOf-2M-FON">
                                 <rect key="frame" x="0.0" y="609" width="393" height="110"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Lam-Vt-kYc">
@@ -1528,10 +1528,10 @@ Let's add some items. </string>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hms-n1-XMj">
-                                <rect key="frame" x="0.0" y="140" width="393" height="644"/>
+                                <rect key="frame" x="0.0" y="140" width="393" height="564"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EUj-JO-tNl">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="905"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="825"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tfW-AN-P6M" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="5" width="353" height="133"/>
@@ -1577,7 +1577,7 @@ Let's add some items. </string>
                                                                                 </connections>
                                                                             </button>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gift Cards" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjh-Dj-suT">
-                                                                                <rect key="frame" x="35.333333333333329" y="10.666666666666659" width="80.999999999999986" height="22.666666666666671"/>
+                                                                                <rect key="frame" x="35.333333333333329" y="10.666666666666659" width="81" height="22.666666666666671"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -1839,7 +1839,7 @@ Let's add some items. </string>
                                             <constraint firstItem="EvQ-wz-kcR" firstAttribute="top" secondItem="3yT-it-Ruc" secondAttribute="bottom" constant="25" id="kip-fQ-KuH"/>
                                             <constraint firstItem="tfW-AN-P6M" firstAttribute="leading" secondItem="EUj-JO-tNl" secondAttribute="leading" constant="20" id="lDz-sJ-2ao"/>
                                             <constraint firstItem="3yT-it-Ruc" firstAttribute="leading" secondItem="EUj-JO-tNl" secondAttribute="leading" id="mXx-OY-Afa"/>
-                                            <constraint firstAttribute="bottom" secondItem="RpC-8r-LuJ" secondAttribute="bottom" constant="100" id="qZx-pe-MkF"/>
+                                            <constraint firstAttribute="bottom" secondItem="RpC-8r-LuJ" secondAttribute="bottom" constant="20" id="qZx-pe-MkF"/>
                                             <constraint firstItem="3yT-it-Ruc" firstAttribute="top" secondItem="tfW-AN-P6M" secondAttribute="bottom" constant="10" id="tEF-0e-Khc"/>
                                             <constraint firstItem="EvQ-wz-kcR" firstAttribute="trailing" secondItem="RpC-8r-LuJ" secondAttribute="trailing" id="uBd-4o-Jp0"/>
                                             <constraint firstItem="tfW-AN-P6M" firstAttribute="top" secondItem="EUj-JO-tNl" secondAttribute="top" constant="5" id="wHy-qK-yfX"/>
@@ -1861,7 +1861,7 @@ Let's add some items. </string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="BND-FN-JYh" firstAttribute="top" secondItem="bjZ-av-uG2" secondAttribute="top" id="Izl-1G-QvK"/>
-                            <constraint firstItem="hms-n1-XMj" firstAttribute="bottom" secondItem="vcn-iE-mHx" secondAttribute="bottom" id="UVe-sF-cJN"/>
+                            <constraint firstItem="hms-n1-XMj" firstAttribute="bottom" secondItem="vcn-iE-mHx" secondAttribute="bottom" constant="-80" id="UVe-sF-cJN"/>
                             <constraint firstItem="BND-FN-JYh" firstAttribute="trailing" secondItem="vcn-iE-mHx" secondAttribute="trailing" id="Um5-At-qVN"/>
                             <constraint firstItem="hms-n1-XMj" firstAttribute="leading" secondItem="vcn-iE-mHx" secondAttribute="leading" id="WB6-jp-w7k"/>
                             <constraint firstItem="BND-FN-JYh" firstAttribute="leading" secondItem="vcn-iE-mHx" secondAttribute="leading" id="h9l-18-0lp"/>

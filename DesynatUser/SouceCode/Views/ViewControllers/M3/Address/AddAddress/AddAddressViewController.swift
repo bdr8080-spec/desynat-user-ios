@@ -37,16 +37,10 @@ class AddAddressViewController: UIViewController {
     private lazy var viewModel = AddaddressViewModel(hostVC: self)
     private var dropdown: CustomDropdown?
     private var overlayView: UIView?
-    //  private var selectedCountry: GetAllUserCountryModel? {
-    //      didSet {
-    //          updateCountryCodeField()
-    //      }
-    //  }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initialUserSetup()
-        //    viewModel.countryListApi()
         viewModel.getALlUserCountryListApi()
         [nameTF, countryNameTF, mobileTF, addressTF, landMarkTF,
          cityTF, stateTF, houseNoTF, postalCodeTF, streetTF, countryCodeTF]
@@ -64,29 +58,6 @@ class AddAddressViewController: UIViewController {
             prefillData()
         }
     }
-    
-    //  private func updateCountryCodeField() {
-    //      guard let country = selectedCountry else { return }
-    //
-    //      countryCodeTF.text = country.dialCode
-    //
-    //      // Optional: Show country name next to code or in another field
-    //      // countryNameTF.text = country.name
-    //
-    ////      if let flagURLString = country.flag, let url = URL(string: flagURLString) {
-    ////          let flagView = UIImageView()
-    ////          flagView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "flag.fill"))
-    ////          flagView.contentMode = .scaleAspectFit
-    ////          flagView.frame = CGRect(x: 0, y: 0, width: 30, height: 20)
-    ////
-    ////          let container = UIView(frame: CGRect(x: 0, y: 0, width: 45, height: 30))
-    ////          container.addSubview(flagView)
-    ////          flagView.center = container.center
-    ////
-    ////          countryCodeTF.leftView = container
-    ////          countryCodeTF.leftViewMode = .always
-    ////      }
-    //  }
     
     @IBAction func officeDidTapped(_ sender: Any) {
         officeLabel.textColor = UIColor.darkBrown
@@ -163,7 +134,6 @@ class AddAddressViewController: UIViewController {
     
     
     @IBAction func countyrCodeDidTapped(_ sender: UIButton) {
-        //    showCountryCodeDropdown(anchorView: sender)
         let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
             let name = country.name ?? ""
             let dialCode = country.dialCode ?? ""
@@ -175,7 +145,6 @@ class AddAddressViewController: UIViewController {
             let selectedCountry = self.viewModel.getAllUSerCountryList[index]
             let code = selectedCountry.dialCode ?? "+965"
             self.countryCodeTF.text = code
-            //        self.selectedCountry = code
         }
     }
     

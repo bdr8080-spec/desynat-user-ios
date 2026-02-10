@@ -115,7 +115,7 @@ class MyOrderDetailVC: UIViewController {
     var isCustomOrder: Bool = false
     var orderId: Int?
     var orderDetailId: Int?
-    var selectedPromoCode: PromocodeApplied?
+//    var selectedPromoCode: PromocodeApplied?
     lazy var stepImages: [StepImage] = [
         StepImage(selected: "confirmedOrder", unselected: "confirmedOrder"),
         StepImage(selected: "shippedDone", unselected: "shipped"),
@@ -303,18 +303,24 @@ class MyOrderDetailVC: UIViewController {
             lblReturnAvail.text = "No return available"
         }
         
-        if let selected = selectedPromoCode {
+        if data.order?.promocodeID != nil {
+//        if let selected = selectedPromoCode {
             couponDiscountView.isHidden = false
-            lblCouponDis.text = CommonUtils.formatPrice(selected.applyDiscountValue)
-            lblTotalAmount.text = CommonUtils.formatPrice(selected.finalAmount)
-            totalPaidAmount = lblTotalAmount.text
+            lblSavedAmount.isHidden = false
+            lblCouponDis.text = CommonUtils.formatPriceStringInput(data.order?.promocodeValue ?? "")
+//            lblTotalAmount.text = CommonUtils.formatPrice(selected.finalAmount)
+//            totalPaidAmount = lblTotalAmount.text
+            let discountMrp = Double(data.order?.discountMrp ?? "0") ?? 0.0
+            let promoValue = Double(data.order?.promocodeValue ?? "0") ?? 0.0
+            let discountValue = discountMrp + promoValue
+            lblSavedAmount.text = "You saved \(CommonUtils.formatPrice(discountValue)) on this"
         } else {
             couponDiscountView.isHidden = true
-            lblCouponDis.text = "0"
-            lblTotalAmount.text = CommonUtils.formatPrice(Double(data.order?.totalAmount ?? "0"))
-            let savingAmount = Double(data.order?.discountMrp ?? "0")
-            totalPaidAmount = lblTotalAmount.text
-            lblSavedAmount.text = "You saved \(CommonUtils.formatPrice(savingAmount)) on this"
+            lblSavedAmount.text = "You saved \(CommonUtils.formatPriceStringInput(data.order?.discountMrp ?? "0")) on this"
+//            lblTotalAmount.text = CommonUtils.formatPrice(Double(data.order?.totalAmount ?? "0"))
+//            let savingAmount = Double(data.order?.discountMrp ?? "0")
+//            totalPaidAmount = lblTotalAmount.text
+//            lblSavedAmount.text = "You saved \(CommonUtils.formatPrice(savingAmount)) on this"
         }
         
         let selectedAddress = data.order?.deliveryDetails

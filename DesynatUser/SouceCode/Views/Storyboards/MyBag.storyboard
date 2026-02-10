@@ -898,7 +898,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="789-Wv-47b" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                <rect key="frame" x="24" y="431.33333333333331" width="345" height="44.666666666666686"/>
+                                <rect key="frame" x="24" y="431.33333333333331" width="345" height="67"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="currentLocation" translatesAutoresizingMaskIntoConstraints="NO" id="WIm-G9-BDI">
                                         <rect key="frame" x="18" y="15" width="30" height="30"/>
@@ -907,17 +907,14 @@
                                             <constraint firstAttribute="height" constant="30" id="wS2-cv-y3E"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0iZ-P6-5tz">
-                                        <rect key="frame" x="60" y="15.000000000000002" width="261" height="19.666666666666671"/>
-                                        <string key="text" base64-UTF8="YES">
-IAogA
-</string>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0iZ-P6-5tz">
+                                        <rect key="frame" x="60" y="15" width="261" height="30"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4S2-Cn-5lY">
-                                        <rect key="frame" x="60" y="39.666666666666686" width="261" height="0.0"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4S2-Cn-5lY">
+                                        <rect key="frame" x="60" y="45" width="261" height="17"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -930,9 +927,10 @@ IAogA
                                     <constraint firstAttribute="bottom" secondItem="4S2-Cn-5lY" secondAttribute="bottom" constant="5" id="3B5-Mi-rye"/>
                                     <constraint firstItem="0iZ-P6-5tz" firstAttribute="top" secondItem="789-Wv-47b" secondAttribute="top" constant="15" id="6H3-a5-lod"/>
                                     <constraint firstItem="WIm-G9-BDI" firstAttribute="top" secondItem="789-Wv-47b" secondAttribute="top" constant="15" id="I5Q-eT-JGu"/>
-                                    <constraint firstItem="4S2-Cn-5lY" firstAttribute="top" secondItem="0iZ-P6-5tz" secondAttribute="bottom" constant="5" id="Z1h-pN-XJ5"/>
+                                    <constraint firstItem="4S2-Cn-5lY" firstAttribute="top" secondItem="0iZ-P6-5tz" secondAttribute="bottom" id="Z1h-pN-XJ5"/>
                                     <constraint firstAttribute="trailing" secondItem="0iZ-P6-5tz" secondAttribute="trailing" constant="24" id="fYn-2B-70Q"/>
                                     <constraint firstItem="0iZ-P6-5tz" firstAttribute="leading" secondItem="WIm-G9-BDI" secondAttribute="trailing" constant="12" id="kzz-lv-6W0"/>
+                                    <constraint firstItem="WIm-G9-BDI" firstAttribute="centerY" secondItem="0iZ-P6-5tz" secondAttribute="centerY" id="pnK-Nu-FaZ"/>
                                     <constraint firstItem="0iZ-P6-5tz" firstAttribute="trailing" secondItem="4S2-Cn-5lY" secondAttribute="trailing" id="w3F-Yg-Th0"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -948,7 +946,7 @@ IAogA
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7gS-h5-9qT" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                <rect key="frame" x="24" y="496" width="345" height="48"/>
+                                <rect key="frame" x="24" y="518.33333333333337" width="345" height="48"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ff1-Fs-iWm">
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="48"/>
@@ -962,7 +960,7 @@ IAogA
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track your Order" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWo-HS-zWy">
-                                        <rect key="frame" x="20.000000000000007" y="14.333333333333316" width="117.66666666666669" height="19.666666666666671"/>
+                                        <rect key="frame" x="20.000000000000007" y="14.333333333333259" width="117.66666666666669" height="19.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                         <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1071,7 +1069,7 @@ IAogA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g92-am-y8J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5312" y="1437"/>
+            <point key="canvasLocation" x="5259" y="1437"/>
         </scene>
         <!--Use Gift Cards View Controller-->
         <scene sceneID="cy0-Ys-DRE">
@@ -1337,7 +1335,7 @@ IAogA
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

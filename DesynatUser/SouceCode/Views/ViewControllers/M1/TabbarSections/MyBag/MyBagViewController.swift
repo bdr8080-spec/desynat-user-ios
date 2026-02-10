@@ -164,8 +164,8 @@ class MyBagViewController: UIViewController {
         nextVC.comingFromBag = true
         nextVC.onAddressSelected = { [weak self] selectedAddress in
             self?.deliveryId = selectedAddress.id ?? 0
-            let addressLine = "\(selectedAddress.name ?? "")-\(selectedAddress.houseNo ?? ""), \(selectedAddress.streetNo ?? ""), \(selectedAddress.city ?? ""), \(selectedAddress.state ?? ""), \(selectedAddress.countryName ?? "")-\(selectedAddress.postalCode ?? "")"
-            self?.addressLabel.text = addressLine
+//            let addressLine = "\(selectedAddress.name ?? "")-\(selectedAddress.houseNo ?? ""), \(selectedAddress.streetNo ?? ""), \(selectedAddress.city ?? ""), \(selectedAddress.state ?? ""), \(selectedAddress.countryName ?? "")-\(selectedAddress.postalCode ?? "")"
+            self?.addressLabel.text = self?.formattedAddress(from: selectedAddress)//addressLine
         }
         self.navigationController?.pushViewController(nextVC, animated: false)
     }
@@ -199,8 +199,8 @@ class MyBagViewController: UIViewController {
         }
         let selectedAddress = data.userAddress
         deliveryId = selectedAddress?.id ?? 0
-        let addressLine = "\(selectedAddress?.name ?? "")-\(selectedAddress?.houseNo ?? ""), \(selectedAddress?.streetNo ?? ""), \(selectedAddress?.city ?? ""), \(selectedAddress?.state ?? ""), \(selectedAddress?.countryName ?? "")-\(selectedAddress?.postalCode ?? "")"
-        addressLabel.text = addressLine
+//        let addressLine = "\(selectedAddress?.name ?? "")-\(selectedAddress?.houseNo ?? ""), \(selectedAddress?.streetNo ?? ""), \(selectedAddress?.city ?? ""), \(selectedAddress?.state ?? ""), \(selectedAddress?.countryName ?? "")-\(selectedAddress?.postalCode ?? "")"
+        addressLabel.text = formattedAddress(from: data.userAddress)//addressLine
         shippingFeeLabel.text = formatPrice(data.shippingFees)
         taxLabel.text = formatPrice(data.tax)
         totalAmount = data.totalAmount ?? 0
@@ -291,6 +291,36 @@ class MyBagViewController: UIViewController {
             return String(format: "%.2f", roundedAmount) + " \(currency)"
         }
     }
+    
+    func formattedAddress(from address: SavedAddressList?) -> String {
+        guard let address else { return "" }
+
+        let nameAndHouse = [
+            address.name,
+            address.houseNo
+        ].compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }
+         .filter { !$0.isEmpty }
+         .joined(separator: "-")
+
+        let mainParts = [
+            nameAndHouse,
+            address.streetNo,
+            address.city,
+            address.state,
+            address.countryName
+        ].compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }
+         .filter { !$0.isEmpty }
+
+        var result = mainParts.joined(separator: ", ")
+
+        if let postalCode = address.postalCode,
+           !postalCode.trimmingCharacters(in: .whitespaces).isEmpty {
+            result += " - \(postalCode)"
+        }
+
+        return result
+    }
+
     
 }
 
