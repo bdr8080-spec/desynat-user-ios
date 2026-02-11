@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Medium.ttf">
+            <string>Poppins-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="AffiliatedCategoriesCollectionViewCell" customModule="DesynatUser" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="120" height="226"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="120" height="226"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wgj-Pk-x8g">
+                        <rect key="frame" x="0.0" y="0.0" width="120" height="226"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xRU-1J-jYC" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="120" height="100"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dress" translatesAutoresizingMaskIntoConstraints="NO" id="hFL-hf-k9v" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="10" width="100" height="90"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="OpL-R6-YAD"/>
+                                    <constraint firstItem="hFL-hf-k9v" firstAttribute="centerX" secondItem="xRU-1J-jYC" secondAttribute="centerX" id="R1R-Pd-1re"/>
+                                    <constraint firstAttribute="bottom" secondItem="hFL-hf-k9v" secondAttribute="bottom" id="Yo2-l0-i3T"/>
+                                    <constraint firstItem="hFL-hf-k9v" firstAttribute="top" secondItem="xRU-1J-jYC" secondAttribute="top" constant="10" id="zql-Ld-my0"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" name="darkBrown"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Abaya" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="euq-nF-3AH">
+                                <rect key="frame" x="0.0" y="106" width="120" height="19.666666666666671"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="xRU-1J-jYC" firstAttribute="top" secondItem="Wgj-Pk-x8g" secondAttribute="top" id="7qZ-TK-YH4"/>
+                            <constraint firstAttribute="trailing" secondItem="xRU-1J-jYC" secondAttribute="trailing" id="8WX-1o-T7e"/>
+                            <constraint firstItem="euq-nF-3AH" firstAttribute="top" secondItem="xRU-1J-jYC" secondAttribute="bottom" constant="6" id="AJx-rc-F01"/>
+                            <constraint firstItem="euq-nF-3AH" firstAttribute="trailing" secondItem="xRU-1J-jYC" secondAttribute="trailing" id="GAd-tj-LWh"/>
+                            <constraint firstItem="euq-nF-3AH" firstAttribute="leading" secondItem="xRU-1J-jYC" secondAttribute="leading" id="UoV-7n-j5t"/>
+                            <constraint firstItem="xRU-1J-jYC" firstAttribute="leading" secondItem="Wgj-Pk-x8g" secondAttribute="leading" id="VPL-pr-ezS"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="euq-nF-3AH" secondAttribute="bottom" constant="10" id="fdL-Yr-sKn"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Wgj-Pk-x8g" secondAttribute="bottom" id="5W3-qa-nwz"/>
+                <constraint firstItem="Wgj-Pk-x8g" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="89x-to-MJP"/>
+                <constraint firstAttribute="trailing" secondItem="Wgj-Pk-x8g" secondAttribute="trailing" id="BwU-ti-HPp"/>
+                <constraint firstItem="Wgj-Pk-x8g" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="sIn-M3-aDw"/>
+            </constraints>
+            <connections>
+                <outlet property="mainBackgroundView" destination="xRU-1J-jYC" id="Fxb-GN-meY"/>
+                <outlet property="mainImageView" destination="hFL-hf-k9v" id="UVG-K4-46i"/>
+                <outlet property="titleLabel" destination="euq-nF-3AH" id="wwx-pt-zkW"/>
+            </connections>
+            <point key="canvasLocation" x="37" y="-11"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="dress" width="100" height="100"/>
+        <namedColor name="darkBrown">
+            <color red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

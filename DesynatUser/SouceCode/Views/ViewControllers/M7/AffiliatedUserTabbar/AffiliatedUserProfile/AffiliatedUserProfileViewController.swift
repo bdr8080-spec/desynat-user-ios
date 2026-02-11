@@ -8,7 +8,7 @@
 import UIKit
 
 class AffiliatedUserProfileViewController: UIViewController {
-
+    
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var userProfileImageView: CustomImageView!
@@ -40,7 +40,7 @@ class AffiliatedUserProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-            viewModel.getUserData()
+        viewModel.getUserData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -55,18 +55,16 @@ class AffiliatedUserProfileViewController: UIViewController {
     }
     
     @IBAction func btnTapLogout(_ sender: UIButton) {
-            self.showConfirmationAlert(msg: "Are you sure you want to logout?"){ [weak self] in
-                guard let self = self else { return }
-                self.viewModel.logoutAPI()
-            }
+        self.showConfirmationAlert(msg: "Are you sure you want to logout?"){ [weak self] in
+            guard let self = self else { return }
+            self.viewModel.logoutAPI()
+        }
     }
-    
     
     @IBAction func pencilButtonAction(_ sender: Any) {
-//            let vc = ProfileDetailsViewController.instantiate(fromAppStoryboard: .Profile)
-//            self.navigationController?.pushViewController(vc, animated: false)
+        let vc = AffiliatedProfileDetailsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+        self.navigationController?.pushViewController(vc, animated: false)
     }
-    
     
 }
 
@@ -84,42 +82,42 @@ extension AffiliatedUserProfileViewController: UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            let selectedItem = sideMenuData[indexPath.row].title
+        let selectedItem = sideMenuData[indexPath.row].title
+        
+        switch selectedItem {
+        case "My Withdrawals":
+            print("✅ Selected: My Wallet")
             
-            switch selectedItem {
-            case "My Withdrawals":
-                print("✅ Selected: My Wallet")
-                
-            case "Terms & Condition":
-                print("✅ Selected: Terms & Condition")
-                
-            case "About Us":
-                print("✅ Selected: About Us")
-                
-            case "FAQ's":
-                print("✅ Selected: FAQ's")
-                
-            case "Change Language":
-                print("✅ Selected: Change Language")
-                
-            case "Change Currency":
-                print("✅ Selected: Change Currency")
-                
-            case "Change Country":
-                print("✅ Selected: Change Country")
-                
-            case "Support":
-                print("✅ Selected: Support")
-                
-            case "Settings":
-                print("✅ Selected: Settings")
-                
-            default:
-                print("⚠️ Unknown option selected: \(selectedItem)")
-            }
+        case "Terms & Condition":
+            print("✅ Selected: Terms & Condition")
             
-            // Deselect the row
-            tableView.deselectRow(at: indexPath, animated: true)
+        case "About Us":
+            print("✅ Selected: About Us")
+            
+        case "FAQ's":
+            print("✅ Selected: FAQ's")
+            
+        case "Change Language":
+            print("✅ Selected: Change Language")
+            
+        case "Change Currency":
+            print("✅ Selected: Change Currency")
+            
+        case "Change Country":
+            print("✅ Selected: Change Country")
+            
+        case "Support":
+            print("✅ Selected: Support")
+            
+        case "Settings":
+            print("✅ Selected: Settings")
+            
+        default:
+            print("⚠️ Unknown option selected: \(selectedItem)")
+        }
+        
+        // Deselect the row
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

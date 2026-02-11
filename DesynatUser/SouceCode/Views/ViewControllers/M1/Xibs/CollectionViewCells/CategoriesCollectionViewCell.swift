@@ -32,4 +32,6 @@ class CategoriesCollectionViewCell: UICollectionViewCell {
     }
     
     
+    
+    
 }

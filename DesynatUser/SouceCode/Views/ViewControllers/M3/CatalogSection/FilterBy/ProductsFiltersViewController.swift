@@ -72,7 +72,7 @@ class ProductsFiltersViewController: UIViewController {
       let options = viewModel.getAllCategoriesList.map {
           ProductFilterOption(
               title: $0.name ?? "",
-              isSelected: selectedCategoryIDs.contains("\($0.id ?? 0)"), // ✅ important
+              isSelected: selectedCategoryIDs.contains("\($0.id ?? 0)"), // important
               apiParcing: "\($0.id ?? 0)",
               havingColourCode: false,
               colourCode: ""
@@ -86,7 +86,7 @@ class ProductsFiltersViewController: UIViewController {
       let options = viewModel.getAllBrandsList.map {
           ProductFilterOption(
               title: $0.nameEnglish ?? "",
-              isSelected: selectedBrandIDs.contains("\($0.id ?? 0)"), // ✅ important
+              isSelected: selectedBrandIDs.contains("\($0.id ?? 0)"), // important
               apiParcing: "\($0.id ?? 0)",
               havingColourCode: false,
               colourCode: ""
@@ -100,7 +100,7 @@ class ProductsFiltersViewController: UIViewController {
       let options = viewModel.getAllColorsList.map {
           ProductFilterOption(
               title: $0.name ?? "",
-              isSelected: selectedColorIDs.contains("\($0.id ?? 0)"), // ✅ important
+              isSelected: selectedColorIDs.contains("\($0.id ?? 0)"), // important
               apiParcing: "\($0.id ?? 0)",
               havingColourCode: true,
               colourCode: $0.hexCode ?? "#000000"
@@ -114,7 +114,7 @@ class ProductsFiltersViewController: UIViewController {
       let options = viewModel.getAllSizesList.map {
           ProductFilterOption(
               title: $0.name ?? "",
-              isSelected: selectedSizeIDs.contains("\($0.id ?? 0)"), // ✅ important
+              isSelected: selectedSizeIDs.contains("\($0.id ?? 0)"), // important
               apiParcing: "\($0.id ?? 0)",
               havingColourCode: false,
               colourCode: ""

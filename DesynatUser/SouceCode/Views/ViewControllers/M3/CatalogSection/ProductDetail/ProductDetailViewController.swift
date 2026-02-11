@@ -54,37 +54,31 @@ class ProductDetailViewController: UIViewController {
             productImageCollectionView.registerCellFromNib(cellID: "ProductDetailImageCollectionViewCell")
         }
     }
-    
     @IBOutlet weak var colorsCollectionView: UICollectionView! {
         didSet {
             colorsCollectionView.registerCellFromNib(cellID: "ColorsCollectionViewCell")
         }
     }
-    
     @IBOutlet weak var sizeCollectionView: UICollectionView! {
         didSet {
             sizeCollectionView.registerCellFromNib(cellID: "SizeVariantCollectionViewCell")
         }
     }
-    
     @IBOutlet weak var specificationTableView: UITableView! {
         didSet {
             specificationTableView.registerCellFromNib(cellID: "ListTableViewCell")
         }
     }
-    
     @IBOutlet weak var checkDeliveryTableView: UITableView! {
         didSet {
             checkDeliveryTableView.registerCellFromNib(cellID: "FiltersOptionsTableViewCell")
         }
     }
-    
     @IBOutlet weak var ratingsTableView: UITableView! {
         didSet {
             ratingsTableView.registerCellFromNib(cellID: "ProductRatingTableViewCell")
         }
     }
-    
     @IBOutlet weak var similarProductCollectionView: UICollectionView! {
         didSet {
             similarProductCollectionView.registerCellFromNib(cellID: "BestSellingsCollectionViewCell")
@@ -98,8 +92,7 @@ class ProductDetailViewController: UIViewController {
     private var selectedSizeIndex = 0
     private var checkDelivery: [CheckDeliveryModel] = [CheckDeliveryModel(image: "calender", title: "Get it by 24/12/2024"),
                                                        CheckDeliveryModel(image: "cashOnDelivery", title: "Cash on Delivery Available"),
-                                                       CheckDeliveryModel(image: "returnExchamge", title: "7 Days Return & 5 days Exchange"),
-    ]
+                                                       CheckDeliveryModel(image: "returnExchamge", title: "7 Days Return & 5 days Exchange")]
     var quantity = 0
     var uniqueColors: [Color] = []
     var filteredVariants: [ProductVariant] = []
@@ -302,7 +295,7 @@ class ProductDetailViewController: UIViewController {
                                                   discountValue: variants.first?.discountValue)
         
         descriptionLabel.text = productDetails?.descriptionEn
-        // 1️⃣ Get unique colors
+        // Get unique colors
         uniqueColors = Array(
             Dictionary(grouping: variants, by: { $0.color?.id })
                 .compactMap { $0.value.first?.color }
@@ -335,9 +328,7 @@ class ProductDetailViewController: UIViewController {
             womenDeatilsBottomLabel.isHidden = true
         }
         
-        
-        
-        // 2️⃣ Default selected color = first color
+        // Default selected color = first color
         selectedColourIndex = 0
         filterVariantsForSelectedColor()
         
