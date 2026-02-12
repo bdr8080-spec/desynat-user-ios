@@ -155,6 +155,22 @@ class CommonUtils {
         label.attributedText = attributeString
     }
     
+    static func formatTax(_ tax: Double?) -> String {
+        if tax == 0 {
+            return "Free"
+        } else {
+            return formatPrice(tax) // Assuming formatPrice(_:) returns a formatted string like "$10.00"
+        }
+    }
+    
+    static func formatDeliveryCharges(_ deliveryFees: Double?) -> String {
+        if deliveryFees == 0 {
+            return "Free Delivery"
+        } else {
+            return formatPrice(deliveryFees) // Assuming formatPrice(_:) returns a formatted string like "$10.00"
+        }
+    }
+    
     static func formatDate(from dateString: String) -> String? {
         let inputFormatter = ISO8601DateFormatter()
         inputFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]

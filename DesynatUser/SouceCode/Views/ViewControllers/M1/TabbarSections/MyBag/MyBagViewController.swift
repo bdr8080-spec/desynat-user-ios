@@ -201,8 +201,8 @@ class MyBagViewController: UIViewController {
         deliveryId = selectedAddress?.id ?? 0
 //        let addressLine = "\(selectedAddress?.name ?? "")-\(selectedAddress?.houseNo ?? ""), \(selectedAddress?.streetNo ?? ""), \(selectedAddress?.city ?? ""), \(selectedAddress?.state ?? ""), \(selectedAddress?.countryName ?? "")-\(selectedAddress?.postalCode ?? "")"
         addressLabel.text = formattedAddress(from: data.userAddress)//addressLine
-        shippingFeeLabel.text = formatPrice(data.shippingFees)
-        taxLabel.text = formatPrice(data.tax)
+        shippingFeeLabel.text = CommonUtils.formatDeliveryCharges(data.shippingFees)//formatPrice(data.shippingFees)
+        taxLabel.text = formatPrice(data.tax)//CommonUtils.formatTax(data.tax)//
         totalAmount = data.totalAmount ?? 0
         CommonUtils.setStrikethrough(label: actualPriceLAbel, text: formatPrice(data.totalMrp))
         let customOrderCount = viewModel.customOrders.count

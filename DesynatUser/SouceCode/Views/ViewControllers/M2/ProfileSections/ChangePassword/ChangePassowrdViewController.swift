@@ -9,7 +9,6 @@ import UIKit
 
 class ChangePassowrdViewController: UIViewController {
     
-    
     @IBOutlet weak var txtOldPassword: UITextField!
     @IBOutlet weak var txtNewPass: UITextField!
     @IBOutlet weak var txtConfirmPass: UITextField!
