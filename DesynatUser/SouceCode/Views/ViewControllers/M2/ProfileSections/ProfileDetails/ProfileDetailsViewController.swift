@@ -50,6 +50,7 @@ class ProfileDetailsViewController: UIViewController {
     
     @IBAction func changePasswordBtnAction(_ sender: Any) {
         let vc = ChangePassowrdViewController.instantiate(fromAppStoryboard: .Profile)
+        vc.comingReason = .fromNormalUser
         self.navigationController?.pushViewController(vc, animated: false)
     }
     

@@ -9,6 +9,12 @@ import UIKit
 
 class BankAccountsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var mainImageView: UIImageView!
+    
+    var editButtonAction: (() -> Void)?
+    var deleteButtonAction: (() -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -18,6 +24,14 @@ class BankAccountsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @IBAction func editDidTapped(_ sender: Any) {
+        editButtonAction?()
+    }
+    
+    @IBAction func deleteDidTapped(_ sender: Any) {
+        deleteButtonAction?()
     }
     
 }

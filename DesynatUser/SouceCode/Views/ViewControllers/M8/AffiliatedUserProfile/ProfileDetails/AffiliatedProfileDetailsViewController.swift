@@ -23,6 +23,9 @@ class AffiliatedProfileDetailsViewController: UIViewController {
             bankAccountTableView.registerCellFromNib(cellID: "BankAccountsTableViewCell")
         }
     }
+    
+    private var selectedCardIndex = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         selectTab(.personal)
@@ -58,7 +61,15 @@ class AffiliatedProfileDetailsViewController: UIViewController {
     }
     
     @IBAction func changePasswordDidTapped(_ sender: Any) {
-        
+        let vc = ChangePassowrdViewController.instantiate(fromAppStoryboard: .Profile)
+        vc.comingReason = .fromAffiliatedUser
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    @IBAction func addAnotherAccountDidTapped(_ sender: Any) {
+        let nextVC = AddAccountViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+        nextVC.comingForEdit = false
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     private func selectTab(_ tab: ProfileTab) {
@@ -98,7 +109,28 @@ extension AffiliatedProfileDetailsViewController: UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BankAccountsTableViewCell", for: indexPath) as! BankAccountsTableViewCell
+        cell.editButtonAction = { [weak self] in
+            let nextVC = AddAccountViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+            nextVC.comingForEdit = true
+            self?.navigationController?.pushViewController(nextVC, animated: true)
+        }
+        cell.deleteButtonAction = { [weak self] in
+            self?.showConfirmationAlert(msg: "Are you sure you want to delete this account?"){ [weak self] in
+                guard let self = self else { return }
+                // CALL API HERE
+            }
+        }
+        if selectedCardIndex == indexPath.row {
+            cell.mainImageView.image = .radioSelected
+        } else {
+            cell.mainImageView.image = .unselcetdRadioHome
+        }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedCardIndex = indexPath.row
+        bankAccountTableView.reloadData()
     }
     
 }

@@ -44,6 +44,8 @@ class RegisterationSuccessViewController: UIViewController {
             descriptionLabel.text = "Amount added\nsuccessfully!"
         case .giftCardRedeemed:
             descriptionLabel.text = "Gift Card Redeemed\nsuccessfully!"
+        case .changePasswordForAffiliatedUser:
+            descriptionLabel.text = "Password changed successfully!"
         }
     }
 
@@ -59,4 +61,5 @@ enum ComingReasonAtRegisterationSuccess {
     case quotationSentForCustomization
     case amountAddeddToWallet
     case giftCardRedeemed
+    case changePasswordForAffiliatedUser
 }

@@ -14,6 +14,7 @@ class ChangePassowrdViewController: UIViewController {
     @IBOutlet weak var txtConfirmPass: UITextField!
     
     private lazy var viewModel = ChangePassowrdViewModel(hostVC:self)
+    var comingReason : ComingReasonAtChangPassword = .fromNormalUser
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,8 +52,13 @@ class ChangePassowrdViewController: UIViewController {
             showAlert(msg: "Passwords do not match")
             return
         }
+        switch comingReason {
+        case .fromNormalUser:
+            viewModel.changePasswordApi()
+        case .fromAffiliatedUser:
+            viewModel.changePasswordApiForAffiliatedUser()
+        }
         
-        viewModel.changePasswordApi()
     }
     
     @IBAction func btnTapEyeOldPass(_ sender:UIButton) {
@@ -82,4 +88,9 @@ class ChangePassowrdViewController: UIViewController {
         }
     }
     
+}
+
+enum ComingReasonAtChangPassword {
+    case fromNormalUser
+    case fromAffiliatedUser
 }
