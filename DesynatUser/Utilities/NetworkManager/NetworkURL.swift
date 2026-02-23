@@ -115,6 +115,19 @@ enum NetworkEndPoint: String {
     case CustomOrderAddToCard           = "api/user/custom-order-add-to-card"
     case CustomOrderRemoveFromCard      = "api/user/remove-custom-product-add-to-card"
     
+    
+    //M8
+    case getAffiliateProfile            = "api/affiliate/get_affiliate_profile"
+    case updatedAffiliateProfile        = "api/affiliate/update_affiliate_profile"
+    case updatedAffiliateAddress        = "api/affiliate/update_affiliate_address"
+    case updatedAffiliateBankDetails    = "api/affiliate/update_affiliate_bank_details"
+    case addAffiliateBankDetails        = "api/affiliate/add_affiliate_bank_details"
+    case deleteAffiliateBankDetails     = "api/affiliate/delete_affiliate_bank_account"
+    case updateAffiliateUserPassword    = "api/affiliate/update_affiliate_password"
+    case getAllAffiliateUserProduct     = "api/affiliate/get_all_products"
+    case generateProductLink            = "api/affiliate/generate_product_link"
+    case addProductToMyProducts         = "api/affiliate/add_to_my_products"
+    
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"
     }

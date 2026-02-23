@@ -35,16 +35,15 @@ class ChangePassowrdViewModel:NSObject{
     func changePasswordApiForAffiliatedUser(){
         let param:[String:Any] = [
             "old_password":self.hostVC.txtOldPassword.text ?? "",
-            "new_password":self.hostVC.txtNewPass.text ?? "",
-            "confirm_password":self.hostVC.txtConfirmPass.text ?? ""
-        ]
-//        WebService.sharedInstance.changePasswordService(withParams:param) { user in
+            "password":self.hostVC.txtNewPass.text ?? "",
+            "confirm_password":self.hostVC.txtConfirmPass.text ?? ""]
+        WebService.sharedInstance.changePasswordOfAffilaitedUserService(param: param) { user in
             let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
             vc.comingReason = .changePasswordForAffiliatedUser
             vc.callBackDismiss = {
                 self.hostVC.navigationController?.popViewController(animated: true)
             }
             self.hostVC.navigationController?.present(vc, animated: true)
-//        }
+        }
     }
 }

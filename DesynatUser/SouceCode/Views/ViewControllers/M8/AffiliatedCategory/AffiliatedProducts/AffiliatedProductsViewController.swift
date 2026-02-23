@@ -24,6 +24,10 @@ class AffiliatedProductsViewController: UIViewController {
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
     private var isListening = false
+    private var searchWorkItem: DispatchWorkItem?
+    var categoryId: Int = 0
+    var subCatrgoryId: Int = 0
+    var comingReasonAtAllProducts: ComingReasonAtAllProducts? = .fromCategory
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +36,18 @@ class AffiliatedProductsViewController: UIViewController {
         requestPermissions()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.resetAndFetchProducts()
+    }
+    
     @IBAction func backDidTapped(_ sender: Any) {
-        self.navigationController?.popToViewController(ofType: AffiliatedCategorySearchViewController.self)
+        switch comingReasonAtAllProducts {
+        case .fromCategory:
+            self.navigationController?.popViewController(animated: true)
+        default:
+            self.navigationController?.popToViewController(ofType: AffiliatedCategorySearchViewController.self)
+        }
     }
     
     @IBAction func micDidTapped(_ sender: UIButton) {
@@ -80,7 +94,7 @@ class AffiliatedProductsViewController: UIViewController {
                 let text = result.bestTranscription.formattedString
                 self.searchTF.text = text
                 self.viewModel.searchText = text
-                viewModel.getProductsApi() // live search as user speaks
+                viewModel.resetAndFetchProducts() // live search as user speaks
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     self.stopListening()
                 }
@@ -131,14 +145,15 @@ class AffiliatedProductsViewController: UIViewController {
 
 extension AffiliatedProductsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return viewModel.productDetails.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AffiliatedProductsCollectionViewCell", for: indexPath) as! AffiliatedProductsCollectionViewCell
+        let data = viewModel.productDetails[indexPath.row]
+        cell.configData(data: data)
         cell.onGetLinkTapped = { [weak self] in
-            let nextVC = AffiliatedCopyLinkViewController.instantiate(fromAppStoryboard: .AffiliateUser)
-            self?.navigationController?.present(nextVC, animated: true)
+            self?.viewModel.generateProductLink(productId: data.id ?? 0)
         }
         return cell
     }
@@ -151,17 +166,35 @@ extension AffiliatedProductsViewController: UICollectionViewDelegate, UICollecti
     }
 }
 
+extension AffiliatedProductsViewController: UIScrollViewDelegate {
+  
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView == productsCollectionView else { return }
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.size.height
+        if offsetY > contentHeight - frameHeight - 50 {
+            viewModel.getAllProducts()
+        }
+    }
+    
+}
+
 extension AffiliatedProductsViewController: UITextFieldDelegate {
-    //  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    //    let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
-    //    searchWorkItem?.cancel()
-    //    let workItem = DispatchWorkItem { [weak self] in
-    //      guard let self = self else { return }
-    //      self.viewModel.searchText = currentText
-    //      viewModel.getProductsApi()
-    //    }
-    //    searchWorkItem = workItem
-    //    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
-    //    return true
-    //  }
+      func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+        searchWorkItem?.cancel()
+        let workItem = DispatchWorkItem { [weak self] in
+          guard let self = self else { return }
+          self.viewModel.searchText = currentText
+            viewModel.resetAndFetchProducts()
+        }
+        searchWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
+        return true
+      }
+}
+
+enum ComingReasonAtAllProducts {
+    case fromCategory
 }

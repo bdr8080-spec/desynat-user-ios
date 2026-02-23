@@ -90,6 +90,11 @@ extension AffiliatedUserCategoriesViewController: UICollectionViewDataSource, UI
             viewModel.getSubCategoriesListApi(categoryID: viewModel.categoriesSection[indexPath.row].id ?? 0)
         }  else {
             // Navigate to all product page
+            let nextVC = AffiliatedProductsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+            nextVC.categoryId = viewModel.categoriesSection[selectedCatgeoryIndex].id ?? 0
+            nextVC.subCatrgoryId = viewModel.subCategoriesSection[indexPath.row].id ?? 0
+            nextVC.comingReasonAtAllProducts = .fromCategory
+            self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
 

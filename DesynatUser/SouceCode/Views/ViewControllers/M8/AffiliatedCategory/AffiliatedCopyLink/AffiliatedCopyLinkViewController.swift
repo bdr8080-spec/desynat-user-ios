@@ -13,10 +13,14 @@ class AffiliatedCopyLinkViewController: UIViewController {
     @IBOutlet weak var titleView: UIView!
     
     var onAddToProduct: (() -> Void)?
+    var productLink: String = ""
+    var productID: Int = 0
+    private lazy var viewModel = AffiliatedCopyLinkViewModel(hostVC: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
+        linkTF.text = productLink
     }
     
     @IBAction func dismissDidTapped(_ sender: Any) {
@@ -24,8 +28,7 @@ class AffiliatedCopyLinkViewController: UIViewController {
     }
     
     @IBAction func addToProductsDidTapped(_ sender: Any) {
-        onAddToProduct?()
-        self.dismiss(animated: true)
+        viewModel.addProductToMyProduct()
     }
     
     @IBAction func copyLinkDidTapped(_ sender: Any) {

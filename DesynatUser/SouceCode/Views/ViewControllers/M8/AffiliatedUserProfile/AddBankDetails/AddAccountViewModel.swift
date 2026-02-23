@@ -59,9 +59,26 @@ class AddAccountViewModel {
             "confirm_account_no": hostVC.confirmAccountNumberTF.text ?? "",
             "iban": hostVC.ibanTextField.text ?? "",
             "swift": hostVC.swiftTextField.text ?? ""]
-//        WebService.sharedInstance.addBankDetailsAffiliatedUserService(param:param) { user in
-//        let nextVC = AccountCreationDoneViewController.instantiate(fromAppStoryboard: .AffiliateUser)
-//        self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
-//        }
+        WebService.sharedInstance.addAffiliatedBankDetailsService(param:param) { user in
+            self.hostVC.changesAreDone?()
+            CommonUtils.showToast(message: "Account added successfully")
+            self.hostVC.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func updateAccountApi(){
+        let param:[String:Any] = [
+            "bank_details_id": hostVC.bankDetail?.id ?? 0,
+            "bank_name": hostVC.bankNameTextField.text ?? "",
+            "account_holder_name": hostVC.accountHolderTextField.text ?? "",
+            "account_no": hostVC.accountNumberTF.text ?? "",
+            "confirm_account_no": hostVC.confirmAccountNumberTF.text ?? "",
+            "iban": hostVC.ibanTextField.text ?? "",
+            "swift": hostVC.swiftTextField.text ?? ""]
+        WebService.sharedInstance.updateAffiliatedBankDetailsService(param:param) { user in
+            self.hostVC.changesAreDone?()
+            CommonUtils.showToast(message: "Bank details updated successfully")
+            self.hostVC.navigationController?.popViewController(animated: true)
+        }
     }
 }

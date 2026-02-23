@@ -9,6 +9,8 @@ import UIKit
 
 class AddAccountViewController: UIViewController {
     
+    @IBOutlet weak var buttonTitleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var confirmAccountNumberTF: UITextField!
     @IBOutlet weak var accountNumberTF: UITextField!
     @IBOutlet weak var bankNameTextField: UITextField!
@@ -18,6 +20,8 @@ class AddAccountViewController: UIViewController {
     
     private lazy var viewModel = AddAccountViewModel(hostVC: self)
     var comingForEdit: Bool = false
+    var bankDetail: BankDetail?
+    var changesAreDone: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +29,7 @@ class AddAccountViewController: UIViewController {
         swiftTextField.delegate = self
         bankNameTextField.delegate = self
         accountHolderTextField.delegate = self
+        populateData()
     }
     
     @IBAction func backDidTapped(_ sender: Any) {
@@ -33,7 +38,24 @@ class AddAccountViewController: UIViewController {
     
     @IBAction func submitDidTapped(_ sender: Any) {
         if viewModel.validFields() {
-            viewModel.addAccountApi()
+            if comingForEdit {
+                viewModel.updateAccountApi()
+            } else {
+                viewModel.addAccountApi()
+            }
+        }
+    }
+    
+    func populateData() {
+        if comingForEdit {
+            titleLabel.text = "Edit Account Details"
+            buttonTitleLabel.text = "Save Changes"
+            bankNameTextField.text = bankDetail?.bankName
+            accountHolderTextField.text = bankDetail?.accountHolderName
+            accountNumberTF.text = bankDetail?.accountNo
+            confirmAccountNumberTF.text = bankDetail?.accountNo
+            ibanTextField.text = bankDetail?.iban
+            swiftTextField.text = bankDetail?.swift
         }
     }
     

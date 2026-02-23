@@ -19,6 +19,9 @@ struct AffiliateCreateAccountDataModel: Codable {
     let addressUpdateStatus, bankUpdateStatus, adminVerify: String?
     let rejectReason, rememberToken: String?
     let status, createdAt, updatedAt, affiliatedAccessToken: String?
+    let addressDetails: AddressDetails?
+    let bankDetails: [BankDetail]?
+    let countryDetails: CountryDetails?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -44,5 +47,71 @@ struct AffiliateCreateAccountDataModel: Codable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case affiliatedAccessToken = "affiliated_accessToken"
+        case addressDetails = "address_details"
+        case bankDetails = "bank_details"
+        case countryDetails = "country_details"
+    }
+}
+
+// MARK: - AddressDetails
+struct AddressDetails: Codable {
+    let id, affiliateID: Int?
+    let country, locations, address1, address2: String?
+    let pincode: String?
+    let town, state, city: String?
+    let addressDetailsLet, long, createdAt, updatedAt: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case affiliateID = "affiliate_id"
+        case country, locations, address1, address2, pincode, town, state, city
+        case addressDetailsLet = "let"
+        case long
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+}
+
+// MARK: - BankDetail
+struct BankDetail: Codable {
+    let id: Int?
+    let userID, type, accountType, accountNo: String?
+    let iban, swift, bankName, accountHolderName: String?
+    let uploadProof: String?
+    let createdAt, updatedAt: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case userID = "user_id"
+        case type
+        case accountType = "account_type"
+        case accountNo = "account_no"
+        case iban, swift
+        case bankName = "bank_name"
+        case accountHolderName = "account_holder_name"
+        case uploadProof = "upload_proof"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+}
+
+// MARK: - CountryDetails
+struct CountryDetails: Codable {
+    let id: Int?
+    let name, code, isoCode, isoCodeNumber: String?
+    let currencyName, currencyCode, currencySymbol, exchangeRateToUsd: String?
+    let dialCode, flag1: String?
+    let flag: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id, name, code
+        case isoCode = "iso_code"
+        case isoCodeNumber = "iso_code_number"
+        case currencyName = "currency_name"
+        case currencyCode = "currency_code"
+        case currencySymbol = "currency_symbol"
+        case exchangeRateToUsd = "exchange_rate_to_usd"
+        case dialCode = "dial_code"
+        case flag1, flag
     }
 }

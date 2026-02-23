@@ -15,7 +15,7 @@ class AffiliatedCategorySearchViewModel {
         self.hostVC = hostVC
     }
     
-//    func getRecommendedSearchData() {
+//    func getLatestSearchData() {
 //        WebService.sharedInstance.getRecommendedSearch { data in
 //            DispatchQueue.main.async {
 //                self.hostVC.recommendedData = data
@@ -26,17 +26,17 @@ class AffiliatedCategorySearchViewModel {
 //        }
 //    }
     
-    func getRecentData() {
-        WebService.sharedInstance.getRecentSearch { data in
-            DispatchQueue.main.async {
-                self.hostVC.recentData = data
-                self.hostVC.lblNoRecentData.isHidden = !data.isEmpty
-                self.hostVC.noLatesSearchFoundLabel.isHidden = !data.isEmpty
-                self.hostVC.RecentSearchTableView.reloadData()
-                self.hostVC.latestSearchCollectionView.reloadData()
-                self.hostVC.updateLatestSearchCollectionHeight()
-            }
-        }
-}
+//    func getSearchProducts() {
+//        WebService.sharedInstance.getRecentSearch { data in
+//            DispatchQueue.main.async {
+//                self.hostVC.recentData = data
+//                self.hostVC.lblNoRecentData.isHidden = !data.isEmpty
+//                self.hostVC.noLatesSearchFoundLabel.isHidden = !data.isEmpty
+//                self.hostVC.RecentSearchTableView.reloadData()
+//                self.hostVC.latestSearchCollectionView.reloadData()
+//                self.hostVC.updateLatestSearchCollectionHeight()
+//            }
+//        }
+//}
 
 }

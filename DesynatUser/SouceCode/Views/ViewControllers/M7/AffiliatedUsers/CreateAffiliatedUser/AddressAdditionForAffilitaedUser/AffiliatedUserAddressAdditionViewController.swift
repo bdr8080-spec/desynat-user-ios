@@ -27,15 +27,6 @@ class AffiliatedUserAddressAdditionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.countryListApi()
-//        let textFields: [UITextField] = [
-//          fullNameInArabicTF, mobileTF, countryCodeTF,
-//          emailTF, addressLineOneTF, addressLineTwoTF, cityTF, stateTF,
-//          passwordTF, confirmPasswordTF, zoneTF, vehicleNameTF, vehicleeRegistrationTF
-//        ]
-//        
-//        for tf in textFields {
-//          tf.delegate = self
-//        }
     }
     
     @IBAction func locationdidTapped(_ sender: Any) {

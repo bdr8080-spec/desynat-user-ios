@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class AffiliatedProfileDetailsViewController: UIViewController {
     
@@ -24,7 +25,25 @@ class AffiliatedProfileDetailsViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var userProfileImageView: CustomImageView!
+    @IBOutlet weak var fullNameTF: UITextField!
+    @IBOutlet weak var countryCodeTF: UITextField!
+    @IBOutlet weak var mobileTF: UITextField!
+    @IBOutlet weak var emailTF: UITextField!
+    @IBOutlet weak var documentOneImageView: CustomImageView!
+    @IBOutlet weak var documentTwoImageView: CustomImageView!
+    @IBOutlet weak var countryTF: UITextField!
+    @IBOutlet weak var locationTF: UITextField!
+    @IBOutlet weak var addressLineOneTF: UITextField!
+    @IBOutlet weak var addressLineTwoTF: UITextField!
+    
     private var selectedCardIndex = 0
+    private lazy var viewModel = AffiliatedProfileDetailsViewModel(hostVC: self)
+    var uplaodDocuOneImage = ""
+    var uploadDocTwoImage = ""
+    var selectedProfileImageUrl = ""
+    var latitude: Double? = 0.0
+    var longitude: Double? = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +51,8 @@ class AffiliatedProfileDetailsViewController: UIViewController {
         personalInfoScrollView.isHidden = false
         bankAccountView.isHidden = true
         addressScrollView.isHidden = true
-        
+        viewModel.countryListApi()
+        viewModel.getUserProfileApi()
     }
     
     @IBAction func personalDidTapped(_ sender: Any) {
@@ -69,7 +89,141 @@ class AffiliatedProfileDetailsViewController: UIViewController {
     @IBAction func addAnotherAccountDidTapped(_ sender: Any) {
         let nextVC = AddAccountViewController.instantiate(fromAppStoryboard: .AffiliateUser)
         nextVC.comingForEdit = false
+        nextVC.changesAreDone = { [weak self] in
+            self?.viewModel.getUserProfileApi()
+        }
         self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @IBAction func changeProfileImageDidTapped(_ sender: Any) {
+        ImagePickerManager().pickImage(self) { [weak self] image, fileName, url in
+            guard let self = self else { return }
+            self.viewModel.uploadDocument(file: image, isImage: true) { [weak self] uploadedUrl in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    self.selectedProfileImageUrl = uploadedUrl
+                    self.userProfileImageView.image = image
+                }
+            }
+        }
+    }
+    
+    @IBAction func changeMobileNumberAction(_ sender: Any) {
+    }
+    
+    @IBAction func countryCodeDidTapped(_ sender: UIButton) {
+//        let countryNames = viewModel.countryList.map { country -> String in
+//            let name = country.name ?? ""
+//            let dialCode = country.dialCode ?? ""
+//            let flag = country.flag ?? "🇰🇼"
+//            return "\(flag)  \(name) (\(dialCode))"
+//        }
+//        
+//        kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+//            let selectedCountry = self.viewModel.countryList[index]
+//            let code = selectedCountry.dialCode ?? "+965"
+//            self.countryCodeTF.text = code
+//        }
+    }
+    
+    @IBAction func emailChangeDidTapped(_ sender: Any) {
+        
+    }
+    
+    @IBAction func uploadDocumnetOneDidTapped(_ sender: Any) {
+        ImagePickerHelper.shared.showPickerController {  image , imageName in
+            if let image = image {
+                WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
+                    self.uplaodDocuOneImage = imageURL.url ?? ""
+                    if let url = URL(string: imageURL.url ?? "") {
+                        self.documentOneImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                        self.documentOneImageView.sd_setImage(with: url,placeholderImage: .uploadDoc1)
+                    }
+                }
+            }
+        }
+    }
+    
+    @IBAction func uploadDocumnetTwoDidTapped(_ sender: Any) {
+        ImagePickerHelper.shared.showPickerController {  image , imageName in
+            if let image = image {
+                WebService.sharedInstance.uploadImage(withParams: image) { imageURL in
+                    self.uploadDocTwoImage = imageURL.url ?? ""
+                    if let url = URL(string: imageURL.url ?? "") {
+                        self.documentTwoImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                        self.documentTwoImageView.sd_setImage(with: url,placeholderImage: .uploaddoc2)
+                    }
+                }
+            }
+        }
+    }
+    
+    @IBAction func personalInfoSaveChangesDidTapped(_ sender: Any) {
+        if viewModel.validatePersonalInfoFields() {
+            viewModel.updateAffiliatedProfileService()
+        }
+    }
+    
+    @IBAction func locationdidTapped(_ sender: Any) {
+        let vc = LocationViewController.instantiate(fromAppStoryboard: .Profile)
+        vc.preSelectedLat = self.latitude   // your saved lat
+        vc.preSelectedLng = self.longitude  // your saved long
+        vc.comingReason = .affiliateUserAccountCreation
+        vc.locationCallBack = { [weak self] address, localityName, locality, city, state, country, pincode, lat, long in
+            guard let self = self else { return }
+            let safeAddress = address.isEmpty ? "" : address
+            let safeLocality = locality.isEmpty ? "" : locality
+            let safeCity = city.isEmpty ? "" : city
+            let safeState = state.isEmpty ? "" : state
+            let safePincode = pincode.isEmpty ? "" : pincode
+            self.locationTF.text = safeAddress
+            var addressLineOne: [String] = []
+            if !localityName.isEmpty {
+                addressLineOne.append(localityName)
+            }
+            if !safeLocality.isEmpty {
+                addressLineOne.append(safeLocality)
+            }
+            self.addressLineOneTF.text = addressLineOne.joined(separator: ", ")
+            
+            var components: [String] = []
+
+            if !safeCity.isEmpty {
+                components.append(safeCity)
+            }
+            if !safeState.isEmpty {
+                components.append(safeState)
+            }
+
+            var address = components.joined(separator: ", ")
+
+            if !safePincode.isEmpty {
+                address += " - \(safePincode)"
+            }
+            self.addressLineTwoTF.text = address
+            self.latitude = lat
+            self.longitude = long
+        }
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func countryDidTapped(_ sender: UIButton) {
+        let countryNames = viewModel.countryList.map { country -> String in
+            let name = country.name ?? ""
+            let flag = country.flag ?? "🇰🇼"
+            return "\(flag) \(name)"
+        }
+        kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+            let selectedCountry = self.viewModel.countryList[index]
+            let name = selectedCountry.name
+            self.countryTF.text = name
+        }
+    }
+    
+    @IBAction func adressSaveChnagesDidTapped(_ sender: Any) {
+        if viewModel.validateAddressFields() {
+            viewModel.updateAffiliatedAddressService()
+        }
     }
     
     private func selectTab(_ tab: ProfileTab) {
@@ -103,21 +257,27 @@ class AffiliatedProfileDetailsViewController: UIViewController {
 }
 
 extension AffiliatedProfileDetailsViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return viewModel.affiliatedUserProfile?.bankDetails?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BankAccountsTableViewCell", for: indexPath) as! BankAccountsTableViewCell
+        cell.configData(data: viewModel.affiliatedUserProfile?.bankDetails?[indexPath.row])
         cell.editButtonAction = { [weak self] in
             let nextVC = AddAccountViewController.instantiate(fromAppStoryboard: .AffiliateUser)
             nextVC.comingForEdit = true
+            nextVC.bankDetail = self?.viewModel.affiliatedUserProfile?.bankDetails?[indexPath.row]
+            nextVC.changesAreDone = { [weak self] in
+                self?.viewModel.getUserProfileApi()
+            }
             self?.navigationController?.pushViewController(nextVC, animated: true)
         }
         cell.deleteButtonAction = { [weak self] in
             self?.showConfirmationAlert(msg: "Are you sure you want to delete this account?"){ [weak self] in
                 guard let self = self else { return }
-                // CALL API HERE
+                viewModel.deleteBankAccountAffilaitedUserApi(id: viewModel.affiliatedUserProfile?.bankDetails?[indexPath.row].id ?? 0)
             }
         }
         if selectedCardIndex == indexPath.row {
