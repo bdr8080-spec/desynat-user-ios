@@ -3,7 +3,6 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,44 +22,39 @@
                 <rect key="frame" x="0.0" y="0.0" width="231" height="253"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNB-BS-4tZ">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNB-BS-4tZ" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="231" height="80"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Xm4-Ne-wQg">
-                                <rect key="frame" x="0.0" y="0.0" width="231" height="80"/>
+                                <rect key="frame" x="2" y="0.0" width="227" height="80"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CRB-MT-Ozb" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="231" height="57"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="227" height="57"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="allSubCatgeory" translatesAutoresizingMaskIntoConstraints="NO" id="Svv-ed-0cb" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="10" width="231" height="47"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="227" height="57"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="0.0"/>
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.4431372549" green="0.28235294119999998" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="Svv-ed-0cb" firstAttribute="top" secondItem="CRB-MT-Ozb" secondAttribute="top" constant="10" id="Nfb-tW-86B"/>
+                                            <constraint firstItem="Svv-ed-0cb" firstAttribute="top" secondItem="CRB-MT-Ozb" secondAttribute="top" id="Nfb-tW-86B"/>
                                             <constraint firstAttribute="height" constant="57" id="oUQ-Mt-5Ap"/>
                                             <constraint firstAttribute="trailing" secondItem="Svv-ed-0cb" secondAttribute="trailing" id="rmQ-Ri-wWU"/>
                                             <constraint firstItem="Svv-ed-0cb" firstAttribute="leading" secondItem="CRB-MT-Ozb" secondAttribute="leading" id="sUx-Uk-2Cj"/>
                                             <constraint firstAttribute="bottom" secondItem="Svv-ed-0cb" secondAttribute="bottom" id="uuq-LB-2LL"/>
                                             <constraint firstItem="Svv-ed-0cb" firstAttribute="centerX" secondItem="CRB-MT-Ozb" secondAttribute="centerX" id="v13-3d-jv4"/>
                                         </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="16"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" name="darkBrown"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Abaya" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MKv-oD-Jgx">
-                                        <rect key="frame" x="0.0" y="63" width="231" height="17"/>
+                                        <rect key="frame" x="0.0" y="63" width="227" height="17"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                         <color key="textColor" red="0.48627450980392156" green="0.48627450980392156" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -71,10 +65,18 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Xm4-Ne-wQg" secondAttribute="bottom" id="BmC-lw-3rs"/>
-                            <constraint firstAttribute="trailing" secondItem="Xm4-Ne-wQg" secondAttribute="trailing" id="hRR-WY-5DL"/>
-                            <constraint firstItem="Xm4-Ne-wQg" firstAttribute="leading" secondItem="aNB-BS-4tZ" secondAttribute="leading" id="oe8-xc-sVf"/>
+                            <constraint firstAttribute="trailing" secondItem="Xm4-Ne-wQg" secondAttribute="trailing" constant="2" id="hRR-WY-5DL"/>
+                            <constraint firstItem="Xm4-Ne-wQg" firstAttribute="leading" secondItem="aNB-BS-4tZ" secondAttribute="leading" constant="2" id="oe8-xc-sVf"/>
                             <constraint firstItem="Xm4-Ne-wQg" firstAttribute="top" secondItem="aNB-BS-4tZ" secondAttribute="top" id="zLb-Gg-d4C"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" red="0.4431372549" green="0.28235294119999998" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
             </view>
@@ -88,6 +90,7 @@
             <size key="customSize" width="231" height="253"/>
             <connections>
                 <outlet property="mainImageView" destination="Svv-ed-0cb" id="CT3-uQ-qj2"/>
+                <outlet property="mainView" destination="aNB-BS-4tZ" id="HAz-Pd-Df4"/>
                 <outlet property="titleLabel" destination="MKv-oD-Jgx" id="jrK-gC-V3f"/>
             </connections>
             <point key="canvasLocation" x="138.1679389312977" y="60.211267605633807"/>
@@ -95,9 +98,6 @@
     </objects>
     <resources>
         <image name="allSubCatgeory" width="57" height="57"/>
-        <namedColor name="darkBrown">
-            <color red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

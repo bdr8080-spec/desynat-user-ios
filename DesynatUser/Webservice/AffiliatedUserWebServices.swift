@@ -181,23 +181,106 @@ extension WebService {
         }
     }
     
-//    func addProductToMyProductsService(param: [String: Any], completion:@escaping (_ user: EmptyModel)-> Void) {
-//        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-//        CommonUtils.showHud(show: true)
-//        NetworkManager.shared.request(withAPI: .endpoint(.addProductToMyProducts), requestMethod: .post, requestParams: param,  requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-//            CommonUtils.showHud(show: false)
-//            self.evaluateWebServiceResponse(response: result) { response, message,error in
-//                guard let user = response else {
-//                    if let error {
-//                        UIApplication.shared.topViewController()?.showAlert(msg: error)
-//                    }
-//                    return
-//                }
-//                completion(user)
-//            }
-//        }
-//    }
-//    
+    func getAffiliatedLatestSearchService(completion:@escaping (_ user: [AffiliatedLatestSearch])-> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getLatestSearchData), requestMethod: .get,  requestModel: [AffiliatedLatestSearch].self, affiliatedUserToken: affiliatedAccessToken) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
     
+    func getAffiliatedSearchProductsService(completion:@escaping (_ user: [AffiliatedLatestSearch])-> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getRecentSearchData), requestMethod: .get,  requestModel: [AffiliatedLatestSearch].self, affiliatedUserToken: affiliatedAccessToken) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getSearchProductsService(param: [String: Any], completion:@escaping (_ user: AffiliatedProductsDataModel)-> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getAffiliatedProductSearchData), requestMethod: .post, requestParams: param,  requestModel: AffiliatedProductsDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getSortListOfAffiliatedProductsService(completion:@escaping (_ user: [SortByStoreDataModel])-> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.productfilterKeys), requestMethod: .get,  requestModel: [SortByStoreDataModel].self, affiliatedUserToken: affiliatedAccessToken) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getMyProductsListService(param: [String:Any], completion:@escaping (_ user: AffiliatedUserMyProductsDataModel)-> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getMyProducts), requestMethod: .get, requestParams: param,  requestModel: AffiliatedUserMyProductsDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getMyProductsDetailsService(param: [String:Any], completion:@escaping (_ user: AffiliatedUserMyProductsList)-> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getMyProductDetails), requestMethod: .get, requestParams: param,  requestModel: AffiliatedUserMyProductsList.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
     
 }

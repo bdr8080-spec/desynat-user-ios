@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class AddAccountViewModel {
     
@@ -50,6 +51,19 @@ class AddAccountViewModel {
         return errorMessage == .none
     }
     
+    func populateData() {
+        if hostVC.comingForEdit {
+            hostVC.titleLabel.text = "Edit Account Details"
+            hostVC.buttonTitleLabel.text = "Save Changes"
+            hostVC.bankNameTextField.text = hostVC.bankDetail?.bankName
+            hostVC.accountHolderTextField.text = hostVC.bankDetail?.accountHolderName
+            hostVC.accountNumberTF.text = hostVC.bankDetail?.accountNo
+            hostVC.confirmAccountNumberTF.text = hostVC.bankDetail?.accountNo
+            hostVC.ibanTextField.text = hostVC.bankDetail?.iban
+            hostVC.swiftTextField.text = hostVC.bankDetail?.swift
+        }
+    }
+    
     //Mark:->UploadDocumentApi
     func addAccountApi(){
         let param:[String:Any] = [
@@ -80,5 +94,49 @@ class AddAccountViewModel {
             CommonUtils.showToast(message: "Bank details updated successfully")
             self.hostVC.navigationController?.popViewController(animated: true)
         }
+    }
+}
+
+extension AddAccountViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string.isEmpty {
+            return true
+        }
+        let currentText = textField.text ?? ""
+        let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        if textField == bankNameTextField {
+            if currentText.isEmpty && string == " " {
+                return false
+            }
+            let allowedCharacterSet = CharacterSet.letters.union(.whitespaces)
+            return string.rangeOfCharacter(from: allowedCharacterSet.inverted) == nil
+        }
+        if textField == accountHolderTextField {
+            if currentText.isEmpty && string == " " {
+                return false
+            }
+            let allowedCharacterSet = CharacterSet.letters.union(.whitespaces)
+            return string.rangeOfCharacter(from: allowedCharacterSet.inverted) == nil
+        }
+        if textField == ibanTextField {
+            if string == " " {
+                return false
+            }
+            if newText.count > 20 {
+                return false
+            }
+            return true
+        }
+        if textField == swiftTextField {
+            if string == " " {
+                return false
+            }
+            return true
+        }
+        if newText.trimmingCharacters(in: .whitespaces).isEmpty && !newText.isEmpty {
+            return false
+        }
+        return true
     }
 }

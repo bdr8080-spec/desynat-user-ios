@@ -127,6 +127,12 @@ enum NetworkEndPoint: String {
     case getAllAffiliateUserProduct     = "api/affiliate/get_all_products"
     case generateProductLink            = "api/affiliate/generate_product_link"
     case addProductToMyProducts         = "api/affiliate/add_to_my_products"
+    case getRecentSearchData            = "api/affiliate/getRecentSearchData"
+    case getLatestSearchData            = "api/affiliate/getLatestSearchData"
+    case getAffiliatedProductSearchData = "api/affiliate/product_search"
+    case productfilterKeys              = "api/affiliate/product_filter_keys"
+    case getMyProducts                  = "api/affiliate/get_my_products"
+    case getMyProductDetails            = "api/affiliate/get_my_product_detail"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

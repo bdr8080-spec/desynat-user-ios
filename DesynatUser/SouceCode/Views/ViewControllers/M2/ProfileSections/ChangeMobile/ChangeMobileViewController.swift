@@ -9,7 +9,7 @@ import UIKit
 
 class ChangeMobileViewController: UIViewController {
     
-    private lazy var viewModel = ChangeMobileViewModel(hostVC:self)
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var mobileView: UIView!
     @IBOutlet weak var emailView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -19,6 +19,7 @@ class ChangeMobileViewController: UIViewController {
     
     var comingToUpdateMobile: Bool = false
     var countryCode:String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
+    private lazy var viewModel = ChangeMobileViewModel(hostVC:self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,10 +62,12 @@ class ChangeMobileViewController: UIViewController {
     func initialSetup() {
         if comingToUpdateMobile {
             titleLabel.text = "Enter New Mobile Number"
+            descriptionLabel.text = "Great! now enter the mobile number that you\nwant to continue with"
             emailView.isHidden = true
             mobileView.isHidden = false
         } else {
             titleLabel.text = "Enter New Email "
+            descriptionLabel.text = "Great! now enter the email address that you\nwant to continue with"
             emailView.isHidden = false
             mobileView.isHidden = true
         }

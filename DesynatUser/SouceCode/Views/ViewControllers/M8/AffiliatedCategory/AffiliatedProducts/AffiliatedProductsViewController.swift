@@ -18,7 +18,8 @@ class AffiliatedProductsViewController: UIViewController {
             productsCollectionView.registerCellFromNib(cellID: "AffiliatedProductsCollectionViewCell")
         }
     }
-    lazy var viewModel = AffiliatedProductsViewModel(hostVC: self)
+    
+    private lazy var viewModel = AffiliatedProductsViewModel(hostVC: self)
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
@@ -61,13 +62,28 @@ class AffiliatedProductsViewController: UIViewController {
         }
     }
     
+    // MARK: - Start Listening (Speech → Text)
+    
     private func requestPermissions() {
-        SFSpeechRecognizer.requestAuthorization { _ in }
-        AVAudioSession.sharedInstance().requestRecordPermission { _ in }
+        SFSpeechRecognizer.requestAuthorization { status in
+            print("Speech permission: \(status)")
+        }
+        
+        if #available(iOS 17.0, *) {
+            AVAudioApplication.requestRecordPermission { granted in
+                DispatchQueue.main.async {
+                    print("Mic permission: \(granted)")
+                }
+            }
+        } else {
+            AVAudioSession.sharedInstance().requestRecordPermission { granted in
+                DispatchQueue.main.async {
+                    print("Mic permission: \(granted)")
+                }
+            }
+        }
     }
     
-    
-    // MARK: - Start Listening (Speech → Text)
     private func startListening() {
         // Reset everything
         recognitionTask?.cancel()
@@ -164,6 +180,10 @@ extension AffiliatedProductsViewController: UICollectionViewDelegate, UICollecti
         let width = (collectionView.frame.width - totalSpacing) / 2
         return CGSize(width: width, height: 295)
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        viewModel.generateProductLink(productId: viewModel.productDetails[indexPath.row].id ?? 0)
+//    }
 }
 
 extension AffiliatedProductsViewController: UIScrollViewDelegate {

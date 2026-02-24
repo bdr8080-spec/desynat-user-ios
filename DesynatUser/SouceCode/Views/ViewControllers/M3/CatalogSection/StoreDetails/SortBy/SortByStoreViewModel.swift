@@ -11,21 +11,19 @@ import UIKit
 class SortByStoreViewModel {
     
     private var hostVC: SortByStoresViewController
-  var sortedStoreList: [SortByStoreDataModel]?
-  
+    var sortedStoreList: [SortByStoreDataModel]?
+    
     init(hostVC: SortByStoresViewController) {
         self.hostVC = hostVC
     }
-
+    
     func getSingleStoresApi() {
-      WebService.sharedInstance.getSortByStoreListService() { list in
-        DispatchQueue.main.async {
-          self.sortedStoreList = list
-
-                     // Reload and handle pre-selection
-                     self.hostVC.setupOptions() 
-
-        }
+        WebService.sharedInstance.getSortByStoreListService() { list in
+            DispatchQueue.main.async {
+                self.sortedStoreList = list
+                self.hostVC.setupOptions()
+                
+            }
         }
     }
 }

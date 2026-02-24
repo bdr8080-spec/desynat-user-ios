@@ -10,12 +10,12 @@ import Foundation
 class AffiliatedProductsViewModel {
     
     private var hostVC: AffiliatedProductsViewController
-    var productDetails: [AffiliatedProductsList] = []
-    var searchText: String = ""
     private var currentPage = 1
     private var lastPage = 1
     private var isFetching = false
     private var hasMorePages = true
+    var productDetails: [AffiliatedProductsList] = []
+    var searchText: String = ""
     
     init(hostVC: AffiliatedProductsViewController) {
         self.hostVC = hostVC
@@ -35,7 +35,7 @@ class AffiliatedProductsViewModel {
             "category_id": hostVC.categoryId,
             "subcategory_id": hostVC.subCatrgoryId,
             "page": currentPage,
-            "limit": 6]
+            "limit": 20]
         
         if !searchText.isEmpty {
             params["search"] = searchText

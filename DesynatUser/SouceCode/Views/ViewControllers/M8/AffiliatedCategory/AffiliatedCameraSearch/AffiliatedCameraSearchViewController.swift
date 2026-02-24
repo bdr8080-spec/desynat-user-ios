@@ -92,7 +92,7 @@ class AffiliatedCameraSearchViewController: UIViewController {
             // Start session
             captureSession?.startRunning()
         } catch {
-            self.showAlert(msg: "❌ Error setting up camera") {
+            self.showAlert(msg: "Error setting up camera") {
                 self.navigationController?.popViewController(animated: true)
             }
         }
@@ -148,7 +148,7 @@ class AffiliatedCameraSearchViewController: UIViewController {
             
             device.unlockForConfiguration()
         } catch {
-            print("❌ Focus error: \(error)")
+            print("Focus error: \(error)")
         }
     }
     
@@ -163,22 +163,22 @@ extension AffiliatedCameraSearchViewController {
                 self.showAlert(msg: "Product not recognized")
                 return
             }
-            
-            print("CATEGORY:", result.category ?? "")
-            print("BRAND:", result.brand ?? "")
-            print("PRODUCT:", result.productName ?? "")
-            print("ATTRIBUTES:", result.attributes)
-            print("COLORS:", result.colors)
+//            
+//            print("CATEGORY:", result.category ?? "")
+//            print("BRAND:", result.brand ?? "")
+//            print("PRODUCT:", result.productName ?? "")
+//            print("ATTRIBUTES:", result.attributes)
+//            print("COLORS:", result.colors)
             
             DispatchQueue.main.async {
                 if self.comingFromSearchProduct {
                     self.onImageRecognized?(result.attributes)
                     self.navigationController?.popViewController(animated: true)
                 } else {
-                    let nextVC = AffiliatedProductsViewController
+                    let nextVC = SearchAffiliatedProductsViewController
                         .instantiate(fromAppStoryboard: .AffiliateUser)
-//                    nextVC.comingFromImageScanner = true
-//                    nextVC.viewModel.attributeText = result.attributes
+                    nextVC.comingFromImageScanner = true
+                    nextVC.viewModel.attributeText = result.attributes
                     self.navigationController?.pushViewController(nextVC, animated: true)
                 }
             }

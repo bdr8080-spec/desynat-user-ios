@@ -10,6 +10,7 @@ import SDWebImage
 
 class MyProductsSubCategoryCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var mainView: CustomView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var mainImageView: CustomImageView!
     

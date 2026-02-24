@@ -24,7 +24,6 @@ class AffiliatedProfileDetailsViewController: UIViewController {
             bankAccountTableView.registerCellFromNib(cellID: "BankAccountsTableViewCell")
         }
     }
-    
     @IBOutlet weak var userProfileImageView: CustomImageView!
     @IBOutlet weak var fullNameTF: UITextField!
     @IBOutlet weak var countryCodeTF: UITextField!
@@ -109,6 +108,13 @@ class AffiliatedProfileDetailsViewController: UIViewController {
     }
     
     @IBAction func changeMobileNumberAction(_ sender: Any) {
+        let nextVC = ChangeEmailMobileViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+        nextVC.affiliatedUserProfile = viewModel.affiliatedUserProfile
+        nextVC.comingToUpdateMobile = true
+        nextVC.changesAreDone = { [weak self] in
+            self?.viewModel.getUserProfileApi()
+        }
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @IBAction func countryCodeDidTapped(_ sender: UIButton) {
@@ -127,7 +133,13 @@ class AffiliatedProfileDetailsViewController: UIViewController {
     }
     
     @IBAction func emailChangeDidTapped(_ sender: Any) {
-        
+        let nextVC = ChangeEmailMobileViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+        nextVC.comingToUpdateMobile = false
+        nextVC.affiliatedUserProfile = viewModel.affiliatedUserProfile
+        nextVC.changesAreDone = { [weak self] in
+            self?.viewModel.getUserProfileApi()
+        }
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @IBAction func uploadDocumnetOneDidTapped(_ sender: Any) {
@@ -295,8 +307,3 @@ extension AffiliatedProfileDetailsViewController: UITableViewDelegate, UITableVi
     
 }
 
-enum ProfileTab {
-    case personal
-    case address
-    case bank
-}

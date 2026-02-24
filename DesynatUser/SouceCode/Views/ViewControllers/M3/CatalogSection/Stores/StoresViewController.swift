@@ -62,11 +62,6 @@ class StoresViewController: UIViewController {
         stopBannerAutoScroll()
     }
     
-    private func requestPermissions() {
-        SFSpeechRecognizer.requestAuthorization { _ in }
-        AVAudioSession.sharedInstance().requestRecordPermission { _ in }
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         updateCollectionsHeight()
@@ -112,7 +107,6 @@ class StoresViewController: UIViewController {
             )
     }
     
-    
     // MARK: - Mic Button – This is what you wanted!
     @IBAction func micDidTapped(_ sender: UIButton) {
         if isListening {
@@ -122,6 +116,26 @@ class StoresViewController: UIViewController {
             startListening()
             sender.setImage(UIImage(systemName: "mic.fill"), for: .normal)
             sender.tintColor = .systemRed // optional: show it's active
+        }
+    }
+    
+    private func requestPermissions() {
+        SFSpeechRecognizer.requestAuthorization { status in
+            print("Speech permission: \(status)")
+        }
+        
+        if #available(iOS 17.0, *) {
+            AVAudioApplication.requestRecordPermission { granted in
+                DispatchQueue.main.async {
+                    print("Mic permission: \(granted)")
+                }
+            }
+        } else {
+            AVAudioSession.sharedInstance().requestRecordPermission { granted in
+                DispatchQueue.main.async {
+                    print("Mic permission: \(granted)")
+                }
+            }
         }
     }
     

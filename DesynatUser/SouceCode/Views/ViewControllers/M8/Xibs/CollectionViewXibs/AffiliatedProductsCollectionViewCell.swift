@@ -21,6 +21,12 @@ class AffiliatedProductsCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        mainImageView.layer.cornerRadius = 8
+        mainImageView.layer.masksToBounds = true
+        mainImageView.layer.maskedCorners = [
+            .layerMinXMinYCorner,  // top-left
+            .layerMaxXMinYCorner   // top-right
+        ]
     }
     
     @IBAction func getLinkDidTapped(_ sender: Any) {

@@ -125,11 +125,6 @@ class HomeViewController: UIViewController {
         stopDiscountAutoScroll()
     }
     
-    private func requestPermissions() {
-        SFSpeechRecognizer.requestAuthorization { _ in }
-        AVAudioSession.sharedInstance().requestRecordPermission { _ in }
-    }
-    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         DispatchQueue.main.async {
@@ -207,6 +202,27 @@ class HomeViewController: UIViewController {
             self.navigationController?.pushViewController(nextVC, animated: true)
         } else {
             showLoginAlert()
+        }
+    }
+    
+    // MARK: - Permissions
+    private func requestPermissions() {
+        SFSpeechRecognizer.requestAuthorization { status in
+            print("Speech permission: \(status)")
+        }
+        
+        if #available(iOS 17.0, *) {
+            AVAudioApplication.requestRecordPermission { granted in
+                DispatchQueue.main.async {
+                    print("Mic permission: \(granted)")
+                }
+            }
+        } else {
+            AVAudioSession.sharedInstance().requestRecordPermission { granted in
+                DispatchQueue.main.async {
+                    print("Mic permission: \(granted)")
+                }
+            }
         }
     }
     

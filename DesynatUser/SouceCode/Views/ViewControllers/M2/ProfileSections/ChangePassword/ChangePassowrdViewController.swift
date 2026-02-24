@@ -38,7 +38,7 @@ class ChangePassowrdViewController: UIViewController {
         
         // Password format validation
         if !newPassword.isValidPassword() {
-            showAlert(msg: "Password must be at least 8 characters long and contain letters and digits")
+            showAlert(msg: "Password must be at least 8 characters long and contain letters and numbers")
             return
         }
         

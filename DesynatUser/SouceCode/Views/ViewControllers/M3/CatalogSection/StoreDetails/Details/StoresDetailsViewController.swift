@@ -77,11 +77,6 @@ class StoresDetailsViewController: UIViewController, SortByStoresViewControllerD
         viewModel.getSingleStoresApi()
     }
     
-    private func requestPermissions() {
-        SFSpeechRecognizer.requestAuthorization { _ in }
-        AVAudioSession.sharedInstance().requestRecordPermission { _ in }
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         updateCollectionsHeight()
@@ -170,9 +165,27 @@ class StoresDetailsViewController: UIViewController, SortByStoresViewControllerD
         }
     }
     
-    
-    
     // MARK: - Start Listening (Speech → Text)
+    
+    private func requestPermissions() {
+        SFSpeechRecognizer.requestAuthorization { status in
+            print("Speech permission: \(status)")
+        }
+        
+        if #available(iOS 17.0, *) {
+            AVAudioApplication.requestRecordPermission { granted in
+                DispatchQueue.main.async {
+                    print("Mic permission: \(granted)")
+                }
+            }
+        } else {
+            AVAudioSession.sharedInstance().requestRecordPermission { granted in
+                DispatchQueue.main.async {
+                    print("Mic permission: \(granted)")
+                }
+            }
+        }
+    }
     private func startListening() {
         // Reset everything
         recognitionTask?.cancel()

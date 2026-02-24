@@ -117,11 +117,25 @@ class SearchProductListViewController: UIViewController, SortByStoresViewControl
     self.navigationController?.pushViewController(vc, animated: true)
   }
   
-  private func requestPermissions() {
-    SFSpeechRecognizer.requestAuthorization { _ in }
-    AVAudioSession.sharedInstance().requestRecordPermission { _ in }
-  }
-  
+    private func requestPermissions() {
+        SFSpeechRecognizer.requestAuthorization { status in
+            print("Speech permission: \(status)")
+        }
+        
+        if #available(iOS 17.0, *) {
+            AVAudioApplication.requestRecordPermission { granted in
+                DispatchQueue.main.async {
+                    print("Mic permission: \(granted)")
+                }
+            }
+        } else {
+            AVAudioSession.sharedInstance().requestRecordPermission { granted in
+                DispatchQueue.main.async {
+                    print("Mic permission: \(granted)")
+                }
+            }
+        }
+    }
   
   // MARK: - Start Listening (Speech → Text)
   private func startListening() {

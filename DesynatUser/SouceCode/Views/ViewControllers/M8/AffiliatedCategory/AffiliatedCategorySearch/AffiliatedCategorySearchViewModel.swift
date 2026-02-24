@@ -10,33 +10,32 @@ import Foundation
 class AffiliatedCategorySearchViewModel {
     
     private var hostVC: AffiliatedCategorySearchViewController
+    var latestSearchData: [AffiliatedLatestSearch] = []
+    var searchProductsData: [AffiliatedLatestSearch] = []
     
     init(hostVC: AffiliatedCategorySearchViewController) {
         self.hostVC = hostVC
     }
     
-//    func getLatestSearchData() {
-//        WebService.sharedInstance.getRecommendedSearch { data in
-//            DispatchQueue.main.async {
-//                self.hostVC.recommendedData = data
-//                self.hostVC.noReconmmendedDataFoundLAbel.isHidden = !data.isEmpty
-//                self.hostVC.recommendedCollectionView.reloadData()
-//                self.hostVC.recommendedCollectionView.layoutIfNeeded()
-//            }
-//        }
-//    }
+    func getLatestSearchData() {
+        WebService.sharedInstance.getAffiliatedLatestSearchService { data in
+            DispatchQueue.main.async {
+                self.latestSearchData = data
+                self.hostVC.latestSearchCollectionView.reloadData()
+                self.hostVC.updateLatestSearchCollectionHeight()
+                self.hostVC.noLatesSearchFoundLabel.isHidden = !data.isEmpty
+            }
+        }
+    }
     
-//    func getSearchProducts() {
-//        WebService.sharedInstance.getRecentSearch { data in
-//            DispatchQueue.main.async {
-//                self.hostVC.recentData = data
-//                self.hostVC.lblNoRecentData.isHidden = !data.isEmpty
-//                self.hostVC.noLatesSearchFoundLabel.isHidden = !data.isEmpty
-//                self.hostVC.RecentSearchTableView.reloadData()
-//                self.hostVC.latestSearchCollectionView.reloadData()
-//                self.hostVC.updateLatestSearchCollectionHeight()
-//            }
-//        }
-//}
-
+    func getSearchProducts() {
+        WebService.sharedInstance.getAffiliatedSearchProductsService { data in
+            DispatchQueue.main.async {
+                self.searchProductsData = data
+                self.hostVC.lblNoRecentData.isHidden = !data.isEmpty
+                self.hostVC.RecentSearchTableView.reloadData()
+            }
+        }
+    }
+    
 }

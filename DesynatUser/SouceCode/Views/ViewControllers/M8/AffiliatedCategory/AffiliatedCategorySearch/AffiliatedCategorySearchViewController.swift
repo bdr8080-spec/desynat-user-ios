@@ -29,15 +29,13 @@ class AffiliatedCategorySearchViewController: UIViewController {
     @IBOutlet weak var btnMicOutlet: UIButton!
     @IBOutlet weak var noLatesSearchFoundLabel: CustomLabelFont!
     
-    lazy private var viewModel = AffiliatedCategorySearchViewModel(hostVC: self)
-    var recentData: [RecentDataModel] = []
-    
     // MARK: - Speech Recognition
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
     private var isListening = false
+    private lazy var viewModel = AffiliatedCategorySearchViewModel(hostVC: self)
     lazy var objectDetector: ObjectDetector = {
         let options = ObjectDetectorOptions()
         options.detectorMode = .singleImage
@@ -48,19 +46,14 @@ class AffiliatedCategorySearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.getRecentData()
         lblNoRecentData.isHidden = true
         requestPermissions()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        updateLatestSearchCollectionHeight()
-    }
-    
-    private func requestPermissions() {
-        SFSpeechRecognizer.requestAuthorization { _ in }
-        AVAudioSession.sharedInstance().requestRecordPermission { _ in }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.getLatestSearchData()
+        viewModel.getSearchProducts()
     }
     
     @IBAction func btnGo(_ sender: Any) {
@@ -70,9 +63,9 @@ class AffiliatedCategorySearchViewController: UIViewController {
             showAlert(msg: "Please search something")
             return
         }
-        let nextVC = AffiliatedProductsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+        let nextVC = SearchAffiliatedProductsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
         nextVC.viewModel.searchText = self.txtSearch.text?.trimmed() ?? ""
-//        nextVC.comingFromImageScanner = false
+        nextVC.comingFromImageScanner = false
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
@@ -98,6 +91,27 @@ class AffiliatedCategorySearchViewController: UIViewController {
     }
     
     // MARK: - Start Listening (Speech → Text)
+    
+    private func requestPermissions() {
+        SFSpeechRecognizer.requestAuthorization { status in
+            print("Speech permission: \(status)")
+        }
+        
+        if #available(iOS 17.0, *) {
+            AVAudioApplication.requestRecordPermission { granted in
+                DispatchQueue.main.async {
+                    print("Mic permission: \(granted)")
+                }
+            }
+        } else {
+            AVAudioSession.sharedInstance().requestRecordPermission { granted in
+                DispatchQueue.main.async {
+                    print("Mic permission: \(granted)")
+                }
+            }
+        }
+    }
+    
     private func startListening() {
         // Reset everything
         recognitionTask?.cancel()
@@ -130,7 +144,7 @@ class AffiliatedCategorySearchViewController: UIViewController {
                     showAlert(msg: "Please search something")
                     return
                 }
-                let nextVC = SearchProductListViewController.instantiate(fromAppStoryboard: .MyOrder)
+                let nextVC = SearchAffiliatedProductsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
                 nextVC.viewModel.searchText = self.txtSearch.text?.trimmed() ?? ""
                 nextVC.comingFromImageScanner = false
                 self.navigationController?.pushViewController(nextVC, animated: true)
@@ -181,40 +195,39 @@ class AffiliatedCategorySearchViewController: UIViewController {
 
 extension AffiliatedCategorySearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recentData.count
+        return viewModel.searchProductsData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecentSearchTableCell", for: indexPath) as! RecentSearchTableCell
-        let data = recentData[indexPath.row]
-        cell.lblName.text = data.name ?? ""
+        cell.lblName.text = viewModel.searchProductsData[indexPath.row].name ?? ""
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let nextVC = AffiliatedProductsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
-        nextVC.viewModel.searchText = recentData[indexPath.row].name ?? ""
-//        nextVC.comingFromImageScanner = false
+        let nextVC = SearchAffiliatedProductsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+        nextVC.viewModel.searchText = viewModel.searchProductsData[indexPath.row].name ?? ""
+        nextVC.comingFromImageScanner = false
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
 extension AffiliatedCategorySearchViewController: UICollectionViewDelegate, UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return recentData.count
+        return viewModel.latestSearchData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LatestSearchCollectionCell", for: indexPath) as! LatestSearchCollectionCell
-        cell.titleLabel.text = recentData[indexPath.row].name
+        cell.titleLabel.text = viewModel.latestSearchData[indexPath.row].name
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-                    let nextVC = AffiliatedProductsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
-                    nextVC.viewModel.searchText = recentData[indexPath.row].name ?? ""
-//                    nextVC.comingFromImageScanner = false
-                    self.navigationController?.pushViewController(nextVC, animated: true)
+        let nextVC = SearchAffiliatedProductsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+        nextVC.viewModel.searchText = viewModel.latestSearchData[indexPath.row].name ?? ""
+        nextVC.comingFromImageScanner = false
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -230,8 +243,11 @@ extension AffiliatedCategorySearchViewController: UICollectionViewDelegate, UICo
     
     func updateLatestSearchCollectionHeight() {
         latestSearchCollectionView.layoutIfNeeded()
-        latstSearchCollectionViewHieghtConstriant.constant =
-        latestSearchCollectionView.collectionViewLayout.collectionViewContentSize.height
+        if viewModel.latestSearchData.isEmpty {
+            latstSearchCollectionViewHieghtConstriant.constant = 120
+        } else {
+            latstSearchCollectionViewHieghtConstriant.constant =
+            latestSearchCollectionView.collectionViewLayout.collectionViewContentSize.height
+        }
     }
-    
 }

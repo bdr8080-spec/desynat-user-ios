@@ -39,7 +39,6 @@ class AffiliatedUserCategoriesViewController: UIViewController {
         
     }
     
-    
     @IBAction func searchDidTapped(_ sender: Any) {
         let nextVC = AffiliatedCategorySearchViewController.instantiate(fromAppStoryboard: .AffiliateUser)
         self.navigationController?.pushViewController(nextVC, animated: true)
@@ -51,7 +50,6 @@ class AffiliatedUserCategoriesViewController: UIViewController {
 //      
 //    }
 }
-
 
 // MARK: - CollectionView Delegates
 extension AffiliatedUserCategoriesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {

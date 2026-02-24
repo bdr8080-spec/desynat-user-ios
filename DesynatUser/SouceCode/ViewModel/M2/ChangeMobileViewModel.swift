@@ -23,20 +23,16 @@ class ChangeMobileViewModel:NSObject{
             let input = String.getString(hostVC.txtMobileNumber.text).trimmingCharacters(in: .whitespacesAndNewlines)
             if input.isEmpty {
                 errorMessage = .changeNewMobile
-            } else if input.isPhoneNumber() {
-                if !input.isValidPhoneNumber() {
+            } else if !input.isValidPhoneNumber() {
                     errorMessage = .validMobileNumber
-                }
             }
         } else{
             let input = String.getString(hostVC.txtEmail.text).trimmingCharacters(in: .whitespacesAndNewlines)
             if input.isEmpty {
                 errorMessage = .chnageNewEmail
-            } else if input.isEmail() {
-                if !input.isValidEmail() {
+            } else if !input.isValidEmail() {
                     errorMessage = .EnterValidEmailAddress
                 }
-            }
         }
         
         if errorMessage != .none {
