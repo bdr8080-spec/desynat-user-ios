@@ -30,13 +30,17 @@ class AffiliatedUserCategoriesViewController: UIViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        //searchTF.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
+        searchTF.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
         viewModel.getCategoriesListApi()
     }
     
     // MARK: - Mic Button – This is what you wanted!
     @IBAction func micDidTapped(_ sender: UIButton) {
-        
+        let nextVC = VoiceSearchViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+        nextVC.onSearchedCompletionTxt = { [weak self] searchText in
+            self?.viewModel.filterSubCategories(with: searchText)
+        }
+        self.navigationController?.present(nextVC, animated: true)
     }
     
     @IBAction func searchDidTapped(_ sender: Any) {
@@ -44,11 +48,11 @@ class AffiliatedUserCategoriesViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
-//    @objc private func searchTextChanged(_ textField: UITextField) {
-//        let text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-//        viewModel.filterSubCategories(with: text)
-//      
-//    }
+    @objc private func searchTextChanged(_ textField: UITextField) {
+        let text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        viewModel.filterSubCategories(with: text)
+    }
+    
 }
 
 // MARK: - CollectionView Delegates
@@ -93,6 +97,10 @@ extension AffiliatedUserCategoriesViewController: UICollectionViewDataSource, UI
             nextVC.subCatrgoryId = viewModel.subCategoriesSection[indexPath.row].id ?? 0
             nextVC.comingReasonAtAllProducts = .fromCategory
             self.navigationController?.pushViewController(nextVC, animated: true)
+            
+//            let nextVC = SearchAffiliatedProductsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+//            nextVC.viewModel.searchText = self.txtSearch.text?.trimmed() ?? ""
+//            nextVC.comingFromImageScanner = false
         }
     }
 

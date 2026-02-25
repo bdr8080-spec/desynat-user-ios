@@ -86,7 +86,8 @@ extension AffiliatedUserProfileViewController: UITableViewDelegate, UITableViewD
         
         switch selectedItem {
         case "My Withdrawals":
-            print("✅ Selected: My Wallet")
+            let nextVC = MyAffiliatedWithdrawalViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+            self.navigationController?.pushViewController(nextVC, animated: true)
             
         case "Terms & Condition":
             print("✅ Selected: Terms & Condition")

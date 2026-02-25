@@ -81,7 +81,7 @@ class AffiliatedCategorySearchViewController: UIViewController {
         } else {
             startListening()
             sender.setImage(UIImage(systemName: "mic.fill"), for: .normal)
-            sender.tintColor = .systemRed // optional: show it's active
+            sender.tintColor = .systemRed
         }
     }
     

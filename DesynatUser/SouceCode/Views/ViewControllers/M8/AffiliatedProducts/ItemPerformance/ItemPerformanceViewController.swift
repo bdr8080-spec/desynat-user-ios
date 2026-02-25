@@ -62,7 +62,7 @@ class ItemPerformanceViewController: UIViewController, UITextFieldDelegate {
         copiedLabel.textAlignment = .center
         copiedLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         copiedLabel.textColor = .white
-        copiedLabel.backgroundColor = .gray
+        copiedLabel.backgroundColor = .darkGray
         copiedLabel.layer.cornerRadius = 8
         copiedLabel.clipsToBounds = true
         
