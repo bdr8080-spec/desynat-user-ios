@@ -285,4 +285,36 @@ extension WebService {
         }
     }
     
+    func changeMobileNumberForAffiliateUserService(withParams dictParams: Dictionary<String, Any>, completion: @escaping (_ user: ChangeMobileNumModel) -> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.changeMobileNumberForAffiliatedUser), requestMethod: .post, requestParams: dictParams, encoding: JSONEncoding.default, requestModel: ChangeMobileNumModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                if let error {
+                    UIApplication.shared.topViewController()?.showAlert(msg: error)
+                } else if let response {
+                    CommonUtils.showToast(message: "Otp sent succesfully")
+                    completion(response)
+                }
+            }
+        }
+    }
+    
+    func userVerifyOtpForAffiliateUserService(withParams dictParams: Dictionary<String, Any>, completion: @escaping (_ user: UserModel) -> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.userVerifyOtpForAffiliatedUser), requestMethod: .post, requestParams: dictParams, encoding: JSONEncoding.default, requestModel: UserModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                if let error {
+                    UIApplication.shared.topViewController()?.showAlert(msg: error)
+                } else if let response {
+                    CommonUtils.showToast(message:message ?? "")
+                    completion(response)
+                }
+            }
+        }
+    }
+    
 }

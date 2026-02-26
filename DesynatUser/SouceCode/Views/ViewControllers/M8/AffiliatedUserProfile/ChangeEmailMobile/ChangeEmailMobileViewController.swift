@@ -44,11 +44,12 @@ class ChangeEmailMobileViewController: UIViewController {
     
     @IBAction func continueBtnAction(_ sender: Any) {
         if viewModel.validFields() {
-            if comingToUpdateMobile {
-                viewModel.updateAffiliatedUserMobileService()
-            } else {
-                viewModel.updateAffiliatedUserEmailService()
-            }
+            viewModel.changeMobileNumberAndEmailApi()
+//            if comingToUpdateMobile {
+//                viewModel.updateAffiliatedUserMobileService()
+//            } else {
+//                viewModel.updateAffiliatedUserEmailService()
+//            }
         }
     }
     

@@ -43,6 +43,10 @@ class AffiliatedProfileDetailsViewController: UIViewController {
     var selectedProfileImageUrl = ""
     var latitude: Double? = 0.0
     var longitude: Double? = 0.0
+    var email: String? = ""
+    var mobile: String? = ""
+    var countryCode: String = ""
+    var comingAfterUpdate: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +56,16 @@ class AffiliatedProfileDetailsViewController: UIViewController {
         addressScrollView.isHidden = true
         viewModel.countryListApi()
         viewModel.getUserProfileApi()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if comingAfterUpdate {
+            viewModel.getUserProfileApi()
+//            self.mobileTF.text = mobile
+//            self.countryCodeTF.text = countryCode
+//            self.emailTF.text = email
+        }
     }
     
     @IBAction func personalDidTapped(_ sender: Any) {
@@ -108,13 +122,14 @@ class AffiliatedProfileDetailsViewController: UIViewController {
     }
     
     @IBAction func changeMobileNumberAction(_ sender: Any) {
-        let nextVC = ChangeEmailMobileViewController.instantiate(fromAppStoryboard: .AffiliateUser)
-        nextVC.affiliatedUserProfile = viewModel.affiliatedUserProfile
-        nextVC.comingToUpdateMobile = true
-        nextVC.changesAreDone = { [weak self] in
-            self?.viewModel.getUserProfileApi()
-        }
-        self.navigationController?.pushViewController(nextVC, animated: true)
+//        let nextVC = ChangeEmailMobileViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+//        nextVC.affiliatedUserProfile = viewModel.affiliatedUserProfile
+//        nextVC.comingToUpdateMobile = true
+//        nextVC.changesAreDone = { [weak self] in
+//            self?.viewModel.getUserProfileApi()
+//        }
+//        self.navigationController?.pushViewController(nextVC, animated: true)
+        viewModel.changeMobileNumberApi()
     }
     
     @IBAction func countryCodeDidTapped(_ sender: UIButton) {
@@ -133,13 +148,14 @@ class AffiliatedProfileDetailsViewController: UIViewController {
     }
     
     @IBAction func emailChangeDidTapped(_ sender: Any) {
-        let nextVC = ChangeEmailMobileViewController.instantiate(fromAppStoryboard: .AffiliateUser)
-        nextVC.comingToUpdateMobile = false
-        nextVC.affiliatedUserProfile = viewModel.affiliatedUserProfile
-        nextVC.changesAreDone = { [weak self] in
-            self?.viewModel.getUserProfileApi()
-        }
-        self.navigationController?.pushViewController(nextVC, animated: true)
+//        let nextVC = ChangeEmailMobileViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+//        nextVC.comingToUpdateMobile = false
+//        nextVC.affiliatedUserProfile = viewModel.affiliatedUserProfile
+//        nextVC.changesAreDone = { [weak self] in
+//            self?.viewModel.getUserProfileApi()
+//        }
+//        self.navigationController?.pushViewController(nextVC, animated: true)
+        viewModel.changeEmailApi()
     }
     
     @IBAction func uploadDocumnetOneDidTapped(_ sender: Any) {

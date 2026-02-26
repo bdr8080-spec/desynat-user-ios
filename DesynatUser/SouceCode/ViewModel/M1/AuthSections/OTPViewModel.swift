@@ -57,6 +57,14 @@ class OTPViewModel: NSObject {
                 print("api called")
             case .loginViaOTPForAffiliatedUser:
                 print("api called")
+            case .changeOldMobileNumberForAffiliatedUser:
+                print("api called")
+            case .changeOldEmailNumberForAffiliatedUser:
+                print("api called")
+            case .setNewMobileNumberForAffiliatedUser:
+                print("api called")
+            case .setNewEmailForAffiliatedUser:
+                print("api called")
             }
         }
     }
@@ -85,7 +93,7 @@ class OTPViewModel: NSObject {
                     UserDefaults.standard.setValue("true", forKey: "affiliatedAccountIsLoggedIn")
                     kSharedSceneDelegate.navigateToAffiliatedUserHomeVc()
                 } else if response.adminVerify == "4" {
-//                    self.hostVC.showAlert(msg: "Document Rejected. Please Reupload it.")
+                    //                    self.hostVC.showAlert(msg: "Document Rejected. Please Reupload it.")
                     self.hostVC.showAlert(msg: "Document Rejected. Please Reupload it.\n\(response.rejectReason ?? "")")
                     let nextVC = CreateAffiliateUserAccountViewController.instantiate(fromAppStoryboard: .AffiliateUser)
                     nextVC.iscomingAfterDocumnetReject = true
@@ -107,19 +115,19 @@ class OTPViewModel: NSObject {
         }
     }
     
-//    func verifyOtpAPIForAffiliatedUser(type: String) {
-//        //        let params: [String: Any] = [
-//        //            "user_id": hostVC.userId,
-//        //            "otp": hostVC.otpDigits,
-//        //            "type": type
-//        //        ]
-//        //        WebService.sharedInstance.verifyOTPService(withParams: params) { otp in
-//        let vc = ResetPasswordViewController.instantiate(fromAppStoryboard: .Main)
-//        //                vc.userId = self.hostVC.userId
-//        vc.comingUserRole = .affiliateUser
-//        self.hostVC.navigationController?.pushViewController(vc, animated: true)
-//        //        }
-//    }
+    //    func verifyOtpAPIForAffiliatedUser(type: String) {
+    //        //        let params: [String: Any] = [
+    //        //            "user_id": hostVC.userId,
+    //        //            "otp": hostVC.otpDigits,
+    //        //            "type": type
+    //        //        ]
+    //        //        WebService.sharedInstance.verifyOTPService(withParams: params) { otp in
+    //        let vc = ResetPasswordViewController.instantiate(fromAppStoryboard: .Main)
+    //        //                vc.userId = self.hostVC.userId
+    //        vc.comingUserRole = .affiliateUser
+    //        self.hostVC.navigationController?.pushViewController(vc, animated: true)
+    //        //        }
+    //    }
     
     func resendOtpAPI() {
         var params: [String: Any] = ["email_mobile": hostVC.phoneNumber ?? ""]
@@ -186,6 +194,59 @@ class OTPViewModel: NSObject {
                     if let navController = self.hostVC.navigationController {
                         for controller in navController.viewControllers {
                             if let profileVC = controller as? ProfileDetailsViewController {
+                                profileVC.email = user.email
+                                profileVC.comingAfterUpdate = true
+                                navController.popToViewController(profileVC, animated: true)
+                                break
+                            }
+                        }
+                    }
+                    
+                }
+                self.hostVC.navigationController?.present(vc, animated: true)
+            }
+        }
+    }
+    
+    func verifyOtpApiForChangeEmailAndMobileAffiliatedUser(){
+        let param:[String:Any] = [
+            "id":self.hostVC.id,
+            "otp":self.hostVC.otpDigits]
+        
+        WebService.sharedInstance.userVerifyOtpForAffiliateUserService(withParams:param) { user in
+            if self.hostVC.comingReason == .changeOldMobileNumberForAffiliatedUser{
+                let vc = ChangeEmailMobileViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+                vc.countryCode = user.countryCode ?? ""
+                vc.comingToUpdateMobile = true
+                self.hostVC.navigationController?.pushViewController(vc, animated: false)
+            }else if self.hostVC.comingReason == .changeOldEmailNumberForAffiliatedUser{
+                let vc = ChangeEmailMobileViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+                vc.comingToUpdateMobile = false
+                self.hostVC.navigationController?.pushViewController(vc, animated: false)
+            }else if self.hostVC.comingReason == .setNewMobileNumberForAffiliatedUser{
+                let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
+                vc.comingReason = .changeMobileNumber
+                vc.callBackDismiss = {
+                    if let navController = self.hostVC.navigationController {
+                        for controller in navController.viewControllers {
+                            if let profileVC = controller as? AffiliatedProfileDetailsViewController {
+                                profileVC.mobile = user.mobile
+                                profileVC.countryCode = user.countryCode ?? ""
+                                profileVC.comingAfterUpdate = true
+                                navController.popToViewController(profileVC, animated: true)
+                                break
+                            }
+                        }
+                    }
+                }
+                self.hostVC.navigationController?.present(vc, animated: true)
+            }else if self.hostVC.comingReason == .setNewEmailForAffiliatedUser{
+                let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
+                vc.comingReason = .changeEmailAddress
+                vc.callBackDismiss = {
+                    if let navController = self.hostVC.navigationController {
+                        for controller in navController.viewControllers {
+                            if let profileVC = controller as? AffiliatedProfileDetailsViewController {
                                 profileVC.email = user.email
                                 profileVC.comingAfterUpdate = true
                                 navController.popToViewController(profileVC, animated: true)

@@ -28,6 +28,8 @@ class SearchAffiliatedProductsViewController: UIViewController {
     lazy var viewModel = SearchAffiliatedProductsViewModel(hostVC: self)
     var appliedSortFilter: Int?
     var comingFromImageScanner: Bool = false
+    var categoryId: Int? = 0
+    var subCatrgoryId: Int? = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,17 +49,15 @@ class SearchAffiliatedProductsViewController: UIViewController {
     }
     
     @IBAction func filterDidTapped(_ sender: Any) {
-        let nextVC = ProductsFiltersViewController.instantiate(fromAppStoryboard: .Catalog)
-        nextVC.selectedCategoryIDs = viewModel.selectedCategoryIDs
+        let nextVC = AffiliatedCategoryFilterViewController.instantiate(fromAppStoryboard: .AffiliateUser)
         nextVC.selectedBrandIDs = viewModel.selectedBrandIDs
         nextVC.selectedColorIDs = viewModel.selectedColorIDs
         nextVC.selectedSizeIDs = viewModel.selectedSizeIDs
         nextVC.selectedDiscountIDs = viewModel.selectedDiscountIDs
         nextVC.selectedMinPrice = viewModel.minPrice
         nextVC.selectedMaxPrice = viewModel.maxPrice
-        nextVC.onApplyFilters = { [weak self] categories, brands, colors, sizes, discounts, minPrice, maxPrice in
+        nextVC.onApplyFilters = { [weak self] brands, colors, sizes, discounts, minPrice, maxPrice in
             guard let self = self else { return }
-            self.viewModel.selectedCategoryIDs = categories
             self.viewModel.selectedBrandIDs = brands
             self.viewModel.selectedColorIDs = colors
             self.viewModel.selectedSizeIDs = sizes
@@ -66,12 +66,13 @@ class SearchAffiliatedProductsViewController: UIViewController {
             self.viewModel.maxPrice = maxPrice
             self.viewModel.resetAndFetchProducts()
         }
-        
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @IBAction func backDidTapped(_ sender: Any) {
-        self.navigationController?.popToViewController(ofType: AffiliatedCategorySearchViewController.self)
+        self.navigationController?.popViewController(animated: true)
+//        self.navigationController?.popToCategoryViewController(ofType: AffiliatedUserCategoriesViewController.self)
+//        self.navigationController?.popToViewController(ofClass: AffiliatedUserCategoriesViewController.self)
     }
     
     @IBAction func sortDidTapped(_ sender: Any) {
@@ -83,14 +84,22 @@ class SearchAffiliatedProductsViewController: UIViewController {
     
     // MARK: - Mic Button – This is what you wanted!
     @IBAction func micDidTapped(_ sender: UIButton) {
-        if isListening {
-            stopListening()
-            sender.setImage(UIImage(systemName: "mic"), for: .normal)
-        } else {
-            startListening()
-            sender.setImage(UIImage(systemName: "mic.fill"), for: .normal)
-            sender.tintColor = .systemRed // optional: show it's active
+        let nextVC = VoiceSearchViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+        nextVC.onSearchedCompletionTxt = { [weak self] searchText in
+//            self?.viewModel.filterSubCategories(with: searchText)
+            self?.searchTF.text = searchText
+            self?.viewModel.searchText = searchText
+            self?.viewModel.resetAndFetchProducts()
         }
+        self.navigationController?.present(nextVC, animated: true)
+//        if isListening {
+//            stopListening()
+//            sender.setImage(UIImage(systemName: "mic"), for: .normal)
+//        } else {
+//            startListening()
+//            sender.setImage(UIImage(systemName: "mic.fill"), for: .normal)
+//            sender.tintColor = .systemRed // optional: show it's active
+//        }
     }
     
     @IBAction func cameraDidTapped(_ sender: Any) {

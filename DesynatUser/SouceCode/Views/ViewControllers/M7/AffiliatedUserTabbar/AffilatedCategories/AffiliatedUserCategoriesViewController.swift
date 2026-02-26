@@ -38,6 +38,7 @@ class AffiliatedUserCategoriesViewController: UIViewController {
     @IBAction func micDidTapped(_ sender: UIButton) {
         let nextVC = VoiceSearchViewController.instantiate(fromAppStoryboard: .AffiliateUser)
         nextVC.onSearchedCompletionTxt = { [weak self] searchText in
+            self?.searchTF.text = searchText
             self?.viewModel.filterSubCategories(with: searchText)
         }
         self.navigationController?.present(nextVC, animated: true)
@@ -92,15 +93,18 @@ extension AffiliatedUserCategoriesViewController: UICollectionViewDataSource, UI
             viewModel.getSubCategoriesListApi(categoryID: viewModel.categoriesSection[indexPath.row].id ?? 0)
         }  else {
             // Navigate to all product page
-            let nextVC = AffiliatedProductsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+//            let nextVC = AffiliatedProductsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+//            nextVC.categoryId = viewModel.categoriesSection[selectedCatgeoryIndex].id ?? 0
+//            nextVC.subCatrgoryId = viewModel.subCategoriesSection[indexPath.row].id ?? 0
+//            nextVC.comingReasonAtAllProducts = .fromCategory
+//            self.navigationController?.pushViewController(nextVC, animated: true)
+            
+            let nextVC = SearchAffiliatedProductsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+//            nextVC.viewModel.searchText = self.txtSearch.text?.trimmed() ?? ""
+            nextVC.comingFromImageScanner = false
             nextVC.categoryId = viewModel.categoriesSection[selectedCatgeoryIndex].id ?? 0
             nextVC.subCatrgoryId = viewModel.subCategoriesSection[indexPath.row].id ?? 0
-            nextVC.comingReasonAtAllProducts = .fromCategory
             self.navigationController?.pushViewController(nextVC, animated: true)
-            
-//            let nextVC = SearchAffiliatedProductsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
-//            nextVC.viewModel.searchText = self.txtSearch.text?.trimmed() ?? ""
-//            nextVC.comingFromImageScanner = false
         }
     }
 

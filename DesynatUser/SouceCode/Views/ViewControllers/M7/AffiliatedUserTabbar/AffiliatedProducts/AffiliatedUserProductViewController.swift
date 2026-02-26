@@ -54,20 +54,28 @@ class AffiliatedUserProductViewController: UIViewController {
             status: 1,
             createdAt: nil,
             updatedAt: nil)
-            viewModel.subCategoriesSection.insert(allSubCategory, at: 0)
+        viewModel.subCategoriesSection.insert(allSubCategory, at: 0)
         viewModel.resetAndFetchProducts()
-        requestPermissions()
+//        requestPermissions()
+        viewModel.getAllSubCategoriesService()
     }
     
     @IBAction func micdidTapped(_ sender: UIButton) {
-        if isListening {
-            stopListening()
-            sender.setImage(UIImage(systemName: "mic"), for: .normal)
-        } else {
-            startListening()
-            sender.setImage(UIImage(systemName: "mic.fill"), for: .normal)
-            sender.tintColor = .systemRed // optional: show it's active
+        let nextVC = VoiceSearchViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+        nextVC.onSearchedCompletionTxt = { [weak self] searchText in
+            self?.searchTF.text = searchText
+            self?.viewModel.searchText = searchText
+            self?.viewModel.resetAndFetchProducts()
         }
+        self.navigationController?.present(nextVC, animated: true)
+        //        if isListening {
+        //            stopListening()
+        //            sender.setImage(UIImage(systemName: "mic"), for: .normal)
+        //        } else {
+        //            startListening()
+        //            sender.setImage(UIImage(systemName: "mic.fill"), for: .normal)
+        //            sender.tintColor = .systemRed // optional: show it's active
+        //        }
     }
     
     private func requestPermissions() {
@@ -243,7 +251,7 @@ extension AffiliatedUserProductViewController: UICollectionViewDelegate, UIColle
                 status: 1,
                 createdAt: nil,
                 updatedAt: nil)
-                viewModel.subCategoriesSection.insert(allSubCategory, at: 0)
+            viewModel.subCategoriesSection.insert(allSubCategory, at: 0)
             if indexPath.row > 0 {
                 viewModel.getSubCategoriesListApi(categoryID: viewModel.categoriesSection[indexPath.row].id ?? 0)
             } else {
@@ -254,10 +262,10 @@ extension AffiliatedUserProductViewController: UICollectionViewDelegate, UIColle
             selectedSubCatrgoryId = viewModel.subCategoriesSection[indexPath.row].id ?? 0
             subCatgeoryCollectionView.reloadData()
             viewModel.resetAndFetchProducts()
-        case productCollectionView:
-            let nextVC = ItemPerformanceViewController.instantiate(fromAppStoryboard: .AffiliateUser)
-            nextVC.productId = self.viewModel.productDetails[indexPath.row].productID ?? 0
-            self.navigationController?.pushViewController(nextVC, animated: true)
+            //        case productCollectionView:
+            //            let nextVC = ItemPerformanceViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+            //            nextVC.productId = self.viewModel.productDetails[indexPath.row].productID ?? 0
+            //            self.navigationController?.pushViewController(nextVC, animated: true)
         default:
             print("")
         }

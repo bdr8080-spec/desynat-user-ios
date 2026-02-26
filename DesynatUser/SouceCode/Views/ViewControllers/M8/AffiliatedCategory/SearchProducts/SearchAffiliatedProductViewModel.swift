@@ -17,7 +17,7 @@ class SearchAffiliatedProductsViewModel {
     var productDetails: [AffiliatedProductsList] = []
     var searchText: String = ""
     var attributeText: [String] = []
-    var selectedCategoryIDs: [String] = []
+//    var selectedCategoryIDs: [String] = []
     var selectedBrandIDs: [String] = []
     var selectedColorIDs: [String] = []
     var selectedSizeIDs: [String] = []
@@ -53,11 +53,13 @@ class SearchAffiliatedProductsViewModel {
         guard !isFetching, hasMorePages else { return }
         isFetching = true
         var param: [String: Any] = ["page": currentPage,
+                                    "subcategory_id": [hostVC?.subCatrgoryId],
+                                    "category_id": [hostVC?.categoryId],
                                     "limit": 20]
         if !attributeText.isEmpty { param["attributes_data"] = attributeText }
         if !searchText.isEmpty { param["search"] = searchText }
         if let sort = hostVC?.appliedSortFilter { param["sort_filter"] = sort }
-        if !selectedCategoryIDs.isEmpty { param["category_id"] = selectedCategoryIDs }
+//        if !selectedCategoryIDs.isEmpty { param["category_id"] = selectedCategoryIDs }
         if !selectedBrandIDs.isEmpty { param["brand_id"] = selectedBrandIDs }
         if let minPrice = minPrice { param["price_min"] = minPrice }
         if let maxPrice = maxPrice { param["price_max"] = maxPrice }

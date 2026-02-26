@@ -67,6 +67,27 @@ class AffiliatedUserProductViewModel {
         }
     }
     
+    func getAllSubCategoriesService() {
+        WebService.sharedInstance.getAllSubCategoriesService() { [weak self] list in
+            guard let self = self else { return }
+//            var updatedList = list
+//            // Default "All" SubCategory
+//            let allSubCategory = SubCategoriesDataModel(
+//                id: -1,
+//                categoryID: categoryID,
+//                nameEnglish: "All",
+//                nameArabic: "الكل",
+//                image: nil,
+//                status: 1,
+//                createdAt: nil,
+//                updatedAt: nil)
+//            updatedList.insert(allSubCategory, at: 0)
+//            self.subCategoriesSection = updatedList
+            self.subCategoriesSection.append(contentsOf: list)
+            self.hostVC.subCatgeoryCollectionView.reloadData()
+        }
+    }
+    
     func getAllProducts(reset: Bool = false) {
         if reset {
             currentPage = 1

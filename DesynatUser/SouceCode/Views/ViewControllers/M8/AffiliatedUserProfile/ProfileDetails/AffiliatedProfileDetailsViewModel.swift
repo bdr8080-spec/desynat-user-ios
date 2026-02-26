@@ -196,6 +196,50 @@ class AffiliatedProfileDetailsViewModel {
         }
     }
     
+    //Mark->:changeMobileNumberApi
+    func changeMobileNumberApi(){
+        let param:[String:Any] = [
+               "for":"mobile", //mobile,email
+               "country_code":self.hostVC.countryCodeTF.text ?? "",
+               "mobile":self.hostVC.mobileTF.text ?? "",
+               "type":"0"] //0-old,1-new
+       
+        WebService.sharedInstance.changeMobileNumberForAffiliateUserService(withParams:param) { user in
+            let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
+            vc.comingReason = .changeOldMobileNumberForAffiliatedUser
+            vc.id = "\(user.id ?? 0)"
+            vc.isEnteredPhoneNumber = true
+            vc.phoneNumber = self.hostVC.mobileTF.text?.trimmed() ?? ""
+            vc.countryCode = self.hostVC.countryCodeTF.text?.trimmed() ?? ""
+            vc.callBackForProfileDetails = { mobile,countryCode,_ in
+                self.hostVC.mobileTF.text = mobile
+                self.hostVC.countryCodeTF.text = countryCode
+            }
+            self.hostVC.navigationController?.pushViewController(vc, animated: true)
+            
+        }
+    }
+    
+    //Mark->:changeEmailApi
+    func changeEmailApi(){
+        let param:[String:Any] = [
+               "for":"email", //mobile,email
+               "email":self.hostVC.emailTF.text ?? "",
+               "type":"0"] //0-old,1-new
+        WebService.sharedInstance.changeMobileNumberForAffiliateUserService(withParams:param) { user in
+            let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
+            vc.comingReason = .changeOldEmailNumberForAffiliatedUser
+            vc.id = "\(user.id ?? 0)"
+            vc.isEnteredPhoneNumber = false
+            vc.phoneNumber = self.hostVC.emailTF.text?.trimmed() ?? ""
+            vc.callBackForProfileDetails = { _, _, email in
+                self.hostVC.emailTF.text = email
+            }
+            self.hostVC.navigationController?.pushViewController(vc, animated: true)
+            
+        }
+    }
+    
     func convertToDouble(_ string: String) -> Double? {
         guard let value = Double(string) else {
             return nil

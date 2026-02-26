@@ -91,6 +91,14 @@ class OTPViewController: UIViewController {
             viewModel.verifyAffiliatedAccountService(type: "1")
         case .loginViaOTPForAffiliatedUser:
             viewModel.verifyAffiliatedAccountService(type: "1")
+        case .changeOldMobileNumberForAffiliatedUser:
+            viewModel.verifyOtpApiForChangeEmailAndMobileAffiliatedUser()
+        case .changeOldEmailNumberForAffiliatedUser:
+            viewModel.verifyOtpApiForChangeEmailAndMobileAffiliatedUser()
+        case .setNewMobileNumberForAffiliatedUser:
+            viewModel.verifyOtpApiForChangeEmailAndMobileAffiliatedUser()
+        case .setNewEmailForAffiliatedUser:
+            viewModel.verifyOtpApiForChangeEmailAndMobileAffiliatedUser()
         }
     }
     
@@ -220,4 +228,8 @@ enum ComingReasonAtOTPScreen {
     case forgotPasswordForAffiliatedUser
     case accountCreateAffiliateUser
     case loginViaOTPForAffiliatedUser
+    case changeOldMobileNumberForAffiliatedUser
+    case changeOldEmailNumberForAffiliatedUser
+    case setNewMobileNumberForAffiliatedUser
+    case setNewEmailForAffiliatedUser
 }

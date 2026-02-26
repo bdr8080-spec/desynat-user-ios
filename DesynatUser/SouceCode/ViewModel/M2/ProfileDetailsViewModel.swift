@@ -40,12 +40,10 @@ class ProfileDetailsViewModel:NSObject{
     //Mark->:changeMobileNumberApi
     func changeMobileNumberApi(){
         let param:[String:Any] = [
-               "for":"mobile",
+               "for":"mobile", //mobile,email
                "country_code":self.hostVC.txtCountryCode.text ?? "",
                "mobile":self.hostVC.txtMobileNumber.text ?? "",
-               "type":"0"
-               
-           ]
+               "type":"0"] //0-old,1-new
        
         WebService.sharedInstance.changeMobileNumberService(withParams:param) { user in
             let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
@@ -57,8 +55,6 @@ class ProfileDetailsViewModel:NSObject{
             vc.callBackForProfileDetails = { mobile,countryCode,_ in
                 self.hostVC.txtMobileNumber.text = mobile
                 self.hostVC.txtCountryCode.text = countryCode
-                print("mobile:\(mobile)")
-                print("countryCode:\(countryCode)")
             }
             self.hostVC.navigationController?.pushViewController(vc, animated: true)
             
@@ -68,12 +64,9 @@ class ProfileDetailsViewModel:NSObject{
     //Mark->:changeEmailApi
     func changeEmailApi(){
         let param:[String:Any] = [
-               "for":"email",
+               "for":"email", //mobile,email
                "email":self.hostVC.txtEmail.text ?? "",
-               "type":"0"
-               
-           ]
-         
+               "type":"0"] //0-old,1-new
         WebService.sharedInstance.changeMobileNumberService(withParams:param) { user in
             let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
             vc.comingReason = .changeOldEmail
@@ -82,7 +75,6 @@ class ProfileDetailsViewModel:NSObject{
             vc.phoneNumber = self.hostVC.txtEmail.text?.trimmed() ?? ""
             vc.callBackForProfileDetails = { _, _, email in
                 self.hostVC.txtEmail.text = email
-                print("email:\(email)")
             }
             self.hostVC.navigationController?.pushViewController(vc, animated: true)
             

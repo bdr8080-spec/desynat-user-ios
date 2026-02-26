@@ -44,9 +44,6 @@ extension WebService {
                 if let error {
                     UIApplication.shared.topViewController()?.showAlert(msg: error)
                 } else if let response {
-                    //Global.shared.user = response
-                  //  kSharedUserDefaults.saveModelFor(key: .user, value: response)
-                  //  kSharedUserDefaults.saveStringFor(Key: .accessToken, value: response.accessToken)
                     CommonUtils.showToast(message: "Otp sent succesfully")
                     completion(response)
                 }
@@ -62,9 +59,6 @@ extension WebService {
                 if let error {
                     UIApplication.shared.topViewController()?.showAlert(msg: error)
                 } else if let response {
-//                    Global.shared.user = response
-//                    kSharedUserDefaults.saveModelFor(key: .user, value: response)
-//                    kSharedUserDefaults.saveStringFor(Key: .accessToken, value: response.accessToken)
                     CommonUtils.showToast(message:message ?? "")
                     completion(response)
                 }
