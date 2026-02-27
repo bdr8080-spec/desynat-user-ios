@@ -19,38 +19,15 @@ class AffiliatedCategoryFilterViewController: UIViewController {
     var selectedDiscountIDs: [String] = []
     var selectedMinPrice: Int?
     var selectedMaxPrice: Int?
-
+    private var isColorExpanded = false
+    private let colorSectionIndex = 2
+    private let defaultVisibleColorCount = 10
+    
     // Callback to send data back
     var onApplyFilters: (( [String], [String], [String], [String], Int?, Int?) -> Void)?
 
     // MARK: - FILTER SECTIONS
-//    var filtersOptions: [ProductFilterSection] = [
-//        ProductFilterSection(header: "Category", description: "", options: []),
-//        ProductFilterSection(header: "Brand", description: "A-Z", options: []),
-//        ProductFilterSection(header: "Price", description: "", options: []),
-//        ProductFilterSection(header: "Color", description: "", options: []),
-//        ProductFilterSection(header: "Discount Range", description: "", options: [
-//            ProductFilterOption(title: "10%", isSelected: false, apiParcing: "10", havingColourCode: false, colourCode: ""),
-//            ProductFilterOption(title: "20%", isSelected: false, apiParcing: "20", havingColourCode: false, colourCode: ""),
-//            ProductFilterOption(title: "30%", isSelected: false, apiParcing: "30", havingColourCode: false, colourCode: ""),
-//            ProductFilterOption(title: "40%", isSelected: false, apiParcing: "40", havingColourCode: false, colourCode: ""),
-//            ProductFilterOption(title: "50%", isSelected: false, apiParcing: "50", havingColourCode: false, colourCode: "")
-//        ]),
-//        ProductFilterSection(header: "Sizes", description: "", options: []),
-//        ProductFilterSection(header: "Ratings", description: "", options: [
-//            ProductFilterOption(title: "1 Star", isSelected: false, apiParcing: "1", havingColourCode: false, colourCode: ""),
-//            ProductFilterOption(title: "2 Star", isSelected: false, apiParcing: "2", havingColourCode: false, colourCode: ""),
-//            ProductFilterOption(title: "3 Star", isSelected: false, apiParcing: "3", havingColourCode: false, colourCode: ""),
-//            ProductFilterOption(title: "4 Star", isSelected: false, apiParcing: "4", havingColourCode: false, colourCode: ""),
-//            ProductFilterOption(title: "5 Star", isSelected: false, apiParcing: "5", havingColourCode: false, colourCode: "")
-//        ]),
-//        ProductFilterSection(header: "Delivery Time", description: "", options: [
-//            ProductFilterOption(title: "Today - 2 days", isSelected: false, apiParcing: "1", havingColourCode: false, colourCode: ""),
-//            ProductFilterOption(title: "3 - 5 days", isSelected: false, apiParcing: "2", havingColourCode: false, colourCode: ""),
-//            ProductFilterOption(title: "6 - 12 days", isSelected: false, apiParcing: "3", havingColourCode: false, colourCode: "")
-//        ]),
-//    ]
-    
+
     var filtersOptions: [ProductFilterSection] = [
         ProductFilterSection(header: "Brand", description: "A-Z", options: []),
         ProductFilterSection(header: "Price", description: "", options: []),
@@ -88,25 +65,10 @@ class AffiliatedCategoryFilterViewController: UIViewController {
 
     // MARK: - API CALLS
     private func callDynamicFilterAPIs() {
-//        viewModel.getAllCategory { [weak self] in self?.prepareCategorySection() }
         viewModel.getAllBrands { [weak self] in self?.prepareBrandSection() }
         viewModel.getAllColors { [weak self] in self?.prepareColorSection() }
         viewModel.getAllSize { [weak self] in self?.prepareSizeSection() }
     }
-
-//  func prepareCategorySection() {
-//      let options = viewModel.getAllCategoriesList.map {
-//          ProductFilterOption(
-//              title: $0.name ?? "",
-//              isSelected: selectedCategoryIDs.contains("\($0.id ?? 0)"), // important
-//              apiParcing: "\($0.id ?? 0)",
-//              havingColourCode: false,
-//              colourCode: ""
-//          )
-//      }
-//      filtersOptions[0].options = options
-//      filtersTableView.reloadSections(IndexSet(integer: 0), with: .none)
-//  }
 
   func prepareBrandSection() {
       let options = viewModel.getAllBrandsList.map {
@@ -149,6 +111,8 @@ class AffiliatedCategoryFilterViewController: UIViewController {
       filtersOptions[4].options = options
       filtersTableView.reloadSections(IndexSet(integer: 4), with: .none)
   }
+    
+    
 
 
     // MARK: - ACTIONS
@@ -158,7 +122,6 @@ class AffiliatedCategoryFilterViewController: UIViewController {
 
     @IBAction func applydidTapped(_ sender: Any) {
         onApplyFilters?(
-//            selectedCategoryIDs,
             selectedBrandIDs,
             selectedColorIDs,
             selectedSizeIDs,
@@ -170,7 +133,6 @@ class AffiliatedCategoryFilterViewController: UIViewController {
     }
 
     @IBAction func clearDidTapped(_ sender: Any) {
-//        selectedCategoryIDs.removeAll()
         selectedBrandIDs.removeAll()
         selectedColorIDs.removeAll()
         selectedSizeIDs.removeAll()
@@ -187,7 +149,6 @@ class AffiliatedCategoryFilterViewController: UIViewController {
 
         filtersTableView.reloadData()
       onApplyFilters?(
-//              selectedCategoryIDs,
               selectedBrandIDs,
               selectedColorIDs,
               selectedSizeIDs,
@@ -218,6 +179,17 @@ extension AffiliatedCategoryFilterViewController: UITableViewDelegate, UITableVi
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if filtersOptions[section].header == "Price" { return 1 }
+        if section == colorSectionIndex {
+                let totalColors = filtersOptions[section].options.count
+                
+                if totalColors <= defaultVisibleColorCount {
+                    return totalColors
+                }
+                
+                return isColorExpanded
+                    ? totalColors + 1   // +1 for Show Less
+                    : defaultVisibleColorCount + 1 // +1 for Show More
+            }
         return filtersOptions[section].options.count
     }
 
@@ -249,7 +221,47 @@ extension AffiliatedCategoryFilterViewController: UITableViewDelegate, UITableVi
 
           return cell
       }
+        // 👇 Special handling for Color section
+            if indexPath.section == colorSectionIndex {
 
+                let totalColors = filtersOptions[indexPath.section].options.count
+
+                // SHOW MORE / LESS CELL
+                if totalColors > defaultVisibleColorCount {
+                    
+                    if (!isColorExpanded && indexPath.row == defaultVisibleColorCount) ||
+                       (isColorExpanded && indexPath.row == totalColors) {
+
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
+                        
+                        let title = isColorExpanded ? "Show Less" : "Show More"
+                        
+                        let showMoreOption = ProductFilterOption(
+                            title: title,
+                            isSelected: false,
+                            apiParcing: "",
+                            havingColourCode: false,
+                            colourCode: ""
+                        )
+                        
+                        cell.configureProductFilter(option: showMoreOption)
+                        
+                        // ✅ Make text bold
+//                        cell.titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
+                        
+                        return cell
+                    }
+                }
+
+                let visibleOptions = isColorExpanded
+                    ? filtersOptions[indexPath.section].options
+                    : Array(filtersOptions[indexPath.section].options.prefix(defaultVisibleColorCount))
+
+                let option = visibleOptions[indexPath.row]
+                let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
+                cell.configureProductFilter(option: option)
+                return cell
+            }
         let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
         let option = filtersOptions[indexPath.section].options[indexPath.row]
         cell.configureProductFilter(option: option)
@@ -273,22 +285,44 @@ extension AffiliatedCategoryFilterViewController: UITableViewDelegate, UITableVi
         let sectionName = filtersOptions[section].header
 
         if sectionName == "Price" { return }
+        // 👇 Handle Show More / Less tap
+            if section == colorSectionIndex {
+                
+                let totalColors = filtersOptions[section].options.count
 
+                if totalColors > defaultVisibleColorCount {
+                    
+                    if (!isColorExpanded && indexPath.row == defaultVisibleColorCount) ||
+                       (isColorExpanded && indexPath.row == totalColors) {
+
+                        isColorExpanded.toggle()
+                        tableView.reloadSections(IndexSet(integer: section), with: .automatic)
+                        return
+                    }
+                }
+
+                let actualIndex = isColorExpanded
+                    ? indexPath.row
+                    : indexPath.row
+
+                filtersOptions[section].options[actualIndex].isSelected.toggle()
+                let option = filtersOptions[section].options[actualIndex]
+
+                if filtersOptions[section].options[actualIndex].isSelected {
+                    selectedColorIDs.append(option.apiParcing)
+                } else {
+                    selectedColorIDs.removeAll { $0 == option.apiParcing }
+                }
+
+                tableView.reloadSections(IndexSet(integer: section), with: .none)
+                return
+            }
         // Toggle selection
         filtersOptions[section].options[indexPath.row].isSelected.toggle()
         let isSelected = filtersOptions[section].options[indexPath.row].isSelected
         let option = filtersOptions[section].options[indexPath.row]
 
         switch sectionName {
-//        case "Category":
-//                // Single selection: deselect all first
-//                for i in 0..<filtersOptions[section].options.count {
-//                    filtersOptions[section].options[i].isSelected = false
-//                }
-//
-//                // Select the tapped option if it was not selected
-//                filtersOptions[section].options[indexPath.row].isSelected = true
-//                selectedCategoryIDs = [option.apiParcing]
 
         case "Brand":
             if isSelected {

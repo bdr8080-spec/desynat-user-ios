@@ -113,6 +113,23 @@ extension WebService {
         }
     }
     
+    func makeDefaultBankAccountAffilaitedUserService(param: [String: Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.makeDefualtAffiliateBankDetails), requestMethod: .post, requestParams: param,  requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
     func changePasswordOfAffilaitedUserService(param: [String: Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
         CommonUtils.showHud(show: true)

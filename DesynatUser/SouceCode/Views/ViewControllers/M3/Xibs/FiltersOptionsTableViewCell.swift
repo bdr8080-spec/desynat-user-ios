@@ -39,7 +39,14 @@ class FiltersOptionsTableViewCell: UITableViewCell {
     
     func configureProductFilter(option: ProductFilterOption) {
         titleLabel.text = option.title
-        
+        // Reset to default first (IMPORTANT for reuse)
+            titleLabel.font = UIFont.systemFont(ofSize: 14)
+
+            // If it's Show More / Show Less → make bold
+            if option.title == "Show More" || option.title == "Show Less" {
+                titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
+            }
+
         if option.havingColourCode {
             colourView.isHidden = false
             colourView.backgroundColor = UIColor(hexString: option.colourCode)

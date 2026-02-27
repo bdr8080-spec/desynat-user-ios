@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Speech
+//import Speech
 
 class AffiliatedUserCategoriesViewController: UIViewController {
 

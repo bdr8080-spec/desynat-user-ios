@@ -71,8 +71,6 @@ class SearchAffiliatedProductsViewController: UIViewController {
     
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
-//        self.navigationController?.popToCategoryViewController(ofType: AffiliatedUserCategoriesViewController.self)
-//        self.navigationController?.popToViewController(ofClass: AffiliatedUserCategoriesViewController.self)
     }
     
     @IBAction func sortDidTapped(_ sender: Any) {
@@ -86,20 +84,11 @@ class SearchAffiliatedProductsViewController: UIViewController {
     @IBAction func micDidTapped(_ sender: UIButton) {
         let nextVC = VoiceSearchViewController.instantiate(fromAppStoryboard: .AffiliateUser)
         nextVC.onSearchedCompletionTxt = { [weak self] searchText in
-//            self?.viewModel.filterSubCategories(with: searchText)
             self?.searchTF.text = searchText
             self?.viewModel.searchText = searchText
             self?.viewModel.resetAndFetchProducts()
         }
         self.navigationController?.present(nextVC, animated: true)
-//        if isListening {
-//            stopListening()
-//            sender.setImage(UIImage(systemName: "mic"), for: .normal)
-//        } else {
-//            startListening()
-//            sender.setImage(UIImage(systemName: "mic.fill"), for: .normal)
-//            sender.tintColor = .systemRed // optional: show it's active
-//        }
     }
     
     @IBAction func cameraDidTapped(_ sender: Any) {
@@ -228,10 +217,6 @@ extension SearchAffiliatedProductsViewController: UICollectionViewDelegate, UICo
         }
         return cell
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        viewModel.generateProductLink(productId: viewModel.productDetails[indexPath.row].id ?? 0)
-//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt
                         indexPath: IndexPath) -> CGSize {

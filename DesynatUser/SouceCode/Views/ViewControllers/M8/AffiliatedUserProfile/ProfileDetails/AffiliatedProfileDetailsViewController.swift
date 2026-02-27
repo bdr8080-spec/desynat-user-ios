@@ -36,7 +36,7 @@ class AffiliatedProfileDetailsViewController: UIViewController {
     @IBOutlet weak var addressLineOneTF: UITextField!
     @IBOutlet weak var addressLineTwoTF: UITextField!
     
-    private var selectedCardIndex = 0
+//    private var selectedCardIndex = 0
     private lazy var viewModel = AffiliatedProfileDetailsViewModel(hostVC: self)
     var uplaodDocuOneImage = ""
     var uploadDocTwoImage = ""
@@ -62,9 +62,6 @@ class AffiliatedProfileDetailsViewController: UIViewController {
         super.viewWillAppear(animated)
         if comingAfterUpdate {
             viewModel.getUserProfileApi()
-//            self.mobileTF.text = mobile
-//            self.countryCodeTF.text = countryCode
-//            self.emailTF.text = email
         }
     }
     
@@ -122,39 +119,14 @@ class AffiliatedProfileDetailsViewController: UIViewController {
     }
     
     @IBAction func changeMobileNumberAction(_ sender: Any) {
-//        let nextVC = ChangeEmailMobileViewController.instantiate(fromAppStoryboard: .AffiliateUser)
-//        nextVC.affiliatedUserProfile = viewModel.affiliatedUserProfile
-//        nextVC.comingToUpdateMobile = true
-//        nextVC.changesAreDone = { [weak self] in
-//            self?.viewModel.getUserProfileApi()
-//        }
-//        self.navigationController?.pushViewController(nextVC, animated: true)
         viewModel.changeMobileNumberApi()
     }
     
     @IBAction func countryCodeDidTapped(_ sender: UIButton) {
-//        let countryNames = viewModel.countryList.map { country -> String in
-//            let name = country.name ?? ""
-//            let dialCode = country.dialCode ?? ""
-//            let flag = country.flag ?? "🇰🇼"
-//            return "\(flag)  \(name) (\(dialCode))"
-//        }
-//        
-//        kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
-//            let selectedCountry = self.viewModel.countryList[index]
-//            let code = selectedCountry.dialCode ?? "+965"
-//            self.countryCodeTF.text = code
-//        }
+
     }
     
     @IBAction func emailChangeDidTapped(_ sender: Any) {
-//        let nextVC = ChangeEmailMobileViewController.instantiate(fromAppStoryboard: .AffiliateUser)
-//        nextVC.comingToUpdateMobile = false
-//        nextVC.affiliatedUserProfile = viewModel.affiliatedUserProfile
-//        nextVC.changesAreDone = { [weak self] in
-//            self?.viewModel.getUserProfileApi()
-//        }
-//        self.navigationController?.pushViewController(nextVC, animated: true)
         viewModel.changeEmailApi()
     }
     
@@ -308,17 +280,11 @@ extension AffiliatedProfileDetailsViewController: UITableViewDelegate, UITableVi
                 viewModel.deleteBankAccountAffilaitedUserApi(id: viewModel.affiliatedUserProfile?.bankDetails?[indexPath.row].id ?? 0)
             }
         }
-        if selectedCardIndex == indexPath.row {
-            cell.mainImageView.image = .radioSelected
-        } else {
-            cell.mainImageView.image = .unselcetdRadioHome
-        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedCardIndex = indexPath.row
-        bankAccountTableView.reloadData()
+        viewModel.makeDefaultBankAccountAffilaitedUserApi(id: viewModel.affiliatedUserProfile?.bankDetails?[indexPath.row].id ?? 0)
     }
     
 }

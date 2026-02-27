@@ -78,6 +78,7 @@ struct BankDetail: Codable {
     let userID, type, accountType, accountNo: String?
     let iban, swift, bankName, accountHolderName: String?
     let uploadProof: String?
+    let defaultAccount: String?
     let createdAt, updatedAt: String?
     
     enum CodingKeys: String, CodingKey {
@@ -92,6 +93,7 @@ struct BankDetail: Codable {
         case uploadProof = "upload_proof"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case defaultAccount = "default_account"
     }
 }
 

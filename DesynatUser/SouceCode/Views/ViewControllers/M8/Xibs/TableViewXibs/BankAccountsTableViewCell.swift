@@ -36,6 +36,12 @@ class BankAccountsTableViewCell: UITableViewCell {
     
     func configData(data: BankDetail?) {
         titleLabel.text = maskAccountNumber(data?.accountNo ?? "")
+        let isDefaultBankAccount = data?.defaultAccount ?? "0"
+        if isDefaultBankAccount == "1" {
+            mainImageView.image = .radioSelected
+        } else {
+            mainImageView.image = .radioUnselected
+        }
     }
     
     func maskAccountNumber(_ accountNumber: String) -> String {

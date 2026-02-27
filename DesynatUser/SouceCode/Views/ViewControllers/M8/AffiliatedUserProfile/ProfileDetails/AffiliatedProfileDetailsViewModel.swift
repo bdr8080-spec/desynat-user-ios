@@ -196,6 +196,14 @@ class AffiliatedProfileDetailsViewModel {
         }
     }
     
+    func makeDefaultBankAccountAffilaitedUserApi(id: Int){
+        let param: [String: Any] = ["bank_details_id": id]
+        WebService.sharedInstance.makeDefaultBankAccountAffilaitedUserService(param: param) { response in
+            CommonUtils.showToast(message: "Bank Account changed succesfully")
+            self.getUserProfileApi()
+        }
+    }
+    
     //Mark->:changeMobileNumberApi
     func changeMobileNumberApi(){
         let param:[String:Any] = [
