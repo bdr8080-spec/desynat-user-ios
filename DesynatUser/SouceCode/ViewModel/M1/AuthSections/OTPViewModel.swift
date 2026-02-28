@@ -230,8 +230,8 @@ class OTPViewModel: NSObject {
                     if let navController = self.hostVC.navigationController {
                         for controller in navController.viewControllers {
                             if let profileVC = controller as? AffiliatedProfileDetailsViewController {
-                                profileVC.mobile = user.mobile
-                                profileVC.countryCode = user.countryCode ?? ""
+//                                profileVC.mobile = user.mobile
+//                                profileVC.countryCode = user. ?? ""
                                 profileVC.comingAfterUpdate = true
                                 navController.popToViewController(profileVC, animated: true)
                                 break
@@ -247,7 +247,7 @@ class OTPViewModel: NSObject {
                     if let navController = self.hostVC.navigationController {
                         for controller in navController.viewControllers {
                             if let profileVC = controller as? AffiliatedProfileDetailsViewController {
-                                profileVC.email = user.email
+//                                profileVC.email = user.email
                                 profileVC.comingAfterUpdate = true
                                 navController.popToViewController(profileVC, animated: true)
                                 break

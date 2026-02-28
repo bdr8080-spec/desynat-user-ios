@@ -21,7 +21,7 @@ class AffiliatedUserAddressAdditionViewController: UIViewController {
     private lazy var viewModel = AffiliatedUserAddressAdditionViewModel(hostVC: self)
     var latitude: Double? = 0.0
     var longitude: Double? = 0.0
-    var selectedCountryCode: String? = "+965"
+    var selectedCountryCode: String? = ""
     var affiliatedUserToken: String = ""
     
     override func viewDidLoad() {
@@ -82,7 +82,7 @@ class AffiliatedUserAddressAdditionViewController: UIViewController {
             let selectedCountry = self.viewModel.getAllUSerCountryList[index]
             let name = selectedCountry.name
             self.countryTF.text = name
-            self.selectedCountryCode = selectedCountry.dialCode
+            self.selectedCountryCode = selectedCountry.id?.description
         }
     }
     

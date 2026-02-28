@@ -123,7 +123,7 @@ enum NetworkEndPoint: String {
     case updatedAffiliateBankDetails    = "api/affiliate/update_affiliate_bank_details"
     case addAffiliateBankDetails        = "api/affiliate/add_affiliate_bank_details"
     case deleteAffiliateBankDetails     = "api/affiliate/delete_affiliate_bank_account"
-    case makeDefualtAffiliateBankDetails     = ""
+    case makeDefualtAffiliateBankDetails     = "api/affiliate/default_affiliate_bank_details"
     case updateAffiliateUserPassword    = "api/affiliate/update_affiliate_password"
     case getAllAffiliateUserProduct     = "api/affiliate/get_all_products"
     case generateProductLink            = "api/affiliate/generate_product_link"
@@ -134,6 +134,7 @@ enum NetworkEndPoint: String {
     case productfilterKeys              = "api/affiliate/product_filter_keys"
     case getMyProducts                  = "api/affiliate/get_my_products"
     case getMyProductDetails            = "api/affiliate/get_my_product_detail"
+    case deleteMyProductDetails         = "api/affiliate/affiliate_remove_affilate_product"
     case changeMobileNumberForAffiliatedUser = "api/affiliate/change-mobile-number"
     case userVerifyOtpForAffiliatedUser = "api/affiliate/verify-otp"
     

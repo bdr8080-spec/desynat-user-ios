@@ -34,7 +34,7 @@ class SearchAffiliatedProductsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchTF.delegate = self
-        requestPermissions()
+//        requestPermissions()
         if comingFromImageScanner {
             searchTF.text = viewModel.attributeText.joined(separator: ", ")
         } else {
@@ -106,99 +106,99 @@ class SearchAffiliatedProductsViewController: UIViewController {
     
     // MARK: - Start Listening (Speech → Text)
     
-    private func requestPermissions() {
-        SFSpeechRecognizer.requestAuthorization { status in
-            print("Speech permission: \(status)")
-        }
-        
-        if #available(iOS 17.0, *) {
-            AVAudioApplication.requestRecordPermission { granted in
-                DispatchQueue.main.async {
-                    print("Mic permission: \(granted)")
-                }
-            }
-        } else {
-            AVAudioSession.sharedInstance().requestRecordPermission { granted in
-                DispatchQueue.main.async {
-                    print("Mic permission: \(granted)")
-                }
-            }
-        }
-    }
+//    private func requestPermissions() {
+//        SFSpeechRecognizer.requestAuthorization { status in
+//            print("Speech permission: \(status)")
+//        }
+//        
+//        if #available(iOS 17.0, *) {
+//            AVAudioApplication.requestRecordPermission { granted in
+//                DispatchQueue.main.async {
+//                    print("Mic permission: \(granted)")
+//                }
+//            }
+//        } else {
+//            AVAudioSession.sharedInstance().requestRecordPermission { granted in
+//                DispatchQueue.main.async {
+//                    print("Mic permission: \(granted)")
+//                }
+//            }
+//        }
+//    }
     
-    private func startListening() {
-        // Reset everything
-        recognitionTask?.cancel()
-        recognitionTask = nil
-        recognitionRequest = nil
-        
-        let audioSession = AVAudioSession.sharedInstance()
-        do {
-            try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
-            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
-        } catch {
-            print("Audio session error: \(error)")
-            return
-        }
-        
-        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
-        guard let request = recognitionRequest else { return }
-        request.shouldReportPartialResults = true
-        
-        recognitionTask = speechRecognizer?.recognitionTask(with: request) { [weak self] result, error in
-            guard let self = self else { return }
-            
-            if let result = result {
-                let text = result.bestTranscription.formattedString
-                self.searchTF.text = text
-                self.viewModel.searchText = text
-                viewModel.resetAndFetchProducts() // live search as user speaks
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    self.stopListening()
-                }
-            }
-            
-            if error != nil || result?.isFinal == true {
-                self.stopListening()
-                DispatchQueue.main.async {
-                    (self.searchTF.inputView as? UIButton)?.setImage(UIImage(systemName: "mic"), for: .normal)
-                }
-            }
-        }
-        
-        let inputNode = audioEngine.inputNode
-        let recordingFormat = inputNode.outputFormat(forBus: 0)
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
-            request.append(buffer)
-        }
-        
-        audioEngine.prepare()
-        do {
-            try audioEngine.start()
-            isListening = true
-            searchTF.becomeFirstResponder()
-        } catch {
-            print("Failed to start audio engine: \(error)")
-            stopListening()
-        }
-    }
+//    private func startListening() {
+//        // Reset everything
+//        recognitionTask?.cancel()
+//        recognitionTask = nil
+//        recognitionRequest = nil
+//        
+//        let audioSession = AVAudioSession.sharedInstance()
+//        do {
+//            try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
+//            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+//        } catch {
+//            print("Audio session error: \(error)")
+//            return
+//        }
+//        
+//        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+//        guard let request = recognitionRequest else { return }
+//        request.shouldReportPartialResults = true
+//        
+//        recognitionTask = speechRecognizer?.recognitionTask(with: request) { [weak self] result, error in
+//            guard let self = self else { return }
+//            
+//            if let result = result {
+//                let text = result.bestTranscription.formattedString
+//                self.searchTF.text = text
+//                self.viewModel.searchText = text
+//                viewModel.resetAndFetchProducts() // live search as user speaks
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//                    self.stopListening()
+//                }
+//            }
+//            
+//            if error != nil || result?.isFinal == true {
+//                self.stopListening()
+//                DispatchQueue.main.async {
+//                    (self.searchTF.inputView as? UIButton)?.setImage(UIImage(systemName: "mic"), for: .normal)
+//                }
+//            }
+//        }
+//        
+//        let inputNode = audioEngine.inputNode
+//        let recordingFormat = inputNode.outputFormat(forBus: 0)
+//        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
+//            request.append(buffer)
+//        }
+//        
+//        audioEngine.prepare()
+//        do {
+//            try audioEngine.start()
+//            isListening = true
+//            searchTF.becomeFirstResponder()
+//        } catch {
+//            print("Failed to start audio engine: \(error)")
+//            stopListening()
+//        }
+//    }
     
     // MARK: - Stop Listening
-    private func stopListening() {
-        audioEngine.stop()
-        audioEngine.inputNode.removeTap(onBus: 0)
-        recognitionRequest?.endAudio()
-        recognitionRequest = nil
-        recognitionTask?.cancel()
-        recognitionTask = nil
-        isListening = false
-        btnMicOutlet.setImage(UIImage(systemName: "mic"), for: .normal)
-        btnMicOutlet.tintColor = .label
-    }
+//    private func stopListening() {
+//        audioEngine.stop()
+//        audioEngine.inputNode.removeTap(onBus: 0)
+//        recognitionRequest?.endAudio()
+//        recognitionRequest = nil
+//        recognitionTask?.cancel()
+//        recognitionTask = nil
+//        isListening = false
+//        btnMicOutlet.setImage(UIImage(systemName: "mic"), for: .normal)
+//        btnMicOutlet.tintColor = .label
+//    }
     
-    deinit {
-        stopListening()
-    }
+//    deinit {
+//        stopListening()
+//    }
     
 }
 

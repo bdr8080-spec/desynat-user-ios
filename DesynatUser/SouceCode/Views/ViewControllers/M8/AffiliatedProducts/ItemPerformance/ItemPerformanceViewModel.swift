@@ -27,6 +27,17 @@ class ItemPerformanceViewModel {
         }
     }
     
+    func deleteAffiliatedProductData() {
+        let param: [String: Any] = ["id": productsDetailsData?.id ?? 0]
+        WebService.sharedInstance.deleteProductsDetailsService(param: param) { data in
+            DispatchQueue.main.async {
+                self.hostVC.onProductIsRemoved?()
+                CommonUtils.showToast(message: "Product is removed successfully")
+                self.hostVC.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
     private func populateData() {
         guard let data = productsDetailsData else { return }
         if let imageUrlString = data.product?.productVariants?.first?.variantImage?.first,

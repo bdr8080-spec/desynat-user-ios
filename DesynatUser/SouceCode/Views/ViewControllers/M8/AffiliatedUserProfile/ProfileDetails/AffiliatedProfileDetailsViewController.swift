@@ -36,25 +36,24 @@ class AffiliatedProfileDetailsViewController: UIViewController {
     @IBOutlet weak var addressLineOneTF: UITextField!
     @IBOutlet weak var addressLineTwoTF: UITextField!
     
-//    private var selectedCardIndex = 0
     private lazy var viewModel = AffiliatedProfileDetailsViewModel(hostVC: self)
     var uplaodDocuOneImage = ""
     var uploadDocTwoImage = ""
     var selectedProfileImageUrl = ""
     var latitude: Double? = 0.0
     var longitude: Double? = 0.0
-    var email: String? = ""
-    var mobile: String? = ""
-    var countryCode: String = ""
+//    var email: String? = ""
+//    var mobile: String? = ""
+    var selectedAddressCountryCode: String? = "0"
     var comingAfterUpdate: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.countryListApi()
         selectTab(.personal)
         personalInfoScrollView.isHidden = false
         bankAccountView.isHidden = true
         addressScrollView.isHidden = true
-        viewModel.countryListApi()
         viewModel.getUserProfileApi()
     }
     
@@ -217,6 +216,7 @@ class AffiliatedProfileDetailsViewController: UIViewController {
             let selectedCountry = self.viewModel.countryList[index]
             let name = selectedCountry.name
             self.countryTF.text = name
+            self.selectedAddressCountryCode = selectedCountry.id?.description ?? "0"
         }
     }
     

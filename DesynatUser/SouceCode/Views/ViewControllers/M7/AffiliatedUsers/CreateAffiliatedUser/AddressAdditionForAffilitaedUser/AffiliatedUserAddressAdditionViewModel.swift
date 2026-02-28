@@ -65,14 +65,10 @@ class AffiliatedUserAddressAdditionViewModel {
     //Mark:->UploadDocumentApi
     func addAddressApi(){
         let param:[String:Any] = [
-            "country": hostVC.selectedCountryCode ?? "+965",
+            "country": hostVC.selectedCountryCode ?? "0",
             "locations": hostVC.locationTF.text ?? "",
             "address1": hostVC.addresSLineOneTF.text ?? "",
             "address2": hostVC.addressLineTwoTF.text ?? "",
-//            "pincode": hostVC.pinCodeTF.text ?? "",
-//            "town": hostVC.localityTownTD.text ?? "",
-//            "state": hostVC.stateTF.text ?? "",
-//            "city": hostVC.cityTF.text ?? "",
             "let": hostVC.latitude ?? 0.0,
             "long": hostVC.longitude ?? 0.0]
         WebService.sharedInstance.addAddressAffiliatedAccountService(param: param) { user in

@@ -111,6 +111,9 @@ extension AffiliatedUserProductViewController: UICollectionViewDelegate, UIColle
             cell.onTrackPerformanceTapped = {
                 let nextVC = ItemPerformanceViewController.instantiate(fromAppStoryboard: .AffiliateUser)
                 nextVC.productId = self.viewModel.productDetails[indexPath.row].productID ?? 0
+                nextVC.onProductIsRemoved = {
+                    self.viewModel.resetAndFetchProducts()
+                }
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
             return cell
@@ -124,7 +127,7 @@ extension AffiliatedUserProductViewController: UICollectionViewDelegate, UIColle
         case categoryCollectionView:
             selectedCatrgoryId = viewModel.categoriesSection[indexPath.row].id ?? 0
             categoryCollectionView.reloadData()
-            selectedSubCatrgoryId = 0
+            selectedSubCatrgoryId = -1
             viewModel.subCategoriesSection = []
             let allSubCategory = SubCategoriesDataModel(
                 id: -1,

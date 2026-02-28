@@ -37,6 +37,9 @@ class SearchAffiliatedProductsViewModel {
                 let nextVC = AffiliatedCopyLinkViewController.instantiate(fromAppStoryboard: .AffiliateUser)
                 nextVC.productLink = response.link ?? ""
                 nextVC.productID = productId
+                nextVC.onAddToProduct = {
+                    self.resetAndFetchProducts()
+                }
                 self.hostVC?.navigationController?.present(nextVC, animated: true)
             }
         }

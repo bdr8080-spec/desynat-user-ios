@@ -17,6 +17,8 @@ class AffiliatedCategoryFilterViewController: UIViewController {
     var selectedColorIDs: [String] = []
     var selectedSizeIDs: [String] = []
     var selectedDiscountIDs: [String] = []
+    var selectedRatings: [String] = []
+    var selectedDeliveryTime: [String] = []
     var selectedMinPrice: Int?
     var selectedMaxPrice: Int?
     private var isColorExpanded = false
@@ -68,6 +70,7 @@ class AffiliatedCategoryFilterViewController: UIViewController {
         viewModel.getAllBrands { [weak self] in self?.prepareBrandSection() }
         viewModel.getAllColors { [weak self] in self?.prepareColorSection() }
         viewModel.getAllSize { [weak self] in self?.prepareSizeSection() }
+        applyPreselectedDiscount()
     }
 
   func prepareBrandSection() {
@@ -112,7 +115,17 @@ class AffiliatedCategoryFilterViewController: UIViewController {
       filtersTableView.reloadSections(IndexSet(integer: 4), with: .none)
   }
     
-    
+    private func applyPreselectedDiscount() {
+        guard let sectionIndex = filtersOptions.firstIndex(where: { $0.header == "Discount Range" }) else { return }
+
+        for index in filtersOptions[sectionIndex].options.indices {
+            let option = filtersOptions[sectionIndex].options[index]
+            filtersOptions[sectionIndex].options[index].isSelected =
+                selectedDiscountIDs.contains(option.apiParcing)
+        }
+
+        filtersTableView.reloadSections(IndexSet(integer: sectionIndex), with: .none)
+    }
 
 
     // MARK: - ACTIONS
@@ -245,10 +258,7 @@ extension AffiliatedCategoryFilterViewController: UITableViewDelegate, UITableVi
                         )
                         
                         cell.configureProductFilter(option: showMoreOption)
-                        
-                        // ✅ Make text bold
-//                        cell.titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
-                        
+
                         return cell
                     }
                 }
@@ -273,7 +283,7 @@ extension AffiliatedCategoryFilterViewController: UITableViewDelegate, UITableVi
     let sectionName = filtersOptions[section].header
 
     if sectionName == "Price" {
-      return 65
+      return 75
     } else {
       return UITableView.automaticDimension
     }
@@ -340,16 +350,34 @@ extension AffiliatedCategoryFilterViewController: UITableViewDelegate, UITableVi
 
         case "Sizes":
             if isSelected {
-                selectedSizeIDs.append(option.apiParcing)
+                // Clear previous selection
+                filtersOptions[section].options.indices.forEach {
+                    filtersOptions[section].options[$0].isSelected = false
+                }
+                selectedSizeIDs.removeAll()
+
+                // Select current
+                filtersOptions[section].options[indexPath.row].isSelected = true
+                selectedSizeIDs = [option.apiParcing]
             } else {
-                selectedSizeIDs.removeAll { $0 == option.apiParcing }
+                // If tapping already selected → remove selection
+                selectedSizeIDs.removeAll()
             }
 
         case "Discount Range":
             if isSelected {
-                selectedDiscountIDs.append(option.apiParcing)
+                // Clear previous selection
+                filtersOptions[section].options.indices.forEach {
+                    filtersOptions[section].options[$0].isSelected = false
+                }
+                selectedDiscountIDs.removeAll()
+
+                // Select current
+                filtersOptions[section].options[indexPath.row].isSelected = true
+                selectedDiscountIDs = [option.apiParcing]
             } else {
-                selectedDiscountIDs.removeAll { $0 == option.apiParcing }
+                // If tapping already selected → remove selection
+                selectedDiscountIDs.removeAll()
             }
 
         default:

@@ -13,6 +13,7 @@ class AffiliatedProfileDetailsViewModel {
     private var hostVC: AffiliatedProfileDetailsViewController
     var countryList:[CountryModel] = []
     var affiliatedUserProfile: AffiliateCreateAccountDataModel?
+    var isCountryListLoaded = false
     
     init(hostVC: AffiliatedProfileDetailsViewController) {
         self.hostVC = hostVC
@@ -21,6 +22,8 @@ class AffiliatedProfileDetailsViewModel {
     func countryListApi(){
         WebService.sharedInstance.countryListService { list in
             self.countryList = list
+            self.isCountryListLoaded = true
+                    self.setCountryIfPossible()
         }
     }
     
@@ -29,6 +32,7 @@ class AffiliatedProfileDetailsViewModel {
             kSharedUserDefaults.saveModelFor(key: .affiliatedUserDeatils, value: response)
             self.affiliatedUserProfile = response
             self.populateData(data: response)
+            self.setCountryIfPossible()
         }
     }
     
@@ -60,13 +64,25 @@ class AffiliatedProfileDetailsViewModel {
             hostVC.documentTwoImageView.enableFullscreenZoom()
             hostVC.uploadDocTwoImage = imageUrlString
         }
-        hostVC.countryTF.text = data?.addressDetails?.country
+        self.hostVC.selectedAddressCountryCode = data?.addressDetails?.country
         hostVC.locationTF.text = data?.addressDetails?.locations
         hostVC.addressLineOneTF.text = data?.addressDetails?.address1
         hostVC.addressLineTwoTF.text = data?.addressDetails?.address2
         hostVC.latitude = convertToDouble(data?.addressDetails?.addressDetailsLet ?? "0.0")
         hostVC.longitude = convertToDouble(data?.addressDetails?.long ?? "0.0")
         hostVC.bankAccountTableView.reloadData()
+    }
+    
+    func setCountryIfPossible() {
+        guard isCountryListLoaded,
+              let code = hostVC.selectedAddressCountryCode,
+              !countryList.isEmpty else { return }
+        
+        if let matchedCountry = countryList.first(where: { $0.id?.description == code }) {
+            DispatchQueue.main.async {
+                self.hostVC.countryTF.text = matchedCountry.name
+            }
+        }
     }
     
     func uploadDocument(file: Any, isImage: Bool, completion: @escaping(String) -> Void) {
@@ -106,19 +122,15 @@ class AffiliatedProfileDetailsViewModel {
     
     func updateAffiliatedAddressService(){
         let param:[String:Any] = [
-            "country": hostVC.countryTF.text ?? "Kuwait",
+            "country": hostVC.selectedAddressCountryCode ?? 0,//hostVC.countryTF.text ?? "Kuwait",
             "locations": hostVC.locationTF.text ?? "",
             "address1": hostVC.addressLineOneTF.text ?? "",
             "address2": hostVC.addressLineTwoTF.text ?? "",
-            //            "pincode": hostVC.pinCodeTF.text ?? "",
-            //            "town": hostVC.localityTownTD.text ?? "",
-            //            "state": hostVC.stateTF.text ?? "",
-            //            "city": hostVC.cityTF.text ?? "",
             "let": hostVC.latitude ?? 0.0,
             "long": hostVC.longitude ?? 0.0]
         WebService.sharedInstance.updateAffiliatedAddressService(param: param) { response in
             CommonUtils.showToast(message: "Address updated successfully")
-            self.hostVC.navigationController?.popViewController(animated: true)
+            //            self.hostVC.navigationController?.popViewController(animated: true)
         }
     }
     
@@ -197,7 +209,7 @@ class AffiliatedProfileDetailsViewModel {
     }
     
     func makeDefaultBankAccountAffilaitedUserApi(id: Int){
-        let param: [String: Any] = ["bank_details_id": id]
+        let param: [String: Any] = ["id": id]
         WebService.sharedInstance.makeDefaultBankAccountAffilaitedUserService(param: param) { response in
             CommonUtils.showToast(message: "Bank Account changed succesfully")
             self.getUserProfileApi()
@@ -207,11 +219,11 @@ class AffiliatedProfileDetailsViewModel {
     //Mark->:changeMobileNumberApi
     func changeMobileNumberApi(){
         let param:[String:Any] = [
-               "for":"mobile", //mobile,email
-               "country_code":self.hostVC.countryCodeTF.text ?? "",
-               "mobile":self.hostVC.mobileTF.text ?? "",
-               "type":"0"] //0-old,1-new
-       
+            "for":"mobile", //mobile,email
+            "country_code":self.hostVC.countryCodeTF.text ?? "",
+            "mobile":self.hostVC.mobileTF.text ?? "",
+            "type":"0"] //0-old,1-new
+        
         WebService.sharedInstance.changeMobileNumberForAffiliateUserService(withParams:param) { user in
             let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
             vc.comingReason = .changeOldMobileNumberForAffiliatedUser
@@ -231,9 +243,9 @@ class AffiliatedProfileDetailsViewModel {
     //Mark->:changeEmailApi
     func changeEmailApi(){
         let param:[String:Any] = [
-               "for":"email", //mobile,email
-               "email":self.hostVC.emailTF.text ?? "",
-               "type":"0"] //0-old,1-new
+            "for":"email", //mobile,email
+            "email":self.hostVC.emailTF.text ?? "",
+            "type":"0"] //0-old,1-new
         WebService.sharedInstance.changeMobileNumberForAffiliateUserService(withParams:param) { user in
             let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
             vc.comingReason = .changeOldEmailNumberForAffiliatedUser

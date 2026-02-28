@@ -6,10 +6,9 @@
 //
 
 import UIKit
-//import Speech
 
 class AffiliatedUserCategoriesViewController: UIViewController {
-
+    
     @IBOutlet weak var noDataFoundLabel: UILabel!
     @IBOutlet weak var btnMicOutlet: UIButton!
     @IBOutlet weak var searchTF: UITextField!
@@ -58,7 +57,7 @@ class AffiliatedUserCategoriesViewController: UIViewController {
 
 // MARK: - CollectionView Delegates
 extension AffiliatedUserCategoriesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == categoriesCollectionView {
             return viewModel.categoriesSection.count
@@ -66,7 +65,7 @@ extension AffiliatedUserCategoriesViewController: UICollectionViewDataSource, UI
             return viewModel.subCategoriesSection.count
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == categoriesCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AffiliatedCategoriesCollectionViewCell", for: indexPath) as! AffiliatedCategoriesCollectionViewCell
@@ -85,29 +84,21 @@ extension AffiliatedUserCategoriesViewController: UICollectionViewDataSource, UI
             return cell
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == categoriesCollectionView {
             selectedCatgeoryIndex = indexPath.row
             categoriesCollectionView.reloadData()
             viewModel.getSubCategoriesListApi(categoryID: viewModel.categoriesSection[indexPath.row].id ?? 0)
         }  else {
-            // Navigate to all product page
-//            let nextVC = AffiliatedProductsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
-//            nextVC.categoryId = viewModel.categoriesSection[selectedCatgeoryIndex].id ?? 0
-//            nextVC.subCatrgoryId = viewModel.subCategoriesSection[indexPath.row].id ?? 0
-//            nextVC.comingReasonAtAllProducts = .fromCategory
-//            self.navigationController?.pushViewController(nextVC, animated: true)
-            
             let nextVC = SearchAffiliatedProductsViewController.instantiate(fromAppStoryboard: .AffiliateUser)
-//            nextVC.viewModel.searchText = self.txtSearch.text?.trimmed() ?? ""
             nextVC.comingFromImageScanner = false
             nextVC.categoryId = viewModel.categoriesSection[selectedCatgeoryIndex].id ?? 0
             nextVC.subCatrgoryId = viewModel.subCategoriesSection[indexPath.row].id ?? 0
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == categoriesCollectionView {
             let width = (categoriesCollectionView.frame.width - 40) / 3

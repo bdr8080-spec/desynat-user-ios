@@ -30,7 +30,8 @@ class ItemPerformanceViewController: UIViewController, UITextFieldDelegate {
     private lazy var viewModel = ItemPerformanceViewModel(hostVC: self)
     var productId: Int = 0
     let datePicker = UIDatePicker()
-   
+    var onProductIsRemoved:(()-> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.getLatestSearchData()
@@ -54,6 +55,13 @@ class ItemPerformanceViewController: UIViewController, UITextFieldDelegate {
         vc.startIndex = 0
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
+    }
+    
+    @IBAction func deleteDidTapped(_ sender: Any) {
+        showConfirmationAlert(msg: "Are you sure you want to remove this product?"){ [weak self] in
+            guard let self = self else { return }
+            viewModel.deleteAffiliatedProductData()
+        }
     }
     
     private func showCopiedLabel() {
@@ -126,12 +134,26 @@ extension ItemPerformanceViewController {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextField = textField
+        
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
-        if textField == txtToDate, let fromDateText = txtFromDate.text, let fromDate = formatter.date(from: fromDateText) {
+        
+        // If textfield already has a date, show it in picker
+        if let text = textField.text,
+           let selectedDate = formatter.date(from: text) {
+            datePicker.date = selectedDate
+        } else {
+            // Optional: set default date
+            datePicker.date = Date()
+        }
+        
+        // Handle minimum date for To Date
+        if textField == txtToDate,
+           let fromDateText = txtFromDate.text,
+           let fromDate = formatter.date(from: fromDateText) {
             datePicker.minimumDate = fromDate
         } else {
-//            datePicker.minimumDate = Date()
+            datePicker.minimumDate = nil
         }
     }
 }

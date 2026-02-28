@@ -26,7 +26,7 @@ class RangeSliderView: UIControl {
         }
     }
     
-    var currentValue: CGFloat = 5000 {
+    var currentValue: CGFloat = 100000 {
         didSet {
             currentValue = min(max(currentValue, initialValue), maxValue)
             updateThumbPositions()
@@ -121,7 +121,12 @@ class RangeSliderView: UIControl {
         let trackY = bounds.midY
         let thumbY = trackY
         
-        trackLayer.frame = CGRect(x: 0, y: trackY - trackHeight/2, width: bounds.width, height: trackHeight)
+        trackLayer.frame = CGRect(
+            x: 0,
+            y: trackY - trackHeight/2,
+            width: bounds.width,
+            height: trackHeight
+        )
         
         let leftX = valueToX(initialValue)
         let rightX = valueToX(currentValue)
@@ -133,21 +138,33 @@ class RangeSliderView: UIControl {
             height: trackHeight
         )
         
+        leftThumbLayer.bounds = CGRect(x: 0, y: 0, width: thumbSize, height: thumbSize)
+        rightThumbLayer.bounds = CGRect(x: 0, y: 0, width: thumbSize, height: thumbSize)
+        
         leftThumbLayer.position = CGPoint(x: leftX, y: thumbY)
         rightThumbLayer.position = CGPoint(x: rightX, y: thumbY)
-        leftThumbLayer.bounds = CGRect(x: 0, y: -10, width: thumbSize, height: thumbSize)
-        rightThumbLayer.bounds = CGRect(x: 0, y: -10, width: thumbSize, height: thumbSize)
         
-        // Labels
-        let labelY = thumbY + thumbSize/2 + labelOffsetY
+        // MARK: Labels
+        
         let labelWidth: CGFloat = 70
         let labelHeight: CGFloat = 24
         
-        minLabelLayer.bounds = CGRect(x: 0, y: -10, width: labelWidth, height: labelHeight)
-        maxLabelLayer.bounds = CGRect(x: 0, y: -10, width: labelWidth, height: labelHeight)
+        minLabelLayer.bounds = CGRect(x: 0, y: 0, width: labelWidth, height: labelHeight)
+        maxLabelLayer.bounds = CGRect(x: 0, y: 0, width: labelWidth, height: labelHeight)
         
-        minLabelLayer.position = CGPoint(x: leftX + 10, y: labelY)
-        maxLabelLayer.position = CGPoint(x: clampedLabelX(rightX, labelWidth: labelWidth), y: labelY)
+        let bottomLabelY = thumbY + thumbSize/2 + labelOffsetY + labelHeight/2
+        let topLabelY = max(labelHeight/2, thumbY - thumbSize/2 - labelOffsetY - labelHeight/2)
+        
+        // Clamp positions to stay inside view bounds
+        minLabelLayer.position = CGPoint(
+            x: clampedLabelX(leftX, labelWidth: labelWidth),
+            y: bottomLabelY
+        )
+        
+        maxLabelLayer.position = CGPoint(
+            x: clampedLabelX(rightX, labelWidth: labelWidth),
+            y: topLabelY
+        )
     }
     
     // MARK: - Thumb & Label Updates
@@ -158,10 +175,13 @@ class RangeSliderView: UIControl {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         
+        // Move thumbs
         leftThumbLayer.position.x = leftX
         rightThumbLayer.position.x = rightX
         
         let trackY = bounds.midY
+        
+        // Update selected track
         selectedTrackLayer.frame = CGRect(
             x: leftX,
             y: trackY - trackHeight/2,
@@ -170,10 +190,27 @@ class RangeSliderView: UIControl {
         )
         
         let labelWidth = minLabelLayer.bounds.width
-        minLabelLayer.position.x = leftX + 10
-        maxLabelLayer.position.x = clampedLabelX(rightX, labelWidth: labelWidth)
+        let labelHeight = minLabelLayer.bounds.height
         
+        // Y positions for labels
+        let bottomLabelY = trackY + thumbSize/2 + labelOffsetY + labelHeight/2
+        let topLabelY = max(labelHeight/2, trackY - thumbSize/2 - labelOffsetY - labelHeight/2)
+        
+        // Min label (bottom of left thumb), clamped to stay inside bounds
+        minLabelLayer.position = CGPoint(
+            x: clampedLabelX(leftX, labelWidth: labelWidth),
+            y: bottomLabelY
+        )
+        
+        // Max label (top of right thumb), clamped to stay inside bounds
+        maxLabelLayer.position = CGPoint(
+            x: clampedLabelX(rightX, labelWidth: labelWidth),
+            y: topLabelY
+        )
+        
+        // Update label texts
         updateLabelTexts()
+        
         CATransaction.commit()
     }
     

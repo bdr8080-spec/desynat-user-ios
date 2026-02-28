@@ -302,6 +302,25 @@ extension WebService {
         }
     }
     
+    func deleteProductsDetailsService(param: [String:Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+//        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.deleteMyProductDetails), requestMethod: .post, requestParams: param,  requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
+//            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
     func changeMobileNumberForAffiliateUserService(withParams dictParams: Dictionary<String, Any>, completion: @escaping (_ user: ChangeMobileNumModel) -> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
         CommonUtils.showHud(show: true)
