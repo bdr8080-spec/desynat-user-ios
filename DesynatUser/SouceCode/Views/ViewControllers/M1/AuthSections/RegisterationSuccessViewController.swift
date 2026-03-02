@@ -8,12 +8,15 @@
 import UIKit
 
 class RegisterationSuccessViewController: UIViewController {
-
+    
+    // MARK: - IBOutlet's
     @IBOutlet weak var descriptionLabel: UILabel!
     
+    // MARK: - Property Decalaration
     var comingReason: ComingReasonAtRegisterationSuccess = .passwordUpdated
     var callBackDismiss: (()->())?
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
@@ -37,18 +40,20 @@ class RegisterationSuccessViewController: UIViewController {
         case .changeEmailAddress:
             descriptionLabel.text = "Email Address Changed\nsuccessfully !"
         case .giftCardPurchased:
-          descriptionLabel.text = "Gift card purchased\nsuccessfully!"
+            descriptionLabel.text = "Gift card purchased\nsuccessfully!"
         case .quotationSentForCustomization:
-          descriptionLabel.text = "Request sent\nsuccessfully!"
+            descriptionLabel.text = "Request sent\nsuccessfully!"
         case .amountAddeddToWallet:
             descriptionLabel.text = "Amount added\nsuccessfully!"
         case .giftCardRedeemed:
             descriptionLabel.text = "Gift Card Redeemed\nsuccessfully!"
         case .changePasswordForAffiliatedUser:
             descriptionLabel.text = "Password changed successfully!"
+        case .amountAddedIntoWalletForAffiliatedUser:
+            descriptionLabel.text = "Request sent successfully!"
         }
     }
-
+    
 }
 
 enum ComingReasonAtRegisterationSuccess {
@@ -62,4 +67,5 @@ enum ComingReasonAtRegisterationSuccess {
     case amountAddeddToWallet
     case giftCardRedeemed
     case changePasswordForAffiliatedUser
+    case amountAddedIntoWalletForAffiliatedUser
 }

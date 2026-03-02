@@ -8,14 +8,15 @@
 import UIKit
 
 class AddCardViewController: UIViewController {
-
+    
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
-
-  @IBAction func backDidTapped(_ sender: Any) {
-    self.navigationController?.popViewController(animated: true)
-  }
+    
+    // MARK: - Button's Action
+    @IBAction func backDidTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }

@@ -9,6 +9,7 @@ import UIKit
 
 class ProductDetailViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var noDataFoundLabel: UILabel!
     @IBOutlet weak var separtaorInPriceLabel: UILabel!
     @IBOutlet weak var totalItemsInBagLabel: UILabel!
@@ -85,6 +86,7 @@ class ProductDetailViewController: UIViewController {
         }
     }
     
+    // MARK: - Property Decalaration
     private lazy var viewModel = ProductDetailsViewModel(hostVC: self)
     var productId: Int? = 0
     var bagCount: Int = 0
@@ -106,6 +108,7 @@ class ProductDetailViewController: UIViewController {
         return filteredVariants[safeIndex]
     }
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetUp()
@@ -125,6 +128,7 @@ class ProductDetailViewController: UIViewController {
         }
     }
     
+    // MARK: - Button's Action
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -614,6 +618,7 @@ class ProductDetailViewController: UIViewController {
     
 }
 
+// MARK: - COLLECTION VIEW METHODS
 extension ProductDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -734,6 +739,7 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
     
 }
 
+// MARK: - TABLE VIEW METHODS
 extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

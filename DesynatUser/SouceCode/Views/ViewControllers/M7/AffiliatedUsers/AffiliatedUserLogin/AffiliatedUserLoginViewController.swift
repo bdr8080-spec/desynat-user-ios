@@ -8,7 +8,8 @@
 import UIKit
 
 class AffiliatedUserLoginViewController: UIViewController {
-
+    
+    // MARK: - IBOutlet's
     @IBOutlet weak var countryCodeLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -16,12 +17,14 @@ class AffiliatedUserLoginViewController: UIViewController {
     @IBOutlet weak var txtFieldLeading: NSLayoutConstraint!
     @IBOutlet weak var viewCountryCode: UIView!
     
+    // MARK: - Property Decalaration
     private lazy var viewModel = AffiliatedUserLoginViewModel(loginHostVC: self)
     var countryCode: String = "+965"
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-      viewModel.countryListApi()
+        viewModel.countryListApi()
         countryCodeLabel.text = countryCode
         passwordTextField.isSecureTextEntry = true
         passwordTextField.delegate = self
@@ -31,7 +34,7 @@ class AffiliatedUserLoginViewController: UIViewController {
         emailMobileImageView.image = UIImage(named: "email")
     }
     
-
+    // MARK: - Button's Action
     @IBAction func loginDidTapped(_ sender: Any) {
         if viewModel.validFields() {
             viewModel.loginApi()
@@ -46,12 +49,12 @@ class AffiliatedUserLoginViewController: UIViewController {
     
     @IBAction func signupDidTapped(_ sender: Any) {
         if let navController = self.navigationController,
-               let signupVC = navController.viewControllers.first(where: { $0 is CreateAffiliateUserAccountViewController }) {
-                navController.popToViewController(signupVC, animated: true)
-            } else {
-                let vc = CreateAffiliateUserAccountViewController.instantiate(fromAppStoryboard: .AffiliateUser)
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+           let signupVC = navController.viewControllers.first(where: { $0 is CreateAffiliateUserAccountViewController }) {
+            navController.popToViewController(signupVC, animated: true)
+        } else {
+            let vc = CreateAffiliateUserAccountViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     @IBAction func loginViaOTPDidTapped(_ sender: Any) {
@@ -60,8 +63,6 @@ class AffiliatedUserLoginViewController: UIViewController {
     }
     
     @IBAction func switchToUserDidTapped(_ sender: Any) {
-//        self.navigationController?.popToRootViewController(animated: true)
-//        kSharedSceneDelegate.navigateToUserHomeVc()
         kSharedSceneDelegate.navigateToUserHomeVc(selectedIndex: 4)
     }
     
@@ -71,20 +72,20 @@ class AffiliatedUserLoginViewController: UIViewController {
     }
     
     @IBAction func countryDidTapped(_ sender: UIButton) {
-      let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
-          let name = country.name ?? ""
-          let dialCode = country.dialCode ?? ""
-          let flag = country.flag ?? "🇰🇼"
-          return "\(flag)  \(name) (\(dialCode))"
-      }
-
-      kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
-          let selectedCountry = self.viewModel.getAllUSerCountryList[index]
-          let code = selectedCountry.dialCode ?? "+965"
-         
-        self.setUpCountryCode(code: code)
-          self.countryCode = code
-      }
+        let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
+            let name = country.name ?? ""
+            let dialCode = country.dialCode ?? ""
+            let flag = country.flag ?? "🇰🇼"
+            return "\(flag)  \(name) (\(dialCode))"
+        }
+        
+        kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+            let selectedCountry = self.viewModel.getAllUSerCountryList[index]
+            let code = selectedCountry.dialCode ?? "+965"
+            
+            self.setUpCountryCode(code: code)
+            self.countryCode = code
+        }
     }
     
     func setUpCountryCode(code: String) {

@@ -9,14 +9,17 @@ import UIKit
 
 class CatalogViewController: UIViewController {
     
+      // MARK: - IBOutlet's
     @IBOutlet weak var catalogTableView: UITableView! {
         didSet {
             catalogTableView.registerCellFromNib(cellID: "CatalogTableViewCell")
         }
     }
     
+    // MARK: - Property Decalaration
     private lazy var viewModel = CatalogViewModel(hostVC: self)
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -27,6 +30,7 @@ class CatalogViewController: UIViewController {
     }
 }
 
+// MARK: - TABLE VIEW METHODS
 extension CatalogViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

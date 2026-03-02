@@ -11,6 +11,7 @@ import Cosmos
 
 class MyOrderDetailVC: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var discountOnMRPView: UIView!
     @IBOutlet weak var customOrderItemPriceLabel: CustomLabelFont!
     @IBOutlet weak var itemPriceLabelForCustomOrder: CustomLabelFont!
@@ -110,12 +111,12 @@ class MyOrderDetailVC: UIViewController {
     @IBOutlet weak var couponDiscountView: UIView!
     @IBOutlet weak var discountPercentageLabel: UILabel!
     
+    // MARK: - Property Decalaration
     lazy private var viewModel = MyOrderDetailVM(hostVC: self)
     var orderData: OrderModel?
     var isCustomOrder: Bool = false
     var orderId: Int?
     var orderDetailId: Int?
-//    var selectedPromoCode: PromocodeApplied?
     lazy var stepImages: [StepImage] = [
         StepImage(selected: "confirmedOrder", unselected: "confirmedOrder"),
         StepImage(selected: "shippedDone", unselected: "shipped"),
@@ -124,6 +125,7 @@ class MyOrderDetailVC: UIViewController {
     ]
     var totalPaidAmount: String?
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         showRatingView.settings.fillMode = .full
@@ -146,6 +148,7 @@ class MyOrderDetailVC: UIViewController {
         }
     }
     
+    // MARK: - Button's Action
     @IBAction func btnBack(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -264,7 +267,7 @@ class MyOrderDetailVC: UIViewController {
         let unitPrice = Double(data.amount ?? "") ?? 0
         let quantity = data.quantity ?? 1
         let totalPriceforCustom = unitPrice * Double(quantity)
-
+        
         itemPriceLabelForCustomOrder.text = "Custom Items Price"
         
         lblTotalMrp.text = CommonUtils.formatPriceStringInput(data.order?.totalMrp, currency: "KD")
@@ -282,15 +285,15 @@ class MyOrderDetailVC: UIViewController {
         } else {
             lblDisPrice.text = CommonUtils.formatPrice(Double(data.variationDetails?.finalPrice ?? "0"))
             lblPrice.isHidden = false
-//            discountPercentageLabel.isHidden = false
+            //            discountPercentageLabel.isHidden = false
             CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: lblPrice,discountType: data.variationDetails?.discountType,discountValue: data.variationDetails?.discountValue)
         }
-//        let discountType = data.variationDetails?.discountType ?? "1"
-//        if discountType == "1" {
-//            discountPercentageLabel.text = "\(data.variationDetails?.discountValue ?? "")% Off"
-//        } else {
-//            discountPercentageLabel.text = "\(data.variationDetails?.discountValue ?? "") KD Off"
-//        }
+        //        let discountType = data.variationDetails?.discountType ?? "1"
+        //        if discountType == "1" {
+        //            discountPercentageLabel.text = "\(data.variationDetails?.discountValue ?? "")% Off"
+        //        } else {
+        //            discountPercentageLabel.text = "\(data.variationDetails?.discountValue ?? "") KD Off"
+        //        }
         
         
         
@@ -304,12 +307,12 @@ class MyOrderDetailVC: UIViewController {
         }
         
         if data.order?.promocodeID != nil {
-//        if let selected = selectedPromoCode {
+            //        if let selected = selectedPromoCode {
             couponDiscountView.isHidden = false
             lblSavedAmount.isHidden = false
             lblCouponDis.text = CommonUtils.formatPriceStringInput(data.order?.promocodeValue ?? "")
-//            lblTotalAmount.text = CommonUtils.formatPrice(selected.finalAmount)
-//            totalPaidAmount = lblTotalAmount.text
+            //            lblTotalAmount.text = CommonUtils.formatPrice(selected.finalAmount)
+            //            totalPaidAmount = lblTotalAmount.text
             let discountMrp = Double(data.order?.discountMrp ?? "0") ?? 0.0
             let promoValue = Double(data.order?.promocodeValue ?? "0") ?? 0.0
             let discountValue = discountMrp + promoValue
@@ -317,10 +320,10 @@ class MyOrderDetailVC: UIViewController {
         } else {
             couponDiscountView.isHidden = true
             lblSavedAmount.text = "You saved \(CommonUtils.formatPriceStringInput(data.order?.discountMrp ?? "0")) on this"
-//            lblTotalAmount.text = CommonUtils.formatPrice(Double(data.order?.totalAmount ?? "0"))
-//            let savingAmount = Double(data.order?.discountMrp ?? "0")
-//            totalPaidAmount = lblTotalAmount.text
-//            lblSavedAmount.text = "You saved \(CommonUtils.formatPrice(savingAmount)) on this"
+            //            lblTotalAmount.text = CommonUtils.formatPrice(Double(data.order?.totalAmount ?? "0"))
+            //            let savingAmount = Double(data.order?.discountMrp ?? "0")
+            //            totalPaidAmount = lblTotalAmount.text
+            //            lblSavedAmount.text = "You saved \(CommonUtils.formatPrice(savingAmount)) on this"
         }
         
         let selectedAddress = data.order?.deliveryDetails
@@ -387,7 +390,7 @@ class MyOrderDetailVC: UIViewController {
                     let cleaned = amount
                         .replacingOccurrences(of: ",", with: "") // remove thousand separators
                         .filter { "0123456789.".contains($0) }
-
+                    
                     return Double(cleaned)
                 }
                 .reduce(0.0, +)
@@ -1026,6 +1029,7 @@ class MyOrderDetailVC: UIViewController {
     }
 }
 
+// MARK: - TABLE VIEW METHODS
 extension MyOrderDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -1042,12 +1046,6 @@ extension MyOrderDetailVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 }
-
-//extension MyOrderDetailVC: UIDocumentInteractionControllerDelegate {
-//    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
-//        return self
-//    }
-//}
 
 extension MyOrderDetailVC: SelectReasonDelegate {
     

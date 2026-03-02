@@ -9,16 +9,20 @@ import UIKit
 
 class AddMoneyViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var amountTF: UITextField!
     @IBOutlet weak var amountCollectionview: UICollectionView! {
         didSet {
             amountCollectionview.registerCellFromNib(cellID: "AddMoneyCollectionViewCell")
         }
     }
+    
+    // MARK: - Property Decalaration
     private var moneyList = ["10 KD", "100 KD", "500 KD"]
     var selectedMoneyIndex: Int = -1
     var amountToPay: Double? = 0.0
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         amountTF.keyboardType = .decimalPad
@@ -31,6 +35,7 @@ class AddMoneyViewController: UIViewController {
         amountCollectionview.reloadData()
     }
     
+    // MARK: - Button's Action
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -65,6 +70,7 @@ class AddMoneyViewController: UIViewController {
     
 }
 
+// MARK: - COLLECTION VIEW METHODS
 extension AddMoneyViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return moneyList.count
@@ -74,11 +80,6 @@ extension AddMoneyViewController: UICollectionViewDelegate, UICollectionViewData
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddMoneyCollectionViewCell", for: indexPath) as! AddMoneyCollectionViewCell
         let data = moneyList[indexPath.row]
         cell.titleLabel.text = data
-//        if selectedMoneyIndex == indexPath.row {
-//            cell.mainView.borderColor = .accent
-//        } else {
-//            cell.mainView.borderColor = .black.withAlphaComponent(0.1)
-//        }
         return cell
     }
     
@@ -93,10 +94,9 @@ extension AddMoneyViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//       let width = (amountCollectionview.frame.width + 5) / 3
+        //       let width = (amountCollectionview.frame.width + 5) / 3
         let height: CGFloat = 38
         return CGSize(width: 105, height: height)
     }
-    
     
 }

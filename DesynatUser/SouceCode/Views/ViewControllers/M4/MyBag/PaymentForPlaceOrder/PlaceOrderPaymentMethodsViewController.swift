@@ -8,14 +8,9 @@
 import UIKit
 import MFSDK
 
-class PlaceOrderPaymentMethodsViewController: UIViewController, PlaceOrderPaymentMethodsCellDelegate {
+class PlaceOrderPaymentMethodsViewController: UIViewController {
     
-    func handlePaymentCompletion(transactionID: String, invoiceId: String, gateway: String) {
-        self.paymentTransactionDetails = (transactionID, invoiceId, gateway)
-        self.paymentCompleted = true
-        proceedToPay()
-    }
-    
+    // MARK: - IBOutlet's
     @IBOutlet weak var giftCardAmountLabel: UILabel!
     @IBOutlet weak var giftCardLabel: UILabel!
     @IBOutlet weak var checkMarkImageView: UIImageView!
@@ -26,6 +21,7 @@ class PlaceOrderPaymentMethodsViewController: UIViewController, PlaceOrderPaymen
     }
     @IBOutlet weak var paymentTableHeightConstraint: NSLayoutConstraint!
     
+    // MARK: - Property Decalaration
     private lazy var viewModel = PlaceOrderPaymentMethodsViewModel(hostVC: self)
     var selectedPaymentMethod: PaymentMethodType?
     var giftCardDetails: UseGiftCardDataModel?
@@ -40,6 +36,7 @@ class PlaceOrderPaymentMethodsViewController: UIViewController, PlaceOrderPaymen
     var customChatUniqueId: String = ""
     var comingForCustomeOrderPlace: Bool = false
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         paymnetTableView.rowHeight = UITableView.automaticDimension
@@ -56,6 +53,7 @@ class PlaceOrderPaymentMethodsViewController: UIViewController, PlaceOrderPaymen
         viewModel.getWalletAmountApi()
     }
     
+    // MARK: - Button's Action
     @IBAction func placeOrderDidTapped(_ sender: Any) {
         guard let method = selectedPaymentMethod else {
             viewModel.showAlertAtPayment(msg: "Please select a payment method")
@@ -145,6 +143,7 @@ class PlaceOrderPaymentMethodsViewController: UIViewController, PlaceOrderPaymen
     }
 }
 
+// MARK: - TABLE VIEW METHODS
 extension PlaceOrderPaymentMethodsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -275,5 +274,14 @@ extension PlaceOrderPaymentMethodsViewController {
                 self.didReceivePaymentError(error.errorDescription)
             }
         }
+    }
+}
+
+extension PlaceOrderPaymentMethodsViewController: PlaceOrderPaymentMethodsCellDelegate {
+    
+    func handlePaymentCompletion(transactionID: String, invoiceId: String, gateway: String) {
+        self.paymentTransactionDetails = (transactionID, invoiceId, gateway)
+        self.paymentCompleted = true
+        proceedToPay()
     }
 }

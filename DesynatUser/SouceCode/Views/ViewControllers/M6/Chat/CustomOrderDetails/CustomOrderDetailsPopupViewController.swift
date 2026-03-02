@@ -9,20 +9,23 @@ import UIKit
 
 class CustomOrderDetailsPopupViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var customDetailsLabel: UILabel!
     @IBOutlet weak var addressLAbel: UILabel!
     @IBOutlet weak var tottalQuantityLAbel: UILabel!
     @IBOutlet weak var headerView: UIView!
     
+    // MARK: - Property Decalaration
     var quotationData: Record?
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         handleUISetup()
         bindData()
     }
     
-    
+    // MARK: - Button's Action
     @IBAction func dismissDidTapped(_ sender: Any) {
         self.dismiss(animated: true)
     }

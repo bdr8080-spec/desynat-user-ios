@@ -9,6 +9,7 @@ import UIKit
 
 class SotByAffiliatedProductsViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var sortTableview: UITableView! {
         didSet {
@@ -16,18 +17,21 @@ class SotByAffiliatedProductsViewController: UIViewController {
         }
     }
     
+    // MARK: - Property Decalaration
     private lazy var viewModel = SortByAffiliatedProductsViewModel(hostVC: self)
     weak var delegate: SortByStoresViewControllerDelegate?
     var preSelectedApiValue: Int?
     var selectedIndex: Int = 0
     var filtersOptions: [SortOptionModel] = []
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
         viewModel.getSortListOfAffilatedProductsApi()
     }
     
+    // MARK: - Button's Action
     @IBAction func dismissDidTapped(_ sender: Any) {
         self.dismiss(animated: true)
     }
@@ -51,7 +55,7 @@ class SotByAffiliatedProductsViewController: UIViewController {
     }
 }
 
-// MARK: - TableView Delegate & DataSource
+// MARK: - TABLE VIEW METHODS
 extension SotByAffiliatedProductsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -12,6 +12,7 @@ import Speech
 
 class HomeViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var noCnterHomeBannersFoundLabel: UILabel!
     @IBOutlet weak var noTopHomeBannersFoundLabel: UILabel!
     @IBOutlet weak var browseBannersView: UIView!
@@ -73,6 +74,7 @@ class HomeViewController: UIViewController {
         }
     }
     
+    // MARK: - Property Decalaration
     private var bottomLabels: [UILabel] = []
     private var bannerCount = 5
     private var bestSellCount = 5
@@ -88,6 +90,7 @@ class HomeViewController: UIViewController {
     private var currentPremiumIndex = 0
     private var currentDiscountIndex = 0
     private let autoScrollDelay: TimeInterval = 6
+    
     // MARK: - Speech Recognition
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
@@ -95,7 +98,7 @@ class HomeViewController: UIViewController {
     private let audioEngine = AVAudioEngine()
     private var isListening = false
     
-    
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.getCategoriesListApi()
@@ -132,7 +135,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    // MARK: - Page Control Tap Handling
+    // MARK: - Button's Action
     @IBAction func pageControlChanged(_ sender: UIPageControl) {
         currentBannerIndex = sender.currentPage
         let indexPath = IndexPath(item: currentBannerIndex, section: 0)
@@ -417,6 +420,7 @@ class HomeViewController: UIViewController {
     }
 }
 
+// MARK: - COLLECTION VIEW METHODS
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

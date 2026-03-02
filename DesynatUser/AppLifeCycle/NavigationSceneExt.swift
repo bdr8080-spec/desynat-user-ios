@@ -16,13 +16,6 @@ extension SceneDelegate {
         navigateTo(vc: LoginViewController.instantiate(fromAppStoryboard: .Main))
     }
     
-    // Navigate to Home Vc
-//    public func navigateToUserHomeVc() {
-//        let vc = TabBarVC.instantiate(fromAppStoryboard: .Home)
-//        navigateTo(vc: vc)
-//      
-//    }
-    
     public func navigateToUserHomeVc(selectedIndex: Int = 0) {
         let vc = TabBarVC.instantiate(fromAppStoryboard: .Home)
         vc.initialTabIndex = selectedIndex   // ✅ set tab here

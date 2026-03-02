@@ -9,6 +9,7 @@ import UIKit
 
 class ChangeEmailMobileViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var mobileView: UIView!
     @IBOutlet weak var emailView: UIView!
@@ -17,12 +18,14 @@ class ChangeEmailMobileViewController: UIViewController {
     @IBOutlet weak var txtMobileNumber: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
     
+    // MARK: - Property Decalaration
     private lazy var viewModel = ChangeEmailMobileViewModel(hostVC: self)
     var comingToUpdateMobile: Bool = false
     var countryCode:String = "+965"
     var changesAreDone: (() -> Void)?
     var affiliatedUserProfile: AffiliateCreateAccountDataModel?
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
@@ -38,6 +41,7 @@ class ChangeEmailMobileViewController: UIViewController {
         }
     }
     
+    // MARK: - Button's Action
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -45,11 +49,6 @@ class ChangeEmailMobileViewController: UIViewController {
     @IBAction func continueBtnAction(_ sender: Any) {
         if viewModel.validFields() {
             viewModel.changeMobileNumberAndEmailApi()
-//            if comingToUpdateMobile {
-//                viewModel.updateAffiliatedUserMobileService()
-//            } else {
-//                viewModel.updateAffiliatedUserEmailService()
-//            }
         }
     }
     

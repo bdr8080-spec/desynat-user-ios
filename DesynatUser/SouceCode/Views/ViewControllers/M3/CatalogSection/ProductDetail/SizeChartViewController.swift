@@ -11,11 +11,14 @@ import SDWebImage
 
 class SizeChartViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var mainImageView: CustomImageView!
     
+    // MARK: - Property Decalaration
     var sizeChartUrl: String? = ""
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         configData()
@@ -24,6 +27,7 @@ class SizeChartViewController: UIViewController {
         titleView.clipsToBounds = true
     }
     
+    // MARK: - Button's Action
     @IBAction func dismissDidTapped(_ sender: Any) {
         self.dismiss(animated: true)
     }

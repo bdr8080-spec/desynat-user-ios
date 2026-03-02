@@ -9,13 +9,15 @@ import UIKit
 
 class ProfileDetailsViewController: UIViewController {
     
-    private lazy var viewModel = ProfileDetailsViewModel(hostVC:self)
+    // MARK: - IBOutlet's
     @IBOutlet weak var imgProfile: CustomImageView!
     @IBOutlet weak var txtFullName: UITextField!
     @IBOutlet weak var txtMobileNumber: UITextField!
     @IBOutlet weak var txtCountryCode: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
     
+    // MARK: - Property Decalaration
+    private lazy var viewModel = ProfileDetailsViewModel(hostVC:self)
     var selectedProfileImageUrl:String = ""
     var isMobile = ""
     var email: String? = ""
@@ -23,6 +25,7 @@ class ProfileDetailsViewController: UIViewController {
     var countryCode: String = ""
     var comingAfterUpdate: Bool = false
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         txtEmail.isUserInteractionEnabled = false
@@ -40,10 +43,11 @@ class ProfileDetailsViewController: UIViewController {
         }
     }
     
+    // MARK: - Button's Action
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
-
+    
     @IBAction func changeMobileNumberAction(_ sender: Any) {
         viewModel.changeMobileNumberApi()
     }

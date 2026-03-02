@@ -9,6 +9,7 @@ import UIKit
 
 class ChatInboxListViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var noDataFoundLabel: UILabel!
     @IBOutlet weak var searchTF: UITextField!
     @IBOutlet weak var inboxTableView: UITableView! {
@@ -16,9 +17,12 @@ class ChatInboxListViewController: UIViewController {
             inboxTableView.registerCellFromNib(cellID: "ChatInboxTableViewCell")
         }
     }
+    
+    // MARK: - Property Decalaration
     private var searchWorkItem: DispatchWorkItem?
     private lazy var viewModel = ChatInboxListViewModel(hostVC: self)
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         searchTF.delegate = self
@@ -29,16 +33,9 @@ class ChatInboxListViewController: UIViewController {
         self.viewModel.getChatInboxRequest()
     }
     
+    // MARK: - Button's Action
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
-        //      self.navigationController?.popToRootViewController(animated: false)
-        //      DispatchQueue.main.async {
-        //          if let tabBarVC = self.findTabBarVC() {
-        //              tabBarVC.updateTabSelection(forTag: 4)
-        //          } else {
-        //              print("TabBarVC not found")
-        //          }
-        //      }
     }
     
     @IBAction func filtreDidTapped(_ sender: Any) {
@@ -62,7 +59,7 @@ class ChatInboxListViewController: UIViewController {
     }
 }
 
-
+// MARK: - TABLE VIEW METHODS
 extension ChatInboxListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

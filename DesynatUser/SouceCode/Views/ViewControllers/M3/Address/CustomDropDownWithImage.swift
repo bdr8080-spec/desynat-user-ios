@@ -111,7 +111,7 @@ class CustomDropdown: UIView {
     }
 }
 
-// MARK: - UITableView DataSource & Delegate
+// MARK: - TABLE VIEW METHODS
 extension CustomDropdown: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -10,12 +10,9 @@ import SDWebImage
 import AVFAudio
 import Speech
 
-class StoresDetailsViewController: UIViewController, SortByStoresViewControllerDelegate {
-    func didSelectSortOption(_ option: Int) {
-        appliedSortFilter = option
-        self.viewModel.getSingleStoresApi()   // call API again
-    }
+class StoresDetailsViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var noReelsFound: UILabel!
     @IBOutlet weak var statusView: CustomView!
     @IBOutlet weak var searchTF: UITextField!
@@ -48,23 +45,27 @@ class StoresDetailsViewController: UIViewController, SortByStoresViewControllerD
     @IBOutlet weak var reelsCollectionView: UICollectionView! {
         didSet {
             reelsCollectionView.registerCellFromNib(cellID: "ReelsCollectionViewCell")
-        }
+        }a
     }
     
-    var storeId: Int? = 0
+    // MARK: - Property Decalaration
     private lazy var viewModel = StoreDetailsViewModel(hostVC: self)
     private var searchWorkItem: DispatchWorkItem?
     var fullName: String? = ""
     var profilePic: String? = ""
     var appliedSortFilter: Int?
+    let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
+    var storeId: Int? = 0
+    
+    // MARK: - speechRecognizer
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
     private var isListening = false
     private var sellerId: Int = 0
-    let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadAllCollections()
@@ -82,6 +83,7 @@ class StoresDetailsViewController: UIViewController, SortByStoresViewControllerD
         updateCollectionsHeight()
     }
     
+    // MARK: - Button's Action
     @IBAction func bakDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -347,6 +349,7 @@ class StoresDetailsViewController: UIViewController, SortByStoresViewControllerD
     
 }
 
+// MARK: - COLLECTION VIEW METHODS
 extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
@@ -440,6 +443,13 @@ extension StoresDetailsViewController: UITextFieldDelegate {
         searchWorkItem = workItem
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
         return true
+    }
+}
+
+extension StoresDetailsViewController: SortByStoresViewControllerDelegate {
+    func didSelectSortOption(_ option: Int) {
+        appliedSortFilter = option
+        self.viewModel.getSingleStoresApi()   // call API again
     }
 }
 

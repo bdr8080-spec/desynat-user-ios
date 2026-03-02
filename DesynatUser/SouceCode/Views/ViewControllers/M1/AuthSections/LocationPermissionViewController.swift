@@ -8,24 +8,27 @@
 import UIKit
 
 class LocationPermissionViewController: UIViewController {
-
+    
+    // MARK: - Property Decalaration
     var onPermissionCompletion: (() -> Void)?
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
+    // MARK: - Button's Action
     @IBAction func denyDidTapped(_ sender: Any) {
         self.dismiss(animated: true) { [weak self] in
-                self?.onPermissionCompletion?()
-            }
+            self?.onPermissionCompletion?()
+        }
     }
     
     @IBAction func allowDidTapped(_ sender: Any) {
         self.dismiss(animated: true) { [weak self] in
-                self?.onPermissionCompletion?()
-            }
+            self?.onPermissionCompletion?()
+        }
     }
     
 }

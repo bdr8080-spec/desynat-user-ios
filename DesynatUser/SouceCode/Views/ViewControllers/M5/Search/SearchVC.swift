@@ -13,6 +13,7 @@ import MLKitVision
 
 class SearchVC: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var latstSearchCollectionViewHieghtConstriant: NSLayoutConstraint!
     @IBOutlet weak var txtSearch: UITextField!
     @IBOutlet weak var latestSearchCollectionView: CollViewAdjustedHeight!
@@ -23,6 +24,7 @@ class SearchVC: UIViewController {
     @IBOutlet weak var noLatesSearchFoundLabel: CustomLabelFont!
     @IBOutlet weak var noReconmmendedDataFoundLAbel: CustomLabelFont!
     
+    // MARK: - Property Decalaration
     lazy private var viewModel = SearchVM(hostVC: self)
     var recentData: [RecentDataModel] = []
     var recommendedData: [RecommenedeSearch] = []
@@ -40,6 +42,7 @@ class SearchVC: UIViewController {
         return ObjectDetector.objectDetector(options: options)
     }()
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         registerXib()
@@ -54,6 +57,7 @@ class SearchVC: UIViewController {
         updateLatestSearchCollectionHeight()
     }
     
+    // MARK: - Button's Action
     @IBAction func btnSearch(_ sender: Any) {
     }
     
@@ -206,6 +210,7 @@ class SearchVC: UIViewController {
     }
 }
 
+// MARK: - TABLE VIEW METHODS
 extension SearchVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recentData.count
@@ -226,6 +231,7 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+// MARK: - COLLECTION VIEW METHODS
 extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == latestSearchCollectionView {
@@ -273,14 +279,6 @@ extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource , UICol
             let width = (latestSearchCollectionView.frame.width - 12) / 3
             let height: CGFloat = 38
             return CGSize(width: width, height: height)
-            //            let text = recentData[indexPath.row].name ?? ""
-            //                    let font = UIFont.systemFont(ofSize: 14, weight: .medium)
-            //
-            //                    let textWidth = text.size(withAttributes: [.font: font]).width
-            //                    let horizontalPadding: CGFloat = 12 // left + right padding inside cell
-            //                    let width = textWidth + horizontalPadding
-            //
-            //                    return CGSize(width: width, height: 20)
         }
         return CGSize(width: 100, height: 40)
     }
@@ -326,16 +324,6 @@ extension SearchVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
                     detectedLabels.append((label.text, label.confidence))
                 }
             }
-            //      for object in objects {
-            //        let frame = object.frame
-            //        let trackingID = object.trackingID
-            //
-            //        // If classification was enabled:
-            //        let description = object.labels.enumerated().map { (index, label) in
-            //          "Label \(index): \(label.text), \(label.confidence)"
-            //          }.joined(separator:"\n")
-            //        print("description======>\(description)")
-            //      }
             if let bestLabel = detectedLabels.max(by: { $0.confidence < $1.confidence }) {
                 DispatchQueue.main.async {
                     self.txtSearch.text = bestLabel.text

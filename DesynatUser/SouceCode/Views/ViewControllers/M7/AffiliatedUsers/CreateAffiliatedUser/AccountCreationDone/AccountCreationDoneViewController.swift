@@ -9,26 +9,20 @@ import UIKit
 
 class AccountCreationDoneViewController: UIViewController {
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
-    
-    
+    // MARK: - Button's Action
     @IBAction func logoutDidTapped(_ sender: Any) {
-//        self.showConfirmationAlert(msg: "Are you sure you want to logout?"){ [weak self] in
-//            guard let self = self else { return }
-            logoutApi()
-//        }
+        logoutApi()
     }
     
 }
 
 extension AccountCreationDoneViewController{
     func logoutApi(){
-//        WebService.sharedInstance.logoutService { user in
-//            kSharedSceneDelegate.logoutUser()
-            self.navigationController?.popToRootViewController(animated: true)
-//        }
+        self.navigationController?.popToRootViewController(animated: true)
     }
 }

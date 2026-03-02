@@ -9,6 +9,7 @@ import UIKit
 
 class ChangeMobileViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var mobileView: UIView!
     @IBOutlet weak var emailView: UIView!
@@ -17,18 +18,21 @@ class ChangeMobileViewController: UIViewController {
     @IBOutlet weak var txtMobileNumber: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
     
+    // MARK: - Property Decalaration
     var comingToUpdateMobile: Bool = false
     var countryCode:String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
     private lazy var viewModel = ChangeMobileViewModel(hostVC:self)
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
         txtEmail.delegate = self
         txtMobileNumber.delegate = self
-      viewModel.getALlUserCountryListApi()
+        viewModel.getALlUserCountryListApi()
     }
     
+    // MARK: - Button's Action
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -40,19 +44,19 @@ class ChangeMobileViewController: UIViewController {
     }
     
     @IBAction func btnTapCountryCode(_ sender: UIButton) {
-      let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
-          let name = country.name ?? ""
-          let dialCode = country.dialCode ?? ""
-          let flag = country.flag1 ?? "🇰🇼"
-          return "\(flag)  \(name) (\(dialCode))"
-      }
-
-      kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
-          let selectedCountry = self.viewModel.getAllUSerCountryList[index]
-          let code = selectedCountry.dialCode ?? "+965"
-        self.setUpCountryCode(code: code)
-          self.countryCode = code
-      }
+        let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
+            let name = country.name ?? ""
+            let dialCode = country.dialCode ?? ""
+            let flag = country.flag1 ?? "🇰🇼"
+            return "\(flag)  \(name) (\(dialCode))"
+        }
+        
+        kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+            let selectedCountry = self.viewModel.getAllUSerCountryList[index]
+            let code = selectedCountry.dialCode ?? "+965"
+            self.setUpCountryCode(code: code)
+            self.countryCode = code
+        }
     }
     
     func setUpCountryCode(code: String) {

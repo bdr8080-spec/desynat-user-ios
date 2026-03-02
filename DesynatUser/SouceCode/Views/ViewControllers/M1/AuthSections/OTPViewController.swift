@@ -9,8 +9,7 @@ import UIKit
 
 class OTPViewController: UIViewController {
     
-    // MARK: - Outlets
-    
+    // MARK: - IBOutlet's
     @IBOutlet weak var stepImageView: UIImageView!
     @IBOutlet weak var view1: UIView!
     @IBOutlet weak var textField1: UITextField!
@@ -28,9 +27,8 @@ class OTPViewController: UIViewController {
     @IBOutlet weak var resendView: UIView!
     @IBOutlet weak var labelTimer: UILabel!
     @IBOutlet weak var phoneNumberLabel: UILabel!
-    var callBackForProfileDetails:((String,String,String)->())?
     
-    // MARK: - Variables
+    // MARK: - Property Decalaration
     var comingReason: ComingReasonAtOTPScreen = .loginViaOTP
     var remainingTime = 90
     var otpTimer: Timer?
@@ -41,8 +39,9 @@ class OTPViewController: UIViewController {
     var id = ""
     var isEnteredPhoneNumber: Bool = false
     lazy private var viewModel = OTPViewModel(hostVC: self)
+    var callBackForProfileDetails:((String,String,String)->())?
     
-    // MARK: - Lifecycle
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTextFields()
@@ -63,7 +62,7 @@ class OTPViewController: UIViewController {
         
     }
     
-    // MARK: - Actions
+    // MARK: - Button's Action
     @IBAction func backDidTapped(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }

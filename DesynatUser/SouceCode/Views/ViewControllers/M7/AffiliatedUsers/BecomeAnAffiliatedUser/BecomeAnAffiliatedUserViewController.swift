@@ -8,14 +8,13 @@
 import UIKit
 
 class BecomeAnAffiliatedUserViewController: UIViewController {
-
+    
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
-
-
+    
+    // MARK: - Button's Action
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -25,8 +24,5 @@ class BecomeAnAffiliatedUserViewController: UIViewController {
     }
     
     @IBAction func newUserDidTapped(_ sender: Any) {
-//        let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
-//        vc.comingUserRole = .affiliateUser
-//        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

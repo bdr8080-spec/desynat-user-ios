@@ -6,10 +6,10 @@
 //
 
 import UIKit
-//import Speech
 
 class AffiliatedUserProductViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var btnMicOutlet: UIButton!
     @IBOutlet weak var searchTF: UITextField!
     @IBOutlet weak var noDataFoundLabel: UILabel!
@@ -23,17 +23,18 @@ class AffiliatedUserProductViewController: UIViewController {
             subCatgeoryCollectionView.registerCellFromNib(cellID: "MyProductsSubCategoryCollectionViewCell")
         }
     }
-    
     @IBOutlet weak var productCollectionView: UICollectionView! {
         didSet {
             productCollectionView.registerCellFromNib(cellID: "MyProductsCollectionViewCell")
         }
     }
     
+    // MARK: - Property Decalaration
     private lazy var viewModel = AffiliatedUserProductViewModel(hostVC: self)
     var selectedCatrgoryId = 0
     var selectedSubCatrgoryId = -1//0
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         searchTF.delegate = self
@@ -52,6 +53,7 @@ class AffiliatedUserProductViewController: UIViewController {
         viewModel.getAllSubCategoriesService()
     }
     
+    // MARK: - Button's Action
     @IBAction func micdidTapped(_ sender: UIButton) {
         let nextVC = VoiceSearchViewController.instantiate(fromAppStoryboard: .AffiliateUser)
         nextVC.onSearchedCompletionTxt = { [weak self] searchText in
@@ -63,6 +65,7 @@ class AffiliatedUserProductViewController: UIViewController {
     }
 }
 
+// MARK: - COLLECTION VIEW METHODS
 extension AffiliatedUserProductViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
@@ -188,7 +191,6 @@ extension AffiliatedUserProductViewController: UIScrollViewDelegate {
             viewModel.getAllProducts()
         }
     }
-    
 }
 
 extension AffiliatedUserProductViewController: UITextFieldDelegate {

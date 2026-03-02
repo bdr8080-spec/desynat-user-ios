@@ -8,7 +8,8 @@
 import UIKit
 
 class ForgotPasswordViewController: UIViewController {
-
+    
+    // MARK: - IBOutlet's
     @IBOutlet weak var countryCodeTextField: UITextField!
     @IBOutlet weak var emailAddressTextField: UITextField!
     @IBOutlet weak var mobileTextField: UITextField!
@@ -17,11 +18,13 @@ class ForgotPasswordViewController: UIViewController {
     @IBOutlet weak var mobileView: UIView!
     @IBOutlet weak var emailView: UIView!
     
+    // MARK: - Property Decalaration
     var mobileIsSelected: Bool = true
     private lazy var viewModel = ForgotPasswordViewModel(hostVC: self)
     var countryCode: String = "+965"
     var comingUserRole: UserType = .normalUser
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         mobileIsSelected = true
@@ -38,6 +41,7 @@ class ForgotPasswordViewController: UIViewController {
         countryCodeTextField.text = countryCode
     }
     
+    // MARK: - Button's Action
     @IBAction func continueDidTapped(_ sender: Any) {
         if viewModel.validFields(mobileIsSelected: mobileIsSelected) {
             switch comingUserRole {
@@ -82,8 +86,8 @@ class ForgotPasswordViewController: UIViewController {
             kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
                 let selectedCountry = self.viewModel.getAllUSerCountryList[index]
                 let code = selectedCountry.dialCode ?? "+965"
-               
-              self.setUpCountryCode(code: code)
+                
+                self.setUpCountryCode(code: code)
                 self.countryCode = code
             }
         case .affiliateUser:
@@ -96,12 +100,12 @@ class ForgotPasswordViewController: UIViewController {
             kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
                 let selectedCountry = self.viewModel.getSevenCountryList[index]
                 let code = selectedCountry.dialCode ?? "+965"
-               
-              self.setUpCountryCode(code: code)
+                
+                self.setUpCountryCode(code: code)
                 self.countryCode = code
             }
         }
-      
+        
     }
     
     func setUpCountryCode(code: String) {

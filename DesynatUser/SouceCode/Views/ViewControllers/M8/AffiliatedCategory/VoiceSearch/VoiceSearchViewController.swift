@@ -9,10 +9,12 @@ import UIKit
 import Speech
 
 class VoiceSearchViewController: UIViewController {
-
+    
+    // MARK: - IBOutlet's
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var micImageView: UIImageView!
     
+    // MARK: - Property Decalaration
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
@@ -25,6 +27,7 @@ class VoiceSearchViewController: UIViewController {
     private var hasFinishedListening = false
     var onSearchedCompletionTxt: ((String) -> Void)?
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = "Listening..."
@@ -84,13 +87,13 @@ class VoiceSearchViewController: UIViewController {
         
         recognitionTask = speechRecognizer?.recognitionTask(with: request) { [weak self] result, error in
             guard let self = self else { return }
-
+            
             // 🚫 Ignore updates after finishing
             if self.hasFinishedListening { return }
-
+            
             if let result = result {
                 let text = result.bestTranscription.formattedString.trimmingCharacters(in: .whitespacesAndNewlines)
-
+                
                 // ✅ Ignore empty text
                 if !text.isEmpty {
                     self.latestSpokenText = text
@@ -98,11 +101,11 @@ class VoiceSearchViewController: UIViewController {
                     DispatchQueue.main.async {
                         self.titleLabel.text = text
                     }
-
+                    
                     self.resetSilenceTimer()
                 }
             }
-
+            
             if let error = error {
                 print("Recognition error:", error)
                 DispatchQueue.main.async {
@@ -147,12 +150,12 @@ class VoiceSearchViewController: UIViewController {
         hasFinishedListening = true
         
         stopListening()
-
+        
         // ✅ Force label to keep last spoken text
         titleLabel.text = latestSpokenText
-
+        
         micImageView.image = UIImage(named: "micSearch")
-
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.navigateToNextScreen()
         }
@@ -222,8 +225,4 @@ class VoiceSearchViewController: UIViewController {
         micImageView.alpha = 1.0
     }
     
-//    deinit {
-//        stopListening()
-//    }
-
 }

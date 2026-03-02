@@ -9,7 +9,8 @@ import UIKit
 import SDWebImage
 
 class ItemPerformanceViewController: UIViewController, UITextFieldDelegate {
-
+    
+    // MARK: - IBOutlet's
     @IBOutlet weak var productImageView: CustomImageView!
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var actualPriceLabel: CustomLabelFont!
@@ -26,18 +27,21 @@ class ItemPerformanceViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var txtFromDate: UITextField!
     @IBOutlet weak var txtToDate: UITextField!
     
+    // MARK: - Property Decalaration
     private var activeTextField: UITextField?
     private lazy var viewModel = ItemPerformanceViewModel(hostVC: self)
     var productId: Int = 0
     let datePicker = UIDatePicker()
     var onProductIsRemoved:(()-> Void)?
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.getLatestSearchData()
         setUpTextFields()
     }
-
+    
+    // MARK: - Button's Action
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -64,6 +68,7 @@ class ItemPerformanceViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // MARK: - function
     private func showCopiedLabel() {
         let copiedLabel = UILabel()
         copiedLabel.text = "  Copied  "
@@ -93,7 +98,7 @@ extension ItemPerformanceViewController {
     private func setUpTextFields() {
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
-//        datePicker.minimumDate = Date()
+        //        datePicker.minimumDate = Date()
         datePicker.backgroundColor = .white
         
         let toolbar = UIToolbar()

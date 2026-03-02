@@ -7,17 +7,14 @@
 
 import UIKit
 
-class MyOrderVC: UIViewController, FilterDelegate {
-
-    func didApplyFilter(_ filter: OrderFilterType) {
-        normalOrderFilter = filter
-        viewModel.getOrders()
-    }
+class MyOrderVC: UIViewController {
     
+      // MARK: - IBOutlet's
     @IBOutlet weak var txtSearch: UITextField!
     @IBOutlet weak var orderTableView: TableViewDynamicHeight!
     @IBOutlet weak var lblNoData: UILabel!
     
+    // MARK: - Property Decalaration
     lazy private var viewModel = MyOrderVM(hostVC: self)
     var orderData: [OrderModel] = []
     var selectedOrderType: OrderType = .order
@@ -25,6 +22,7 @@ class MyOrderVC: UIViewController, FilterDelegate {
     private var searchWorkItem: DispatchWorkItem?
     var comingFromOrderTracking: Bool = false
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         registerXib()
@@ -42,6 +40,7 @@ class MyOrderVC: UIViewController, FilterDelegate {
         orderTableView.register(UINib(nibName: "MyOrderTableCell", bundle: nil), forCellReuseIdentifier: "MyOrderTableCell")
     }
     
+      // MARK: - Button's Action
     @IBAction func btnBack(_ sender: Any) {
         if comingFromOrderTracking {
             self.navigationController?.popToRootViewController(animated: false)
@@ -67,6 +66,7 @@ class MyOrderVC: UIViewController, FilterDelegate {
     
 }
 
+// MARK: - TABLE VIEW METHODS
 extension MyOrderVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -107,5 +107,13 @@ extension MyOrderVC: UITextFieldDelegate {
         searchWorkItem = workItem
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
         return true
+    }
+}
+
+extension MyOrderVC: FilterDelegate {
+    
+    func didApplyFilter(_ filter: OrderFilterType) {
+        normalOrderFilter = filter
+        viewModel.getOrders()
     }
 }

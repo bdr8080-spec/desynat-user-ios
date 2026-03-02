@@ -8,12 +8,15 @@
 import UIKit
 
 class SuccessMsgVC: UIViewController {
-
+    
+    // MARK: - IBOutlet's
     @IBOutlet weak var lblSuccesMsg: CustomLabelFont!
     
+    // MARK: - Property Decalaration
     var message: String = ""
     var OnDismiss: (()->())?
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         lblSuccesMsg.text = message
@@ -24,5 +27,4 @@ class SuccessMsgVC: UIViewController {
         }
     }
     
-
 }

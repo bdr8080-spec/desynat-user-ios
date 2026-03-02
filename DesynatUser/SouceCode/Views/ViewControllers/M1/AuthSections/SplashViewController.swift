@@ -8,7 +8,8 @@
 import UIKit
 
 class SplashViewController: UIViewController {
-
+    
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.asyncAfter(deadline:.now() + 5.0){

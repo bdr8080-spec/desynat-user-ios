@@ -10,6 +10,7 @@ import SDWebImage
 
 class AffiliatedProfileDetailsViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var bankAccountView: UIView!
     @IBOutlet weak var addressScrollView: UIScrollView!
     @IBOutlet weak var personalInfoScrollView: UIScrollView!
@@ -36,17 +37,17 @@ class AffiliatedProfileDetailsViewController: UIViewController {
     @IBOutlet weak var addressLineOneTF: UITextField!
     @IBOutlet weak var addressLineTwoTF: UITextField!
     
+    // MARK: - Property Decalaration
     private lazy var viewModel = AffiliatedProfileDetailsViewModel(hostVC: self)
     var uplaodDocuOneImage = ""
     var uploadDocTwoImage = ""
     var selectedProfileImageUrl = ""
     var latitude: Double? = 0.0
     var longitude: Double? = 0.0
-//    var email: String? = ""
-//    var mobile: String? = ""
     var selectedAddressCountryCode: String? = "0"
     var comingAfterUpdate: Bool = false
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.countryListApi()
@@ -64,6 +65,7 @@ class AffiliatedProfileDetailsViewController: UIViewController {
         }
     }
     
+    // MARK: - Button's Action
     @IBAction func personalDidTapped(_ sender: Any) {
         selectTab(.personal)
         personalInfoScrollView.isHidden = false
@@ -122,7 +124,7 @@ class AffiliatedProfileDetailsViewController: UIViewController {
     }
     
     @IBAction func countryCodeDidTapped(_ sender: UIButton) {
-
+        
     }
     
     @IBAction func emailChangeDidTapped(_ sender: Any) {
@@ -186,16 +188,16 @@ class AffiliatedProfileDetailsViewController: UIViewController {
             self.addressLineOneTF.text = addressLineOne.joined(separator: ", ")
             
             var components: [String] = []
-
+            
             if !safeCity.isEmpty {
                 components.append(safeCity)
             }
             if !safeState.isEmpty {
                 components.append(safeState)
             }
-
+            
             var address = components.joined(separator: ", ")
-
+            
             if !safePincode.isEmpty {
                 address += " - \(safePincode)"
             }
@@ -256,6 +258,7 @@ class AffiliatedProfileDetailsViewController: UIViewController {
     }
 }
 
+// MARK: - TABLE VIEW METHODS
 extension AffiliatedProfileDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

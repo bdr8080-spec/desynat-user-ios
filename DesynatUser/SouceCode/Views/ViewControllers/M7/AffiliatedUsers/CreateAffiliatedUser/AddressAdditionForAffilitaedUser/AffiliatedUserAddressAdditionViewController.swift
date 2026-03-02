@@ -9,6 +9,7 @@ import UIKit
 
 class AffiliatedUserAddressAdditionViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var countryTF: UITextField!
     @IBOutlet weak var locationTF: UITextField!
     @IBOutlet weak var addresSLineOneTF: UITextField!
@@ -18,17 +19,20 @@ class AffiliatedUserAddressAdditionViewController: UIViewController {
     @IBOutlet weak var stateTF: UITextField!
     @IBOutlet weak var cityTF: UITextField!
     
+    // MARK: - Property Decalaration
     private lazy var viewModel = AffiliatedUserAddressAdditionViewModel(hostVC: self)
     var latitude: Double? = 0.0
     var longitude: Double? = 0.0
     var selectedCountryCode: String? = ""
     var affiliatedUserToken: String = ""
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.countryListApi()
     }
     
+    // MARK: - Button's Action
     @IBAction func locationdidTapped(_ sender: Any) {
         let vc = LocationViewController.instantiate(fromAppStoryboard: .Profile)
         vc.preSelectedLat = self.latitude   // your saved lat
@@ -52,16 +56,16 @@ class AffiliatedUserAddressAdditionViewController: UIViewController {
             self.addresSLineOneTF.text = addressLineOne.joined(separator: ", ")
             
             var components: [String] = []
-
+            
             if !safeCity.isEmpty {
                 components.append(safeCity)
             }
             if !safeState.isEmpty {
                 components.append(safeState)
             }
-
+            
             var address = components.joined(separator: ", ")
-
+            
             if !safePincode.isEmpty {
                 address += " - \(safePincode)"
             }

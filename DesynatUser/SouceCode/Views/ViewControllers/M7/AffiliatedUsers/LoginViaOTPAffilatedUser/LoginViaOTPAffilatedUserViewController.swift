@@ -9,15 +9,18 @@ import UIKit
 
 class LoginViaOTPAffilatedUserViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var emailMobileImageView: UIImageView!
     @IBOutlet weak var txtFieldLeading: NSLayoutConstraint!
     @IBOutlet weak var viewCountryCode: UIView!
     @IBOutlet weak var countryCodeLabel: UILabel!
     
+    // MARK: - Property Decalaration
     private lazy var viewModel = LoginViaOTPAffiliatedUserViewModel(loginHostVC: self)
     var countryCode: String = "+965"
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         countryCodeLabel.text = countryCode
@@ -28,14 +31,15 @@ class LoginViaOTPAffilatedUserViewController: UIViewController {
         viewModel.getALlUserCountryListApi()
     }
     
+    // MARK: - Button's Action
     @IBAction func signupDidTapped(_ sender: Any) {
         if let navController = self.navigationController,
-               let signupVC = navController.viewControllers.first(where: { $0 is CreateAffiliateUserAccountViewController }) {
-                navController.popToViewController(signupVC, animated: true)
-            } else {
-                let vc = CreateAffiliateUserAccountViewController.instantiate(fromAppStoryboard: .AffiliateUser)
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+           let signupVC = navController.viewControllers.first(where: { $0 is CreateAffiliateUserAccountViewController }) {
+            navController.popToViewController(signupVC, animated: true)
+        } else {
+            let vc = CreateAffiliateUserAccountViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     @IBAction func continueDidTapped(_ sender: Any) {
@@ -49,25 +53,25 @@ class LoginViaOTPAffilatedUserViewController: UIViewController {
     }
     
     @IBAction func swithToUserDidTapped(_ sender: Any) {
-//        self.navigationController?.popToRootViewController(animated: true)
+        //        self.navigationController?.popToRootViewController(animated: true)
         kSharedSceneDelegate.navigateToUserHomeVc(selectedIndex: 4)
     }
     
     @IBAction func countryDidTapped(_ sender: UIButton) {
-      let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
-          let name = country.name ?? ""
-          let dialCode = country.dialCode ?? ""
-          let flag = country.flag ?? "🇰🇼"
-          return "\(flag)  \(name) (\(dialCode))"
-      }
-
-      kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
-          let selectedCountry = self.viewModel.getAllUSerCountryList[index]
-          let code = selectedCountry.dialCode ?? "+965"
-         
-        self.setUpCountryCode(code: code)
-          self.countryCode = code
-      }
+        let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
+            let name = country.name ?? ""
+            let dialCode = country.dialCode ?? ""
+            let flag = country.flag ?? "🇰🇼"
+            return "\(flag)  \(name) (\(dialCode))"
+        }
+        
+        kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+            let selectedCountry = self.viewModel.getAllUSerCountryList[index]
+            let code = selectedCountry.dialCode ?? "+965"
+            
+            self.setUpCountryCode(code: code)
+            self.countryCode = code
+        }
     }
     
     func setUpCountryCode(code: String) {
@@ -98,7 +102,7 @@ extension LoginViaOTPAffilatedUserViewController: UITextFieldDelegate {
                 self.txtFieldLeading.constant = 12
                 validation = StringValidation(string: currentText, characterCount: 15, validation: .mobileNo)
             }
-    
+            
             if let data = validation {
                 return data.validate()
             } else {

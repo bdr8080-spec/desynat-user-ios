@@ -11,12 +11,14 @@ import GooglePlaces
 
 class LocationViewController: UIViewController, UITextFieldDelegate {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var buttonTitleLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var txtSearch: UITextField!
     @IBOutlet weak var viewMap: GMSMapView!
     @IBOutlet weak var lblLocation: UILabel!
     
+    // MARK: - Property Decalaration
     var locationFor = ""
     var currentLocation:String?
     var latitude:Double?
@@ -38,13 +40,12 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
     var preSelectedLat: Double?
     var preSelectedLng: Double?
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
         txtSearch.delegate = self
         viewMap.delegate = self
-        
-        // Setup location manager
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
@@ -73,6 +74,7 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
         initialSetup()
     }
     
+    // MARK: - Button's Action
     @IBAction func btnBack(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }

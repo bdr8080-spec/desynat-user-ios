@@ -10,6 +10,7 @@ import IQKeyboardManagerSwift
 
 class ChatDetailsViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var addToBagView: UIView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var detailsStackView: UIStackView!
@@ -46,11 +47,14 @@ class ChatDetailsViewController: UIViewController {
             productTableView.registerCellFromNib(cellID: "OrderForChatTableViewCell")
         }
     }
+    
+    // MARK: - Property Decalaration
     var chatType: ChatType = .normalChatWithDealer
     lazy var viewModel = ChatEnquiryViewModel(hostVC: self)
     var chatList:[Chat] = []
     var comingFromChatInbox: Bool = true
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
@@ -74,23 +78,13 @@ class ChatDetailsViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    // MARK: - Button's Action
     @IBAction func addToBagDidTapped(_ sender: Any) {
         viewModel.CustomOrderAddToCardService()
     }
     
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
-//        guard let nav = navigationController else {
-//                dismiss(animated: true)
-//                return
-//            }
-//
-//            let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-//            let inboxVC = storyboard.instantiateViewController(
-//                withIdentifier: "ChatInboxListViewController"
-//            )
-//
-//            nav.setViewControllers([inboxVC], animated: true)
     }
     
     @IBAction func payNowDidTapped(_ sender: Any) {
@@ -149,7 +143,7 @@ class ChatDetailsViewController: UIViewController {
         } else {
             productTableView.isHidden = false
             detailsStackView.isHidden = false
-//            payNowView.isHidden = true
+            //            payNowView.isHidden = true
             addToBagView.isHidden = true
             mainHeaderView.backgroundColor = UIColor(hex: "#FFF7EA")
             detailsView.backgroundColor = UIColor(hex: "#FFF7EA")
@@ -187,14 +181,14 @@ class ChatDetailsViewController: UIViewController {
                 productDetailsView.isHidden = true
                 productPriceView.isHidden = false
                 productDetailsActionButtonStackView.isHidden = false
-//                payNowView.isHidden = true
+                //                payNowView.isHidden = true
                 addToBagView.isHidden = true
                 actionButtonView.isHidden = false
             case "5":
                 productDetailsView.isHidden = true
                 productPriceView.isHidden = false
                 productDetailsActionButtonStackView.isHidden = false
-//                payNowView.isHidden = false
+                //                payNowView.isHidden = false
                 addToBagView.isHidden = false
                 actionButtonView.isHidden = true
                 if quotationData?.addtocardStatus == "1" {
@@ -288,6 +282,7 @@ class ChatDetailsViewController: UIViewController {
     
 }
 
+// MARK: - TABLE VIEW METHODS
 extension ChatDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == productTableView {
@@ -379,15 +374,9 @@ extension ChatDetailsViewController : UITextFieldDelegate {
     }
 }
 
-
-
 enum ChatType {
     case quotationReceived
     case quotationAccepted
     case requestSentForCustomization
     case normalChatWithDealer
 }
-
-
-// action 2 ==> (accept and reject)
-//

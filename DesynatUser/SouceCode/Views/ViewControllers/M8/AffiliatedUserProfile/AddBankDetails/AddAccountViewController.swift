@@ -9,6 +9,7 @@ import UIKit
 
 class AddAccountViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var buttonTitleLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var confirmAccountNumberTF: UITextField!
@@ -18,11 +19,13 @@ class AddAccountViewController: UIViewController {
     @IBOutlet weak var ibanTextField: UITextField!
     @IBOutlet weak var accountHolderTextField: UITextField!
     
+    // MARK: - Property Decalaration
     private lazy var viewModel = AddAccountViewModel(hostVC: self)
     var comingForEdit: Bool = false
     var bankDetail: BankDetail?
     var changesAreDone: (() -> Void)?
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         ibanTextField.delegate = self
@@ -32,6 +35,7 @@ class AddAccountViewController: UIViewController {
         viewModel.populateData()
     }
     
+    // MARK: - Button's Action
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }

@@ -9,18 +9,22 @@ import UIKit
 
 class ChangePassowrdViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var txtOldPassword: UITextField!
     @IBOutlet weak var txtNewPass: UITextField!
     @IBOutlet weak var txtConfirmPass: UITextField!
     
+    // MARK: - Property Decalaration
     private lazy var viewModel = ChangePassowrdViewModel(hostVC:self)
     var comingReason : ComingReasonAtChangPassword = .fromNormalUser
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
+    // MARK: - Button's Action
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }

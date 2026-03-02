@@ -9,23 +9,40 @@ import UIKit
 
 class FilterVC: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var filterTableview: UITableView!
     
+    // MARK: - Property Decalaration
     var filtersOptions = ["All", "Ongoing", "Delivered", "Cancelled", "Return"]
     var selectedIndex: Int = 0
     weak var delegate: FilterDelegate?
     var preselectedFilter: OrderFilterType = .all
-    
     var selectedFilter: OrderFilterType {
         return OrderFilterType(rawValue: selectedIndex + 1) ?? .all
     }
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         registerXib()
         initialSetup()
         applyPreselection()
+    }
+    
+    // MARK: - Button's Action
+    @IBAction func dismissDidTapped(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
+    @IBAction func btnClear(_ sender: Any) {
+        selectedIndex = 0
+        filterTableview.reloadData()
+    }
+    
+    @IBAction func btnApply(_ sender: Any) {
+        delegate?.didApplyFilter(selectedFilter)
+        dismiss(animated: true)
     }
     
     private func applyPreselection() {
@@ -46,22 +63,9 @@ class FilterVC: UIViewController {
         titleView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     
-    @IBAction func dismissDidTapped(_ sender: Any) {
-        self.dismiss(animated: true)
-    }
-    
-    @IBAction func btnClear(_ sender: Any) {
-        selectedIndex = 0
-        filterTableview.reloadData()
-    }
-    
-    @IBAction func btnApply(_ sender: Any) {
-        delegate?.didApplyFilter(selectedFilter)
-        dismiss(animated: true)
-    }
-    
 }
 
+// MARK: - TABLE VIEW METHODS
 extension FilterVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -83,8 +87,5 @@ extension FilterVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
         filterTableview.reloadData()
-        //self.dismiss(animated: true)
     }
-    
-    
 }

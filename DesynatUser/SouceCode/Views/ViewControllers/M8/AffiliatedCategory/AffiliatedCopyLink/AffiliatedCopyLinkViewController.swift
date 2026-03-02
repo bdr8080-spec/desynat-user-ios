@@ -8,21 +8,25 @@
 import UIKit
 
 class AffiliatedCopyLinkViewController: UIViewController {
-
+    
+    // MARK: - IBOutlet's
     @IBOutlet weak var linkTF: UITextField!
     @IBOutlet weak var titleView: UIView!
     
+    // MARK: - Property Decalaration
     private lazy var viewModel = AffiliatedCopyLinkViewModel(hostVC: self)
     var onAddToProduct: (() -> Void)?
     var productLink: String = ""
     var productID: Int = 0
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
         linkTF.text = productLink
     }
     
+    // MARK: - Button's Action
     @IBAction func dismissDidTapped(_ sender: Any) {
         self.dismiss(animated: true)
     }

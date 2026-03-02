@@ -83,7 +83,7 @@ class PlaceOrderPaymentMethodsTableViewCell: UITableViewCell, MFPaymentDelegate 
   }
 }
 
-// MARK: - TableView delegate
+// MARK: - TABLE VIEW METHODS
 extension PlaceOrderPaymentMethodsTableViewCell: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

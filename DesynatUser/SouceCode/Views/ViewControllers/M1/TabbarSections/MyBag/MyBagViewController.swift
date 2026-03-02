@@ -9,6 +9,7 @@ import UIKit
 
 class MyBagViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var discountOnMrpStackView: UIStackView!
     @IBOutlet weak var totalMRPStackView: UIStackView!
     @IBOutlet weak var customPriceStackView: UIStackView!
@@ -45,6 +46,7 @@ class MyBagViewController: UIViewController {
         }
     }
     
+    // MARK: - Property Decalaration
     private lazy var viewModel = MyBagViewModel(hostVC: self)
     var deliveryId: Int = 0
     var isPromoCodeApplied: Bool = false
@@ -54,6 +56,7 @@ class MyBagViewController: UIViewController {
     var totalMRPDiscountValue: Double = 0.0
     var isAnyItemRemovedFromCart: Bool = false
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,13 +72,6 @@ class MyBagViewController: UIViewController {
         }
     }
     
-    private func guestLoginUIHandle() {
-        noDataFoundLabel.isHidden = false
-        noDataFoundLabel.text = "Please login to view your bag"
-        bagDetailsView.isHidden = true
-        totoalAmountPriceView.isHidden = true
-    }
-    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         DispatchQueue.main.async {
@@ -84,6 +80,7 @@ class MyBagViewController: UIViewController {
         }
     }
     
+    // MARK: - Button's Action
     @IBAction func applyPromocodeDidTapped(_ sender: Any) {
         let nextVC = PromoCodeListViewController.instantiate(fromAppStoryboard: .MyBag)
         nextVC.deliveryAddress = viewModel.bagDetails?.userAddress?.id ?? 0
@@ -128,7 +125,7 @@ class MyBagViewController: UIViewController {
                     let cleaned = amount
                         .replacingOccurrences(of: ",", with: "") // remove thousand separators
                         .filter { "0123456789.".contains($0) }
-
+                    
                     return Double(cleaned)
                 }
                 .reduce(0.0, +)
@@ -139,23 +136,18 @@ class MyBagViewController: UIViewController {
         let customOrderCount = viewModel.customOrders.count
         if normalOrderCount != 0 && customOrderCount != 0 {
             let totalPrice = viewModel.customOrders.compactMap { $0.chatroomData?.totalAmount }.compactMap { amount -> Double? in
-                    let cleaned = amount
-                        .replacingOccurrences(of: ",", with: "") // remove thousand separators
-                        .filter { "0123456789.".contains($0) }
-
-                    return Double(cleaned)
-                }
+                let cleaned = amount
+                    .replacingOccurrences(of: ",", with: "") // remove thousand separators
+                    .filter { "0123456789.".contains($0) }
+                
+                return Double(cleaned)
+            }
                 .reduce(0.0, +)
             let finalAmount = max(0, (viewModel.bagDetails?.totalAmount ?? 0) + (totalPrice))
             totalAmountLabel.text = formatPrice(finalAmount)
             finalPriceLabel.text = formatPrice(finalAmount)
             let actualPriceWithputDiscount = max(0, (viewModel.bagDetails?.totalMrp ?? 0) + (totalPrice))
             CommonUtils.setStrikethrough(label: actualPriceLAbel, text: formatPrice(actualPriceWithputDiscount))
-//            if isPromoCodeApplied, let selected = selectedPromoCode {
-//                let finalAmountAfterApplyingPromocode = max(0, (finalAmount) - (selected.applyDiscountValue ?? 0))
-//                totalAmountLabel.text = formatPrice(finalAmountAfterApplyingPromocode)
-//                finalPriceLabel.text = formatPrice(finalAmountAfterApplyingPromocode)
-//            }
         }
     }
     
@@ -164,8 +156,7 @@ class MyBagViewController: UIViewController {
         nextVC.comingFromBag = true
         nextVC.onAddressSelected = { [weak self] selectedAddress in
             self?.deliveryId = selectedAddress.id ?? 0
-//            let addressLine = "\(selectedAddress.name ?? "")-\(selectedAddress.houseNo ?? ""), \(selectedAddress.streetNo ?? ""), \(selectedAddress.city ?? ""), \(selectedAddress.state ?? ""), \(selectedAddress.countryName ?? "")-\(selectedAddress.postalCode ?? "")"
-            self?.addressLabel.text = self?.formattedAddress(from: selectedAddress)//addressLine
+            self?.addressLabel.text = self?.formattedAddress(from: selectedAddress)
         }
         self.navigationController?.pushViewController(nextVC, animated: false)
     }
@@ -199,7 +190,6 @@ class MyBagViewController: UIViewController {
         }
         let selectedAddress = data.userAddress
         deliveryId = selectedAddress?.id ?? 0
-//        let addressLine = "\(selectedAddress?.name ?? "")-\(selectedAddress?.houseNo ?? ""), \(selectedAddress?.streetNo ?? ""), \(selectedAddress?.city ?? ""), \(selectedAddress?.state ?? ""), \(selectedAddress?.countryName ?? "")-\(selectedAddress?.postalCode ?? "")"
         addressLabel.text = formattedAddress(from: data.userAddress)//addressLine
         shippingFeeLabel.text = CommonUtils.formatDeliveryCharges(data.shippingFees)//formatPrice(data.shippingFees)
         taxLabel.text = formatPrice(data.tax)//CommonUtils.formatTax(data.tax)//
@@ -214,7 +204,7 @@ class MyBagViewController: UIViewController {
                     let cleaned = amount
                         .replacingOccurrences(of: ",", with: "") // remove thousand separators
                         .filter { "0123456789.".contains($0) }
-
+                    
                     return Double(cleaned)
                 }
                 .reduce(0.0, +)
@@ -239,7 +229,7 @@ class MyBagViewController: UIViewController {
                     let cleaned = amount
                         .replacingOccurrences(of: ",", with: "") // remove thousand separators
                         .filter { "0123456789.".contains($0) }
-
+                    
                     return Double(cleaned)
                 }
                 .reduce(0.0, +)
@@ -259,12 +249,12 @@ class MyBagViewController: UIViewController {
         
         if normalOrderCount != 0 && customOrderCount != 0 {
             let totalPrice = viewModel.customOrders.compactMap { $0.chatroomData?.totalAmount }.compactMap { amount -> Double? in
-                    let cleaned = amount
-                        .replacingOccurrences(of: ",", with: "") // remove thousand separators
-                        .filter { "0123456789.".contains($0) }
-
-                    return Double(cleaned)
-                }
+                let cleaned = amount
+                    .replacingOccurrences(of: ",", with: "") // remove thousand separators
+                    .filter { "0123456789.".contains($0) }
+                
+                return Double(cleaned)
+            }
                 .reduce(0.0, +)
             let finalAmount = max(0, (data.totalAmount ?? 0) + (totalPrice))
             totalAmountLabel.text = formatPrice(finalAmount)
@@ -294,14 +284,14 @@ class MyBagViewController: UIViewController {
     
     func formattedAddress(from address: SavedAddressList?) -> String {
         guard let address else { return "" }
-
+        
         let nameAndHouse = [
             address.name,
             address.houseNo
         ].compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }
-         .filter { !$0.isEmpty }
-         .joined(separator: "-")
-
+            .filter { !$0.isEmpty }
+            .joined(separator: "-")
+        
         let mainParts = [
             nameAndHouse,
             address.streetNo,
@@ -309,21 +299,28 @@ class MyBagViewController: UIViewController {
             address.state,
             address.countryName
         ].compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }
-         .filter { !$0.isEmpty }
-
+            .filter { !$0.isEmpty }
+        
         var result = mainParts.joined(separator: ", ")
-
+        
         if let postalCode = address.postalCode,
            !postalCode.trimmingCharacters(in: .whitespaces).isEmpty {
             result += " - \(postalCode)"
         }
-
+        
         return result
     }
-
+    
+    private func guestLoginUIHandle() {
+        noDataFoundLabel.isHidden = false
+        noDataFoundLabel.text = "Please login to view your bag"
+        bagDetailsView.isHidden = true
+        totoalAmountPriceView.isHidden = true
+    }
     
 }
 
+// MARK: - TABLE VIEW METHODS
 extension MyBagViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

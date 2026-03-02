@@ -10,6 +10,7 @@ import Speech
 
 class StoresViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var btnMicOutlet: UIButton!
     @IBOutlet weak var noResultFoundLabel: UILabel!
     @IBOutlet weak var searchTF: UITextField!
@@ -26,6 +27,7 @@ class StoresViewController: UIViewController {
         }
     }
     
+    // MARK: - Property Decalaration
     var slectedsubCategoryId: Int? = 0
     private lazy var viewModel = StoreViewModel(hostVC: self)
     var appliedRatings: [String] = []
@@ -43,6 +45,7 @@ class StoresViewController: UIViewController {
     private var currentBannerIndex = 0
     private let bannerAutoScrollDelay: TimeInterval = 6
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         bannerCollectionView.layer.cornerRadius = 12
@@ -67,6 +70,7 @@ class StoresViewController: UIViewController {
         updateCollectionsHeight()
     }
     
+    // MARK: - Button's Action
     @IBAction func filterDidTapped(_ sender: Any) {
         let nextVC = StoresFiltersViewController.instantiate(fromAppStoryboard: .Catalog)
         
@@ -98,13 +102,13 @@ class StoresViewController: UIViewController {
     // MARK: - Page Control Tap Handling
     @IBAction func pageControlChanged(_ sender: UIPageControl) {
         currentBannerIndex = sender.currentPage
-
-            let indexPath = IndexPath(item: currentBannerIndex, section: 0)
-            bannerCollectionView.scrollToItem(
-                at: indexPath,
-                at: .centeredHorizontally,
-                animated: true
-            )
+        
+        let indexPath = IndexPath(item: currentBannerIndex, section: 0)
+        bannerCollectionView.scrollToItem(
+            at: indexPath,
+            at: .centeredHorizontally,
+            animated: true
+        )
     }
     
     // MARK: - Mic Button – This is what you wanted!
@@ -145,7 +149,7 @@ class StoresViewController: UIViewController {
     
     private func startBannerAutoScroll() {
         stopBannerAutoScroll()
-
+        
         bannerAutoScrollTimer = Timer.scheduledTimer(
             timeInterval: bannerAutoScrollDelay,
             target: self,
@@ -154,7 +158,7 @@ class StoresViewController: UIViewController {
             repeats: true
         )
     }
-
+    
     private func stopBannerAutoScroll() {
         bannerAutoScrollTimer?.invalidate()
         bannerAutoScrollTimer = nil
@@ -163,24 +167,24 @@ class StoresViewController: UIViewController {
     @objc private func autoScrollBanner() {
         let totalItems = viewModel.homeScreenAllBannersList.count
         guard totalItems > 1 else { return }
-
+        
         currentBannerIndex += 1
         if currentBannerIndex >= totalItems {
             currentBannerIndex = 0
         }
-
+        
         let indexPath = IndexPath(item: currentBannerIndex, section: 0)
-
+        
         bannerCollectionView.scrollToItem(
             at: indexPath,
             at: .centeredHorizontally,
             animated: true
         )
-
+        
         bannerPageController.currentPage = currentBannerIndex
     }
-
-
+    
+    
     
     // MARK: - Start Listening (Speech → Text)
     private func startListening() {
@@ -258,6 +262,7 @@ class StoresViewController: UIViewController {
     }
 }
 
+// MARK: - COLLECTION VIEW METHODS
 extension StoresViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -322,12 +327,6 @@ extension StoresViewController: UICollectionViewDelegate, UICollectionViewDataSo
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    //    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-    //        if collectionView == storesCollectionView {
-    //            viewWillLayoutSubviews()
-    //        }
-    //    }
-    
     // MARK: - Update Page Control on Scroll
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == bannerCollectionView {
@@ -336,8 +335,6 @@ extension StoresViewController: UICollectionViewDelegate, UICollectionViewDataSo
             currentBannerIndex = pageIndex
         }
     }
-
-    
 }
 
 extension StoresViewController: UITextFieldDelegate {

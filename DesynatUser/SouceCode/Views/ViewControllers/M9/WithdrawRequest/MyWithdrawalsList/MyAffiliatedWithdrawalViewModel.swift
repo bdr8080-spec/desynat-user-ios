@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+class MyAffiliatedWithdrawalViewModel {
+    
+    private var hostVC: MyAffiliatedWithdrawalViewController!
+    
+    init(hostVC: MyAffiliatedWithdrawalViewController!) {
+        self.hostVC = hostVC
+    }
+    
+}

@@ -9,6 +9,7 @@ import UIKit
 
 class AffiliatedUserCategoriesViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var noDataFoundLabel: UILabel!
     @IBOutlet weak var btnMicOutlet: UIButton!
     @IBOutlet weak var searchTF: UITextField!
@@ -23,17 +24,18 @@ class AffiliatedUserCategoriesViewController: UIViewController {
         }
     }
     
+    // MARK: - Property Decalaration
     private lazy var viewModel = AffiliatedUserCategoriesViewModel(hostVC: self)
     private var selectedCatgeoryIndex = 0
     
-    // MARK: - View Lifecycle
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         searchTF.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
         viewModel.getCategoriesListApi()
     }
     
-    // MARK: - Mic Button – This is what you wanted!
+    // MARK: - Button's Action
     @IBAction func micDidTapped(_ sender: UIButton) {
         let nextVC = VoiceSearchViewController.instantiate(fromAppStoryboard: .AffiliateUser)
         nextVC.onSearchedCompletionTxt = { [weak self] searchText in
@@ -55,7 +57,7 @@ class AffiliatedUserCategoriesViewController: UIViewController {
     
 }
 
-// MARK: - CollectionView Delegates
+// MARK: - COLLECTION VIEW METHODS
 extension AffiliatedUserCategoriesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

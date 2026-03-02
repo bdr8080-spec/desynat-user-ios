@@ -9,6 +9,9 @@ import UIKit
 
 class MyAffiliatedWithdrawalViewController: UIViewController {
     
+    // MARK: - IBOutlet's
+    @IBOutlet weak var searchTF: UITextField!
+    @IBOutlet weak var totalWithdrawalsLabel: CustomLabelFont!
     @IBOutlet weak var noDataFoundLabel: UILabel!
     @IBOutlet weak var upcomingButtonOutlet: CustomButton!
     @IBOutlet weak var upcomingTitleLabel: UILabel!
@@ -20,36 +23,41 @@ class MyAffiliatedWithdrawalViewController: UIViewController {
         }
     }
     
+    // MARK: - Property Decalaration
     private var requestType: WithdrawRequestType = .upcoming
+    private lazy var viewModel = MyAffiliatedWithdrawalViewModel(hostVC: self)
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
+    // MARK: - Button's Action
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
-
+    
     @IBAction func upcomingDidTapped(_ sender: Any) {
-        requestType = .upcoming
         upcomingButtonOutlet.setImage(.btnGradient, for: .normal)
         upcomingTitleLabel.textColor = .white
         completedTitleLabel.textColor = .black
-        completedButtonOutlet.setImage(UIImage(named: ""), for: .normal)
+        completedButtonOutlet.setImage(nil, for: .normal)
         listTableView.reloadData()
+        requestType = .upcoming
     }
     
     @IBAction func completedDidTapped(_ sender: Any) {
-        requestType = .completed
-        upcomingButtonOutlet.setImage(UIImage(named: ""), for: .normal)
+        upcomingButtonOutlet.setImage(nil, for: .normal)
         upcomingTitleLabel.textColor = .black
         completedTitleLabel.textColor = .white
         completedButtonOutlet.setImage(.btnGradient, for: .normal)
         listTableView.reloadData()
+        requestType = .completed
     }
 }
 
+// MARK: - TABLE VIEW METHODS
 extension MyAffiliatedWithdrawalViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -9,9 +9,15 @@ import UIKit
 
 class MyAffiliatedWithdrawalTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var requestedOnDateLabel: CustomLabelFont!
     @IBOutlet weak var transactionView: UIStackView!
     @IBOutlet weak var statusLabel: CustomLabelFont!
     @IBOutlet weak var creditOnView: UIStackView!
+    @IBOutlet weak var requestIdLabel: CustomLabelFont!
+    @IBOutlet weak var transactionIdLabel: CustomLabelFont!
+    @IBOutlet weak var accountNumberLabel: CustomLabelFont!
+    @IBOutlet weak var totalAmountLabel: CustomLabelFont!
+    @IBOutlet weak var creditedOnLabel: CustomLabelFont!
     
     override func awakeFromNib() {
         super.awakeFromNib()

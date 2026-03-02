@@ -285,10 +285,8 @@ extension WebService {
     
     func getMyProductsDetailsService(param: [String:Any], completion:@escaping (_ user: AffiliatedUserMyProductsList)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-//        CommonUtils.showHud(show: true)
         Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.getMyProductDetails), requestMethod: .get, requestParams: param,  requestModel: AffiliatedUserMyProductsList.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-//            CommonUtils.showHud(show: false)
             Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
@@ -304,11 +302,9 @@ extension WebService {
     
     func deleteProductsDetailsService(param: [String:Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-//        CommonUtils.showHud(show: true)
-        Shimmer.shared.show(show: true)
+        CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.deleteMyProductDetails), requestMethod: .post, requestParams: param,  requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-//            CommonUtils.showHud(show: false)
-            Shimmer.shared.show(show: false)
+            CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {

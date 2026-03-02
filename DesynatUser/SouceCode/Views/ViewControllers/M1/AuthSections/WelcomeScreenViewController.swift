@@ -10,6 +10,7 @@ import JXPageControl
 
 class WelcomeScreenViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var skipButtonOutlet: CustomButton!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
@@ -17,6 +18,7 @@ class WelcomeScreenViewController: UIViewController {
     @IBOutlet weak var walkthroghtCollectionView: UICollectionView!
     @IBOutlet weak var previousButtonOutlet: UIButton!
     
+    // MARK: - Property Decalaration
     var bannerArray: [WalkthroughModel] = [
         WalkthroughModel(image: UIImage(named: "walk1") ?? UIImage(systemName: "photo")!,
                          name: "Order Item".localiz(),
@@ -43,15 +45,16 @@ class WelcomeScreenViewController: UIViewController {
     var currentCellIndex = 0
     var comingUserRole: UserType = .normalUser
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
         configurePageControl()
         updateUI(for: 0)
-        // Force initial reload to ensure correct cell display
         walkthroghtCollectionView.reloadData()
     }
     
+    // MARK: - Button's Action
     @IBAction func forwardNextButtonDidTapped(_ sender: Any) {
         switch comingUserRole {
         case .normalUser:
@@ -161,6 +164,7 @@ class WelcomeScreenViewController: UIViewController {
     
 }
 
+// MARK: - COLLECTION VIEW METHODS
 extension WelcomeScreenViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch comingUserRole {

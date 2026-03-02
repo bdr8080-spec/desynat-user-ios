@@ -9,6 +9,7 @@ import UIKit
 
 class AffiliatedUserProfileViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var userProfileImageView: CustomImageView!
@@ -19,6 +20,7 @@ class AffiliatedUserProfileViewController: UIViewController {
         }
     }
     
+    // MARK: - Property Decalaration
     private var sideMenuData: [SideMenuModel] = [
         SideMenuModel(title: "My Withdrawals", image: "myWithdroawsl"),
         SideMenuModel(title: "Terms & Condition", image: "terms"),
@@ -30,9 +32,9 @@ class AffiliatedUserProfileViewController: UIViewController {
         SideMenuModel(title: "Cancellation Policy", image: "cancellation"),
         SideMenuModel(title: "Support", image: "support"),
         SideMenuModel(title: "Settings", image: "settings")]
-    
     private lazy var viewModel = AffilatedUserProfileViewModel(hostVC: self)
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTableHeight()
@@ -48,12 +50,7 @@ class AffiliatedUserProfileViewController: UIViewController {
         updateTableHeight()
     }
     
-    private func updateTableHeight() {
-        DispatchQueue.main.async {
-            self.sideMenuHeightConstaint.constant = self.sideMenuTableView.contentSize.height
-        }
-    }
-    
+    // MARK: - Button's Action
     @IBAction func btnTapLogout(_ sender: UIButton) {
         self.showConfirmationAlert(msg: "Are you sure you want to logout?"){ [weak self] in
             guard let self = self else { return }
@@ -66,8 +63,15 @@ class AffiliatedUserProfileViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: false)
     }
     
+    private func updateTableHeight() {
+        DispatchQueue.main.async {
+            self.sideMenuHeightConstaint.constant = self.sideMenuTableView.contentSize.height
+        }
+    }
+    
 }
 
+// MARK: - TABLE VIEW METHODS
 extension AffiliatedUserProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -120,8 +124,4 @@ extension AffiliatedUserProfileViewController: UITableViewDelegate, UITableViewD
         // Deselect the row
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
 }
-
-
-

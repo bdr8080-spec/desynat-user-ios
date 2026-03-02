@@ -10,6 +10,7 @@ import Speech
 
 class AffiliatedProductsViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var btnMicOutlet: UIButton!
     @IBOutlet weak var noDataFoundLabel: UILabel!
     @IBOutlet weak var searchTF: UITextField!
@@ -19,6 +20,7 @@ class AffiliatedProductsViewController: UIViewController {
         }
     }
     
+    // MARK: - Property Decalaration
     private lazy var viewModel = AffiliatedProductsViewModel(hostVC: self)
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
@@ -30,6 +32,7 @@ class AffiliatedProductsViewController: UIViewController {
     var subCatrgoryId: Int = 0
     var comingReasonAtAllProducts: ComingReasonAtAllProducts? = .fromCategory
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         searchTF.delegate = self
@@ -42,6 +45,7 @@ class AffiliatedProductsViewController: UIViewController {
         viewModel.resetAndFetchProducts()
     }
     
+    // MARK: - Button's Action
     @IBAction func backDidTapped(_ sender: Any) {
         switch comingReasonAtAllProducts {
         case .fromCategory:
@@ -159,6 +163,7 @@ class AffiliatedProductsViewController: UIViewController {
     }
 }
 
+// MARK: - COLLECTION VIEW METHODS
 extension AffiliatedProductsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.productDetails.count
@@ -181,13 +186,13 @@ extension AffiliatedProductsViewController: UICollectionViewDelegate, UICollecti
         return CGSize(width: width, height: 295)
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        viewModel.generateProductLink(productId: viewModel.productDetails[indexPath.row].id ?? 0)
-//    }
+    //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    //        viewModel.generateProductLink(productId: viewModel.productDetails[indexPath.row].id ?? 0)
+    //    }
 }
 
 extension AffiliatedProductsViewController: UIScrollViewDelegate {
-  
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard scrollView == productsCollectionView else { return }
         let offsetY = scrollView.contentOffset.y
@@ -201,18 +206,18 @@ extension AffiliatedProductsViewController: UIScrollViewDelegate {
 }
 
 extension AffiliatedProductsViewController: UITextFieldDelegate {
-      func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
         searchWorkItem?.cancel()
         let workItem = DispatchWorkItem { [weak self] in
-          guard let self = self else { return }
-          self.viewModel.searchText = currentText
+            guard let self = self else { return }
+            self.viewModel.searchText = currentText
             viewModel.resetAndFetchProducts()
         }
         searchWorkItem = workItem
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
         return true
-      }
+    }
 }
 
 enum ComingReasonAtAllProducts {

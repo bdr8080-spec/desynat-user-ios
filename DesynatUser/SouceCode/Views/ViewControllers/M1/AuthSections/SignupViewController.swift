@@ -8,6 +8,8 @@
 import UIKit
 
 class SignupViewController: UIViewController {
+    
+    // MARK: - IBOutlet's
     @IBOutlet weak var countryCodeTextField: UITextField!
     @IBOutlet weak var profileImageView: CustomImageView!
     @IBOutlet weak var fullNameTextField: UITextField!
@@ -16,33 +18,25 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var createPasswordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     
+    // MARK: - Property Decalaration
     var isTermsAccepted: Bool = false
     var selectedImage: UIImage?
     lazy private var viewModel = SignupViewModel(hostVC: self)
     var countryCode: String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
     var selectedProfileImageUrl: String = ""
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setDelegates()
     }
     
-    func setDelegates(){
-        countryCodeTextField.text = countryCode
-        mobileTextField.delegate = self
-        emailTextField.delegate = self
-        fullNameTextField.delegate = self
-        createPasswordTextField.delegate = self
-        confirmPasswordTextField.delegate = self
-        viewModel.getALlUserCountryListApi()
-    }
-    
+    // MARK: - Button's Action
     @IBAction func conitnueDidTapped(_ sender: Any) {
         if viewModel.validFields() {
             viewModel.signupApi()
         }
     }
-    
     
     @IBAction func signInDidTapped(_ sender: Any) {
         if let navController = self.navigationController,
@@ -98,24 +92,34 @@ class SignupViewController: UIViewController {
     }
     
     @IBAction func countryCodeDidTapped(_ sender: UIButton) {
-      let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
-          let name = country.name ?? ""
-          let dialCode = country.dialCode ?? ""
-          let flag = country.flag1 ?? "🇰🇼"
-          return "\(flag)  \(name) (\(dialCode))"
-      }
-
-      kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
-          let selectedCountry = self.viewModel.getAllUSerCountryList[index]
-          let code = selectedCountry.dialCode ?? "+965"
-         
-        self.setUpCountryCode(code: code)
-          self.countryCode = code
-      }
+        let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
+            let name = country.name ?? ""
+            let dialCode = country.dialCode ?? ""
+            let flag = country.flag1 ?? "🇰🇼"
+            return "\(flag)  \(name) (\(dialCode))"
+        }
+        
+        kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+            let selectedCountry = self.viewModel.getAllUSerCountryList[index]
+            let code = selectedCountry.dialCode ?? "+965"
+            
+            self.setUpCountryCode(code: code)
+            self.countryCode = code
+        }
     }
     
     func setUpCountryCode(code: String) {
         self.countryCodeTextField.text = code
+    }
+    
+    func setDelegates(){
+        countryCodeTextField.text = countryCode
+        mobileTextField.delegate = self
+        emailTextField.delegate = self
+        fullNameTextField.delegate = self
+        createPasswordTextField.delegate = self
+        confirmPasswordTextField.delegate = self
+        viewModel.getALlUserCountryListApi()
     }
     
 }

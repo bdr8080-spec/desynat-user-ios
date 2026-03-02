@@ -10,8 +10,10 @@ import AVFoundation
 
 class AffiliatedCameraSearchViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var cameraPreview: UIView!
     
+    // MARK: - Property Decalaration
     private var captureSession: AVCaptureSession?
     private var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     private var captureDevice: AVCaptureDevice?
@@ -21,6 +23,7 @@ class AffiliatedCameraSearchViewController: UIViewController {
     var comingFromSearchProduct: Bool = false
     var viewModel:WatchRecognizer!
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewModel = .init()
@@ -34,6 +37,7 @@ class AffiliatedCameraSearchViewController: UIViewController {
         videoPreviewLayer?.frame = cameraPreview.bounds
     }
     
+    // MARK: - Button's Action
     @IBAction func btnTapBack(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -163,12 +167,12 @@ extension AffiliatedCameraSearchViewController {
                 self.showAlert(msg: "Product not recognized")
                 return
             }
-//            
-//            print("CATEGORY:", result.category ?? "")
-//            print("BRAND:", result.brand ?? "")
-//            print("PRODUCT:", result.productName ?? "")
-//            print("ATTRIBUTES:", result.attributes)
-//            print("COLORS:", result.colors)
+            //
+            //            print("CATEGORY:", result.category ?? "")
+            //            print("BRAND:", result.brand ?? "")
+            //            print("PRODUCT:", result.productName ?? "")
+            //            print("ATTRIBUTES:", result.attributes)
+            //            print("COLORS:", result.colors)
             
             DispatchQueue.main.async {
                 if self.comingFromSearchProduct {
@@ -184,7 +188,6 @@ extension AffiliatedCameraSearchViewController {
             }
         }
     }
-    
 }
 
 extension AffiliatedCameraSearchViewController : AVCapturePhotoCaptureDelegate {

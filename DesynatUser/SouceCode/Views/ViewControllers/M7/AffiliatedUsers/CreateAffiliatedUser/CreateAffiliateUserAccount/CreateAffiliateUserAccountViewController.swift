@@ -10,6 +10,7 @@ import SDWebImage
 
 class CreateAffiliateUserAccountViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var countryCodeButton: UIButton!
     @IBOutlet weak var uploadDocumentSecondImageView: CustomImageView!
     @IBOutlet weak var uplaodDocumentOneImageView: CustomImageView!
@@ -22,6 +23,7 @@ class CreateAffiliateUserAccountViewController: UIViewController {
     @IBOutlet weak var txtCountryCode: UITextField!
     @IBOutlet weak var txtFieldLeading: NSLayoutConstraint!
     
+    // MARK: - Property Decalaration
     var isTermsAccepted: Bool = false
     var selectedImage: UIImage?
     var selectedImageDoc1: UIImage?
@@ -34,6 +36,7 @@ class CreateAffiliateUserAccountViewController: UIViewController {
     var iscomingAfterDocumnetReject: Bool = false
     var affiliatedUserDetails: AffiliateCreateAccountDataModel?
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         txtCountryCode.text = countryCode
@@ -51,6 +54,7 @@ class CreateAffiliateUserAccountViewController: UIViewController {
         }
     }
     
+    // MARK: - Button's Action
     @IBAction func conitnueDidTapped(_ sender: Any) {
         if viewModel.validFields() {
             if iscomingAfterDocumnetReject {
@@ -192,7 +196,7 @@ class CreateAffiliateUserAccountViewController: UIViewController {
             uplaodDocumentOneImageView.image = UIImage(named: "uploadDoc1")
             selectedImageDoc1 = nil
         }
-
+        
         if let imageUrl = affiliatedUserDetails?.document2,
            let url = URL(string: imageUrl) {
             uploadDocTwoImage = affiliatedUserDetails?.document2 ?? ""
@@ -239,13 +243,6 @@ extension CreateAffiliateUserAccountViewController: UITextFieldDelegate {
         else if textField == mobileTextField {
             validation = StringValidation(string: updatedText, characterCount: 15, validation: .mobileNo)
         }
-        
-//        else if textField == fullNameTextField {
-//            let englishPattern = "^[A-Za-z]*$"
-//            if string.range(of: englishPattern, options: .regularExpression) == nil {
-//                return false
-//            }
-//        }
         
         if textField == fullNameTextField {
             if currentText.isEmpty && string == " " {

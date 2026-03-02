@@ -8,6 +8,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var countryCodeLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -15,12 +16,14 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var txtFieldLeading: NSLayoutConstraint!
     @IBOutlet weak var viewCountryCode: UIView!
     
+    // MARK: - Property Decalaration
     private lazy var viewModel = LoginViewModel(loginHostVC: self)
     var countryCode: String = LocationManager.sharedInstance.getCurrentLocationCode().dialCode
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-      viewModel.getALlUserCountryListApi()
+        viewModel.getALlUserCountryListApi()
         countryCodeLabel.text = countryCode
         passwordTextField.isSecureTextEntry = true
         passwordTextField.delegate = self
@@ -30,7 +33,8 @@ class LoginViewController: UIViewController {
         emailMobileImageView.image = UIImage(named: "email")
     }
     
-
+    // MARK: - Button's Action
+    
     @IBAction func loginDidTapped(_ sender: Any) {
         if viewModel.validFields() {
             viewModel.loginApi()
@@ -45,12 +49,12 @@ class LoginViewController: UIViewController {
     
     @IBAction func signupDidTapped(_ sender: Any) {
         if let navController = self.navigationController,
-               let signupVC = navController.viewControllers.first(where: { $0 is SignupViewController }) {
-                navController.popToViewController(signupVC, animated: true)
-            } else {
-                let vc = SignupViewController.instantiate(fromAppStoryboard: .Main)
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+           let signupVC = navController.viewControllers.first(where: { $0 is SignupViewController }) {
+            navController.popToViewController(signupVC, animated: true)
+        } else {
+            let vc = SignupViewController.instantiate(fromAppStoryboard: .Main)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     @IBAction func loginViaOTPDidTapped(_ sender: Any) {
@@ -80,20 +84,20 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func countryDidTapped(_ sender: UIButton) {
-      let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
-          let name = country.name ?? ""
-          let dialCode = country.dialCode ?? ""
-          let flag = country.flag1 ?? "🇰🇼"
-          return "\(flag)  \(name) (\(dialCode))"
-      }
-
-      kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
-          let selectedCountry = self.viewModel.getAllUSerCountryList[index]
-          let code = selectedCountry.dialCode ?? "+965"
-         
-        self.setUpCountryCode(code: code)
-          self.countryCode = code
-      }
+        let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
+            let name = country.name ?? ""
+            let dialCode = country.dialCode ?? ""
+            let flag = country.flag1 ?? "🇰🇼"
+            return "\(flag)  \(name) (\(dialCode))"
+        }
+        
+        kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
+            let selectedCountry = self.viewModel.getAllUSerCountryList[index]
+            let code = selectedCountry.dialCode ?? "+965"
+            
+            self.setUpCountryCode(code: code)
+            self.countryCode = code
+        }
     }
     
     func setUpCountryCode(code: String) {
@@ -130,7 +134,7 @@ extension LoginViewController: UITextFieldDelegate {
                 self.txtFieldLeading.constant = 12
                 validation = StringValidation(string: currentText, characterCount: 15, validation: .mobileNo)
             }
-    
+            
             if let data = validation {
                 return data.validate()
             } else {

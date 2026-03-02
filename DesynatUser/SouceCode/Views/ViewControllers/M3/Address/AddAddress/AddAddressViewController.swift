@@ -9,6 +9,7 @@ import UIKit
 
 class AddAddressViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var nameTF: UITextField!
     @IBOutlet weak var countryNameTF: UITextField!
     @IBOutlet weak var mobileTF: UITextField!
@@ -29,15 +30,17 @@ class AddAddressViewController: UIViewController {
     @IBOutlet weak var officeLabel: UILabel!
     @IBOutlet weak var officeIconImageView: UIImageView!
     
+    // MARK: - Property Decalaration
+    private lazy var viewModel = AddaddressViewModel(hostVC: self)
+    private var dropdown: CustomDropdown?
+    private var overlayView: UIView?
     var lat: Double = 0.0
     var long: Double = 0.0
     var comingReason: comingReasonAtAddAddress = .forAddNewAddress
     var editAddressID: Int?
     var addressData: SavedAddressList?
-    private lazy var viewModel = AddaddressViewModel(hostVC: self)
-    private var dropdown: CustomDropdown?
-    private var overlayView: UIView?
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         initialUserSetup()
@@ -47,18 +50,7 @@ class AddAddressViewController: UIViewController {
             .forEach { $0?.delegate = self }
     }
     
-    private func initialUserSetup() {
-        switch comingReason {
-        case .forAddNewAddress:
-            titleLabel.text = "ADD NEW ADDRESS"
-            buttonLabel.text = "Add Address"
-        case .forEditAddress:
-            titleLabel.text = "EDIT ADDRESS"
-            buttonLabel.text = "Update"
-            prefillData()
-        }
-    }
-    
+    // MARK: - Button's Action
     @IBAction func officeDidTapped(_ sender: Any) {
         officeLabel.textColor = UIColor.darkBrown
         officeIconImageView.image = UIImage(named: "office")?.withRenderingMode(.alwaysTemplate)
@@ -97,7 +89,7 @@ class AddAddressViewController: UIViewController {
                 comp == city || comp == state || comp == country || comp == pincode
             }
             
-            // 1️⃣ Determine addressTF and houseNoTF
+            // Determine addressTF and houseNoTF
             if components.count >= 2 {
                 // addressTF = all except last component
                 let addressPart = components.dropLast().joined(separator: ", ")
@@ -114,13 +106,13 @@ class AddAddressViewController: UIViewController {
                 self.houseNoTF.text = fallback
             }
             
-            // 2️⃣ Fallback-safe values for other fields
+            // Fallback-safe values for other fields
             self.cityTF.text = !city.isEmpty ? city : (!locality.isEmpty ? locality : self.addressTF.text)
             self.stateTF.text = !state.isEmpty ? state : (!city.isEmpty ? city : (!locality.isEmpty ? locality : self.addressTF.text))
             self.countryNameTF.text = !country.isEmpty ? country : "Country"
             self.postalCodeTF.text = pincode
             
-            // 3️⃣ Coordinates
+            // Coordinates
             self.lat = lat
             self.long = long
         }
@@ -152,6 +144,18 @@ class AddAddressViewController: UIViewController {
         viewModel.addOrUpdateAddressApi()
     }
     
+    private func initialUserSetup() {
+        switch comingReason {
+        case .forAddNewAddress:
+            titleLabel.text = "ADD NEW ADDRESS"
+            buttonLabel.text = "Add Address"
+        case .forEditAddress:
+            titleLabel.text = "EDIT ADDRESS"
+            buttonLabel.text = "Update"
+            prefillData()
+        }
+    }
+    
     private func prefillData() {
         guard let data = addressData else { return }
         
@@ -178,122 +182,6 @@ class AddAddressViewController: UIViewController {
             officeDidTapped(UIView())
         }
     }
-    
-    //  private func showCountryCodeDropdown(anchorView: UIView) {
-    //      dismissDropdown()
-    //
-    //      guard !viewModel.getAllUSerCountryList.isEmpty else {
-    //          print("No countries loaded yet")
-    //          return
-    //      }
-    //
-    //      // Overlay
-    //      let overlay = UIView()
-    //      overlay.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-    //      view.addSubview(overlay)
-    //      overlay.fillSuperview()
-    //      overlay.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissDropdown)))
-    //
-    //      // Dropdown
-    //      let dropdown = CustomDropdown()
-    //      dropdown.countries = viewModel.getAllUSerCountryList
-    //
-    //      dropdown.onSelect = { [weak self] index in
-    //          guard let self = self else { return }
-    //          self.selectedCountry = self.viewModel.getAllUSerCountryList[index]
-    //          self.dismissDropdown()
-    //      }
-    //
-    //      view.addSubview(dropdown)
-    //      dropdown.translatesAutoresizingMaskIntoConstraints = false
-    //
-    //      // MARK: - THIS IS THE MAGIC - Full height to bottom
-    //      NSLayoutConstraint.activate([
-    //          dropdown.topAnchor.constraint(equalTo: anchorView.bottomAnchor, constant: 12),
-    //          dropdown.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-    //          dropdown.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-    //
-    //          // This makes it grow down to bottom of screen (safe area respected)
-    //          dropdown.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
-    //      ])
-    //
-    //      // Optional: Set a reasonable min height so it doesn't look weird with few items
-    //      dropdown.heightAnchor.constraint(greaterThanOrEqualToConstant: 600).isActive = true
-    //
-    //      // Animation
-    //      dropdown.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-    //      dropdown.alpha = 0
-    //      dropdown.layer.cornerRadius = 16
-    //
-    //      UIView.animate(withDuration: 0.4,
-    //                     delay: 0,
-    //                     usingSpringWithDamping: 0.85,
-    //                     initialSpringVelocity: 0.6,
-    //                     options: .curveEaseOut) {
-    //          overlay.alpha = 1
-    //          dropdown.alpha = 1
-    //          dropdown.transform = .identity
-    //      }
-    //
-    //      self.dropdown = dropdown
-    //      self.overlayView = overlay
-    //  }
-    
-    //  private func showCountryCodeDropdown(anchorView: UIView) {
-    //      dismissDropdown()
-    //
-    //      guard !viewModel.getAllUSerCountryList.isEmpty else {
-    //          print("No countries loaded yet")
-    //          return
-    //      }
-    //
-    //      // Overlay
-    //      let overlay = UIView()
-    //      overlay.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-    //      view.addSubview(overlay)
-    //      overlay.fillSuperview()
-    //      overlay.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissDropdown)))
-    //
-    //      // Dropdown
-    //      let dropdown = CustomDropdown()
-    //      dropdown.countries = viewModel.getAllUSerCountryList
-    //
-    //      dropdown.onSelect = { [weak self] index in
-    //          guard let self = self else { return }
-    //          self.selectedCountry = self.viewModel.getAllUSerCountryList[index]
-    //          self.dismissDropdown()
-    //      }
-    //
-    //      view.addSubview(dropdown)
-    //      dropdown.translatesAutoresizingMaskIntoConstraints = false
-    //
-    //      // THIS IS THE PERFECT SOLUTION – Never gets cut off
-    //      let dropdownWidth: CGFloat = min(300, UIScreen.main.bounds.width - 40) // Max 300, never exceeds screen
-    //
-    //      NSLayoutConstraint.activate([
-    //          dropdown.topAnchor.constraint(equalTo: anchorView.bottomAnchor, constant: 8),
-    //          dropdown.centerXAnchor.constraint(equalTo: view.centerXAnchor),           // Perfectly centered
-    //          dropdown.widthAnchor.constraint(equalToConstant: dropdownWidth),
-    //          dropdown.heightAnchor.constraint(lessThanOrEqualToConstant: 800)           // Max height
-    //      ])
-    //
-    //      // Animation
-    //      dropdown.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-    //      dropdown.alpha = 0
-    //
-    //      UIView.animate(withDuration: 0.35,
-    //                     delay: 0,
-    //                     usingSpringWithDamping: 0.8,
-    //                     initialSpringVelocity: 0.5,
-    //                     options: .curveEaseOut) {
-    //          overlay.alpha = 1
-    //          dropdown.alpha = 1
-    //          dropdown.transform = .identity
-    //      }
-    //
-    //      self.dropdown = dropdown
-    //      self.overlayView = overlay
-    //  }
     
     @objc private func dismissDropdown() {
         guard let dropdown = dropdown, let overlay = overlayView else { return }

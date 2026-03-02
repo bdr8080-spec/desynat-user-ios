@@ -8,8 +8,8 @@
 import UIKit
 
 class WalletMoneyListViewController: UIViewController {
-
-//    @IBOutlet weak var heightOfTableViewConstaint: NSLayoutConstraint!
+    
+    // MARK: - IBOutlet's
     @IBOutlet weak var noDataFoundLabel: UILabel!
     @IBOutlet weak var totalamountLabel: UILabel!
     @IBOutlet weak var walletTableView: UITableView! {
@@ -18,18 +18,21 @@ class WalletMoneyListViewController: UIViewController {
         }
     }
     
+    // MARK: - Property Decalaration
     private lazy var viewModel = WalletMoneyListViewModel(hostVC: self)
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.getWalletHistory()
     }
-
+    
+    // MARK: - Button's Action
     @IBAction func addMoneyDidTapped(_ sender: Any) {
         let nextVC = AddMoneyViewController.instantiate(fromAppStoryboard: .Profile)
         self.navigationController?.pushViewController(nextVC, animated: true)
@@ -45,10 +48,10 @@ class WalletMoneyListViewController: UIViewController {
     }
     
     func updateTableViewHieght() {
-//        DispatchQueue.main.async {
-//            self.walletTableView.layoutIfNeeded()
-//            self.heightOfTableViewConstaint.constant = self.walletTableView.contentSize.height
-//        }
+        //        DispatchQueue.main.async {
+        //            self.walletTableView.layoutIfNeeded()
+        //            self.heightOfTableViewConstaint.constant = self.walletTableView.contentSize.height
+        //        }
     }
     
     func setData() {
@@ -57,7 +60,9 @@ class WalletMoneyListViewController: UIViewController {
     
 }
 
+// MARK: - TABLE VIEW METHODS
 extension WalletMoneyListViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.walletData?.history?.count ?? 0
     }
@@ -68,6 +73,4 @@ extension WalletMoneyListViewController: UITableViewDelegate, UITableViewDataSou
         cell.configData(data: data)
         return cell
     }
-    
-    
 }

@@ -10,6 +10,7 @@ import SDWebImage
 
 class ProfileViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var logoutImageView: UIImageView!
     @IBOutlet weak var logoutLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
@@ -22,6 +23,7 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    // MARK: - Property Decalaration
     private var sideMenuData: [SideMenuModel] = [
         SideMenuModel(title: "My Wallet", image: "mywallet"),
         SideMenuModel(title: "Terms & Condition", image: "terms"),
@@ -36,10 +38,10 @@ class ProfileViewController: UIViewController {
         SideMenuModel(title: "Support", image: "support"),
         SideMenuModel(title: "Become An Affiliate", image: "becomeAn"),
         SideMenuModel(title: "Settings", image: "settings")]
-    
     private lazy var viewModel = ProfileViewModel(hostVC: self)
     let isGuestLogin = UserDefaults.standard.string(forKey:"isGuestLogin")
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTableHeight()
@@ -66,13 +68,7 @@ class ProfileViewController: UIViewController {
         updateTableHeight()
     }
     
-    private func updateTableHeight() {
-        DispatchQueue.main.async {
-            self.sideMenuHeightConstaint.constant = self.sideMenuTableView.contentSize.height
-        }
-    }
-    
-    
+    // MARK: - Button's Action
     @IBAction func maySavedCardsDidTapped(_ sender: Any) {
         if isGuestLogin == "true" {
             showLoginAlert()
@@ -92,7 +88,6 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    
     @IBAction func pencilButtonAction(_ sender: Any) {
         if isGuestLogin == "true" {
             showLoginAlert()
@@ -111,15 +106,15 @@ class ProfileViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: false)
         }
     }
-  
-  @IBAction func giftCardsDidTapped(_ sender: Any) {
-      if isGuestLogin == "true" {
-          showLoginAlert()
-      } else {
-          let vc = GiftCardsListViewController.instantiate(fromAppStoryboard: .Profile)
-          self.navigationController?.pushViewController(vc, animated: false)
-      }
-  }
+    
+    @IBAction func giftCardsDidTapped(_ sender: Any) {
+        if isGuestLogin == "true" {
+            showLoginAlert()
+        } else {
+            let vc = GiftCardsListViewController.instantiate(fromAppStoryboard: .Profile)
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
+    }
     
     @IBAction func btnMyOrder(_ sender: Any) {
         if isGuestLogin == "true" {
@@ -131,8 +126,15 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    private func updateTableHeight() {
+        DispatchQueue.main.async {
+            self.sideMenuHeightConstaint.constant = self.sideMenuTableView.contentSize.height
+        }
+    }
+    
 }
 
+// MARK: - TABLE VIEW METHODS
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -9,22 +9,25 @@ import UIKit
 
 class CustomOrderPopupViewController: UIViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet weak var customDetailsTextView: UITextView!
     @IBOutlet weak var deliveryAddressTF: UILabel!
     @IBOutlet weak var quantityTF: UITextField!
     @IBOutlet weak var headerView: UIView!
     
+    // MARK: - Property Decalaration
     var uniqueId: String? = ""
     var deliveryAddressId: Int? = 0
     var requestIsSent: (() -> Void)?
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         handleUISetup()
-//        getSavedAddressListAPI()
         quantityTF.delegate = self
     }
     
+    // MARK: - Button's Action
     @IBAction func changeDidTapped(_ sender: Any) {
         let nextVC = SavedAddressViewController.instantiate(fromAppStoryboard: .Profile)
         nextVC.comingFromBag = true
@@ -69,21 +72,11 @@ class CustomOrderPopupViewController: UIViewController {
         headerView.clipsToBounds = true
     }
     
-//    func getSavedAddressListAPI(){
-//        WebService.sharedInstance.getSavedAddressList { [self] list in
-//            let defaultAddress = list.first(where: { ($0.setAsDefault == "1")})
-//            let addressLine1 = "\(defaultAddress?.houseNo ?? ""), \(defaultAddress?.streetNo ?? ""), \(defaultAddress?.city ?? ""), \(defaultAddress?.state ?? ""), \(defaultAddress?.countryName ?? "")"
-//            let postalCode = defaultAddress?.postalCode ?? ""
-//            deliveryAddressId = defaultAddress?.id
-//            deliveryAddressTF.text = "\(addressLine1)-\(postalCode)"
-//        }
-//    }
-    
     func sendCustomOrderRequest(){
         let param: [String: Any] = ["unique_id": uniqueId ?? "",
                                     "quantity": quantityTF.text?.trimmed() ?? "",
                                     "custom_details": customDetailsTextView.text.trimmed()]//,
-                                   // "delivery_address": deliveryAddressId ?? ""]
+        // "delivery_address": deliveryAddressId ?? ""]
         WebService.sharedInstance.sendCustomOrderRequest(param: param) { [self] list in
             DispatchQueue.main.async {
                 let successVC = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
@@ -107,13 +100,6 @@ class CustomOrderPopupViewController: UIViewController {
             return false
         }
         
-//        // Address
-//        guard let address = deliveryAddressTF.text?.trimmingCharacters(in: .whitespaces),
-//              !address.isEmpty else {
-//            showAlert(msg: "Please select address")
-//            return false
-//        }
-        
         // Custom details
         guard let details = customDetailsTextView.text?.trimmingCharacters(in: .whitespaces),
               !details.isEmpty else {
@@ -124,8 +110,6 @@ class CustomOrderPopupViewController: UIViewController {
         
         return true
     }
-    
-    
 }
 
 extension CustomOrderPopupViewController: UITextFieldDelegate {
