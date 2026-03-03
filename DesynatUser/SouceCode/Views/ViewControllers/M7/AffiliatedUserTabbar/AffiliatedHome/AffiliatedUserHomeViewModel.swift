@@ -18,7 +18,6 @@ class AffiliatedUserHomeViewModel {
     
     func getUserData() {
         if let userDetails: AffiliateCreateAccountDataModel = kSharedUserDefaults.retrieveModelFor(key: .affiliatedUserDeatils, model: AffiliateCreateAccountDataModel.self) {
-//            let affiliatedUserdetails = userDetails.affiliatedUserdetails
             hostVC.usernameLabel.text = "Hi \(userDetails.fullName ?? "")"
             
             hostVC.userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.medium

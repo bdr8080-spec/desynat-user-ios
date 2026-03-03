@@ -16,7 +16,6 @@ class MyProductsSubCategoryCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     func configData(data: SubCategoriesDataModel?) {

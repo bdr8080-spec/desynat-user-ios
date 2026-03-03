@@ -31,6 +31,7 @@ class AffiliatedUserHomeViewController: UIViewController {
         updateRadioSelection(for: dateButtons, selectedButton: sender)
     }
     
+    //MARK: Function's declaration
     private func updateRadioSelection(for buttons: [UIButton], selectedButton: UIButton) {
         for button in buttons {
             if button == selectedButton {

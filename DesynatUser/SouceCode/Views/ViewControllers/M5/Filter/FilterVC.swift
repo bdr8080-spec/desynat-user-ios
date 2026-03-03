@@ -45,11 +45,11 @@ class FilterVC: UIViewController {
         dismiss(animated: true)
     }
     
+    //MARK: Function's declaration
     private func applyPreselection() {
         selectedIndex = max(preselectedFilter.rawValue - 1, 0)
         filterTableview.reloadData()
     }
-    
     
     func registerXib() {
         filterTableview.dataSource = self

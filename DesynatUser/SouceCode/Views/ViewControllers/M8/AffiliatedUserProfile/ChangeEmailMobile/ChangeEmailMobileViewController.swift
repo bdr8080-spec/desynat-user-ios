@@ -68,7 +68,8 @@ class ChangeEmailMobileViewController: UIViewController {
         }
     }
     
-    func setUpCountryCode(code: String) {
+    //MARK: Function's declaration
+     private func setUpCountryCode(code: String) {
         self.txtCountryCode.text = code
     }
     
@@ -87,6 +88,7 @@ class ChangeEmailMobileViewController: UIViewController {
     }
 }
 
+//MARK: UITextFieldDelegate Methods
 extension ChangeEmailMobileViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField,

@@ -30,6 +30,7 @@ class CustomOrderDetailsPopupViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
+    //MARK: Function's declaration
     private func handleUISetup() {
         headerView.layer.cornerRadius = 24
         headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]

@@ -9,7 +9,7 @@ import UIKit
 
 class CatalogViewController: UIViewController {
     
-      // MARK: - IBOutlet's
+    // MARK: - IBOutlet's
     @IBOutlet weak var catalogTableView: UITableView! {
         didSet {
             catalogTableView.registerCellFromNib(cellID: "CatalogTableViewCell")

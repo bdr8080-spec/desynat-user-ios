@@ -10,14 +10,14 @@ import Foundation
 class AffiliatedUserProductViewModel {
     
     private var hostVC: AffiliatedUserProductViewController
-    var subCategoriesSection: [SubCategoriesDataModel] = []
-    var categoriesSection:[CategoriesDataModel] = []
-    var searchText: String = ""
-    var productDetails: [AffiliatedUserMyProductsList] = []
     private var currentPage = 1
     private var lastPage = 1
     private var isFetching = false
     private var hasMorePages = true
+    var subCategoriesSection: [SubCategoriesDataModel] = []
+    var categoriesSection:[CategoriesDataModel] = []
+    var searchText: String = ""
+    var productDetails: [AffiliatedUserMyProductsList] = []
     var searchWorkItem: DispatchWorkItem?
     
     init(hostVC: AffiliatedUserProductViewController) {
@@ -28,7 +28,6 @@ class AffiliatedUserProductViewModel {
         WebService.sharedInstance.getCategoriesService { [weak self] list in
             guard let self = self else { return }
             var updatedList = list
-            // Default "All" Category
             let allCategory = CategoriesDataModel(
                 id: -1,
                 name: "All",
@@ -49,19 +48,6 @@ class AffiliatedUserProductViewModel {
     func getSubCategoriesListApi(categoryID: Int) {
         WebService.sharedInstance.getSubCategoriesService(categoryID: categoryID) { [weak self] list in
             guard let self = self else { return }
-//            var updatedList = list
-//            // Default "All" SubCategory
-//            let allSubCategory = SubCategoriesDataModel(
-//                id: -1,
-//                categoryID: categoryID,
-//                nameEnglish: "All",
-//                nameArabic: "الكل",
-//                image: nil,
-//                status: 1,
-//                createdAt: nil,
-//                updatedAt: nil)
-//            updatedList.insert(allSubCategory, at: 0)
-//            self.subCategoriesSection = updatedList
             self.subCategoriesSection.append(contentsOf: list)
             self.hostVC.subCatgeoryCollectionView.reloadData()
         }
@@ -70,19 +56,6 @@ class AffiliatedUserProductViewModel {
     func getAllSubCategoriesService() {
         WebService.sharedInstance.getAllSubCategoriesService() { [weak self] list in
             guard let self = self else { return }
-//            var updatedList = list
-//            // Default "All" SubCategory
-//            let allSubCategory = SubCategoriesDataModel(
-//                id: -1,
-//                categoryID: categoryID,
-//                nameEnglish: "All",
-//                nameArabic: "الكل",
-//                image: nil,
-//                status: 1,
-//                createdAt: nil,
-//                updatedAt: nil)
-//            updatedList.insert(allSubCategory, at: 0)
-//            self.subCategoriesSection = updatedList
             self.subCategoriesSection.append(contentsOf: list)
             self.hostVC.subCatgeoryCollectionView.reloadData()
         }

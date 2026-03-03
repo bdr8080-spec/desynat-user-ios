@@ -50,7 +50,6 @@ class EnterCardsDetailsViewController: UIViewController {
         }
     }
     
-    
     @IBAction func countryDidTapped(_ sender: UIButton) {
         let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
             let name = country.name ?? ""
@@ -66,6 +65,7 @@ class EnterCardsDetailsViewController: UIViewController {
         }
     }
     
+    //MARK: Function's declaration
     func setDelegateMethod() {
         let textFields = [enterAmountTF, nameTextField, emailTextField, fromNameTextField, wishMessageTextView, noteTextView]
         for item in textFields {
@@ -116,7 +116,7 @@ extension EnterCardsDetailsViewController: UICollectionViewDelegate, UICollectio
     }
 }
 
-
+//MARK: UITextFieldDelegate Methods
 extension EnterCardsDetailsViewController: UITextFieldDelegate, UITextViewDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

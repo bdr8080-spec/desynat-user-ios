@@ -50,6 +50,7 @@ class AffiliatedCameraSearchViewController: UIViewController {
         photoOutput.capturePhoto(with: settings, delegate: self)
     }
     
+    //MARK: Function's declaration
     private func setupCamera() {
         captureSession = AVCaptureSession()
         captureSession?.sessionPreset = .photo

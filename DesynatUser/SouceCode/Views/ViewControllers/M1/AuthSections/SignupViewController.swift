@@ -108,6 +108,7 @@ class SignupViewController: UIViewController {
         }
     }
     
+    //MARK: Function's declaration
     func setUpCountryCode(code: String) {
         self.countryCodeTextField.text = code
     }
@@ -124,7 +125,7 @@ class SignupViewController: UIViewController {
     
 }
 
-
+//MARK: UITextFieldDelegate Methods
 extension SignupViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField,

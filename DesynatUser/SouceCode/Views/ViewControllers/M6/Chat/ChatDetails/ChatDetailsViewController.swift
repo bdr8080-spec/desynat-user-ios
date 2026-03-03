@@ -120,6 +120,7 @@ class ChatDetailsViewController: UIViewController {
         handleSendMessage(msg: txt, type: "0")
     }
     
+    //MARK: Function's declaration
     func handleSendMessage(msg: String, type: String) {
         self.viewModel.sendMsg(msg: msg, type: type)
     }
@@ -366,6 +367,7 @@ extension ChatDetailsViewController : ChatViewModelDelegate {
     
 }
 
+//MARK: UITextFieldDelegate Methods
 extension ChatDetailsViewController : UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

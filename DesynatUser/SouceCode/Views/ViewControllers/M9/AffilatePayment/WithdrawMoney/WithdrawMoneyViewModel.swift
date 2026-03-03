@@ -15,5 +15,4 @@ class WithdrawMoneyViewModel {
         self.hostVC = hostVC
     }
     
-    
 }

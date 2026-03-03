@@ -84,11 +84,13 @@ class LoginViaOTPViewController: UIViewController {
         }
     }
     
+    //MARK: Function's declaration
     func setUpCountryCode(code: String) {
         self.countryCodeLabel.text = code
     }
 }
 
+//MARK: UITextFieldDelegate Methods
 extension LoginViaOTPViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

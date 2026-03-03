@@ -49,5 +49,7 @@ class AddAccountViewController: UIViewController {
             }
         }
     }
+    
+    //MARK: Function's declaration
 }
 

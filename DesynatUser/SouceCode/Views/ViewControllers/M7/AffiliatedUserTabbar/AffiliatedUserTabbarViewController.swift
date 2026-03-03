@@ -23,15 +23,12 @@ class AffiliatedUserTabbarViewController: UIViewController {
         updateTabSelection(forTag: initialTabIndex)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     // MARK: - Button's Action
     @IBAction func tabBarAction(_ sender: UIButton) {
         updateTabSelection(forTag: sender.tag)
     }
     
+    //MARK: Function's declaration
     func updateTabSelection(forTag tag: Int) {
         loadSubview(forTag: tag)
         setUserButtonImages(selectedTag: tag)
@@ -43,23 +40,17 @@ class AffiliatedUserTabbarViewController: UIViewController {
             "productsAffiliated",
             "showAffiliated",
             "paymentAffiliated",
-            "profileUnselected"
-        ]
+            "profileUnselected"]
         
         let selectedImages = [
             "homeSelected",
             "selectedProductAffiliated",
             "showAffiliated",
             "selectedPaymnetAffiliated",
-            "profileSelected"
-        ]
+            "profileSelected"]
         
         let paymentTabIndex = 3
         
-        // Always control visibility first
-        //        paymnetTabImageView.isHidden = selectedTag != paymentTabIndex
-        
-        // Update payment image explicitly
         let paymentImageName = (selectedTag == paymentTabIndex)
         ? selectedImages[paymentTabIndex]
         : unselectedImages[paymentTabIndex]

@@ -59,6 +59,7 @@ class ChangeMobileViewController: UIViewController {
         }
     }
     
+    //MARK: Function's declaration
     func setUpCountryCode(code: String) {
         self.txtCountryCode.text = code
     }
@@ -78,6 +79,7 @@ class ChangeMobileViewController: UIViewController {
     }
 }
 
+//MARK: UITextFieldDelegate Methods
 extension ChangeMobileViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField,

@@ -68,8 +68,6 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
         
         let camera = GMSCameraPosition.camera(withLatitude: targetLat, longitude: targetLng, zoom: zoom)
         viewMap.camera = camera
-        //      locationMarker.position = CLLocationCoordinate2D(latitude: targetLat, longitude: targetLng)
-        //      locationMarker.map = viewMap
         reverseGeocodeCoordinate(CLLocationCoordinate2D(latitude: targetLat, longitude: targetLng))
         initialSetup()
     }
@@ -102,6 +100,7 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     
+    //MARK: Function's declaration
     func googleMapSetup() {
         viewMap.isMyLocationEnabled = false
         viewMap.delegate = self
@@ -207,11 +206,9 @@ extension LocationViewController: CLLocationManagerDelegate,GMSMapViewDelegate {
             }
         }
     }
-    
-    
-    
-    
 }
+
+
 extension LocationViewController: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         viewMap.moveCamera(GMSCameraUpdate.setTarget(CLLocationCoordinate2D(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude), zoom: ZOOM_LEVEL_HIGH))
@@ -230,6 +227,7 @@ extension LocationViewController: GMSAutocompleteViewControllerDelegate {
         dismiss(animated: true, completion: nil)
     }
     
+    //MARK: UITextFieldDelegate Methods
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == txtSearch{
             self.txtSearch.resignFirstResponder()

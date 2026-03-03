@@ -144,6 +144,7 @@ class AddAddressViewController: UIViewController {
         viewModel.addOrUpdateAddressApi()
     }
     
+    //MARK: Function's declaration
     private func initialUserSetup() {
         switch comingReason {
         case .forAddNewAddress:
@@ -199,7 +200,7 @@ class AddAddressViewController: UIViewController {
     }
 }
 
-
+//MARK: UITextFieldDelegate Methods
 extension AddAddressViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

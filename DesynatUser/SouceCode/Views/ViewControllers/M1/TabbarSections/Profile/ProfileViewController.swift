@@ -126,6 +126,7 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    //MARK: Function's declaration
     private func updateTableHeight() {
         DispatchQueue.main.async {
             self.sideMenuHeightConstaint.constant = self.sideMenuTableView.contentSize.height

@@ -33,6 +33,7 @@ class WatchScannerVc : UIViewController {
         cameraPreview.addGestureRecognizer(tapGesture)
     }
     
+    //MARK: Function's declaration
     private func setupCamera() {
         captureSession = AVCaptureSession()
         captureSession?.sessionPreset = .photo

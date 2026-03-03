@@ -210,5 +210,4 @@ extension Encodable {
 
 protocol ChatViewModelDelegate {
     func getAllMsg(list:[Chat])
-    //  func getNewMsg(msg:Chat)
 }

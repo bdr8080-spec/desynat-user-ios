@@ -29,17 +29,10 @@ class AddMoneyViewController: UIViewController {
         amountTF.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
-    @objc func textFieldDidChange() {
-        selectedMoneyIndex = -1
-        amountToPay = nil
-        amountCollectionview.reloadData()
-    }
-    
     // MARK: - Button's Action
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
-    
     
     @IBAction func continueDidTapped(_ sender: Any) {
         guard let finalAmount = getFinalAmount(), finalAmount > 0 else {
@@ -54,20 +47,24 @@ class AddMoneyViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    //MARK: Function's declaration
     func getFinalAmount() -> Double? {
-        // 1️⃣ Check TextField first
+        // Check TextField first
         if let text = amountTF.text,
            !text.trimmingCharacters(in: .whitespaces).isEmpty,
            let amount = Double(text.trimmingCharacters(in: .whitespaces)) {
             return amount
         }
         
-        // 2️⃣ Else fallback to selected collection value
+        // Else fallback to selected collection value
         return amountToPay
     }
     
-    
-    
+    @objc func textFieldDidChange() {
+        selectedMoneyIndex = -1
+        amountToPay = nil
+        amountCollectionview.reloadData()
+    }
 }
 
 // MARK: - COLLECTION VIEW METHODS
@@ -94,7 +91,6 @@ extension AddMoneyViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //       let width = (amountCollectionview.frame.width + 5) / 3
         let height: CGFloat = 38
         return CGSize(width: 105, height: height)
     }

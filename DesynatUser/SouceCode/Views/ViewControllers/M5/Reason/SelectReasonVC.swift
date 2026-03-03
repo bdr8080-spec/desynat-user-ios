@@ -116,6 +116,7 @@ class SelectReasonVC: UIViewController {
         }
     }
     
+    //MARK: Function's declaration
     private func getSelectedCancelReason() -> String? {
         let isOtherSelected = selectedIndex == rejectReasonData.count
         
@@ -127,7 +128,6 @@ class SelectReasonVC: UIViewController {
             return rejectReasonData[selectedIndex].reasonEnglish
         }
     }
-    
     
     func registerXib() {
         reasonTableView.delegate = self
@@ -259,26 +259,6 @@ extension SelectReasonVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    //  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //    switch tableView {
-    //    case reasonTableView:
-    //      selectedIndex = indexPath.row
-    //      let isOtherSelected = indexPath.row == rejectReasonData.count
-    //      viewOtherReason.isHidden = !isOtherSelected
-    //      if !isOtherSelected {
-    //        txtReason.text = ""
-    //      }
-    //      reasonTableView.reloadData()
-    //
-    //    case sizeTableView:
-    //      selectedIndex1 = indexPath.row
-    //      sizeTableView.reloadData()
-    //
-    //    default:
-    //      return
-    //    }
-    //  }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableView {
             
@@ -296,7 +276,7 @@ extension SelectReasonVC: UITableViewDelegate, UITableViewDataSource {
                 
                 let selectedReason = rejectReasonData[indexPath.row]
                 
-                // ✅ Show size only for reason id 40 or 41
+                // Show size only for reason id 40 or 41
                 if selectedReason.id == 40 || selectedReason.id == 41 {
                     viewSize.isHidden = false
                 } else {

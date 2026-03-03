@@ -165,6 +165,7 @@ class MyBagViewController: UIViewController {
         viewModel.placeOrderApi()
     }
     
+    //MARK: Function's declaration
     func condifData(data: MyCartDetailsDataModel) {
         totalMRPDiscountValue = data.discountOnMrp ?? 0.0
         totalMRP.text = formatPrice(data.totalMrp)

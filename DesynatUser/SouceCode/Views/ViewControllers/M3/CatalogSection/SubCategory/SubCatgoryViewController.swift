@@ -49,14 +49,6 @@ class SubCatgoryViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc private func searchTextChanged(_ textField: UITextField) {
-        let text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        viewModel.filterSubCategories(with: text)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            self.stopListening()
-        }
-    }
-    
     // MARK: - Mic Button – This is what you wanted!
     @IBAction func micDidTapped(_ sender: UIButton) {
         if isListening {
@@ -69,7 +61,7 @@ class SubCatgoryViewController: UIViewController {
         }
     }
     
-    // MARK: - Permissions
+    //MARK: Function's declaration
     private func requestPermissions() {
         SFSpeechRecognizer.requestAuthorization { status in
             print("Speech permission: \(status)")
@@ -156,6 +148,14 @@ class SubCatgoryViewController: UIViewController {
         isListening = false
         btnMicOutlet.setImage(UIImage(systemName: "mic"), for: .normal)
         btnMicOutlet.tintColor = .label
+    }
+    
+    @objc private func searchTextChanged(_ textField: UITextField) {
+        let text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        viewModel.filterSubCategories(with: text)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.stopListening()
+        }
     }
     
     deinit {

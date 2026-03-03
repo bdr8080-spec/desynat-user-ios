@@ -63,6 +63,7 @@ class AffiliatedUserProfileViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: false)
     }
     
+    //MARK: Function's declaration
     private func updateTableHeight() {
         DispatchQueue.main.async {
             self.sideMenuHeightConstaint.constant = self.sideMenuTableView.contentSize.height

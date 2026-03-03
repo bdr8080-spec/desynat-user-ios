@@ -11,10 +11,10 @@ import Speech
 import UIKit
 
 class AffiliatedCategorySearchViewController: UIViewController {
-
+    
     // MARK: - IBOutlet's
     @IBOutlet weak var latstSearchCollectionViewHieghtConstriant:
-        NSLayoutConstraint!
+    NSLayoutConstraint!
     @IBOutlet weak var txtSearch: UITextField!
     @IBOutlet weak var latestSearchCollectionView: CollViewAdjustedHeight! {
         didSet {
@@ -33,7 +33,7 @@ class AffiliatedCategorySearchViewController: UIViewController {
     @IBOutlet weak var lblNoRecentData: CustomLabelFont!
     @IBOutlet weak var btnMicOutlet: UIButton!
     @IBOutlet weak var noLatesSearchFoundLabel: CustomLabelFont!
-
+    
     // MARK: - Property Decalaration
     private lazy var viewModel = AffiliatedCategorySearchViewModel(hostVC: self)
     lazy var objectDetector: ObjectDetector = {
@@ -43,7 +43,7 @@ class AffiliatedCategorySearchViewController: UIViewController {
         options.shouldEnableClassification = true
         return ObjectDetector.objectDetector(options: options)
     }()
-
+    
     // MARK: - Speech Recognition
     private let speechRecognizer = SFSpeechRecognizer(
         locale: Locale(identifier: "en-US")
@@ -52,20 +52,20 @@ class AffiliatedCategorySearchViewController: UIViewController {
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
     private var isListening = false
-
+    
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         lblNoRecentData.isHidden = true
         requestPermissions()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.getLatestSearchData()
         viewModel.getSearchProducts()
     }
-
+    
     // MARK: - Button's Action
     @IBAction func btnGo(_ sender: Any) {
         stopListening()
@@ -85,14 +85,14 @@ class AffiliatedCategorySearchViewController: UIViewController {
         nextVC.comingFromImageScanner = false
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
-
+    
     @IBAction func btnCamera(_ sender: Any) {
         let vc = AffiliatedCameraSearchViewController.instantiate(
             fromAppStoryboard: .AffiliateUser
         )
         self.navigationController?.pushViewController(vc, animated: true)
     }
-
+    
     @IBAction func btnMic(_ sender: UIButton) {
         if isListening {
             stopListening()
@@ -103,19 +103,19 @@ class AffiliatedCategorySearchViewController: UIViewController {
             sender.tintColor = .systemRed
         }
     }
-
+    
     @IBAction func backDidTapped(_ sender: Any) {
         stopListening()
         self.navigationController?.popViewController(animated: true)
     }
-
+    
     // MARK: - Start Listening (Speech → Text)
-
+    
     private func requestPermissions() {
         SFSpeechRecognizer.requestAuthorization { status in
             print("Speech permission: \(status)")
         }
-
+        
         if #available(iOS 17.0, *) {
             AVAudioApplication.requestRecordPermission { granted in
                 DispatchQueue.main.async {
@@ -130,13 +130,14 @@ class AffiliatedCategorySearchViewController: UIViewController {
             }
         }
     }
-
+    
+    //MARK: Function's declaration
     private func startListening() {
         // Reset everything
         recognitionTask?.cancel()
         recognitionTask = nil
         recognitionRequest = nil
-
+        
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try audioSession.setCategory(
@@ -152,15 +153,15 @@ class AffiliatedCategorySearchViewController: UIViewController {
             print("Audio session error: \(error)")
             return
         }
-
+        
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         guard let request = recognitionRequest else { return }
         request.shouldReportPartialResults = true
-
+        
         recognitionTask = speechRecognizer?.recognitionTask(with: request) {
             [weak self] result, error in
             guard let self = self else { return }
-
+            
             if let result = result {
                 let text = result.bestTranscription.formattedString
                 self.txtSearch.text = text
@@ -179,14 +180,14 @@ class AffiliatedCategorySearchViewController: UIViewController {
                     fromAppStoryboard: .AffiliateUser
                 )
                 nextVC.viewModel.searchText =
-                    self.txtSearch.text?.trimmed() ?? ""
+                self.txtSearch.text?.trimmed() ?? ""
                 nextVC.comingFromImageScanner = false
                 self.navigationController?.pushViewController(
                     nextVC,
                     animated: true
                 )
             }
-
+            
             if error != nil || result?.isFinal == true {
                 self.stopListening()
                 DispatchQueue.main.async {
@@ -197,7 +198,7 @@ class AffiliatedCategorySearchViewController: UIViewController {
                 }
             }
         }
-
+        
         let inputNode = audioEngine.inputNode
         let recordingFormat = inputNode.outputFormat(forBus: 0)
         inputNode.installTap(
@@ -207,7 +208,7 @@ class AffiliatedCategorySearchViewController: UIViewController {
         ) { buffer, _ in
             request.append(buffer)
         }
-
+        
         audioEngine.prepare()
         do {
             try audioEngine.start()
@@ -218,7 +219,7 @@ class AffiliatedCategorySearchViewController: UIViewController {
             stopListening()
         }
     }
-
+    
     // MARK: - Stop Listening
     private func stopListening() {
         audioEngine.stop()
@@ -231,7 +232,7 @@ class AffiliatedCategorySearchViewController: UIViewController {
         btnMicOutlet.setImage(UIImage(systemName: "mic"), for: .normal)
         btnMicOutlet.tintColor = .label
     }
-
+    
     deinit {
         stopListening()
     }
@@ -239,27 +240,27 @@ class AffiliatedCategorySearchViewController: UIViewController {
 
 // MARK: - TABLE VIEW METHODS
 extension AffiliatedCategorySearchViewController: UITableViewDelegate,
-    UITableViewDataSource
+                                                  UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
-        -> Int
+    -> Int
     {
         return viewModel.searchProductsData.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
-        -> UITableViewCell
+    -> UITableViewCell
     {
         let cell =
-            tableView.dequeueReusableCell(
-                withIdentifier: "RecentSearchTableCell",
-                for: indexPath
-            ) as! RecentSearchTableCell
+        tableView.dequeueReusableCell(
+            withIdentifier: "RecentSearchTableCell",
+            for: indexPath
+        ) as! RecentSearchTableCell
         cell.lblName.text =
-            viewModel.searchProductsData[indexPath.row].name ?? ""
+        viewModel.searchProductsData[indexPath.row].name ?? ""
         return cell
     }
-
+    
     func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
@@ -268,7 +269,7 @@ extension AffiliatedCategorySearchViewController: UITableViewDelegate,
             fromAppStoryboard: .AffiliateUser
         )
         nextVC.viewModel.searchText =
-            viewModel.searchProductsData[indexPath.row].name ?? ""
+        viewModel.searchProductsData[indexPath.row].name ?? ""
         nextVC.comingFromImageScanner = false
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -276,7 +277,7 @@ extension AffiliatedCategorySearchViewController: UITableViewDelegate,
 
 // MARK: - COLLECTION VIEW METHODS
 extension AffiliatedCategorySearchViewController: UICollectionViewDelegate,
-    UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
+                                                  UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
     func collectionView(
         _ collectionView: UICollectionView,
@@ -284,20 +285,20 @@ extension AffiliatedCategorySearchViewController: UICollectionViewDelegate,
     ) -> Int {
         return viewModel.latestSearchData.count
     }
-
+    
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell =
-            collectionView.dequeueReusableCell(
-                withReuseIdentifier: "LatestSearchCollectionCell",
-                for: indexPath
-            ) as! LatestSearchCollectionCell
+        collectionView.dequeueReusableCell(
+            withReuseIdentifier: "LatestSearchCollectionCell",
+            for: indexPath
+        ) as! LatestSearchCollectionCell
         cell.titleLabel.text = viewModel.latestSearchData[indexPath.row].name
         return cell
     }
-
+    
     func collectionView(
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
@@ -306,11 +307,11 @@ extension AffiliatedCategorySearchViewController: UICollectionViewDelegate,
             fromAppStoryboard: .AffiliateUser
         )
         nextVC.viewModel.searchText =
-            viewModel.latestSearchData[indexPath.row].name ?? ""
+        viewModel.latestSearchData[indexPath.row].name ?? ""
         nextVC.comingFromImageScanner = false
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
-
+    
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
@@ -323,14 +324,14 @@ extension AffiliatedCategorySearchViewController: UICollectionViewDelegate,
         }
         return CGSize(width: 100, height: 40)
     }
-
+    
     func updateLatestSearchCollectionHeight() {
         latestSearchCollectionView.layoutIfNeeded()
         if viewModel.latestSearchData.isEmpty {
             latstSearchCollectionViewHieghtConstriant.constant = 120
         } else {
             latstSearchCollectionViewHieghtConstriant.constant =
-                latestSearchCollectionView.collectionViewLayout
+            latestSearchCollectionView.collectionViewLayout
                 .collectionViewContentSize.height
         }
     }

@@ -27,6 +27,7 @@ class RegisterationSuccessViewController: UIViewController {
         }
     }
     
+    //MARK: Function's declaration
     func initialSetup() {
         switch comingReason {
         case .passwordUpdated:

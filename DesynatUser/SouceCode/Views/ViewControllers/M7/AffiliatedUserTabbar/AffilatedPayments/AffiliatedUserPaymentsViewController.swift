@@ -38,12 +38,12 @@ class AffiliatedUserPaymentsViewController: UIViewController {
         
     }
     
+    //MARK: Function's declaration
     func handleHeightOfTableView () {
         DispatchQueue.main.async {
             self.paymentHistoryTableviewHeightConstraint.constant = self.paymentHistoryTableview.contentSize.height
         }
     }
-    
 }
 
 // MARK: - TABLE VIEW METHODS

@@ -9,7 +9,7 @@ import UIKit
 
 class MyOrderVC: UIViewController {
     
-      // MARK: - IBOutlet's
+    // MARK: - IBOutlet's
     @IBOutlet weak var txtSearch: UITextField!
     @IBOutlet weak var orderTableView: TableViewDynamicHeight!
     @IBOutlet weak var lblNoData: UILabel!
@@ -34,13 +34,7 @@ class MyOrderVC: UIViewController {
         viewModel.getOrders()
     }
     
-    func registerXib() {
-        orderTableView.delegate = self
-        orderTableView.dataSource = self
-        orderTableView.register(UINib(nibName: "MyOrderTableCell", bundle: nil), forCellReuseIdentifier: "MyOrderTableCell")
-    }
-    
-      // MARK: - Button's Action
+    // MARK: - Button's Action
     @IBAction func btnBack(_ sender: Any) {
         if comingFromOrderTracking {
             self.navigationController?.popToRootViewController(animated: false)
@@ -62,6 +56,13 @@ class MyOrderVC: UIViewController {
         vc.delegate = self
         vc.preselectedFilter = normalOrderFilter
         self.navigationController?.present(vc, animated: true)
+    }
+    
+    //MARK: Function's declaration
+    func registerXib() {
+        orderTableView.delegate = self
+        orderTableView.dataSource = self
+        orderTableView.register(UINib(nibName: "MyOrderTableCell", bundle: nil), forCellReuseIdentifier: "MyOrderTableCell")
     }
     
 }
@@ -94,6 +95,7 @@ extension MyOrderVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+//MARK: UITextFieldDelegate Methods
 extension MyOrderVC: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

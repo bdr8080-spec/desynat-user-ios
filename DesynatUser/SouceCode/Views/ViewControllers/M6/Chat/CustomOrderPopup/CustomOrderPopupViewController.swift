@@ -46,11 +46,11 @@ class CustomOrderPopupViewController: UIViewController {
                 .compactMap { $0 }
                 .joined(separator: ", ")
             self.deliveryAddressTF.text = addressLine
-            // 🔹 Restore navigation bar before coming back
+            // Restore navigation bar before coming back
             self.navigationController?.setNavigationBarHidden(false, animated: false)
             self.navigationController?.popViewController(animated: true)
         }
-        // 🔥 Hide navigation bar to remove top space
+        // Hide navigation bar to remove top space
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -66,6 +66,7 @@ class CustomOrderPopupViewController: UIViewController {
         }
     }
     
+    //MARK: Function's declaration
     private func handleUISetup() {
         headerView.layer.cornerRadius = 24
         headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -112,6 +113,7 @@ class CustomOrderPopupViewController: UIViewController {
     }
 }
 
+//MARK: UITextFieldDelegate Methods
 extension CustomOrderPopupViewController: UITextFieldDelegate {
     
     func textField(

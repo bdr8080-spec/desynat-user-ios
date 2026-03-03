@@ -21,7 +21,6 @@ class RedeemGiftCardViewModel {
       WebService.sharedInstance.redeemGiftCardWallet(param: param) { response in
           DispatchQueue.main.async { [weak self] in
               guard let self else { return }
-//            self.hostVC.onRedeem?(cardNumber, giftCardPin, response)
               let successVC = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
               successVC.comingReason = .giftCardRedeemed
               successVC.callBackDismiss = { [weak self] in

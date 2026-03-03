@@ -108,11 +108,13 @@ class ForgotPasswordViewController: UIViewController {
         
     }
     
+    //MARK: Function's declaration
     func setUpCountryCode(code: String) {
         self.countryCodeTextField.text = code
     }
 }
 
+//MARK: UITextFieldDelegate Methods
 extension ForgotPasswordViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField,

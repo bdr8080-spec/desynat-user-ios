@@ -50,6 +50,7 @@ class AffiliatedUserCategoriesViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    //MARK: Function's declaration
     @objc private func searchTextChanged(_ textField: UITextField) {
         let text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         viewModel.filterSubCategories(with: text)

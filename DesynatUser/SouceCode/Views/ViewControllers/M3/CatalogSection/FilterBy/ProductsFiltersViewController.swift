@@ -105,7 +105,7 @@ class ProductsFiltersViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    // MARK: - TABLE REGISTRATION
+    //MARK: Function's declaration
     func registerXib() {
         filtersTableView.delegate = self
         filtersTableView.dataSource = self

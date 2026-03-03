@@ -64,7 +64,7 @@ class AddAccountViewModel {
         }
     }
     
-    //Mark:->UploadDocumentApi
+    //MARK: UploadDocumentApi
     func addAccountApi(){
         let param:[String:Any] = [
             "bank_name": hostVC.bankNameTextField.text ?? "",
@@ -97,6 +97,7 @@ class AddAccountViewModel {
     }
 }
 
+//MARK: UITextFieldDelegate Methods
 extension AddAccountViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

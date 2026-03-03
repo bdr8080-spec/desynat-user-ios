@@ -53,7 +53,6 @@ class LoginViaOTPAffilatedUserViewController: UIViewController {
     }
     
     @IBAction func swithToUserDidTapped(_ sender: Any) {
-        //        self.navigationController?.popToRootViewController(animated: true)
         kSharedSceneDelegate.navigateToUserHomeVc(selectedIndex: 4)
     }
     
@@ -74,11 +73,13 @@ class LoginViaOTPAffilatedUserViewController: UIViewController {
         }
     }
     
+    //MARK: Function's declaration
     func setUpCountryCode(code: String) {
         self.countryCodeLabel.text = code
     }
 }
 
+//MARK: UITextFieldDelegate Methods
 extension LoginViaOTPAffilatedUserViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

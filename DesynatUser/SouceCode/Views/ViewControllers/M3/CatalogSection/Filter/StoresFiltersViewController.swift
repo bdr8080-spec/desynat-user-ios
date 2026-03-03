@@ -71,7 +71,7 @@ class StoresFiltersViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    // MARK: - Build UI Filters List
+    //MARK: Function's declaration
     func prepareFilters() {
         
         // RATING OPTIONS

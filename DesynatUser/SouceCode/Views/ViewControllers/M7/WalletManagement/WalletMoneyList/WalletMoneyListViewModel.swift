@@ -23,7 +23,6 @@ class WalletMoneyListViewModel {
                 self.hostVC.setData()
                 self.hostVC.walletTableView.reloadData()
                 self.hostVC.walletTableView.layoutIfNeeded()
-                self.hostVC.updateTableViewHieght()
                 self.hostVC.noDataFoundLabel.isHidden = !(self.walletData?.history?.isEmpty ?? true)
             }
         }

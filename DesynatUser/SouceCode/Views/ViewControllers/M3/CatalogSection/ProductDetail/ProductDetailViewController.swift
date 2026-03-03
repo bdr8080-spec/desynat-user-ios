@@ -251,6 +251,7 @@ class ProductDetailViewController: UIViewController {
         }
     }
     
+    //MARK: Function's declaration
     private func addProductToCart(forIncrement: Bool) {
         guard let productId = productDetails?.id else { return }
         let selectedVariant = filteredVariants[selectedSizeIndex]

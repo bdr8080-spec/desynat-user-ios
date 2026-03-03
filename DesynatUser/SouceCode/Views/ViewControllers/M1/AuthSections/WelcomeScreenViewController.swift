@@ -94,6 +94,7 @@ class WelcomeScreenViewController: UIViewController {
         
     }
     
+    //MARK: Function's declaration
     private func setupCollectionView() {
         walkthroghtCollectionView.delegate = self
         walkthroghtCollectionView.dataSource = self

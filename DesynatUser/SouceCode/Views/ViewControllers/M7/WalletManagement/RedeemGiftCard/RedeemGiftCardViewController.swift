@@ -43,6 +43,7 @@ class RedeemGiftCardViewController: UIViewController {
     }
 }
 
+//MARK: UITextFieldDelegate Methods
 extension RedeemGiftCardViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,

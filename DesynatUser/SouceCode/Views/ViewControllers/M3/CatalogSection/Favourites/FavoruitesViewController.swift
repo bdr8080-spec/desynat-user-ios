@@ -66,6 +66,7 @@ class FavoruitesViewController: UIViewController {
         updateUI()
     }
     
+    //MARK: Function's declaration
     func handleWishlistTap(index: Int) {
         if showingProducts {
             guard let productId = viewModel.productList?[index].id else { return }

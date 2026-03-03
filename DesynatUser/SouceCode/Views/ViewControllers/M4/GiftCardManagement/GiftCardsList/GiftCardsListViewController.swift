@@ -63,6 +63,7 @@ extension GiftCardsListViewController: UITableViewDelegate, UITableViewDataSourc
     }
 }
 
+//MARK: UITextFieldDelegate Methods
 extension GiftCardsListViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

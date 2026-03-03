@@ -50,6 +50,8 @@ class WithdrawMoneyViewController: UIViewController {
         self.navigationController?.present(vc, animated: true)
     }
     
+    //MARK: Function's declaration
+    
 }
 
 // MARK: - TABLE VIEW METHODS

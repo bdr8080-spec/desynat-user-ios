@@ -42,6 +42,7 @@ class UseGiftCardsViewController: UIViewController {
     }
 }
 
+//MARK: UITextFieldDelegate Methods
 extension UseGiftCardsViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,

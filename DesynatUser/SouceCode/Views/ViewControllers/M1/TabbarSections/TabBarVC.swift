@@ -35,6 +35,7 @@ class TabBarVC: UIViewController {
         updateTabSelection(forTag: sender.tag)
     }
     
+    //MARK: Function's declaration
     func updateTabSelection(forTag tag: Int) {
         loadSubview(forTag: tag)
         setUserButtonImages(selectedTag: tag)

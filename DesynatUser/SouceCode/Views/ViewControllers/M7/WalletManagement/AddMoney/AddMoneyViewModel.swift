@@ -15,6 +15,4 @@ class AddMoneyViewModel {
         self.hostVC = hostVC
     }
     
-    
-    
 }

@@ -42,7 +42,6 @@ class AddBankDetailsViewController: UIViewController {
         }
     }
     
-    
     @IBAction func uploadProofDidTapped(_ sender: Any) {
         //        ImagePickerHelper.shared.showPickerController {  image , imageName in
         //            if let image = image {
@@ -60,6 +59,7 @@ class AddBankDetailsViewController: UIViewController {
     
 }
 
+//MARK: UITextFieldDelegate Methods
 extension AddBankDetailsViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

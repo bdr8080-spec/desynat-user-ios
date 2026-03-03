@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class ItemPerformanceViewController: UIViewController, UITextFieldDelegate {
+class ItemPerformanceViewController: UIViewController {
     
     // MARK: - IBOutlet's
     @IBOutlet weak var productImageView: CustomImageView!
@@ -68,7 +68,7 @@ class ItemPerformanceViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    // MARK: - function
+    //MARK: Function's declaration
     private func showCopiedLabel() {
         let copiedLabel = UILabel()
         copiedLabel.text = "  Copied  "
@@ -92,8 +92,8 @@ class ItemPerformanceViewController: UIViewController, UITextFieldDelegate {
     
 }
 
-
-extension ItemPerformanceViewController {
+//MARK: UITextFieldDelegate Methods
+extension ItemPerformanceViewController: UITextFieldDelegate {
     
     private func setUpTextFields() {
         datePicker.preferredDatePickerStyle = .wheels

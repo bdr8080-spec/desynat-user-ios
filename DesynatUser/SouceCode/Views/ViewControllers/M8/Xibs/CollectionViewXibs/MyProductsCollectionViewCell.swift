@@ -24,9 +24,8 @@ class MyProductsCollectionViewCell: UICollectionViewCell {
         mainImageView.layer.cornerRadius = 8
         mainImageView.layer.masksToBounds = true
         mainImageView.layer.maskedCorners = [
-            .layerMinXMinYCorner,  // top-left
-            .layerMaxXMinYCorner   // top-right
-        ]
+            .layerMinXMinYCorner,
+            .layerMaxXMinYCorner]
     }
 
     @IBAction func trackPerformanceDidTapped(_ sender: Any) {

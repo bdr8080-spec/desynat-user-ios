@@ -111,7 +111,7 @@ class OTPViewController: UIViewController {
         }
     }
     
-    // MARK: - Timer Handling
+    //MARK: Function's declaration
     func startTimer() {
         remainingTime = 90
         resendView.isHidden = true
@@ -146,7 +146,7 @@ class OTPViewController: UIViewController {
     }
 }
 
-// MARK: - UITextFieldDelegate
+//MARK: UITextFieldDelegate Methods
 extension OTPViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

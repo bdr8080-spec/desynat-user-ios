@@ -93,20 +93,14 @@ class AffiliatedUserLoginViewModel {
         }
     }
     
-//    
-//    func getALlUserCountryListApi(){
-//        WebService.sharedInstance.getAllUserscountryList { list in
-//            self.getAllUSerCountryList = list
-//        }
-//    }
-    
-        func countryListApi(){
-            WebService.sharedInstance.countryListService { list in
-                self.getAllUSerCountryList = list
-            }
+    func countryListApi(){
+        WebService.sharedInstance.countryListService { list in
+            self.getAllUSerCountryList = list
         }
+    }
 }
 
+//MARK: UITextFieldDelegate Methods
 extension AffiliatedUserLoginViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -135,7 +129,7 @@ extension AffiliatedUserLoginViewController: UITextFieldDelegate {
                 self.txtFieldLeading.constant = 12
                 validation = StringValidation(string: currentText, characterCount: 15, validation: .mobileNo)
             }
-    
+            
             if let data = validation {
                 return data.validate()
             } else {

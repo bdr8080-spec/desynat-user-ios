@@ -193,6 +193,7 @@ extension AffiliatedUserProductViewController: UIScrollViewDelegate {
     }
 }
 
+//MARK: UITextFieldDelegate Methods
 extension AffiliatedUserProductViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""

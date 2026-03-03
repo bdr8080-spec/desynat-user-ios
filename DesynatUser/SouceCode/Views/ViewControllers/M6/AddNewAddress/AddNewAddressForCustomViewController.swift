@@ -42,6 +42,7 @@ class AddNewAddressForCustomViewController: UIViewController {
         viewModel.addOrUpdateAddressApi()
     }
     
+    //MARK: Function's declaration
     @objc private func dismissDropdown() {
         guard let dropdown = dropdown, let overlay = overlayView else { return }
         
@@ -58,7 +59,7 @@ class AddNewAddressForCustomViewController: UIViewController {
     }
 }
 
-
+//MARK: UITextFieldDelegate Methods
 extension AddNewAddressForCustomViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

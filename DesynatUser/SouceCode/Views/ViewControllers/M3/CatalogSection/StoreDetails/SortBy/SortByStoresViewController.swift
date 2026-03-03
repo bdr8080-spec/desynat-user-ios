@@ -37,6 +37,7 @@ class SortByStoresViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
+    //MARK: Function's declaration
     private func initialSetup() {
         titleView.clipsToBounds = true
         titleView.layer.cornerRadius = 32   // Your desired value

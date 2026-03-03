@@ -34,13 +34,7 @@ class RateProductOrderViewController: UIViewController {
         submitButton.alpha = 0.65
         setupRatingObservers()
     }
-    
-    private func initialSetup() {
-        titleView.clipsToBounds = true
-        titleView.layer.cornerRadius = 32
-        titleView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-    }
-    
+
     // MARK: - Button's Action
     @IBAction func dismissDidTapped(_ sender: Any) {
         self.dismiss(animated: true)
@@ -59,6 +53,13 @@ class RateProductOrderViewController: UIViewController {
                                     //                                "store_image"
         ]
         viewModel.addRatingToRequest(param: param)
+    }
+    
+    //MARK: Function's declaration
+    private func initialSetup() {
+        titleView.clipsToBounds = true
+        titleView.layer.cornerRadius = 32
+        titleView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     
     private func setupRatingObservers() {
@@ -91,6 +92,4 @@ class RateProductOrderViewController: UIViewController {
         
         present(successVC, animated: true)
     }
-    
-    
 }

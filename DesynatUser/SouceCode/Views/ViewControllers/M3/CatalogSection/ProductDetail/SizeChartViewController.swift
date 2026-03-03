@@ -32,6 +32,7 @@ class SizeChartViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
+    //MARK: Function's declaration
     func configData() {
         if let imageUrlString = sizeChartUrl,
            let url = URL(string: imageUrlString) {

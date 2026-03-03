@@ -41,6 +41,7 @@ class FullScreenBannerViewController: UIViewController {
         bannerCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
+    //MARK: Function's declaration
     func startAutoScroll() {
         autoScrollTimer?.invalidate()
         autoScrollTimer = Timer.scheduledTimer(withTimeInterval: 6.0, repeats: true) { [weak self] _ in

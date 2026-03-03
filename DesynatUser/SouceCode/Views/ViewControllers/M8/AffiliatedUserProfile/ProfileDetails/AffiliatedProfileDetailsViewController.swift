@@ -228,6 +228,7 @@ class AffiliatedProfileDetailsViewController: UIViewController {
         }
     }
     
+    //MARK: Function's declaration
     private func selectTab(_ tab: ProfileTab) {
         let buttons = [personalButton, addressButton, bankAcountButton]
         let labels = [personalLabel, addressLabel, bankAccountLabel]

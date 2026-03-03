@@ -230,6 +230,7 @@ class MyOrderDetailVC: UIViewController {
         navigationController?.present(vc, animated: true)
     }
     
+    //MARK: Function's declaration
     private func resetStepper() {
         let inactiveColor = UIColor.lightGray
         let labels = [lbl1, lbl2, lbl3, lbl4]

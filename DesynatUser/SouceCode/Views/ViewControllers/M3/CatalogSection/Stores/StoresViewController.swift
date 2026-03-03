@@ -123,6 +123,7 @@ class StoresViewController: UIViewController {
         }
     }
     
+    //MARK: Function's declaration
     private func requestPermissions() {
         SFSpeechRecognizer.requestAuthorization { status in
             print("Speech permission: \(status)")
@@ -337,6 +338,7 @@ extension StoresViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
 }
 
+//MARK: UITextFieldDelegate Methods
 extension StoresViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""

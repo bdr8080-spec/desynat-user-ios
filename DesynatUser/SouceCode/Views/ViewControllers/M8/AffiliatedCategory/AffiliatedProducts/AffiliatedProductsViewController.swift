@@ -88,6 +88,7 @@ class AffiliatedProductsViewController: UIViewController {
         }
     }
     
+    //MARK: Function's declaration
     private func startListening() {
         // Reset everything
         recognitionTask?.cancel()
@@ -205,6 +206,7 @@ extension AffiliatedProductsViewController: UIScrollViewDelegate {
     
 }
 
+//MARK: UITextFieldDelegate Methods
 extension AffiliatedProductsViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""

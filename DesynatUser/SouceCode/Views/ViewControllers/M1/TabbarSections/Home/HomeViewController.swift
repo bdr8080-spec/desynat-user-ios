@@ -208,7 +208,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    // MARK: - Permissions
+    //MARK: Function's declaration
     private func requestPermissions() {
         SFSpeechRecognizer.requestAuthorization { status in
             print("Speech permission: \(status)")
@@ -293,6 +293,7 @@ class HomeViewController: UIViewController {
         isListening = false
     }
     
+    //MARK: Function's declaration
     func startBannerAutoScroll() {
         stopBannerAutoScroll() // prevent duplicate timers
         bannerAutoScrollTimer = Timer.scheduledTimer(

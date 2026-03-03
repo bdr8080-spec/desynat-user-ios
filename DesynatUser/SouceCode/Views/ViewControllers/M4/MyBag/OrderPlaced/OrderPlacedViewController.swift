@@ -52,6 +52,7 @@ class OrderPlacedViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    //MARK: Function's declaration
     func playGIF() {
         do {
             let gif = try UIImage(gifName: "orderPlace.gif")

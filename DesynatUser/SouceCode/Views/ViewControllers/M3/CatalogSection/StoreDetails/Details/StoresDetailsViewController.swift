@@ -45,7 +45,7 @@ class StoresDetailsViewController: UIViewController {
     @IBOutlet weak var reelsCollectionView: UICollectionView! {
         didSet {
             reelsCollectionView.registerCellFromNib(cellID: "ReelsCollectionViewCell")
-        }a
+        }
     }
     
     // MARK: - Property Decalaration
@@ -167,8 +167,7 @@ class StoresDetailsViewController: UIViewController {
         }
     }
     
-    // MARK: - Start Listening (Speech → Text)
-    
+    //MARK: Function's declaration
     private func requestPermissions() {
         SFSpeechRecognizer.requestAuthorization { status in
             print("Speech permission: \(status)")
@@ -431,6 +430,7 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
     
 }
 
+//MARK: UITextFieldDelegate Methods
 extension StoresDetailsViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""

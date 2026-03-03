@@ -35,7 +35,6 @@ class OrderForChatTableViewCell: UITableViewCell {
         onViewRequestTap?()
     }
     
-    
     @IBAction func sendRequestDidTapped(_ sender: Any) {
         onSendRequestTap?()
     }
@@ -49,12 +48,6 @@ class OrderForChatTableViewCell: UITableViewCell {
             productImageView.image = UIImage(named: "")
         }
         productNameLabel.text = data?.productVariation?.productDetails?.productNameEn ?? ""
-        //    let discountType = data?.productVariation?.discountType ?? "1"
-        //    if discountType == "1" {
-        //      discountPriceLabel.text = "\(data?.productVariation?.discountValue ?? "")% Off"
-        //    } else {
-        //      discountPriceLabel.text = "\(data?.productVariation?.discountValue ?? "") KD Off"
-        //    }
         
         CommonUtils.updateDiscountPercentageLabel(discountPriceLabel, actualAmountLabel: actualPriceLabel,discountType: data?.productVariation?.discountType,discountValue: data?.productVariation?.discountValue)
         

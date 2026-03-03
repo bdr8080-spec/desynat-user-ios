@@ -54,6 +54,7 @@ class ChatInboxListViewController: UIViewController {
         self.navigationController?.present(vc, animated: false)
     }
     
+    //MARK: Function's declaration
     func bindData() {
         inboxTableView.reloadData()
     }
@@ -82,6 +83,7 @@ extension ChatInboxListViewController: UITableViewDelegate, UITableViewDataSourc
     
 }
 
+//MARK: UITextFieldDelegate Methods
 extension ChatInboxListViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""

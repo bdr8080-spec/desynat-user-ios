@@ -136,6 +136,7 @@ extension SearchAffiliatedProductsViewController: UICollectionViewDelegate, UICo
     
 }
 
+//MARK: UITextFieldDelegate Methods
 extension SearchAffiliatedProductsViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

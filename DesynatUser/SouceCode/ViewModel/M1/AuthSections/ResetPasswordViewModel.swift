@@ -107,6 +107,7 @@ class ResetPasswordViewModel: NSObject {
     }
 }
 
+//MARK: UITextFieldDelegate Methods
 extension ResetPasswordViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == createPasswordTextField || textField == confirmPasswordTextField {

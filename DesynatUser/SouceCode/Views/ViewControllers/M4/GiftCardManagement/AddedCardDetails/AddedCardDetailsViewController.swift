@@ -39,6 +39,7 @@ class AddedCardDetailsViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    //MARK: Function's declaration
     func configData(){
         if let imageUrlString = giftCardDetails?.giftDetails?.image,
            let url = URL(string: imageUrlString) {

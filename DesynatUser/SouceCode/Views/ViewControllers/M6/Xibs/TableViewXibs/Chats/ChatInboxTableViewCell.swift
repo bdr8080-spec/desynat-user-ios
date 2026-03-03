@@ -19,13 +19,11 @@ class ChatInboxTableViewCell: UITableViewCell {
   
   override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
   
   func configData(data: ChatInboxListModel?) {
@@ -38,7 +36,6 @@ class ChatInboxTableViewCell: UITableViewCell {
       userProfileImageView.image = UIImage(named: "userProfile")
     }
     usernameLabel.text = "\(data?.sellerDetails?.firstName ?? "") \(data?.sellerDetails?.lastName ?? "")"
-//    messageLabel.text = data?.lastChat ?? "Sent an attachment"
     if data?.messageType == "1" {
       messageLabel.text = "Sent an attachment"
     } else {
@@ -97,7 +94,7 @@ class ChatInboxTableViewCell: UITableViewCell {
   
   func formattedChatTime(from isoString: String) -> String {
       
-      // 1️⃣ Parse ISO string
+      // Parse ISO string
       let isoFormatter = ISO8601DateFormatter()
       isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
       
@@ -108,29 +105,29 @@ class ChatInboxTableViewCell: UITableViewCell {
       let calendar = Calendar.current
 //      let now = Date()
       
-      // 2️⃣ Time formatter
+      // Time formatter
       let timeFormatter = DateFormatter()
       timeFormatter.locale = Locale.current
       timeFormatter.timeZone = .current
       timeFormatter.dateFormat = "h:mm a"
       
-      // 3️⃣ Date formatter (fallback)
+      // Date formatter (fallback)
       let dateFormatter = DateFormatter()
       dateFormatter.locale = Locale.current
       dateFormatter.timeZone = .current
       dateFormatter.dateFormat = "dd/MM/yy, h:mm a"
       
-      // 4️⃣ Today
+      // Today
       if calendar.isDateInToday(date) {
           return "Today \(timeFormatter.string(from: date))"
       }
       
-      // 5️⃣ Yesterday
+      // Yesterday
       if calendar.isDateInYesterday(date) {
           return "Yesterday \(timeFormatter.string(from: date))"
       }
       
-      // 6️⃣ Older dates
+      // Older dates
       return dateFormatter.string(from: date)
   }
     

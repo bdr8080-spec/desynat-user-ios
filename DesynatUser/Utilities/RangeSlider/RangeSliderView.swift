@@ -14,7 +14,7 @@ class RangeSliderView: UIControl {
     var minValue: CGFloat = 0 {
         didSet { updateLayoutIfNeeded() }
     }
-    var maxValue: CGFloat = 100000 {
+    var maxValue: CGFloat = 10000 {
         didSet { updateLayoutIfNeeded() }
     }
     
@@ -26,7 +26,7 @@ class RangeSliderView: UIControl {
         }
     }
     
-    var currentValue: CGFloat = 100000 {
+    var currentValue: CGFloat = 10000 {
         didSet {
             currentValue = min(max(currentValue, initialValue), maxValue)
             updateThumbPositions()

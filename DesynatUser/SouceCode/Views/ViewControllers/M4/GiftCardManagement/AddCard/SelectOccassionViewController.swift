@@ -29,11 +29,6 @@ class SelectOccassionViewController: UIViewController {
         viewModel.getAllGiftsCardsOccassion()
     }
     
-    func updateCollectionViewHeight() {
-        self.occassionCollectionView.layoutIfNeeded()
-        self.heightOfCollectionView.constant = self.occassionCollectionView.contentSize.height
-    }
-    
     // MARK: - Button's Action
     @IBAction func continueDidTapped(_ sender: Any) {
         guard let _ = selectedIndex else {
@@ -47,6 +42,12 @@ class SelectOccassionViewController: UIViewController {
     
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    //MARK: Function's declaration
+    func updateCollectionViewHeight() {
+        self.occassionCollectionView.layoutIfNeeded()
+        self.heightOfCollectionView.constant = self.occassionCollectionView.contentSize.height
     }
     
     func populateData(imageUrl: String?) {

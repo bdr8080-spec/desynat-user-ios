@@ -159,6 +159,7 @@ class CreateAffiliateUserAccountViewController: UIViewController {
     @IBAction func termsAndConditionAction(_ sender: Any) {
     }
     
+    //MARK: Function's declaration
     func getUserData() {
         fullNameTextField.text = affiliatedUserDetails?.fullName
         mobileTextField.text = affiliatedUserDetails?.mobile
@@ -216,6 +217,7 @@ class CreateAffiliateUserAccountViewController: UIViewController {
     
 }
 
+//MARK: UITextFieldDelegate Methods
 extension CreateAffiliateUserAccountViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField,
@@ -260,6 +262,3 @@ extension CreateAffiliateUserAccountViewController: UITextFieldDelegate {
         return true
     }
 }
-
-
-

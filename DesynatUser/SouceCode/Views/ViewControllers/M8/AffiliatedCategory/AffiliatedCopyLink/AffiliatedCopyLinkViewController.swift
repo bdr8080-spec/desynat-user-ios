@@ -41,6 +41,7 @@ class AffiliatedCopyLinkViewController: UIViewController {
         showCopiedLabel()
     }
     
+    //MARK: Function's declaration
     private func showCopiedLabel() {
         let copiedLabel = UILabel()
         copiedLabel.text = "  Copied  "

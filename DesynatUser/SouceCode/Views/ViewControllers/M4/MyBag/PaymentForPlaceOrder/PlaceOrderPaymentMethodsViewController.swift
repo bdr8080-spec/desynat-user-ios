@@ -103,6 +103,7 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    //MARK: Function's declaration
     func proceedToPay() {
         guard let selectedMethod = selectedPaymentMethod else { return }
         if comingForCustomeOrderPlace {

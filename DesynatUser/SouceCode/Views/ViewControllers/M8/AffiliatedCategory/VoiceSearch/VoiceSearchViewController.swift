@@ -40,6 +40,7 @@ class VoiceSearchViewController: UIViewController {
         }
     }
     
+    //MARK: Function's declaration
     private func requestPermissions() {
         SFSpeechRecognizer.requestAuthorization { status in
             print("Speech permission: \(status)")
@@ -88,13 +89,13 @@ class VoiceSearchViewController: UIViewController {
         recognitionTask = speechRecognizer?.recognitionTask(with: request) { [weak self] result, error in
             guard let self = self else { return }
             
-            // 🚫 Ignore updates after finishing
+            // Ignore updates after finishing
             if self.hasFinishedListening { return }
             
             if let result = result {
                 let text = result.bestTranscription.formattedString.trimmingCharacters(in: .whitespacesAndNewlines)
                 
-                // ✅ Ignore empty text
+                // Ignore empty text
                 if !text.isEmpty {
                     self.latestSpokenText = text
                     
@@ -151,7 +152,7 @@ class VoiceSearchViewController: UIViewController {
         
         stopListening()
         
-        // ✅ Force label to keep last spoken text
+        // Force label to keep last spoken text
         titleLabel.text = latestSpokenText
         
         micImageView.image = UIImage(named: "micSearch")

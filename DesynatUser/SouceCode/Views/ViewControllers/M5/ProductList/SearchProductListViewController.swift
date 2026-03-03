@@ -56,7 +56,6 @@ class SearchProductListViewController: UIViewController {
         nextVC.selectedMaxPrice = viewModel.maxPrice
         nextVC.onApplyFilters = { [weak self] categories, brands, colors, sizes, discounts, minPrice, maxPrice in
             guard let self = self else { return }
-            
             self.viewModel.selectedCategoryIDs = categories
             self.viewModel.selectedBrandIDs = brands
             self.viewModel.selectedColorIDs = colors
@@ -66,16 +65,11 @@ class SearchProductListViewController: UIViewController {
             self.viewModel.maxPrice = maxPrice
             self.viewModel.getProductsApi()
         }
-        
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @IBAction func backDidTapped(_ sender: Any) {
-        //      if comingFromImageScanner {
         self.navigationController?.popToViewController(ofType: SearchVC.self)
-        //      } else {
-        //        self.navigationController?.popViewController(animated: true)
-        //      }
     }
     
     @IBAction func sortDidTapped(_ sender: Any) {
@@ -110,6 +104,7 @@ class SearchProductListViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    //MARK: Function's declaration
     private func requestPermissions() {
         SFSpeechRecognizer.requestAuthorization { status in
             print("Speech permission: \(status)")
@@ -267,6 +262,7 @@ extension SearchProductListViewController: UICollectionViewDelegate, UICollectio
     }
 }
 
+//MARK: UITextFieldDelegate Methods
 extension SearchProductListViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""

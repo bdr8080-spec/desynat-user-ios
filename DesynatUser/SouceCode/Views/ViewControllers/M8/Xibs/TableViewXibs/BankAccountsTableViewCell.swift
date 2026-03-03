@@ -17,13 +17,10 @@ class BankAccountsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     @IBAction func editDidTapped(_ sender: Any) {
@@ -45,8 +42,6 @@ class BankAccountsTableViewCell: UITableViewCell {
     }
     
     func maskAccountNumber(_ accountNumber: String) -> String {
-        
-        // Ensure minimum length
         guard accountNumber.count > 8 else {
             return accountNumber
         }

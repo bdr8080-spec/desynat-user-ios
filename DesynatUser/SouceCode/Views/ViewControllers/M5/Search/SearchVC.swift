@@ -95,8 +95,7 @@ class SearchVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    // MARK: - Start Listening (Speech → Text)
-    
+    //MARK: Function's declaration
     func registerXib() {
         RecentSearchTableView.delegate = self
         RecentSearchTableView.dataSource = self

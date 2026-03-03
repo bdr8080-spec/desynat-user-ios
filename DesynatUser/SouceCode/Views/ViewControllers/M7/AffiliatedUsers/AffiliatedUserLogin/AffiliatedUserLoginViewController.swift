@@ -88,7 +88,8 @@ class AffiliatedUserLoginViewController: UIViewController {
         }
     }
     
-    func setUpCountryCode(code: String) {
+    //MARK: Function's declaration
+    private func setUpCountryCode(code: String) {
         self.countryCodeLabel.text = code
     }
     

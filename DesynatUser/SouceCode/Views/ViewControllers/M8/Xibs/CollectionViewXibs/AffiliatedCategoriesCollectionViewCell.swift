@@ -16,7 +16,6 @@ class AffiliatedCategoriesCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     func configDataForCategory(data: CategoriesDataModel?) {

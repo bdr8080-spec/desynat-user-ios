@@ -11,7 +11,6 @@ class AffiliatedProductsFiltersViewModel {
     
     private var hostVC: AffiliatedCategoryFilterViewController
     
-//    var getAllCategoriesList: [CategoriesDataModel] = []
     var getAllBrandsList: [AllBrandsListData] = []
     var getAllColorsList: [AllColorsList] = []
     var getAllSizesList: [AllSizesList] = []
@@ -19,14 +18,6 @@ class AffiliatedProductsFiltersViewModel {
     init(hostVC: AffiliatedCategoryFilterViewController) {
         self.hostVC = hostVC
     }
-    
-//    // CATEGORY
-//    func getAllCategory(completion: @escaping () -> Void) {
-//        WebService.sharedInstance.getCategoriesService { list in
-//            self.getAllCategoriesList = list
-//            completion()
-//        }
-//    }
     
     // BRANDS
     func getAllBrands(completion: @escaping () -> Void) {

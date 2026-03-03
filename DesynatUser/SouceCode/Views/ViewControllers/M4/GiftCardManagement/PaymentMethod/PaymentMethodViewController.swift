@@ -138,7 +138,6 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
     }
     
     @IBAction func cardButtonAction(_ sender: Any) {
-        let supplierId = String(Int.random(in: 1000...9999))
         cardSelectionImageView.image = UIImage(named: "radioSelected")
         isCardIsSlecteed = true
         selectedPaymentMethodID = nil
@@ -151,6 +150,7 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
         startVisaPayPayment()
     }
     
+    //MARK: Function's declaration
     func initaislUISetup() {
         switch comingFrom {
         case .fromCardDetails:
@@ -358,7 +358,7 @@ extension PaymentMethodViewController {
                 
                 // Automatically complete backend registration
                 self.viewModel.payNowRequest(transactionId: transactionID, paymentId: 1)
-            case .failure(let error):
+            case .failure(_):
                 showAlertAtPayment(msg: "Payment not completed")
             }
         }
@@ -384,7 +384,7 @@ extension PaymentMethodViewController {
                 self.paymentCompleted = true
                 self.viewModel.payNowRequest(transactionId: transactionID, paymentId: 1)
                 //              self.presentSuccessScreen()
-            case .failure(let error):
+            case .failure(_):
                 showAlertAtPayment(msg: "Payment not completed")
             }
         }

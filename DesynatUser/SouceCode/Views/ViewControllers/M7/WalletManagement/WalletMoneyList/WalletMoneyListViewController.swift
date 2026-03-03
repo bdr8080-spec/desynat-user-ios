@@ -47,13 +47,7 @@ class WalletMoneyListViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func updateTableViewHieght() {
-        //        DispatchQueue.main.async {
-        //            self.walletTableView.layoutIfNeeded()
-        //            self.heightOfTableViewConstaint.constant = self.walletTableView.contentSize.height
-        //        }
-    }
-    
+    //MARK: Function's declaration
     func setData() {
         totalamountLabel.text = CommonUtils.formatPriceStringInput(viewModel.walletData?.walletBalance, currency: "KD")
     }

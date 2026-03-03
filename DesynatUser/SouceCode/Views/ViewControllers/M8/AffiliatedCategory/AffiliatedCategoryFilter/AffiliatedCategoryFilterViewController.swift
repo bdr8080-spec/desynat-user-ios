@@ -105,7 +105,7 @@ class AffiliatedCategoryFilterViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    // MARK: - TABLE REGISTRATION
+    //MARK: Function's declaration
     func registerXib() {
         filtersTableView.delegate = self
         filtersTableView.dataSource = self
@@ -221,7 +221,7 @@ extension AffiliatedCategoryFilterViewController: UITableViewDelegate, UITableVi
             
             // Preselect previously chosen values
             cell.minPrice = selectedMinPrice ?? 0
-            cell.maxPrice = selectedMaxPrice ?? 100000
+            cell.maxPrice = selectedMaxPrice ?? 10000
             
             cell.onPriceChanged = { [weak self] min, max in
                 guard let self = self else { return }
