@@ -35,6 +35,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
     }
     
+    func scene(_ scene: UIScene,
+               continue userActivity: NSUserActivity) {
+
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+              let url = userActivity.webpageURL else { return }
+
+        print("Universal link:", url)
+
+        handleDeepLink(url)
+    }
+    
+    func handleDeepLink(_ url: URL) {
+
+        let path = url.path
+
+        if path.contains("/user/product/detail-page/") {
+
+            let components = path.split(separator: "/")
+            if let productId = components.last {
+
+                print("Product ID:", productId)
+
+                // Navigate to product screen
+                // push ProductViewController(productId)
+            }
+        }
+    }
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
@@ -59,3 +87,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
 }
 
+//https:desynat.com/user/product/detail-page/75?ref=25
+//applinks:desynat.com

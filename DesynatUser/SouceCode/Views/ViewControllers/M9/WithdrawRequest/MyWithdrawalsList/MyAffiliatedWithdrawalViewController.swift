@@ -22,6 +22,7 @@ class MyAffiliatedWithdrawalViewController: UIViewController {
             listTableView.registerCellFromNib(cellID: "MyAffiliatedWithdrawalTableViewCell")
         }
     }
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
     // MARK: - Property Decalaration
     private var requestType: WithdrawRequestType = .upcoming
@@ -45,6 +46,7 @@ class MyAffiliatedWithdrawalViewController: UIViewController {
         completedButtonOutlet.setImage(nil, for: .normal)
         listTableView.reloadData()
         requestType = .upcoming
+        handleHeightOfTableView()
     }
     
     @IBAction func completedDidTapped(_ sender: Any) {
@@ -54,6 +56,13 @@ class MyAffiliatedWithdrawalViewController: UIViewController {
         completedButtonOutlet.setImage(.btnGradient, for: .normal)
         listTableView.reloadData()
         requestType = .completed
+        handleHeightOfTableView()
+    }
+    
+    func handleHeightOfTableView() {
+        DispatchQueue.main.async {
+            self.tableViewHeightConstraint.constant = self.listTableView.contentSize.height
+        }
     }
 }
 

@@ -34,4 +34,22 @@ class PaymentsHistoryTableViewCell: UITableViewCell {
         //Cancelled #D53B36 (Red)
     }
     
+    func formatDate(_ isoDate: String) -> String {
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        isoFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+
+        guard let date = isoFormatter.date(from: isoDate) else {
+            return ""
+        }
+
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "dd/MM/yyyy at hh:mm a"
+        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        outputFormatter.timeZone = TimeZone.current
+
+        return outputFormatter.string(from: date)
+    }
+
+    
 }
