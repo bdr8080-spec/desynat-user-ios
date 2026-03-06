@@ -37,31 +37,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene,
                continue userActivity: NSUserActivity) {
+//
+//        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+//              let url = userActivity.webpageURL else { return }
+//
+//        print("Universal link:", url)
 
-        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
-              let url = userActivity.webpageURL else { return }
-
-        print("Universal link:", url)
-
-        handleDeepLink(url)
+//        handleDeepLink(url)
     }
     
-    func handleDeepLink(_ url: URL) {
-
-        let path = url.path
-
-        if path.contains("/user/product/detail-page/") {
-
-            let components = path.split(separator: "/")
-            if let productId = components.last {
-
-                print("Product ID:", productId)
-
-                // Navigate to product screen
-                // push ProductViewController(productId)
-            }
-        }
-    }
+//    func handleDeepLink(_ url: URL) {
+//
+//        let path = url.path
+//
+//        if path.contains("/user/product/detail-page/") {
+//
+//            let components = path.split(separator: "/")
+//            if let productId = components.last {
+//
+//                print("Product ID:", productId)
+//
+//                // Navigate to product screen
+//                // push ProductViewController(productId)
+//            }
+//        }
+//    }
     
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

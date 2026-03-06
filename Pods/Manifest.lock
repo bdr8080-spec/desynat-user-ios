@@ -9,6 +9,7 @@ PODS:
     - GoogleUtilities/Environment (~> 8.0)
     - GoogleUtilities/UserDefaults (~> 8.0)
     - PromisesObjC (~> 2.4)
+  - Branch (1.45.2)
   - Cosmos (23.0.0)
   - DropDown (2.3.13)
   - FTIndicator (1.2.9):
@@ -110,6 +111,7 @@ PODS:
   - Toaster (2.3.0)
 
 DEPENDENCIES:
+  - Branch
   - Cosmos (~> 23.0)
   - DropDown
   - FTIndicator
@@ -130,6 +132,7 @@ SPEC REPOS:
   trunk:
     - AppAuth
     - AppCheckCore
+    - Branch
     - Cosmos
     - DropDown
     - FTIndicator
@@ -163,6 +166,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AppAuth: 1c1a8afa7e12f2ec3a294d9882dfa5ab7d3cb063
   AppCheckCore: cc8fd0a3a230ddd401f326489c99990b013f0c4f
+  Branch: c1a7fa1811ef9203c01bc6c2588a229eb3ee1a84
   Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   FTIndicator: f7f071fd159e5befa1d040a9ef2e3ab53fa9322c
@@ -193,6 +197,6 @@ SPEC CHECKSUMS:
   SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: 7b6b69c3e79ce94518f1e7faead828bd8b79604f
+PODFILE CHECKSUM: 1a26dca96e71a80ac5f9cef9e4e0b1e0b64c060c
 
 COCOAPODS: 1.16.2

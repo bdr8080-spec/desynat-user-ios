@@ -22,5 +22,6 @@ target 'DesynatUser' do
   pod 'RangeSeekSlider'
   pod 'MyFatoorah'
   pod 'GoogleMLKit/ObjectDetection', '8.0.0'
+  pod 'Branch'
   
 end
