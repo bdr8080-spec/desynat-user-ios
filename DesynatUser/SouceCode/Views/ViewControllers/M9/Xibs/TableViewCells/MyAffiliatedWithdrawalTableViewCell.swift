@@ -28,7 +28,13 @@ class MyAffiliatedWithdrawalTableViewCell: UITableViewCell {
 
     }
     
-    func configData(requestType: WithdrawRequestType) {
+    func configData(requestType: WithdrawRequestType, data: WithdrawRequestList?) {
+        requestIdLabel.text = "#\(data?.requestID ?? "0")"
+        requestedOnDateLabel.text = formatDate(data?.createdAt ?? "")
+        transactionIdLabel.text = data?.requestID
+        accountNumberLabel.text = maskAccountNumber(data?.bankDetails?.accountNo ?? "")
+        totalAmountLabel.text = CommonUtils.formatPriceStringInput(data?.amount)
+        creditedOnLabel.text = formatDate(data?.createdAt ?? "")
         transactionView.isHidden = true
         creditOnView.isHidden = true
         switch requestType {
@@ -43,18 +49,31 @@ class MyAffiliatedWithdrawalTableViewCell: UITableViewCell {
         }
     }
     
+    func maskAccountNumber(_ accountNumber: String) -> String {
+        guard accountNumber.count > 8 else {
+            return accountNumber
+        }
+        
+        let firstFour = accountNumber.prefix(5)
+        let lastFour = accountNumber.suffix(3)
+        let maskedCount = accountNumber.count - 8
+        let maskedPart = String(repeating: "X", count: maskedCount)
+        
+        return "\(firstFour)\(maskedPart)\(lastFour)"
+    }
+    
     func formatDate(_ isoDate: String) -> String {
-        let isoFormatter = ISO8601DateFormatter()
-        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        isoFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
+        inputFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
 
-        guard let date = isoFormatter.date(from: isoDate) else {
+        guard let date = inputFormatter.date(from: isoDate) else {
             return ""
         }
 
         let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "dd/MM/yyyy at hh:mm a"
-        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        outputFormatter.dateFormat = "dd/MM/yyyy 'at' hh:mm a"
         outputFormatter.timeZone = TimeZone.current
 
         return outputFormatter.string(from: date)

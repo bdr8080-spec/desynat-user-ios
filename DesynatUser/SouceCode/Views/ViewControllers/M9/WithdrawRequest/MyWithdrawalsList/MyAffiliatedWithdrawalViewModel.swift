@@ -10,9 +10,28 @@ import Foundation
 class MyAffiliatedWithdrawalViewModel {
     
     private var hostVC: MyAffiliatedWithdrawalViewController!
+    var moneyWithdrawalData: WithdrawRequestDataModel?
+    var searchWorkItem: DispatchWorkItem?
+    var searchText: String = ""
     
     init(hostVC: MyAffiliatedWithdrawalViewController!) {
         self.hostVC = hostVC
+    }
+    
+    func getWalletHistory() {
+        var param: [String:Any]  = ["req_type": hostVC.requestType.rawValue] //0-pending/upcoming,1-approved/credited
+        if !searchText.isEmpty { param["search"] = searchText }
+        WebService.sharedInstance.getAffilateWithdrwalService(withParams: param) { data in
+            DispatchQueue.main.async {
+                self.moneyWithdrawalData = data
+                self.hostVC.totalWithdrawalsLabel.text = CommonUtils.formatPriceStringInput(data.totalWithdrawals)
+                self.hostVC.listTableView.reloadData()
+                self.hostVC.listTableView.layoutIfNeeded()
+                self.hostVC.handleHeightOfTableView()
+                
+                self.hostVC.noDataFoundLabel.isHidden = !(self.moneyWithdrawalData?.withdrawRequests?.isEmpty ?? true)
+            }
+        }
     }
     
 }

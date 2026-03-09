@@ -88,6 +88,7 @@ class ProductDetailViewController: UIViewController {
     
     // MARK: - Property Decalaration
     private lazy var viewModel = ProductDetailsViewModel(hostVC: self)
+    var refernceLink: String? = "http://157.241.119.72/user/product/detail-page/57?ref=23"
     var productId: Int? = 0
     var bagCount: Int = 0
     private var selectedColourIndex = 0

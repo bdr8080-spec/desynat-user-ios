@@ -19,12 +19,14 @@ class WithdrawMoneyViewController: UIViewController {
     
     // MARK: - Property Decalaration
     private lazy var viewModel = WithdrawMoneyViewModel(hostVC: self)
-    private var selectedAccountIndex: Int = 0
+    var selectedAccountId: Int = 0
+    var amountToPay: Double? = 0.0
     
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        amountTF.delegate = self
+        viewModel.getUserBankAccountApi()
     }
     
     // MARK: - Button's Action
@@ -36,43 +38,70 @@ class WithdrawMoneyViewController: UIViewController {
         let nextVC = AddAccountViewController.instantiate(fromAppStoryboard: .AffiliateUser)
         nextVC.comingForEdit = false
         nextVC.changesAreDone = { [weak self] in
-            //            Again Call api here
+            self?.viewModel.getUserBankAccountApi()
         }
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @IBAction func submitRequestDidTapped(_ sender: Any) {
-        let vc = RegisterationSuccessViewController.instantiate(fromAppStoryboard: .Main)
-        vc.comingReason = .amountAddedIntoWalletForAffiliatedUser
-        vc.callBackDismiss = {
-            self.navigationController?.popViewController(animated: true)
+        guard let finalAmount = getFinalAmount(), finalAmount > 0 else {
+            showAlert(msg: "Please enter a valid amount")
+            return
         }
-        self.navigationController?.present(vc, animated: true)
+        viewModel.affiliateSubmitWithdrawRequest()
     }
     
     //MARK: Function's declaration
-    
+    func getFinalAmount() -> Double? {
+        // Check TextField first
+        if let text = amountTF.text,
+           !text.trimmingCharacters(in: .whitespaces).isEmpty,
+           let amount = Double(text.trimmingCharacters(in: .whitespaces)) {
+            return amount
+        }
+        
+        // Else fallback to selected collection value
+        return amountToPay
+    }
 }
 
 // MARK: - TABLE VIEW METHODS
 extension WithdrawMoneyViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return viewModel.affiliatedUserBankAccount?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddedBankAccountTableViewCell", for: indexPath) as! AddedBankAccountTableViewCell
-        if selectedAccountIndex == indexPath.row {
-            cell.mainImageView.image = .radioSelected
-        } else {
-            cell.mainImageView.image = .radioUnselected
-        }
+        let data = viewModel.affiliatedUserBankAccount?[indexPath.row]
+        cell.configData(data: data)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedAccountIndex = indexPath.row
-        accountListTableView.reloadData()
+        viewModel.makeDefaultBankAccountAffilaitedUserApi(id: viewModel.affiliatedUserBankAccount?[indexPath.row].id ?? 0)
+    }
+}
+
+// MARK: -  UITextField DELEGATE METHODS
+extension WithdrawMoneyViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        guard textField == amountTF else { return true }
+        
+        let currentText = textField.text ?? ""
+        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        
+        // Allow only numbers
+        let allowedCharacters = CharacterSet.decimalDigits
+        let characterSet = CharacterSet(charactersIn: string)
+        if !allowedCharacters.isSuperset(of: characterSet) && string != "" {
+            return false
+        }
+        
+        // Limit to 7 digits
+        return updatedText.count <= 7
     }
 }

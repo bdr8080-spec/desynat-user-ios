@@ -28,24 +28,54 @@ class PaymentsHistoryTableViewCell: UITableViewCell {
 
     }
     
-    func configData() {
+    func configData(data: OrdersDataAffilaitedPaymentList?) {
       // Pending #FE7D49 (Orange)
         //Credited #17854C (Green)
         //Cancelled #D53B36 (Red)
+        transactionIdLabel.text = "#\(data?.id ?? 0)"
+        myEarningLabel.text = CommonUtils.formatPriceStringInput(data?.amount)
+        purchasedLabel.text = data?.userDetails?.fullName
+        productNameLabel.text = data?.productDetails?.productNameEn
+        categoryNameLabel.text = data?.productDetails?.category?.name
+        quantityLabel.text = "\(data?.quantity ?? 0)"
+        totalAmountLabel.text = CommonUtils.formatPriceStringInput(data?.amount)
+        purchasedOnLabel.text = formatDate(data?.createdAt ?? "")
+        let deliveryStatus = data?.deliveryStatus ?? "1"
+        let paymentStatus = data?.paymentStatus ?? "1"
+
+        if paymentStatus == "2" || paymentStatus == "3" {
+            orderStatusLabel.text = "Cancelled"
+            orderStatusLabel.textColor = UIColor(hexString: "#D53B36")
+        } else {
+            switch deliveryStatus {
+            case "1":
+                orderStatusLabel.text = "Pending"
+                orderStatusLabel.textColor = UIColor(hexString: "#FE7D49")
+            case "3":
+                orderStatusLabel.text = "Completed"
+                orderStatusLabel.textColor = UIColor(hexString: "#17854C")
+            case "4":
+                orderStatusLabel.text = "Cancelled"
+                orderStatusLabel.textColor = UIColor(hexString: "#D53B36")
+            default:
+                orderStatusLabel.text = "Ongoing"
+                orderStatusLabel.textColor = UIColor(hexString: "#FE7D49")
+            }
+        }
     }
     
     func formatDate(_ isoDate: String) -> String {
-        let isoFormatter = ISO8601DateFormatter()
-        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        isoFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
+        inputFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
 
-        guard let date = isoFormatter.date(from: isoDate) else {
+        guard let date = inputFormatter.date(from: isoDate) else {
             return ""
         }
 
         let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "dd/MM/yyyy at hh:mm a"
-        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        outputFormatter.dateFormat = "dd/MM/yyyy 'at' hh:mm a"
         outputFormatter.timeZone = TimeZone.current
 
         return outputFormatter.string(from: date)

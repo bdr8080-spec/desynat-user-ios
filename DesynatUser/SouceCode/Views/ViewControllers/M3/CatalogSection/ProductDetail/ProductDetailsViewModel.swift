@@ -38,11 +38,16 @@ class ProductDetailsViewModel: NSObject {
     }
     
     func addToCart(productId: Int, variantId: Int, quantity: Int, forIncrement: Bool, completion: @escaping (Bool) -> Void) {
-        let param: [String: Any] = [
+        var param: [String: Any] = [
             "product_id": productId,
             "variants_id": variantId,
-            "quantity": forIncrement ? 1 : -1 //quantity
+            "quantity": forIncrement ? 1 : -1, //quantity
         ]
+        
+        if let referenceLink = hostVC.refernceLink,
+               !referenceLink.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                param["reference_link"] = referenceLink
+            }
         WebService.sharedInstance.addToCart(param: param) { list in
             DispatchQueue.main.async {
                 CommonUtils.showToast(message: "Product Added to Cart Succesfully")

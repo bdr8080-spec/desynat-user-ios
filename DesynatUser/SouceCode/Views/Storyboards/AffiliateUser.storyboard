@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24128" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -4395,6 +4395,12 @@ you for your patience. Team Desynat App</string>
                                                     <outlet property="delegate" destination="v5n-1U-itL" id="1hR-nZ-u5R"/>
                                                 </connections>
                                             </tableView>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no data found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KMK-QN-ibK">
+                                                <rect key="frame" x="143.66666666666666" y="366" width="105.66666666666666" height="20.333333333333314"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -4403,9 +4409,11 @@ you for your patience. Team Desynat App</string>
                                             <constraint firstItem="8qv-In-nSn" firstAttribute="top" secondItem="Ysm-6m-GUD" secondAttribute="bottom" constant="20" id="GBd-cK-Wcy"/>
                                             <constraint firstAttribute="trailing" secondItem="Ysm-6m-GUD" secondAttribute="trailing" constant="24" id="LWG-kL-0Dp"/>
                                             <constraint firstItem="Ysm-6m-GUD" firstAttribute="top" secondItem="Tog-hU-wh1" secondAttribute="bottom" constant="20" id="Ted-xi-WnU"/>
+                                            <constraint firstItem="KMK-QN-ibK" firstAttribute="top" secondItem="Ysm-6m-GUD" secondAttribute="bottom" constant="150" id="VsX-ok-hEF"/>
                                             <constraint firstItem="8qv-In-nSn" firstAttribute="trailing" secondItem="Ysm-6m-GUD" secondAttribute="trailing" id="azj-fc-cXi"/>
                                             <constraint firstAttribute="bottom" secondItem="8qv-In-nSn" secondAttribute="bottom" id="bA2-bR-uPm"/>
                                             <constraint firstItem="Tog-hU-wh1" firstAttribute="top" secondItem="PX5-nV-eKy" secondAttribute="top" id="j0z-qP-yua"/>
+                                            <constraint firstItem="KMK-QN-ibK" firstAttribute="centerX" secondItem="PX5-nV-eKy" secondAttribute="centerX" id="jxU-os-Yl9"/>
                                             <constraint firstAttribute="trailing" secondItem="Tog-hU-wh1" secondAttribute="trailing" id="qt3-jM-QGF"/>
                                             <constraint firstItem="8qv-In-nSn" firstAttribute="leading" secondItem="Ysm-6m-GUD" secondAttribute="leading" id="rtV-WN-yqi"/>
                                         </constraints>
@@ -4452,6 +4460,7 @@ you for your patience. Team Desynat App</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="noDataFoundLabel" destination="KMK-QN-ibK" id="JOc-nq-yB5"/>
                         <outlet property="paymentHistoryTableview" destination="8qv-In-nSn" id="p4x-Nx-PZI"/>
                         <outlet property="paymentHistoryTableviewHeightConstraint" destination="Xzo-Ns-7r6" id="c9q-JO-JgH"/>
                         <outlet property="searchTF" destination="c3X-hB-R45" id="4mT-hn-qht"/>
@@ -9027,7 +9036,7 @@ want to continue with</string>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="KD |  Enter amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vgn-PV-MlR">
                                                 <rect key="frame" x="20" y="5" width="305" height="40"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -9212,7 +9221,7 @@ want to continue with</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nVm-Xu-GEw">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="62.666666666666664"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8i-jd-xfI">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Filter" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8i-jd-xfI">
                                                 <rect key="frame" x="20" y="18" width="305" height="22.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -9227,7 +9236,7 @@ want to continue with</string>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" image="cross"/>
                                                 <connections>
-                                                    <action selector="dismissDidTapped:" destination="g0a-2d-jTA" eventType="touchUpInside" id="J1n-RP-1zs"/>
+                                                    <action selector="dismissDidTapped:" destination="g0a-2d-jTA" eventType="touchUpInside" id="mye-K9-SQ5"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -9266,7 +9275,7 @@ want to continue with</string>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calender" translatesAutoresizingMaskIntoConstraints="NO" id="Ddi-S3-uLI">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="affilatedCalender" translatesAutoresizingMaskIntoConstraints="NO" id="Ddi-S3-uLI">
                                                                 <rect key="frame" x="133" y="8" width="22" height="22"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="22" id="nP8-cW-teb"/>
@@ -9309,7 +9318,7 @@ want to continue with</string>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calender" translatesAutoresizingMaskIntoConstraints="NO" id="aFg-FV-JkP">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="affilatedCalender" translatesAutoresizingMaskIntoConstraints="NO" id="aFg-FV-JkP">
                                                                 <rect key="frame" x="133" y="8" width="22" height="22"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="22" id="SYm-oa-7Al"/>
@@ -9387,7 +9396,7 @@ want to continue with</string>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="clearDidTapped:" destination="g0a-2d-jTA" eventType="touchUpInside" id="GOM-oJ-4Df"/>
+                                                            <action selector="clearDidTapped:" destination="g0a-2d-jTA" eventType="touchUpInside" id="Ubz-3G-2cN"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clear" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ps1-I7-4QH">
@@ -9426,7 +9435,7 @@ want to continue with</string>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="applyDidTapped:" destination="g0a-2d-jTA" eventType="touchUpInside" id="OAS-Kn-vBV"/>
+                                                            <action selector="applyDidTapped:" destination="g0a-2d-jTA" eventType="touchUpInside" id="FzB-nV-J9T"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apply" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSm-Ef-Ldt">
@@ -9480,9 +9489,9 @@ want to continue with</string>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="fromTextField" destination="HdL-uI-1hv" id="lgN-jQ-YGd"/>
-                        <outlet property="headerView" destination="E8i-jd-xfI" id="gKP-D1-gjV"/>
-                        <outlet property="toTextField" destination="4Ph-eS-dMU" id="jGp-ak-mpb"/>
+                        <outlet property="fromTextField" destination="HdL-uI-1hv" id="HSh-E2-Ux8"/>
+                        <outlet property="headerView" destination="nVm-Xu-GEw" id="KtG-CX-CfF"/>
+                        <outlet property="toTextField" destination="4Ph-eS-dMU" id="mke-Pc-Smd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FbF-Z5-LvA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -9498,7 +9507,6 @@ want to continue with</string>
         <image name="affiliateduserloaction" width="24" height="24"/>
         <image name="bagSelected" width="52" height="44"/>
         <image name="btnGradient" width="343" height="38"/>
-        <image name="calender" width="20" height="20"/>
         <image name="cameraUpload" width="76" height="76"/>
         <image name="catalogSelected" width="52" height="44"/>
         <image name="chatBot" width="52.666667938232422" height="52.666667938232422"/>
@@ -9569,13 +9577,13 @@ want to continue with</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -151,7 +151,6 @@ extension WithdrawalFiltersViewController: UITextFieldDelegate {
     }
 }
 
-
 struct WithdrawalFilterModel {
     var fromDate: String?
     var toDate: String?

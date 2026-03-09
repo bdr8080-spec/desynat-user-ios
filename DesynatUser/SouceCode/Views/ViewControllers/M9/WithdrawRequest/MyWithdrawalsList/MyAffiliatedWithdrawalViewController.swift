@@ -25,13 +25,14 @@ class MyAffiliatedWithdrawalViewController: UIViewController {
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
     // MARK: - Property Decalaration
-    private var requestType: WithdrawRequestType = .upcoming
+    var requestType: WithdrawRequestType = .upcoming
     private lazy var viewModel = MyAffiliatedWithdrawalViewModel(hostVC: self)
     
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        searchTF.delegate = self
+        viewModel.getWalletHistory()
     }
     
     // MARK: - Button's Action
@@ -46,7 +47,7 @@ class MyAffiliatedWithdrawalViewController: UIViewController {
         completedButtonOutlet.setImage(nil, for: .normal)
         listTableView.reloadData()
         requestType = .upcoming
-        handleHeightOfTableView()
+        viewModel.getWalletHistory()
     }
     
     @IBAction func completedDidTapped(_ sender: Any) {
@@ -56,7 +57,7 @@ class MyAffiliatedWithdrawalViewController: UIViewController {
         completedButtonOutlet.setImage(.btnGradient, for: .normal)
         listTableView.reloadData()
         requestType = .completed
-        handleHeightOfTableView()
+        viewModel.getWalletHistory()
     }
     
     func handleHeightOfTableView() {
@@ -70,19 +71,37 @@ class MyAffiliatedWithdrawalViewController: UIViewController {
 extension MyAffiliatedWithdrawalViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return viewModel.moneyWithdrawalData?.withdrawRequests?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyAffiliatedWithdrawalTableViewCell", for: indexPath) as! MyAffiliatedWithdrawalTableViewCell
-        cell.configData(requestType: requestType)
+        let data = viewModel.moneyWithdrawalData?.withdrawRequests?[indexPath.row]
+        cell.configData(requestType: requestType, data: data)
         return cell
     }
     
 }
 
-enum WithdrawRequestType {
-    case upcoming
-    case completed
+// MARK: - UITextField Delegate METHODS
+extension MyAffiliatedWithdrawalViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+            viewModel.searchWorkItem?.cancel()
+        let workItem = DispatchWorkItem { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.searchText = currentText
+            viewModel.getWalletHistory()
+        }
+            viewModel.searchWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
+        return true
+    }
+}
+
+enum WithdrawRequestType: Int {
+    case upcoming = 0
+    case completed = 1
 }
 
