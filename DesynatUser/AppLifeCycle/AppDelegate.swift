@@ -31,13 +31,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let them = MFTheme(navigationTintColor: .white, navigationBarTintColor: .lightGray, navigationTitle: "Payment", cancelButtonTitle: "Cancel")
         MFSettings.shared.setTheme(theme: them)
         // BRANCH IO FOR PRODUCT LINK NAVIGATION
+        
         Branch.getInstance().initSession(launchOptions: launchOptions) { params, error in
             // Debug / show content in alert
             self.showShareAlert(withText: "\(params ?? [:])")
             
             if let productId = params?["product_id"] as? String {
                 let productLink = "https://desynat.com/user/product/detail-page/\(productId)"
-                
                 // Show product link alert
                 self.showShareAlert(withText: productLink)
                 
@@ -109,11 +109,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
-//    func application(_ application: UIApplication,
-//                     continue userActivity: NSUserActivity,
-//                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-//        return Branch.getInstance().continue(userActivity)
-//    }
+    // Handle universal links
+        func application(
+            _ application: UIApplication,
+            continue userActivity: NSUserActivity,
+            restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
+        ) -> Bool {
+
+            return Branch.getInstance().continue(userActivity)
+        }
+
+        // Handle URI schemes
+        func application(
+            _ app: UIApplication,
+            open url: URL,
+            options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+        ) -> Bool {
+
+            return Branch.getInstance().application(app, open: url, options: options)
+        }
     
     func application(_ application: UIApplication,
     continue userActivity: NSUserActivity,
