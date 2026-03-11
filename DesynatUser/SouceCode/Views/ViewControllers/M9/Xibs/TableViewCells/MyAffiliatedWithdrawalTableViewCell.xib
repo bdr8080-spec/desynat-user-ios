@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EON-MU-6o1" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="308" height="208.66666666666666"/>
+                        <rect key="frame" x="0.0" y="0.0" width="308" height="242.66666666666666"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QTV-FO-HTC" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="308" height="63.666666666666664"/>
@@ -96,7 +96,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cTA-vU-Nyl">
-                                <rect key="frame" x="15" y="78.666666666666686" width="278" height="110"/>
+                                <rect key="frame" x="15" y="78.666666666666686" width="278" height="144"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="yEh-sz-U6K">
                                         <rect key="frame" x="0.0" y="0.0" width="278" height="18"/>
@@ -157,7 +157,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="WUt-hL-Pn1">
                                         <rect key="frame" x="0.0" y="46" width="278" height="18"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Total Amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pYh-S2-RbY" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pYh-S2-RbY" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="131.66666666666666" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -183,7 +183,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="RCQ-Zf-y5l">
                                         <rect key="frame" x="0.0" y="68.999999999999986" width="278" height="18"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Credited On" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NV2-ek-pcC" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credited On" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NV2-ek-pcC" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="131.66666666666666" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -232,6 +232,29 @@
                                             <constraint firstAttribute="height" constant="18" id="uOK-AM-MM9"/>
                                         </constraints>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="YMc-Vw-cMp">
+                                        <rect key="frame" x="0.0" y="115" width="278" height="29"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rejected Reason" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0bq-FK-zmv" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="278" height="12"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 21/08/2024 at 07:30 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ATw-7T-ItY" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="17" width="278" height="12"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -270,6 +293,8 @@
                 <outlet property="accountNumberLabel" destination="rvq-yj-r3z" id="K4d-SP-s6l"/>
                 <outlet property="creditOnView" destination="RCQ-Zf-y5l" id="Shk-dH-5nK"/>
                 <outlet property="creditedOnLabel" destination="qjn-UZ-EQa" id="rzk-Ji-Coe"/>
+                <outlet property="rejectReasonLabel" destination="ATw-7T-ItY" id="sGG-QO-ufy"/>
+                <outlet property="rejectedReasonView" destination="YMc-Vw-cMp" id="Wmk-7J-EsO"/>
                 <outlet property="requestIdLabel" destination="4e0-h3-vRf" id="Jb6-5l-zg9"/>
                 <outlet property="requestedOnDateLabel" destination="HDD-YX-fdl" id="NcZ-6L-J3a"/>
                 <outlet property="statusLabel" destination="wjt-do-grk" id="obf-Ql-VuX"/>

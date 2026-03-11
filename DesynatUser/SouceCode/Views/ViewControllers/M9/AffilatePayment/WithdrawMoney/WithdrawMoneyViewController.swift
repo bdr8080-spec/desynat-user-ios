@@ -14,6 +14,7 @@ class WithdrawMoneyViewController: UIViewController {
     @IBOutlet weak var accountListTableView: UITableView! {
         didSet {
             accountListTableView.registerCellFromNib(cellID: "AddedBankAccountTableViewCell")
+            accountListTableView.registerCellFromNib(cellID: "FooterActionTableViewCell")
         }
     }
     
@@ -81,6 +82,28 @@ extension WithdrawMoneyViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.makeDefaultBankAccountAffilaitedUserApi(id: viewModel.affiliatedUserBankAccount?[indexPath.row].id ?? 0)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FooterActionTableViewCell") as! FooterActionTableViewCell
+        
+        cell.addButton.addTarget(self, action: #selector(addBankAccountTapped), for: .touchUpInside)
+        
+        return cell.contentView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 80
+    }
+    
+    @objc func addBankAccountTapped() {
+        let nextVC = AddAccountViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+        nextVC.comingForEdit = false
+        nextVC.changesAreDone = { [weak self] in
+            self?.viewModel.getUserBankAccountApi()
+        }
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 

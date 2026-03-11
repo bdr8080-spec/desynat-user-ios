@@ -13,7 +13,6 @@ class AffiliatedUserPaymentsViewController: UIViewController {
     @IBOutlet weak var noDataFoundLabel: UILabel!
     @IBOutlet weak var searchTF: UITextField!
     @IBOutlet weak var totalRevenuwAmountLabel: CustomLabelFont!
-    @IBOutlet weak var paymentHistoryTableviewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var paymentHistoryTableview: UITableView! {
         didSet {
             paymentHistoryTableview.registerCellFromNib(cellID: "PaymentsHistoryTableViewCell")
@@ -26,12 +25,8 @@ class AffiliatedUserPaymentsViewController: UIViewController {
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        paymentHistoryTableview.rowHeight = UITableView.automaticDimension
-        paymentHistoryTableview.estimatedRowHeight = 120
-        paymentHistoryTableview.isScrollEnabled = false
         searchTF.delegate = self
         viewModel.getWalletHistory()
-        
     }
     
     // MARK: - Button's Action
@@ -58,14 +53,10 @@ class AffiliatedUserPaymentsViewController: UIViewController {
         self.navigationController?.present(vc, animated: false)
     }
     
-    //MARK: Function's declaration
-    func handleHeightOfTableView() {
-        paymentHistoryTableview.beginUpdates()
-        paymentHistoryTableview.endUpdates()
-        paymentHistoryTableview.layoutIfNeeded()
-        paymentHistoryTableviewHeightConstraint.constant = paymentHistoryTableview.contentSize.height
-        paymentHistoryTableview.reloadData()
+    @IBAction func refreshDidTapped(_ sender: Any) {
+        viewModel.getWalletHistory()
     }
+
 }
 
 // MARK: - TABLE VIEW METHODS

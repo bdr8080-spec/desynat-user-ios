@@ -18,19 +18,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ERw-4o-sa0" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="286" height="244.66666666666666"/>
+                        <rect key="frame" x="24" y="0.0" width="238" height="244.66666666666666"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dgq-qX-waI" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="286" height="63.666666666666664"/>
+                                <rect key="frame" x="0.0" y="0.0" width="238" height="63.666666666666664"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="vze-iF-rSD">
-                                        <rect key="frame" x="15" y="15" width="256" height="33.666666666666664"/>
+                                        <rect key="frame" x="15" y="15" width="208" height="33.666666666666664"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="aFJ-n8-SZ1">
-                                                <rect key="frame" x="0.0" y="0.0" width="256" height="14.333333333333334"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="208" height="14.333333333333334"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction Id" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TIu-oM-fkV" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="14.333333333333334"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="96.666666666666671" height="14.333333333333334"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -39,7 +39,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Earnings" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PFc-2p-Dek" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                        <rect key="frame" x="135.66666666666666" y="0.0" width="120.33333333333334" height="14.333333333333334"/>
+                                                        <rect key="frame" x="111.66666666666666" y="0.0" width="96.333333333333343" height="14.333333333333334"/>
                                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="10"/>
                                                         <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -50,10 +50,10 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="w41-sb-qcC">
-                                                <rect key="frame" x="0.0" y="19.333333333333336" width="256" height="14.333333333333336"/>
+                                                <rect key="frame" x="0.0" y="19.333333333333336" width="208" height="14.333333333333336"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#5372821" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8df-ps-6XS" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="14.333333333333334"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="96.666666666666671" height="14.333333333333334"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -62,7 +62,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="250 KD" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jSn-MX-A5r" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                        <rect key="frame" x="135.66666666666666" y="0.0" width="120.33333333333334" height="14.333333333333334"/>
+                                                        <rect key="frame" x="111.66666666666666" y="0.0" width="96.333333333333343" height="14.333333333333334"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -95,13 +95,13 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="qw2-vx-TCW">
-                                <rect key="frame" x="15" y="73.666666666666686" width="256" height="156"/>
+                                <rect key="frame" x="15" y="73.666666666666686" width="208" height="156"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="VQh-PA-V7U">
-                                        <rect key="frame" x="0.0" y="0.0" width="256" height="18"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="208" height="18"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purchased by" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BH1-1L-1rd" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="18"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="96.666666666666671" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -110,7 +110,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Atif Aslam" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AaU-FW-sZM" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="135.66666666666666" y="0.0" width="120.33333333333334" height="18"/>
+                                                <rect key="frame" x="111.66666666666666" y="0.0" width="96.333333333333343" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -124,11 +124,12 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="B4v-O5-oEM">
-                                        <rect key="frame" x="0.0" y="23" width="256" height="18"/>
+                                        <rect key="frame" x="0.0" y="23" width="208" height="18"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MIT-pV-kf2" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="18"/>
-                                                <string key="text">Product Name</string>
+                                                <rect key="frame" x="0.0" y="0.0" width="96.666666666666671" height="18"/>
+                                                <string key="text">Product Name
+</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -137,7 +138,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nike Shirt" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Zl-w1-gqK" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="135.66666666666666" y="0.0" width="120.33333333333334" height="18"/>
+                                                <rect key="frame" x="111.66666666666666" y="0.0" width="96.333333333333343" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -151,10 +152,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="yHg-mt-JDU">
-                                        <rect key="frame" x="0.0" y="46" width="256" height="18"/>
+                                        <rect key="frame" x="0.0" y="46" width="208" height="18"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PWK-cf-m4r" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="18"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="96.666666666666671" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -163,7 +164,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Men's Shirt" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C2S-nL-vUm" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="135.66666666666666" y="0.0" width="120.33333333333334" height="18"/>
+                                                <rect key="frame" x="111.66666666666666" y="0.0" width="96.333333333333343" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -177,11 +178,12 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="v1Q-wf-a5x">
-                                        <rect key="frame" x="0.0" y="68.999999999999986" width="256" height="18"/>
+                                        <rect key="frame" x="0.0" y="68.999999999999986" width="208" height="18"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7TH-gu-Hdo" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="18"/>
-                                                <string key="text">Quantity</string>
+                                                <rect key="frame" x="0.0" y="0.0" width="96.666666666666671" height="18"/>
+                                                <string key="text">Quantity
+</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -190,7 +192,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="02" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u02-Pp-oc1" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="135.66666666666666" y="0.0" width="120.33333333333334" height="18"/>
+                                                <rect key="frame" x="111.66666666666666" y="0.0" width="96.333333333333343" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -204,11 +206,12 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="tLk-eu-ZBE">
-                                        <rect key="frame" x="0.0" y="91.999999999999986" width="256" height="18"/>
+                                        <rect key="frame" x="0.0" y="91.999999999999986" width="208" height="18"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ule-UY-umw" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="18"/>
-                                                <string key="text">Total Amount</string>
+                                                <rect key="frame" x="0.0" y="0.0" width="96.666666666666671" height="18"/>
+                                                <string key="text">Total Amount
+</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -217,7 +220,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="299 KD" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PQ2-Bz-YYl" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="135.66666666666666" y="0.0" width="120.33333333333334" height="18"/>
+                                                <rect key="frame" x="111.66666666666666" y="0.0" width="96.333333333333343" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -231,10 +234,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="bqc-wH-iPm">
-                                        <rect key="frame" x="0.0" y="114.99999999999999" width="256" height="18.000000000000014"/>
+                                        <rect key="frame" x="0.0" y="114.99999999999999" width="208" height="18.000000000000014"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purchased on" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2qt-1F-qPm" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="18"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="96.666666666666671" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -243,7 +246,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 21/08/2024 at 07:30 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yml-1a-7oY" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="135.66666666666666" y="0.0" width="120.33333333333334" height="18"/>
+                                                <rect key="frame" x="111.66666666666666" y="0.0" width="96.333333333333343" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -257,10 +260,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="SMC-g5-swe">
-                                        <rect key="frame" x="0.0" y="138" width="256" height="18"/>
+                                        <rect key="frame" x="0.0" y="138" width="208" height="18"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0CK-bc-DYi" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="120.66666666666667" height="18"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="96.666666666666671" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -269,7 +272,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PLV-gf-K6Y" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="135.66666666666666" y="0.0" width="120.33333333333334" height="18"/>
+                                                <rect key="frame" x="111.66666666666666" y="0.0" width="96.333333333333343" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                 <color key="textColor" red="0.99607843137254903" green="0.49019607843137253" blue="0.28627450980392155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -309,9 +312,9 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="ERw-4o-sa0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="BrO-WM-Cas"/>
+                    <constraint firstItem="ERw-4o-sa0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="BrO-WM-Cas"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ERw-4o-sa0" secondAttribute="bottom" constant="20" id="Nfd-SB-y0z"/>
-                    <constraint firstAttribute="trailing" secondItem="ERw-4o-sa0" secondAttribute="trailing" id="nOK-g8-myu"/>
+                    <constraint firstAttribute="trailing" secondItem="ERw-4o-sa0" secondAttribute="trailing" constant="24" id="nOK-g8-myu"/>
                     <constraint firstItem="ERw-4o-sa0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="pmp-bZ-SXL"/>
                 </constraints>
             </tableViewCellContentView>

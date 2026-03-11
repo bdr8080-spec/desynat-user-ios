@@ -9,6 +9,8 @@ import UIKit
 
 class MyAffiliatedWithdrawalTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var rejectReasonLabel: CustomLabelFont!
+    @IBOutlet weak var rejectedReasonView: UIStackView!
     @IBOutlet weak var requestedOnDateLabel: CustomLabelFont!
     @IBOutlet weak var transactionView: UIStackView!
     @IBOutlet weak var statusLabel: CustomLabelFont!
@@ -31,12 +33,14 @@ class MyAffiliatedWithdrawalTableViewCell: UITableViewCell {
     func configData(requestType: WithdrawRequestType, data: WithdrawRequestList?) {
         requestIdLabel.text = "#\(data?.requestID ?? "0")"
         requestedOnDateLabel.text = formatDate(data?.createdAt ?? "")
-        transactionIdLabel.text = data?.requestID
+        transactionIdLabel.text = "#\(data?.requestID ?? "0")"
         accountNumberLabel.text = maskAccountNumber(data?.bankDetails?.accountNo ?? "")
         totalAmountLabel.text = CommonUtils.formatPriceStringInput(data?.amount)
         creditedOnLabel.text = formatDate(data?.createdAt ?? "")
+        rejectReasonLabel.text = data?.rejectReason
         transactionView.isHidden = true
         creditOnView.isHidden = true
+        rejectedReasonView.isHidden = true
         switch requestType {
         case .upcoming:
             statusLabel.text = "Pending"
@@ -44,8 +48,18 @@ class MyAffiliatedWithdrawalTableViewCell: UITableViewCell {
         case .completed:
             transactionView.isHidden = false
             creditOnView.isHidden = false
-            statusLabel.text = " Credited"
-            statusLabel.textColor = UIColor(hexString: "#17854C")
+//            statusLabel.text = " Credited"
+//            statusLabel.textColor = UIColor(hexString: "#17854C")
+            let adminVerify = data?.adminVerify ?? 1
+            
+            if adminVerify == 1 {
+                statusLabel.text = "Credited"
+                statusLabel.textColor = UIColor(hexString: "#17854C")
+            } else {
+                rejectedReasonView.isHidden = false
+                statusLabel.text = "Rejected"
+                statusLabel.textColor = .red//UIColor(hexString: "#17854C")
+            }
         }
     }
     

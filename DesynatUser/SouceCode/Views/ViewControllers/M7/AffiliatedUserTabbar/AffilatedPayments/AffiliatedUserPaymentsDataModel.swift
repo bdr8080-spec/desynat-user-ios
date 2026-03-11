@@ -123,45 +123,6 @@ struct OrdersDataAffilaitedPaymentList: Codable {
     }
 }
 
-//// MARK: - User Details
-//struct UserDetails: Codable {
-//    var id: Int?
-//    var profileImage: String?
-//    var fullName: String?
-//    var countryCode: String?
-//    var mobile: String?
-//    var email: String?
-//    var otp: String?
-//    var otpVerify: String?
-//    var deviceType: String?
-//    var deviceToken: String?
-//    var status: String?
-//    var bannerView: String?
-//    var lang: String?
-//    var createdAt: String?
-//    var updatedAt: String?
-//    var accessToken: String?
-//
-//    enum CodingKeys: String, CodingKey {
-//        case id
-//        case profileImage = "profile_image"
-//        case fullName = "full_name"
-//        case countryCode = "country_code"
-//        case mobile
-//        case email
-//        case otp
-//        case otpVerify = "otp_verify"
-//        case deviceType = "device_type"
-//        case deviceToken = "device_token"
-//        case status
-//        case bannerView = "banner_view"
-//        case lang
-//        case createdAt = "created_at"
-//        case updatedAt = "updated_at"
-//        case accessToken
-//    }
-//}
-
 // MARK: - Order Info
 struct OrderInfo: Codable {
     var id: Int?
@@ -202,84 +163,6 @@ struct OrderInfo: Codable {
     }
 }
 
-// MARK: - Delivery Details
-//struct DeliveryDetails: Codable {
-//    var id: Int?
-//    var userId: Int?
-//    var name: String?
-//    var mobile: String?
-//    var countryCode: String?
-//    var address: String?
-//    var houseNo: String?
-//    var city: String?
-//    var state: String?
-//    var countryName: String?
-//    var latitude: String?
-//    var longitude: String?
-//
-//    enum CodingKeys: String, CodingKey {
-//        case id
-//        case userId = "user_id"
-//        case name
-//        case mobile
-//        case countryCode = "country_code"
-//        case address
-//        case houseNo = "house_no"
-//        case city
-//        case state
-//        case countryName = "country_name"
-//        case latitude
-//        case longitude
-//    }
-//}
-
-// MARK: - Product Details
-//struct ProductDetails: Codable {
-//    var id: Int?
-//    var productNameEn: String?
-//    var productNameAr: String?
-//    var descriptionEn: String?
-//    var descriptionAr: String?
-//    var productActiveStatus: Int?
-//    var brand: Brand?
-//    var category: Category?
-//    var subcategory: Subcategory?
-//
-//    enum CodingKeys: String, CodingKey {
-//        case id
-//        case productNameEn = "product_name_en"
-//        case productNameAr = "product_name_ar"
-//        case descriptionEn = "description_en"
-//        case descriptionAr = "description_ar"
-//        case productActiveStatus = "product_active_status"
-//        case brand
-//        case category
-//        case subcategory
-//    }
-//}
-
-// MARK: - Brand
-//struct Brand: Codable {
-//    var id: Int?
-//    var nameEnglish: String?
-//    var nameArabic: String?
-//    var image: String?
-//
-//    enum CodingKeys: String, CodingKey {
-//        case id
-//        case nameEnglish = "name_english"
-//        case nameArabic = "name_arabic"
-//        case image
-//    }
-//}
-
-// MARK: - Category
-//struct Category: Codable {
-//    var id: Int?
-//    var name: String?
-//    var image: String?
-//}
-
 // MARK: - Subcategory
 struct Subcategory: Codable {
     var id: Int?
@@ -293,44 +176,9 @@ struct Subcategory: Codable {
     }
 }
 
-// MARK: - Variation
-//struct VariationDetails: Codable {
-//    var id: Int?
-//    var productId: Int?
-//    var variantImage: [String]?
-//    var color: Color?
-//    var size: Size?
-//    var finalPrice: String?
-//
-//    enum CodingKeys: String, CodingKey {
-//        case id
-//        case productId = "product_id"
-//        case variantImage = "variant_image"
-//        case color
-//        case size
-//        case finalPrice = "final_price"
-//    }
-//}
-
-// MARK: - Color
-//struct Color: Codable {
-//    var id: Int?
-//    var name: String?
-//    var hexCode: String?
-//
-//    enum CodingKeys: String, CodingKey {
-//        case id
-//        case name
-//        case hexCode = "hex_code"
-//    }
-//}
-
 // MARK: - Size
 struct Size: Codable {
     var id: Int?
     var name: String?
 }
 
-// MARK: - Exchange
-//struct ExchangeOrderDetails: Codable {
-//}

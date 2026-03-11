@@ -26,9 +26,6 @@ class MyAffiliatedWithdrawalViewModel {
                 self.moneyWithdrawalData = data
                 self.hostVC.totalWithdrawalsLabel.text = CommonUtils.formatPriceStringInput(data.totalWithdrawals)
                 self.hostVC.listTableView.reloadData()
-                self.hostVC.listTableView.layoutIfNeeded()
-                self.hostVC.handleHeightOfTableView()
-                
                 self.hostVC.noDataFoundLabel.isHidden = !(self.moneyWithdrawalData?.withdrawRequests?.isEmpty ?? true)
             }
         }

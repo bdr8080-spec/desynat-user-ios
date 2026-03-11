@@ -22,7 +22,6 @@ class MyAffiliatedWithdrawalViewController: UIViewController {
             listTableView.registerCellFromNib(cellID: "MyAffiliatedWithdrawalTableViewCell")
         }
     }
-    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
     // MARK: - Property Decalaration
     var requestType: WithdrawRequestType = .upcoming
@@ -33,6 +32,8 @@ class MyAffiliatedWithdrawalViewController: UIViewController {
         super.viewDidLoad()
         searchTF.delegate = self
         viewModel.getWalletHistory()
+        listTableView.rowHeight = UITableView.automaticDimension
+        listTableView.estimatedRowHeight = 100
     }
     
     // MARK: - Button's Action
@@ -58,12 +59,6 @@ class MyAffiliatedWithdrawalViewController: UIViewController {
         listTableView.reloadData()
         requestType = .completed
         viewModel.getWalletHistory()
-    }
-    
-    func handleHeightOfTableView() {
-        DispatchQueue.main.async {
-            self.tableViewHeightConstraint.constant = self.listTableView.contentSize.height
-        }
     }
 }
 

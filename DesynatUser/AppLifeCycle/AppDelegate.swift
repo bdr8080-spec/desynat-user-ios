@@ -32,21 +32,93 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MFSettings.shared.setTheme(theme: them)
         // BRANCH IO FOR PRODUCT LINK NAVIGATION
         
-        Branch.getInstance().initSession(launchOptions: launchOptions) { params, error in
-            // Debug / show content in alert
-            self.showShareAlert(withText: "\(params ?? [:])")
-            
-            if let productId = params?["product_id"] as? String {
-                let productLink = "https://desynat.com/user/product/detail-page/\(productId)"
-                // Show product link alert
-                self.showShareAlert(withText: productLink)
-                
-                // Navigate to product screen
-                self.openProduct(productId)
-            }
-        }
+//        Branch.getInstance().initSession(launchOptions: launchOptions) { params, error in
+//            // Debug / show content in alert
+//            self.showShareAlert(withText: "\(params ?? [:])")
+//            
+//            if let productId = params?["product_id"] as? String {
+//                let productLink = "https://desynat.com/user/product/detail-page/\(productId)"
+//                // Show product link alert
+//                self.showShareAlert(withText: productLink)
+//                
+//                // Navigate to product screen
+//                self.openProduct(productId)
+//            }
+//        }
         return true
     }
+    
+//    // ✅ Universal Links (https://desynat.com/product/123)
+//        func application(_ application: UIApplication,
+//                        continue userActivity: NSUserActivity,
+//                        restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+//            
+//            guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+//                  let url = userActivity.webpageURL,
+//                  let productId = extractProductId(from: url) else {
+//                return false
+//            }
+//            
+//            navigateToProduct(productId: productId)
+//            return true
+//        }
+        
+//        // ✅ Custom URL Scheme (desynat://product/123)
+//        func application(_ app: UIApplication,
+//                        open url: URL,
+//                        options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+//            
+//            guard let productId = extractProductId(from: url) else {
+//                return false
+//            }
+//            
+//            navigateToProduct(productId: productId)
+//            return true
+//        }
+        
+//        // MARK: - Navigation (YOUR STORYBOARD CODE)
+//        private func navigateToProduct(productId: String) {
+//            guard let id = Int(productId) else { return }
+//            
+//            let storyboard = UIStoryboard(name: "Catalog", bundle: nil)
+//            guard let vc = storyboard.instantiateViewController(withIdentifier: "ProductDetailViewController") as? ProductDetailViewController else { return }
+//            
+//            vc.productId = id  // ✅ Exactly your code
+//            
+//            // ✅ iOS 15+ Compatible Navigation
+//            DispatchQueue.main.async {
+//                if let nav = self.getRootNavigationController() {
+//                    nav.pushViewController(vc, animated: true)
+//                }
+//            }
+//        }
+        
+//        // MARK: - Helpers
+//        private func extractProductId(from url: URL) -> String? {
+//            let pathComponents = url.pathComponents
+//            guard pathComponents.count > 1,
+//                  pathComponents[0] == "product",
+//                  let productId = pathComponents.last else {
+//                return nil
+//            }
+//            return productId
+//        }
+        
+//        private func getRootNavigationController() -> UINavigationController? {
+//            let scenes = UIApplication.shared.connectedScenes
+//            for scene in scenes {
+//                guard let windowScene = scene as? UIWindowScene,
+//                      let window = windowScene.windows.first(where: { $0.isKeyWindow }) else {
+//                    continue
+//                }
+//                if let nav = window.rootViewController as? UINavigationController {
+//                    return nav
+//                }
+//            }
+//            return nil
+//        }
+//    }
+
     
     func showShareAlert(withText text: String) {
         // Get the top-most view controller
@@ -91,66 +163,61 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return base
     }
     
-    func openProduct(_ id: String) {
-
-        let storyboard = UIStoryboard(name: "Catalog", bundle: nil)
-
-        if let vc = storyboard.instantiateViewController(withIdentifier: "ProductDetailViewController") as? ProductDetailViewController {
-
-            vc.productId = Int(id)
-
-            let nav = UIApplication.shared.windows.first?.rootViewController as? UINavigationController
-            nav?.pushViewController(vc, animated: true)
-        }
-        
-//        let nextVC = ProductDetailViewController.instantiate(fromAppStoryboard: .Catalog)
-//        nextVC.productId = viewModel.productDetails?[indexPath.row].id
-//        //      nextVC.storeName = pageTitleLabel.text?.trimmed()
-//        self.navigationController?.pushViewController(nextVC, animated: true)
-    }
+//    func openProduct(_ id: String) {
+//
+//        let storyboard = UIStoryboard(name: "Catalog", bundle: nil)
+//
+//        if let vc = storyboard.instantiateViewController(withIdentifier: "ProductDetailViewController") as? ProductDetailViewController {
+//
+//            vc.productId = Int(id)
+//
+//            let nav = UIApplication.shared.windows.first?.rootViewController as? UINavigationController
+//            nav?.pushViewController(vc, animated: true)
+//        }
+//    }
     
     // Handle universal links
-        func application(
-            _ application: UIApplication,
-            continue userActivity: NSUserActivity,
-            restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
-        ) -> Bool {
-
-            return Branch.getInstance().continue(userActivity)
-        }
-
-        // Handle URI schemes
-        func application(
-            _ app: UIApplication,
-            open url: URL,
-            options: [UIApplication.OpenURLOptionsKey : Any] = [:]
-        ) -> Bool {
-
-            return Branch.getInstance().application(app, open: url, options: options)
-        }
+//        func application(
+//            _ application: UIApplication,
+//            continue userActivity: NSUserActivity,
+//            restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
+//        ) -> Bool {
+//
+//            return Branch.getInstance().continue(userActivity)
+//        }
+//
+//        // Handle URI schemes
+//        func application(
+//            _ app: UIApplication,
+//            open url: URL,
+//            options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+//        ) -> Bool {
+//
+//            return Branch.getInstance().application(app, open: url, options: options)
+//        }
+//    
+//    func application(_ application: UIApplication,
+//    continue userActivity: NSUserActivity,
+//    restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+//
+//        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+//              let url = userActivity.webpageURL else { return false }
+//
+//        handleDeepLink(url)
+//
+//        return true
+//    }
     
-    func application(_ application: UIApplication,
-    continue userActivity: NSUserActivity,
-    restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-
-        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
-              let url = userActivity.webpageURL else { return false }
-
-        handleDeepLink(url)
-
-        return true
-    }
-    
-    func handleDeepLink(_ url: URL) {
-
-        let pathComponents = url.pathComponents
-
-        if pathComponents.contains("product"),
-           let productId = pathComponents.last {
-
-            openProduct(productId)
-        }
-    }
+//    func handleDeepLink(_ url: URL) {
+//
+//        let pathComponents = url.pathComponents
+//
+//        if pathComponents.contains("product"),
+//           let productId = pathComponents.last {
+//
+//            openProduct(productId)
+//        }
+//    }
     
     // MARK: UISceneSession Lifecycle
     

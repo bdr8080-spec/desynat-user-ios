@@ -19,27 +19,45 @@ class AffiliatedUserPaymentsViewModel {
         self.hostVC = hostVC
     }
     
+    func formatDateString(_ dateString: String,
+                          from inputFormat: String = "dd/MM/yyyy",
+                          to outputFormat: String = "yyyy-MM-dd") -> String? {
+        
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = inputFormat
+        
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = outputFormat
+        
+        if let date = inputFormatter.date(from: dateString) {
+            return outputFormatter.string(from: date)
+        }
+        
+        return nil
+    }
+    
     func getWalletHistory() {
         var param: [String:Any]  = [:] //0-pending/upcoming,1-approved/credited
         if !searchText.isEmpty { param["search"] = searchText }
-//        if let fromDate = appliedFilter.fromDate {
-//            param["filters"] = fromDate
-//        }
-//        
-//        if let toDate = appliedFilter.toDate {
-//            param["filters"] = toDate
-//        }
+        if let fromDate = appliedFilter.fromDate,
+           let formattedFromDate = formatDateString(fromDate) {
+            param["start_date"] = formattedFromDate
+        }
+
+        if let toDate = appliedFilter.toDate,
+           let formattedToDate = formatDateString(toDate) {
+            param["end_date"] = formattedToDate
+        }
+        
+        if let status = appliedFilter.status {
+          param["filter"] = status.rawValue
+        }
+        
         WebService.sharedInstance.getAffilatePaymentHistoryService(withParams: param) { data in
             DispatchQueue.main.async {
                 self.paymentListData = data
                 self.hostVC.totalRevenuwAmountLabel.text = CommonUtils.formatPrice(data.totalEarning)
                 self.hostVC.paymentHistoryTableview.reloadData()
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    self.hostVC.paymentHistoryTableview.layoutIfNeeded()
-                    self.hostVC.paymentHistoryTableviewHeightConstraint.constant =
-                    self.hostVC.paymentHistoryTableview.contentSize.height
-                }
                 self.hostVC.noDataFoundLabel.isHidden = !(self.paymentListData?.orders?.isEmpty ?? true)
             }
         }
