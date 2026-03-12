@@ -45,9 +45,9 @@ class ProductDetailsViewModel: NSObject {
         ]
         
         if let referenceLink = hostVC.refernceLink,
-               !referenceLink.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                param["reference_link"] = referenceLink
-            }
+           !referenceLink.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            param["reference_link"] = referenceLink
+        }
         WebService.sharedInstance.addToCart(param: param) { list in
             DispatchQueue.main.async {
                 CommonUtils.showToast(message: "Product Added to Cart Succesfully")
@@ -57,11 +57,15 @@ class ProductDetailsViewModel: NSObject {
     }
     
     func buyNow(productId: Int, variantId: Int, quantity: Int, completion: @escaping (Bool) -> Void) {
-        let param: [String: Any] = [
+        var param: [String: Any] = [
             "product_id": productId,
             "variants_id": variantId,
-            "quantity":  1
-        ]
+            "quantity":  1]
+        
+        if let referenceLink = hostVC.refernceLink,
+           !referenceLink.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            param["reference_link"] = referenceLink
+        }
         WebService.sharedInstance.addToCart(param: param) { list in
             DispatchQueue.main.async {
                 CommonUtils.showToast(message: "Product Added to Cart Succesfully")
@@ -83,5 +87,4 @@ class ProductDetailsViewModel: NSObject {
             }
         }
     }
-    
 }

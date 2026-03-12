@@ -58,7 +58,7 @@ class PaymentsHistoryTableViewCell: UITableViewCell {
 //                orderStatusLabel.text = "Cancelled"
 //                orderStatusLabel.textColor = UIColor(hexString: "#D53B36") //(Red)
 //            default:
-//                orderStatusLabel.text = "Ongoing"
+//                orderStatusLabel.text = "Pending"
 //                orderStatusLabel.textColor = UIColor(hexString: "#FE7D49") //(Orange)
 //            }
 //        }
@@ -66,7 +66,7 @@ class PaymentsHistoryTableViewCell: UITableViewCell {
     }
     
     func configureStatus(with data: OrdersDataAffilaitedPaymentList?) {
-        orderStatusLabel.text = "Ongoing"
+        orderStatusLabel.text = "Pending"
         guard let data = data else { return }
         let paymentMethod = data.order?.paymentMethod
         let paymentStatus = data.paymentStatus //data.order?.paymentStatus
@@ -76,7 +76,7 @@ class PaymentsHistoryTableViewCell: UITableViewCell {
             if paymentStatus == "1" {
                 switch deliveryStatus {
                 case "1": //Pending
-                    orderStatusLabel.text = "Ongoing"
+                    orderStatusLabel.text = "Pending"
                     orderStatusLabel.textColor = UIColor(hexString: "#FF5F1B")
                     if data.returnType == "1" || data.returnType == "2" {
                         let approveType = data.rEApprove ?? "1"
@@ -85,8 +85,8 @@ class PaymentsHistoryTableViewCell: UITableViewCell {
                         }
                     }
                     
-                case "2", "2.1", "7": //Ongoing
-                    orderStatusLabel.text = "Ongoing"
+                case "2", "2.1", "7": //Pending
+                    orderStatusLabel.text = "Pending"
                     orderStatusLabel.textColor = UIColor(hexString: "#FF5F1B")
                     if data.deliveryStatus == "7" && (data.returnType == "1" || data.returnType == "2") {
                         let approveType = data.rEApprove ?? "1"
@@ -115,7 +115,7 @@ class PaymentsHistoryTableViewCell: UITableViewCell {
             if paymentStatus == "0" || paymentStatus == "1" {
                 switch deliveryStatus {
                 case "1": //Pending
-                    orderStatusLabel.text = "Ongoing"
+                    orderStatusLabel.text = "Pending"
                     orderStatusLabel.textColor = UIColor(hexString: "#FF5F1B")
                     if data.returnType == "1" || data.returnType == "2" {
                         let approveType = data.rEApprove ?? "1"
@@ -124,8 +124,8 @@ class PaymentsHistoryTableViewCell: UITableViewCell {
                         }
                     }
                     
-                case "2","2.1", "7": //Ongoing, Picked
-                    orderStatusLabel.text = "Ongoing"
+                case "2","2.1", "7": //Pending, Picked
+                    orderStatusLabel.text = "Pending"
                     orderStatusLabel.textColor = UIColor(hexString: "#FF5F1B")
                     if data.deliveryStatus == "7" && (data.returnType == "1" || data.returnType == "2") {
                         let approveType = data.rEApprove ?? "1"

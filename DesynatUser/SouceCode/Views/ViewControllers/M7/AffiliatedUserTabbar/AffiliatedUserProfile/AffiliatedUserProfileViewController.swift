@@ -119,7 +119,7 @@ extension AffiliatedUserProfileViewController: UITableViewDelegate, UITableViewD
             print("✅ Selected: Settings")
             
         default:
-            print("⚠️ Unknown option selected: \(selectedItem)")
+            print("Unknown option selected: \(selectedItem)")
         }
         
         // Deselect the row

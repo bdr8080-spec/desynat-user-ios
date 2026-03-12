@@ -12,19 +12,48 @@ class ItemPerformanceViewModel {
     
     private var hostVC: ItemPerformanceViewController
     var productsDetailsData: AffiliatedUserMyProductsList?
+    var appliedFilter = WithdrawalFilterModel()
     
     init(hostVC: ItemPerformanceViewController) {
         self.hostVC = hostVC
     }
     
-    func getLatestSearchData() {
-        let param: [String: Any] = ["id": hostVC.productId]
+    func getProductDetailsData() {
+        var param: [String: Any] = ["id": hostVC.productId]
+        
+        if let fromDate = appliedFilter.fromDate,
+            let formattedToDate = formatDateString(fromDate) {
+            param["start_date"] = formattedToDate
+        }
+        
+        if let toDate = appliedFilter.toDate,
+            let formattedToDate = formatDateString(toDate) {
+            param["end_date"] = formattedToDate
+        }
+        
         WebService.sharedInstance.getMyProductsDetailsService(param: param) { data in
             DispatchQueue.main.async {
                 self.productsDetailsData = data
                 self.populateData()
             }
         }
+    }
+    
+    func formatDateString(_ dateString: String,
+                          from inputFormat: String = "dd/MM/yyyy",
+                          to outputFormat: String = "yyyy-MM-dd") -> String? {
+        
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = inputFormat
+        
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = outputFormat
+        
+        if let date = inputFormatter.date(from: dateString) {
+            return outputFormatter.string(from: date)
+        }
+        
+        return nil
     }
     
     func deleteAffiliatedProductData() {
@@ -55,7 +84,11 @@ class ItemPerformanceViewModel {
         CommonUtils.updateDiscountPercentageLabel(hostVC.discountPercenteLabel, actualAmountLabel: hostVC.actualPriceLabel, discountType: data.product?.productVariants?.first?.discountType,discountValue: data.product?.productVariants?.first?.discountValue)
         hostVC.commissionPercentageLabel.text = "\(data.product?.affiliatedCommission ?? "0")% Commission"
         hostVC.linkLabel.text = "Link - off \(data.affiliateProductLink?.link ?? "")"
-        //        totalCountLabel.text = data.t
+        hostVC.totalCountLabel.text = data.totalClicks?.description
+        hostVC.totalOrdersLabel.text = data.totalOrders?.description
+        hostVC.conversionRateLabel.text = "\(data.conversionRate ?? 0) %"
+        hostVC.totalRevenueLabel.text = CommonUtils.formatPrice(data.totalRevenue)
+        hostVC.myEarningLabel.text = CommonUtils.formatPrice(data.myEarning)
     }
     
     

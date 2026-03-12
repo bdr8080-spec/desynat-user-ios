@@ -18,14 +18,13 @@ class ItemPerformanceViewController: UIViewController {
     @IBOutlet weak var discountPercenteLabel: UILabel!
     @IBOutlet weak var commissionPercentageLabel: UILabel!
     @IBOutlet weak var linkLabel: UILabel!
-    @IBOutlet weak var fromDateTF: UITextField!
-    @IBOutlet weak var toDateTF: UITextField!
     @IBOutlet weak var totalCountLabel: UILabel!
     @IBOutlet weak var totalOrdersLabel: UILabel!
     @IBOutlet weak var conversionRateLabel: UILabel!
     @IBOutlet weak var totalRevenueLabel: UILabel!
     @IBOutlet weak var txtFromDate: UITextField!
     @IBOutlet weak var txtToDate: UITextField!
+    @IBOutlet weak var myEarningLabel: UILabel!
     
     // MARK: - Property Decalaration
     private var activeTextField: UITextField?
@@ -37,7 +36,7 @@ class ItemPerformanceViewController: UIViewController {
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.getLatestSearchData()
+        viewModel.getProductDetailsData()
         setUpTextFields()
     }
     
@@ -95,20 +94,56 @@ class ItemPerformanceViewController: UIViewController {
 //MARK: UITextFieldDelegate Methods
 extension ItemPerformanceViewController: UITextFieldDelegate {
     
+//    private func setUpTextFields() {
+//        datePicker.preferredDatePickerStyle = .wheels
+//        datePicker.datePickerMode = .date
+//        datePicker.backgroundColor = .white
+//
+//        let toolbar = UIToolbar()
+//        toolbar.sizeToFit()
+//        
+//        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneDatePicker))
+//        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+//        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
+//        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+//        
+//        let textFields = [txtFromDate, txtToDate]
+//        textFields.forEach { textField in
+//            textField?.inputView = datePicker
+//            textField?.inputAccessoryView = toolbar
+//            textField?.delegate = self
+//        }
+//    }
+    
     private func setUpTextFields() {
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
-        //        datePicker.minimumDate = Date()
         datePicker.backgroundColor = .white
-        
+
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
+
+        let cancelButton = UIBarButtonItem(title: "Cancel",
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(cancelDatePicker))
         
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneDatePicker))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
-        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                          target: nil,
+                                          action: nil)
         
+        let clearButton = UIBarButtonItem(title: "Clear",
+                                          style: .plain,
+                                          target: self,
+                                          action: #selector(clearDateFilter))
+
+        let doneButton = UIBarButtonItem(title: "Done",
+                                         style: .done,
+                                         target: self,
+                                         action: #selector(doneDatePicker))
+
+        toolbar.setItems([cancelButton, spaceButton, clearButton, doneButton], animated: false)
+
         let textFields = [txtFromDate, txtToDate]
         textFields.forEach { textField in
             textField?.inputView = datePicker
@@ -117,17 +152,53 @@ extension ItemPerformanceViewController: UITextFieldDelegate {
         }
     }
     
+    @objc func clearDateFilter() {
+        txtFromDate.text = ""
+        txtToDate.text = ""
+        view.endEditing(true)
+        let filter = WithdrawalFilterModel()
+        self.viewModel.appliedFilter = filter
+        self.viewModel.getProductDetailsData()
+    }
+    
     @objc private func doneDatePicker() {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
+        
         guard let activeTextField = activeTextField else { return }
+        
         activeTextField.text = formatter.string(from: datePicker.date)
         view.endEditing(true)
+        
         switch activeTextField {
         case txtFromDate:
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.txtToDate.becomeFirstResponder()
+                let fromDate = self.txtFromDate.text ?? ""
+                let toDate = self.txtToDate.text ?? ""
+                if !fromDate.isEmpty && !toDate.isEmpty {
+                    var filter = WithdrawalFilterModel()
+                    filter.fromDate = fromDate
+                    filter.toDate = toDate
+                    self.viewModel.appliedFilter = filter
+                    self.viewModel.getProductDetailsData()
+                } else {
+                    self.txtToDate.becomeFirstResponder()
+                }
             }
+            
+        case txtToDate:
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                guard
+                    let fromDate = self.txtFromDate.text, !fromDate.isEmpty,
+                    let toDate = self.txtToDate.text, !toDate.isEmpty
+                else { return }
+                var filter = WithdrawalFilterModel()
+                filter.fromDate = fromDate
+                filter.toDate = toDate
+                self.viewModel.appliedFilter = filter
+                self.viewModel.getProductDetailsData()
+            }
+            
         default:
             break
         }

@@ -102,7 +102,7 @@ class CustomLabelFont: UILabel {
         if let customFont = UIFont(name: fontName, size: pointSize) {
             super.font = customFont
         } else {
-            //print("⚠️ Font '\(fontName)' not found. Did you add it to the project and Info.plist?")
+            //print("Font '\(fontName)' not found. Did you add it to the project and Info.plist?")
         }
     }
 }

@@ -47,6 +47,11 @@ struct AffiliatedUserMyProductsList: Codable {
     let product: AffiliatedProductsList?
     let averageRating: AverageRating?
     let affiliateCommission: Int?
+    let totalClicks: Int?
+    let totalOrders: Int?
+    let conversionRate: Double?
+    let totalRevenue: Double?
+    let myEarning: Double?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -59,6 +64,11 @@ struct AffiliatedUserMyProductsList: Codable {
         case product
         case averageRating = "average_rating"
         case affiliateCommission = "affiliate_commission"
+        case totalClicks = "affiliate_product_click_records_count"
+        case totalOrders = "Total_order"
+        case conversionRate = "conversionrate"
+        case totalRevenue = "Total_revenue"
+        case myEarning = "my_earning"
     }
 }
 

@@ -24,10 +24,10 @@ class WithdrawalFiltersViewController: UIViewController {
     var selectedFilter = WithdrawalFilterModel()
     var onApplyFilter: ((WithdrawalFilterModel) -> Void)?
     var onClearFilter: (() -> Void)?
-    private var filtersOptions = ["Ongoing", "Completed", "Cancelled", "Return"]
+    private var filtersOptions = ["Pending", "Completed", "Cancelled", "Return"]
     private var selectedIndex: Int = -1
     private let statusMapping: [OrderStatus] = [
-        .ongoing,
+        .pending,
         .completed,
         .cancelled,
         .returned]
@@ -211,7 +211,7 @@ struct WithdrawalFilterModel {
 }
 
 enum OrderStatus: String {
-    case ongoing    = "2"
+    case pending    = "2"
     case completed  = "3"
     case cancelled  = "4"
     case returned   = "5"
