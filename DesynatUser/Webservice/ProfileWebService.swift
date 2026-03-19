@@ -18,7 +18,7 @@ extension WebService {
             }
         }
     }
-
+    
     func getProfileService(completion:@escaping (_ user:UserModel)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.viewProfile), requestMethod: .get,requestModel:UserModel.self) { result, code in
@@ -91,9 +91,9 @@ extension WebService {
                 if let error {
                     UIApplication.shared.topViewController()?.showAlert(msg: error)
                 } else if let response {
-                 //   Global.shared.user = response
-                 //   kSharedUserDefaults.saveModelFor(key: .user, value: response)
-                   // kSharedUserDefaults.saveStringFor(Key: .accessToken, value: response.accessToken)
+                    //   Global.shared.user = response
+                    //   kSharedUserDefaults.saveModelFor(key: .user, value: response)
+                    // kSharedUserDefaults.saveStringFor(Key: .accessToken, value: response.accessToken)
                     CommonUtils.showToast(message:message ?? "")
                     completion(response)
                 }
@@ -101,84 +101,116 @@ extension WebService {
         }
     }
     
-  func singleChatDetails(param: [String: Any], completion:@escaping (_ user: ChatDetailsDataModel)-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI: .endpoint(.getSingleChats), requestMethod: .post, requestParams: param, requestModel:ChatDetailsDataModel.self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
-  
-  func acceptAndRejectOrderQuotationDetails(param: [String: Any], completion:@escaping (_ user: ChatDetailsDataModel)-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI: .endpoint(.acceptAndRejectQuotation), requestMethod: .post, requestParams: param, requestModel:ChatDetailsDataModel.self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
-  
-  func getAllChatsList(param: [String: Any], completion:@escaping (_ user: [ChatInboxListModel])-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI: .endpoint(.getAllChatsRecord), requestMethod: .post, requestParams: param, requestModel:[ChatInboxListModel].self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
-  
-  func createCustomOrderRequest(param: [String: Any], completion:@escaping (_ user: CustomOrderPlaceOrderDetail)-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI: .endpoint(.createCustomOrderRequest), requestMethod: .post, requestParams: param, requestModel: CustomOrderPlaceOrderDetail.self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
+    func singleChatDetails(param: [String: Any], completion:@escaping (_ user: ChatDetailsDataModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getSingleChats), requestMethod: .post, requestParams: param, requestModel:ChatDetailsDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func acceptAndRejectOrderQuotationDetails(param: [String: Any], completion:@escaping (_ user: ChatDetailsDataModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.acceptAndRejectQuotation), requestMethod: .post, requestParams: param, requestModel:ChatDetailsDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getAllChatsList(param: [String: Any], completion:@escaping (_ user: [ChatInboxListModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getAllChatsRecord), requestMethod: .post, requestParams: param, requestModel:[ChatInboxListModel].self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func createCustomOrderRequest(param: [String: Any], completion:@escaping (_ user: CustomOrderPlaceOrderDetail)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.createCustomOrderRequest), requestMethod: .post, requestParams: param, requestModel: CustomOrderPlaceOrderDetail.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
     
     func CustomOrderAddToCardService(param: [String: Any], completion:@escaping (_ user: EmptyModel)-> Void) {
-      CommonUtils.showHud(show: true)
-      NetworkManager.shared.request(withAPI: .endpoint(.CustomOrderAddToCard), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
-          CommonUtils.showHud(show: false)
-          self.evaluateWebServiceResponse(response: result) { response, message,error in
-              guard let user = response else {
-                  if let error {
-                      UIApplication.shared.topViewController()?.showAlert(msg: error)
-                  }
-                  return
-              }
-              completion(user)
-          }
-      }
-  }
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.CustomOrderAddToCard), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getMyNotificationsListService(completion: @escaping([NotificationsList]) -> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getMyNotificationsList),requestMethod: .get, requestModel: [NotificationsList].self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(response)
+            }
+        }
+    }
+    
+    func markReadNotificationsService(param: [String:Any], completion: @escaping(EmptyModel) -> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.markReadNotifications),requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(response)
+            }
+        }
+    }
 }
 

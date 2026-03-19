@@ -208,6 +208,11 @@ class HomeViewController: UIViewController {
         }
     }
     
+    @IBAction func notificationDidTapped(_ sender: Any) {
+        let nextVC = NotificationListViewController.instantiate(fromAppStoryboard: .Chat)
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
     //MARK: Function's declaration
     private func requestPermissions() {
         SFSpeechRecognizer.requestAuthorization { status in

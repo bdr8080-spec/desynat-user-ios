@@ -18,7 +18,7 @@ extension SceneDelegate {
     
     public func navigateToUserHomeVc(selectedIndex: Int = 0) {
         let vc = TabBarVC.instantiate(fromAppStoryboard: .Home)
-        vc.initialTabIndex = selectedIndex   // ✅ set tab here
+        vc.initialTabIndex = selectedIndex   // set tab here
         navigateTo(vc: vc)
     }
 
@@ -60,6 +60,5 @@ extension SceneDelegate {
         sceneDelegate.window!.rootViewController = nc
         sceneDelegate.window!.makeKeyAndVisible()
     }
-    
     
 }

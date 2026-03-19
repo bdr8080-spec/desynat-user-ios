@@ -143,6 +143,9 @@ enum NetworkEndPoint: String {
     case affiliateSubmitWithdrawRequest = "api/affiliate/affiliate_submit_withdraw_request"
     case affiliateGetAllOrdersRequest = "api/affiliate/affiliate_all_order"
     
+    //M10
+    case getMyNotificationsList          = "api/user/get_notifications_list"
+    case markReadNotifications           = "api/user/mark_notification_as_read"
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"
     }

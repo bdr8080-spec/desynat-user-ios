@@ -13,6 +13,7 @@ import DropDown
 import MFSDK
 import FirebaseCore
 import Branch
+import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,95 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MFSettings.shared.configure(token: "SK_KWT_vVZlnnAqu8jRByOWaRPNId4ShzEDNt256dvnjebuyzo52dXjAfRx2ixW5umjWSUx", country: .kuwait, environment: MFEnvironment.test)
         let them = MFTheme(navigationTintColor: .white, navigationBarTintColor: .lightGray, navigationTitle: "Payment", cancelButtonTitle: "Cancel")
         MFSettings.shared.setTheme(theme: them)
-        // BRANCH IO FOR PRODUCT LINK NAVIGATION
-        
-//        Branch.getInstance().initSession(launchOptions: launchOptions) { params, error in
-//            // Debug / show content in alert
-//            self.showShareAlert(withText: "\(params ?? [:])")
-//            
-//            if let productId = params?["product_id"] as? String {
-//                let productLink = "https://desynat.com/user/product/detail-page/\(productId)"
-//                // Show product link alert
-//                self.showShareAlert(withText: productLink)
-//                
-//                // Navigate to product screen
-//                self.openProduct(productId)
-//            }
-//        }
+        UNUserNotificationCenter.current().delegate = self
+        requestNotificationPermission()
         return true
     }
-    
-//    // ✅ Universal Links (https://desynat.com/product/123)
-//        func application(_ application: UIApplication,
-//                        continue userActivity: NSUserActivity,
-//                        restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-//            
-//            guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
-//                  let url = userActivity.webpageURL,
-//                  let productId = extractProductId(from: url) else {
-//                return false
-//            }
-//            
-//            navigateToProduct(productId: productId)
-//            return true
-//        }
-        
-//        // ✅ Custom URL Scheme (desynat://product/123)
-//        func application(_ app: UIApplication,
-//                        open url: URL,
-//                        options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-//            
-//            guard let productId = extractProductId(from: url) else {
-//                return false
-//            }
-//            
-//            navigateToProduct(productId: productId)
-//            return true
-//        }
-        
-//        // MARK: - Navigation (YOUR STORYBOARD CODE)
-//        private func navigateToProduct(productId: String) {
-//            guard let id = Int(productId) else { return }
-//            
-//            let storyboard = UIStoryboard(name: "Catalog", bundle: nil)
-//            guard let vc = storyboard.instantiateViewController(withIdentifier: "ProductDetailViewController") as? ProductDetailViewController else { return }
-//            
-//            vc.productId = id  // ✅ Exactly your code
-//            
-//            // ✅ iOS 15+ Compatible Navigation
-//            DispatchQueue.main.async {
-//                if let nav = self.getRootNavigationController() {
-//                    nav.pushViewController(vc, animated: true)
-//                }
-//            }
-//        }
-        
-//        // MARK: - Helpers
-//        private func extractProductId(from url: URL) -> String? {
-//            let pathComponents = url.pathComponents
-//            guard pathComponents.count > 1,
-//                  pathComponents[0] == "product",
-//                  let productId = pathComponents.last else {
-//                return nil
-//            }
-//            return productId
-//        }
-        
-//        private func getRootNavigationController() -> UINavigationController? {
-//            let scenes = UIApplication.shared.connectedScenes
-//            for scene in scenes {
-//                guard let windowScene = scene as? UIWindowScene,
-//                      let window = windowScene.windows.first(where: { $0.isKeyWindow }) else {
-//                    continue
-//                }
-//                if let nav = window.rootViewController as? UINavigationController {
-//                    return nav
-//                }
-//            }
-//            return nil
-//        }
-//    }
-
     
     func showShareAlert(withText text: String) {
         // Get the top-most view controller
@@ -163,75 +79,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return base
     }
     
-//    func openProduct(_ id: String) {
-//
-//        let storyboard = UIStoryboard(name: "Catalog", bundle: nil)
-//
-//        if let vc = storyboard.instantiateViewController(withIdentifier: "ProductDetailViewController") as? ProductDetailViewController {
-//
-//            vc.productId = Int(id)
-//
-//            let nav = UIApplication.shared.windows.first?.rootViewController as? UINavigationController
-//            nav?.pushViewController(vc, animated: true)
-//        }
-//    }
-    
-    // Handle universal links
-//        func application(
-//            _ application: UIApplication,
-//            continue userActivity: NSUserActivity,
-//            restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
-//        ) -> Bool {
-//
-//            return Branch.getInstance().continue(userActivity)
-//        }
-//
-//        // Handle URI schemes
-//        func application(
-//            _ app: UIApplication,
-//            open url: URL,
-//            options: [UIApplication.OpenURLOptionsKey : Any] = [:]
-//        ) -> Bool {
-//
-//            return Branch.getInstance().application(app, open: url, options: options)
-//        }
-//    
-//    func application(_ application: UIApplication,
-//    continue userActivity: NSUserActivity,
-//    restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-//
-//        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
-//              let url = userActivity.webpageURL else { return false }
-//
-//        handleDeepLink(url)
-//
-//        return true
-//    }
-    
-//    func handleDeepLink(_ url: URL) {
-//
-//        let pathComponents = url.pathComponents
-//
-//        if pathComponents.contains("product"),
-//           let productId = pathComponents.last {
-//
-//            openProduct(productId)
-//        }
-//    }
-    
     // MARK: UISceneSession Lifecycle
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
     
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-    }
+    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {}
     
     func dropDown(dataSource:[String] , anchorView:UIView , completion: @escaping (  _ index: Int ,  _ item: String) -> ()) -> Void {
         let dropDown = DropDown()
@@ -252,4 +106,74 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 }
 
-//com.app.DesynatUser
+// MARK: - Permissions
+extension AppDelegate {
+    
+    func requestNotificationPermission() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            if let error = error {
+                print("Notification permission error: \(error.localizedDescription)")
+            } else {
+                print("Notification permission granted: \(granted)")
+                if granted {
+                    DispatchQueue.main.async {
+                        UIApplication.shared.registerForRemoteNotifications()
+                    }
+                }
+            }
+        }
+    }
+}
+
+extension AppDelegate {
+    
+    func requestPushPermission(_ application: UIApplication) {
+        let center = UNUserNotificationCenter.current()
+        
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+            if granted {
+                DispatchQueue.main.async {
+                    application.registerForRemoteNotifications()
+                }
+            } else {
+                print("Permission denied")
+            }
+        }
+    }
+    
+    // Called when APNs registration succeeds
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        print("Device Token: \(token)")
+    }
+    
+    // Called when APNs registration fails
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register for remote notifications: \(error.localizedDescription)")
+    }
+}
+
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    // When app is in foreground
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler:
+                                @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        completionHandler([.banner, .sound, .badge])
+    }
+    
+    // When user taps notification
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        let userInfo = response.notification.request.content.userInfo
+        print("Notification Data: \(userInfo)")
+        
+        completionHandler()
+    }
+}
