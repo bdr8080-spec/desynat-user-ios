@@ -76,7 +76,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - Property Decalaration
     private var bottomLabels: [UILabel] = []
-    private var bannerCount = 5
+//    private var bannerCount = 5
     private var bestSellCount = 5
     private var newProductCount = 6
     private var suggestedStores = ["Abaya", "Kurti set", "Abaya", "Shoes", "Maxi", "Cord", "Abaya", "Shoes", "Maxi", "Cord"]
@@ -367,7 +367,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func autoScrollDiscount() {
-        let totalItems = bannerCount // or your actual data source count
+        let totalItems = viewModel.homeBottomDealAllBannersList.count // or your actual data source count
         guard totalItems > 1 else { return }
         
         currentDiscountIndex += 1
@@ -454,7 +454,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case topRatedCollectionView:
             return bestSellCount
         case bowseSomeDisCountCollectionView:
-            return bannerCount
+            let data = viewModel.homeBottomDealAllBannersList
+            if data.isEmpty {
+                return 1
+            } else {
+                return viewModel.homeBottomDealAllBannersList.count
+            }
         case topRatedCollectionView:
             return bestSellCount
         case newestProductsCollectionView:
@@ -512,6 +517,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case bowseSomeDisCountCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeBannerCollectionViewCell", for: indexPath) as! HomeBannerCollectionViewCell
             cell.mainImageView.layer.cornerRadius = 8
+            let data = viewModel.homeBottomDealAllBannersList
+            if data.isEmpty {
+                cell.mainImageView.image = .noBannerFound
+            } else {
+                cell.configDealData(data: data[indexPath.row])
+            }
             return cell
             
         case newestProductsCollectionView:

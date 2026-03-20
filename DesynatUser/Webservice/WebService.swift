@@ -69,32 +69,4 @@ class WebService {
         return msg
     }
     
-//    private func getPrintableError(err: ErrorResponse) -> String? {
-//        var msg = ""
-//
-//        // ✅ Try message, msg, or error
-//        if let message = err.message, !message.isEmpty {
-//            msg = message
-//        } else if let title = err.msg, !title.isEmpty {
-//            msg = title
-//        } else if let error = err.error, !error.isEmpty {
-//            msg = error
-//        }
-//
-//        // ✅ Also include details if present
-//        if let details = err.detail {
-//            let detailMessages = details.compactMap { $0.msg }.joined(separator: "\n")
-//            if !detailMessages.isEmpty {
-//                msg += msg.isEmpty ? detailMessages : "\n" + detailMessages
-//            }
-//        }
-//
-//        // ✅ Final fallback
-//        if msg.isEmpty {
-//            msg = "Something went wrong. Please try again."
-//        }
-//
-//        return msg
-//    }
-
 }
