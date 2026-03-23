@@ -52,6 +52,7 @@ struct SellerInformation: Codable {
     let rejectReason, lang: String?
     let isBlock: Int?
     let createdAt, updatedAt: String?
+    let profileQr, qrSellerUrl: String?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -73,5 +74,7 @@ struct SellerInformation: Codable {
         case isBlock = "is_block"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case profileQr = "profile_qr"
+        case qrSellerUrl = "qrSellerUrl"
     }
 }

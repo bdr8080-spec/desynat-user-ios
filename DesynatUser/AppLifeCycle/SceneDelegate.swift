@@ -106,7 +106,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.navigateToProductDetail(productId: productId, refernceLink: url.absoluteString)
             }
+            return
         }
+        
+        if let storeIndex = pathComponents.firstIndex(of: "store-details"),
+           storeIndex + 1 < pathComponents.count,
+           let storeId = Int(pathComponents[storeIndex + 1]) {
+            
+            print("Store ID: \(storeId)")
+            
+            forceNormalUserHomeFlow()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.navigateToStoreDetails(storeId: storeId)
+            }
+            return
+        }
+            
     }
     
     // NEW: Logout affiliated WITHOUT navigation change
@@ -153,6 +169,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
     
+    private func navigateToStoreDetails(storeId: Int) {
+        let storyboard = UIStoryboard(name: "Catalog", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: "StoresDetailsViewController") as? StoresDetailsViewController else {
+            return
+        }
+        vc.storeId = storeId
+        DispatchQueue.main.async {
+            if let nav = self.getRootNavigationController() {
+                nav.pushViewController(vc, animated: true)
+            } else {
+                print("No navigation controller found")
+            }
+        }
+    }
+    
     private func getRootNavigationController() -> UINavigationController? {
         guard let window = self.window else { return nil }
         let rootVC = window.rootViewController
@@ -178,5 +209,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
 }
 
-//https:desynat.com/user/product/detail-page/75?ref=25
+//https://desynat.com/user/product/detail-page/75?ref=25 -> product link
+//https://desynat.com/user/store-details/58 -> link getting after scanning QR
 //applinks:desynat.com

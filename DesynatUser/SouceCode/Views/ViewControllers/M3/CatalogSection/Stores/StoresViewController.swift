@@ -322,9 +322,6 @@ extension StoresViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let nextVC = StoresDetailsViewController.instantiate(fromAppStoryboard: .Catalog)
         nextVC.storeId = viewModel.storesSection[indexPath.row].id
-        let info = viewModel.storesSection[indexPath.row].sellerInformation
-        nextVC.fullName = "\(info?.firstName ?? "") \(info?.lastName ?? "")"
-        nextVC.profilePic = info?.profilePic
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     

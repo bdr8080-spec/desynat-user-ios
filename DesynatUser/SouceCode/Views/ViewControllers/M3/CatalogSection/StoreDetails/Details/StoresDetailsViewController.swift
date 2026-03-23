@@ -51,8 +51,8 @@ class StoresDetailsViewController: UIViewController {
     // MARK: - Property Decalaration
     private lazy var viewModel = StoreDetailsViewModel(hostVC: self)
     private var searchWorkItem: DispatchWorkItem?
-    var fullName: String? = ""
-    var profilePic: String? = ""
+//    var fullName: String? = ""
+//    var profilePic: String? = ""
     var appliedSortFilter: Int?
     let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
     var storeId: Int? = 0
@@ -261,7 +261,7 @@ class StoresDetailsViewController: UIViewController {
     
     func configData(data: Store) {
         pageTitleLabel.text = data.storeName
-        storeTitleLabel.text = fullName
+        storeTitleLabel.text = "\(data.sellerInformation?.firstName ?? "") \(data.sellerInformation?.lastName ?? "")"
         brandLabel.text = data.storeName
         sellerId = data.sellerID ?? 0
         if let imageUrlString = data.storeImage,
@@ -276,13 +276,22 @@ class StoresDetailsViewController: UIViewController {
             storeImageView.image = UIImage(named: "")
         }
         
-        if let imageUrlString = profilePic,
+        if let imageUrlString = data.sellerInformation?.profilePic,
            let url = URL(string: imageUrlString) {
             userProfileImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
             userProfileImage.sd_imageIndicator?.startAnimatingIndicator()
             userProfileImage.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
         } else {
             userProfileImage.image = UIImage(named: "")
+        }
+        
+        if let imageUrlString = data.sellerInformation?.profileQr,
+           let url = URL(string: imageUrlString) {
+            qrImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            qrImageView.sd_imageIndicator?.startAnimatingIndicator()
+            qrImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+        } else {
+            qrImageView.image = UIImage(named: "")
         }
         
         descriptionLabel.text = data.bio

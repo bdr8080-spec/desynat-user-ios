@@ -161,15 +161,26 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 self.navigationController?.pushViewController(nextVC, animated: true)
                 
             case "Terms & Condition":
+                let vc = CMSViewController.instantiate(fromAppStoryboard: .DashBoard)
+                vc.comingReason = .termsAndConditions
+                self.navigationController?.pushViewController(vc, animated: true)
                 print("✅ Selected: Terms & Condition")
                 
             case "Return Policy":
+                let vc = CMSViewController.instantiate(fromAppStoryboard: .DashBoard)
+                vc.comingReason = .returnPolicy
+                self.navigationController?.pushViewController(vc, animated: true)
                 print("✅ Selected: Return Policy")
                 
             case "About Us":
+                let vc = CMSViewController.instantiate(fromAppStoryboard: .DashBoard)
+                vc.comingReason = .aboutUs
+                self.navigationController?.pushViewController(vc, animated: true)
                 print("✅ Selected: About Us")
                 
             case "FAQ's":
+                let vc = FAQViewController.instantiate(fromAppStoryboard: .DashBoard)
+                self.navigationController?.pushViewController(vc, animated: true)
                 print("✅ Selected: FAQ's")
                 
             case "Change Language":
@@ -182,9 +193,15 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 print("✅ Selected: Change Country")
                 
             case "Cancellation Policy":
+                let vc = CMSViewController.instantiate(fromAppStoryboard: .DashBoard)
+                vc.comingReason = .cancellationPolicy
+                self.navigationController?.pushViewController(vc, animated: true)
                 print("✅ Selected: Cancellation Policy")
                 
             case "Exchange Policy":
+                let vc = CMSViewController.instantiate(fromAppStoryboard: .DashBoard)
+                vc.comingReason = .exchangePolicy
+                self.navigationController?.pushViewController(vc, animated: true)
                 print("✅ Selected: Exchange Policy")
                 
             case "Support":

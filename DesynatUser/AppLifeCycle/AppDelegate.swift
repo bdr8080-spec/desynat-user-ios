@@ -14,6 +14,7 @@ import MFSDK
 import FirebaseCore
 import Branch
 import UserNotifications
+import SDWebImageSVGCoder
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -33,6 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MFSettings.shared.setTheme(theme: them)
         UNUserNotificationCenter.current().delegate = self
         requestNotificationPermission()
+        let SVGCoder = SDImageSVGCoder.shared
+        SDImageCodersManager.shared.addCoder(SVGCoder)
+        
         return true
     }
     
@@ -103,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             completion(index,item)
         }
     }
-        
+    
 }
 
 // MARK: - Permissions
