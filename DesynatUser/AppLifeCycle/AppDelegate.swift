@@ -149,6 +149,7 @@ extension AppDelegate {
     // Called when APNs registration succeeds
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        kSharedUserDefaults.saveModelFor(key: .deviceToken, value: token)
         print("Device Token: \(token)")
     }
     

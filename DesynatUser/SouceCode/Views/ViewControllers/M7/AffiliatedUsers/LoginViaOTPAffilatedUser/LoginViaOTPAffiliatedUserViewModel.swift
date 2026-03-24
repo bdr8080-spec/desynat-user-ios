@@ -40,7 +40,11 @@ class LoginViaOTPAffiliatedUserViewModel: NSObject {
     
     func loginViaOTPApi() {
         let input = loginHostVC.phoneTextField.text?.trimmed() ?? ""
-        var params: [String:Any] = [:]
+        var params: [String:Any] = [
+            "lang": LanguageManager.currentLanguageCode,
+            "device_type": 1,//0 web 1 ios 2 andriod
+            "fcm_token": kSharedUserDefaults.retrieveModelFor(key: .deviceToken, model: String.self) ?? "",
+        ]
         if input.isEmail() {
             isEnterPhoneNumber = false
             params["type"] = "1"

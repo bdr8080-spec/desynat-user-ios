@@ -58,6 +58,7 @@ struct HomescreenBannersList: Codable {
     let cancelledReason: String?
     let status, createdAt, updatedAt: String?
     let categoryDetails: CategoryDetails?
+let sellerDetails: SellerDetails?
 //    let subcategoryDetails: String?
 
     enum CodingKeys: String, CodingKey {
@@ -79,6 +80,7 @@ struct HomescreenBannersList: Codable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case categoryDetails = "category_details"
+        case sellerDetails = "seller_details"
 //        case subcategoryDetails = "subcategory_details"
     }
 }

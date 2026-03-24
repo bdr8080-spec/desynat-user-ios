@@ -95,28 +95,48 @@ extension AffiliatedUserProfileViewController: UITableViewDelegate, UITableViewD
             self.navigationController?.pushViewController(nextVC, animated: true)
             
         case "Terms & Condition":
-            print("✅ Selected: Terms & Condition")
+            let vc = CMSViewController.instantiate(fromAppStoryboard: .DashBoard)
+            vc.comingReason = .termsAndConditions
+            vc.comingUserRole = .affilaiteUser
+            self.navigationController?.pushViewController(vc, animated: true)
             
         case "About Us":
-            print("✅ Selected: About Us")
+            let vc = CMSViewController.instantiate(fromAppStoryboard: .DashBoard)
+            vc.comingReason = .aboutUs
+            vc.comingUserRole = .affilaiteUser
+            self.navigationController?.pushViewController(vc, animated: true)
             
         case "FAQ's":
-            print("✅ Selected: FAQ's")
+            let vc = FAQViewController.instantiate(fromAppStoryboard: .DashBoard)
+            vc.comingUserRole = .affilaiteUser
+            self.navigationController?.pushViewController(vc, animated: true)
             
         case "Change Language":
-            print("✅ Selected: Change Language")
+            let nextVC = ChangeLanguageViewController.instantiate(fromAppStoryboard: .DashBoard)
+            nextVC.comingUserRole = .affilaiteUser
+            self.navigationController?.pushViewController(nextVC, animated: true)
             
         case "Change Currency":
-            print("✅ Selected: Change Currency")
+            let nextVC = ChangeCurrencyViewController.instantiate(fromAppStoryboard: .DashBoard)
+            nextVC.comingReason = .comingFromCurrency
+            nextVC.comingUserRole = .affilaiteUser
+            self.navigationController?.pushViewController(nextVC, animated: true)
             
         case "Change Country":
-            print("✅ Selected: Change Country")
+            let nextVC = ChangeCurrencyViewController.instantiate(fromAppStoryboard: .DashBoard)
+            nextVC.comingReason = .comingFromCountry
+            nextVC.comingUserRole = .affilaiteUser
+            self.navigationController?.pushViewController(nextVC, animated: true)
             
         case "Support":
-            print("✅ Selected: Support")
+            let nextVC = SupportViewController.instantiate(fromAppStoryboard: .DashBoard)
+            nextVC.comingUserRole = .affilaiteUser
+            self.navigationController?.pushViewController(nextVC, animated: true)
             
         case "Settings":
-            print("✅ Selected: Settings")
+            let nextVC = SettingsViewController.instantiate(fromAppStoryboard: .DashBoard)
+            nextVC.comingUserRole = .affilaiteUser
+            self.navigationController?.pushViewController(nextVC, animated: true)
             
         default:
             print("Unknown option selected: \(selectedItem)")

@@ -60,6 +60,8 @@ class LoginViewModel: NSObject {
         let password = loginHostVC.passwordTextField.text?.trimmed() ?? ""
         
         var params: [String: Any] = [
+            "device_type": 1,//0 web 1 ios 2 andriod
+            "fcm_token": kSharedUserDefaults.retrieveModelFor(key: .deviceToken, model: String.self) ?? "",
             "lang": LanguageManager.currentLanguageCode,
             "password": password,
             "email_mobile": input]

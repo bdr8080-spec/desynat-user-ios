@@ -20,12 +20,16 @@ class NotificationListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.getMyNotificationsListRequest()
+        viewModel.resetAndFetchStories()
     }
 
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+//    @IBAction func readAllDidTapped(_ sender: Any) {
+//        viewModel.markAllReadNotificationsRequest()
+//    }
 }
 
 // MARK: - TABLE VIEW METHODS
@@ -48,4 +52,24 @@ extension NotificationListViewController: UITableViewDelegate, UITableViewDataSo
             viewModel.markReadNotificationsRequest()
         }
     }
+}
+
+extension NotificationListViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        // Don't paginate if content is not scrollable
+        guard scrollView.contentSize.height > scrollView.frame.height else {
+            return
+        }
+        
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - frameHeight - 100 {
+            viewModel.getMyNotificationsListRequest()
+        }
+    }
+    
 }

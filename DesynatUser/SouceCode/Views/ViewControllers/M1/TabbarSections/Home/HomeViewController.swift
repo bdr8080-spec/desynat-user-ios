@@ -76,7 +76,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - Property Decalaration
     private var bottomLabels: [UILabel] = []
-//    private var bannerCount = 5
+    //    private var bannerCount = 5
     private var bestSellCount = 5
     private var newProductCount = 6
     private var suggestedStores = ["Abaya", "Kurti set", "Abaya", "Shoes", "Maxi", "Cord", "Abaya", "Shoes", "Maxi", "Cord"]
@@ -603,6 +603,19 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             nextVC.slectedsubCategoryId = viewModel.selectedCategoriesSection
             nextVC.slecetedCategoryID = viewModel.selectedCategoriesSection
             self.navigationController?.pushViewController(nextVC, animated: true)
+        case bannerCollectionView:
+            let nextVC = StoresDetailsViewController.instantiate(fromAppStoryboard: .Catalog)
+            nextVC.storeId = viewModel.homeScreenAllBannersList[indexPath.row].sellerDetails?.storeInfo?.id
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        case browsePrimiumCollectionView:
+            let nextVC = StoresDetailsViewController.instantiate(fromAppStoryboard: .Catalog)
+            nextVC.storeId = viewModel.homeCenterScreenAllBannersList[indexPath.row].sellerDetails?.storeInfo?.id
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        case bowseSomeDisCountCollectionView:
+            print("")
+            //            let nextVC = StoresDetailsViewController.instantiate(fromAppStoryboard: .Catalog)
+            //            nextVC.storeId = viewModel.homeBottomDealAllBannersList[indexPath.row].sellerDealrecord.s
+            //            self.navigationController?.pushViewController(nextVC, animated: true)
         default:
             print("")
         }

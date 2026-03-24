@@ -13,6 +13,8 @@ class CMSViewController: UIViewController {
     
     var titleText : String?
     var comingReason : ComingFrom?
+    var comingUserRole: UserRoleType = .normalUser
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLbl.text = titleText

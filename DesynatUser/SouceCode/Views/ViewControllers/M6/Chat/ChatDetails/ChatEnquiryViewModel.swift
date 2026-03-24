@@ -17,6 +17,8 @@ class ChatEnquiryViewModel {
     private var existingKeys = Set<String>()
     public var delegate:ChatViewModelDelegate?
     private var hostVC: ChatDetailsViewController?
+    private var chatDB = Database.database().reference().child("chats")
+    private var chatReference:DatabaseReference?
     
     init(hostVC: ChatDetailsViewController) {
         self.hostVC = hostVC
@@ -64,9 +66,6 @@ class ChatEnquiryViewModel {
             }
         }
     }
-    
-    private var chatDB = Database.database().reference().child("chats")
-    private var chatReference:DatabaseReference?
     
     func checkForEnquiryChat() {
         let ref = self.chatDB.child(chatDetailsUniqueId)
@@ -125,21 +124,6 @@ class ChatEnquiryViewModel {
             }
         })
     }
-    
-    
-    //  public func sendMsg(msg: String, type: String, by: String = "user") {
-    //      guard let detail = Global.shared.user,
-    //            let id = detail.id,
-    //            let ref = self.chatReference else { return }
-    //
-    //      let childRef = ref.childByAutoId()
-    //      // Create Chat with ISO8601 times
-    //      let formatter = ISO8601DateFormatter()
-    //      formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-    //      let isoDate = formatter.string(from: Date())
-    //      let chat = Chat(uniqueId: chatDetailsUniqueId, senderId: String(id), type: type, message: msg, by: by, read: 0, times: isoDate)
-    //      childRef.updateChildValues(chat.toBackendDictionary(uniqueId: chatDetailsUniqueId))
-    //  }
     
     public func sendMsg(msg: String, type: String, by: String = "user") {
         guard let detail = Global.shared.user,

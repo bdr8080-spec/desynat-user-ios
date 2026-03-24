@@ -22,6 +22,7 @@ class FAQViewController: UIViewController {
     private var selecetdIndex = 0
     private lazy var viewModel = FAQViewModel(hostVC: self)
     var selectedUserType = 1
+    var comingUserRole: UserRoleType = .normalUser
     
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
@@ -65,4 +66,9 @@ extension FAQViewController: UITableViewDelegate, UITableViewDataSource {
         listTableView.reloadData()
     }
     
+}
+
+enum UserRoleType {
+    case normalUser
+    case affilaiteUser
 }

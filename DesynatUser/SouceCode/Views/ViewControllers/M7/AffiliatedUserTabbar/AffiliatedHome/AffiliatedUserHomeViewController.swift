@@ -31,6 +31,16 @@ class AffiliatedUserHomeViewController: UIViewController {
         updateRadioSelection(for: dateButtons, selectedButton: sender)
     }
     
+    @IBAction func bellDidTapepd(_ sender: Any) {
+        let nextVC = AffiliateUserNotificationViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func supportChatDidTapped(_ sender: Any) {
+        let nextVC = AffilaiteSupportChatViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
     //MARK: Function's declaration
     private func updateRadioSelection(for buttons: [UIButton], selectedButton: UIButton) {
         for button in buttons {

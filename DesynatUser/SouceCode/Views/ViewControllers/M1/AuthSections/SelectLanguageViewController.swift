@@ -17,6 +17,7 @@ class SelectLanguageViewController: UIViewController {
     
     // MARK: - Property Decalaration
     private var selectedLanguage: String = "en"
+    var comingFromDashboard: Bool = false
     
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
@@ -55,3 +56,4 @@ class SelectLanguageViewController: UIViewController {
     }
     
 }
+

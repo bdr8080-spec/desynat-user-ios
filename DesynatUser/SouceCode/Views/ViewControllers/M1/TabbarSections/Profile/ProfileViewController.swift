@@ -163,49 +163,59 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             case "Terms & Condition":
                 let vc = CMSViewController.instantiate(fromAppStoryboard: .DashBoard)
                 vc.comingReason = .termsAndConditions
+                vc.comingUserRole = .normalUser
                 self.navigationController?.pushViewController(vc, animated: true)
-                print("✅ Selected: Terms & Condition")
                 
             case "Return Policy":
                 let vc = CMSViewController.instantiate(fromAppStoryboard: .DashBoard)
                 vc.comingReason = .returnPolicy
+                vc.comingUserRole = .normalUser
                 self.navigationController?.pushViewController(vc, animated: true)
-                print("✅ Selected: Return Policy")
                 
             case "About Us":
                 let vc = CMSViewController.instantiate(fromAppStoryboard: .DashBoard)
                 vc.comingReason = .aboutUs
+                vc.comingUserRole = .normalUser
                 self.navigationController?.pushViewController(vc, animated: true)
-                print("✅ Selected: About Us")
                 
             case "FAQ's":
                 let vc = FAQViewController.instantiate(fromAppStoryboard: .DashBoard)
+                vc.comingUserRole = .normalUser
                 self.navigationController?.pushViewController(vc, animated: true)
-                print("✅ Selected: FAQ's")
                 
             case "Change Language":
-                print("✅ Selected: Change Language")
+                let nextVC = ChangeLanguageViewController.instantiate(fromAppStoryboard: .DashBoard)
+                nextVC.comingUserRole = .normalUser
+                self.navigationController?.pushViewController(nextVC, animated: true)
                 
             case "Change Currency":
-                print("✅ Selected: Change Currency")
+                let nextVC = ChangeCurrencyViewController.instantiate(fromAppStoryboard: .DashBoard)
+                nextVC.comingReason = .comingFromCurrency
+                nextVC.comingUserRole = .normalUser
+                self.navigationController?.pushViewController(nextVC, animated: true)
                 
             case "Change Country":
-                print("✅ Selected: Change Country")
+                let nextVC = ChangeCurrencyViewController.instantiate(fromAppStoryboard: .DashBoard)
+                nextVC.comingReason = .comingFromCountry
+                nextVC.comingUserRole = .normalUser
+                self.navigationController?.pushViewController(nextVC, animated: true)
                 
             case "Cancellation Policy":
                 let vc = CMSViewController.instantiate(fromAppStoryboard: .DashBoard)
                 vc.comingReason = .cancellationPolicy
+                vc.comingUserRole = .normalUser
                 self.navigationController?.pushViewController(vc, animated: true)
-                print("✅ Selected: Cancellation Policy")
                 
             case "Exchange Policy":
                 let vc = CMSViewController.instantiate(fromAppStoryboard: .DashBoard)
                 vc.comingReason = .exchangePolicy
+                vc.comingUserRole = .normalUser
                 self.navigationController?.pushViewController(vc, animated: true)
-                print("✅ Selected: Exchange Policy")
                 
             case "Support":
-                print("✅ Selected: Support")
+                let nextVC = SupportViewController.instantiate(fromAppStoryboard: .DashBoard)
+                nextVC.comingUserRole = .normalUser
+                self.navigationController?.pushViewController(nextVC, animated: true)
                 
             case "Become An Affiliate":
                 if let userdetails = viewModel.savedUserProfile {
@@ -220,7 +230,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 
             case "Settings":
-                print("✅ Selected: Settings")
+                let nextVC = SettingsViewController.instantiate(fromAppStoryboard: .DashBoard)
+                nextVC.comingUserRole = .normalUser
+                self.navigationController?.pushViewController(nextVC, animated: true)
                 
             default:
                 print("Unknown option selected: \(selectedItem)")
