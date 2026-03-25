@@ -411,6 +411,23 @@ extension WebService {
         }
     }
     
+    func getCountOfNotificationForAffilatedUserService(completion:@escaping (_ user: Int)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.countOfNotifcationForAffilated), requestMethod: .get,requestModel: Int.self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
     func markAffiliateNotificationsService(param: [String:Any], completion: @escaping(EmptyModel) -> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.markAffiliateReadNotifications),requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
@@ -430,6 +447,22 @@ extension WebService {
     func markAffiliateAllReadNotificationsService(param: [String:Any], completion: @escaping(EmptyModel) -> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.markAffiliateAllReadNotifications),requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(response)
+            }
+        }
+    }
+    
+    func markAllReadNotificationsService(param: [String:Any], completion: @escaping(EmptyModel) -> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.markAllReadNotifications),requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 guard let response = response else {

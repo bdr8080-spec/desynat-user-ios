@@ -103,7 +103,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             forceNormalUserHomeFlow()
             
             // Navigate to product (Guest/Normal both work)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.navigateToProductDetail(productId: productId, refernceLink: url.absoluteString)
             }
             return
@@ -112,12 +112,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let storeIndex = pathComponents.firstIndex(of: "store-details"),
            storeIndex + 1 < pathComponents.count,
            let storeId = Int(pathComponents[storeIndex + 1]) {
-            
             print("Store ID: \(storeId)")
             
             forceNormalUserHomeFlow()
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.navigateToStoreDetails(storeId: storeId)
             }
             return

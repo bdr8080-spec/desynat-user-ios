@@ -87,7 +87,7 @@ class NotificationListViewModel {
     
     func markReadNotificationsRequest() {
         let param: [String:Any] = ["notification_id": [hostVC.selectedNotificationId]]
-        WebService.shared.markAffiliateNotificationsService(param: param) { [weak self] response in
+        WebService.shared.markReadNotificationsService(param: param) { [weak self] response in
             guard let self = self else { return }
             resetAndFetchStories()
         }
@@ -95,7 +95,7 @@ class NotificationListViewModel {
     
     func markAllReadNotificationsRequest() {
         let param: [String:Any] = ["receiver_type": 1]
-        WebService.shared.markAffiliateAllReadNotificationsService(param: param) { [weak self] response in
+        WebService.shared.markAllReadNotificationsService(param: param) { [weak self] response in
             guard let self = self else { return }
             resetAndFetchStories()
         }

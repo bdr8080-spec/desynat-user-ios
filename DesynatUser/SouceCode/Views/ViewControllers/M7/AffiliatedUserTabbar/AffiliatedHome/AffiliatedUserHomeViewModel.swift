@@ -16,6 +16,17 @@ class AffiliatedUserHomeViewModel {
         self.hostVC = hostVC
     }
     
+    func getCountOfNotificationRequest(){
+        WebService.sharedInstance.getCountOfNotificationForAffilatedUserService { [self] count in
+            if count > 0 {
+                self.hostVC.ntoificationcountView.isHidden = false
+                self.hostVC.notificationCountLabel.text = count.description
+            } else {
+                self.hostVC.ntoificationcountView.isHidden = true
+            }
+        }
+    }
+    
     func getUserData() {
         if let userDetails: AffiliateCreateAccountDataModel = kSharedUserDefaults.retrieveModelFor(key: .affiliatedUserDeatils, model: AffiliateCreateAccountDataModel.self) {
             hostVC.usernameLabel.text = "Hi \(userDetails.fullName ?? "")"

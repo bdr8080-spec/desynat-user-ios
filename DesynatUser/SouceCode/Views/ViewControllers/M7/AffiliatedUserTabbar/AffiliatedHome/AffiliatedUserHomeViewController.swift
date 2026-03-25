@@ -15,6 +15,8 @@ class AffiliatedUserHomeViewController: UIViewController {
     @IBOutlet weak var btnToday: UIButton!
     @IBOutlet weak var btnThisWeek: UIButton!
     @IBOutlet weak var btnThisMonth: UIButton!
+    @IBOutlet weak var ntoificationcountView: CustomView!
+    @IBOutlet weak var notificationCountLabel: UILabel!
     
     // MARK: - Property Decalaration
     private var dateButtons: [UIButton] { [btnToday, btnThisWeek, btnThisMonth]}
@@ -24,6 +26,11 @@ class AffiliatedUserHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.getUserData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.getCountOfNotificationRequest()
     }
     
     // MARK: - Button's Action

@@ -111,7 +111,6 @@ struct OrderCreateStatus: Codable {
     }
 }
 
-
 // MARK: - ProductVariation
 struct ProductVariation: Codable {
   let id, productID: Int?

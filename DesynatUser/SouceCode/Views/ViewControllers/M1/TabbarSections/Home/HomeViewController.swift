@@ -13,6 +13,10 @@ import Speech
 class HomeViewController: UIViewController {
     
     // MARK: - IBOutlet's
+    
+    @IBOutlet weak var notigicationView: CustomView!
+    @IBOutlet weak var notificationCountLabel: UILabel!
+    
     @IBOutlet weak var noCnterHomeBannersFoundLabel: UILabel!
     @IBOutlet weak var noTopHomeBannersFoundLabel: UILabel!
     @IBOutlet weak var browseBannersView: UIView!
@@ -106,6 +110,7 @@ class HomeViewController: UIViewController {
         requestPermissions()
         viewModel.getTopHomeBannersListApi()
         viewModel.getCenterHomeBannersListApi()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -113,6 +118,7 @@ class HomeViewController: UIViewController {
         startBannerAutoScroll()
         startPremiumAutoScroll()
         startDiscountAutoScroll()
+        viewModel.getCountOfNotificationRequest()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -604,13 +610,17 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             nextVC.slecetedCategoryID = viewModel.selectedCategoriesSection
             self.navigationController?.pushViewController(nextVC, animated: true)
         case bannerCollectionView:
-            let nextVC = StoresDetailsViewController.instantiate(fromAppStoryboard: .Catalog)
-            nextVC.storeId = viewModel.homeScreenAllBannersList[indexPath.row].sellerDetails?.storeInfo?.id
-            self.navigationController?.pushViewController(nextVC, animated: true)
+            if !viewModel.homeScreenAllBannersList.isEmpty {
+                let nextVC = StoresDetailsViewController.instantiate(fromAppStoryboard: .Catalog)
+                nextVC.storeId = viewModel.homeScreenAllBannersList[indexPath.row].sellerDetails?.storeInfo?.id
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
         case browsePrimiumCollectionView:
-            let nextVC = StoresDetailsViewController.instantiate(fromAppStoryboard: .Catalog)
-            nextVC.storeId = viewModel.homeCenterScreenAllBannersList[indexPath.row].sellerDetails?.storeInfo?.id
-            self.navigationController?.pushViewController(nextVC, animated: true)
+            if !viewModel.homeCenterScreenAllBannersList.isEmpty {
+                let nextVC = StoresDetailsViewController.instantiate(fromAppStoryboard: .Catalog)
+                nextVC.storeId = viewModel.homeCenterScreenAllBannersList[indexPath.row].sellerDetails?.storeInfo?.id
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
         case bowseSomeDisCountCollectionView:
             print("")
             //            let nextVC = StoresDetailsViewController.instantiate(fromAppStoryboard: .Catalog)

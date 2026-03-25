@@ -320,9 +320,20 @@ extension StoresViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let nextVC = StoresDetailsViewController.instantiate(fromAppStoryboard: .Catalog)
-        nextVC.storeId = viewModel.storesSection[indexPath.row].id
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        switch collectionView {
+        case bannerCollectionView:
+            if !viewModel.homeScreenAllBannersList.isEmpty {
+                let nextVC = StoresDetailsViewController.instantiate(fromAppStoryboard: .Catalog)
+                nextVC.storeId = viewModel.homeScreenAllBannersList[indexPath.row].sellerDetails?.storeInfo?.id
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+        case storesCollectionView:
+            let nextVC = StoresDetailsViewController.instantiate(fromAppStoryboard: .Catalog)
+            nextVC.storeId = viewModel.storesSection[indexPath.row].id
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        default:
+            print("")
+        }
     }
     
     // MARK: - Update Page Control on Scroll

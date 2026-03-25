@@ -2973,13 +2973,48 @@ you for your patience. Team Desynat App</string>
                                             <action selector="bellDidTapepd:" destination="fXL-ZR-1QQ" eventType="touchUpInside" id="CLm-gf-iJ2"/>
                                         </connections>
                                     </button>
+                                    <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DiE-OE-peK" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                                        <rect key="frame" x="353" y="77.666666666666671" width="20" height="20"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnGradient" translatesAutoresizingMaskIntoConstraints="NO" id="bit-Pb-uee" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="circleCorner" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nuv-sc-v0v">
+                                                <rect key="frame" x="2" y="2" width="16" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="bit-Pb-uee" firstAttribute="top" secondItem="DiE-OE-peK" secondAttribute="top" id="LDP-IS-Hct"/>
+                                            <constraint firstAttribute="bottom" secondItem="nuv-sc-v0v" secondAttribute="bottom" constant="2" id="Q96-vu-6hz"/>
+                                            <constraint firstItem="nuv-sc-v0v" firstAttribute="top" secondItem="DiE-OE-peK" secondAttribute="top" constant="2" id="WBZ-Fe-6dr"/>
+                                            <constraint firstAttribute="trailing" secondItem="bit-Pb-uee" secondAttribute="trailing" id="Xai-Ch-T8a"/>
+                                            <constraint firstAttribute="bottom" secondItem="bit-Pb-uee" secondAttribute="bottom" id="Yh0-lt-Efi"/>
+                                            <constraint firstAttribute="trailing" secondItem="nuv-sc-v0v" secondAttribute="trailing" constant="2" id="Z1Y-xX-NPK"/>
+                                            <constraint firstItem="bit-Pb-uee" firstAttribute="leading" secondItem="DiE-OE-peK" secondAttribute="leading" id="cOG-Kx-Znb"/>
+                                            <constraint firstItem="nuv-sc-v0v" firstAttribute="leading" secondItem="DiE-OE-peK" secondAttribute="leading" constant="2" id="men-k4-Try"/>
+                                            <constraint firstAttribute="height" constant="20" id="uN0-k6-TEY"/>
+                                            <constraint firstAttribute="width" constant="20" id="uPM-K5-0fp"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="circleCorner" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.96862745100000003" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="E2g-2Q-ih5" firstAttribute="leading" secondItem="mtd-En-trJ" secondAttribute="leading" constant="24" id="0eI-kK-fTP"/>
+                                    <constraint firstItem="Mp1-9V-oZp" firstAttribute="top" secondItem="DiE-OE-peK" secondAttribute="top" id="QFH-XB-AxP"/>
                                     <constraint firstItem="QCD-66-cfZ" firstAttribute="centerY" secondItem="E2g-2Q-ih5" secondAttribute="centerY" id="Rc3-Ka-upg"/>
                                     <constraint firstAttribute="height" constant="115" id="S9y-3Q-gpc"/>
                                     <constraint firstAttribute="trailing" secondItem="Mp1-9V-oZp" secondAttribute="trailing" constant="20" id="cLh-PG-hYr"/>
+                                    <constraint firstItem="Mp1-9V-oZp" firstAttribute="trailing" secondItem="DiE-OE-peK" secondAttribute="trailing" id="eNb-ic-xLF"/>
                                     <constraint firstItem="Mp1-9V-oZp" firstAttribute="centerY" secondItem="E2g-2Q-ih5" secondAttribute="centerY" id="he2-nk-SUi"/>
                                     <constraint firstItem="QCD-66-cfZ" firstAttribute="leading" secondItem="E2g-2Q-ih5" secondAttribute="trailing" constant="8" id="jjD-Zl-yZR"/>
                                     <constraint firstAttribute="bottom" secondItem="E2g-2Q-ih5" secondAttribute="bottom" id="vUK-t5-DR0"/>
@@ -3752,6 +3787,8 @@ you for your patience. Team Desynat App</string>
                         <outlet property="btnThisMonth" destination="bLO-sV-IAV" id="z6v-aA-ZC0"/>
                         <outlet property="btnThisWeek" destination="oZk-Dd-OBW" id="zgt-Qe-Rru"/>
                         <outlet property="btnToday" destination="6qT-81-wqC" id="ZJa-Yn-QC9"/>
+                        <outlet property="notificationCountLabel" destination="nuv-sc-v0v" id="4uX-N2-Jtt"/>
+                        <outlet property="ntoificationcountView" destination="DiE-OE-peK" id="VQF-kM-YdM"/>
                         <outlet property="userProfileImageView" destination="E2g-2Q-ih5" id="lki-ap-eCw"/>
                         <outlet property="usernameLabel" destination="LI6-dK-yLe" id="JD8-E2-5ep"/>
                     </connections>
@@ -9815,7 +9852,7 @@ want to continue with</string>
             <color red="0.090196078431372548" green="0.090196078431372548" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="AccentColor">
-            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.4309999942779541" green="0.27099999785423279" blue="0.15299999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="darkBrown">
             <color red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

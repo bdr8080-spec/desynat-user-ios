@@ -104,18 +104,67 @@
                                                             <action selector="lieDidTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="F6N-zR-z80"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLr-cD-nnY">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L9r-YN-lDK">
                                                         <rect key="frame" x="70" y="0.0" width="35" height="35"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLr-cD-nnY">
+                                                                <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="35" id="aJh-R1-291"/>
+                                                                    <constraint firstAttribute="width" secondItem="uLr-cD-nnY" secondAttribute="height" id="gTW-BJ-LDD"/>
+                                                                </constraints>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" image="homeBell"/>
+                                                                <connections>
+                                                                    <action selector="notificationDidTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="DNd-r0-ugo"/>
+                                                                </connections>
+                                                            </button>
+                                                            <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zc4-Qg-Jec" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                                                                <rect key="frame" x="15" y="0.0" width="20" height="20"/>
+                                                                <subviews>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnGradient" translatesAutoresizingMaskIntoConstraints="NO" id="qYf-Xl-pC0" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="circleCorner" value="YES"/>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </imageView>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ulf-JV-fHn">
+                                                                        <rect key="frame" x="2" y="2" width="16" height="16"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailing" secondItem="ulf-JV-fHn" secondAttribute="trailing" constant="2" id="7k5-Qh-fj9"/>
+                                                                    <constraint firstAttribute="height" constant="20" id="81r-np-jug"/>
+                                                                    <constraint firstItem="ulf-JV-fHn" firstAttribute="top" secondItem="Zc4-Qg-Jec" secondAttribute="top" constant="2" id="M5v-i3-52Q"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="ulf-JV-fHn" secondAttribute="bottom" constant="2" id="QHD-Qk-reP"/>
+                                                                    <constraint firstItem="qYf-Xl-pC0" firstAttribute="top" secondItem="Zc4-Qg-Jec" secondAttribute="top" id="V2r-Uc-C9k"/>
+                                                                    <constraint firstItem="ulf-JV-fHn" firstAttribute="leading" secondItem="Zc4-Qg-Jec" secondAttribute="leading" constant="2" id="V61-e6-opZ"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="qYf-Xl-pC0" secondAttribute="bottom" id="bIu-Lf-Vsy"/>
+                                                                    <constraint firstAttribute="width" constant="20" id="f44-6n-TCP"/>
+                                                                    <constraint firstItem="qYf-Xl-pC0" firstAttribute="leading" secondItem="Zc4-Qg-Jec" secondAttribute="leading" id="mmG-Sx-RkV"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="qYf-Xl-pC0" secondAttribute="trailing" id="tV3-4k-5hy"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="circleCorner" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="35" id="aJh-R1-291"/>
-                                                            <constraint firstAttribute="width" secondItem="uLr-cD-nnY" secondAttribute="height" id="gTW-BJ-LDD"/>
+                                                            <constraint firstItem="uLr-cD-nnY" firstAttribute="leading" secondItem="L9r-YN-lDK" secondAttribute="leading" id="42Q-aS-R1s"/>
+                                                            <constraint firstAttribute="width" secondItem="L9r-YN-lDK" secondAttribute="height" id="BGI-M7-hd8"/>
+                                                            <constraint firstAttribute="bottom" secondItem="uLr-cD-nnY" secondAttribute="bottom" id="hMr-ZT-IIQ"/>
+                                                            <constraint firstItem="uLr-cD-nnY" firstAttribute="top" secondItem="L9r-YN-lDK" secondAttribute="top" id="joI-Oi-T8X"/>
+                                                            <constraint firstItem="Zc4-Qg-Jec" firstAttribute="top" secondItem="L9r-YN-lDK" secondAttribute="top" id="l85-v3-GU4"/>
+                                                            <constraint firstAttribute="height" constant="35" id="mDR-9j-7KF"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Zc4-Qg-Jec" secondAttribute="trailing" id="o8s-C9-MYx"/>
+                                                            <constraint firstAttribute="trailing" secondItem="uLr-cD-nnY" secondAttribute="trailing" id="ybK-ay-dwa"/>
                                                         </constraints>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" image="homeBell"/>
-                                                        <connections>
-                                                            <action selector="notificationDidTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="DNd-r0-ugo"/>
-                                                        </connections>
-                                                    </button>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -611,6 +660,8 @@
                         <outlet property="noCatgeoriesFoundLabel" destination="Uak-9Y-Mvh" id="ofe-98-Ec3"/>
                         <outlet property="noCnterHomeBannersFoundLabel" destination="7RW-bZ-ZkS" id="FFQ-lR-Efs"/>
                         <outlet property="noTopHomeBannersFoundLabel" destination="CnW-17-Rvk" id="jDR-Oj-2pL"/>
+                        <outlet property="notificationCountLabel" destination="ulf-JV-fHn" id="Dl1-UY-ueU"/>
+                        <outlet property="notigicationView" destination="Zc4-Qg-Jec" id="kd1-hk-7r7"/>
                         <outlet property="searchTF" destination="KZu-hC-BYA" id="mrw-6o-CZS"/>
                         <outlet property="suggestedStoresCollectionView" destination="Cum-a6-Yok" id="wTG-Fl-9oZ"/>
                         <outlet property="topRatedCollectionView" destination="HhN-8j-FdC" id="v5Z-SX-SWL"/>
@@ -1580,7 +1631,7 @@ Let's add some items. </string>
                                                                                 </connections>
                                                                             </button>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gift Cards" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjh-Dj-suT">
-                                                                                <rect key="frame" x="35.333333333333329" y="10.666666666666659" width="81" height="22.666666666666671"/>
+                                                                                <rect key="frame" x="35.333333333333329" y="10.666666666666659" width="80.999999999999986" height="22.666666666666671"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>

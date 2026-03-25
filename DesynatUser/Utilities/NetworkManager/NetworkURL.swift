@@ -3,8 +3,8 @@ import Foundation
 let kIsAppInstalled = "isAppInstalled"
 
 enum BaseURL {
-    static let development  = "http://65.2.12.223/"//"https://desynat.com/"//"http://157.241.119.72/"
-    static let release      = "http://65.2.12.223/"//"https://desynat.com/"//"http://157.241.119.72/"
+    static let development  = "https://desynat.com/"//"http://157.241.119.72/"
+    static let release      = "https://desynat.com/"//"http://157.241.119.72/"
     
     static func value() -> String {
         switch BuildConfiguration.shared.environment {
@@ -150,6 +150,9 @@ enum NetworkEndPoint: String {
     case getAffiliateNotificationsList   = "api/affiliate/affiliateUserNotification"
     case markAffiliateReadNotifications  = "api/affiliate/ReadAffiliateUserNotification"
     case markAffiliateAllReadNotifications = ""
+    case markAllReadNotifications = "dfv"
+    case countOfNotifcation              = "api/user/count-user-notification"
+    case countOfNotifcationForAffilated  = "api/user/CountaffiliateUserNotification"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

@@ -38,6 +38,17 @@ class HomeViewModel: NSObject {
         }
     }
     
+    func getCountOfNotificationRequest(){
+        WebService.sharedInstance.getCountOfNotificationService { [self] count in
+            if count > 0 {
+                self.hostVC.notigicationView.isHidden = false
+                self.hostVC.notificationCountLabel.text = count.description
+            } else {
+                self.hostVC.notigicationView.isHidden = true
+            }
+        }
+    }
+    
     func getSubCategoriesListApi(categoryID: Int) {
         WebService.sharedInstance.getSubCategoriesService(categoryID: categoryID) { list in
             self.subCategoriesSection = list
