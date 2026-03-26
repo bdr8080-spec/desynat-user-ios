@@ -105,8 +105,8 @@ class CreateAffiliateUserAccountViewModel: NSObject {
             "document1": hostVC.uplaodDocuOneImage,
             "document2": hostVC.uploadDocTwoImage,
             "accept": 1,
-            "device_type": "1",
-            "device_token":""]
+            "device_type": 1,
+            "fcm_token": kSharedUserDefaults.retrieveModelFor(key: .deviceToken, model: String.self) ?? ""]
         
         WebService.sharedInstance.createAffiliatedAccountService(param:params) { response in
             let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
@@ -131,8 +131,8 @@ class CreateAffiliateUserAccountViewModel: NSObject {
             "document1": hostVC.uplaodDocuOneImage,
             "document2": hostVC.uploadDocTwoImage,
             "accept": 1,
-            "device_type": "1",
-            "device_token":""]
+            "device_type": 1,
+            "fcm_token": kSharedUserDefaults.retrieveModelFor(key: .deviceToken, model: String.self) ?? ""]
         
         WebService.sharedInstance.reuploadDocumnetsAffiliatedAccountService(param:params) { response in
             let nextVC = AccountCreationDoneViewController.instantiate(fromAppStoryboard: .AffiliateUser)

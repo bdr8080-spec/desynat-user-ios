@@ -14,7 +14,8 @@ struct AffiliateCreateAccountDataModel: Codable {
     let email: String?
     let emailVerifiedAt: String?
     let password,passwordOld, document1, document2, otp: String?
-    let otpVerify, deviceType: String?
+    let otpVerify: String?
+//    let deviceType: String?
     let deviceToken, dataLet, long: String?
     let addressUpdateStatus, bankUpdateStatus, adminVerify: String?
     let rejectReason, rememberToken: String?
@@ -33,7 +34,7 @@ struct AffiliateCreateAccountDataModel: Codable {
         case emailVerifiedAt = "email_verified_at"
         case password, document1, document2, otp
         case otpVerify = "otp_verify"
-        case deviceType = "device_type"
+//        case deviceType = "device_type"
         case deviceToken = "device_token"
         case dataLet = "let"
         case long

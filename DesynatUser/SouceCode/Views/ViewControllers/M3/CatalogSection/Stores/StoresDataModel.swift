@@ -47,7 +47,8 @@ struct SellerInformation: Codable {
     let firstName, lastName, countryCode, mobile: String?
     let email, password, acceptTerms, otp: String?
     let otpVerify: String?
-    let deviceType, deviceToken: String?
+//    let deviceType: String?
+    let deviceToken: String?
     let adminVerify, storeInformation, bankInformation: String?
     let rejectReason, lang: String?
     let isBlock: Int?
@@ -64,7 +65,7 @@ struct SellerInformation: Codable {
         case acceptTerms = "accept_terms"
         case otp
         case otpVerify = "otp_verify"
-        case deviceType = "device_type"
+//        case deviceType = "device_type"
         case deviceToken = "device_token"
         case adminVerify = "admin_verify"
         case storeInformation = "store_information"

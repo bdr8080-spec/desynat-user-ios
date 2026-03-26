@@ -15,9 +15,10 @@ import FirebaseCore
 import Branch
 import UserNotifications
 import SDWebImageSVGCoder
+import FirebaseMessaging
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     
     var forOpenFilePickerView = ""
     
@@ -28,15 +29,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.isEnabled = true
         GMSServices.provideAPIKey("AIzaSyBlCfJlRuxElolt6l-4erdJPR9ySUB8Jwk")    // Our google map API
         GMSPlacesClient.provideAPIKey("AIzaSyAekJV3oxQlPy_OWHCxPYfFw5CnrD-Wzkg")
-        FirebaseApp.configure()
         MFSettings.shared.configure(token: "SK_KWT_vVZlnnAqu8jRByOWaRPNId4ShzEDNt256dvnjebuyzo52dXjAfRx2ixW5umjWSUx", country: .kuwait, environment: MFEnvironment.test)
         let them = MFTheme(navigationTintColor: .white, navigationBarTintColor: .lightGray, navigationTitle: "Payment", cancelButtonTitle: "Cancel")
         MFSettings.shared.setTheme(theme: them)
         UNUserNotificationCenter.current().delegate = self
-        requestNotificationPermission()
+        FirebaseApp.configure()
+        Messaging.messaging().delegate = self
+        Messaging.messaging().isAutoInitEnabled = true
+        confrigNotification(application: application)
         let SVGCoder = SDImageSVGCoder.shared
         SDImageCodersManager.shared.addCoder(SVGCoder)
-        
         return true
     }
     
@@ -110,75 +112,66 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 }
 
-// MARK: - Permissions
-extension AppDelegate {
+extension AppDelegate:UNUserNotificationCenterDelegate {
     
-    func requestNotificationPermission() {
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-            if let error = error {
-                print("Notification permission error: \(error.localizedDescription)")
-            } else {
-                print("Notification permission granted: \(granted)")
-                if granted {
-                    DispatchQueue.main.async {
-                        UIApplication.shared.registerForRemoteNotifications()
-                    }
-                }
+    func confrigNotification(application:UIApplication) {
+        UNUserNotificationCenter.current().delegate = self
+        
+        let options: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: options) { granted, error in
+            guard granted else { return }
+            DispatchQueue.main.async {
+                application.registerForRemoteNotifications()  // only once
             }
         }
     }
-}
-
-extension AppDelegate {
     
-    func requestPushPermission(_ application: UIApplication) {
-        let center = UNUserNotificationCenter.current()
-        
-        center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
-            if granted {
+    private func registerForPushNotification(_ application: UIApplication) {
+        let current = UNUserNotificationCenter.current()
+        current.delegate = self
+        current.requestAuthorization(options: [.alert, .badge, .sound]) { (flag, error) in
+            if error == nil {
                 DispatchQueue.main.async {
                     application.registerForRemoteNotifications()
                 }
-            } else {
-                print("Permission denied")
             }
         }
     }
     
-    // Called when APNs registration succeeds
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-        kSharedUserDefaults.saveModelFor(key: .deviceToken, value: token)
-        print("Device Token: \(token)")
+        Messaging.messaging().apnsToken = deviceToken
+        Messaging.messaging().setAPNSToken(deviceToken,type: .unknown)
+        fetchFirebaseToken()
     }
     
-    // Called when APNs registration fails
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("Failed to register for remote notifications: \(error.localizedDescription)")
-    }
-}
-
-
-extension AppDelegate: UNUserNotificationCenterDelegate {
-    
-    // When app is in foreground
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler:
-                                @escaping (UNNotificationPresentationOptions) -> Void) {
-        
-        completionHandler([.banner, .sound, .badge])
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        kSharedUserDefaults.saveValue(Key: .deviceToken, value: fcmToken)
     }
     
-    // When user taps notification
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void) {
-        
-        let userInfo = response.notification.request.content.userInfo
-        print("Notification Data: \(userInfo)")
-        
-        completionHandler()
+    fileprivate func fetchFirebaseToken() {
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print("Error fetching remote instange ID: \(error)")
+            } else if let result = token {
+                print("Remote instance ID token: \(result)")
+                kSharedUserDefaults.saveModelFor(key: .deviceToken, value: token)
+            }
+        }
     }
+    
+    func applicationWillTerminate(_ application: UIApplication) {}
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("notification - \(notification.request.content.userInfo)")
+        if #available(iOS 14.0, *) {
+            completionHandler([.banner, .badge, .sound])
+        } else {
+            completionHandler([.alert, .badge, .sound])
+        }
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("")
+    }
+    
 }

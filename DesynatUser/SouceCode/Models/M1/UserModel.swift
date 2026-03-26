@@ -10,7 +10,8 @@ struct UserModel: Codable {
     let id: Int?
     let fullName, countryCode, mobile, email, profileImage: String?
     let emailVerifiedAt: String?
-    let otp, otpVerify, deviceType: String?
+    let otp, otpVerify: String?
+//    let deviceType: String?
     let deviceToken, dataLet, long: String?
     let createdAt, updatedAt, accessToken: String?
     let affiliatedUserdetails: AffiliatedUserdetails?
@@ -24,7 +25,7 @@ struct UserModel: Codable {
         case emailVerifiedAt = "email_verified_at"
         case otp
         case otpVerify = "otp_verify"
-        case deviceType = "device_type"
+//        case deviceType = "device_type"
         case deviceToken = "device_token"
         case dataLet = "let"
         case long
@@ -46,7 +47,8 @@ struct AffiliatedUserdetails: Codable {
     let password: String?
     let document1: String?
     let document2, otp: String?
-    let otpVerify, deviceType: String?
+    let otpVerify: String?
+//    let deviceType: String?
     let deviceToken, affiliatedUserdetailsLet, long: String?
     let addressUpdateStatus, bankUpdateStatus, adminVerify, rejectReason: String?
     let rememberToken: String?
@@ -62,7 +64,7 @@ struct AffiliatedUserdetails: Codable {
         case emailVerifiedAt = "email_verified_at"
         case password, document1, document2, otp
         case otpVerify = "otp_verify"
-        case deviceType = "device_type"
+//        case deviceType = "device_type"
         case deviceToken = "device_token"
         case affiliatedUserdetailsLet = "let"
         case long
