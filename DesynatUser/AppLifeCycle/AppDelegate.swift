@@ -23,8 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     var forOpenFilePickerView = ""
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        LocationManager.sharedInstance.startUpdatingLocation()
         Thread.sleep(forTimeInterval: 5.0)
+        LocationManager.sharedInstance.startUpdatingLocation()
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.isEnabled = true
         GMSServices.provideAPIKey("AIzaSyBlCfJlRuxElolt6l-4erdJPR9ySUB8Jwk")    // Our google map API
@@ -72,7 +72,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         topVC.present(alert, animated: true, completion: nil)
     }
     
-    func topViewController(base: UIViewController? = UIApplication.shared.windows.first?.rootViewController) -> UIViewController? {
+    func topViewController(base: UIViewController? = UIApplication.shared.connectedScenes
+                                .compactMap { $0 as? UIWindowScene }
+                                .flatMap { $0.windows }
+                                .first { $0.isKeyWindow }?
+                                .rootViewController) -> UIViewController? {
+
         if let nav = base as? UINavigationController {
             return topViewController(base: nav.visibleViewController)
         }
@@ -162,16 +167,42 @@ extension AppDelegate:UNUserNotificationCenterDelegate {
     func applicationWillTerminate(_ application: UIApplication) {}
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("notification - \(notification.request.content.userInfo)")
-        if #available(iOS 14.0, *) {
-            completionHandler([.banner, .badge, .sound])
-        } else {
-            completionHandler([.alert, .badge, .sound])
-        }
+        let payload = notification.request.content.userInfo
+            
+            // Convert payload to JSON text
+            if let jsonText = payload.toPrettyString() {
+//                showShareAlert(withText: jsonText)
+            }
+            
+            if #available(iOS 14.0, *) {
+                completionHandler([.banner, .badge, .sound])
+            } else {
+                completionHandler([.alert, .badge, .sound])
+            }
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("")
+        let payload = response.notification.request.content.userInfo
+            
+            if let jsonText = payload.toPrettyString() {
+//                showShareAlert(withText: jsonText)
+            }
+
+            // Later you use payload to navigate screens
+            // handleDeepLinks(payload)
+
+            completionHandler()
     }
     
+}
+
+extension Dictionary {
+    func toPrettyString() -> String? {
+        if JSONSerialization.isValidJSONObject(self),
+           let data = try? JSONSerialization.data(withJSONObject: self, options: .prettyPrinted),
+           let text = String(data: data, encoding: .utf8) {
+            return text
+        }
+        return nil
+    }
 }

@@ -219,6 +219,11 @@ class HomeViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    @IBAction func storyDidTapped(_ sender: Any) {
+//        let nextVC = StoryViewerViewController.instantiate(fromAppStoryboard: .Home)
+//        self.navigationController?.pushViewController(nextVC, animated: false)
+    }
+    
     //MARK: Function's declaration
     private func requestPermissions() {
         SFSpeechRecognizer.requestAuthorization { status in
