@@ -1212,4 +1212,36 @@ extension WebService {
             }
         }
     }
+    
+    func getSellerHighlightsService(param: [String:Any], completion:@escaping (_ user:[SellerHighlightsModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getSellerHighlights), requestMethod: .get, requestParams: param, requestModel:[SellerHighlightsModel].self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getSellerReelsService(param: [String:Any], completion:@escaping (_ user:[SellerHighlightsModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getSellerReels), requestMethod: .get, requestParams: param, requestModel:[SellerHighlightsModel].self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
 }

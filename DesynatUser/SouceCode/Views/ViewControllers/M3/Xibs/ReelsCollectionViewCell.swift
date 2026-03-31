@@ -8,6 +8,8 @@
 import UIKit
 
 class ReelsCollectionViewCell: UICollectionViewCell {
+    
+    @IBOutlet weak var mainImageView: CustomImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()

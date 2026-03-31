@@ -153,6 +153,11 @@ enum NetworkEndPoint: String {
     case markAllReadNotifications = "dfv"
     case countOfNotifcation              = "api/user/count-user-notification"
     case countOfNotifcationForAffilated  = "api/user/CountaffiliateUserNotification"
+    case getAffiliateDashboardData       = "api/affiliate/get_affiliate_dashboard_data"
+    case getSellerStories       = "api/user/get_seller_stories"
+    case getAdminStories       = "api/user/get_admin_stories"
+    case getSellerReels       = "api/user/get_seller_reels"
+    case getSellerHighlights       = "api/user/get_seller_highlights"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

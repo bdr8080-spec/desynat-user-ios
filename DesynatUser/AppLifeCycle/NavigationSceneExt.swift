@@ -33,7 +33,7 @@ extension SceneDelegate {
         navigateTo(vc: vc)
     }
 
-//    /// Logout current user and navigate to loginVc
+    // Logout current user and navigate to loginVc
     func logoutUser() {
         kSharedUserDefaults.clearAllData(except: [.deviceToken,.userLocation,.selectedLanguage, .defaultLanguage, .language])
         Global.shared.user = nil

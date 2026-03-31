@@ -119,7 +119,7 @@ class StoresDetailsViewController: UIViewController {
         sortFilterView.isHidden = true
         storesCollectionView.isHidden = true
         reelsCollectionView.isHidden = false
-        noReelsFound.isHidden = false
+        //noReelsFound.isHidden = false
         reelsCollectionViewHeightConstriant.constant = reelsCollectionView.contentSize.height
     }
     
@@ -362,11 +362,11 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case storiesCollectionView:
-            return 2
+            return self.viewModel.sellerHighlights.count
         case storesCollectionView:
             return viewModel.singleStoresSection?.allProduct?.data?.count ?? 0
         case reelsCollectionView:
-            return 8
+            return self.viewModel.sellerReels.count
         default:
             return 0
         }
@@ -376,11 +376,18 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
         switch collectionView {
         case storiesCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoresDetailsCollectionViewCell", for: indexPath) as! StoresDetailsCollectionViewCell
-            if indexPath.row == 0 {
-                cell.mainImageView.image = UIImage(named: "statusImage")
-            } else if indexPath.row == 1 {
-                cell.mainImageView.image = UIImage(named: "bestSell")
-            }
+//            if indexPath.row == 0 {
+//                cell.mainImageView.image = UIImage(named: "statusImage")
+//            } else if indexPath.row == 1 {
+//                cell.mainImageView.image = UIImage(named: "bestSell")
+//            }
+            let dict = self.viewModel.sellerHighlights[indexPath.row]
+            let url = URL(string: dict.file ?? "")
+              
+                cell.mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                cell.mainImageView.sd_imageIndicator?.startAnimatingIndicator()
+                cell.mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+            cell.lblTitle.text = dict.title
             return cell
         case storesCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilteredStoreCollectionViewCell", for: indexPath) as! FilteredStoreCollectionViewCell
@@ -397,6 +404,12 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
             return cell
         case reelsCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ReelsCollectionViewCell", for: indexPath) as! ReelsCollectionViewCell
+            let dict = self.viewModel.sellerReels[indexPath.row]
+            let url = URL(string: dict.file ?? "")
+              
+                cell.mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                cell.mainImageView.sd_imageIndicator?.startAnimatingIndicator()
+                cell.mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
             return cell
         default:
             return UICollectionViewCell()
@@ -431,7 +444,7 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
             let spacing: CGFloat = 10
             let totalSpacing = spacing * 2 // 3 cells per row → 2 spaces between
             let width = (collectionView.frame.width - totalSpacing) / 2
-            return CGSize(width: width, height: storesCollectionView.frame.height)
+            return CGSize(width: width, height: 275)
         default:
             return CGSize(width: 0, height: 0)
         }

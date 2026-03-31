@@ -412,8 +412,9 @@ extension WebService {
     }
     
     func getCountOfNotificationForAffilatedUserService(completion:@escaping (_ user: Int)-> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI: .endpoint(.countOfNotifcationForAffilated), requestMethod: .get,requestModel: Int.self) { result, code in
+        NetworkManager.shared.request(withAPI: .endpoint(.countOfNotifcationForAffilated), requestMethod: .get,requestModel: Int.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
             
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
@@ -463,6 +464,24 @@ extension WebService {
     func markAllReadNotificationsService(param: [String:Any], completion: @escaping(EmptyModel) -> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.markAllReadNotifications),requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(response)
+            }
+        }
+    }
+
+    
+    func getAffiliateDashboardDataService(param: [String:Any], completion: @escaping(AffiliateDashboardDataModel) -> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getAffiliateDashboardData),requestMethod: .get, requestParams: param, requestModel: AffiliateDashboardDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 guard let response = response else {

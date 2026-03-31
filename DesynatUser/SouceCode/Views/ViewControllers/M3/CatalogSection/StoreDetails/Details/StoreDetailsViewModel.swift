@@ -20,6 +20,8 @@ class StoreDetailsViewModel: NSObject {
     var selectedDiscountIDs: [String] = []
     var minPrice: Int?
     var maxPrice: Int?
+    var sellerHighlights: [SellerHighlightsModel] = []
+    var sellerReels: [SellerHighlightsModel] = []
     
     init(hostVC: StoresDetailsViewController) {
         self.hostVC = hostVC
@@ -46,6 +48,8 @@ class StoreDetailsViewModel: NSObject {
         WebService.sharedInstance.getSingleStoresListService(param: param) { list in
             self.singleStoresSection = list
             DispatchQueue.main.async {
+                self.getSellerHighlightsService(sellerId: list.store?.sellerID ?? 0)
+                self.getSellerReelsService(sellerId: list.store?.sellerID ?? 0)
                 self.hostVC.storesCollectionView.reloadData()
                 if let store = list.store {
                     self.hostVC.configData(data: store)
@@ -75,6 +79,22 @@ class StoreDetailsViewModel: NSObject {
                 nextVC.comingFromChatInbox = false
                 self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
             }
+        }
+    }
+    
+    func getSellerHighlightsService(sellerId: Int) {
+        let param: [String: Any] = ["seller_id": sellerId]
+        WebService.sharedInstance.getSellerHighlightsService(param: param) { list in
+            self.sellerHighlights = list
+            self.hostVC.storiesCollectionView.reloadData()
+        }
+    }
+    
+    func getSellerReelsService(sellerId: Int) {
+        let param: [String: Any] = ["seller_id": sellerId]
+        WebService.sharedInstance.getSellerReelsService(param: param) { list in
+            self.sellerReels = list
+            self.hostVC.reelsCollectionView.reloadData()
         }
     }
 }
