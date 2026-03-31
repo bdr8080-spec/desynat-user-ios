@@ -39,16 +39,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         confrigNotification(application: application)
         let SVGCoder = SDImageSVGCoder.shared
         SDImageCodersManager.shared.addCoder(SVGCoder)
+        UNUserNotificationCenter.current().setBadgeCount(0, withCompletionHandler: nil)
         return true
     }
     
     func showShareAlert(withText text: String) {
         // Get the top-most view controller
         guard let topVC = topViewController() else { return }
-        
         // Create alert
         let alert = UIAlertController(title: "Debug / Share", message: text, preferredStyle: .alert)
-        
         // Add Share button
         let shareAction = UIAlertAction(title: "Share", style: .default) { _ in
             let activityVC = UIActivityViewController(activityItems: [text], applicationActivities: nil)
