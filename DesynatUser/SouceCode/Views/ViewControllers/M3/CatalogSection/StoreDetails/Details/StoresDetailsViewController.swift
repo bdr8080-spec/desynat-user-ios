@@ -423,6 +423,8 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
             let nextVC = ProductDetailViewController.instantiate(fromAppStoryboard: .Catalog)
             nextVC.productId = viewModel.singleStoresSection?.allProduct?.data?[indexPath.row].id
             self.navigationController?.pushViewController(nextVC, animated: true)
+//        case storiesCollectionView:
+            
         default:
             break
         }

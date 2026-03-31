@@ -9,13 +9,13 @@ import Foundation
 
 // MARK: - Models
 struct Story {
-    let url: String?
+    let url: String?          // Make it optional
     let isVideo: Bool
-    let duration: TimeInterval?
+    let duration: TimeInterval?   // nil for videos
+    
+    init(url: String?, isVideo: Bool, duration: TimeInterval?) {
+        self.url = url
+        self.isVideo = isVideo
+        self.duration = duration
+    }
 }
-
-struct UserStories {
-    let userName: String?
-    let stories: [Story]?
-}
-

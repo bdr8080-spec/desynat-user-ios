@@ -1642,7 +1642,7 @@ Let's add some items. </string>
                                                                                 </connections>
                                                                             </button>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gift Cards" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjh-Dj-suT">
-                                                                                <rect key="frame" x="35.333333333333329" y="10.666666666666659" width="80.999999999999986" height="22.666666666666671"/>
+                                                                                <rect key="frame" x="35.333333333333329" y="10.666666666666659" width="81" height="22.666666666666671"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -2068,8 +2068,8 @@ Let's add some items. </string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0ia-GK-NJk">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="0.0" y="-10" width="393" height="872"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="btq-vA-6DI">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -2091,16 +2091,8 @@ Let's add some items. </string>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="cross"/>
                                 <connections>
-                                    <action selector="crossDidTapped:" destination="bcG-in-XXa" eventType="touchUpInside" id="83g-FC-aH5"/>
+                                    <action selector="crossDidTapped:" destination="bcG-in-XXa" eventType="touchUpInside" id="0nq-h5-Cil"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DMY-fq-x7u">
-                                <rect key="frame" x="0.0" y="183" width="196.66666666666666" height="601"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yfb-g3-ioC">
-                                <rect key="frame" x="196.66666666666663" y="183" width="196.33333333333337" height="601"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UX0-AC-zxA">
                                 <rect key="frame" x="10" y="118" width="373" height="10"/>
@@ -2122,21 +2114,13 @@ Let's add some items. </string>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1gE-hr-nA0"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="0ia-GK-NJk" secondAttribute="trailing" id="5yr-69-6dV"/>
                             <constraint firstItem="1gE-hr-nA0" firstAttribute="trailing" secondItem="Hd3-lP-BGA" secondAttribute="trailing" constant="20" id="D4a-rP-HcB"/>
-                            <constraint firstItem="DMY-fq-x7u" firstAttribute="bottom" secondItem="1gE-hr-nA0" secondAttribute="bottom" id="KuN-pS-L5o"/>
-                            <constraint firstItem="DMY-fq-x7u" firstAttribute="leading" secondItem="1gE-hr-nA0" secondAttribute="leading" id="MMf-1G-jZr"/>
-                            <constraint firstItem="Yfb-g3-ioC" firstAttribute="leading" secondItem="DMY-fq-x7u" secondAttribute="trailing" id="Nal-vq-Yue"/>
-                            <constraint firstItem="Yfb-g3-ioC" firstAttribute="width" secondItem="1gE-hr-nA0" secondAttribute="width" multiplier="0.5" id="QP0-wY-Obi"/>
-                            <constraint firstItem="0ia-GK-NJk" firstAttribute="top" secondItem="D6w-1a-hfT" secondAttribute="top" id="TM9-zF-gTH"/>
+                            <constraint firstItem="0ia-GK-NJk" firstAttribute="top" secondItem="D6w-1a-hfT" secondAttribute="top" constant="-10" id="TM9-zF-gTH"/>
                             <constraint firstItem="0ia-GK-NJk" firstAttribute="leading" secondItem="D6w-1a-hfT" secondAttribute="leading" id="VIB-kX-BoX"/>
-                            <constraint firstItem="DMY-fq-x7u" firstAttribute="top" secondItem="Yfb-g3-ioC" secondAttribute="top" id="X6b-aH-akz"/>
-                            <constraint firstItem="Yfb-g3-ioC" firstAttribute="trailing" secondItem="1gE-hr-nA0" secondAttribute="trailing" id="cwK-lC-qv0"/>
-                            <constraint firstAttribute="bottom" secondItem="0ia-GK-NJk" secondAttribute="bottom" id="eL5-K5-kvC"/>
-                            <constraint firstItem="Yfb-g3-ioC" firstAttribute="bottom" secondItem="1gE-hr-nA0" secondAttribute="bottom" id="eO8-hh-JgN"/>
-                            <constraint firstItem="Yfb-g3-ioC" firstAttribute="top" secondItem="Hd3-lP-BGA" secondAttribute="bottom" constant="10" id="iEh-w8-Uco"/>
+                            <constraint firstAttribute="bottom" secondItem="0ia-GK-NJk" secondAttribute="bottom" constant="-10" id="eL5-K5-kvC"/>
                             <constraint firstItem="UX0-AC-zxA" firstAttribute="leading" secondItem="1gE-hr-nA0" secondAttribute="leading" constant="10" id="ixk-cs-mdG"/>
                             <constraint firstItem="1gE-hr-nA0" firstAttribute="top" secondItem="UX0-AC-zxA" secondAttribute="top" id="jRv-yC-NVw"/>
                             <constraint firstItem="1gE-hr-nA0" firstAttribute="trailing" secondItem="UX0-AC-zxA" secondAttribute="trailing" constant="10" id="rPK-Ip-a6X"/>
@@ -2330,16 +2314,16 @@ Let's add some items. </string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
