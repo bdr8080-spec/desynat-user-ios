@@ -158,6 +158,8 @@ enum NetworkEndPoint: String {
     case getAdminStories       = "api/user/get_admin_stories"
     case getSellerReels       = "api/user/get_seller_reels"
     case getSellerHighlights       = "api/user/get_seller_highlights"
+    case addRemoveReelsFromwishlist   = "api/user/add_remove_reel_to_whislist"
+    case shareReels   = "api/user/share_reel"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

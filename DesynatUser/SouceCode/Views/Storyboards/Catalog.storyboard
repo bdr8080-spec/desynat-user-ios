@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -1316,6 +1316,86 @@
             </objects>
             <point key="canvasLocation" x="2094" y="-27"/>
         </scene>
+        <!--Reels Scroll View Controller-->
+        <scene sceneID="6aY-IX-euE">
+            <objects>
+                <viewController storyboardIdentifier="ReelsScrollViewController" id="COw-pj-1zT" customClass="ReelsScrollViewController" customModule="DesynatUser" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HyO-Ju-Rru">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="v16-28-KeU">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bJu-wP-lpK">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="COw-pj-1zT" id="9Uj-Xg-NeP"/>
+                                    <outlet property="delegate" destination="COw-pj-1zT" id="qsf-cT-q28"/>
+                                </connections>
+                            </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="acD-7E-AZL">
+                                <rect key="frame" x="0.0" y="118" width="393" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yB3-Nt-zDF">
+                                        <rect key="frame" x="24" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="RlV-iY-0QA"/>
+                                            <constraint firstAttribute="width" constant="40" id="v4b-U7-hmm"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="leftVector"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="imageDirection">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="backDidTapped:" destination="COw-pj-1zT" eventType="touchUpInside" id="iOk-pR-lkg"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reels" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nB5-JA-4T5">
+                                        <rect key="frame" x="175.33333333333334" y="8.6666666666666732" width="42.666666666666657" height="22.666666666666671"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="nB5-JA-4T5" firstAttribute="centerY" secondItem="acD-7E-AZL" secondAttribute="centerY" id="Pdd-A4-6qd"/>
+                                    <constraint firstItem="yB3-Nt-zDF" firstAttribute="top" secondItem="acD-7E-AZL" secondAttribute="top" id="Qpd-Ne-sTD"/>
+                                    <constraint firstItem="yB3-Nt-zDF" firstAttribute="leading" secondItem="acD-7E-AZL" secondAttribute="leading" constant="24" id="mzd-9n-nzA"/>
+                                    <constraint firstItem="yB3-Nt-zDF" firstAttribute="centerY" secondItem="acD-7E-AZL" secondAttribute="centerY" id="nd8-WP-8GZ"/>
+                                    <constraint firstItem="nB5-JA-4T5" firstAttribute="centerX" secondItem="acD-7E-AZL" secondAttribute="centerX" id="wPr-2o-OQk"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="17W-FH-Prz"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="acD-7E-AZL" firstAttribute="top" secondItem="17W-FH-Prz" secondAttribute="top" id="3TA-5j-Gqb"/>
+                            <constraint firstItem="v16-28-KeU" firstAttribute="top" secondItem="HyO-Ju-Rru" secondAttribute="top" id="7GZ-IY-aZy"/>
+                            <constraint firstAttribute="bottom" secondItem="v16-28-KeU" secondAttribute="bottom" id="Fad-Dn-P4c"/>
+                            <constraint firstItem="acD-7E-AZL" firstAttribute="trailing" secondItem="17W-FH-Prz" secondAttribute="trailing" id="KD1-cN-OLD"/>
+                            <constraint firstItem="v16-28-KeU" firstAttribute="leading" secondItem="HyO-Ju-Rru" secondAttribute="leading" id="Xp3-iY-P9O"/>
+                            <constraint firstItem="acD-7E-AZL" firstAttribute="leading" secondItem="17W-FH-Prz" secondAttribute="leading" id="cKq-iL-Gel"/>
+                            <constraint firstAttribute="trailing" secondItem="v16-28-KeU" secondAttribute="trailing" id="lyF-0m-t9T"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="reelsCollectionView" destination="v16-28-KeU" id="1f5-0P-GpA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KxB-Sa-Ego" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2094" y="665"/>
+        </scene>
         <!--Sort By Stores View Controller-->
         <scene sceneID="wAp-iC-YlG">
             <objects>
@@ -2423,7 +2503,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(2 Items) View My Bag" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8K-uU-6Rm">
-                                                <rect key="frame" x="20" y="14.333333333333373" width="158" height="19.666666666666664"/>
+                                                <rect key="frame" x="20" y="14.333333333333373" width="158" height="19.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -3006,13 +3086,13 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

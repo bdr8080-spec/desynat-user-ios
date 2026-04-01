@@ -9,6 +9,8 @@ import UIKit
 import SDWebImage
 import AVFAudio
 import Speech
+import AVFoundation
+import AVKit
 
 class StoresDetailsViewController: UIViewController {
     
@@ -56,7 +58,7 @@ class StoresDetailsViewController: UIViewController {
     var appliedSortFilter: Int?
     let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
     var storeId: Int? = 0
-    
+    private var player: AVPlayer?
     // MARK: - speechRecognizer
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
@@ -75,7 +77,7 @@ class StoresDetailsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.getSingleStoresApi()
+//        viewModel.getSingleStoresApi()
     }
     
     override func viewDidLayoutSubviews() {
@@ -89,12 +91,14 @@ class StoresDetailsViewController: UIViewController {
     }
     
     @IBAction func chatDidTapped(_ sender: Any) {
-        if isGuestUser != "true" {
-            viewModel.createNormalChatSercie(sellerId: sellerId)
-        } else {
-            showLoginAlert()
-        }
+//        if isGuestUser != "true" {
+//            viewModel.createNormalChatSercie(sellerId: sellerId)
+//        } else {
+//            showLoginAlert()
+//        }
+        let nextVC = ReelsScrollViewController.instantiate(fromAppStoryboard: .Catalog)
         
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @IBAction func productDidTapped(_ sender: Any) {
@@ -424,7 +428,23 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
             nextVC.productId = viewModel.singleStoresSection?.allProduct?.data?[indexPath.row].id
             self.navigationController?.pushViewController(nextVC, animated: true)
 //        case storiesCollectionView:
+        case reelsCollectionView:
+            let nextVC = ReelsScrollViewController.instantiate(fromAppStoryboard: .Catalog)
             
+            self.navigationController?.pushViewController(nextVC, animated: true)
+//            let media = viewModel.sellerReels[indexPath.item]
+//            guard let fileURLString = media.file,
+//                  let encodedURLString = fileURLString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+//                  let url = URL(string: encodedURLString) else { return }
+//            
+//            if fileURLString.lowercased().contains(".mp4") {
+//                player = AVPlayer(url: url) // retain player
+//                let playerVC = AVPlayerViewController()
+//                playerVC.player = player
+//                self.present(playerVC, animated: true) {
+//                    self.player?.play()
+//                }
+//            }
         default:
             break
         }
