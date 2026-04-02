@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - IBOutlet's
     
+    @IBOutlet weak var adminstoryButtonOutlet: UIButton!
     @IBOutlet weak var notigicationView: CustomView!
     @IBOutlet weak var notificationCountLabel: UILabel!
     
@@ -29,7 +30,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var heightConstraintOfCategoryColelctionView: NSLayoutConstraint!
     @IBOutlet weak var bannerPageController: UIPageControl!
     @IBOutlet weak var lblLocatioin: UILabel!
-    @IBOutlet weak var imgProfile: CustomImageView!
+    @IBOutlet weak var adminStoryProfile: CustomImageView!
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var bannerCollectionView: UICollectionView! {
         didSet {
@@ -110,7 +111,6 @@ class HomeViewController: UIViewController {
         requestPermissions()
         viewModel.getTopHomeBannersListApi()
         viewModel.getCenterHomeBannersListApi()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,12 +119,12 @@ class HomeViewController: UIViewController {
         startPremiumAutoScroll()
         startDiscountAutoScroll()
         viewModel.getCountOfNotificationRequest()
+        viewModel.getAdminStory()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewModel.getAllFullscreenBannersList()
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -221,6 +221,7 @@ class HomeViewController: UIViewController {
     
     @IBAction func storyDidTapped(_ sender: Any) {
         let nextVC = StoryViewerViewController.instantiate(fromAppStoryboard: .Home)
+        nextVC.comingFor = .forAdminStory
         self.navigationController?.pushViewController(nextVC, animated: false)
     }
     
@@ -432,7 +433,6 @@ class HomeViewController: UIViewController {
             lblUserName.text = "Hello Guest"
         } else {
             lblUserName.text = "Deliver to \(Global.shared.user?.fullName ?? "")"
-            imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.medium
         }
     }
 }

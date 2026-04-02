@@ -20,8 +20,8 @@ class StoreDetailsViewModel: NSObject {
     var selectedDiscountIDs: [String] = []
     var minPrice: Int?
     var maxPrice: Int?
-    var sellerHighlights: [SellerHighlightsModel] = []
-    var sellerReels: [SellerHighlightsModel] = []
+    var sellerHighlights: [GetHighLightsList] = []
+    var sellerReels: [GetMyReelsList] = []
     
     init(hostVC: StoresDetailsViewController) {
         self.hostVC = hostVC
@@ -95,6 +95,19 @@ class StoreDetailsViewModel: NSObject {
         WebService.sharedInstance.getSellerReelsService(param: param) { list in
             self.sellerReels = list
             self.hostVC.reelsCollectionView.reloadData()
+        }
+    }
+    
+    func addToReelsWishelistRequest(reelId: Int, completion: @escaping (Bool) -> Void) {
+        let param: [String: Any] = ["reel_id": reelId]
+        WebService.sharedInstance.addToReelsWishelistSercie(param: param) { list in
+            completion(true)
+        }
+    }
+    
+    func shareReels(reelId: Int) {
+        let param: [String: Any] = ["reel_id": reelId]
+        WebService.sharedInstance.shareReelsService(param: param) { list in
         }
     }
 }

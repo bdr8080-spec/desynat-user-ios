@@ -11,28 +11,52 @@ import UIKit
 class FavouirtesVieModel: NSObject {
     
     private var hostVC: FavoruitesViewController!
-   var productList: [FavoruitesDataModel]? = []
-       var reelsList: [FavoruitesDataModel]? = []
-  
+    var productList: [FavoruitesDataModel]? = []
+    var reelsList: [GetMyWislistDataModelForReels]? = []
+    
     init(hostVC: FavoruitesViewController) {
         self.hostVC = hostVC
     }
-
-  func getProductDetails(completion: (() -> Void)? = nil) {
-      WebService.sharedInstance.getWishlistService { list in
-          self.productList = list
-          
-          // Notify ViewController that data is ready
-          completion?()
-      }
-  }
-
     
-    func addToWishlist(productId: Int, completion: @escaping (Bool) -> Void) {
-      let param: [String: Any] = ["product_id": productId]
-      WebService.sharedInstance.addToWishelistSercie(param: param) { list in
-          completion(true)
+    func getProductDetails() {
+        WebService.sharedInstance.getWishlistService { list in
+            self.productList = list
+            let isEmpty = self.productList?.isEmpty ?? true
+            self.hostVC.emptyLabel.text = isEmpty ? "No product found" : ""
+            self.hostVC.emptyLabel.isHidden = !isEmpty
+            self.hostVC.favouriteCollectionView.reloadData()
         }
     }
-
+    
+    func getReelsWishlistRequest() {
+        WebService.sharedInstance.getReelsWishlistService { list in
+            self.reelsList = list
+            let isEmpty = self.reelsList?.isEmpty ?? true
+            self.hostVC.emptyLabel.text = isEmpty ? "No reels found" : ""
+            self.hostVC.emptyLabel.isHidden = !isEmpty
+            self.hostVC.favouriteCollectionView.reloadData()
+        }
+    }
+    
+    
+    func addToWishlist(productId: Int, completion: @escaping (Bool) -> Void) {
+        let param: [String: Any] = ["product_id": productId]
+        WebService.sharedInstance.addToWishelistSercie(param: param) { list in
+            completion(true)
+        }
+    }
+    
+    func shareReels(reelId: Int) {
+        let param: [String: Any] = ["reel_id": reelId]
+        WebService.sharedInstance.shareReelsService(param: param) { list in
+        }
+    }
+    
+    func addToReelsWishelistRequest(reelId: Int, completion: @escaping (Bool) -> Void) {
+        let param: [String: Any] = ["reel_id": reelId]
+        WebService.sharedInstance.addToReelsWishelistSercie(param: param) { list in
+            completion(true)
+        }
+    }
+    
 }

@@ -24,16 +24,29 @@ class ReelsScrollCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-       // playPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+
+        // Tap on video to play/pause
+        let tap = UITapGestureRecognizer(target: self, action: #selector(videoTapped))
+        videoContainerView.addGestureRecognizer(tap)
+        videoContainerView.isUserInteractionEnabled = true
+    }
+    
+    @objc private func videoTapped() {
+        togglePlayPause()
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        NotificationCenter.default.removeObserver(self)
+        
         player?.pause()
         player = nil
+        
         playerLayer?.removeFromSuperlayer()
+        playerLayer = nil
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         playerLayer?.frame = videoContainerView.bounds
@@ -42,13 +55,20 @@ class ReelsScrollCollectionViewCell: UICollectionViewCell {
     func configure(with reel: Reel) {
         captionLabel.text = reel.caption ?? ""
         setupVideo(urlString: reel.videoURL)
+        
     }
 
     private func setupVideo(urlString: String?) {
+        
         guard let urlString = urlString,
               let url = URL(string: urlString) else { return }
 
-        player = AVPlayer(url: url)
+        // 🔥 Remove old layer
+        playerLayer?.removeFromSuperlayer()
+
+        let playerItem = AVPlayerItem(url: url)
+        player = AVPlayer(playerItem: playerItem)
+
         playerLayer = AVPlayerLayer(player: player)
         playerLayer?.videoGravity = .resizeAspectFill
         playerLayer?.frame = videoContainerView.bounds
@@ -61,18 +81,18 @@ class ReelsScrollCollectionViewCell: UICollectionViewCell {
             self,
             selector: #selector(loopVideo),
             name: .AVPlayerItemDidPlayToEndTime,
-            object: player?.currentItem
+            object: playerItem
         )
     }
 
     func playVideo() {
         player?.play()
-//        playPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        playPauseButton.isHidden = true
     }
 
     func pauseVideo() {
         player?.pause()
-        playPauseButton.setImage(UIImage(named: "reelPlayPauseButton"), for: .normal)
+        playPauseButton.isHidden = false
     }
 
     func togglePlayPause() {

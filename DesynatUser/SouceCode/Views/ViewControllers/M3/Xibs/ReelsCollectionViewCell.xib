@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -36,6 +36,9 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="share"/>
+                                <connections>
+                                    <action selector="shareButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="UQQ-a8-pYz"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcw-2z-bJ5">
                                 <rect key="frame" x="168" y="12" width="25" height="25"/>
@@ -45,6 +48,21 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="besSellLike"/>
+                                <connections>
+                                    <action selector="likeButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="23c-Tl-BP5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wa1-aI-s8z">
+                                <rect key="frame" x="85" y="121" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="NPj-2w-IF1"/>
+                                    <constraint firstAttribute="height" constant="35" id="jEi-LW-gbQ"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="reelPlayPauseButton"/>
+                                <connections>
+                                    <action selector="playButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="O5k-Zx-dEv"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -52,11 +70,13 @@
                             <constraint firstAttribute="bottom" secondItem="9Y6-0T-MZf" secondAttribute="bottom" id="0B4-ks-avj"/>
                             <constraint firstItem="9Y6-0T-MZf" firstAttribute="leading" secondItem="aU6-FG-DoH" secondAttribute="leading" id="9nk-4v-74h"/>
                             <constraint firstAttribute="trailing" secondItem="9Y6-0T-MZf" secondAttribute="trailing" id="DKK-5b-e96"/>
+                            <constraint firstItem="wa1-aI-s8z" firstAttribute="centerY" secondItem="aU6-FG-DoH" secondAttribute="centerY" id="Ghn-wj-qQO"/>
                             <constraint firstItem="TQg-Nk-GGj" firstAttribute="centerY" secondItem="fcw-2z-bJ5" secondAttribute="centerY" id="Had-pl-gLx"/>
                             <constraint firstItem="9Y6-0T-MZf" firstAttribute="top" secondItem="aU6-FG-DoH" secondAttribute="top" id="Jgy-pk-dNG"/>
                             <constraint firstItem="TQg-Nk-GGj" firstAttribute="leading" secondItem="aU6-FG-DoH" secondAttribute="leading" constant="12" id="RUo-GQ-Rqh"/>
                             <constraint firstItem="fcw-2z-bJ5" firstAttribute="top" secondItem="aU6-FG-DoH" secondAttribute="top" constant="12" id="d2Z-V5-h2b"/>
                             <constraint firstAttribute="trailing" secondItem="fcw-2z-bJ5" secondAttribute="trailing" constant="12" id="otl-RL-WYD"/>
+                            <constraint firstItem="wa1-aI-s8z" firstAttribute="centerX" secondItem="aU6-FG-DoH" secondAttribute="centerX" id="vov-Qw-Fi1"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -81,7 +101,10 @@
             </constraints>
             <size key="customSize" width="205" height="277"/>
             <connections>
+                <outlet property="likeButton" destination="fcw-2z-bJ5" id="hjC-Mn-TEg"/>
                 <outlet property="mainImageView" destination="9Y6-0T-MZf" id="103-2N-Uxa"/>
+                <outlet property="playButton" destination="wa1-aI-s8z" id="G54-Ga-IXX"/>
+                <outlet property="shareButton" destination="TQg-Nk-GGj" id="zli-LA-bgI"/>
             </connections>
             <point key="canvasLocation" x="199.23664122137404" y="68.661971830985919"/>
         </collectionViewCell>
@@ -89,12 +112,13 @@
     <resources>
         <image name="besSellLike" width="20" height="20"/>
         <image name="bestSell" width="158" height="136"/>
+        <image name="reelPlayPauseButton" width="44" height="49.666667938232422"/>
         <image name="share" width="20" height="20"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

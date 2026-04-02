@@ -38,6 +38,19 @@ class HomeViewModel: NSObject {
         }
     }
     
+    func getAdminStory() {
+        WebService.sharedInstance.getAdminStoryService() { list in
+            if list.count > 0 {
+                self.hostVC.adminStoryProfile.image = .logo
+                self.hostVC.adminstoryButtonOutlet.isUserInteractionEnabled = true
+            } else{
+                self.hostVC.adminStoryProfile.image = .adminStroyEmpty
+                self.hostVC.adminstoryButtonOutlet.isUserInteractionEnabled = false
+            }
+            
+        }
+    }
+    
     func getCountOfNotificationRequest(){
         WebService.sharedInstance.getCountOfNotificationService { [self] count in
             if count > 0 {

@@ -251,11 +251,69 @@ struct SellerHighlightsModel: Codable {
     var title: String?
     var status: Int?
     var createdAt, updatedAt: String?
+    var isWhishlisted: Int?
 
     enum CodingKeys: String, CodingKey {
         case id, type
         case sellerID = "seller_id"
         case file, title, status
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case isWhishlisted = "is_whishlisted"
+
+    }
+    
+    //MARK: - Decode
+    init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            if let value  = try? container.decodeIfPresent(Int.self, forKey: .id) {
+                id = value
+            }
+            if let value  = try? container.decodeIfPresent(Int.self, forKey: .type) {
+                type = value
+            }
+            if let value  = try? container.decodeIfPresent(Int.self, forKey: .sellerID) {
+                sellerID = value
+            }
+            if let value  = try? container.decodeIfPresent(String.self, forKey: .file) {
+                file = value
+            }
+            if let value  = try? container.decodeIfPresent(String.self, forKey: .title) {
+                title = value
+            }
+            if let value  = try? container.decodeIfPresent(Int.self, forKey: .status) {
+                status = value
+            }
+            if let value  = try? container.decodeIfPresent(String.self, forKey: .createdAt) {
+                createdAt = value
+            }
+            if let value  = try? container.decodeIfPresent(String.self, forKey: .updatedAt) {
+                updatedAt = value
+            }
+            if let value  = try? container.decodeIfPresent(Int.self, forKey: .isWhishlisted) {
+                isWhishlisted = value
+            }
+            
+        } catch {
+            print("error:",error.localizedDescription)
+        }
+    }
+}
+
+// MARK: - GetHighLightsList
+struct GetHighLightsList: Codable {
+    let id, type, sellerID: Int?
+    let file: String?
+    let title: String?
+    let thumbnail: String?
+    let status: Int?
+    let createdAt, updatedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id, type
+        case sellerID = "seller_id"
+        case file, title, status, thumbnail
         case createdAt = "created_at"
         case updatedAt = "updated_at"
     }

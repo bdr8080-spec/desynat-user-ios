@@ -19,3 +19,21 @@ struct Story {
         self.duration = duration
     }
 }
+
+
+//// MARK: - SellerHighlightsModel
+//struct SellerHighlightsModel: Codable {
+//    let id, type, sellerID: Int?
+//    let file: String?
+//    let title: String?
+//    let status: Int?
+//    let createdAt, updatedAt: String?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id, type
+//        case sellerID = "seller_id"
+//        case file, status, title
+//        case createdAt = "created_at"
+//        case updatedAt = "updated_at"
+//    }
+//}

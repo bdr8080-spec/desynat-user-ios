@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AVFoundation
+import AVKit
 
 class FavoruitesViewController: UIViewController {
     
@@ -13,6 +15,7 @@ class FavoruitesViewController: UIViewController {
     @IBOutlet weak var favouriteCollectionView: UICollectionView! {
         didSet {
             favouriteCollectionView.registerCellFromNib(cellID: "FilteredStoreCollectionViewCell")
+            favouriteCollectionView.registerCellFromNib(cellID: "ReelsCollectionViewCell")
         }
     }
     @IBOutlet weak var reelsButtonOutlet: CustomButton!
@@ -24,7 +27,7 @@ class FavoruitesViewController: UIViewController {
     // MARK: - Property Decalaration
     private lazy var viewModel = FavouirtesVieModel(hostVC: self)
     private var showingProducts = true
-    
+    private var videoURL: URL?
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,9 +36,7 @@ class FavoruitesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.getProductDetails { [weak self] in
-            self?.updateUI()
-        }
+        viewModel.getProductDetails()
     }
     
     // MARK: - Button's Action
@@ -50,8 +51,7 @@ class FavoruitesViewController: UIViewController {
         
         reelsTitlLabel.textColor = .black
         reelsButtonOutlet.setImage(nil, for: .normal)
-        
-        updateUI()
+        viewModel.getProductDetails()
     }
     
     @IBAction func reelsDidTapped(_ sender: Any) {
@@ -62,8 +62,7 @@ class FavoruitesViewController: UIViewController {
         
         productTitleLabel.textColor = .black
         productButtonOutlet.setImage(nil, for: .normal)
-        
-        updateUI()
+        viewModel.getReelsWishlistRequest()
     }
     
     //MARK: Function's declaration
@@ -80,40 +79,83 @@ class FavoruitesViewController: UIViewController {
                     self.favouriteCollectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
                 })
                 
-                self.updateUI()
+//                viewModel.getProductDetails()
             }
         } else {
-            guard let reelId = viewModel.reelsList?[index].id else { return }
-            
-            viewModel.addToWishlist(productId: reelId) { [weak self] success in
-                guard let self = self, success else { return }
-                
-                self.viewModel.reelsList?.remove(at: index)
-                
-                self.favouriteCollectionView.performBatchUpdates({
-                    self.favouriteCollectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
-                })
-                
-                self.updateUI()
-            }
+//            guard let reelId = viewModel.reelsList?[index].id else { return }
+//
+//            viewModel.addToReelsWishelistRequest(reelId: reelId) { [weak self] success in
+//                guard let self = self, success else { return }
+//
+//                self.viewModel.reelsList?.remove(at: index)
+//
+//                self.favouriteCollectionView.performBatchUpdates({
+//                    self.favouriteCollectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
+//                })
+//
+////                viewModel.getReelsWishlistRequest()
+//            }
         }
     }
     
-    
-    private func updateUI() {
-        if showingProducts {
-            let isEmpty = viewModel.productList?.isEmpty ?? true
-            emptyLabel.text = isEmpty ? "No product found" : ""
-            emptyLabel.isHidden = !isEmpty
-        } else {
-            let isEmpty = viewModel.reelsList?.isEmpty ?? true
-            emptyLabel.text = isEmpty ? "Under Developement" : ""
-            emptyLabel.isHidden = !isEmpty
+    func handleReelRemove(reelId: Int) {
+        guard let index = viewModel.reelsList?.firstIndex(where: { $0.reelID == reelId }) else {
+            return
         }
         
-        favouriteCollectionView.reloadData()
+        viewModel.addToReelsWishelistRequest(reelId: reelId) { [weak self] success in
+            guard let self = self, success else { return }
+            
+            // Remove from array
+            self.viewModel.reelsList?.remove(at: index)
+            
+            // Update UI
+            self.favouriteCollectionView.performBatchUpdates({
+                self.favouriteCollectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
+            }, completion: { _ in
+                
+                // ✅ If list is now empty, show "No reels found"
+                let isEmpty = self.viewModel.reelsList?.isEmpty ?? true
+                if isEmpty {
+                    self.emptyLabel.text = "No reels found"
+                    self.emptyLabel.isHidden = false
+                } else {
+                    self.emptyLabel.isHidden = true
+                }
+            })
+        }
     }
     
+    func shareReel(reelId: Int, completion: @escaping (Bool) -> Void) {
+
+        let shareText = "Check out this reel: https://yourapp.com/reel/\(reelId)"
+        let activityVC = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
+
+        activityVC.completionWithItemsHandler = { activityType, completed, returnedItems, error in
+            completion(completed)   // return true if shared
+        }
+
+        self.present(activityVC, animated: true)
+    }
+    
+    @objc func playVideo() {
+            guard let url = videoURL else { return }
+            
+            let player = AVPlayer(url: url)
+            let vc = AVPlayerViewController()
+            vc.player = player
+            
+            present(vc, animated: true) {
+                player.play()
+            }
+        }
+    
+    func toURL(_ string: String?) -> URL? {
+        guard let string = string,
+              let url = URL(string: string.trimmingCharacters(in: .whitespacesAndNewlines))
+        else { return nil }
+        return url
+    }
     
 }
 
@@ -126,30 +168,51 @@ extension FavoruitesViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "FilteredStoreCollectionViewCell",
-            for: indexPath
-        ) as! FilteredStoreCollectionViewCell
-        
-        let data = showingProducts
-        ? viewModel.productList?[indexPath.row]
-        : viewModel.reelsList?[indexPath.row]
-        
-        cell.configDataForFavouites(data: data)
-        
-        cell.wishlistButtonTapped = { [weak self, weak cell] in
-            guard
-                let self = self,
-                let cell = cell,
-                let currentIndex = collectionView.indexPath(for: cell)?.row
-            else { return }
-            
-            self.handleWishlistTap(index: currentIndex)
+        if showingProducts {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilteredStoreCollectionViewCell",for: indexPath) as! FilteredStoreCollectionViewCell
+            let data = viewModel.productList?[indexPath.row]
+            cell.configDataForFavouites(data: data)
+            cell.wishlistButtonTapped = { [weak self, weak cell] in
+                guard
+                    let self = self,
+                    let cell = cell,
+                    let currentIndex = collectionView.indexPath(for: cell)?.row
+                else { return }
+                self.handleWishlistTap(index: currentIndex)
+            }
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ReelsCollectionViewCell",for: indexPath) as! ReelsCollectionViewCell
+            let data = viewModel.reelsList?[indexPath.row]
+            cell.configData(data: data?.reelDetails)
+            cell.likeButton.setImage(UIImage(named: "selectedHeartImage"), for: .normal)
+            cell.onLikeTapped = { [weak self] in
+                guard let self = self else { return }
+                
+                let reelId = data?.reelID ?? 0          // ← Use the data you already have here
+                if reelId == 0 { return }
+                
+                self.handleReelRemove(reelId: reelId)
+            }
+            cell.onshareTapped = { [weak self, weak cell] in
+                guard let self = self, let cell = cell else { return }
+                let reelId = data?.reelID ?? 0
+                self.shareReel(reelId: reelId) { shared in
+                    if shared {
+                        // User completed share → Call API
+                        self.viewModel.shareReels(reelId: reelId)
+                    } else {
+                        print("Share cancelled")
+                    }
+                }
+            }
+            cell.onPlayTapped = { [weak self, weak cell] in
+                guard let self = self, let cell = cell else { return }
+                videoURL = toURL(data?.reelDetails?.file ?? "")
+                playVideo()
+            }
+            return cell
         }
-        
-        
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -167,12 +230,17 @@ extension FavoruitesViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let spacing: CGFloat = 10
-        let totalSpacing = spacing * 2
-        let width = (collectionView.frame.width - totalSpacing) / 2
-        
-        return CGSize(width: width, height: 220)
+        if showingProducts {
+            let spacing: CGFloat = 10
+            let totalSpacing = spacing * 2
+            let width = (collectionView.frame.width - totalSpacing) / 2
+            return CGSize(width: width, height: 220)
+        } else {
+            let spacing: CGFloat = 10
+            let totalSpacing = spacing * 2 // 3 cells per row → 2 spaces between
+            let width = (collectionView.frame.width - totalSpacing) / 2
+            return CGSize(width: width, height: 275)
+        }
     }
     
 }

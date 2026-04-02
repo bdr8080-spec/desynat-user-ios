@@ -56,7 +56,7 @@ enum NetworkEndPoint: String {
     case getAllBrands                       = "api/all-brand"
     case getAllColors                       = "api/all-color"
     case getAllSizes                        = "api/all-size"
-    
+    case getReelsFromWishlist   = "api/user/get_whishlisted_reel"
     //M4
     case getAllCards                        = "api/user/view-gift-cards"
     case getAllOccassion                    = "api/user/gift-card-occasion-list"

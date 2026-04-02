@@ -10,31 +10,46 @@ import AVFoundation
 
 class StoryViewerViewController: UIViewController {
     
+    @IBOutlet weak var highlightTitleLabel: UILabel!
+    @IBOutlet weak var highlightTitleView: CustomView!
     @IBOutlet weak var storiesCollectionView: UICollectionView!
     @IBOutlet weak var topSliderCollectionView: UICollectionView!
     
     // MARK: - Variables
     var usersStory: [Story] = []
     var currentStoryIndex = 0
-    
     var player: AVPlayer?
     var playerLayer: AVPlayerLayer?
-    
     private var seenStories: Set<Int> = []
     private var progressTimer: Timer?
     private var currentProgress: CGFloat = 0.0
+    private lazy var viewModel = StoryViewerViewModel(hostVC: self)
+//    var sellerId = Int()
+    var selectedIndex: Int = 0
+    var selectedStory: SellerHighlightsModel?
+    var comingFor: ComingReasonAtStoryViewer = .forAdminStory
+    var sellerId: Int? = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
         setupCollectionViews()
-        loadDummyStories()
+        switch comingFor {
+        case .forAdminStory:
+            fetchAdminStoriesFrom()
+            highlightTitleView.isHidden = true
+        case .forSellerStory:
+            fetchSelfStories()
+            highlightTitleView.isHidden = true
+        case .forSellerHighlight:
+            fetchSelfHighlight()
+            highlightTitleView.isHidden = false
+        }
     }
     
     private func setupCollectionViews() {
         // Register Cells
-        storiesCollectionView.register(UINib(nibName: "StorieDetailsCollectionViewCell", bundle: nil),
-                                       forCellWithReuseIdentifier: "StorieDetailsCollectionViewCell")
+        storiesCollectionView.register(UINib(nibName: "StorieDetailsCollectionViewCell", bundle: nil),forCellWithReuseIdentifier: "StorieDetailsCollectionViewCell")
         
         topSliderCollectionView.register(UINib(nibName: "StorieTopSliderCollectionViewCell", bundle: nil),
                                          forCellWithReuseIdentifier: "StorieTopSliderCollectionViewCell")
@@ -70,56 +85,132 @@ class StoryViewerViewController: UIViewController {
         self.navigationController?.popViewController(animated: false)
     }
     
-    // MARK: - Dummy Data
-    func loadDummyStories() {
-        let img1 = "https://picsum.photos/800/1400"
-        let img2 = "https://picsum.photos/801/1401"
-        let img3 = "https://picsum.photos/802/1402"
+    func fetchSelfStories() {
         
-        let video1 = "https://www.w3schools.com/html/mov_bbb.mp4"
-        let video2 = "https://www.w3schools.com/html/movie.mp4"
-        
-        usersStory = [
-            Story(url: img1, isVideo: false, duration: 10),
-            Story(url: video1, isVideo: true, duration: nil),
-            Story(url: img2, isVideo: false, duration: 10),
-            Story(url: img3, isVideo: false, duration: 10),
-            Story(url: video2, isVideo: true, duration: nil),
-            Story(url: img1, isVideo: false, duration: 10)
-        ]
-        
-        storiesCollectionView.reloadData()
-        topSliderCollectionView.reloadData()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.startCurrentStory()
+        // 👉 sellerId pass karo (yaha dynamic bhi kar sakte ho)
+        viewModel.getSelfStory() { [weak self] in
+            guard let self = self else { return }
+            
+            self.usersStory = self.viewModel.sellerStories.compactMap { item in
+                
+                guard let url = item.file else { return nil }
+                
+                let lowerURL = url.lowercased()
+                
+                let isVideo = lowerURL.hasSuffix(".mp4") ||
+                              lowerURL.hasSuffix(".mov") ||
+                              lowerURL.contains(".m3u8")
+                
+                return Story(
+                    url: url,
+                    isVideo: isVideo,
+                    duration: isVideo ? nil : 10.0
+                )
+            }
+            
+            DispatchQueue.main.async {
+                
+                if self.usersStory.isEmpty {
+                    self.dismiss(animated: true)
+                    return
+                }
+                
+                self.storiesCollectionView.reloadData()
+                self.topSliderCollectionView.reloadData()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.startCurrentStory()
+                }
+            }
         }
     }
     
-    // MARK: - Start Story
-//    private func startCurrentStory() {
-//        guard let story = usersStory[safe: currentStoryIndex] else { return }
-//
-//        seenStories.insert(currentStoryIndex)
-//        currentProgress = 0.0
-//        invalidateProgressTimer()
-//
-//        // Configure current story cell
-//        if let cell = storiesCollectionView.cellForItem(at: IndexPath(item: currentStoryIndex, section: 0)) as? StorieDetailsCollectionViewCell {
-//            configureCell(cell, with: story)
-//        }
-//
-//        topSliderCollectionView.reloadData()
-//
-//        // Start Progress
-//        if story.isVideo {
-//            startVideoProgressObserver()
-//        } else {
-//            startImageProgressAnimation(duration: 10.0)
-//        }
-//    }
+    func fetchSelfHighlight() {
+        
+        viewModel.getSelfHighlight() { [weak self] in
+            guard let self = self else { return }
+            
+            self.usersStory = self.viewModel.sellerHighlight.compactMap { item in
+                
+                guard let url = item.file else { return nil }
+                
+                let lowerURL = url.lowercased()
+                
+                let isVideo = lowerURL.hasSuffix(".mp4") ||
+                              lowerURL.hasSuffix(".mov") ||
+                              lowerURL.contains(".m3u8")
+                
+                return Story(
+                    url: url,
+                    isVideo: isVideo,
+                    duration: isVideo ? nil : 10.0
+                )
+            }
+            
+            DispatchQueue.main.async {
+                
+                if self.usersStory.isEmpty {
+                    self.dismiss(animated: true)
+                    return
+                }
+                
+                self.storiesCollectionView.reloadData()
+                self.topSliderCollectionView.reloadData()
+                self.highlightTitleLabel.text = self.viewModel.sellerHighlight.first?.title ?? ""
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.startCurrentStory()
+                }
+            }
+        }
+    }
+    
+    func fetchAdminStoriesFrom() {
+          
+          viewModel.getAdminStory { [weak self] in
+              guard let self = self else { return }
+              
+              self.usersStory = self.viewModel.adminStories.compactMap { item in
+                  
+                  guard let url = item.file else { return nil }
+                  
+                  let lowerURL = url.lowercased()
+                  
+                  let isVideo = lowerURL.hasSuffix(".mp4") ||
+                                lowerURL.hasSuffix(".mov") ||
+                                lowerURL.contains(".m3u8")
+                  
+                  return Story(
+                      url: url,
+                      isVideo: isVideo,
+                      duration: isVideo ? nil : 10.0
+                  )
+              }
+              
+              DispatchQueue.main.async {
+                  if self.usersStory.isEmpty {
+                      self.dismiss(animated: true)
+                      return
+                  }
+                  
+                  self.storiesCollectionView.reloadData()
+                  self.topSliderCollectionView.reloadData()
+                  
+                  DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                      self.startCurrentStory()
+                  }
+              }
+          }
+      }
     
     private func goToNextStory() {
+        
+        // 👉 SINGLE STORY CASE
+        if self.accessibilityHint == "SingleStory" {
+            dismiss(animated: false)
+            return
+        }
+        
+        // 👉 NORMAL FLOW (multiple stories)
         guard currentStoryIndex < usersStory.count - 1 else {
             dismiss(animated: false)
             return
@@ -401,6 +492,11 @@ extension StoryViewerViewController: UICollectionViewDelegate, UICollectionViewD
 
             currentStoryIndex = indexPath.item
             startCurrentStory()     // ← backward/forward both handled
+        }
+        
+        if comingFor == .forSellerHighlight {
+            let item = viewModel.sellerHighlight[currentStoryIndex]
+            highlightTitleLabel.text = item.title
         }
     }
 }

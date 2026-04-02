@@ -53,8 +53,8 @@ class StoresDetailsViewController: UIViewController {
     // MARK: - Property Decalaration
     private lazy var viewModel = StoreDetailsViewModel(hostVC: self)
     private var searchWorkItem: DispatchWorkItem?
-//    var fullName: String? = ""
-//    var profilePic: String? = ""
+    //    var fullName: String? = ""
+    //    var profilePic: String? = ""
     var appliedSortFilter: Int?
     let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
     var storeId: Int? = 0
@@ -66,7 +66,7 @@ class StoresDetailsViewController: UIViewController {
     private let audioEngine = AVAudioEngine()
     private var isListening = false
     private var sellerId: Int = 0
-    
+    private var videoURL: URL?
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +77,7 @@ class StoresDetailsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        viewModel.getSingleStoresApi()
+        viewModel.getSingleStoresApi()
     }
     
     override func viewDidLayoutSubviews() {
@@ -91,14 +91,11 @@ class StoresDetailsViewController: UIViewController {
     }
     
     @IBAction func chatDidTapped(_ sender: Any) {
-//        if isGuestUser != "true" {
-//            viewModel.createNormalChatSercie(sellerId: sellerId)
-//        } else {
-//            showLoginAlert()
-//        }
-        let nextVC = ReelsScrollViewController.instantiate(fromAppStoryboard: .Catalog)
-        
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        if isGuestUser != "true" {
+            viewModel.createNormalChatSercie(sellerId: sellerId)
+        } else {
+            showLoginAlert()
+        }
     }
     
     @IBAction func productDidTapped(_ sender: Any) {
@@ -169,6 +166,13 @@ class StoresDetailsViewController: UIViewController {
             sender.setImage(UIImage(systemName: "mic.fill"), for: .normal)
             sender.tintColor = .systemRed // optional: show it's active
         }
+    }
+    
+    @IBAction func sellerStoryDidTapped(_ sender: Any) {
+        let nextVC = StoryViewerViewController.instantiate(fromAppStoryboard: .Home)
+        nextVC.comingFor = .forSellerStory
+        nextVC.sellerId = sellerId
+        self.navigationController?.pushViewController(nextVC, animated: false)
     }
     
     //MARK: Function's declaration
@@ -357,6 +361,64 @@ class StoresDetailsViewController: UIViewController {
         }
     }
     
+    func handReelsleWishlistTap(index: Int) {
+        let reelId = viewModel.sellerReels[index].id ?? 0
+        
+        viewModel.addToReelsWishelistRequest(reelId: reelId) { [weak self] success in
+            guard let self = self else { return }
+            if success {
+                var updatedReel = self.viewModel.sellerReels[index]
+                
+                let newStatus = updatedReel.isWhishlisted == 1 ? 0 : 1
+                updatedReel.isWhishlisted = newStatus
+                
+                self.viewModel.sellerReels[index] = updatedReel
+                
+                DispatchQueue.main.async {
+                    self.reelsCollectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
+                    
+                    if newStatus == 1 {
+                        CommonUtils.showToast(message: "Reel added to wishlist")
+                    } else {
+                        CommonUtils.showToast(message: "Reel removed from wishlist")
+                    }
+                }
+            } else {
+                print("Wishlist API Failed")
+            }
+        }
+    }
+    
+    func shareReel(reelId: Int, completion: @escaping (Bool) -> Void) {
+        
+        let shareText = "Check out this reel: https://yourapp.com/reel/\(reelId)"
+        let activityVC = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
+        
+        activityVC.completionWithItemsHandler = { activityType, completed, returnedItems, error in
+            completion(completed)   // return true if shared
+        }
+        
+        self.present(activityVC, animated: true)
+    }
+    
+//    @objc func playVideo() {
+//        guard let url = videoURL else { return }
+//
+//        let player = AVPlayer(url: url)
+//        let vc = AVPlayerViewController()
+//        vc.player = player
+//
+//        present(vc, animated: true) {
+//            player.play()
+//        }
+//    }
+//
+//    func toURL(_ string: String?) -> URL? {
+//        guard let string = string,
+//              let url = URL(string: string.trimmingCharacters(in: .whitespacesAndNewlines))
+//        else { return nil }
+//        return url
+//    }
     
     
 }
@@ -380,18 +442,8 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
         switch collectionView {
         case storiesCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoresDetailsCollectionViewCell", for: indexPath) as! StoresDetailsCollectionViewCell
-//            if indexPath.row == 0 {
-//                cell.mainImageView.image = UIImage(named: "statusImage")
-//            } else if indexPath.row == 1 {
-//                cell.mainImageView.image = UIImage(named: "bestSell")
-//            }
             let dict = self.viewModel.sellerHighlights[indexPath.row]
-            let url = URL(string: dict.file ?? "")
-              
-                cell.mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                cell.mainImageView.sd_imageIndicator?.startAnimatingIndicator()
-                cell.mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
-            cell.lblTitle.text = dict.title
+            cell.configData(data: dict)
             return cell
         case storesCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilteredStoreCollectionViewCell", for: indexPath) as! FilteredStoreCollectionViewCell
@@ -409,11 +461,41 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
         case reelsCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ReelsCollectionViewCell", for: indexPath) as! ReelsCollectionViewCell
             let dict = self.viewModel.sellerReels[indexPath.row]
-            let url = URL(string: dict.file ?? "")
-              
-                cell.mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                cell.mainImageView.sd_imageIndicator?.startAnimatingIndicator()
-                cell.mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+            cell.configData(data: dict)
+            cell.onLikeTapped = { [weak self] in
+                guard let self = self else { return }
+                if isGuestUser != "true" {
+                    self.handReelsleWishlistTap(index: indexPath.row)
+                } else {
+                    showLoginAlert()
+                }
+            }
+            
+            cell.onshareTapped = { [weak self, weak cell] in
+                guard let self = self, let cell = cell else { return }
+                if isGuestUser != "true" {
+                    let reelId = dict.id ?? 0
+                    self.shareReel(reelId: reelId) { shared in
+                        if shared {
+                            // User completed share → Call API
+                            self.viewModel.shareReels(reelId: reelId)
+                        } else {
+                            print("Share cancelled")
+                        }
+                    }
+                } else {
+                    showLoginAlert()
+                }
+            }
+            
+            cell.onPlayTapped = { [weak self, weak cell] in
+//                guard let self = self, let cell = cell else { return }
+//                videoURL = toURL(dict.file ?? "")
+//                playVideo()
+                let nextVC = ReelsScrollViewController.instantiate(fromAppStoryboard: .Catalog)
+                nextVC.sellerId = self?.sellerId ?? 0
+                self?.navigationController?.pushViewController(nextVC, animated: true)
+            }
             return cell
         default:
             return UICollectionViewCell()
@@ -427,24 +509,15 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
             let nextVC = ProductDetailViewController.instantiate(fromAppStoryboard: .Catalog)
             nextVC.productId = viewModel.singleStoresSection?.allProduct?.data?[indexPath.row].id
             self.navigationController?.pushViewController(nextVC, animated: true)
-//        case storiesCollectionView:
         case reelsCollectionView:
             let nextVC = ReelsScrollViewController.instantiate(fromAppStoryboard: .Catalog)
-            
+            nextVC.sellerId = sellerId
             self.navigationController?.pushViewController(nextVC, animated: true)
-//            let media = viewModel.sellerReels[indexPath.item]
-//            guard let fileURLString = media.file,
-//                  let encodedURLString = fileURLString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-//                  let url = URL(string: encodedURLString) else { return }
-//            
-//            if fileURLString.lowercased().contains(".mp4") {
-//                player = AVPlayer(url: url) // retain player
-//                let playerVC = AVPlayerViewController()
-//                playerVC.player = player
-//                self.present(playerVC, animated: true) {
-//                    self.player?.play()
-//                }
-//            }
+        case storiesCollectionView:
+            let nextVC = StoryViewerViewController.instantiate(fromAppStoryboard: .Home)
+            nextVC.comingFor = .forSellerHighlight
+            nextVC.sellerId = sellerId
+            self.navigationController?.pushViewController(nextVC, animated: false)
         default:
             break
         }
