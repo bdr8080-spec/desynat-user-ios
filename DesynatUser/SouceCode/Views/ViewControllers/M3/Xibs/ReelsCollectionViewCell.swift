@@ -37,57 +37,80 @@ class ReelsCollectionViewCell: UICollectionViewCell {
         onPlayTapped?()
     }
     
-    func configData(data: GetMyReelsList?) {
-
-        // Reset state
-        mainImageView.image = nil
-        playButton.isHidden = true
-        currentVideoURL = nil
-
-        guard let fileURLString = data?.file else {
-            mainImageView.image = UIImage(named: "placeholder")
-            return
-        }
-
-        let isVideo = fileURLString.lowercased().contains(".mp4")
-        let fileURL = URL(string: fileURLString)
-
-        // ----- VIDEO CASE -----
-        if isVideo {
-
-            currentVideoURL = fileURL
-            playButton.isHidden = false  // Show play icon
-
-            // Show placeholder first
-            mainImageView.image = UIImage(named: "placeholder")
-
-            // Load THUMBNAIL
-            if let thumbString = data?.thumbnail,
-               let thumbURL = URL(string: thumbString) {
-
-                mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                mainImageView.sd_setImage(
-                    with: thumbURL,
-                    placeholderImage: UIImage(named: "placeholder"),
-                    options: [.retryFailed, .scaleDownLargeImages]
-                )
-            }
-
-        }
-        else {
-            // ----- IMAGE CASE -----
-            playButton.isHidden = true
-
-            if let url = fileURL {
-                mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                mainImageView.sd_setImage(
-                    with: url,
-                    placeholderImage: UIImage(named: "placeholder"),
-                    options: [.retryFailed, .scaleDownLargeImages]
-                )
-            }
-        }
-
+    //    func configData(data: GetMyReelsList?) {
+    //
+    //        // Reset state
+    //        mainImageView.image = nil
+    //        playButton.isHidden = true
+    //        currentVideoURL = nil
+    //
+    //        guard let fileURLString = data?.file else {
+    //            mainImageView.image = UIImage(named: "placeholder")
+    //            return
+    //        }
+    //
+    //        let isVideo = fileURLString.lowercased().contains(".mp4")
+    //        let fileURL = URL(string: fileURLString)
+    //
+    //        // ----- VIDEO CASE -----
+    //        if isVideo {
+    //
+    //            currentVideoURL = fileURL
+    //            playButton.isHidden = false  // Show play icon
+    //
+    //            // Show placeholder first
+    //            mainImageView.image = UIImage(named: "placeholder")
+    //
+    //            // Load THUMBNAIL
+    //            if let thumbString = data?.thumbnail,
+    //               let thumbURL = URL(string: thumbString) {
+    //
+    //                mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+    //                mainImageView.sd_setImage(
+    //                    with: thumbURL,
+    //                    placeholderImage: UIImage(named: "placeholder"),
+    //                    options: [.retryFailed, .scaleDownLargeImages]
+    //                )
+    //            }
+    //
+    //        }
+    //        else {
+    //            // ----- IMAGE CASE -----
+    //            playButton.isHidden = true
+    //
+    //            if let url = fileURL {
+    //                mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+    //                mainImageView.sd_setImage(
+    //                    with: url,
+    //                    placeholderImage: UIImage(named: "placeholder"),
+    //                    options: [.retryFailed, .scaleDownLargeImages]
+    //                )
+    //            }
+    //        }
+    //
+    //
+    //    }
+    
+    func configData(data: GetMyReelsList?){
+        let fileString = data?.file ?? ""
+        let thumbnailString = data?.thumbnail ?? ""
+        
+        // Detect video
+        let isVideo = fileString.lowercased().contains(".mp4")
+        playButton.isHidden = !isVideo
+        // Decide which URL to load
+        let finalURLString = isVideo ? thumbnailString : fileString
+        let url = URL(string: finalURLString)
+        mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        mainImageView.sd_imageIndicator?.startAnimatingIndicator()
+        
+        // Set image
+        mainImageView.sd_setImage(
+            with: url,
+            placeholderImage: UIImage(named: "placeholder")
+        )
+        //            lblTitle.text = data?.title
+        
         // ----- LIKE BUTTON -----
         if data?.isWhishlisted == 1 {
             likeButton.setImage(.selectedHeart, for: .normal)

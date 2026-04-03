@@ -50,6 +50,7 @@ class StoreDetailsViewModel: NSObject {
             DispatchQueue.main.async {
                 self.getSellerHighlightsService(sellerId: list.store?.sellerID ?? 0)
                 self.getSellerReelsService(sellerId: list.store?.sellerID ?? 0)
+                self.getSellerStory(sellerId: list.store?.sellerID ?? 0)
                 self.hostVC.storesCollectionView.reloadData()
                 if let store = list.store {
                     self.hostVC.configData(data: store)
@@ -105,9 +106,29 @@ class StoreDetailsViewModel: NSObject {
         }
     }
     
-    func shareReels(reelId: Int) {
-        let param: [String: Any] = ["reel_id": reelId]
-        WebService.sharedInstance.shareReelsService(param: param) { list in
+    func getSellerStory(sellerId: Int) {
+        let param: [String:Any] = ["seller_id": sellerId]
+        WebService.sharedInstance.getSellerStoryService(param: param) { list in
+            if list.count > 0 {
+                self.hostVC.userProfileImage.borderWidth = 1.5
+                self.hostVC.sellerProfileButton.isUserInteractionEnabled = true
+            } else {
+                self.hostVC.sellerProfileButton.isUserInteractionEnabled = false
+                self.hostVC.userProfileImage.borderWidth = 0
+            }
         }
     }
+    
+    func shareReelsRequest(reelId: Int, completion: @escaping (String?) -> Void) {
+
+        let param = ["reel_id": reelId]
+
+        WebService.shared.shareReelsService(param: param) { response in
+            // Assuming API returns:  { "link": "https://..." }
+            let link = response.file ?? ""
+            completion(link)
+        }
+    }
+    
+    
 }

@@ -19,8 +19,6 @@ class StoresDetailsCollectionViewCell: UICollectionViewCell {
     }
     
     func configData(data: GetHighLightsList?){
-    //        let dict = self.viewModel.highlightList?[indexPath.row]
-     
             let fileString = data?.file ?? ""
             let thumbnailString = data?.thumbnail ?? ""
      
@@ -30,8 +28,6 @@ class StoresDetailsCollectionViewCell: UICollectionViewCell {
             // Decide which URL to load
             let finalURLString = isVideo ? thumbnailString : fileString
             let url = URL(string: finalURLString)
-     
-            // Loader
             mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             mainImageView.sd_imageIndicator?.startAnimatingIndicator()
      

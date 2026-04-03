@@ -27,7 +27,7 @@ class StoryViewerViewModel {
     }
     
     func getSelfStory(completion: @escaping () -> Void) {
-        let param: [String:Any] = ["seller_id": hostVC.sellerId ?? 0]
+        let param: [String:Any] = ["seller_id": hostVC.sellerId]
         WebService.sharedInstance.getSellerStoryService(param: param) { list in
             self.sellerStories = list
             completion()
@@ -35,7 +35,7 @@ class StoryViewerViewModel {
     }
     
     func getSelfHighlight(completion: @escaping () -> Void) {
-        let param: [String:Any] = ["seller_id": hostVC.sellerId ?? 0]
+        let param: [String:Any] = ["seller_id": hostVC.sellerId]
         WebService.sharedInstance.getSellerHighlightsService(param: param) { list in
             self.sellerHighlight = list
             completion()

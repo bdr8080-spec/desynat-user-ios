@@ -16,7 +16,10 @@ class LiveStreamingViewController: UIViewController {
     var agoraKit: AgoraRtcEngineKit!
     let appID = "564c1a00b81c4d1c91d0a3a22db4a8bd"
     var channelName = "live_stream"
-    var token: String? = "007eJxTYJgXO03k5AaemduOxc2z8Ylf0L7Ipu208ou3x1+Z3zpnxDpVgcHUzCTZMNHAIMnCMNkkxTDZ0jDFINE40cgoJckk0SIpReLtmcyGQEaGE4f5WBkZIBDE52bIySxLjS8uKUpNzGVgAACxhiQx"
+//    var token: String? = "007eJxTYJgXO03k5AaemduOxc2z8Ylf0L7Ipu208ou3x1+Z3zpnxDpVgcHUzCTZMNHAIMnCMNkkxTDZ0jDFINE40cgoJckk0SIpReLtmcyGQEaGE4f5WBkZIBDE52bIySxLjS8uKUpNzGVgAACxhiQx"
+//    var uid: UInt = UInt.random(in: 1...9999)
+    
+    var token: String? = ""
     var uid: UInt = UInt.random(in: 1...9999)
     var isHost = false
     var isMuted = false
@@ -132,7 +135,7 @@ class LiveStreamingViewController: UIViewController {
         case 4:
             print("📴 End Stream")
             leaveChannel()
-            dismiss(animated: true)
+            dismiss(animated: false)
         default:
             break
         }

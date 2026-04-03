@@ -24,6 +24,8 @@ class ReelsScrollViewController: UIViewController {
     private var reels: [Reel] = []
     private var currentIndex = 0
     var sellerId: Int = 0
+    var isComingFromMywishlist: Bool = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +35,9 @@ class ReelsScrollViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            self.playReel(at: 0)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            self.playReel(at: self.currentIndex)
         }
     }
 
@@ -54,19 +57,37 @@ class ReelsScrollViewController: UIViewController {
 
     // MARK: - Load API Data
     private func getReelsData() {
-        viewModel.getSellerReelsService(sellerId: sellerId) { [weak self] in
-            guard let self = self else { return }
-
-            // Convert API model → local Reel model
-            self.reels = self.viewModel.sellerReels.map {
-                Reel(id: $0.id,
-                     videoURL: $0.file,
-                     caption: $0.title)
+        if isComingFromMywishlist {
+            viewModel.getReelsWishlistRequest() { [weak self] in
+                guard let self = self else { return }
+                
+                self.reels = self.viewModel.reelsList.map {
+                    Reel(id: $0.reelID,
+                         videoURL: $0.reelDetails?.file,
+                         caption: $0.reelDetails?.caption ?? "",
+                         isWhishlisted: 1
+                    )
+                }
+                
+                DispatchQueue.main.async {
+                    self.reelsCollectionView.reloadData()
+                }
             }
-
-            DispatchQueue.main.async {
-                self.reelsCollectionView.reloadData()
-                self.playReel(at: 0)
+        } else {
+            viewModel.getSellerReelsService(sellerId: sellerId) { [weak self] in
+                guard let self = self else { return }
+                
+                self.reels = self.viewModel.sellerReels.map {
+                    Reel(id: $0.id,
+                         videoURL: $0.file,
+                         caption: $0.caption,
+                         isWhishlisted: $0.isWhishlisted
+                    )
+                }
+                
+                DispatchQueue.main.async {
+                    self.reelsCollectionView.reloadData()
+                }
             }
         }
     }
@@ -75,21 +96,33 @@ class ReelsScrollViewController: UIViewController {
     private func playReel(at index: Int) {
         let indexPath = IndexPath(item: index, section: 0)
 
-        DispatchQueue.main.async {
-            if let cell = self.reelsCollectionView.cellForItem(at: indexPath) as? ReelsScrollCollectionViewCell {
+        if let cell = reelsCollectionView.cellForItem(at: indexPath) as? ReelsScrollCollectionViewCell {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 cell.playVideo()
             }
         }
     }
 
     private func pauseAll() {
-        reelsCollectionView.visibleCells.forEach {
-            ($0 as? ReelsScrollCollectionViewCell)?.pauseVideo()
+        for cell in reelsCollectionView.visibleCells {
+            (cell as? ReelsScrollCollectionViewCell)?.pauseVideo()
         }
     }
 
     @IBAction func backDidTapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: false)
+        dismiss(animated: false)
+    }
+    
+    func openShareSheet(urlString: String) {
+
+        guard let url = URL(string: urlString) else { return }
+
+        let activityVC = UIActivityViewController(activityItems: [url],
+                                                  applicationActivities: nil)
+
+        activityVC.excludedActivityTypes = [.assignToContact]
+
+        present(activityVC, animated: true)
     }
 }
 
@@ -113,38 +146,47 @@ extension ReelsScrollViewController:
         let reel = reels[indexPath.item]
         cell.configure(with: reel)
 
-        // Auto play/pause
+        // Auto Play Current Index
         if indexPath.item == currentIndex {
-            cell.playVideo()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                cell.playVideo()
+            }
         } else {
             cell.pauseVideo()
         }
 
         // MARK: - SHARE BUTTON
         cell.onShareTapped = { [weak self] in
-            guard let id = reel.id else { return }
-            self?.viewModel.selectedReelId = id
-            self?.viewModel.shareReelsRequest()
-        }
-
-        // MARK: - LIKE BUTTON (local + API)
-        let isLiked = (viewModel.sellerReels[indexPath.item].isWhishlisted ?? 0) == 1
-        cell.likeButton.isSelected = isLiked
-
-        cell.onLikeTapped = { [weak self] in
             guard let self = self else { return }
-
             guard let id = reel.id else { return }
+
             self.viewModel.selectedReelId = id
 
-            // Toggle Local State
+            self.viewModel.shareReelsRequest { link in
+                guard let link = link else { return }
+                self.openShareSheet(urlString: link)
+            }
+        }
+
+        // MARK: - LIKE BUTTON
+        cell.onLikeTapped = { [weak self, weak cell] in
+            guard let self = self,
+                  let cell = cell,
+                  let id = reel.id else { return }
+
+            self.viewModel.selectedReelId = id
+
             if let idx = self.viewModel.sellerReels.firstIndex(where: { $0.id == id }) {
+
                 let current = self.viewModel.sellerReels[idx].isWhishlisted ?? 0
-                self.viewModel.sellerReels[idx].isWhishlisted = (current == 1) ? 0 : 1
-                self.reelsCollectionView.reloadItems(at: [indexPath])
+                let newValue = current == 1 ? 0 : 1
+
+                self.viewModel.sellerReels[idx].isWhishlisted = newValue
+                self.reels[indexPath.item].isWhishlisted = newValue
+
+                cell.btnLike.image = newValue == 1 ? .selectedHeart : .besSellLike
             }
 
-            // API Request
             self.viewModel.addRemoveReelsFromWishlistRequest()
         }
 
@@ -160,24 +202,35 @@ extension ReelsScrollViewController:
     // MARK: - Scroll Detect
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
-        let visibleCenter = CGPoint(
+        let centerPoint = CGPoint(
             x: reelsCollectionView.bounds.midX,
             y: reelsCollectionView.contentOffset.y + reelsCollectionView.bounds.midY
         )
 
-        guard let newIndex = reelsCollectionView.indexPathForItem(at: visibleCenter)?.item else { return }
+        guard let newIndex = reelsCollectionView.indexPathForItem(at: centerPoint)?.item else { return }
 
         if newIndex != currentIndex {
-            pauseAll()                 // pause previous video
+
+            // Pause old reel
+            if let oldCell = reelsCollectionView.cellForItem(
+                at: IndexPath(item: currentIndex, section: 0)
+            ) as? ReelsScrollCollectionViewCell {
+                oldCell.pauseVideo()
+            }
+
             currentIndex = newIndex
 
-            // Reload only the new cell so its player gets created
-            reelsCollectionView.reloadItems(at: [IndexPath(item: newIndex, section: 0)])
+            // Play new reel
+            if let newCell = reelsCollectionView.cellForItem(
+                at: IndexPath(item: newIndex, section: 0)
+            ) as? ReelsScrollCollectionViewCell {
 
-            // 🔥 PLAY AFTER 0.1 sec so cell is fully laid out
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                self.playReel(at: newIndex)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    newCell.playVideo()
+                }
             }
         }
     }
+    
+    
 }

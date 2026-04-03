@@ -1313,6 +1313,7 @@
                         <outlet property="reelsTitlLabel" destination="Twg-9y-S9x" id="6fI-LT-d8B"/>
                         <outlet property="searchTF" destination="Wm7-jT-2bK" id="wrU-lS-Kcq"/>
                         <outlet property="searchView" destination="V5x-bJ-zdR" id="HHk-cc-e1q"/>
+                        <outlet property="sellerProfileButton" destination="9IB-O5-2WF" id="GQb-h7-g4G"/>
                         <outlet property="sortFilterView" destination="egG-TH-DpG" id="aNP-dL-uro"/>
                         <outlet property="statusView" destination="lE9-1i-3V8" id="LKZ-bL-gEC"/>
                         <outlet property="storeImageView" destination="Hmb-zR-1Ls" id="RRQ-bc-wYr"/>
@@ -2935,7 +2936,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="F0b-0A-r6R">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="F0b-0A-r6R">
                                 <rect key="frame" x="20" y="236" width="353" height="548"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="0.0" id="Y56-zQ-Z4B">

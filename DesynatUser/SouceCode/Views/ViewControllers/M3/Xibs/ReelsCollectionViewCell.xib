@@ -20,7 +20,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aU6-FG-DoH" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="205" height="277"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bestSell" translatesAutoresizingMaskIntoConstraints="NO" id="9Y6-0T-MZf" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Y6-0T-MZf" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="205" height="277"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -65,7 +65,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="9Y6-0T-MZf" secondAttribute="bottom" id="0B4-ks-avj"/>
                             <constraint firstItem="9Y6-0T-MZf" firstAttribute="leading" secondItem="aU6-FG-DoH" secondAttribute="leading" id="9nk-4v-74h"/>
@@ -111,12 +111,8 @@
     </objects>
     <resources>
         <image name="besSellLike" width="20" height="20"/>
-        <image name="bestSell" width="158" height="136"/>
         <image name="reelPlayPauseButton" width="44" height="49.666667938232422"/>
         <image name="share" width="20" height="20"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

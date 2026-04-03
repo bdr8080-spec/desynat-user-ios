@@ -28,3 +28,15 @@ struct PromocodeApplied: Codable {
         case finalAmount = "final_amount"
     }
 }
+
+
+// MARK: - sharedReelDataModel
+struct sharedReelDataModel: Codable {
+    let reelID: Int?
+    let file: String?
+
+    enum CodingKeys: String, CodingKey {
+        case reelID = "reel_id"
+        case file
+    }
+}

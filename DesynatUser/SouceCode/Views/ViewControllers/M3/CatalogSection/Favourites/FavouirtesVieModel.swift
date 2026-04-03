@@ -46,9 +46,20 @@ class FavouirtesVieModel: NSObject {
         }
     }
     
-    func shareReels(reelId: Int) {
-        let param: [String: Any] = ["reel_id": reelId]
-        WebService.sharedInstance.shareReelsService(param: param) { list in
+//    func shareReels(reelId: Int) {
+//        let param: [String: Any] = ["reel_id": reelId]
+//        WebService.sharedInstance.shareReelsService(param: param) { list in
+//        }
+//    }
+    
+    func shareReelsRequest(reelId: Int, completion: @escaping (String?) -> Void) {
+
+        let param = ["reel_id": reelId]
+
+        WebService.shared.shareReelsService(param: param) { response in
+            // Assuming API returns:  { "link": "https://..." }
+            let link = response.file ?? ""
+            completion(link)
         }
     }
     

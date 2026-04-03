@@ -9,23 +9,24 @@ import UIKit
 import AVFoundation
 
 class ReelsScrollCollectionViewCell: UICollectionViewCell {
-
+    
+    @IBOutlet weak var btnLike: UIImageView!
     @IBOutlet weak var videoContainerView: UIView!
     @IBOutlet weak var captionLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
-
+    
     private var player: AVPlayer?
     private var playerLayer: AVPlayerLayer?
     var onPlayPauseTapped: (() -> Void)?
     var onShareTapped: (() -> Void)?
     var onLikeTapped: (() -> Void)?
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        // Tap on video to play/pause
+        
+        // Tap gesture on video
         let tap = UITapGestureRecognizer(target: self, action: #selector(videoTapped))
         videoContainerView.addGestureRecognizer(tap)
         videoContainerView.isUserInteractionEnabled = true
@@ -34,15 +35,16 @@ class ReelsScrollCollectionViewCell: UICollectionViewCell {
     @objc private func videoTapped() {
         togglePlayPause()
     }
-
+    
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+
         NotificationCenter.default.removeObserver(self)
-        
+
         player?.pause()
         player = nil
-        
+
+        playerLayer?.player = nil
         playerLayer?.removeFromSuperlayer()
         playerLayer = nil
     }
@@ -51,42 +53,50 @@ class ReelsScrollCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         playerLayer?.frame = videoContainerView.bounds
     }
-
+    
     func configure(with reel: Reel) {
         captionLabel.text = reel.caption ?? ""
         setupVideo(urlString: reel.videoURL)
-        
-    }
 
+        // Always hide play/pause button on new cell
+        playPauseButton.isHidden = true
+
+        btnLike.image = reel.isWhishlisted == 1 ? .selectedHeart : .besSellLike
+    }
+    
+    // MARK: - VIDEO SETUP
     private func setupVideo(urlString: String?) {
-        
         guard let urlString = urlString,
               let url = URL(string: urlString) else { return }
-
-        // 🔥 Remove old layer
+        
+        // Avoid duplicate layer stacking
         playerLayer?.removeFromSuperlayer()
-
-        let playerItem = AVPlayerItem(url: url)
-        player = AVPlayer(playerItem: playerItem)
-
+        
+        // Build new Player
+        let item = AVPlayerItem(url: url)
+        player = AVPlayer(playerItem: item)
+        
         playerLayer = AVPlayerLayer(player: player)
         playerLayer?.videoGravity = .resizeAspectFill
         playerLayer?.frame = videoContainerView.bounds
-
+        
         if let layer = playerLayer {
-            videoContainerView.layer.addSublayer(layer)
+            videoContainerView.layer.insertSublayer(layer, at: 0)
         }
-
+        
+        // Loop video
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(loopVideo),
             name: .AVPlayerItemDidPlayToEndTime,
-            object: playerItem
+            object: item
         )
     }
-
+    
+    // MARK: - PLAY / PAUSE CONTROL
     func playVideo() {
-        player?.play()
+        guard let player = player else { return }
+        player.play()
         playPauseButton.isHidden = true
     }
 
@@ -94,29 +104,32 @@ class ReelsScrollCollectionViewCell: UICollectionViewCell {
         player?.pause()
         playPauseButton.isHidden = false
     }
-
+    
     func togglePlayPause() {
-        if player?.timeControlStatus == .playing {
+        guard let player = player else { return }
+        
+        if player.timeControlStatus == .playing {
             pauseVideo()
         } else {
             playVideo()
         }
     }
-
+    
     @objc private func loopVideo() {
         player?.seek(to: .zero)
         player?.play()
     }
-
+    
+    // MARK: - BUTTON ACTIONS
     @IBAction func playPauseTapped(_ sender: UIButton) {
         togglePlayPause()
         onPlayPauseTapped?()
     }
-
+    
     @IBAction func shareTapped(_ sender: UIButton) {
         onShareTapped?()
     }
-
+    
     @IBAction func likeTapped(_ sender: UIButton) {
         onLikeTapped?()
     }

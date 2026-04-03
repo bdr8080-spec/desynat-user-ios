@@ -10,6 +10,7 @@ class ReelsScrollViewModel {
     private var hostVC: ReelsScrollViewController
     var selectedReelId: Int? = 0
     var sellerReels: [GetMyReelsList] = []
+    var reelsList: [GetMyWislistDataModelForReels] = []
     
     init(hostVC: ReelsScrollViewController) {
         self.hostVC = hostVC
@@ -20,9 +21,15 @@ class ReelsScrollViewModel {
         WebService.shared.addRemoveReelsToWishlistService(param: param) { _ in }
     }
     
-    func shareReelsRequest() {
+    func shareReelsRequest(completion: @escaping (String?) -> Void) {
+
         let param = ["reel_id": selectedReelId ?? 0]
-        WebService.shared.shareReelsService(param: param) { _ in }
+
+        WebService.shared.shareReelsService(param: param) { response in
+            // Assuming API returns:  { "link": "https://..." }
+            let link = response.file ?? ""
+            completion(link)
+        }
     }
     
     func getSellerReelsService(sellerId: Int, completion: @escaping () -> Void) {
@@ -31,6 +38,17 @@ class ReelsScrollViewModel {
         WebService.sharedInstance.getSellerReelsService(param: param) { [weak self] list in
             self?.sellerReels = list
             completion()
+        }
+    }
+    
+    func getReelsWishlistRequest(completion: @escaping () -> Void) {
+        WebService.sharedInstance.getReelsWishlistService { list in
+            self.reelsList = list
+            completion()
+//            let isEmpty = self.reelsList?.isEmpty ?? true
+//            self.hostVC.emptyLabel.text = isEmpty ? "No reels found" : ""
+//            self.hostVC.emptyLabel.isHidden = !isEmpty
+//            self.hostVC.favouriteCollectionView.reloadData()
         }
     }
 }

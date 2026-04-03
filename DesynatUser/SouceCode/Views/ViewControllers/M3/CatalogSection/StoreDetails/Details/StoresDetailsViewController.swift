@@ -15,6 +15,8 @@ import AVKit
 class StoresDetailsViewController: UIViewController {
     
     // MARK: - IBOutlet's
+    
+    @IBOutlet weak var sellerProfileButton: UIButton!
     @IBOutlet weak var noReelsFound: UILabel!
     @IBOutlet weak var statusView: CustomView!
     @IBOutlet weak var searchTF: UITextField!
@@ -420,6 +422,18 @@ class StoresDetailsViewController: UIViewController {
 //        return url
 //    }
     
+    func openShareSheet(urlString: String) {
+
+        guard let url = URL(string: urlString) else { return }
+
+        let activityVC = UIActivityViewController(activityItems: [url],
+                                                  applicationActivities: nil)
+
+        activityVC.excludedActivityTypes = [.assignToContact]
+
+        present(activityVC, animated: true)
+    }
+    
     
 }
 
@@ -471,30 +485,23 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
                 }
             }
             
-            cell.onshareTapped = { [weak self, weak cell] in
-                guard let self = self, let cell = cell else { return }
-                if isGuestUser != "true" {
-                    let reelId = dict.id ?? 0
-                    self.shareReel(reelId: reelId) { shared in
-                        if shared {
-                            // User completed share → Call API
-                            self.viewModel.shareReels(reelId: reelId)
-                        } else {
-                            print("Share cancelled")
-                        }
-                    }
-                } else {
-                    showLoginAlert()
+            cell.onshareTapped = { [weak self] in
+                guard let self = self else { return }
+                guard let id = dict.id else { return }
+
+//                self.viewModel.selectedReelId = id
+
+                self.viewModel.shareReelsRequest(reelId: id) { link in
+                    guard let link = link else { return }
+                    self.openShareSheet(urlString: link)
                 }
             }
             
-            cell.onPlayTapped = { [weak self, weak cell] in
-//                guard let self = self, let cell = cell else { return }
-//                videoURL = toURL(dict.file ?? "")
-//                playVideo()
+            cell.onPlayTapped = { [weak self] in
                 let nextVC = ReelsScrollViewController.instantiate(fromAppStoryboard: .Catalog)
                 nextVC.sellerId = self?.sellerId ?? 0
-                self?.navigationController?.pushViewController(nextVC, animated: true)
+                nextVC.modalPresentationStyle = .fullScreen
+                self?.navigationController?.present(nextVC, animated: false)
             }
             return cell
         default:
@@ -512,7 +519,8 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
         case reelsCollectionView:
             let nextVC = ReelsScrollViewController.instantiate(fromAppStoryboard: .Catalog)
             nextVC.sellerId = sellerId
-            self.navigationController?.pushViewController(nextVC, animated: true)
+            nextVC.modalPresentationStyle = .fullScreen
+            self.navigationController?.present(nextVC, animated: false)
         case storiesCollectionView:
             let nextVC = StoryViewerViewController.instantiate(fromAppStoryboard: .Home)
             nextVC.comingFor = .forSellerHighlight

@@ -198,6 +198,40 @@ extension WebService {
         }
     }
     
+    func getAllLiveStramingService(completion:@escaping (_ user: [LiveStramingDataModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.showAllLiveStraming), requestMethod: .get,requestModel: [LiveStramingDataModel].self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func generateLiveStramingTokenService(param: [String: Any], completion:@escaping (_ user: AgroaTokenDataModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.generateAgoraToken), requestMethod: .post, requestParams: param, requestModel: AgroaTokenDataModel.self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
     func getBrandsService(completion:@escaping (_ user:[AllBrandsListData])-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.getAllBrands), requestMethod: .get,requestModel:[AllBrandsListData].self) { result, code in
@@ -1309,9 +1343,9 @@ extension WebService {
         }
     }
     
-    func shareReelsService(param: [String:Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+    func shareReelsService(param: [String:Any], completion:@escaping (_ user: sharedReelDataModel)-> Void) {
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI: .endpoint(.shareReels), requestMethod: .get, requestParams: param, requestModel: EmptyModel.self) { result, code in
+        NetworkManager.shared.request(withAPI: .endpoint(.shareReels), requestMethod: .get, requestParams: param, requestModel: sharedReelDataModel.self) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {

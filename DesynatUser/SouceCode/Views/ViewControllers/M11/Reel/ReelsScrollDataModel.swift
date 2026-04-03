@@ -8,14 +8,20 @@
 import Foundation
 
 struct Reel {
-    let id: Int?
-    let videoURL: String?
-    let caption: String?
+    var id: Int?
+    var videoURL: String?
+    var caption: String?
+    var isWhishlisted: Int?     // <-- REQUIRED for like UI refresh
     
-    init(id: Int? = nil, videoURL: String? = nil, caption: String? = nil) {
+    init(id: Int? = nil,
+         videoURL: String? = nil,
+         caption: String? = nil,
+         isWhishlisted: Int? = nil) {
+        
         self.id = id
         self.videoURL = videoURL
         self.caption = caption
+        self.isWhishlisted = isWhishlisted
     }
 }
 

@@ -157,6 +157,18 @@ class FavoruitesViewController: UIViewController {
         return url
     }
     
+    func openShareSheet(urlString: String) {
+
+        guard let url = URL(string: urlString) else { return }
+
+        let activityVC = UIActivityViewController(activityItems: [url],
+                                                  applicationActivities: nil)
+
+        activityVC.excludedActivityTypes = [.assignToContact]
+
+        present(activityVC, animated: true)
+    }
+    
 }
 
 // MARK: - COLLECTION VIEW METHODS
@@ -194,22 +206,25 @@ extension FavoruitesViewController: UICollectionViewDelegate, UICollectionViewDa
                 
                 self.handleReelRemove(reelId: reelId)
             }
-            cell.onshareTapped = { [weak self, weak cell] in
-                guard let self = self, let cell = cell else { return }
-                let reelId = data?.reelID ?? 0
-                self.shareReel(reelId: reelId) { shared in
-                    if shared {
-                        // User completed share → Call API
-                        self.viewModel.shareReels(reelId: reelId)
-                    } else {
-                        print("Share cancelled")
-                    }
+            cell.onshareTapped = { [weak self] in
+                guard let self = self else { return }
+                guard let id = data?.reelID else { return }
+
+//                self.viewModel.selectedReelId = id
+
+                self.viewModel.shareReelsRequest(reelId: id) { link in
+                    guard let link = link else { return }
+                    self.openShareSheet(urlString: link)
                 }
             }
-            cell.onPlayTapped = { [weak self, weak cell] in
-                guard let self = self, let cell = cell else { return }
-                videoURL = toURL(data?.reelDetails?.file ?? "")
-                playVideo()
+            cell.onPlayTapped = { [weak self] in
+//                guard let self = self else { return }
+//                videoURL = toURL(data?.reelDetails?.file ?? "")
+//                playVideo()
+                let nextVC = ReelsScrollViewController.instantiate(fromAppStoryboard: .Catalog)
+                nextVC.isComingFromMywishlist = true
+                nextVC.modalPresentationStyle = .fullScreen
+                self?.navigationController?.present(nextVC, animated: false)
             }
             return cell
         }
@@ -222,8 +237,10 @@ extension FavoruitesViewController: UICollectionViewDelegate, UICollectionViewDa
             nextVC.productId = viewModel.productList?[indexPath.row].id
             navigationController?.pushViewController(nextVC, animated: true)
         } else {
-            // If you have a reel Player VC, push it here
-            print("Tap on Reel")
+            let nextVC = ReelsScrollViewController.instantiate(fromAppStoryboard: .Catalog)
+            nextVC.isComingFromMywishlist = true
+            nextVC.modalPresentationStyle = .fullScreen
+            self.navigationController?.present(nextVC, animated: false)
         }
     }
     
