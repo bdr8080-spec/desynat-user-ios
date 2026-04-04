@@ -41,6 +41,8 @@ class ShowViewModel {
             nextVC.isHost = false
             nextVC.token = response.token
             nextVC.uid = response.uid ?? UInt.random(in: 1...9999)
+            nextVC.appID = response.appID ?? ""
+            nextVC.channelName = response.channel ?? ""
             nextVC.modalPresentationStyle = .fullScreen
             self.hostVC.navigationController?.present(nextVC, animated: false)
         }

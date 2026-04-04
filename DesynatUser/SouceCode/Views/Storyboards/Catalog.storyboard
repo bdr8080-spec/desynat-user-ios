@@ -686,7 +686,7 @@
                                 <rect key="frame" x="0.0" y="163" width="393" height="621"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y3Y-v9-4Sy">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="777.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1057.3333333333333"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aKR-AD-W14">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="163"/>
@@ -1144,10 +1144,10 @@
                                                 </constraints>
                                             </view>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FhH-8Q-SuK">
-                                                <rect key="frame" x="18" y="557.33333333333337" width="357" height="220"/>
+                                                <rect key="frame" x="18" y="557.33333333333337" width="357" height="500.00000000000011"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="220" id="Izd-6D-NxT"/>
+                                                    <constraint firstAttribute="height" constant="500" id="htw-Eb-shz"/>
                                                 </constraints>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="0.0" id="Qqd-9F-GRg">
                                                     <size key="itemSize" width="128" height="128"/>
@@ -1167,11 +1167,11 @@
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5ub-Pt-Pb3">
-                                                <rect key="frame" x="18" y="442.33333333333337" width="357" height="335"/>
+                                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5ub-Pt-Pb3">
+                                                <rect key="frame" x="18" y="442.33333333333337" width="357" height="615.00000000000011"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="335" id="kya-eU-kEc"/>
+                                                    <constraint firstAttribute="height" constant="615.00000000000011" id="EJk-hb-fRQ"/>
                                                 </constraints>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="0.0" id="pqz-7r-4RD">
                                                     <size key="itemSize" width="128" height="128"/>
@@ -1309,7 +1309,6 @@
                         <outlet property="qrImageView" destination="MJA-0O-nNz" id="4Vq-t5-qEP"/>
                         <outlet property="reelsButtonOutlet" destination="HQq-j0-5q8" id="7eL-Ps-Qe8"/>
                         <outlet property="reelsCollectionView" destination="5ub-Pt-Pb3" id="CbG-lx-luh"/>
-                        <outlet property="reelsCollectionViewHeightConstriant" destination="kya-eU-kEc" id="ftb-2P-Txk"/>
                         <outlet property="reelsTitlLabel" destination="Twg-9y-S9x" id="6fI-LT-d8B"/>
                         <outlet property="searchTF" destination="Wm7-jT-2bK" id="wrU-lS-Kcq"/>
                         <outlet property="searchView" destination="V5x-bJ-zdR" id="HHk-cc-e1q"/>
@@ -1319,7 +1318,7 @@
                         <outlet property="storeImageView" destination="Hmb-zR-1Ls" id="RRQ-bc-wYr"/>
                         <outlet property="storeTitleLabel" destination="chG-ej-X40" id="fd6-tp-xrs"/>
                         <outlet property="storesCollectionView" destination="FhH-8Q-SuK" id="Jok-cn-gBi"/>
-                        <outlet property="storesCollectionViewHeightConstraint" destination="Izd-6D-NxT" id="iwj-D1-i4e"/>
+                        <outlet property="storesCollectionViewHeightConstraint" destination="htw-Eb-shz" id="Wed-P9-wrv"/>
                         <outlet property="storiesCollectionView" destination="T3r-Ow-ke4" id="Fxa-oD-zox"/>
                         <outlet property="userProfileImage" destination="vST-5K-7c7" id="XqI-UN-Iyb"/>
                     </connections>
@@ -2435,7 +2434,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(2 Items) View My Bag" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8K-uU-6Rm">
-                                                <rect key="frame" x="20" y="14.333333333333373" width="158" height="19.666666666666664"/>
+                                                <rect key="frame" x="20" y="14.333333333333373" width="158" height="19.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -3098,13 +3097,13 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

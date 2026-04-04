@@ -28,7 +28,7 @@ class StoresDetailsViewController: UIViewController {
     @IBOutlet weak var userProfileImage: CustomImageView!
     @IBOutlet weak var storeImageView: UIImageView!
     @IBOutlet weak var noProductsFoundLabel: UILabel!
-    @IBOutlet weak var reelsCollectionViewHeightConstriant: NSLayoutConstraint!
+//    @IBOutlet weak var reelsCollectionViewHeightConstriant: NSLayoutConstraint!
     @IBOutlet weak var searchView: CustomView!
     @IBOutlet weak var sortFilterView: UIView!
     @IBOutlet weak var storesCollectionViewHeightConstraint: NSLayoutConstraint!
@@ -55,8 +55,6 @@ class StoresDetailsViewController: UIViewController {
     // MARK: - Property Decalaration
     private lazy var viewModel = StoreDetailsViewModel(hostVC: self)
     private var searchWorkItem: DispatchWorkItem?
-    //    var fullName: String? = ""
-    //    var profilePic: String? = ""
     var appliedSortFilter: Int?
     let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
     var storeId: Int? = 0
@@ -123,7 +121,7 @@ class StoresDetailsViewController: UIViewController {
         storesCollectionView.isHidden = true
         reelsCollectionView.isHidden = false
         //noReelsFound.isHidden = false
-        reelsCollectionViewHeightConstriant.constant = reelsCollectionView.contentSize.height
+//        reelsCollectionViewHeightConstriant.constant = reelsCollectionView.contentSize.height
     }
     
     @IBAction func sortDidTapped(_ sender: Any) {
@@ -317,7 +315,7 @@ class StoresDetailsViewController: UIViewController {
     
     func updateCollectionsHeight() {
         storesCollectionViewHeightConstraint.constant = storesCollectionView.contentSize.height
-        reelsCollectionViewHeightConstriant.constant = reelsCollectionView.contentSize.height
+//        reelsCollectionViewHeightConstriant.constant = reelsCollectionView.contentSize.height
     }
     
     func reloadAllCollections() {
@@ -332,8 +330,8 @@ class StoresDetailsViewController: UIViewController {
             self.storesCollectionViewHeightConstraint.constant =
             self.storesCollectionView.collectionViewLayout.collectionViewContentSize.height
             
-            self.reelsCollectionViewHeightConstriant.constant =
-            self.reelsCollectionView.collectionViewLayout.collectionViewContentSize.height
+//            self.reelsCollectionViewHeightConstriant.constant =
+//            self.reelsCollectionView.collectionViewLayout.collectionViewContentSize.height
             
             self.view.layoutIfNeeded()
         }
@@ -402,25 +400,6 @@ class StoresDetailsViewController: UIViewController {
         
         self.present(activityVC, animated: true)
     }
-    
-//    @objc func playVideo() {
-//        guard let url = videoURL else { return }
-//
-//        let player = AVPlayer(url: url)
-//        let vc = AVPlayerViewController()
-//        vc.player = player
-//
-//        present(vc, animated: true) {
-//            player.play()
-//        }
-//    }
-//
-//    func toURL(_ string: String?) -> URL? {
-//        guard let string = string,
-//              let url = URL(string: string.trimmingCharacters(in: .whitespacesAndNewlines))
-//        else { return nil }
-//        return url
-//    }
     
     func openShareSheet(urlString: String) {
 

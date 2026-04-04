@@ -50,8 +50,8 @@ class StoryViewerViewController: UIViewController {
         }
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-                tapGesture.cancelsTouchesInView = false
-                storiesCollectionView.addGestureRecognizer(tapGesture)
+        tapGesture.cancelsTouchesInView = false
+        storiesCollectionView.addGestureRecognizer(tapGesture)
         
     }
     
@@ -102,15 +102,15 @@ class StoryViewerViewController: UIViewController {
     }
     
     @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
-            let location = gesture.location(in: storiesCollectionView)
-            let width = storiesCollectionView.frame.width
-
-            if location.x > width / 2 {
-                goToNextStory()
-            } else {
-                goToPreviousStory()
-            }
+        let location = gesture.location(in: storiesCollectionView)
+        let width = storiesCollectionView.frame.width
+        
+        if location.x > width / 2 {
+            goToNextStory()
+        } else {
+            goToPreviousStory()
         }
+    }
     
     func fetchSelfStories() {
         
@@ -125,8 +125,8 @@ class StoryViewerViewController: UIViewController {
                 let lowerURL = url.lowercased()
                 
                 let isVideo = lowerURL.hasSuffix(".mp4") ||
-                              lowerURL.hasSuffix(".mov") ||
-                              lowerURL.contains(".m3u8")
+                lowerURL.hasSuffix(".mov") ||
+                lowerURL.contains(".m3u8")
                 
                 return Story(
                     url: url,
@@ -164,8 +164,8 @@ class StoryViewerViewController: UIViewController {
                 let lowerURL = url.lowercased()
                 
                 let isVideo = lowerURL.hasSuffix(".mp4") ||
-                              lowerURL.hasSuffix(".mov") ||
-                              lowerURL.contains(".m3u8")
+                lowerURL.hasSuffix(".mov") ||
+                lowerURL.contains(".m3u8")
                 
                 return Story(
                     url: url,
@@ -192,226 +192,228 @@ class StoryViewerViewController: UIViewController {
     }
     
     func fetchAdminStoriesFrom() {
-          
-          viewModel.getAdminStory { [weak self] in
-              guard let self = self else { return }
-              
-              self.usersStory = self.viewModel.adminStories.compactMap { item in
-                  
-                  guard let url = item.file else { return nil }
-                  
-                  let lowerURL = url.lowercased()
-                  
-                  let isVideo = lowerURL.hasSuffix(".mp4") ||
-                                lowerURL.hasSuffix(".mov") ||
-                                lowerURL.contains(".m3u8")
-                  
-                  return Story(
-                      url: url,
-                      isVideo: isVideo,
-                      duration: isVideo ? nil : 10.0
-                  )
-              }
-              
-              DispatchQueue.main.async {
-                  if self.usersStory.isEmpty {
-                      self.dismiss(animated: true)
-                      return
-                  }
-                  
-                  self.storiesCollectionView.reloadData()
-                  self.topSliderCollectionView.reloadData()
-                  
-                  DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                      self.startCurrentStory()
-                  }
-              }
-          }
-      }
-    
-    func goToNextStory() {
         
-            invalidateProgressTimer()
-            player?.pause()
-            playerLayer?.removeFromSuperlayer()
-
-            guard currentStoryIndex < usersStory.count - 1 else {
-                closeScreen()
-                return
-            }
-
-            currentStoryIndex += 1
-            scrollToCurrentStory(animated: false)
-        }
-        
-        private func goToPreviousStory() {
-            invalidateProgressTimer()
-            player?.pause()
-            playerLayer?.removeFromSuperlayer()
-
-            guard currentStoryIndex > 0 else { return }
+        viewModel.getAdminStory { [weak self] in
+            guard let self = self else { return }
             
-            currentStoryIndex -= 1
-            scrollToCurrentStory(animated: false)
-        }
-    
-    // ✅ NEW: Centralized scroll method with proper sync
-        private func scrollToCurrentStory(animated: Bool) {
-            resetSliderForBackwardNavigation()
-            
-            let indexPath = IndexPath(item: currentStoryIndex, section: 0)
-            storiesCollectionView.scrollToItem(
-                at: indexPath,
-                at: .centeredHorizontally,
-                animated: animated
-            )
-            
-            // ✅ Wait for scroll completion before configuring
-            DispatchQueue.main.asyncAfter(deadline: .now() + (animated ? 0.3 : 0.1)) {
-                self.configureAndStartCurrentStory()
-            }
-        }
-        
-    // ✅ NEW: Single source of truth for story setup
-        private func configureAndStartCurrentStory() {
-            guard let story = usersStory[safe: currentStoryIndex] else { return }
-            
-            // Get the NOW visible cell (after scroll completes)
-            guard let cell = storiesCollectionView.visibleCells
-                .compactMap({ $0 as? StorieDetailsCollectionViewCell })
-                .first else { return }
-            
-            // Clean previous content
-            cell.mainImageView.image = nil
-            cell.mainImageView.layer.sublayers?.removeAll()
-            
-            // Configure with completion callback
-            configureCell(cell, with: story) { [weak self] in
-                guard let self = self else { return }
+            self.usersStory = self.viewModel.adminStories.compactMap { item in
                 
-                self.resetSliderForBackwardNavigation()
-                self.updateTopSliderProgress()
+                guard let url = item.file else { return nil }
                 
-                // Start progress tracking
-                if story.isVideo {
-                    self.startVideoProgressObserver()
-                } else {
-                    self.startImageProgressAnimation(duration: story.duration ?? 10.0)
+                let lowerURL = url.lowercased()
+                
+                let isVideo = lowerURL.hasSuffix(".mp4") ||
+                lowerURL.hasSuffix(".mov") ||
+                lowerURL.contains(".m3u8")
+                
+                return Story(
+                    url: url,
+                    isVideo: isVideo,
+                    duration: isVideo ? nil : 10.0
+                )
+            }
+            
+            DispatchQueue.main.async {
+                if self.usersStory.isEmpty {
+                    self.dismiss(animated: true)
+                    return
+                }
+                
+                self.storiesCollectionView.reloadData()
+                self.topSliderCollectionView.reloadData()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.startCurrentStory()
                 }
             }
         }
+    }
+    
+    func goToNextStory() {
+        
+        invalidateProgressTimer()
+        player?.pause()
+        playerLayer?.removeFromSuperlayer()
+        
+        guard currentStoryIndex < usersStory.count - 1 else {
+            closeScreen()
+            return
+        }
+        
+        currentStoryIndex += 1
+        scrollToCurrentStory(animated: false)
+    }
+    
+    private func goToPreviousStory() {
+        invalidateProgressTimer()
+        player?.pause()
+        playerLayer?.removeFromSuperlayer()
+        
+        guard currentStoryIndex > 0 else { return }
+        
+        currentStoryIndex -= 1
+        scrollToCurrentStory(animated: false)
+    }
+    
+    // ✅ NEW: Centralized scroll method with proper sync
+    private func scrollToCurrentStory(animated: Bool) {
+        resetSliderForBackwardNavigation()
+        
+        let indexPath = IndexPath(item: currentStoryIndex, section: 0)
+        storiesCollectionView.scrollToItem(
+            at: indexPath,
+            at: .centeredHorizontally,
+            animated: animated
+        )
+        
+        // ✅ Wait for scroll completion before configuring
+        DispatchQueue.main.asyncAfter(deadline: .now() + (animated ? 0.3 : 0.1)) {
+            self.configureAndStartCurrentStory()
+        }
+    }
+    
+    // ✅ NEW: Single source of truth for story setup
+    private func configureAndStartCurrentStory() {
+        guard let story = usersStory[safe: currentStoryIndex] else { return }
+        if comingFor == .forSellerHighlight {
+            highlightTitleLabel.text = viewModel.sellerHighlight[safe: currentStoryIndex]?.title ?? ""
+        }
+        // Get the NOW visible cell (after scroll completes)
+        guard let cell = storiesCollectionView.visibleCells
+            .compactMap({ $0 as? StorieDetailsCollectionViewCell })
+            .first else { return }
+        
+        // Clean previous content
+        cell.mainImageView.image = nil
+        cell.mainImageView.layer.sublayers?.removeAll()
+        
+        // Configure with completion callback
+        configureCell(cell, with: story) { [weak self] in
+            guard let self = self else { return }
+            
+            self.resetSliderForBackwardNavigation()
+            self.updateTopSliderProgress()
+            
+            // Start progress tracking
+            if story.isVideo {
+                self.startVideoProgressObserver()
+            } else {
+                self.startImageProgressAnimation(duration: story.duration ?? 10.0)
+            }
+        }
+    }
     
     // MARK: - Cell Configuration
     private func configureCell(_ cell: StorieDetailsCollectionViewCell, with story: Story, completion: @escaping (() -> Void)) {
-           // Global cleanup
-           player?.pause()
-           playerLayer?.removeFromSuperlayer()
-           cell.mainImageView.image = nil
-           cell.mainImageView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
-           
-           if story.isVideo {
-               let videoURLString = story.url ?? ""
-               if !videoURLString.isEmpty {
-                   playVideo(in: cell, urlString: videoURLString, completion: completion)
-               } else {
-                   completion()
-               }
-           } else {
-               let imageURLString = story.url ?? ""
-               if !imageURLString.isEmpty {
-                   loadImage(in: cell, urlString: imageURLString, completion: completion)
-               } else {
-                   completion()
-               }
-           }
-       }
+        // Global cleanup
+        player?.pause()
+        playerLayer?.removeFromSuperlayer()
+        cell.mainImageView.image = nil
+        cell.mainImageView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        
+        if story.isVideo {
+            let videoURLString = story.url ?? ""
+            if !videoURLString.isEmpty {
+                playVideo(in: cell, urlString: videoURLString, completion: completion)
+            } else {
+                completion()
+            }
+        } else {
+            let imageURLString = story.url ?? ""
+            if !imageURLString.isEmpty {
+                loadImage(in: cell, urlString: imageURLString, completion: completion)
+            } else {
+                completion()
+            }
+        }
+    }
     
     // MARK: - Progress Helpers
     private func startImageProgressAnimation(duration: TimeInterval) {
         invalidateProgressTimer()
-            currentProgress = 0
-            let interval: TimeInterval = 0.016
-            let increment = CGFloat(interval / duration)
-            progressTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] timer in
-                guard let self = self else { return }
-
-                self.currentProgress += increment
-
-                if self.currentProgress >= 1.0 {
-                    self.currentProgress = 1.0
-                    self.updateTopSliderProgress()
-                    self.invalidateProgressTimer()
-                    self.goToNextStory()
-                    self.sliderCheck = false
-                    return
-                }
-
+        currentProgress = 0
+        let interval: TimeInterval = 0.016
+        let increment = CGFloat(interval / duration)
+        progressTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] timer in
+            guard let self = self else { return }
+            
+            self.currentProgress += increment
+            
+            if self.currentProgress >= 1.0 {
+                self.currentProgress = 1.0
                 self.updateTopSliderProgress()
+                self.invalidateProgressTimer()
+                self.goToNextStory()
+                self.sliderCheck = false
+                return
             }
+            
+            self.updateTopSliderProgress()
+        }
     }
     
     private func startVideoProgressObserver() {
-            guard let player = player,
-                  player.currentItem?.status == .readyToPlay else {
-                print("❌ Video not ready yet")
-                return
-            }
-            
-            // ✅ CRITICAL: Remove previous observer first
-            removeVideoTimeObserver()
-            
-            let interval = CMTime(seconds: 0.03, preferredTimescale: 600)  // 30fps smooth
-            
-            videoTimeObserver = player.addPeriodicTimeObserver(
-                forInterval: interval,
-                queue: .main
-            ) { [weak self] time in
-                self?.updateVideoProgress(time: time)
-            }
-            
-            print("✅ Video observer started")
+        guard let player = player,
+              player.currentItem?.status == .readyToPlay else {
+            print("❌ Video not ready yet")
+            return
         }
+        
+        // ✅ CRITICAL: Remove previous observer first
+        removeVideoTimeObserver()
+        
+        let interval = CMTime(seconds: 0.03, preferredTimescale: 600)  // 30fps smooth
+        
+        videoTimeObserver = player.addPeriodicTimeObserver(
+            forInterval: interval,
+            queue: .main
+        ) { [weak self] time in
+            self?.updateVideoProgress(time: time)
+        }
+        
+        print("✅ Video observer started")
+    }
     
     private func removeVideoTimeObserver() {
-            if let observer = videoTimeObserver {
-                player?.removeTimeObserver(observer)
-                videoTimeObserver = nil
-            }
+        if let observer = videoTimeObserver {
+            player?.removeTimeObserver(observer)
+            videoTimeObserver = nil
         }
+    }
     private func updateVideoProgress(time: CMTime) {
-            guard let player = player,
-                  let currentItem = player.currentItem,
-                  currentItem.duration.seconds.isFinite && currentItem.duration.seconds > 0 else {
-                return
-            }
-            
-            let progress = min(1.0, max(0.0, time.seconds / currentItem.duration.seconds))
-            currentProgress = CGFloat(progress)
-            updateTopSliderProgress()
+        guard let player = player,
+              let currentItem = player.currentItem,
+              currentItem.duration.seconds.isFinite && currentItem.duration.seconds > 0 else {
+            return
         }
-   
+        
+        let progress = min(1.0, max(0.0, time.seconds / currentItem.duration.seconds))
+        currentProgress = CGFloat(progress)
+        updateTopSliderProgress()
+    }
+    
     private func startCurrentStory() {
-            guard !usersStory.isEmpty, currentStoryIndex < usersStory.count else { return }
-            scrollToCurrentStory(animated: false)
-        }
+        guard !usersStory.isEmpty, currentStoryIndex < usersStory.count else { return }
+        scrollToCurrentStory(animated: false)
+    }
     
     private func updateTopSliderProgress() {
-            let visibleIndexPaths = topSliderCollectionView.indexPathsForVisibleItems
-            for indexPath in visibleIndexPaths {
-                if let sliderCell = topSliderCollectionView.cellForItem(at: indexPath) as? StorieTopSliderCollectionViewCell {
-                    let isActive = (indexPath.item == currentStoryIndex)
-                    let isSeen = seenStories.contains(indexPath.item)
-                    let progress: CGFloat = isActive ? currentProgress : 0.0
-                    sliderCell.configure(isActive: isActive, isSeen: isSeen, progress: progress)
-                }
+        let visibleIndexPaths = topSliderCollectionView.indexPathsForVisibleItems
+        for indexPath in visibleIndexPaths {
+            if let sliderCell = topSliderCollectionView.cellForItem(at: indexPath) as? StorieTopSliderCollectionViewCell {
+                let isActive = (indexPath.item == currentStoryIndex)
+                let isSeen = seenStories.contains(indexPath.item)
+                let progress: CGFloat = isActive ? currentProgress : 0.0
+                sliderCell.configure(isActive: isActive, isSeen: isSeen, progress: progress)
             }
         }
+    }
     
     private func invalidateProgressTimer() {
-            progressTimer?.invalidate()
-            progressTimer = nil
-            removeVideoTimeObserver()  // ✅ Video cleanup
-        }
+        progressTimer?.invalidate()
+        progressTimer = nil
+        removeVideoTimeObserver()  // ✅ Video cleanup
+    }
     
     // MARK: - Image & Video
     private func loadImage(in cell: StorieDetailsCollectionViewCell, urlString: String, completion: @escaping (() -> Void)) {
@@ -468,40 +470,40 @@ class StoryViewerViewController: UIViewController {
     
     
     override func observeValue(forKeyPath keyPath: String?,
-                                  of object: Any?,
-                                  change: [NSKeyValueChangeKey : Any]?,
-                                  context: UnsafeMutableRawPointer?) {
+                               of object: Any?,
+                               change: [NSKeyValueChangeKey : Any]?,
+                               context: UnsafeMutableRawPointer?) {
+        
+        if keyPath == "timeControlStatus",
+           let player = object as? AVPlayer {
             
-            if keyPath == "timeControlStatus",
-               let player = object as? AVPlayer {
+            switch player.timeControlStatus {
+            case .playing:
+                print("✅ Video playing - starting progress")
+                player.isMuted = false
                 
-                switch player.timeControlStatus {
-                case .playing:
-                    print("✅ Video playing - starting progress")
-                    player.isMuted = false
-                    
-                    // ✅ CRITICAL: Start observer NOW (video ready)
-                    startVideoProgressObserver()
-                    
-                    // Call completion to start other logic
-                    onCompletion?()
-                    
-                case .waitingToPlayAtSpecifiedRate:
-                    print("⏳ Video buffering...")
-                    
-                case .paused:
-                    print("⏸ Video paused")
-                    
-                @unknown default:
-                    break
-                }
+                // ✅ CRITICAL: Start observer NOW (video ready)
+                startVideoProgressObserver()
+                
+                // Call completion to start other logic
+                onCompletion?()
+                
+            case .waitingToPlayAtSpecifiedRate:
+                print("⏳ Video buffering...")
+                
+            case .paused:
+                print("⏸ Video paused")
+                
+            @unknown default:
+                break
             }
         }
+    }
     deinit {
-            removeVideoTimeObserver()
-            player?.removeObserver(self, forKeyPath: "timeControlStatus")
-            NotificationCenter.default.removeObserver(self)
-        }
+        removeVideoTimeObserver()
+        player?.removeObserver(self, forKeyPath: "timeControlStatus")
+        NotificationCenter.default.removeObserver(self)
+    }
     @objc private func videoDidFinishPlaying() {
         NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
         goToNextStory()
@@ -516,30 +518,30 @@ class StoryViewerViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-            super.viewDidLayoutSubviews()
-            playerLayer?.frame = storiesCollectionView.bounds
-        }
+        super.viewDidLayoutSubviews()
+        playerLayer?.frame = storiesCollectionView.bounds
+    }
     
     
     private func resetSliderForBackwardNavigation() {
-
+        
         // 1. BEFORE current index → all should be seen (white)
         if currentStoryIndex > 0 {
             for i in 0..<currentStoryIndex {
                 seenStories.insert(i)
             }
         }
-
+        
         // 2. AFTER current index → all should be NOT SEEN (gray)
         if currentStoryIndex < usersStory.count - 1 {
             for i in (currentStoryIndex + 1)..<usersStory.count {
                 seenStories.remove(i)
             }
         }
-
+        
         // 3. Reset progress for active cell
         currentProgress = 0
-
+        
         // 4. Update slider UI
         topSliderCollectionView.reloadData()
     }
@@ -554,53 +556,56 @@ extension StoryViewerViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            if collectionView == topSliderCollectionView {
-                let sliderCell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: "StorieTopSliderCollectionViewCell",
-                    for: indexPath
-                ) as! StorieTopSliderCollectionViewCell
-                
-                let isActive = (indexPath.item == currentStoryIndex)
-                let isSeen = seenStories.contains(indexPath.item)
-                let progress: CGFloat = isActive ? currentProgress : 0.0
-                sliderCell.configure(isActive: isActive, isSeen: isSeen, progress: progress)
-                
-                return sliderCell
-            }
-            
-            // Stories cell - minimal setup only
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "StorieDetailsCollectionViewCell",
+        if collectionView == topSliderCollectionView {
+            let sliderCell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "StorieTopSliderCollectionViewCell",
                 for: indexPath
-            ) as! StorieDetailsCollectionViewCell
+            ) as! StorieTopSliderCollectionViewCell
             
-            cell.mainImageView.image = nil
-            return cell
+            let isActive = (indexPath.item == currentStoryIndex)
+            let isSeen = seenStories.contains(indexPath.item)
+            let progress: CGFloat = isActive ? currentProgress : 0.0
+            sliderCell.configure(isActive: isActive, isSeen: isSeen, progress: progress)
+            
+            return sliderCell
         }
+        
+        // Stories cell - minimal setup only
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "StorieDetailsCollectionViewCell",
+            for: indexPath
+        ) as! StorieDetailsCollectionViewCell
+        
+        cell.mainImageView.image = nil
+        return cell
+    }
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-            guard scrollView == storiesCollectionView else { return }
-            syncCurrentStoryIndex()
-        }
+        guard scrollView == storiesCollectionView else { return }
+        syncCurrentStoryIndex()
+    }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-            guard scrollView == storiesCollectionView else { return }
-            syncCurrentStoryIndex()
-        }
+        guard scrollView == storiesCollectionView else { return }
+        syncCurrentStoryIndex()
+    }
     
     // ✅ NEW: Sync index with actual scroll position
-       private func syncCurrentStoryIndex() {
-           let centerPoint = CGPoint(
-               x: storiesCollectionView.contentOffset.x + storiesCollectionView.bounds.width / 2,
-               y: storiesCollectionView.bounds.height / 2
-           )
-           
-           if let indexPath = storiesCollectionView.indexPathForItem(at: centerPoint) {
-               currentStoryIndex = indexPath.item
-               resetSliderForBackwardNavigation()
-               configureAndStartCurrentStory()
-           }
-       }
+    private func syncCurrentStoryIndex() {
+        let centerPoint = CGPoint(
+            x: storiesCollectionView.contentOffset.x + storiesCollectionView.bounds.width / 2,
+            y: storiesCollectionView.bounds.height / 2
+        )
+        
+        if let indexPath = storiesCollectionView.indexPathForItem(at: centerPoint) {
+            currentStoryIndex = indexPath.item
+            if comingFor == .forSellerHighlight {
+                highlightTitleLabel.text = viewModel.sellerHighlight[safe: currentStoryIndex]?.title ?? ""
+            }
+            resetSliderForBackwardNavigation()
+            configureAndStartCurrentStory()
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         

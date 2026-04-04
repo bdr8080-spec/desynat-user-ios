@@ -57,7 +57,7 @@ class StoreDetailsViewModel: NSObject {
                 }
                 self.hostVC.storesCollectionView.layoutIfNeeded()
                 self.hostVC.updateCollectionsHeight()
-                
+//                self.hostVC.
                 self.hostVC.noProductsFoundLabel.isHidden = !(self.singleStoresSection?.allProduct?.data?.isEmpty ?? false)
             }
         }
