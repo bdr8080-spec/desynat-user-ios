@@ -11,14 +11,14 @@ class LiveStreamingViewController: UIViewController {
     @IBOutlet weak var btnGoLive: UIButton!
     @IBOutlet weak var btnMute: UIButton!
     @IBOutlet weak var btnEnd: UIButton!
+    @IBOutlet weak var muteLabel: UILabel!
+    @IBOutlet weak var lblWaiting: UILabel!
+    @IBOutlet weak var muteView: UIView!
     
     // MARK: - Agora
     var agoraKit: AgoraRtcEngineKit!
-    var appID: String = "" //= "564c1a00b81c4d1c91d0a3a22db4a8bd"
-    var channelName: String = ""// "live_stream"
-//    var token: String? = "007eJxTYJgXO03k5AaemduOxc2z8Ylf0L7Ipu208ou3x1+Z3zpnxDpVgcHUzCTZMNHAIMnCMNkkxTDZ0jDFINE40cgoJckk0SIpReLtmcyGQEaGE4f5WBkZIBDE52bIySxLjS8uKUpNzGVgAACxhiQx"
-//    var uid: UInt = UInt.random(in: 1...9999)
-    
+    var appID: String = ""
+    var channelName: String = ""
     var token: String? = ""
     var uid: UInt = UInt.random(in: 1...9999)
     var isHost = false
@@ -30,15 +30,16 @@ class LiveStreamingViewController: UIViewController {
         setupAgora()
         if isHost {
             btnGoLive.isHidden = true
-            print("🎥 Start as HOST")
-            agoraKit.setClientRole(.broadcaster)
-            setupLocalVideo()
+            lblWaiting.isHidden = true
+            muteView.isHidden = false
+            // ... host setup
         } else {
             print("👀 Start as AUDIENCE")
             agoraKit.setClientRole(.audience)
-            lblLive.isHidden = true
             btnSwitch.isHidden = true
             btnGoLive.isHidden = true
+            lblWaiting.isHidden = false
+            muteView.isHidden = true
         }
         joinChannel()
     }
@@ -129,9 +130,10 @@ class LiveStreamingViewController: UIViewController {
             }
         case 3:
             isMuted.toggle()
-            agoraKit.muteLocalAudioStream(isMuted)
-            btnMute.setTitle(isMuted ? "Unmute" : "Mute", for: .normal)
-            print("🎙️ Muted: \(isMuted)")
+               // Mute ALL remote audio streams (host's audio)
+               agoraKit.muteAllRemoteAudioStreams(isMuted)
+//               btnMute.setTitle(isMuted ? "Unmute" : "Mute", for: .normal)
+            muteLabel.text = isMuted ? "Unmute" : "Mute"
         case 4:
             print("📴 End Stream")
             leaveChannel()
@@ -149,6 +151,8 @@ extension LiveStreamingViewController: AgoraRtcEngineDelegate {
         print("👤 Remote Joined: \(uid)")
         if !isHost {
             DispatchQueue.main.async {
+                self.lblWaiting.isHidden = true
+                self.muteView.isHidden = false
                 self.setupRemoteVideo(uid: uid)
             }
         }
@@ -157,11 +161,16 @@ extension LiveStreamingViewController: AgoraRtcEngineDelegate {
     func rtcEngine(_ engine: AgoraRtcEngineKit, didOfflineOfUid uid: UInt, reason: AgoraUserOfflineReason) {
         print("🚪 Remote Left: \(uid)")
         DispatchQueue.main.async {
+            self.lblWaiting.isHidden = false
+            self.muteView.isHidden = true
             self.clearVideoView()
         }
     }
     
     func rtcEngine(_ engine: AgoraRtcEngineKit, didOccurError errorCode: AgoraErrorCode) {
         print("❌ Agora Error: \(errorCode.rawValue)")
+        self.lblWaiting.isHidden = false
+        self.muteView.isHidden = true
     }
 }
+

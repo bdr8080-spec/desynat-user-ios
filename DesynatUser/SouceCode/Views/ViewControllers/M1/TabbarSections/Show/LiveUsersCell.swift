@@ -10,7 +10,8 @@ import SDWebImage
 
 class LiveUsersCell: UITableViewCell {
 
-        @IBOutlet weak var userProfileImageView: CustomImageView!
+    @IBOutlet weak var watchLiveButton: CustomButton!
+    @IBOutlet weak var userProfileImageView: CustomImageView!
         @IBOutlet weak var usernameLabel: UILabel!
         @IBOutlet weak var countryNameLabel: UILabel!
         @IBOutlet weak var joinedOnLabel: UILabel!
@@ -48,6 +49,15 @@ class LiveUsersCell: UITableViewCell {
             liveDateLabel.text = "Live Timing \(liveDateresult)"
             livetimeLabel.text = data?.timeslotDetails?.from ?? ""
             countryNameLabel.text = data?.timeslotDetails?.countryInfo?.name ?? ""
+            
+            let isLive = isEventLive(
+                            dateString: data?.timeslotDetails?.date,
+                            fromTime: data?.timeslotDetails?.from,
+                            toTime: data?.timeslotDetails?.to
+                        )
+                        
+                        watchLiveButton.isUserInteractionEnabled = isLive
+                        watchLiveButton.alpha = isLive ? 1.0 : 0.5   // dim when disabled
         }
         
         private func convertISOToDMY(_ isoString: String) -> String? {
@@ -81,6 +91,28 @@ class LiveUsersCell: UITableViewCell {
 
             return input  // fallback
         }
+    
+    func isEventLive(dateString: String?, fromTime: String?, toTime: String?) -> Bool {
+        guard let dateString = dateString,
+              let fromTime = fromTime,
+              let toTime = toTime else { return false }
+
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd hh:mm a"  // <-- IMPORTANT (12 hr + AM/PM)
+
+        let startString = "\(dateString) \(fromTime)"
+        let endString = "\(dateString) \(toTime)"
+
+        guard let startDate = formatter.date(from: startString),
+              let endDate = formatter.date(from: endString) else {
+            print("Parsing failed for:", startString, endString)
+            return false
+        }
+
+        let now = Date()
+        return now >= startDate && now <= endDate
+    }
 
     }
 

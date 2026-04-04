@@ -28,7 +28,7 @@ class StoresDetailsViewController: UIViewController {
     @IBOutlet weak var userProfileImage: CustomImageView!
     @IBOutlet weak var storeImageView: UIImageView!
     @IBOutlet weak var noProductsFoundLabel: UILabel!
-//    @IBOutlet weak var reelsCollectionViewHeightConstriant: NSLayoutConstraint!
+    @IBOutlet weak var reelsCollectionViewHeightConstriant: NSLayoutConstraint!
     @IBOutlet weak var searchView: CustomView!
     @IBOutlet weak var sortFilterView: UIView!
     @IBOutlet weak var storesCollectionViewHeightConstraint: NSLayoutConstraint!
@@ -59,6 +59,7 @@ class StoresDetailsViewController: UIViewController {
     let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
     var storeId: Int? = 0
     private var player: AVPlayer?
+    
     // MARK: - speechRecognizer
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
@@ -67,10 +68,10 @@ class StoresDetailsViewController: UIViewController {
     private var isListening = false
     private var sellerId: Int = 0
     private var videoURL: URL?
+    
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        reloadAllCollections()
         searchTF.delegate = self
         requestPermissions()
     }
@@ -80,10 +81,6 @@ class StoresDetailsViewController: UIViewController {
         viewModel.getSingleStoresApi()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        updateCollectionsHeight()
-    }
     
     // MARK: - Button's Action
     @IBAction func bakDidTapped(_ sender: Any) {
@@ -108,7 +105,9 @@ class StoresDetailsViewController: UIViewController {
         storesCollectionView.isHidden = false
         reelsCollectionView.isHidden = true
         noReelsFound.isHidden = true
-        storesCollectionViewHeightConstraint.constant = storesCollectionView.contentSize.height
+        self.storesCollectionView.layoutIfNeeded()
+        self.storesCollectionViewHeightConstraint.constant =
+        self.storesCollectionView.collectionViewLayout.collectionViewContentSize.height
     }
     
     @IBAction func reelsDidTapped(_ sender: Any) {
@@ -120,8 +119,7 @@ class StoresDetailsViewController: UIViewController {
         sortFilterView.isHidden = true
         storesCollectionView.isHidden = true
         reelsCollectionView.isHidden = false
-        //noReelsFound.isHidden = false
-//        reelsCollectionViewHeightConstriant.constant = reelsCollectionView.contentSize.height
+        viewModel.getSellerReelsService(sellerId: sellerId)
     }
     
     @IBAction func sortDidTapped(_ sender: Any) {
@@ -311,32 +309,6 @@ class StoresDetailsViewController: UIViewController {
         }
     }
     
-    
-    
-    func updateCollectionsHeight() {
-        storesCollectionViewHeightConstraint.constant = storesCollectionView.contentSize.height
-//        reelsCollectionViewHeightConstriant.constant = reelsCollectionView.contentSize.height
-    }
-    
-    func reloadAllCollections() {
-        storiesCollectionView.reloadData()
-        storesCollectionView.reloadData()
-        reelsCollectionView.reloadData()
-        
-        DispatchQueue.main.async {
-            self.storesCollectionView.layoutIfNeeded()
-            self.reelsCollectionView.layoutIfNeeded()
-            
-            self.storesCollectionViewHeightConstraint.constant =
-            self.storesCollectionView.collectionViewLayout.collectionViewContentSize.height
-            
-//            self.reelsCollectionViewHeightConstriant.constant =
-//            self.reelsCollectionView.collectionViewLayout.collectionViewContentSize.height
-            
-            self.view.layoutIfNeeded()
-        }
-    }
-    
     func handleWishlistTap(index: Int) {
         guard let product = viewModel.singleStoresSection?.allProduct?.data?[index] else { return }
         let productId = product.id ?? 0
@@ -402,14 +374,14 @@ class StoresDetailsViewController: UIViewController {
     }
     
     func openShareSheet(urlString: String) {
-
+        
         guard let url = URL(string: urlString) else { return }
-
+        
         let activityVC = UIActivityViewController(activityItems: [url],
                                                   applicationActivities: nil)
-
+        
         activityVC.excludedActivityTypes = [.assignToContact]
-
+        
         present(activityVC, animated: true)
     }
     
@@ -467,9 +439,9 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
             cell.onshareTapped = { [weak self] in
                 guard let self = self else { return }
                 guard let id = dict.id else { return }
-
-//                self.viewModel.selectedReelId = id
-
+                
+                //                self.viewModel.selectedReelId = id
+                
                 self.viewModel.shareReelsRequest(reelId: id) { link in
                     guard let link = link else { return }
                     self.openShareSheet(urlString: link)

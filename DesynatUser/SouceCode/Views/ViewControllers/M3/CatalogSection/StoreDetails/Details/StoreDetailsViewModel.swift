@@ -49,15 +49,19 @@ class StoreDetailsViewModel: NSObject {
             self.singleStoresSection = list
             DispatchQueue.main.async {
                 self.getSellerHighlightsService(sellerId: list.store?.sellerID ?? 0)
-                self.getSellerReelsService(sellerId: list.store?.sellerID ?? 0)
                 self.getSellerStory(sellerId: list.store?.sellerID ?? 0)
-                self.hostVC.storesCollectionView.reloadData()
                 if let store = list.store {
                     self.hostVC.configData(data: store)
                 }
-                self.hostVC.storesCollectionView.layoutIfNeeded()
-                self.hostVC.updateCollectionsHeight()
-//                self.hostVC.
+                DispatchQueue.main.async {
+                    self.hostVC.storesCollectionView.reloadData()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                        self.hostVC.storesCollectionView.layoutIfNeeded()
+                        self.hostVC.storesCollectionViewHeightConstraint.constant =
+                        self.hostVC.storesCollectionView.collectionViewLayout.collectionViewContentSize.height
+                    }
+                }
                 self.hostVC.noProductsFoundLabel.isHidden = !(self.singleStoresSection?.allProduct?.data?.isEmpty ?? false)
             }
         }
@@ -95,7 +99,17 @@ class StoreDetailsViewModel: NSObject {
         let param: [String: Any] = ["seller_id": sellerId]
         WebService.sharedInstance.getSellerReelsService(param: param) { list in
             self.sellerReels = list
-            self.hostVC.reelsCollectionView.reloadData()
+            DispatchQueue.main.async {
+                self.hostVC.reelsCollectionView.reloadData()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    self.hostVC.reelsCollectionView.layoutIfNeeded()
+                    self.hostVC.storesCollectionViewHeightConstraint.constant =
+                    self.hostVC.reelsCollectionView.collectionViewLayout.collectionViewContentSize.height
+                    self.hostVC.reelsCollectionViewHeightConstriant.constant =
+                    self.hostVC.reelsCollectionView.collectionViewLayout.collectionViewContentSize.height
+                }
+            }
         }
     }
     
@@ -120,15 +134,10 @@ class StoreDetailsViewModel: NSObject {
     }
     
     func shareReelsRequest(reelId: Int, completion: @escaping (String?) -> Void) {
-
         let param = ["reel_id": reelId]
-
         WebService.shared.shareReelsService(param: param) { response in
-            // Assuming API returns:  { "link": "https://..." }
             let link = response.file ?? ""
             completion(link)
         }
     }
-    
-    
 }

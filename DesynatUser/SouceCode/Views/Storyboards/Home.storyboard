@@ -1482,7 +1482,7 @@ Let's add some items. </string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sd1-md-uIn">
                                         <rect key="frame" x="223" y="25" width="150" height="38"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w77-2g-HWo" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w77-2g-HWo" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="150" height="38"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -2281,19 +2281,44 @@ Let's add some items. </string>
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Live" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64y-VN-OQb">
-                                <rect key="frame" x="156.66666666666666" y="118" width="80" height="50"/>
-                                <color key="backgroundColor" systemColor="systemRedColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="F8I-73-jPP"/>
-                                    <constraint firstAttribute="width" constant="80" id="TfW-OJ-FPD"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCa-Ug-EZb">
+                                <rect key="frame" x="97.333333333333329" y="428.66666666666669" width="198.66666666666669" height="45"/>
+                                <string key="text">Wait for the host to start 
+the event</string>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z3l-Px-dC6" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                                <rect key="frame" x="173" y="118" width="47" height="32"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Live" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64y-VN-OQb">
+                                        <rect key="frame" x="0.0" y="0.0" width="47" height="32"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="F8I-73-jPP"/>
+                                            <constraint firstAttribute="width" constant="47" id="TfW-OJ-FPD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.83529411764705885" green="0.23137254901960785" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="64y-VN-OQb" firstAttribute="top" secondItem="Z3l-Px-dC6" secondAttribute="top" id="1pJ-Nq-zBf"/>
+                                    <constraint firstAttribute="bottom" secondItem="64y-VN-OQb" secondAttribute="bottom" id="XEP-pu-yTE"/>
+                                    <constraint firstItem="64y-VN-OQb" firstAttribute="leading" secondItem="Z3l-Px-dC6" secondAttribute="leading" id="Zlg-u9-lih"/>
+                                    <constraint firstAttribute="trailing" secondItem="64y-VN-OQb" secondAttribute="trailing" id="xvD-Mx-pzP"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zeX-rp-LIZ">
-                                <rect key="frame" x="10" y="734" width="373" height="50"/>
+                                <rect key="frame" x="24" y="734" width="345" height="50"/>
                                 <subviews>
                                     <button hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rQp-mh-2FY">
                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="50"/>
@@ -2306,35 +2331,72 @@ Let's add some items. </string>
                                             <action selector="btnOptions:" destination="Ypj-Ob-ty6" eventType="touchUpInside" id="8Dk-c0-wO1"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RcJ-1A-WmA">
+                                    <button hidden="YES" opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RcJ-1A-WmA">
                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="50"/>
-                                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Go Live">
+                                        <state key="normal" title="Go Live" image="btnGradient">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="btnOptions:" destination="Ypj-Ob-ty6" eventType="touchUpInside" id="qOd-rQ-Hhz"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqt-MZ-95b">
-                                        <rect key="frame" x="0.0" y="0.0" width="182.66666666666666" height="50"/>
-                                        <color key="backgroundColor" systemColor="systemPurpleColor"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Mute">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="btnOptions:" destination="Ypj-Ob-ty6" eventType="touchUpInside" id="TF2-Ti-2Lw"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yNa-39-bhg">
-                                        <rect key="frame" x="190.66666666666663" y="0.0" width="182.33333333333337" height="50"/>
-                                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odt-VP-eui">
+                                        <rect key="frame" x="0.0" y="0.0" width="168.66666666666666" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IsZ-RT-vT0" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="168.66666666666666" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="btnGradient"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="btnOptions:" destination="Ypj-Ob-ty6" eventType="touchUpInside" id="g6a-aP-jgj"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mute" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fou-DT-qcW">
+                                                <rect key="frame" x="66.666666666666671" y="15.333333333333373" width="35.333333333333329" height="19.666666666666671"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="fou-DT-qcW" firstAttribute="centerY" secondItem="odt-VP-eui" secondAttribute="centerY" id="5zv-km-Wb8"/>
+                                            <constraint firstItem="fou-DT-qcW" firstAttribute="centerX" secondItem="odt-VP-eui" secondAttribute="centerX" id="C3F-2Z-Yhh"/>
+                                            <constraint firstAttribute="bottom" secondItem="IsZ-RT-vT0" secondAttribute="bottom" id="Px4-87-oFb"/>
+                                            <constraint firstItem="IsZ-RT-vT0" firstAttribute="top" secondItem="odt-VP-eui" secondAttribute="top" id="h6A-mT-N62"/>
+                                            <constraint firstItem="IsZ-RT-vT0" firstAttribute="leading" secondItem="odt-VP-eui" secondAttribute="leading" id="iCn-5C-yGv"/>
+                                            <constraint firstAttribute="trailing" secondItem="IsZ-RT-vT0" secondAttribute="trailing" id="k3k-Jk-lyc"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yNa-39-bhg" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
+                                        <rect key="frame" x="176.66666666666663" y="0.0" width="168.33333333333337" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Leave">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" name="darkBrown"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" systemColor="systemBrownColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="btnOptions:" destination="Ypj-Ob-ty6" eventType="touchUpInside" id="NNz-I4-6Gb"/>
                                         </connections>
@@ -2350,21 +2412,26 @@ Let's add some items. </string>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="AEW-Sq-nYR" secondAttribute="bottom" id="4N7-Fi-4MP"/>
                             <constraint firstItem="AEW-Sq-nYR" firstAttribute="top" secondItem="qe7-Rn-fCy" secondAttribute="top" id="5eM-zo-98L"/>
+                            <constraint firstItem="CCa-Ug-EZb" firstAttribute="centerY" secondItem="a90-38-Xju" secondAttribute="centerY" id="60k-7F-CeW"/>
+                            <constraint firstItem="CCa-Ug-EZb" firstAttribute="centerX" secondItem="a90-38-Xju" secondAttribute="centerX" id="9EL-IA-6Ev"/>
                             <constraint firstItem="a90-38-Xju" firstAttribute="bottom" secondItem="zeX-rp-LIZ" secondAttribute="bottom" id="Faa-mh-ZJG"/>
-                            <constraint firstItem="64y-VN-OQb" firstAttribute="top" secondItem="a90-38-Xju" secondAttribute="top" id="JsX-ak-iD8"/>
                             <constraint firstItem="AEW-Sq-nYR" firstAttribute="leading" secondItem="qe7-Rn-fCy" secondAttribute="leading" id="Tfh-wN-itw"/>
-                            <constraint firstItem="zeX-rp-LIZ" firstAttribute="leading" secondItem="a90-38-Xju" secondAttribute="leading" constant="10" id="Y5C-fS-FqJ"/>
-                            <constraint firstItem="64y-VN-OQb" firstAttribute="centerX" secondItem="a90-38-Xju" secondAttribute="centerX" id="bqx-3r-gQA"/>
-                            <constraint firstItem="a90-38-Xju" firstAttribute="trailing" secondItem="zeX-rp-LIZ" secondAttribute="trailing" constant="10" id="lkw-Gr-qrm"/>
+                            <constraint firstItem="a90-38-Xju" firstAttribute="top" secondItem="Z3l-Px-dC6" secondAttribute="top" id="VUG-p9-0oq"/>
+                            <constraint firstItem="Z3l-Px-dC6" firstAttribute="centerX" secondItem="a90-38-Xju" secondAttribute="centerX" id="WlB-GP-feK"/>
+                            <constraint firstItem="zeX-rp-LIZ" firstAttribute="leading" secondItem="a90-38-Xju" secondAttribute="leading" constant="24" id="Y5C-fS-FqJ"/>
+                            <constraint firstItem="a90-38-Xju" firstAttribute="trailing" secondItem="zeX-rp-LIZ" secondAttribute="trailing" constant="24" id="lkw-Gr-qrm"/>
                             <constraint firstAttribute="trailing" secondItem="AEW-Sq-nYR" secondAttribute="trailing" id="t0p-F7-W1N"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="btnEnd" destination="yNa-39-bhg" id="ddH-XX-14i"/>
                         <outlet property="btnGoLive" destination="RcJ-1A-WmA" id="hct-RB-IRo"/>
-                        <outlet property="btnMute" destination="wqt-MZ-95b" id="Hxq-k9-lcW"/>
+                        <outlet property="btnMute" destination="IsZ-RT-vT0" id="SyA-JD-fny"/>
                         <outlet property="btnSwitch" destination="rQp-mh-2FY" id="78p-MX-FjS"/>
                         <outlet property="lblLive" destination="64y-VN-OQb" id="ohM-B6-Cdk"/>
+                        <outlet property="lblWaiting" destination="CCa-Ug-EZb" id="Wbk-Qp-k8r"/>
+                        <outlet property="muteLabel" destination="fou-DT-qcW" id="BDk-HC-0NN"/>
+                        <outlet property="muteView" destination="odt-VP-eui" id="DwQ-0w-B3r"/>
                         <outlet property="videoView" destination="AEW-Sq-nYR" id="JpN-nL-38F"/>
                     </connections>
                 </viewController>
@@ -2515,26 +2582,29 @@ Let's add some items. </string>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
-            <color red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
