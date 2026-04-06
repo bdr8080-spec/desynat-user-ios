@@ -51,6 +51,7 @@ class StoresDetailsViewController: UIViewController {
             reelsCollectionView.registerCellFromNib(cellID: "ReelsCollectionViewCell")
         }
     }
+    @IBOutlet weak var noHighlightsFound: UILabel!
     
     // MARK: - Property Decalaration
     private lazy var viewModel = StoreDetailsViewModel(hostVC: self)
@@ -286,9 +287,9 @@ class StoresDetailsViewController: UIViewController {
            let url = URL(string: imageUrlString) {
             userProfileImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
             userProfileImage.sd_imageIndicator?.startAnimatingIndicator()
-            userProfileImage.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+            userProfileImage.sd_setImage(with: url, placeholderImage: UIImage(named: "userProfile"))
         } else {
-            userProfileImage.image = UIImage(named: "")
+            userProfileImage.image = UIImage(named: "userProfile")
         }
         
         if let imageUrlString = data.sellerInformation?.profileQr,

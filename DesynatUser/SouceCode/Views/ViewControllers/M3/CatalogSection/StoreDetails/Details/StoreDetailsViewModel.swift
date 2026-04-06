@@ -92,6 +92,7 @@ class StoreDetailsViewModel: NSObject {
         WebService.sharedInstance.getSellerHighlightsService(param: param) { list in
             self.sellerHighlights = list
             self.hostVC.storiesCollectionView.reloadData()
+            self.hostVC.noHighlightsFound.isHidden = !(self.sellerHighlights.isEmpty ?? false)
         }
     }
     
@@ -124,11 +125,13 @@ class StoreDetailsViewModel: NSObject {
         let param: [String:Any] = ["seller_id": sellerId]
         WebService.sharedInstance.getSellerStoryService(param: param) { list in
             if list.count > 0 {
-                self.hostVC.userProfileImage.borderWidth = 1.5
+                self.hostVC.sellerProfileButton.setImage(.gerdaientBorder, for: .normal)
                 self.hostVC.sellerProfileButton.isUserInteractionEnabled = true
+//                self.hostVC.sellerProfileButton.layer.borderWidth = 3
             } else {
                 self.hostVC.sellerProfileButton.isUserInteractionEnabled = false
-                self.hostVC.userProfileImage.borderWidth = 0
+                self.hostVC.sellerProfileButton.setImage(UIImage(named: ""), for: .normal)
+//                self.hostVC.sellerProfileButton.layer.borderWidth = 0
             }
         }
     }

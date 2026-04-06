@@ -34,12 +34,12 @@ class AffiliatedUserHomeViewController: UIViewController {
     private var activeTextField: UITextField?
     
     enum FilterType: Int {
-            case custom = 0
-            case today = 1
-            case week = 2
-            case month = 3
-        }
-        
+        case custom = 0
+        case today = 1
+        case week = 2
+        case month = 3
+    }
+    
     private var selectedFilter: FilterType = .today
     
     //MARK: - View's LifeCycle Methods
@@ -62,20 +62,20 @@ class AffiliatedUserHomeViewController: UIViewController {
     // MARK: - Button's Action
     @IBAction func btnSelectDate(_ sender: UIButton) {
         updateRadioSelection(for: dateButtons, selectedButton: sender)
-                
-                // Clear custom dates
-                fromDateTextField.text = ""
-                toDateTextField.text = ""
-                
-                if sender == btnToday {
-                    selectedFilter = .today
-                } else if sender == btnThisWeek {
-                    selectedFilter = .week
-                } else {
-                    selectedFilter = .month
-                }
-                
-                callDashboardAPI()
+        
+        // Clear custom dates
+        fromDateTextField.text = ""
+        toDateTextField.text = ""
+        
+        if sender == btnToday {
+            selectedFilter = .today
+        } else if sender == btnThisWeek {
+            selectedFilter = .week
+        } else {
+            selectedFilter = .month
+        }
+        
+        callDashboardAPI()
     }
     
     @IBAction func bellDidTapepd(_ sender: Any) {
