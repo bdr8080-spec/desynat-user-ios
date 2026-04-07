@@ -17,7 +17,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var adminstoryButtonOutlet: UIButton!
     @IBOutlet weak var notigicationView: CustomView!
     @IBOutlet weak var notificationCountLabel: UILabel!
-    
+    @IBOutlet weak var noStoresFoundLabel: UILabel!
     @IBOutlet weak var noCnterHomeBannersFoundLabel: UILabel!
     @IBOutlet weak var noTopHomeBannersFoundLabel: UILabel!
     @IBOutlet weak var browseBannersView: UIView!
@@ -78,14 +78,14 @@ class HomeViewController: UIViewController {
             categoriesSectionCollectionView.registerCellFromNib(cellID: "CategoriesSectionCollectionViewCell")
         }
     }
+    @IBOutlet weak var noBestSellingDataFound: UILabel!
+    @IBOutlet weak var noTopRatedDataFoundLabel: UILabel!
+    @IBOutlet weak var newestDataFoundLabel: UILabel!
     
     // MARK: - Property Decalaration
     private var bottomLabels: [UILabel] = []
-    //    private var bannerCount = 5
-    private var bestSellCount = 5
-    private var newProductCount = 6
-    private var suggestedStores = ["Abaya", "Kurti set", "Abaya", "Shoes", "Maxi", "Cord", "Abaya", "Shoes", "Maxi", "Cord"]
-    let isGuestLogin = UserDefaults.standard.string(forKey:"isGuestLogin")
+//    private var newProductCount = 6
+    let isGuestLogin = UserDefaults.standard.string(forKey:"isGuestLogin")  ?? "false"
     private lazy var viewModel = HomeViewModel(hostVC: self)
     var slecetdCategoryId: Int? = 0
     private var bannerAutoScrollTimer: Timer?
@@ -111,6 +111,7 @@ class HomeViewController: UIViewController {
         requestPermissions()
         viewModel.getTopHomeBannersListApi()
         viewModel.getCenterHomeBannersListApi()
+        viewModel.getSuggestedStoresRequest()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -120,6 +121,9 @@ class HomeViewController: UIViewController {
         startDiscountAutoScroll()
         viewModel.getCountOfNotificationRequest()
         viewModel.getAdminStory()
+        viewModel.getBestSellingProductsRequest()
+        viewModel.getTopRatedListRequest()
+        viewModel.getNewestProductListRequest()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -134,12 +138,12 @@ class HomeViewController: UIViewController {
         stopDiscountAutoScroll()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        DispatchQueue.main.async {
-            self.updateCollectionsHeight()
-        }
-    }
+//    override func viewWillLayoutSubviews() {
+//        super.viewWillLayoutSubviews()
+//        DispatchQueue.main.async {
+//            self.updateCollectionsHeight()
+//        }
+//    }
     
     // MARK: - Button's Action
     @IBAction func pageControlChanged(_ sender: UIPageControl) {
@@ -215,8 +219,13 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func notificationDidTapped(_ sender: Any) {
-        let nextVC = NotificationListViewController.instantiate(fromAppStoryboard: .Chat)
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
+        if isGuestUser != "true" {
+            let nextVC = NotificationListViewController.instantiate(fromAppStoryboard: .Chat)
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        } else {
+            showLoginAlert()
+        }
     }
     
     @IBAction func storyDidTapped(_ sender: Any) {
@@ -413,10 +422,10 @@ class HomeViewController: UIViewController {
         bannerPageController.currentPage = currentBannerIndex
     }
     
-    private func updateCollectionsHeight() {
-        heightConstraintOfSuggestedStoreCollectionView.constant = suggestedStoresCollectionView.contentSize.height
-        heightConstraintOfNewestProductCollectionView.constant = newestProductsCollectionView.contentSize.height
-    }
+//    private func updateCollectionsHeight() {
+//        
+//        heightConstraintOfNewestProductCollectionView.constant = newestProductsCollectionView.contentSize.height
+//    }
     
     func updateCategoryCollectionHeight() {
         let itemCount = viewModel.subCategoriesSection.count
@@ -435,6 +444,8 @@ class HomeViewController: UIViewController {
             lblUserName.text = "Deliver to \(Global.shared.user?.fullName ?? "")"
         }
     }
+    
+    
 }
 
 // MARK: - COLLECTION VIEW METHODS
@@ -452,9 +463,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case categoriesCollectionView:
             return viewModel.subCategoriesSection.count
         case suggestedStoresCollectionView:
-            return suggestedStores.count
+            return viewModel.suggestedStoresList.count
         case bestSellingCollectionView:
-            return bestSellCount
+            return viewModel.bestSellingProductsList.count
         case browsePrimiumCollectionView:
             let data = viewModel.homeCenterScreenAllBannersList
             if data.isEmpty {
@@ -463,7 +474,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 return viewModel.homeCenterScreenAllBannersList.count
             }
         case topRatedCollectionView:
-            return bestSellCount
+            return viewModel.topRatedProductsList.count
         case bowseSomeDisCountCollectionView:
             let data = viewModel.homeBottomDealAllBannersList
             if data.isEmpty {
@@ -471,10 +482,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             } else {
                 return viewModel.homeBottomDealAllBannersList.count
             }
-        case topRatedCollectionView:
-            return bestSellCount
         case newestProductsCollectionView:
-            return newProductCount
+            return viewModel.newestProductsList.count
         case categoriesSectionCollectionView:
             return viewModel.categoriesSection.count
         default:
@@ -503,11 +512,21 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
         case suggestedStoresCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SuggestedStoresCollectionViewCell", for: indexPath) as! SuggestedStoresCollectionViewCell
-            cell.titleLabel.text = suggestedStores[indexPath.row]
+            cell.configData(data: viewModel.suggestedStoresList[indexPath.row])
             return cell
             
         case bestSellingCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BestSellingsCollectionViewCell", for: indexPath) as! BestSellingsCollectionViewCell
+            let data = viewModel.bestSellingProductsList[indexPath.row]
+            cell.configData(data: data)
+            cell.wishlistButtonTapped = { [weak self] in
+                guard let self = self else { return }
+                if isGuestLogin != "true" {
+                    self.viewModel.handleWishlistTapForBestSelling(index: indexPath.row)
+                } else {
+                    showLoginAlert()
+                }
+            }
             return cell
             
         case browsePrimiumCollectionView:
@@ -523,6 +542,16 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
         case topRatedCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BestSellingsCollectionViewCell", for: indexPath) as! BestSellingsCollectionViewCell
+            let data = viewModel.topRatedProductsList[indexPath.row]
+            cell.configDataForTopRatedProducts(data: data)
+            cell.wishlistButtonTapped = { [weak self] in
+                guard let self = self else { return }
+                if isGuestLogin != "true" {
+                    self.viewModel.handleWishlistTapForTopRated(index: indexPath.row)
+                } else {
+                    showLoginAlert()
+                }
+            }
             return cell
             
         case bowseSomeDisCountCollectionView:
@@ -538,6 +567,16 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
         case newestProductsCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BestSellingsCollectionViewCell", for: indexPath) as! BestSellingsCollectionViewCell
+            let data = viewModel.newestProductsList[indexPath.row]
+            cell.configDataForTopRatedProducts(data: data)
+            cell.wishlistButtonTapped = { [weak self] in
+                guard let self = self else { return }
+                if isGuestLogin != "true" {
+                    self.viewModel.handleWishlistTapForNewestProduct(index: indexPath.row)
+                } else {
+                    showLoginAlert()
+                }
+            }
             return cell
             
         case categoriesSectionCollectionView:
@@ -592,7 +631,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let spacing: CGFloat = 10
             let totalSpacing = spacing * 2 // 3 cells per row → 2 spaces between
             let width = (collectionView.frame.width - totalSpacing) / 2
-            return CGSize(width: width, height: newestProductsCollectionView.frame.height)
+            return CGSize(width: width, height: 230)
             
         case categoriesSectionCollectionView:
             let width = (collectionView.frame.width - 0) / 3
@@ -631,16 +670,32 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             //            let nextVC = StoresDetailsViewController.instantiate(fromAppStoryboard: .Catalog)
             //            nextVC.storeId = viewModel.homeBottomDealAllBannersList[indexPath.row].sellerDealrecord.s
             //            self.navigationController?.pushViewController(nextVC, animated: true)
+        case suggestedStoresCollectionView:
+            let nextVC = StoresDetailsViewController.instantiate(fromAppStoryboard: .Catalog)
+            nextVC.storeId = viewModel.suggestedStoresList[indexPath.row].id
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        case bestSellingCollectionView:
+            let nextVC = ProductDetailViewController.instantiate(fromAppStoryboard: .Catalog)
+            nextVC.productId = viewModel.bestSellingProductsList[indexPath.row].id
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        case topRatedCollectionView:
+            let nextVC = ProductDetailViewController.instantiate(fromAppStoryboard: .Catalog)
+            nextVC.productId = viewModel.topRatedProductsList[indexPath.row].id
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        case newestProductsCollectionView:
+            let nextVC = ProductDetailViewController.instantiate(fromAppStoryboard: .Catalog)
+            nextVC.productId = viewModel.newestProductsList[indexPath.row].id
+            self.navigationController?.pushViewController(nextVC, animated: true)
         default:
             print("")
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if collectionView == categoriesCollectionView {
-            viewWillLayoutSubviews()
-        }
-    }
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        if collectionView == categoriesCollectionView {
+//            viewWillLayoutSubviews()
+//        }
+//    }
     
     // MARK: - Update Page Control on Scroll
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

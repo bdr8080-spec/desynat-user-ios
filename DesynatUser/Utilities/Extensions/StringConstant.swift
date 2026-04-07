@@ -90,6 +90,10 @@ enum AlertConstant: String {
     case confirmPasswordForAffiliate      = "Please Reenter password"
     case EnterNewPassowrdAffliate      = "Please Enter New Password"
     case EnterReEnterPassowrdAffliate      = "Please ReEnter New Password"
+    case Selectattachment      = "Please upload attachment"
+    case SelectTicketType      = "Please select ticket type"
+    case entertitle      = "Please enter title"
+    case enterdescription      = "Please enter description"
     
   func value() -> String {
     return self.rawValue

@@ -10,6 +10,7 @@ import UIKit
 
 class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIDocumentPickerDelegate {
     
+    static let shared = ImagePickerManager()
     var picker = UIImagePickerController();
     var alert = UIAlertController(title: "Choose File", message: nil, preferredStyle: .actionSheet)
     var viewController: UIViewController?

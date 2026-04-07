@@ -248,7 +248,6 @@ extension SearchProductListViewController: UICollectionViewDelegate, UICollectio
         
         let nextVC = ProductDetailViewController.instantiate(fromAppStoryboard: .Catalog)
         nextVC.productId = viewModel.productDetails?[indexPath.row].id
-        //      nextVC.storeName = pageTitleLabel.text?.trimmed()
         self.navigationController?.pushViewController(nextVC, animated: true)
         
     }

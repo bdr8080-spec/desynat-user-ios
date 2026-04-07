@@ -55,10 +55,11 @@ class StoreDetailsViewModel: NSObject {
                 }
                 DispatchQueue.main.async {
                     self.hostVC.storesCollectionView.reloadData()
-                    
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                         self.hostVC.storesCollectionView.layoutIfNeeded()
                         self.hostVC.storesCollectionViewHeightConstraint.constant =
+                        self.hostVC.storesCollectionView.collectionViewLayout.collectionViewContentSize.height
+                        self.hostVC.reelsCollectionViewHeightConstriant.constant =
                         self.hostVC.storesCollectionView.collectionViewLayout.collectionViewContentSize.height
                     }
                 }
@@ -92,7 +93,7 @@ class StoreDetailsViewModel: NSObject {
         WebService.sharedInstance.getSellerHighlightsService(param: param) { list in
             self.sellerHighlights = list
             self.hostVC.storiesCollectionView.reloadData()
-            self.hostVC.noHighlightsFound.isHidden = !(self.sellerHighlights.isEmpty ?? false)
+            self.hostVC.noHighlightsFound.isHidden = !(self.sellerHighlights.isEmpty)
         }
     }
     
@@ -102,7 +103,6 @@ class StoreDetailsViewModel: NSObject {
             self.sellerReels = list
             DispatchQueue.main.async {
                 self.hostVC.reelsCollectionView.reloadData()
-                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                     self.hostVC.reelsCollectionView.layoutIfNeeded()
                     self.hostVC.storesCollectionViewHeightConstraint.constant =
@@ -111,6 +111,7 @@ class StoreDetailsViewModel: NSObject {
                     self.hostVC.reelsCollectionView.collectionViewLayout.collectionViewContentSize.height
                 }
             }
+            self.hostVC.noReelsFound.isHidden = !(self.sellerReels.isEmpty)
         }
     }
     

@@ -1074,6 +1074,71 @@ extension WebService {
         }
     }
     
+    func getSuggestedStoresListService(completion:@escaping (_ user: [SuggestedStoresDataModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.suggestStore), requestMethod: .get, requestModel:[SuggestedStoresDataModel].self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getBestSellingProductsListService(completion:@escaping (_ user: [BestSellingProductsDataModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.bestSellingProduct), requestMethod: .get, requestModel:[BestSellingProductsDataModel].self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getTopRatedListService(completion:@escaping (_ user: [TopRatedDataModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.topRatingProduct), requestMethod: .get, requestModel:[TopRatedDataModel].self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getNewestProductListService(completion:@escaping (_ user: [TopRatedDataModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.newestProduct), requestMethod: .get, requestModel:[TopRatedDataModel].self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
     func createAffiliatedAccountService(param: [String:Any], completion:@escaping (_ user: AffiliateCreateAccountDataModel)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.createAffiliatedAccountUser), requestMethod: .post, requestParams: param, requestModel: AffiliateCreateAccountDataModel.self) { result, code in
@@ -1362,6 +1427,22 @@ extension WebService {
     func addToReelsWishelistSercie(param: [String: Any], completion:@escaping (_ user:EmptyModel)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.addRemoveReelsFromwishlist), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getAllTicketListforUserService(params: [String: Any], completion:@escaping (_ user: SupportListDataModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getRaisedTickets), requestMethod: .get, requestParams: params, requestModel: SupportListDataModel.self) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {

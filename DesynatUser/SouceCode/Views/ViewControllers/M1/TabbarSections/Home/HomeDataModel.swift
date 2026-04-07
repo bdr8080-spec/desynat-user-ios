@@ -147,3 +147,143 @@ struct SellerDealrecord: Codable {
     }
 }
 
+// MARK: - SuggestedStoresDataModel
+struct SuggestedStoresDataModel: Codable {
+    let id, sellerID: Int?
+    let storeImage: String?
+    let storeName, country, storeAddress, addressLine1: String?
+    let addressLine2, storePhone, countryCode, storeMailID: String?
+    let storeAvailability: Int?
+    let bio, datumLet, long, createdAt: String?
+    let updatedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case sellerID = "seller_id"
+        case storeImage = "store_image"
+        case storeName = "store_name"
+        case country
+        case storeAddress = "store_address"
+        case addressLine1 = "address_line1"
+        case addressLine2 = "address_line2"
+        case storePhone = "store_phone"
+        case countryCode = "country_code"
+        case storeMailID = "store_mail_id"
+        case storeAvailability = "Store_Availability"
+        case bio
+        case datumLet = "let"
+        case long
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+}
+
+
+// MARK: - BestSellingProductsDataModel
+struct BestSellingProductsDataModel: Codable {
+    let id: Int?
+    let sellerID, storeID, categoryID, subcategoryID: String?
+    let brandID: String?
+    let otherEn, otherAr: String?
+    let productNameEn, productNameAr, descriptionEn, descriptionAr: String?
+    let minCardQuantity, maxCardQuantity, productReturn, returnDays: String?
+    let productExchangable, exchangableDays, reviewRating, affiliatedProduct: String?
+    let affiliatedCommission: String?
+    let customizedProduct, readyToShip, cashOnDelivery: String?
+    let uploadSizeChart: String?
+    var productActiveStatus, wishlist: Int?
+    let createdAt, updatedAt: String?
+    let category: Category?
+    let subcategory, brand: Brand?
+    let productSpecifications: [ProductSpecification]?
+    let productVariants: [ProductVariant]?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case sellerID = "seller_id"
+        case storeID = "store_id"
+        case categoryID = "category_id"
+        case subcategoryID = "subcategory_id"
+        case brandID = "brand_id"
+        case otherEn = "other_en"
+        case otherAr = "other_ar"
+        case productNameEn = "product_name_en"
+        case productNameAr = "product_name_ar"
+        case descriptionEn = "description_en"
+        case descriptionAr = "description_ar"
+        case minCardQuantity = "min_card_quantity"
+        case maxCardQuantity = "max_card_quantity"
+        case productReturn = "product_return"
+        case returnDays = "return_days"
+        case productExchangable = "product_exchangable"
+        case exchangableDays = "exchangable_days"
+        case reviewRating = "review_rating"
+        case affiliatedProduct = "affiliated_product"
+        case affiliatedCommission = "affiliated_commission"
+        case customizedProduct = "customized_product"
+        case readyToShip = "ready_to_ship"
+        case cashOnDelivery = "cash_on_delivery"
+        case uploadSizeChart = "upload_size_chart"
+        case productActiveStatus = "product_active_status"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case category, subcategory, brand, wishlist
+        case productSpecifications = "product_specifications"
+        case productVariants = "product_variants"
+    }
+}
+
+
+// MARK: - TopRatedDataModel
+struct TopRatedDataModel: Codable {
+    let id: Int?
+    let sellerID, storeID, categoryID, subcategoryID: String?
+    let brandID: String?
+    let otherEn, otherAr: String?
+    let productNameEn, productNameAr, descriptionEn, descriptionAr: String?
+    let minCardQuantity, maxCardQuantity, productReturn, returnDays: String?
+    let productExchangable, exchangableDays, reviewRating, affiliatedProduct: String?
+    let affiliatedCommission: String?
+    let customizedProduct, readyToShip, cashOnDelivery: String?
+    let uploadSizeChart: String?
+    var productActiveStatus, wishlist: Int?
+    let createdAt, updatedAt: String?
+    let category: Category?
+    let subcategory, brand: Brand?
+    let productSpecifications: [ProductSpecification]?
+    let productVariants: [ProductVariant]?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case sellerID = "seller_id"
+        case storeID = "store_id"
+        case categoryID = "category_id"
+        case subcategoryID = "subcategory_id"
+        case brandID = "brand_id"
+        case otherEn = "other_en"
+        case otherAr = "other_ar"
+        case productNameEn = "product_name_en"
+        case productNameAr = "product_name_ar"
+        case descriptionEn = "description_en"
+        case descriptionAr = "description_ar"
+        case minCardQuantity = "min_card_quantity"
+        case maxCardQuantity = "max_card_quantity"
+        case productReturn = "product_return"
+        case returnDays = "return_days"
+        case productExchangable = "product_exchangable"
+        case exchangableDays = "exchangable_days"
+        case reviewRating = "review_rating"
+        case affiliatedProduct = "affiliated_product"
+        case affiliatedCommission = "affiliated_commission"
+        case customizedProduct = "customized_product"
+        case readyToShip = "ready_to_ship"
+        case cashOnDelivery = "cash_on_delivery"
+        case uploadSizeChart = "upload_size_chart"
+        case productActiveStatus = "product_active_status"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case category, subcategory, brand, wishlist
+        case productSpecifications = "product_specifications"
+        case productVariants = "product_variants"
+    }
+}

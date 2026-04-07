@@ -106,9 +106,17 @@ class StoresDetailsViewController: UIViewController {
         storesCollectionView.isHidden = false
         reelsCollectionView.isHidden = true
         noReelsFound.isHidden = true
-        self.storesCollectionView.layoutIfNeeded()
-        self.storesCollectionViewHeightConstraint.constant =
-        self.storesCollectionView.collectionViewLayout.collectionViewContentSize.height
+        //        self.storesCollectionView.layoutIfNeeded()
+        //        self.storesCollectionViewHeightConstraint.constant =
+        //        self.storesCollectionView.collectionViewLayout.collectionViewContentSize.height
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            self.storesCollectionView.layoutIfNeeded()
+            self.storesCollectionViewHeightConstraint.constant =
+            self.storesCollectionView.collectionViewLayout.collectionViewContentSize.height
+            self.reelsCollectionViewHeightConstriant.constant =
+            self.storesCollectionView.collectionViewLayout.collectionViewContentSize.height
+        }
     }
     
     @IBAction func reelsDidTapped(_ sender: Any) {

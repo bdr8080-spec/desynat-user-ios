@@ -25,7 +25,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eja-Qz-uNc">
                         <rect key="frame" x="0.0" y="0.0" width="75" height="154"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="store" translatesAutoresizingMaskIntoConstraints="NO" id="bkJ-KC-FnQ" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfile" translatesAutoresizingMaskIntoConstraints="NO" id="bkJ-KC-FnQ" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                 <rect key="frame" x="8" y="0.0" width="59" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="7Pv-jo-gQK"/>
@@ -41,7 +41,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Abaya" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kln-86-NqT">
-                                <rect key="frame" x="8" y="65" width="59" height="17"/>
+                                <rect key="frame" x="0.0" y="65" width="75" height="17"/>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -54,8 +54,8 @@
                             <constraint firstItem="bkJ-KC-FnQ" firstAttribute="top" secondItem="eja-Qz-uNc" secondAttribute="top" id="9GZ-Op-3zB"/>
                             <constraint firstItem="kln-86-NqT" firstAttribute="top" secondItem="bkJ-KC-FnQ" secondAttribute="bottom" constant="10" id="Aqi-CY-dM7"/>
                             <constraint firstItem="bkJ-KC-FnQ" firstAttribute="leading" secondItem="eja-Qz-uNc" secondAttribute="leading" constant="8" id="HDl-WP-4O7"/>
-                            <constraint firstItem="kln-86-NqT" firstAttribute="trailing" secondItem="bkJ-KC-FnQ" secondAttribute="trailing" id="cbh-zb-Jyh"/>
-                            <constraint firstItem="kln-86-NqT" firstAttribute="leading" secondItem="bkJ-KC-FnQ" secondAttribute="leading" id="mR6-ID-nUO"/>
+                            <constraint firstAttribute="trailing" secondItem="kln-86-NqT" secondAttribute="trailing" id="N00-cW-bNN"/>
+                            <constraint firstItem="kln-86-NqT" firstAttribute="leading" secondItem="eja-Qz-uNc" secondAttribute="leading" id="UQV-uu-vxN"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -68,13 +68,14 @@
             </constraints>
             <size key="customSize" width="82" height="154"/>
             <connections>
+                <outlet property="mainImageView" destination="bkJ-KC-FnQ" id="gPF-B4-cTy"/>
                 <outlet property="titleLabel" destination="kln-86-NqT" id="46m-gL-ktj"/>
             </connections>
             <point key="canvasLocation" x="54.961832061068698" y="32.394366197183103"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="store" width="60" height="60"/>
+        <image name="userProfile" width="32" height="32.333332061767578"/>
         <namedColor name="darkBrown">
             <color red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

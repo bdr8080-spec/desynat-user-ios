@@ -24,7 +24,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qyF-qS-hb2" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="259" height="256"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bestSell" translatesAutoresizingMaskIntoConstraints="NO" id="1JQ-uo-4Th" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1JQ-uo-4Th" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="259" height="136"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="136" id="wXc-cD-HXi"/>
@@ -36,13 +36,13 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3pcs Set (by Abaya)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQQ-Ll-nop">
-                                <rect key="frame" x="10" y="146" width="239" height="17"/>
+                                <rect key="frame" x="10" y="141" width="239" height="17"/>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="xfk-Ed-6Oa">
-                                <rect key="frame" x="10" y="168" width="111" height="12"/>
+                                <rect key="frame" x="10" y="163" width="111" height="12"/>
                                 <subviews>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DG3-2a-bND" customClass="CosmosView" customModule="Cosmos">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="12"/>
@@ -81,7 +81,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="239 KD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xgs-YN-aWL">
-                                <rect key="frame" x="10" y="185" width="239" height="15"/>
+                                <rect key="frame" x="10" y="180" width="239" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="xfc-PK-lb1"/>
                                 </constraints>
@@ -90,7 +90,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="5oI-D1-uXA">
-                                <rect key="frame" x="10" y="205" width="80" height="12"/>
+                                <rect key="frame" x="10" y="200" width="80" height="12"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="239 KD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcw-xy-NCR" customClass="CustomLabelFont">
                                         <rect key="frame" x="0.0" y="0.0" width="36.333333333333336" height="12"/>
@@ -117,6 +117,9 @@
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="share"/>
+                                        <connections>
+                                            <action selector="shareButtonOutket:" destination="gTV-IL-0wX" eventType="touchUpInside" id="JjP-3M-bsa"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1a2-ll-31L">
                                         <rect key="frame" x="27" y="0.0" width="25" height="25"/>
@@ -126,6 +129,9 @@
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="besSellLike"/>
+                                        <connections>
+                                            <action selector="likeButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="wm0-eX-1B5"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -141,7 +147,7 @@
                             <constraint firstItem="5oI-D1-uXA" firstAttribute="top" secondItem="Xgs-YN-aWL" secondAttribute="bottom" constant="5" id="J2e-0d-d7m"/>
                             <constraint firstItem="1JQ-uo-4Th" firstAttribute="leading" secondItem="qyF-qS-hb2" secondAttribute="leading" id="LdX-ia-3wd"/>
                             <constraint firstItem="Xgs-YN-aWL" firstAttribute="leading" secondItem="5oI-D1-uXA" secondAttribute="leading" id="TjC-7Z-h4l"/>
-                            <constraint firstItem="XQQ-Ll-nop" firstAttribute="top" secondItem="1JQ-uo-4Th" secondAttribute="bottom" constant="10" id="Tx5-wG-oz6"/>
+                            <constraint firstItem="XQQ-Ll-nop" firstAttribute="top" secondItem="1JQ-uo-4Th" secondAttribute="bottom" constant="5" id="Tx5-wG-oz6"/>
                             <constraint firstItem="Kqv-kf-y11" firstAttribute="top" secondItem="qyF-qS-hb2" secondAttribute="top" constant="10" id="VcI-i7-VTs"/>
                             <constraint firstItem="1JQ-uo-4Th" firstAttribute="top" secondItem="qyF-qS-hb2" secondAttribute="top" id="bME-s6-2u4"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="5oI-D1-uXA" secondAttribute="bottom" constant="10" id="dAJ-K1-I1r"/>
@@ -173,15 +179,20 @@
             </constraints>
             <size key="customSize" width="259" height="256"/>
             <connections>
+                <outlet property="actualPriceLabel" destination="wcw-xy-NCR" id="fao-NS-j3X"/>
+                <outlet property="discountPriceLabel" destination="4ps-A9-Cyh" id="fQe-dh-Dw4"/>
+                <outlet property="finalPriceLabel" destination="Xgs-YN-aWL" id="E0k-Nz-0W2"/>
+                <outlet property="likeButtonOutlet" destination="1a2-ll-31L" id="cAs-P9-B5Y"/>
                 <outlet property="mainImageView" destination="1JQ-uo-4Th" id="RDa-1O-mo2"/>
-                <outlet property="orginalPriceLabel" destination="wcw-xy-NCR" id="zvz-rk-Y1P"/>
+                <outlet property="ratingView" destination="DG3-2a-bND" id="nqX-eW-Aaf"/>
+                <outlet property="shareButtonOutlet" destination="UBS-3k-8UQ" id="Scl-Ef-upL"/>
+                <outlet property="titleLabel" destination="XQQ-Ll-nop" id="dwf-Jj-DPx"/>
             </connections>
             <point key="canvasLocation" x="227" y="-21"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="besSellLike" width="20" height="20"/>
-        <image name="bestSell" width="158" height="136"/>
         <image name="share" width="20" height="20"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

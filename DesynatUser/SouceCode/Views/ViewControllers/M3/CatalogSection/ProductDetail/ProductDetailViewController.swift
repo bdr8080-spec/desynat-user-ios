@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Cosmos
 
 class ProductDetailViewController: UIViewController {
     
@@ -86,6 +87,7 @@ class ProductDetailViewController: UIViewController {
         }
     }
     @IBOutlet weak var totalBoughtLabel: UILabel!
+    @IBOutlet weak var ratingView: CosmosView!
     
     // MARK: - Property Decalaration
     private lazy var viewModel = ProductDetailsViewModel(hostVC: self)
@@ -276,6 +278,7 @@ class ProductDetailViewController: UIViewController {
         let storeName = productDetails?.store?.storeName ?? productDetails?.productNameEn ?? ""
         pagetitleLabel.text = storeName
         productNameLabel.text = productDetails?.productNameEn
+        ratingView.rating = Double(productDetails?.reviewRating ?? "") ?? 0
         if productDetails?.brand?.nameEnglish == "Other" {
             productLabel.text = productDetails?.otherEn
         } else {

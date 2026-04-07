@@ -22,13 +22,28 @@ class SupportViewController: UIViewController {
             ticketManagementTableView.registerCellFromNib(cellID: "TicketManagementTableViewCell")
         }
     }
+    @IBOutlet weak var pageCountLabel: UILabel!
+    @IBOutlet weak var previousButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var noDataFoundLabel: UILabel!
+    @IBOutlet weak var serachTF: UITextField!
     
+    private lazy var viewModel = SupportViewModel(hostVC: self)
     var comingUserRole: UserRoleType = .normalUser
+    private var searchWorkItem: DispatchWorkItem?
     
+    // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        serachTF.delegate = self
         ticketManagementTableView.isHidden = true
         contactView.isHidden = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.currentPage = 1
+        viewModel.getAllTicketListRequest()
     }
     
     // MARK: - Navigation
@@ -61,21 +76,76 @@ class SupportViewController: UIViewController {
         ticketManagementTableView.isHidden = false
         contactView.isHidden = true
     }
+    
+    @IBAction func nextButtonDidTapped(_ sender: Any) {
+        viewModel.goToNextPage()
+    }
+    
+    @IBAction func previousButtonDidTapped(_ sender: Any) {
+        viewModel.goToPreviousPage()
+    }
+    
+    //MARK: Function's declaration
+    func updatePaginationButtonImages() {
+        // Previous Button
+        if viewModel.currentPage == 1 {
+            previousButton.setImage(UIImage(named: "previousLeft"), for: .normal)
+            previousButton.isUserInteractionEnabled = false
+        } else {
+            previousButton.setImage(UIImage(named: "darkpreviousimage"), for: .normal)
+            previousButton.isUserInteractionEnabled = true
+        }
+        
+        // Next Button
+        if viewModel.currentPage >= viewModel.totalPages {
+            nextButton.setImage(UIImage(named: "lightnextimage"), for: .normal)
+            nextButton.isUserInteractionEnabled = false
+        } else {
+            nextButton.setImage(UIImage(named: "nextRight"), for: .normal)
+            nextButton.isUserInteractionEnabled = true
+        }
+    }
 }
 
 extension SupportViewController : UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return viewModel.ticketsList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TicketManagementTableViewCell", for: indexPath) as! TicketManagementTableViewCell
+        let data = viewModel.ticketsList[indexPath.row]
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = TicketDetailViewController.instantiate(fromAppStoryboard: .DashBoard)
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+
+//MARK: UITextFieldDelegate Methods
+extension SupportViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+        
+        // Cancel previous search work item
+        searchWorkItem?.cancel()
+        
+        // Create new one
+        let workItem = DispatchWorkItem { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.searchText = currentText
+            self.viewModel.currentPage = 1
+            self.viewModel.getAllTicketListRequest()
+        }
+        
+        // Store and execute after delay
+        searchWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: workItem)
+        
+        return true
     }
 }

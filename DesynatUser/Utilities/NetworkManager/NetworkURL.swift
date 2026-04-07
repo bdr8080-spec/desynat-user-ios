@@ -163,6 +163,14 @@ enum NetworkEndPoint: String {
     case showAllLiveStraming   = "api/user/show-all-live-streaming-request"
     case generateAgoraToken   = "api/agora/token"
     
+    
+    //M12
+    case suggestStore               = "api/user/suggest-store"
+    case bestSellingProduct         = "api/user/best-selling-product"
+    case topRatingProduct           = "api/user/top-rating-product"
+    case newestProduct              = "api/user/newest-product"
+    case getRaisedTickets           = "api/user/get_raised_tickets"
+    
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"
     }

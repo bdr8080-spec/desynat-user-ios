@@ -17,6 +17,10 @@ class HomeViewModel: NSObject {
     var homeScreenAllBannersList: [HomescreenBannersList] = []
     var homeCenterScreenAllBannersList: [HomescreenBannersList] = []
     var homeBottomDealAllBannersList: [HomeBottomBannerForDeals] = []
+    var suggestedStoresList: [SuggestedStoresDataModel] = []
+    var bestSellingProductsList: [BestSellingProductsDataModel] = []
+    var topRatedProductsList: [TopRatedDataModel] = []
+    var newestProductsList: [TopRatedDataModel] = []
     
     var selectedCategoriesSection = 0 {
         didSet {
@@ -52,12 +56,15 @@ class HomeViewModel: NSObject {
     }
     
     func getCountOfNotificationRequest(){
-        WebService.sharedInstance.getCountOfNotificationService { [self] count in
-            if count > 0 {
-                self.hostVC.notigicationView.isHidden = false
-                self.hostVC.notificationCountLabel.text = count.description
-            } else {
-                self.hostVC.notigicationView.isHidden = true
+        let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
+        if isGuestUser != "true" {
+            WebService.sharedInstance.getCountOfNotificationService { [self] count in
+                if count > 0 {
+                    self.hostVC.notigicationView.isHidden = false
+                    self.hostVC.notificationCountLabel.text = count.description
+                } else {
+                    self.hostVC.notigicationView.isHidden = true
+                }
             }
         }
     }
@@ -125,6 +132,130 @@ class HomeViewModel: NSObject {
                 self.hostVC.bowseSomeDisCountCollectionView.reloadData()
                 self.hostVC.browseDiscountPageController.numberOfPages = self.homeBottomDealAllBannersList.count
             }
+        }
+    }
+    
+    func getSuggestedStoresRequest() {
+        WebService.sharedInstance.getSuggestedStoresListService() { list in
+            DispatchQueue.main.async {
+                self.suggestedStoresList = list
+                self.hostVC.suggestedStoresCollectionView.isHidden = self.suggestedStoresList.isEmpty
+                self.hostVC.noStoresFoundLabel.isHidden = !self.suggestedStoresList.isEmpty
+                self.hostVC.suggestedStoresCollectionView.reloadData()
+                self.hostVC.suggestedStoresCollectionView.layoutIfNeeded()
+                self.hostVC.heightConstraintOfSuggestedStoreCollectionView.constant = self.hostVC.suggestedStoresCollectionView.contentSize.height
+            }
+        }
+    }
+    
+    func getBestSellingProductsRequest() {
+        WebService.sharedInstance.getBestSellingProductsListService() { list in
+            DispatchQueue.main.async {
+                self.bestSellingProductsList = list
+                self.hostVC.bestSellingCollectionView.isHidden = self.bestSellingProductsList.isEmpty
+                self.hostVC.noBestSellingDataFound.isHidden = !self.bestSellingProductsList.isEmpty
+                self.hostVC.bestSellingCollectionView.reloadData()
+            }
+        }
+    }
+    
+    func getTopRatedListRequest() {
+        WebService.sharedInstance.getTopRatedListService() { list in
+            DispatchQueue.main.async {
+                self.topRatedProductsList = list
+                self.hostVC.topRatedCollectionView.isHidden = self.topRatedProductsList.isEmpty
+                self.hostVC.noTopRatedDataFoundLabel.isHidden = !self.topRatedProductsList.isEmpty
+                self.hostVC.topRatedCollectionView.reloadData()
+            }
+        }
+    }
+    
+    func getNewestProductListRequest() {
+        WebService.sharedInstance.getNewestProductListService() { list in
+            DispatchQueue.main.async {
+                self.newestProductsList = list
+                self.hostVC.newestProductsCollectionView.isHidden = self.newestProductsList.isEmpty
+                self.hostVC.newestDataFoundLabel.isHidden = !self.newestProductsList.isEmpty
+                self.hostVC.newestProductsCollectionView.reloadData()
+                self.hostVC.newestProductsCollectionView.layoutIfNeeded()
+                self.hostVC.heightConstraintOfNewestProductCollectionView.constant = self.hostVC.newestProductsCollectionView.contentSize.height
+            }
+        }
+    }
+    
+    func handleWishlistTapForTopRated(index: Int) {
+        let productId = topRatedProductsList[index].id ?? 0
+        addToWishlist(productId: productId) { [weak self] success in
+            guard let self = self else { return }
+            if success {
+                var updatedProduct = self.topRatedProductsList[index]
+                let newStatus = updatedProduct.wishlist == 1 ? 0 : 1
+                updatedProduct.wishlist = newStatus
+                self.topRatedProductsList[index] = updatedProduct
+                DispatchQueue.main.async {
+                    self.hostVC.topRatedCollectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
+                    if newStatus == 1 {
+                        CommonUtils.showToast(message: "Product added to wishlist")
+                    } else {
+                        CommonUtils.showToast(message: "Product removed from wishlist")
+                    }
+                }
+            } else {
+                print("Wishlist API Failed")
+            }
+        }
+    }
+    
+    func handleWishlistTapForBestSelling(index: Int) {
+        let productId = bestSellingProductsList[index].id ?? 0
+        addToWishlist(productId: productId) { [weak self] success in
+            guard let self = self else { return }
+            if success {
+                var updatedProduct = self.bestSellingProductsList[index]
+                let newStatus = updatedProduct.wishlist == 1 ? 0 : 1
+                updatedProduct.wishlist = newStatus
+                self.bestSellingProductsList[index] = updatedProduct
+                DispatchQueue.main.async {
+                    self.hostVC.bestSellingCollectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
+                    if newStatus == 1 {
+                        CommonUtils.showToast(message: "Product added to wishlist")
+                    } else {
+                        CommonUtils.showToast(message: "Product removed from wishlist")
+                    }
+                }
+            } else {
+                print("Wishlist API Failed")
+            }
+        }
+    }
+    
+    func handleWishlistTapForNewestProduct(index: Int) {
+        let productId = newestProductsList[index].id ?? 0
+        addToWishlist(productId: productId) { [weak self] success in
+            guard let self = self else { return }
+            if success {
+                var updatedProduct = self.newestProductsList[index]
+                let newStatus = updatedProduct.wishlist == 1 ? 0 : 1
+                updatedProduct.wishlist = newStatus
+                self.newestProductsList[index] = updatedProduct
+                DispatchQueue.main.async {
+                    self.hostVC.newestProductsCollectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
+                    if newStatus == 1 {
+                        CommonUtils.showToast(message: "Product added to wishlist")
+                    } else {
+                        CommonUtils.showToast(message: "Product removed from wishlist")
+                    }
+                }
+            } else {
+                print("Wishlist API Failed")
+            }
+        }
+    }
+    
+    func addToWishlist(productId: Int, completion: @escaping (Bool) -> Void) {
+        let param: [String: Any] = ["product_id": productId]
+        WebService.sharedInstance.addToWishelistSercie(param: param) { list in
+            completion(true)
         }
     }
 }

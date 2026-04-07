@@ -6,6 +6,7 @@ struct MultipartUpload {
     
     enum Mime:String {
         case Video = "video/mp4"
+        case gif   = "image/gif"
         case image = "image/jpeg"
         case pdf   = "application/pdf"
     }
