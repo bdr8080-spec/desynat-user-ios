@@ -13,26 +13,36 @@ class RaiseTicketViewController: UIViewController {
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var titleTF: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
-    @IBOutlet weak var attachmentImageView: UIImageView!
+    @IBOutlet weak var attachmentImageView: CustomImageView!
     
     private lazy var viewModel = RaiseTicketViewModel(hostVC: self)
-    var selectedImageUrl: String = ""
-    var selectedTicketType: Int = -1
+    var selectedImageUrl: String? = ""
+    var selectedTicketTypeIndex: Int = -1
     var comingUserRole: UserRoleType = .normalUser
+    var isTicketRaised: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
+        viewModel.ticketTypeListApi()
     }
     
     // MARK: - Navigation
-    
     @IBAction func crossBtn(_ sender: Any) {
         self.dismiss(animated: true)
     }
     
-    @IBAction func ticketTypeDidTapped(_ sender: Any) {
-        
+    @IBAction func ticketTypeDidTapped(_ sender: UIButton) {
+        let ticketsName = viewModel.ticketsTypeList.map { list -> String in
+            let name = list.name ?? ""
+            return name
+        }
+        kSharedAppDelegate.dropDown(dataSource: ticketsName, anchorView: sender) { index, item in
+            let selectedTicket = self.viewModel.ticketsTypeList[index]
+            let name = selectedTicket.name
+            self.ticketTypeLabel.text = name
+            self.selectedTicketTypeIndex = selectedTicket.id ?? -1
+        }
     }
     
     @IBAction func attachmentDidTapped(_ sender: Any) {
@@ -75,7 +85,12 @@ class RaiseTicketViewController: UIViewController {
     
     @IBAction func submitDidTapped(_ sender: Any) {
         if viewModel.validFields() {
-            viewModel.addAttachment()
+            switch comingUserRole {
+            case .normalUser:
+                viewModel.raiseTicketForNormalUser()
+            case .affilaiteUser:
+                viewModel.raiseTicketForAffiliateUser()
+            }
         }
     }
     

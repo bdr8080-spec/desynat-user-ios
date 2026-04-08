@@ -170,6 +170,10 @@ enum NetworkEndPoint: String {
     case topRatingProduct           = "api/user/top-rating-product"
     case newestProduct              = "api/user/newest-product"
     case getRaisedTickets           = "api/user/get_raised_tickets"
+    case getTicketsType             = "api/ticket_types"
+    case raiseTicket                = "api/user/raise_ticket"
+    case getRaiseTicketForAffiliate = "api/affiliate/get_raised_tickets"
+    case raiseTicketForAffiliate    = "api/affiliate/raise_ticket"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

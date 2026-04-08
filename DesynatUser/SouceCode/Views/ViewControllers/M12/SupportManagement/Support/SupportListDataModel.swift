@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 // MARK: - SupportListDataModel
 struct SupportListDataModel: Codable {
@@ -66,6 +67,40 @@ struct SupportList: Codable {
 
 // MARK: - TicketTypeDetails
 struct TicketTypeDetails: Codable {
+    let id: Int?
+    let name: String?
+    let status: Int?
+    let createdAt, updatedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, status
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+}
+
+enum TicketStatus: Int {
+    case pending = 0
+    case resolved = 1
+
+    var text: String {
+        switch self {
+        case .pending: return "Pending"
+        case .resolved: return "Resolved"
+        }
+    }
+    
+    var color: UIColor {
+        switch self {
+        case .pending: return UIColor(hexString: "#D72E04")   // 🔴 red
+        case .resolved: return UIColor(hexString: "#0A8A20")  // 🟢 green
+        }
+    }
+}
+
+
+// MARK: - TicketTypesList
+struct TicketTypesList: Codable {
     let id: Int?
     let name: String?
     let status: Int?

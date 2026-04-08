@@ -495,4 +495,38 @@ extension WebService {
         }
     }
     
+    func getAllTicketListforAffiliateUserService(params: [String: Any], completion:@escaping (_ user: SupportListDataModel)-> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getRaiseTicketForAffiliate), requestMethod: .get, requestParams: params, requestModel: SupportListDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func raiseTicketForAffiliateUserService(param: [String:Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.raiseTicketForAffiliate), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
 }

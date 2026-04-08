@@ -27,6 +27,10 @@ class SupportViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var noDataFoundLabel: UILabel!
     @IBOutlet weak var serachTF: UITextField!
+    @IBOutlet weak var supportEmailLabe: UILabel!
+    @IBOutlet weak var supportPhoneLabel: UILabel!
+    @IBOutlet weak var paginationBottomView: UIView!
+    
     
     private lazy var viewModel = SupportViewModel(hostVC: self)
     var comingUserRole: UserRoleType = .normalUser
@@ -38,12 +42,13 @@ class SupportViewController: UIViewController {
         serachTF.delegate = self
         ticketManagementTableView.isHidden = true
         contactView.isHidden = false
+        paginationBottomView.isHidden = true
+        noDataFoundLabel.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.currentPage = 1
-        viewModel.getAllTicketListRequest()
+        
     }
     
     // MARK: - Navigation
@@ -59,22 +64,40 @@ class SupportViewController: UIViewController {
         contactLbl.textColor = UIColor.white
         ticketManagementTableView.isHidden = true
         contactView.isHidden = false
-        
+        paginationBottomView.isHidden = true
     }
     
     @IBAction func raiseTicketBtn(_ sender: Any) {
         let vc = RaiseTicketViewController.instantiate(fromAppStoryboard: .DashBoard)
+        vc.comingUserRole = comingUserRole
+        vc.isTicketRaised = { [weak self] in
+            guard let self else { return }
+            viewModel.currentPage = 1
+            switch comingUserRole {
+            case .normalUser:
+                viewModel.getAllTicketListRequest()
+            case .affilaiteUser:
+                viewModel.getAllTicketForAffiliateUserListRequest()
+            }
+        }
         self.present(vc, animated: true)
     }
     
     @IBAction func ticketManagementBtn(_ sender: Any) {
         contactBtn.setImage(UIImage(named: ""), for: .normal)
         contactLbl.textColor = UIColor.black
-        
         ticketmanagementbtn.setImage(UIImage(named: "btnGradient"), for: .normal)
         ticketmanagementLbl.textColor = UIColor.white
         ticketManagementTableView.isHidden = false
         contactView.isHidden = true
+        paginationBottomView.isHidden = false
+        viewModel.currentPage = 1
+        switch comingUserRole {
+        case .normalUser:
+            viewModel.getAllTicketListRequest()
+        case .affilaiteUser:
+            viewModel.getAllTicketForAffiliateUserListRequest()
+        }
     }
     
     @IBAction func nextButtonDidTapped(_ sender: Any) {
@@ -83,6 +106,23 @@ class SupportViewController: UIViewController {
     
     @IBAction func previousButtonDidTapped(_ sender: Any) {
         viewModel.goToPreviousPage()
+    }
+    
+    @IBAction func micDidTapped(_ sender: Any) {
+        let nextVC = VoiceSearchViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+        nextVC.onSearchedCompletionTxt = { [weak self] searchText in
+            guard let self else { return }
+            serachTF.text = searchText
+            viewModel.searchText = searchText
+            viewModel.currentPage = 1
+            switch comingUserRole {
+            case .normalUser:
+                viewModel.getAllTicketListRequest()
+            case .affilaiteUser:
+                viewModel.getAllTicketForAffiliateUserListRequest()
+            }
+        }
+        self.navigationController?.present(nextVC, animated: true)
     }
     
     //MARK: Function's declaration
@@ -114,13 +154,14 @@ extension SupportViewController : UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "TicketManagementTableViewCell", for: indexPath) as! TicketManagementTableViewCell
-        let data = viewModel.ticketsList[indexPath.row]
+        cell.configData(data: viewModel.ticketsList[indexPath.row])
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = TicketDetailViewController.instantiate(fromAppStoryboard: .DashBoard)
+        vc.ticketDetails = viewModel.ticketsList[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -139,7 +180,12 @@ extension SupportViewController: UITextFieldDelegate {
             guard let self = self else { return }
             self.viewModel.searchText = currentText
             self.viewModel.currentPage = 1
-            self.viewModel.getAllTicketListRequest()
+            switch comingUserRole {
+            case .normalUser:
+                viewModel.getAllTicketListRequest()
+            case .affilaiteUser:
+                viewModel.getAllTicketForAffiliateUserListRequest()
+            }
         }
         
         // Store and execute after delay
