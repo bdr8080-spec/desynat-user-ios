@@ -1754,7 +1754,7 @@ Let's add some items. </string>
                                                                                 </connections>
                                                                             </button>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gift Cards" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjh-Dj-suT">
-                                                                                <rect key="frame" x="35.333333333333329" y="10.666666666666659" width="80.999999999999986" height="22.666666666666671"/>
+                                                                                <rect key="frame" x="35.333333333333329" y="10.666666666666659" width="81" height="22.666666666666671"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -2329,6 +2329,29 @@ the event</string>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9vp-SU-stl" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                                <rect key="frame" x="155.66666666666666" y="170" width="81.666666666666657" height="27"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Viewers: 1" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="W4u-hL-yhY">
+                                        <rect key="frame" x="11.999999999999996" y="5" width="57.666666666666657" height="17"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                <constraints>
+                                    <constraint firstItem="W4u-hL-yhY" firstAttribute="top" secondItem="9vp-SU-stl" secondAttribute="top" constant="5" id="d2S-l7-ln9"/>
+                                    <constraint firstAttribute="bottom" secondItem="W4u-hL-yhY" secondAttribute="bottom" constant="5" id="db0-l3-Dg6"/>
+                                    <constraint firstAttribute="trailing" secondItem="W4u-hL-yhY" secondAttribute="trailing" constant="12" id="gN7-rn-aFe"/>
+                                    <constraint firstItem="W4u-hL-yhY" firstAttribute="leading" secondItem="9vp-SU-stl" secondAttribute="leading" constant="12" id="hlI-zD-Mrm"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z3l-Px-dC6" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                 <rect key="frame" x="173" y="118" width="47" height="32"/>
                                 <subviews>
@@ -2457,6 +2480,8 @@ the event</string>
                             <constraint firstItem="a90-38-Xju" firstAttribute="bottom" secondItem="zeX-rp-LIZ" secondAttribute="bottom" id="Faa-mh-ZJG"/>
                             <constraint firstItem="AEW-Sq-nYR" firstAttribute="leading" secondItem="qe7-Rn-fCy" secondAttribute="leading" id="Tfh-wN-itw"/>
                             <constraint firstItem="a90-38-Xju" firstAttribute="top" secondItem="Z3l-Px-dC6" secondAttribute="top" id="VUG-p9-0oq"/>
+                            <constraint firstItem="9vp-SU-stl" firstAttribute="centerX" secondItem="a90-38-Xju" secondAttribute="centerX" id="VgA-PG-rpv"/>
+                            <constraint firstItem="9vp-SU-stl" firstAttribute="top" secondItem="Z3l-Px-dC6" secondAttribute="bottom" constant="20" id="Vvg-EV-gd8"/>
                             <constraint firstItem="Z3l-Px-dC6" firstAttribute="centerX" secondItem="a90-38-Xju" secondAttribute="centerX" id="WlB-GP-feK"/>
                             <constraint firstItem="zeX-rp-LIZ" firstAttribute="leading" secondItem="a90-38-Xju" secondAttribute="leading" constant="24" id="Y5C-fS-FqJ"/>
                             <constraint firstItem="a90-38-Xju" firstAttribute="trailing" secondItem="zeX-rp-LIZ" secondAttribute="trailing" constant="24" id="lkw-Gr-qrm"/>
@@ -2469,6 +2494,7 @@ the event</string>
                         <outlet property="btnMute" destination="IsZ-RT-vT0" id="SyA-JD-fny"/>
                         <outlet property="btnSwitch" destination="rQp-mh-2FY" id="78p-MX-FjS"/>
                         <outlet property="lblLive" destination="64y-VN-OQb" id="ohM-B6-Cdk"/>
+                        <outlet property="lblUserCount" destination="W4u-hL-yhY" id="KlK-cC-BaY"/>
                         <outlet property="lblWaiting" destination="CCa-Ug-EZb" id="Wbk-Qp-k8r"/>
                         <outlet property="muteLabel" destination="fou-DT-qcW" id="BDk-HC-0NN"/>
                         <outlet property="muteView" destination="odt-VP-eui" id="DwQ-0w-B3r"/>
