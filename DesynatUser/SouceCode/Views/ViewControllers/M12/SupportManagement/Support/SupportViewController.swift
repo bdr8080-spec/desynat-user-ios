@@ -125,6 +125,11 @@ class SupportViewController: UIViewController {
         self.navigationController?.present(nextVC, animated: true)
     }
     
+    @IBAction func supportChatDidTapped(_ sender: Any) {
+        let nextVC = SupportChatViewController.instantiate(fromAppStoryboard: .Profile)
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
     //MARK: Function's declaration
     func updatePaginationButtonImages() {
         // Previous Button

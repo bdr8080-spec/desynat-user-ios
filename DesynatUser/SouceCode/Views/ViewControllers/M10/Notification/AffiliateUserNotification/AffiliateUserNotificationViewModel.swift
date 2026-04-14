@@ -77,7 +77,7 @@ class AffiliateUserNotificationViewModel {
     }
     
     func markAllReadNotificationsRequest() {
-        let param: [String:Any] = ["receiver_type": 1]
+        let param: [String:Any] = ["receiver_type": 4]
         WebService.shared.markAffiliateAllReadNotificationsService(param: param) { [weak self] response in
             guard let self = self else { return }
             resetAndFetchStories()

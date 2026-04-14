@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -32,9 +32,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="88"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Z8n-dk-9hi" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="50" width="38" height="38"/>
+                                                <rect key="frame" x="20" y="48" width="40" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="38" id="0Gl-JI-0Y0"/>
+                                                    <constraint firstAttribute="height" constant="40" id="0Gl-JI-0Y0"/>
                                                     <constraint firstAttribute="width" secondItem="Z8n-dk-9hi" secondAttribute="height" id="atD-8V-QsR"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
@@ -42,14 +42,14 @@
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4tU-dn-QHT">
-                                                <rect key="frame" x="20" y="50" width="38" height="38"/>
+                                                <rect key="frame" x="10" y="38" width="58" height="58"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <connections>
                                                     <action selector="storyDidTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="UE1-qQ-Le1"/>
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jWZ-hT-wr9">
-                                                <rect key="frame" x="73" y="50.666666666666671" width="121.33333333333331" height="36.666666666666671"/>
+                                                <rect key="frame" x="75" y="49.666666666666671" width="121.33333333333331" height="36.666666666666671"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deliver to Reshab" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXx-nu-GuV">
                                                         <rect key="frame" x="0.0" y="0.0" width="121.33333333333333" height="19.666666666666668"/>
@@ -78,14 +78,14 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Edq-4n-TKa">
-                                                <rect key="frame" x="73" y="50.666666666666671" width="121.33333333333331" height="36.666666666666671"/>
+                                                <rect key="frame" x="75" y="49.666666666666671" width="121.33333333333331" height="36.666666666666671"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <connections>
                                                     <action selector="changeLocationButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="gvh-KI-tB3"/>
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="FyU-Wi-dxA">
-                                                <rect key="frame" x="270" y="51.666666666666657" width="105" height="35"/>
+                                                <rect key="frame" x="270" y="50.666666666666657" width="105" height="35"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5es-Eg-hP7">
                                                         <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
@@ -179,16 +179,16 @@
                                             <constraint firstItem="Z8n-dk-9hi" firstAttribute="leading" secondItem="gM8-Xa-5U1" secondAttribute="leading" constant="20" id="4H7-xY-va0"/>
                                             <constraint firstAttribute="height" constant="88" id="4tB-Dn-9YQ"/>
                                             <constraint firstItem="FyU-Wi-dxA" firstAttribute="centerY" secondItem="Z8n-dk-9hi" secondAttribute="centerY" id="7Oh-hz-mKR"/>
-                                            <constraint firstItem="4tU-dn-QHT" firstAttribute="bottom" secondItem="Z8n-dk-9hi" secondAttribute="bottom" id="8lH-Py-2OC"/>
+                                            <constraint firstItem="4tU-dn-QHT" firstAttribute="bottom" secondItem="Z8n-dk-9hi" secondAttribute="bottom" constant="8" id="8lH-Py-2OC"/>
                                             <constraint firstItem="Edq-4n-TKa" firstAttribute="top" secondItem="jWZ-hT-wr9" secondAttribute="top" id="JBX-33-slB"/>
                                             <constraint firstItem="Edq-4n-TKa" firstAttribute="bottom" secondItem="jWZ-hT-wr9" secondAttribute="bottom" id="Lcm-90-drZ"/>
-                                            <constraint firstItem="4tU-dn-QHT" firstAttribute="trailing" secondItem="Z8n-dk-9hi" secondAttribute="trailing" id="Lsa-7S-Mqz"/>
+                                            <constraint firstItem="4tU-dn-QHT" firstAttribute="trailing" secondItem="Z8n-dk-9hi" secondAttribute="trailing" constant="8" id="Lsa-7S-Mqz"/>
                                             <constraint firstAttribute="bottom" secondItem="Z8n-dk-9hi" secondAttribute="bottom" id="aEd-1X-psb"/>
                                             <constraint firstItem="jWZ-hT-wr9" firstAttribute="centerY" secondItem="Z8n-dk-9hi" secondAttribute="centerY" id="cey-le-mHx"/>
                                             <constraint firstItem="Edq-4n-TKa" firstAttribute="trailing" secondItem="jWZ-hT-wr9" secondAttribute="trailing" id="dIb-Sq-Nvk"/>
                                             <constraint firstItem="jWZ-hT-wr9" firstAttribute="leading" secondItem="Z8n-dk-9hi" secondAttribute="trailing" constant="15" id="ghh-dJ-H96"/>
-                                            <constraint firstItem="4tU-dn-QHT" firstAttribute="leading" secondItem="Z8n-dk-9hi" secondAttribute="leading" id="lav-e8-Q6T"/>
-                                            <constraint firstItem="4tU-dn-QHT" firstAttribute="top" secondItem="Z8n-dk-9hi" secondAttribute="top" id="mMf-WY-pjk"/>
+                                            <constraint firstItem="4tU-dn-QHT" firstAttribute="leading" secondItem="Z8n-dk-9hi" secondAttribute="leading" constant="-10" id="lav-e8-Q6T"/>
+                                            <constraint firstItem="4tU-dn-QHT" firstAttribute="top" secondItem="Z8n-dk-9hi" secondAttribute="top" constant="-10" id="mMf-WY-pjk"/>
                                             <constraint firstItem="Edq-4n-TKa" firstAttribute="leading" secondItem="jWZ-hT-wr9" secondAttribute="leading" id="mPb-C5-5w2"/>
                                             <constraint firstItem="FyU-Wi-dxA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jWZ-hT-wr9" secondAttribute="trailing" constant="20" id="qec-Zu-7RH"/>
                                             <constraint firstAttribute="trailing" secondItem="FyU-Wi-dxA" secondAttribute="trailing" constant="18" id="uRy-7J-usw"/>
@@ -2676,7 +2676,7 @@ the event</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBrownColor">
-            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.67450980390000004" green="0.49803921569999998" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2694,10 +2694,10 @@ the event</string>
             <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
-            <color red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.79607843140000001" green="0.18823529410000001" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.21960784310000001" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
