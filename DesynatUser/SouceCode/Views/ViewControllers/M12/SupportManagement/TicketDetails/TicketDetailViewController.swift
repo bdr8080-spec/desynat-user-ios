@@ -19,6 +19,7 @@ class TicketDetailViewController: UIViewController {
     @IBOutlet weak var resolvedOnStackView: UIStackView!
     @IBOutlet weak var attachmentView: UIView!
     @IBOutlet weak var attachmentImageView: CustomImageView!
+    @IBOutlet weak var titleLabel: UILabel!
     
     var comingUserRole: UserRoleType = .normalUser
     var ticketDetails: SupportList?
@@ -63,7 +64,7 @@ class TicketDetailViewController: UIViewController {
         resolvedOnStackView.isHidden = (data.status != 1)
         resolvedOnDateLabel.text = convertServerDate(data.updatedAt ?? "")
         attachmentView.isHidden = (data.file?.isEmpty ?? true)
-        
+        titleLabel.text = data.title ?? ""
     }
     
     func statusType(status: Int) -> (text: String, color: UIColor) {

@@ -21,6 +21,7 @@ struct FavoruitesDataModel: Codable {
     let cashOnDelivery: String?
     let uploadSizeChart: String?
     let productActiveStatus: Int?
+    let productAvgRating: Double?
     let createdAt, updatedAt, userName: String?
     let category: Category?
     let subcategory, brand: Brand?
@@ -59,6 +60,7 @@ struct FavoruitesDataModel: Codable {
         case category, subcategory, brand
         case productSpecifications = "product_specifications"
         case productVariants = "product_variants"
+        case productAvgRating = "product_avg_rating"
     }
 }
 

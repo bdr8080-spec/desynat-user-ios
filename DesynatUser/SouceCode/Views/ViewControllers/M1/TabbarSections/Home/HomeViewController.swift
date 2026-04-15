@@ -234,6 +234,12 @@ class HomeViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: false)
     }
     
+    @IBAction func chatBotDidTapped(_ sender: Any) {
+        let nextVC = SupportChatViewController.instantiate(fromAppStoryboard: .Profile)
+        nextVC.comingUserRole = .normalUser
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
     //MARK: Function's declaration
     private func requestPermissions() {
         SFSpeechRecognizer.requestAuthorization { status in
@@ -527,6 +533,17 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     showLoginAlert()
                 }
             }
+            cell.shareButtonTapped = { [weak self] in
+                guard let self = self else { return }
+                ShareUtility.shareProduct(
+                    image: cell.mainImageView.image,
+                    imageURL: data.productVariants?.first?.variantImage?.first,
+                    title: data.productNameEn ?? "",
+                    description: data.descriptionEn ?? "",
+                    link: "https://desynat.com/api/user/product/detail-page/\(data.id ?? 0)",
+                    from: self
+                )
+            }
             return cell
             
         case browsePrimiumCollectionView:
@@ -552,6 +569,17 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     showLoginAlert()
                 }
             }
+            cell.shareButtonTapped = { [weak self] in
+                guard let self = self else { return }
+                ShareUtility.shareProduct(
+                    image: cell.mainImageView.image,
+                    imageURL: data.productVariants?.first?.variantImage?.first,
+                    title: data.productNameEn ?? "",
+                    description: data.descriptionEn ?? "",
+                    link: "https://desynat.com/api/user/product/detail-page/\(data.id ?? 0)",
+                    from: self
+                )
+            }
             return cell
             
         case bowseSomeDisCountCollectionView:
@@ -576,6 +604,17 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 } else {
                     showLoginAlert()
                 }
+            }
+            cell.shareButtonTapped = { [weak self] in
+                guard let self = self else { return }
+                ShareUtility.shareProduct(
+                    image: cell.mainImageView.image,
+                    imageURL: data.productVariants?.first?.variantImage?.first,
+                    title: data.productNameEn ?? "",
+                    description: data.descriptionEn ?? "",
+                    link: "https://desynat.com/api/user/product/detail-page/\(data.id ?? 0)",
+                    from: self
+                )
             }
             return cell
             

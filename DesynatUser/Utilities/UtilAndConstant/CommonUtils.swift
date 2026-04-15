@@ -109,6 +109,7 @@ class CommonUtils {
         }
     }
     
+    
     static func updateDiscountPercentageLabel(_ label: UILabel, actualAmountLabel: UILabel, discountType: String?,discountValue: String?) {
         let value = Double(discountValue ?? "0") ?? 0
         guard value > 0 else {

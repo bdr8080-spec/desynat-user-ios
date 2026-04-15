@@ -25,6 +25,7 @@ struct ProductDetailsDataModel: Codable {
   let productActiveStatus: Int?
   let createdAt, updatedAt: String?
   var wishlist: Int?
+  var averageRating: Double?
   var addtocartTotalProduct: Int?
   let category: Category?
   let addtocart: Addtocart?
@@ -69,6 +70,7 @@ struct ProductDetailsDataModel: Codable {
     case productVariants = "product_variants"
     case store = "store"
     case review
+      case averageRating = "average_rating"
   }
 }
 

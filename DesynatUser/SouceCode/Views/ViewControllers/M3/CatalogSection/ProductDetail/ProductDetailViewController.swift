@@ -255,6 +255,18 @@ class ProductDetailViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func shareProductDidTapped(_ sender: Any) {
+        ShareUtility.shareProduct(
+            image: UIImage(),
+            imageURL: productDetails?.productVariants?.first?.variantImage?.first,
+            title: productDetails?.productNameEn ?? "",
+            description: productDetails?.descriptionEn ?? "",
+            link: "https://desynat.com/api/user/product/detail-page/\(productDetails?.id ?? 0)",
+            from: self
+        )
+    }
+    
     //MARK: Function's declaration
     private func addProductToCart(forIncrement: Bool) {
         guard let productId = productDetails?.id else { return }
@@ -278,7 +290,7 @@ class ProductDetailViewController: UIViewController {
         let storeName = productDetails?.store?.storeName ?? productDetails?.productNameEn ?? ""
         pagetitleLabel.text = storeName
         productNameLabel.text = productDetails?.productNameEn
-        ratingView.rating = Double(productDetails?.reviewRating ?? "") ?? 0
+        ratingView.rating = productDetails?.averageRating ?? 0
         if productDetails?.brand?.nameEnglish == "Other" {
             productLabel.text = productDetails?.otherEn
         } else {

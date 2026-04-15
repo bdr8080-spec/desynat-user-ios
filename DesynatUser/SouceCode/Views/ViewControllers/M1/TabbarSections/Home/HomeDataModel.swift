@@ -191,6 +191,7 @@ struct BestSellingProductsDataModel: Codable {
     let affiliatedCommission: String?
     let customizedProduct, readyToShip, cashOnDelivery: String?
     let uploadSizeChart: String?
+    let productAvgRating: Double?
     var productActiveStatus, wishlist: Int?
     let createdAt, updatedAt: String?
     let category: Category?
@@ -230,6 +231,7 @@ struct BestSellingProductsDataModel: Codable {
         case category, subcategory, brand, wishlist
         case productSpecifications = "product_specifications"
         case productVariants = "product_variants"
+        case productAvgRating = "product_avg_rating"
     }
 }
 
@@ -246,6 +248,7 @@ struct TopRatedDataModel: Codable {
     let affiliatedCommission: String?
     let customizedProduct, readyToShip, cashOnDelivery: String?
     let uploadSizeChart: String?
+    let productAvgRating: Double?
     var productActiveStatus, wishlist: Int?
     let createdAt, updatedAt: String?
     let category: Category?
@@ -282,7 +285,7 @@ struct TopRatedDataModel: Codable {
         case productActiveStatus = "product_active_status"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case category, subcategory, brand, wishlist
+        case category, subcategory, brand, wishlist, productAvgRating
         case productSpecifications = "product_specifications"
         case productVariants = "product_variants"
     }

@@ -84,7 +84,8 @@ class AffiliatedUserHomeViewController: UIViewController {
     }
     
     @IBAction func supportChatDidTapped(_ sender: Any) {
-        let nextVC = AffilaiteSupportChatViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+        let nextVC = SupportChatViewController.instantiate(fromAppStoryboard: .Profile)
+        nextVC.comingUserRole = .affilaiteUser
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     

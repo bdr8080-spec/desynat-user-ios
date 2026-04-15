@@ -47,6 +47,11 @@ class LiveStreamingViewController: UIViewController {
         startUserCountTimer()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopUserCountTimer()
+    }
+    
     // Timer & API (same for host/audience)
     private func startUserCountTimer() {
         userCountTimer?.invalidate()
@@ -111,6 +116,14 @@ class LiveStreamingViewController: UIViewController {
     
     deinit {
         cleanupAgora()
+            print("❌ LiveStreamingViewController deallocated")
+        stopUserCountTimer()
+        
+    }
+    
+    private func stopUserCountTimer() {
+        userCountTimer?.invalidate()
+        userCountTimer = nil
     }
     
     // MARK: - Agora Setup

@@ -152,7 +152,7 @@ enum NetworkEndPoint: String {
     case markAffiliateAllReadNotifications = ""
     case markAllReadNotifications = "dfv"
     case countOfNotifcation              = "api/user/count-user-notification"
-    case countOfNotifcationForAffilated  = "api/user/CountaffiliateUserNotification"
+    case countOfNotifcationForAffilated  = "api/affiliate/CountaffiliateUserNotification"
     case getAffiliateDashboardData       = "api/affiliate/get_affiliate_dashboard_data"
     case getSellerStories       = "api/user/get_seller_stories"
     case getAdminStories       = "api/user/get_admin_stories"

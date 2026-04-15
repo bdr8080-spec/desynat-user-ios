@@ -192,6 +192,17 @@ extension FavoruitesViewController: UICollectionViewDelegate, UICollectionViewDa
                 else { return }
                 self.handleWishlistTap(index: currentIndex)
             }
+            cell.shareButtonTapped = { [weak self] in
+                guard let self = self else { return }
+                ShareUtility.shareProduct(
+                    image: cell.mainImageView.image,
+                    imageURL: data?.productVariants?.first?.variantImage?.first,
+                    title: data?.productNameEn ?? "",
+                    description: data?.descriptionEn ?? "",
+                    link: "https://desynat.com/api/user/product/detail-page/\(data?.id ?? 0)",
+                    from: self
+                )
+            }
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ReelsCollectionViewCell",for: indexPath) as! ReelsCollectionViewCell

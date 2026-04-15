@@ -53,7 +53,7 @@ class LiveUsersCell: UITableViewCell {
                 outputFormat: "h:mm a"
             )
             
-            let liveDateresult = convertDate(data?.timeslotDetails?.date ?? "")
+           // let liveDateresult = convertDate(data?.timeslotDetails?.date ?? "")
             liveDateLabel.text = "Live Timing \(liveDateresult)"
             livetimeLabel.text = fromtime
 //            liveDateLabel.text = "Live Timing \(liveDateresult)"

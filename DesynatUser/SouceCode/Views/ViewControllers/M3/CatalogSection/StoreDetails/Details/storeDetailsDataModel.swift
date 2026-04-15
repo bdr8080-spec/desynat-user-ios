@@ -59,6 +59,7 @@ struct ProductList: Codable {
     let readyToShip, cashOnDelivery: String?
     let uploadSizeChart: String?
     let productActiveStatus: Int?
+    let productAvgRating: Double?
     let createdAt, updatedAt: String?
     var wishlist: Int?
     let brand: Brand?
@@ -98,6 +99,7 @@ struct ProductList: Codable {
         case wishlist, brand, category, subcategory
         case productSpecifications = "product_specifications"
         case productVariants = "product_variants"
+        case productAvgRating = "average_rating"
     }
 }
 

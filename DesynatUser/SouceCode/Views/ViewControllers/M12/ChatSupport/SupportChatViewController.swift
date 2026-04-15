@@ -7,15 +7,42 @@
 
 import UIKit
 import WebKit
+import FirebaseAuth
 
 class SupportChatViewController: UIViewController, WKNavigationDelegate {
     
     @IBOutlet weak var contentWebview: WKWebView!
     
+    var comingUserRole: UserRoleType = .normalUser
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        CommonUtils.showHud(show: true)
         setupWebView()
+        if comingUserRole == .affilaiteUser {
+            if let savedUser: AffiliateCreateAccountDataModel = kSharedUserDefaults.retrieveModelFor(key: .affiliatedUserDeatils, model: AffiliateCreateAccountDataModel.self) {
+                let userDetails = UserDataModel(fullName: savedUser.fullName ?? "Desnat user",
+                                                email: savedUser.email ?? "test@gmail.com",
+                                                id: savedUser.id ?? 0,
+                                                mobile: savedUser.mobile ?? "732837468")
+                loadTidioHTML(user: userDetails)
+            }
+        } else if comingUserRole == .normalUser {
+            if let savedUser: UserModel = kSharedUserDefaults.retrieveModelFor(key: .user, model: UserModel.self) {
+                let userDetails = UserDataModel(fullName: savedUser.fullName ?? "Desnat user",
+                                                email: savedUser.email ?? "test@gmail.com",
+                                                id: savedUser.id ?? 0,
+                                                mobile: savedUser.mobile ?? "732837468")
+                loadTidioHTML(user: userDetails)
+            }
+        } else {
+            let userDetails = UserDataModel(fullName: "Desnat user",
+                                            email: "test@gmail.com",
+                                            id: 0,
+                                            mobile: "732837468")
+            loadTidioHTML(user: userDetails)
+        }
 //        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
 //        if let affiliatedAccessToken = affiliatedUserToken,
 //           !affiliatedAccessToken.isEmpty {
@@ -24,10 +51,12 @@ class SupportChatViewController: UIViewController, WKNavigationDelegate {
 //            }
 //        } else if let accessToken = kSharedUserDefaults.getStringFor(key: .accessToken),
 //                  !accessToken.isEmpty {
-            if let savedUser: User = kSharedUserDefaults.retrieveModelFor(key: .user, model: User.self) {
-                loadTidioHTML(user: savedUser)
-            }
+            
 //        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            CommonUtils.showHud(show: false)
+        }
     }
     
     @IBAction func backBtn(_ sender: Any) {
@@ -46,11 +75,11 @@ class SupportChatViewController: UIViewController, WKNavigationDelegate {
         }
     }
     
-    func loadTidioHTML(user: User) {
-        let name = (user.firstName ?? "").replacingOccurrences(of: "\"", with: "\\\"")
-        let email = (user.email ?? "").replacingOccurrences(of: "\"", with: "\\\"")
-        let userId = "\(user.id ?? 0)".replacingOccurrences(of: "\"", with: "\\\"")
-        let phone = (user.mobile ?? "").replacingOccurrences(of: "\"", with: "\\\"")
+    func loadTidioHTML(user: UserDataModel) {
+        let name = (user.fullName).replacingOccurrences(of: "\"", with: "\\\"")
+        let email = (user.email).replacingOccurrences(of: "\"", with: "\\\"")
+        let userId = "\(user.id)".replacingOccurrences(of: "\"", with: "\\\"")
+        let phone = (user.mobile).replacingOccurrences(of: "\"", with: "\\\"")
         
         let html  = """
         <!DOCTYPE html>
@@ -76,7 +105,7 @@ class SupportChatViewController: UIViewController, WKNavigationDelegate {
         </style>
         
         <!-- ✅ IMPORTANT: Use full https URL -->
-        <script src="https://code.tidio.co/na5y0weklpcd9uxhccfezplsfg0fggvk.js" async></script>
+        <script src="https://code.tidio.co/uxltmye9ysuvgaamvz0sisfhvdb1yctx.js" async></script>
         </head>
         
         <body>
@@ -124,4 +153,12 @@ class SupportChatViewController: UIViewController, WKNavigationDelegate {
         
         contentWebview.loadHTMLString(html, baseURL: URL(string: "https://localhost"))
     }
+}
+
+
+struct UserDataModel: Codable {
+    let fullName: String
+    let email: String
+    let id: Int
+    let mobile: String
 }

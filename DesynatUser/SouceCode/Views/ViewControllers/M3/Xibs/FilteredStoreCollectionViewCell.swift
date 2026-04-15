@@ -20,6 +20,7 @@ class FilteredStoreCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     
     var wishlistButtonTapped: (() -> Void)?
+    var shareButtonTapped: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +28,10 @@ class FilteredStoreCollectionViewCell: UICollectionViewCell {
     
     @IBAction func likeButtonTapped(_ sender: UIButton) {
         wishlistButtonTapped?()
+    }
+    
+    @IBAction func shareDidTapped(_ sender: Any) {
+        shareButtonTapped?()
     }
     
     func configData(data: ProductList?) {
@@ -50,7 +55,7 @@ class FilteredStoreCollectionViewCell: UICollectionViewCell {
         } else {
             likeButtonOutlet.setImage(UIImage(named: "besSellLike"), for: .normal)
         }
-        ratingView.rating = Double(data?.reviewRating ?? "") ?? 0
+        ratingView.rating = data?.productAvgRating ?? 0
     }
     
     func configDataForFavouites(data: FavoruitesDataModel?) {
@@ -67,7 +72,7 @@ class FilteredStoreCollectionViewCell: UICollectionViewCell {
         CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productVariants?.first?.actualPrice ?? "") KD")
         CommonUtils.updateDiscountPercentageLabel(iscountPriceLabel, actualAmountLabel: actualPriceLabel,discountType: data?.productVariants?.first?.discountType,discountValue: data?.productVariants?.first?.discountValue)
         likeButtonOutlet.setImage(UIImage(named: "selectedHeartImage"), for: .normal)
-        ratingView.rating = Double(data?.reviewRating ?? "") ?? 0
+        ratingView.rating = data?.productAvgRating ?? 0
     }
     
 }
