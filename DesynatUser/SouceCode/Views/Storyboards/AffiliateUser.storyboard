@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -2945,16 +2945,16 @@ you for your patience. Team Desynat App</string>
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QCD-66-cfZ">
-                                        <rect key="frame" x="72" y="75.333333333333329" width="75" height="39.333333333333329"/>
+                                        <rect key="frame" x="72" y="78.666666666666671" width="65.333333333333314" height="32.666666666666671"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi Will" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LI6-dK-yLe">
-                                                <rect key="frame" x="0.0" y="0.0" width="75" height="19.666666666666668"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="65.333333333333329" height="16.333333333333332"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome !" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yhz-Y2-qhA">
-                                                <rect key="frame" x="0.0" y="19.666666666666671" width="75" height="19.666666666666671"/>
+                                                <rect key="frame" x="0.0" y="16.333333333333329" width="65.333333333333329" height="16.333333333333329"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -2971,6 +2971,18 @@ you for your patience. Team Desynat App</string>
                                         <state key="normal" image="affiliatedUserBell"/>
                                         <connections>
                                             <action selector="bellDidTapepd:" destination="fXL-ZR-1QQ" eventType="touchUpInside" id="CLm-gf-iJ2"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARR-Ql-pe2">
+                                        <rect key="frame" x="288" y="67.666666666666671" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="W41-7o-GgI"/>
+                                            <constraint firstAttribute="width" constant="40" id="cAf-Cb-ZNI"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="2" minY="4" maxX="2" maxY="0.0"/>
+                                        <state key="normal" image="chatBot"/>
+                                        <connections>
+                                            <action selector="supportChatDidTapped:" destination="fXL-ZR-1QQ" eventType="touchUpInside" id="hcL-kG-7Rr"/>
                                         </connections>
                                     </button>
                                     <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DiE-OE-peK" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
@@ -3010,9 +3022,11 @@ you for your patience. Team Desynat App</string>
                                 <color key="backgroundColor" red="1" green="0.96862745100000003" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="E2g-2Q-ih5" firstAttribute="leading" secondItem="mtd-En-trJ" secondAttribute="leading" constant="24" id="0eI-kK-fTP"/>
+                                    <constraint firstItem="DiE-OE-peK" firstAttribute="leading" secondItem="ARR-Ql-pe2" secondAttribute="trailing" constant="25" id="Jfn-KA-r6r"/>
                                     <constraint firstItem="Mp1-9V-oZp" firstAttribute="top" secondItem="DiE-OE-peK" secondAttribute="top" id="QFH-XB-AxP"/>
                                     <constraint firstItem="QCD-66-cfZ" firstAttribute="centerY" secondItem="E2g-2Q-ih5" secondAttribute="centerY" id="Rc3-Ka-upg"/>
                                     <constraint firstAttribute="height" constant="115" id="S9y-3Q-gpc"/>
+                                    <constraint firstItem="ARR-Ql-pe2" firstAttribute="centerY" secondItem="DiE-OE-peK" secondAttribute="centerY" id="bIO-fb-Pxv"/>
                                     <constraint firstAttribute="trailing" secondItem="Mp1-9V-oZp" secondAttribute="trailing" constant="20" id="cLh-PG-hYr"/>
                                     <constraint firstItem="Mp1-9V-oZp" firstAttribute="trailing" secondItem="DiE-OE-peK" secondAttribute="trailing" id="eNb-ic-xLF"/>
                                     <constraint firstItem="Mp1-9V-oZp" firstAttribute="centerY" secondItem="E2g-2Q-ih5" secondAttribute="centerY" id="he2-nk-SUi"/>
@@ -3740,30 +3754,6 @@ you for your patience. Team Desynat App</string>
                                     <constraint firstAttribute="trailing" secondItem="fFY-OX-BMx" secondAttribute="trailing" id="psR-Em-GnH"/>
                                 </constraints>
                             </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghB-Or-jp6" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                <rect key="frame" x="314" y="679" width="55" height="55"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARR-Ql-pe2">
-                                        <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="55" id="W41-7o-GgI"/>
-                                            <constraint firstAttribute="width" constant="55" id="cAf-Cb-ZNI"/>
-                                        </constraints>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="chatBot"/>
-                                        <connections>
-                                            <action selector="supportChatDidTapped:" destination="fXL-ZR-1QQ" eventType="touchUpInside" id="hcL-kG-7Rr"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="ARR-Ql-pe2" firstAttribute="centerY" secondItem="ghB-Or-jp6" secondAttribute="centerY" id="ENc-wB-hdo"/>
-                                    <constraint firstAttribute="height" constant="55" id="bB6-jW-4Jp"/>
-                                    <constraint firstAttribute="trailing" secondItem="ARR-Ql-pe2" secondAttribute="trailing" id="h2l-tE-5lE"/>
-                                    <constraint firstItem="ARR-Ql-pe2" firstAttribute="leading" secondItem="ghB-Or-jp6" secondAttribute="leading" id="soW-dW-Wmr"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Qed-wb-r8n"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3775,9 +3765,7 @@ you for your patience. Team Desynat App</string>
                             <constraint firstItem="mtd-En-trJ" firstAttribute="leading" secondItem="Qed-wb-r8n" secondAttribute="leading" id="Qlk-dH-db9"/>
                             <constraint firstItem="Qed-wb-r8n" firstAttribute="trailing" secondItem="KxX-9G-Yej" secondAttribute="trailing" id="ZJs-oE-Eoh"/>
                             <constraint firstItem="KxX-9G-Yej" firstAttribute="top" secondItem="2oX-zM-1TE" secondAttribute="bottom" id="fJW-2T-Z6j"/>
-                            <constraint firstItem="Qed-wb-r8n" firstAttribute="trailing" secondItem="ghB-Or-jp6" secondAttribute="trailing" constant="24" id="nlU-yH-ujE"/>
                             <constraint firstItem="2oX-zM-1TE" firstAttribute="leading" secondItem="mtd-En-trJ" secondAttribute="leading" id="uPR-vt-wpw"/>
-                            <constraint firstItem="Qed-wb-r8n" firstAttribute="bottom" secondItem="ghB-Or-jp6" secondAttribute="bottom" constant="50" id="w5s-d2-oJx"/>
                             <constraint firstItem="Qed-wb-r8n" firstAttribute="trailing" secondItem="mtd-En-trJ" secondAttribute="trailing" id="xy0-xl-mlo"/>
                             <constraint firstItem="Qed-wb-r8n" firstAttribute="bottom" secondItem="KxX-9G-Yej" secondAttribute="bottom" id="ysq-8d-hdF"/>
                         </constraints>
@@ -9803,7 +9791,7 @@ want to continue with</string>
         <image name="btnGradient" width="343" height="38"/>
         <image name="cameraUpload" width="76" height="76"/>
         <image name="catalogSelected" width="52" height="44"/>
-        <image name="chatBot" width="52.666667938232422" height="52.666667938232422"/>
+        <image name="chatBot" width="28" height="26.666666030883789"/>
         <image name="conversionRate" width="22" height="22"/>
         <image name="copyLink" width="17" height="17"/>
         <image name="country" width="20.333333969116211" height="31"/>
@@ -9860,7 +9848,7 @@ want to continue with</string>
             <color red="0.090196078431372548" green="0.090196078431372548" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="AccentColor">
-            <color red="0.4309999942779541" green="0.27099999785423279" blue="0.15299999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="darkBrown">
             <color red="0.43137254901960786" green="0.27058823529411763" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

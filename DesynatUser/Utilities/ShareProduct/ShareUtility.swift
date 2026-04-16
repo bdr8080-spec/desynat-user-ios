@@ -8,7 +8,7 @@
 import UIKit
 import UniformTypeIdentifiers
 import LinkPresentation
-//
+
 // MARK: - Helper (Decode safely) - MOVED TO TOP LEVEL
 func fullyDecoded(_ text: String) -> String {
     let once = text.removingPercentEncoding ?? text
@@ -87,13 +87,6 @@ final class ShareUtility {
         let cleanDescription = fullyDecoded(description)
         let cleanLink = fullyDecoded(link)
         
-//        let shareText = """
-//        \(cleanTitle)
-//
-//        \(cleanDescription)
-//
-//        \(cleanLink)
-//        """
         let shareText = "\(cleanTitle)\n\n\(cleanDescription)\n\n\(cleanLink)"
         print("DEBUG SHARE TEXT:\n\(shareText)") // Debug
         
