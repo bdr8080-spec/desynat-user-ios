@@ -73,7 +73,8 @@ class ProfileViewController: UIViewController {
         if isGuestLogin == "true" {
             showLoginAlert()
         } else {
-            
+            let nextVc = MySavedCardViewController.instantiate(fromAppStoryboard: .DashBoard)
+            self.navigationController?.pushViewController(nextVc, animated: true)
         }
     }
     

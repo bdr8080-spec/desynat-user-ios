@@ -174,6 +174,19 @@ enum NetworkEndPoint: String {
     case raiseTicket                = "api/user/raise_ticket"
     case getRaiseTicketForAffiliate = "api/affiliate/get_raised_tickets"
     case raiseTicketForAffiliate    = "api/affiliate/raise_ticket"
+   
+    //M13
+    case getContacts                = "api/contact_us"
+    case termsAndCondition          = "api/terms_conditions"
+    case returnPolicy               = "api/return_policy"
+    case aboutUs                    = "api/about_us"
+    case cancellationPolicy         = "api/cancellation_policy"
+    case exchangePolicy             = "api/exchange_policy"
+    case getFAQ                     = "api/faqs"
+    case pushNotificationOnOff      = "api/user/notification_on_off"
+    case inAppNotificationOnOff     = "api/user/app_notification_on_off"
+    case affiliatePushNotificationOnOff = "api/affiliate/affiliate_notification_on_off"
+    case affiliateInAppNotificationOnOff = "api/affiliate/affiliate_app_notification_on_off"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

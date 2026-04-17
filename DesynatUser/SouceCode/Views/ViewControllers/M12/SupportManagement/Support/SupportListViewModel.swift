@@ -14,6 +14,7 @@ class SupportViewModel {
     var currentPage: Int = 1
     var totalPages: Int = 1
     var searchText: String = ""
+    var contactListData: ContactUsDataModel?
     
     init(hostVC: SupportViewController) {
         self.hostVC = hostVC
@@ -90,6 +91,15 @@ class SupportViewModel {
             getAllTicketListRequest()
         case .affilaiteUser:
             getAllTicketForAffiliateUserListRequest()
+        }
+    }
+    
+    func getContactUsRequest() {
+        let param: [String: Any] = ["type": hostVC.selectedUserType]
+        WebService.shared.getContactUsService(parameter: param) { [weak self] response in
+            guard let self = self else { return }
+            contactListData = response
+            hostVC.setUp()
         }
     }
 }

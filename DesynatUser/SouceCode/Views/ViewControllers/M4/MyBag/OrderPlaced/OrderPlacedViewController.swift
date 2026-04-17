@@ -8,7 +8,7 @@
 import UIKit
 import SwiftyGif
 
-class OrderPlacedViewController: UIViewController {
+class OrderPlacedViewController: UIViewController { //}, SwiftyGifDelegate {
     
     // MARK: - IBOutlet's
     @IBOutlet weak var payentDoneOrNotLabel: UILabel!
@@ -58,10 +58,18 @@ class OrderPlacedViewController: UIViewController {
             let gif = try UIImage(gifName: "orderPlace.gif")
             let gifManager = SwiftyGifManager(memoryLimit: 20)
             imageVideo.setGifImage(gif, manager: gifManager, loopCount: 1)
+//            imageVideo.delegate = self
         } catch {
-            print("GIF not found or failed to load")
+            print("No image found")
+//            imageVideo.image = .brownDone
         }
     }
+    
+//    func gifDidStop(sender: UIImageView) {
+//        if sender == imageVideo {
+//            imageVideo.image = .brownDone
+//        }
+//    }
     
     
     func configData(data: OrderSummaryDataModel?) {

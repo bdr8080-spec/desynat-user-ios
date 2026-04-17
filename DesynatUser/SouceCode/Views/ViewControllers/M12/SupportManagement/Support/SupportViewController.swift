@@ -35,6 +35,8 @@ class SupportViewController: UIViewController {
     private lazy var viewModel = SupportViewModel(hostVC: self)
     var comingUserRole: UserRoleType = .normalUser
     private var searchWorkItem: DispatchWorkItem?
+    var selectedUserType = 1
+    var whatsAppNumber: String?
     
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
@@ -44,6 +46,8 @@ class SupportViewController: UIViewController {
         contactView.isHidden = false
         paginationBottomView.isHidden = true
         noDataFoundLabel.isHidden = true
+        viewModel.getContactUsRequest()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -132,7 +136,38 @@ class SupportViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    @IBAction func whatsAppDidTapped(_ sender: Any) {
+            let urlString = "https://wa.me/\(whatsAppNumber ?? "")"
+            if let url = URL(string: urlString),
+               UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        
+        @IBAction func emailDidTapped(_ sender: Any) {
+            let email = supportEmailLabe.text?.trimmed() ?? ""
+            if let url = URL(string: "mailto:\(email)"),
+               UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        
+        @IBAction func callDidTapped(_ sender: Any) {
+            let phoneNumber = supportPhoneLabel.text?.trimmed() ?? ""
+            if let url = URL(string: "tel://\(phoneNumber)"),
+               UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+    
     //MARK: Function's declaration
+    
+    func setUp() {
+        supportEmailLabe.text =  viewModel.contactListData?.contentEnglish?.email
+        supportPhoneLabel.text =  viewModel.contactListData?.contentEnglish?.mobile
+        whatsAppNumber = viewModel.contactListData?.contentEnglish?.whatsapp
+
+    }
     func updatePaginationButtonImages() {
         // Previous Button
         if viewModel.currentPage == 1 {

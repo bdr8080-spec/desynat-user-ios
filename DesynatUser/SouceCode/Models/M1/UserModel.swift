@@ -16,6 +16,8 @@ struct UserModel: Codable {
     let createdAt, updatedAt, accessToken: String?
     let affiliatedUserdetails: AffiliatedUserdetails?
     let affiliatedAccessToken: String?
+    let notification: Int?
+    let appNotification: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -35,6 +37,8 @@ struct UserModel: Codable {
         case profileImage = "profile_image"
         case affiliatedUserdetails = "affiliated_userdetails"
         case affiliatedAccessToken = "affiliated_accessToken"
+        case notification
+        case appNotification = "app_notification"
     }
 }
 

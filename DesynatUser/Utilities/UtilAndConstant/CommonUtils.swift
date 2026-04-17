@@ -1,4 +1,5 @@
 import Foundation
+import WebKit
 import UIKit
 import SVProgressHUD
 import AVFoundation
@@ -40,6 +41,68 @@ class CommonUtils {
         
         return outputFormatter.string(from: newDate)
     }
+    
+    static func loadHTMLContent(_ content: String, webView: WKWebView) {
+        
+        let cleanedContent = content
+            .replacingOccurrences(of: "\u{2028}", with: "<br>")
+            .replacingOccurrences(of: "\u{2029}", with: "<br><br>")
+            .trimmingCharacters(in: .whitespacesAndNewlines) // IMPORTANT: remove leading blank lines
+        
+        let html = """
+        <html>
+        <head>
+            <meta name="viewport"
+                  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+            <style>
+                body {
+                    margin: 0;                           /* remove body margin */
+                    padding: 0;
+                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+                    font-size: 16px;
+                    line-height: 1.6;
+                    -webkit-text-size-adjust: 100%;
+                    white-space: normal !important;      /* reset body */
+                }
+
+                /* Clean paragraphs completely */
+                p {
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    white-space: pre-wrap !important;
+                }
+
+                div, span {
+                    white-space: pre-wrap !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                }
+
+                img {
+                    max-width: 100%;
+                    height: auto;
+                }
+
+                table {
+                    width: 100% !important;
+                }
+
+                /* Add controlled spacing between elements */
+                p + p {
+                   margin-top: 10px !important;
+                }
+            </style>
+        </head>
+        <body>
+            <div style="padding: 12px;">\(cleanedContent)</div>
+        </body>
+        </html>
+        """
+        
+        webView.loadHTMLString(html, baseURL: nil)
+    }
+    
     
     static func isWithinThreeHours(from createdAt: String) -> Bool {
         let formatter = ISO8601DateFormatter()

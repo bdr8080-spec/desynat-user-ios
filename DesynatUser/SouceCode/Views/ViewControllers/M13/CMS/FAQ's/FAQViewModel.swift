@@ -17,12 +17,12 @@ class FAQViewModel {
     }
     
     func getFAQRequest() {
-//        let param: [String: Any] = ["type": hostVC.selectedUserType]
-//        WebService.shared.getFaqService(parameter: param) { [weak self] response in
-//            guard let self = self else { return }
-//            faqListData = response
-//            hostVC.listTableView.reloadData()
-//        }
+        let param: [String: Any] = ["type": hostVC.selectedUserType]
+        WebService.shared.getFaqService(parameter: param) { [weak self] response in
+            guard let self = self else { return }
+            faqListData = response
+            hostVC.listTableView.reloadData()
+        }
     }
     
     func deleteFAQRequest(id: Int) {

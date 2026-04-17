@@ -13,18 +13,37 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var inAppToggleImageView: UIImageView!
     
     var comingUserRole: UserRoleType = .normalUser
+    private lazy var viewModel = SettingsViewModel(hostVC: self)
+    var isAppNotification = false
+    var isPushNotification = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        switch comingUserRole {
+            case .normalUser:
+                viewModel.getProfile()
+        case .affilaiteUser:
+            viewModel.affiliateUserGetProfile()
+        }
         
     }
     
     @IBAction func inappDidTapped(_ sender: Any) {
-        
+        switch comingUserRole {
+            case .normalUser:
+            viewModel.updateInAppNotificationSettingRequest()
+        case .affilaiteUser:
+            viewModel.affiliateUserInAppNotificationSettingRequest()
+        }
     }
     
     @IBAction func pushDidTapped(_ sender: Any) {
-        
+        switch comingUserRole {
+            case .normalUser:
+            viewModel.updatePushNotificationSettingRequest()
+        case .affilaiteUser:
+            viewModel.affiliateUserPushNotificationSettingRequest()
+        }
     }
     
     @IBAction func deleteAccountDidTapped(_ sender: Any) {
@@ -46,6 +65,16 @@ class SettingsViewController: UIViewController {
         //            kSharedSceneDelegate.navigateToLoginVc()
         //            UserDefaults.standard.setValue("No", forKey:"isLogin")
         //        }
+    }
+    // MARK: - UI Update
+    func updateAppNotificationUI() {
+        let imageName = isAppNotification ? "toggleOn" : "toggleOff"
+        inAppToggleImageView.image = UIImage(named: imageName)
+    }
+    
+    func updatePushNotificationUI() {
+        let imageName = isPushNotification ? "toggleOn" : "toggleOff"
+        pushNotificationToggleImageView.image = UIImage(named: imageName)
     }
     
 }

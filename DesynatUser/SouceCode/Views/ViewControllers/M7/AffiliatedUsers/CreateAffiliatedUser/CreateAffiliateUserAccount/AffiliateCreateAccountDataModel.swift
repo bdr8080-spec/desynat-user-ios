@@ -23,6 +23,8 @@ struct AffiliateCreateAccountDataModel: Codable {
     let addressDetails: AddressDetails?
     let bankDetails: [BankDetail]?
     let countryDetails: CountryDetails?
+    let notification: Int?
+    let appNotification: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -51,6 +53,8 @@ struct AffiliateCreateAccountDataModel: Codable {
         case addressDetails = "address_details"
         case bankDetails = "bank_details"
         case countryDetails = "country_details"
+        case notification
+        case appNotification = "app_notification"
     }
 }
 
