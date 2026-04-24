@@ -19,6 +19,7 @@ class ChangeCurrencyViewController: UIViewController {
     var selectedCurrencyIndex = 0
     var comingReason: ComingReasonAtChangeCurrency = .comingFromCurrency
     var comingUserRole: UserRoleType = .normalUser
+    private lazy var viewModel = ChangeCurrencyViewModel(hostVc: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,7 @@ class ChangeCurrencyViewController: UIViewController {
             // call get currency api
         case .comingFromCountry:
             titleLabel.text = "Change Country"
+            viewModel.getALlUserCountryListApi()
             // call get country api
         }
     }
@@ -40,7 +42,12 @@ class ChangeCurrencyViewController: UIViewController {
 extension ChangeCurrencyViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        switch comingReason{
+        case .comingFromCurrency:
+            return viewModel.currencyList.count
+        case .comingFromCountry:
+            return viewModel.getAllUSerCountryList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -52,7 +59,17 @@ extension ChangeCurrencyViewController: UITableViewDataSource, UITableViewDelega
             cell.mainImageView.image = .radioUnselected
             cell.mainView.borderColor = UIColor.lightGray
         }
-        cell.configData(comingReason: comingReason)
+       // cell.configData(comingReason: comingReason)
+        switch comingReason {
+        case .comingFromCurrency:
+            let currency = viewModel.currencyList[indexPath.row]
+            cell.configureCell(comingReason: .comingFromCurrency, currency: currency)
+            
+        case .comingFromCountry:
+            let country = viewModel.getAllUSerCountryList[indexPath.row]
+            cell.configureCell(comingReason: .comingFromCountry, country: country)
+        }
+        
         return cell
     }
     

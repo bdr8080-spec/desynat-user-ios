@@ -34,5 +34,50 @@ extension String {
         
         return outputFormatter.string(from: date)
     }
-    
+    var removingSpaces: String {
+          return self.replacingOccurrences(of: " ", with: "")
+      }
+      
+      // Format into XXXX XXXX XXXX XXXX
+      func formatCardNumber() -> String {
+          let clean = self.removingSpaces
+          var result = ""
+          
+          for (index, char) in clean.enumerated() {
+              if index != 0 && index % 4 == 0 {
+                  result.append(" ")
+              }
+              result.append(char)
+          }
+          
+          return result
+      }
+    func isValidCardNumber() -> Bool {
+        let number = self.replacingOccurrences(of: " ", with: "")
+        
+        // Only digits allowed
+        guard CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: number)) else {
+            return false
+        }
+        // Length check
+        guard number.count >= 13 && number.count <= 15 else {
+            return false
+        }
+        
+//        // Luhn Algorithm
+//        var sum = 0
+//        let reversedDigits = number.reversed().compactMap { Int(String($0)) }
+//        
+//        for (index, digit) in reversedDigits.enumerated() {
+//            if index % 2 == 1 {
+//                let doubled = digit * 2
+//                sum += doubled > 9 ? doubled - 9 : doubled
+//            } else {
+//                sum += digit
+//            }
+//        }
+//        
+//        return sum % 10 == 0
+        return true
+    }
 }

@@ -51,7 +51,7 @@ struct GetAllUserCountryModel: Codable {
     let exchangeRateToUsd: String?
     let dialCode: String?
     let flag: String?
-  let flag1: String?
+    let flag1: String?
 
     enum CodingKeys: String, CodingKey {
         case id, name, code

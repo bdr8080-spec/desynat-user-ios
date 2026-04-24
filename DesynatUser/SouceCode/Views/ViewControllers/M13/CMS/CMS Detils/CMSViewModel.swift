@@ -25,7 +25,7 @@ class CMSViewModel {
     
     func getAboutUsRequest() {
         let param: [String: Any] = ["type": hostVC.selectedUserType]
-        WebService.shared.getReturnPolicyService(parameter: param) { [weak self] response in
+        WebService.shared.getAboutUsPolicyService(parameter: param) { [weak self] response in
             guard let self = self else { return }
             cmsDetailsData = response
             CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A", webView: hostVC.mainContentView)

@@ -21,7 +21,6 @@ class CMSViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
-        // Do any additional setup after loading the view.
     }
     
     // MARK: - Navigation

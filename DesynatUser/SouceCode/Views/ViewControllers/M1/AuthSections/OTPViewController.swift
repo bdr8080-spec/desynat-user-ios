@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OTPViewController: UIViewController {
+class   OTPViewController: UIViewController {
     
     // MARK: - IBOutlet's
     @IBOutlet weak var stepImageView: UIImageView!

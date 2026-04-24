@@ -95,6 +95,15 @@ enum AlertConstant: String {
     case entertitle      = "Please enter title"
     case enterdescription      = "Please enter description"
     
+    case enterCardNumber        = "Card number is required."
+    case validCardNumber        = "Invalid card number. Please check and try again."
+    case enterCardHolderName    = "Card holder name is required."
+    case enterExpiryDate        = "Expiry date is required."
+    case validExpiryDate        = "Invalid expiry date. Use MM/YY format."
+    case enterCVV               = "CVV is required."
+    case validCVV               = "Invalid CVV. It should be 3 or 4 digits."
+    case selectSaveCardOption = "Please select 'Save card for future use'."
+    
   func value() -> String {
     return self.rawValue
   }

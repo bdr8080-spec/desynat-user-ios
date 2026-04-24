@@ -31,8 +31,6 @@ class FAQViewController: UIViewController {
     }
     
     // MARK: - Button's Action
- 
-    
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -59,7 +57,7 @@ extension FAQViewController: UITableViewDelegate, UITableViewDataSource {
         let data = viewModel.faqListData?[indexPath.row]
         cell.configData(data: data, index: indexPath.row)
         return cell
-    }
+    } 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selecetdIndex = indexPath.row

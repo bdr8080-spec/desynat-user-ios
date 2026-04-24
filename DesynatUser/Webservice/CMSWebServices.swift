@@ -9,7 +9,9 @@ import Foundation
 import Foundation
 import UIKit
 import Alamofire
+
 extension WebService {
+    
     func getTermsConditionService(parameter:[String:Any],completion: @escaping(CMSTermsConditionDataModel) -> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.termsAndCondition),requestMethod: .get, requestParams: parameter,requestModel: CMSTermsConditionDataModel.self) { result, code in
@@ -106,65 +108,115 @@ extension WebService {
         }
     }
     func updatePushNotificationSettingService(completion: @escaping(NotificationDataModel) -> Void) {
-            CommonUtils.showHud(show: true)
-            NetworkManager.shared.request(withAPI: .endpoint(.pushNotificationOnOff),requestMethod: .post, requestModel: NotificationDataModel.self) { result, code in
-                CommonUtils.showHud(show: false)
-                self.evaluateWebServiceResponse(response: result) { response, message, error in
-                    guard let response = response else {
-                        if let error {
-                            UIApplication.shared.topViewController()?.showAlert(msg: error)
-                        }
-                        return
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.pushNotificationOnOff),requestMethod: .post, requestModel: NotificationDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
                     }
-                    completion(response)
+                    return
                 }
+                completion(response)
             }
         }
+    }
     
     func updateInAppNotificationSettingService(completion: @escaping(NotificationDataModel) -> Void) {
-            CommonUtils.showHud(show: true)
-            NetworkManager.shared.request(withAPI: .endpoint(.inAppNotificationOnOff),requestMethod: .post, requestModel: NotificationDataModel.self) { result, code in
-                CommonUtils.showHud(show: false)
-                self.evaluateWebServiceResponse(response: result) { response, message, error in
-                    guard let response = response else {
-                        if let error {
-                            UIApplication.shared.topViewController()?.showAlert(msg: error)
-                        }
-                        return
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.inAppNotificationOnOff),requestMethod: .post, requestModel: NotificationDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
                     }
-                    completion(response)
+                    return
                 }
+                completion(response)
             }
         }
+    }
     func affiliateUserPushNotificationSettingService(completion: @escaping(NotificationDataModel) -> Void) {
-            CommonUtils.showHud(show: true)
-            NetworkManager.shared.request(withAPI: .endpoint(.affiliatePushNotificationOnOff),requestMethod: .post, requestModel: NotificationDataModel.self) { result, code in
-                CommonUtils.showHud(show: false)
-                self.evaluateWebServiceResponse(response: result) { response, message, error in
-                    guard let response = response else {
-                        if let error {
-                            UIApplication.shared.topViewController()?.showAlert(msg: error)
-                        }
-                        return
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.affiliatePushNotificationOnOff),requestMethod: .post, requestModel: NotificationDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
                     }
-                    completion(response)
+                    return
                 }
+                completion(response)
             }
         }
+    }
     
     func affiliateUserInAppNotificationSettingService(completion: @escaping(NotificationDataModel) -> Void) {
-            CommonUtils.showHud(show: true)
-            NetworkManager.shared.request(withAPI: .endpoint(.affiliateInAppNotificationOnOff),requestMethod: .post, requestModel: NotificationDataModel.self) { result, code in
-                CommonUtils.showHud(show: false)
-                self.evaluateWebServiceResponse(response: result) { response, message, error in
-                    guard let response = response else {
-                        if let error {
-                            UIApplication.shared.topViewController()?.showAlert(msg: error)
-                        }
-                        return
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.affiliateInAppNotificationOnOff),requestMethod: .post, requestModel: NotificationDataModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
                     }
-                    completion(response)
+                    return
                 }
+                completion(response)
             }
         }
+    }
+    
+    func getSavedCardsService(completion: @escaping([SavedCardsDataModel]) -> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.getMySavedCards), requestMethod: .get, requestModel: [SavedCardsDataModel].self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(response)
+            }
+        }
+    }
+    
+    func  deleteSavedCardsService(param: [String:Any], completion: @escaping(EmptyModel) -> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.deleteSavedCards), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(response)
+            }
+        }
+    }
+    
+    func AddNewCardsService(param: [String:Any], completion: @escaping(EmptyModel) -> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.addNewCard), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(response)
+            }
+        }
+    }
+    
+    
 }
