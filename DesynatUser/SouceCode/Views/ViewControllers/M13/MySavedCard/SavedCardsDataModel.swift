@@ -10,7 +10,7 @@ import Foundation
 // MARK: - SavedCardsDataModel
 struct SavedCardsDataModel: Codable {
     let id, userID: Int?
-    let cardHolderName, cardNumber, expiryDate, cvv: String?
+    let cardHolderName, cardNumber, expiryDate, cvv, cardType, cardImage: String?
     var isFuture: Int?
     let createdAt, updatedAt: String?
 
@@ -24,5 +24,7 @@ struct SavedCardsDataModel: Codable {
         case isFuture = "is_future"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case cardType = "card_type"
+        case cardImage = "card_image"
     }
 }

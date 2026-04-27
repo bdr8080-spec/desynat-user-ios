@@ -21,22 +21,8 @@ class AddCardViewModel{
             "cvv": hostVc?.cvvNumber.text ?? "",
             "is_future": "1"
         ]
-        WebService.sharedInstance.AddNewCardsService(param: params) {
-            data in
-            self.getMySavedCardsRequest()
+        WebService.sharedInstance.AddNewCardsService(param: params) { data in
             self.hostVc?.navigationController?.popViewController(animated: true)
-                print(data)
-        }
-    }
-    
-    func getMySavedCardsRequest() {
-        WebService.sharedInstance.getSavedCardsService { [weak self] response in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-//                self.savedCardsDetails = response
-//                self.hostVC.savedTableView.reloadData()
-//                self.hostVC.noDataFoundLabel.isHidden = !(self.savedCardsDetails?.isEmpty ?? true)
-            }
         }
     }
     
@@ -76,7 +62,9 @@ class AddCardViewModel{
             
         } else if cvv.count < 3 {
             errorMessage = .validCVV
-        }else if hostVc?.isSavedCardForFutureSelected == false {
+        } else if Int(cvv) == 0 {
+            errorMessage = .validCVV
+        } else if hostVc?.isSavedCardForFutureSelected == false {
             errorMessage = .selectSaveCardOption
         }
         
@@ -87,16 +75,14 @@ class AddCardViewModel{
         hostVc?.view.endEditing(true)
         return errorMessage == .none
     }
+    
     private func isValidExpiryDate(_ date: String) -> Bool {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/yy"
         formatter.locale = Locale(identifier: "en_US_POSIX")
-
-        // Convert string to Date
         guard let expiryDate = formatter.date(from: date) else {
-            return false   // invalid format
+            return false
         }
-        // Check if expiry is in future
         return expiryDate >= Date()
     }
 }

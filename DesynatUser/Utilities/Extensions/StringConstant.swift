@@ -100,7 +100,7 @@ enum AlertConstant: String {
     case enterCardHolderName    = "Card holder name is required."
     case enterExpiryDate        = "Expiry date is required."
     case validExpiryDate        = "Invalid expiry date. Use MM/YY format."
-    case enterCVV               = "CVV is required."
+    case enterCVV               = "Plase enter CVV."
     case validCVV               = "Invalid CVV. It should be 3 or 4 digits."
     case selectSaveCardOption = "Please select 'Save card for future use'."
     

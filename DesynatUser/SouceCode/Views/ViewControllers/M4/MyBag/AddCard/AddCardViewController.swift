@@ -27,6 +27,7 @@ class AddCardViewController: UIViewController, UITextFieldDelegate {
         expiryDateTF.delegate = self
         cvvNumber.delegate = self
     }
+    
     @IBAction func saveCardDidTapped(_ sender: UIButton) {
         isSavedCardForFutureSelected.toggle()
         let imageName = isSavedCardForFutureSelected ? "selectedFilterCheckBox" : "unslectedCheckbox"
@@ -67,7 +68,7 @@ extension AddCardViewController {
             }
             
             // Limit to 15 digits
-            return updatedText.count <= 15
+            return updatedText.count <= 19
         }
         
         //  EXPIRY DATE FORMAT (MM/YY)

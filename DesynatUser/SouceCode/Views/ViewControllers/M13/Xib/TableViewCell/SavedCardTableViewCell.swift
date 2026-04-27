@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import SDWebImage
 
 class SavedCardTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var mainImageView: CustomImageView!
     @IBOutlet weak var selectedRadioImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var cardNumberLabel: UILabel!
@@ -34,6 +36,15 @@ class SavedCardTableViewCell: UITableViewCell {
     
     func configData(data: SavedCardsDataModel?) {
         cardNumberLabel.text = maskedCardNumber(data?.cardNumber ?? "")
+        titleLabel.text = data?.cardType ?? ""
+        if let imageUrlString = data?.cardImage,
+           let url = URL(string: imageUrlString) {
+          mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+          mainImageView.sd_imageIndicator?.startAnimatingIndicator()
+            mainImageView.sd_setImage(with: url, placeholderImage: .creditCard)
+        } else {
+            mainImageView.image = .creditCard
+        }
         let defaultAddress = data?.isFuture ?? 0
         if defaultAddress == 1 {
             selectedRadioImage.image = .radioSelected

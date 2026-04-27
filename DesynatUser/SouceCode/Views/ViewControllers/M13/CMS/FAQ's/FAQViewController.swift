@@ -19,7 +19,7 @@ class FAQViewController: UIViewController {
     }
     
     // MARK: - Property Decalaration
-    private var selecetdIndex = 0
+    private var selecetdIndex = -1
     private lazy var viewModel = FAQViewModel(hostVC: self)
     var selectedUserType = 1
     var comingUserRole: UserRoleType = .normalUser
@@ -57,10 +57,14 @@ extension FAQViewController: UITableViewDelegate, UITableViewDataSource {
         let data = viewModel.faqListData?[indexPath.row]
         cell.configData(data: data, index: indexPath.row)
         return cell
-    } 
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selecetdIndex = indexPath.row
+        if selecetdIndex == indexPath.row {
+            selecetdIndex = -1
+        } else {
+            selecetdIndex = indexPath.row
+        }
         listTableView.reloadData()
     }
     
