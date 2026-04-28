@@ -15,7 +15,7 @@ struct AffiliateCreateAccountDataModel: Codable {
     let emailVerifiedAt: String?
     let password,passwordOld, document1, document2, otp: String?
     let otpVerify: String?
-//    let deviceType: String?
+    //    let deviceType: String?
     let deviceToken, dataLet, long: String?
     let addressUpdateStatus, bankUpdateStatus, adminVerify: String?
     let rejectReason, rememberToken: String?
@@ -25,6 +25,9 @@ struct AffiliateCreateAccountDataModel: Codable {
     let countryDetails: CountryDetails?
     let notification: Int?
     let appNotification: Int?
+    let selectedCountry: Int?
+    let selectedCurrency: Int?
+    let userCurrency: GetAllUserCountryModel?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -36,7 +39,7 @@ struct AffiliateCreateAccountDataModel: Codable {
         case emailVerifiedAt = "email_verified_at"
         case password, document1, document2, otp
         case otpVerify = "otp_verify"
-//        case deviceType = "device_type"
+        //        case deviceType = "device_type"
         case deviceToken = "device_token"
         case dataLet = "let"
         case long
@@ -55,6 +58,9 @@ struct AffiliateCreateAccountDataModel: Codable {
         case countryDetails = "country_details"
         case notification
         case appNotification = "app_notification"
+        case selectedCountry = "selected_country"
+        case selectedCurrency = "selected_currency"
+        case userCurrency = "user_currency"
     }
 }
 

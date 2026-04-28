@@ -67,8 +67,8 @@ extension AddCardViewController {
                 return false
             }
             
-            // Limit to 15 digits
-            return updatedText.count <= 19
+            // Limit to 16 digits
+            return updatedText.count <= 16
         }
         
         //  EXPIRY DATE FORMAT (MM/YY)

@@ -304,14 +304,8 @@ class ProductDetailViewController: UIViewController {
             customOrderView.isHidden = true
             spaceTopLabel.isHidden = true
         }
-        finalPriceLAbel.text = "\(variants.first?.finalPrice ?? "") KD"
-        CommonUtils.setStrikethrough(label: actualPriceLAbel, text: "\(variants.first?.actualPrice ?? "") KD")
-        //    let discountType = variants.first?.discountType ?? "1"
-        //    if discountType == "1" {
-        //      discountPercentageLabel.text = "\(variants.first?.discountValue ?? "")% Off"
-        //    } else {
-        //      discountPercentageLabel.text = "\(variants.first?.discountValue ?? "") KD Off"
-        //    }
+        finalPriceLAbel.text = CommonUtils.formatPriceStringInput(variants.first?.finalPrice, currency: "KD")
+        CommonUtils.setStrikethrough(label: actualPriceLAbel, text: CommonUtils.formatPriceStringInput(variants.first?.actualPrice, currency: "KD"))
         CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: actualPriceLAbel,
                                                   discountType: variants.first?.discountType,
                                                   discountValue: variants.first?.discountValue)
@@ -472,23 +466,11 @@ class ProductDetailViewController: UIViewController {
         guard let selectedVariant = self.selectedVariant else { return }
         
         // 1. Price
-        let finalPrice = selectedVariant.finalPrice ?? "0"
-        finalPriceLAbel.text = "\(finalPrice) KD"
+        finalPriceLAbel.text = CommonUtils.formatPriceStringInput(selectedVariant.finalPrice, currency: "KD")
         
         // 2. Actual Price (strikethrough)
-        let actualPrice = selectedVariant.actualPrice ?? "0"
-        CommonUtils.setStrikethrough(label: actualPriceLAbel, text: "\(actualPrice) KD")
-        
-        // 3. Discount
-        //    let discountType = selectedVariant.discountType ?? "1"
-        //    let discountValue = selectedVariant.discountValue ?? "0"
-        //
-        //    if discountType == "1" {
-        //      discountPercentageLabel.text = "\(discountValue)% Off"
-        //    } else {
-        //      discountPercentageLabel.text = "\(discountValue) KD Off"
-        //    }
-        
+        CommonUtils.setStrikethrough(label: actualPriceLAbel, text: CommonUtils.formatPriceStringInput(selectedVariant.actualPrice, currency: "KD"))
+
         CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: actualPriceLAbel,
                                                   discountType: selectedVariant.discountType,
                                                   discountValue: selectedVariant.discountValue)

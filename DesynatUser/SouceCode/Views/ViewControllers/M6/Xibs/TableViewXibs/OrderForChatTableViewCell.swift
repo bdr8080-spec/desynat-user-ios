@@ -51,8 +51,8 @@ class OrderForChatTableViewCell: UITableViewCell {
         
         CommonUtils.updateDiscountPercentageLabel(discountPriceLabel, actualAmountLabel: actualPriceLabel,discountType: data?.productVariation?.discountType,discountValue: data?.productVariation?.discountValue)
         
-        finalPriceLabel.text = "\(data?.productVariation?.finalPrice ?? "") KD"
-        CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productVariation?.actualPrice ?? "0") KD")
+        finalPriceLabel.text = CommonUtils.formatPriceStringInput(data?.productVariation?.finalPrice)
+        CommonUtils.setStrikethrough(label: actualPriceLabel, text: CommonUtils.formatPriceStringInput(data?.productVariation?.actualPrice))
         
         setColorBoxWithQuanity(size: data?.productVariation?.size?.name ?? "", label: productDetailsLabel, hexColor: data?.productVariation?.color?.hexCode ?? "#98ADFF")
         

@@ -16,7 +16,7 @@ class ChangeCurrencyViewController: UIViewController {
         }
     }
     
-    var selectedCurrencyIndex = 0
+    var selectedId = 89 // kuwait
     var comingReason: ComingReasonAtChangeCurrency = .comingFromCurrency
     var comingUserRole: UserRoleType = .normalUser
     private lazy var viewModel = ChangeCurrencyViewModel(hostVc: self)
@@ -26,16 +26,41 @@ class ChangeCurrencyViewController: UIViewController {
         switch comingReason {
         case .comingFromCurrency:
             titleLabel.text = "Change Currency"
-            // call get currency api
         case .comingFromCountry:
             titleLabel.text = "Change Country"
-            viewModel.getALlUserCountryListApi()
-            // call get country api
         }
+        viewModel.getALlUserCountryListApi()
     }
 
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func saveDidTapped(_ sender: Any) {
+        switch comingReason {
+        case .comingFromCurrency:
+            guard selectedId != -1 else {
+                CommonUtils.showToast(message: "Please select country")
+                return
+            }
+            switch comingUserRole {
+            case .normalUser:
+                viewModel.updateCurrency()
+            case .affilaiteUser:
+                viewModel.updateAffiliateCurrency()
+            }
+        case .comingFromCountry:
+            guard selectedId != -1 else {
+                CommonUtils.showToast(message: "Please select country")
+                return
+            }
+            switch comingUserRole {
+            case .normalUser:
+                viewModel.updateCountry()
+            case .affilaiteUser:
+                viewModel.updateAffiliateCountry()
+            }
+        }
     }
 }
 
@@ -44,7 +69,7 @@ extension ChangeCurrencyViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch comingReason{
         case .comingFromCurrency:
-            return viewModel.currencyList.count
+            return viewModel.getAllUSerCountryList.count
         case .comingFromCountry:
             return viewModel.getAllUSerCountryList.count
         }
@@ -52,29 +77,37 @@ extension ChangeCurrencyViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChangeCurrencyTableViewCell", for: indexPath) as! ChangeCurrencyTableViewCell
-        if selectedCurrencyIndex == indexPath.row {
-            cell.mainImageView.image = .radioSelected
-            cell.mainView.borderColor = .darkBrown
-        } else {
-            cell.mainImageView.image = .radioUnselected
-            cell.mainView.borderColor = UIColor.lightGray
-        }
-       // cell.configData(comingReason: comingReason)
+        let country = viewModel.getAllUSerCountryList[indexPath.row]
         switch comingReason {
         case .comingFromCurrency:
-            let currency = viewModel.currencyList[indexPath.row]
-            cell.configureCell(comingReason: .comingFromCurrency, currency: currency)
-            
+            cell.configureCell(comingReason: .comingFromCurrency, country: country)
+            if selectedId == country.id {
+                cell.mainImageView.image = .radioSelected
+                cell.mainView.borderColor = .darkBrown
+            } else {
+                cell.mainImageView.image = .radioUnselected
+                cell.mainView.borderColor = UIColor.lightGray
+            }
         case .comingFromCountry:
-            let country = viewModel.getAllUSerCountryList[indexPath.row]
             cell.configureCell(comingReason: .comingFromCountry, country: country)
+            if selectedId == country.id {
+                cell.mainImageView.image = .radioSelected
+                cell.mainView.borderColor = .darkBrown
+            } else {
+                cell.mainImageView.image = .radioUnselected
+                cell.mainView.borderColor = UIColor.lightGray
+            }
         }
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedCurrencyIndex = indexPath.row
+        switch comingReason {
+        case .comingFromCurrency:
+            selectedId = viewModel.getAllUSerCountryList[indexPath.row].id ?? 1
+        case .comingFromCountry:
+            selectedId = viewModel.getAllUSerCountryList[indexPath.row].id ?? 1
+        }
         listTableView.reloadData()
     }
 }

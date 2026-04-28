@@ -276,7 +276,7 @@ class MyOrderDetailVC: UIViewController {
         customOrderItemPriceLabel.text = CommonUtils.formatPrice(Double(totalPriceforCustom))
         lblDiscountMrp.text = CommonUtils.formatPrice(Double(data.order?.discountMrp ?? "0"))
         lblShippingFee.text = CommonUtils.formatDeliveryCharges(Double(data.order?.shippingFees ?? "0"))//"\(data.order?.shippingFees ?? "0") KD"
-        lblTax.text = "\(data.order?.tax ?? "0") KD"
+        lblTax.text = CommonUtils.formatPriceStringInput(data.order?.tax)
         lblTotalAmount.text = CommonUtils.formatPrice(Double(data.order?.totalAmount ?? "0"))
         totalPaidAmount = lblTotalAmount.text
         if isCustomOrder {

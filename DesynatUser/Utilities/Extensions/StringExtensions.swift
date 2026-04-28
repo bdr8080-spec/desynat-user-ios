@@ -60,7 +60,11 @@ extension String {
             return false
         }
         // Length check
-        guard number.count >= 13 && number.count <= 19 else {
+//        guard number.count >= 13 && number.count <= 19 else {
+//            return false
+//        }
+        
+        guard number.count == 16 else {
             return false
         }
         

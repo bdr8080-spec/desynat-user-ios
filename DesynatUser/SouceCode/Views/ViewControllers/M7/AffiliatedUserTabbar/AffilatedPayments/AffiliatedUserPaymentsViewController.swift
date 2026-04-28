@@ -63,12 +63,12 @@ class AffiliatedUserPaymentsViewController: UIViewController {
 extension AffiliatedUserPaymentsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.paymentListData?.orders?.count ?? 0
+        return viewModel.paymentListData?.orders?.data?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PaymentsHistoryTableViewCell", for: indexPath) as! PaymentsHistoryTableViewCell
-        let data = viewModel.paymentListData?.orders?[indexPath.row]
+        let data = viewModel.paymentListData?.orders?.data?[indexPath.row]
         cell.configData(data: data)
         return cell
     }

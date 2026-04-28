@@ -35,6 +35,13 @@ class ChatEnquiryViewModel {
         }
     }
     
+    func readChatMessagesRequest() {
+        let param: [String: Any] = ["unique_id": chatDetailsUniqueId]
+        WebService.sharedInstance.markAllchatThread(param: param) { [weak self] response in
+            print("Done")
+        }
+    }
+    
     func CustomOrderAddToCardService() {
         let param: [String: Any] = ["unique_id": chatDetailsUniqueId]
         WebService.sharedInstance.CustomOrderAddToCardService(param: param) { [weak self] response in
@@ -63,6 +70,21 @@ class ChatEnquiryViewModel {
                 } else {
                     singleChatDetailRequest()
                 }
+            }
+        }
+    }
+    
+    func sendNotificationDetails(message: String) {
+        let param: [String: Any] = ["sender_id": quotationData?.userID ?? 0,
+                                    "sender_type": 2, //1-admin,2-user,3-seller,4-affiliate,5-driver
+                                    "receiver_id": quotationData?.sellerID ?? 0,
+                                    "receiver_type": 3, //1-admin,2-user,3-seller,4-affiliate,5-driver
+                                    "title_english": message,
+                                    "description_english": "You have a new message",
+                                    "notification_type": "chat_message"]
+        WebService.sharedInstance.sendNotificationDetails(param: param) { [weak self] response in
+            DispatchQueue.main.async { [weak self] in
+                print("send")
             }
         }
     }

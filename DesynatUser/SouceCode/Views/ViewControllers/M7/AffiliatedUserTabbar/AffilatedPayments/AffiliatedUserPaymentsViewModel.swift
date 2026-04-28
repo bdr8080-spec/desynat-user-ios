@@ -58,7 +58,7 @@ class AffiliatedUserPaymentsViewModel {
                 self.paymentListData = data
                 self.hostVC.totalRevenuwAmountLabel.text = CommonUtils.formatPrice(data.totalEarning)
                 self.hostVC.paymentHistoryTableview.reloadData()
-                self.hostVC.noDataFoundLabel.isHidden = !(self.paymentListData?.orders?.isEmpty ?? true)
+                self.hostVC.noDataFoundLabel.isHidden = !(self.paymentListData?.orders?.data?.isEmpty ?? true)
             }
         }
     }

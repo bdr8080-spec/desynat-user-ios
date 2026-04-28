@@ -87,6 +87,7 @@ enum NetworkEndPoint: String {
   case homeFullScreenBanner             = "api/user/popUp-Home-screen-Banner"
   case getAllChatsRecord                = "api/user/user-all-chats"
   case getSingleChats                   = "api/user/user-Single-chats"
+  case markAllchatThread                = "api/user/mark_all_chat_msg_as_read"
   case qutationChatEdit                 = "api/seller/Modify-single-chats-records"
   case sendInMessageChat                = "api/send-message-in-chats"
   case sendInMessageChatNormalChat      = "api/user/user-normal-chat-with-seller"
@@ -95,6 +96,7 @@ enum NetworkEndPoint: String {
   case sendCustomOrderRequest           = "api/user/send-custom-order-request"
   case createCustomOrderRequest         = "api/user/custom-create-order"
   case getAllHomeScreenBannersList      = "api/user/Home-screen-Banner-catgory-banner"
+  case sendNotification                 = "api/sendPushNotificationApp"
   
     
     //M7
@@ -174,6 +176,8 @@ enum NetworkEndPoint: String {
     case raiseTicket                = "api/user/raise_ticket"
     case getRaiseTicketForAffiliate = "api/affiliate/get_raised_tickets"
     case raiseTicketForAffiliate    = "api/affiliate/raise_ticket"
+    case updateAffiliateUserCountry  = "api/affiliate/update-user-selected-country"
+    case updateAffiliateUserCurrency = "api/affiliate/update-user-selected-currency"
    
     //M13
     case getContacts                     = "api/contact_us"
@@ -191,6 +195,8 @@ enum NetworkEndPoint: String {
     case deleteSavedCards                = "api/user/delete_card"
     case cardDefault                     = "api/user/make_card_default"
     case addNewCard                      = "api/user/add_card"
+    case updateUserCountry               = "api/user/update-user-selected-country"
+    case updateUserCurrency              = "api/user/update-user-selected-currency"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

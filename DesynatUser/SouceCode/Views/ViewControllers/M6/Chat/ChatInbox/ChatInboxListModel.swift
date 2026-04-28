@@ -24,6 +24,7 @@ struct ChatInboxListModel: Codable {
     let sellerDetails: SellerDetails?
     let orderCreateStatus: OrderCreateStatus?
     let productBuyStatus: String?
+    let unreadCount: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -50,5 +51,6 @@ struct ChatInboxListModel: Codable {
         case sellerDetails = "seller_details"
         case orderCreateStatus =  "order_create_status"
         case productBuyStatus = "product_buy_status"
+        case unreadCount = "unread_count"
     }
 }

@@ -80,9 +80,12 @@ class MyBagViewModel: NSObject {
         }
     }
     
+    
+    
     func placeOrderApi() {
-        let finalPriceText = hostVC.finalPriceLabel.text?.replacingOccurrences(of: " KD", with: "") ?? "0.0"
-        let finalPrice = Double(finalPriceText) ?? 0.0
+//        let finalPriceText = hostVC.finalPriceLabel.text?.replacingOccurrences(of: " KD", with: "") ?? "0.0"
+//        let finalPrice = Double(finalPriceText) ?? 0.0
+        let finalPrice = CommonUtils.convertDisplayedPriceToKD(hostVC.finalPriceLabel.text)
         var param: [String: Any] = [
             "delivery_address": hostVC.deliveryId,
             "total_mrp": bagDetails?.totalMrp ?? 0,

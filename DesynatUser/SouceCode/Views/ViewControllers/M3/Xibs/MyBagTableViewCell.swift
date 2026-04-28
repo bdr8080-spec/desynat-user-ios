@@ -64,8 +64,8 @@ class MyBagTableViewCell: UITableViewCell {
         
         productNameLabel.text = data.product?.productNameEn
         sellerNameLabel.text = "\(data.product?.sellerDetails?.firstName ?? "") \(data.product?.sellerDetails?.lastName ?? "")"
-        finalPriceLabel.text = "\(data.productVariants?.finalPrice ?? "0") KD"
-        CommonUtils.setStrikethrough(label: actaulPriceLabel, text: "\(data.productVariants?.actualPrice ?? "0") KD")
+        finalPriceLabel.text = CommonUtils.formatPriceStringInput(data.productVariants?.finalPrice, currency: "KD")
+        CommonUtils.setStrikethrough(label: actaulPriceLabel, text: CommonUtils.formatPriceStringInput(data.productVariants?.actualPrice, currency: "KD"))
         setColorBox(size: data.productVariants?.size?.name ?? "M", label: detailsLabel, hexColor: data.productVariants?.color?.hexCode ?? "#98ADFF", quantity: "\(data.quantity)")
         let returnabaiavle = data.product?.productReturn ?? "1"
         if returnabaiavle == "1" {
@@ -73,13 +73,6 @@ class MyBagTableViewCell: UITableViewCell {
         } else {
             returnavaiableLabel.text = "Non returnable"
         }
-//        let discountType = data.productVariants?.discountType ?? "1"
-//        if discountType == "1" {
-//            discountPercentageLabel.text = "\(data.productVariants?.discountValue ?? "")% Off"
-//        } else {
-//            discountPercentageLabel.text = "\(data.productVariants?.discountValue ?? "") KD Off"
-//        }
-        
         CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: actaulPriceLabel,
                                                   discountType: data.productVariants?.discountType,
                                                   discountValue: data.productVariants?.discountValue)

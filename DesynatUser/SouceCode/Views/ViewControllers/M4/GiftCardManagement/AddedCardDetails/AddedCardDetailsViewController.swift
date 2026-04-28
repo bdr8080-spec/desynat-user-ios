@@ -50,7 +50,7 @@ class AddedCardDetailsViewController: UIViewController {
         dateLabel.text = formatDate(giftCardDetails?.createdAt ?? "")
         
         cardLabel.text = giftCardDetails?.giftDetails?.nameEnglish
-        amountLabel.text = "\(giftCardDetails?.amount ?? "") KD"
+        amountLabel.text = CommonUtils.formatPriceStringInput(giftCardDetails?.amount)
         recepientNameLabel.text = giftCardDetails?.receiverName
         recepientEmailLabel.text = giftCardDetails?.receiverEmail
         quantityLabel.text = "Total Quantity- 1"
@@ -58,7 +58,7 @@ class AddedCardDetailsViewController: UIViewController {
         fromMessageLabel.text = giftCardDetails?.wishMessage
         
         transactiobIdLabel.text = giftCardDetails?.transactionID
-        paidAmountLabel.text = "\(giftCardDetails?.amount ?? "") KD"
+        paidAmountLabel.text = CommonUtils.formatPriceStringInput(giftCardDetails?.amount)
     }
     
     private func formatDate(_ isoString: String) -> String {

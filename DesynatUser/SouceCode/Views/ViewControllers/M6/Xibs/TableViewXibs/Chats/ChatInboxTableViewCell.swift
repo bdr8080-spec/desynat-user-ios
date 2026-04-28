@@ -10,6 +10,8 @@ import SDWebImage
 
 class ChatInboxTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var messageCountLabel: UILabel!
+    @IBOutlet weak var messagecountView: CustomView!
     @IBOutlet weak var messageTypeStatusView: CustomView!
     @IBOutlet weak var messageTypeLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -42,6 +44,13 @@ class ChatInboxTableViewCell: UITableViewCell {
             messageLabel.text = data?.lastChat ?? ""
         }
         timeLabel.text = formattedChatTime(from: data?.updatedAt ?? "")
+        let unreadMesageCount = data?.unreadCount ?? 0
+        if unreadMesageCount > 0 {
+            messagecountView.isHidden = false
+            messageCountLabel.text = unreadMesageCount.description
+        } else {
+            messagecountView.isHidden = true
+        }
         let messageType = data?.type ?? "1"
         
         let requestType = data?.productRequest ?? "1"

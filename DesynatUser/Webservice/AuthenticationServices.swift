@@ -22,6 +22,8 @@ extension WebService {
                     Global.shared.user = response
                     kSharedUserDefaults.saveModelFor(key: .user, value: response)
                     kSharedUserDefaults.saveStringFor(Key: .accessToken, value: response.accessToken)
+                    kSharedUserDefaults.saveStringFor(Key: .savedUserCurrency, value: String.getString(response.userCurrency?.currencyCode))
+                    kSharedUserDefaults.saveStringFor(Key: .exchangeRateOfCurrency, value: String.getString(response.userCurrency?.exchangeRate))
                     CommonUtils.showToast(message: "OTP sent succesfully")
                     completion(response)
                 }
@@ -73,6 +75,8 @@ extension WebService {
                     Global.shared.user = response
                     kSharedUserDefaults.saveModelFor(key: .user, value: response)
                     kSharedUserDefaults.saveStringFor(Key: .accessToken, value: String.getString(response.accessToken))
+                    kSharedUserDefaults.saveStringFor(Key: .savedUserCurrency, value: String.getString(response.userCurrency?.currencyCode))
+                    kSharedUserDefaults.saveStringFor(Key: .exchangeRateOfCurrency, value: String.getString(response.userCurrency?.exchangeRate))
                     CommonUtils.showToast(message: message ?? "Login Successfully")
                     completion(response)
                 }
@@ -91,6 +95,8 @@ extension WebService {
                     Global.shared.user = response
                     kSharedUserDefaults.saveModelFor(key: .user, value: response)
                     kSharedUserDefaults.saveStringFor(Key: .accessToken, value: String.getString(response.accessToken))
+                    kSharedUserDefaults.saveStringFor(Key: .savedUserCurrency, value: String.getString(response.userCurrency?.currencyCode))
+                    kSharedUserDefaults.saveStringFor(Key: .exchangeRateOfCurrency, value: String.getString(response.userCurrency?.exchangeRate))
                     CommonUtils.showToast(message: "OTP sent succesfully")
                     completion(response)
                 }
@@ -591,6 +597,40 @@ extension WebService {
     func getAllUserscountryList(completion:@escaping (_ user:[GetAllUserCountryModel])-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.allUserCountry), requestMethod: .get,requestModel:[GetAllUserCountryModel].self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func updatecountryList(param: [String: Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.updateUserCountry), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
+            
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func updateCurrencyList(param: [String: Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.updateUserCurrency), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
             
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in

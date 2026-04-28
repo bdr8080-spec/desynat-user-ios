@@ -103,7 +103,8 @@ class EnterCardsDetailsViewModel {
       "notes": hostVC.noteTextView.text ?? ""]
     
     if hostVC.selectedIndex == 2 {
-      params["amount"] = hostVC.enterAmountTF.text ?? ""
+        let numericAmount = CommonUtils.convertDisplayedPriceToKD(hostVC.enterAmountTF.text)
+      params["amount"] = numericAmount
     } else {
       let selectedText = hostVC.amountArray[hostVC.selectedIndex ?? 0]
       let numericAmount = selectedText.replacingOccurrences(of: " KD", with: "")

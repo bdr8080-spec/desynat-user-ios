@@ -53,8 +53,8 @@ class BestSellingsCollectionViewCell: UICollectionViewCell {
         } else {
             mainImageView.image = UIImage(named: "")
         }
-        finalPriceLabel.text = "\(data?.productVariants?.first?.finalPrice ?? "") KD"
-        CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productVariants?.first?.actualPrice ?? "") KD")
+        finalPriceLabel.text = CommonUtils.formatPriceStringInput(data?.productVariants?.first?.finalPrice, currency: "KD")//"\(data?.productVariants?.first?.finalPrice ?? "") KD"
+        CommonUtils.setStrikethrough(label: actualPriceLabel, text: CommonUtils.formatPriceStringInput(data?.productVariants?.first?.actualPrice, currency: "KD"))
         
         CommonUtils.updateDiscountPercentageLabel(discountPriceLabel, actualAmountLabel: actualPriceLabel,discountType: data?.productVariants?.first?.discountType,discountValue: data?.productVariants?.first?.discountValue)
         
@@ -76,8 +76,8 @@ class BestSellingsCollectionViewCell: UICollectionViewCell {
         } else {
             mainImageView.image = UIImage(named: "")
         }
-        finalPriceLabel.text = "\(data?.productVariants?.first?.finalPrice ?? "") KD"
-        CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productVariants?.first?.actualPrice ?? "") KD")
+        finalPriceLabel.text = CommonUtils.formatPriceStringInput(data?.productVariants?.first?.finalPrice, currency: "KD")
+        CommonUtils.setStrikethrough(label: actualPriceLabel, text: CommonUtils.formatPriceStringInput(data?.productVariants?.first?.actualPrice, currency: "KD"))
         
         CommonUtils.updateDiscountPercentageLabel(discountPriceLabel, actualAmountLabel: actualPriceLabel,discountType: data?.productVariants?.first?.discountType,discountValue: data?.productVariants?.first?.discountValue)
         

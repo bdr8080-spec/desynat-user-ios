@@ -14,6 +14,8 @@ class HomeViewController: UIViewController {
     
     // MARK: - IBOutlet's
     
+    @IBOutlet weak var messageCountLabel: UILabel!
+    @IBOutlet weak var messageCountView: CustomView!
     @IBOutlet weak var adminstoryButtonOutlet: UIButton!
     @IBOutlet weak var notigicationView: CustomView!
     @IBOutlet weak var notificationCountLabel: UILabel!

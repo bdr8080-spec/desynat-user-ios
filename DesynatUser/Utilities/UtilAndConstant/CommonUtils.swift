@@ -119,35 +119,140 @@ class CommonUtils {
         return timeDifference <= (3 * 60 * 60)
     }
     
+//    static func formatPriceStringInput(_ amount: String?, currency: String = "KD") -> String {
+//        guard
+//            let amount = amount,
+//            let doubleAmount = Double(amount)
+//        else {
+//            return "0 \(currency)"
+//        }
+//        
+//        let roundedAmount = round(doubleAmount * 100) / 100
+//        
+//        if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
+//            return "\(Int(roundedAmount)) \(currency)"
+//        } else {
+//            return String(format: "%.2f", roundedAmount) + " \(currency)"
+//        }
+//    }
+    
+    static func convertDisplayedPriceToKD(_ priceText: String?) -> Double {
+        
+        guard let text = priceText, !text.isEmpty else { return 0.0 }
+        
+        // Get selected currency
+        let savedCurrencyCode = kSharedUserDefaults.getStringFor(key: .savedUserCurrency)
+        let savedExchangeRate = kSharedUserDefaults.getStringFor(key: .exchangeRateOfCurrency)
+        
+        var cleanText = text
+        
+        // Remove selected currency text
+        if let code = savedCurrencyCode, !code.isEmpty {
+            cleanText = cleanText.replacingOccurrences(of: " \(code)", with: "")
+        }
+        
+        // Remove KD if present
+        cleanText = cleanText.replacingOccurrences(of: " KD", with: "")
+        cleanText = cleanText.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        var amount = Double(cleanText) ?? 0.0
+        
+        // Convert selected currency back to KD
+        if let code = savedCurrencyCode,
+           !code.isEmpty,
+           code != "KD",
+           let rateString = savedExchangeRate,
+           let rate = Double(rateString),
+           rate > 0 {
+            
+            amount = amount / rate
+        }
+        
+        // Round to 2 decimal places
+        amount = (amount * 100).rounded() / 100
+        
+        return amount
+    }
+    
     static func formatPriceStringInput(_ amount: String?, currency: String = "KD") -> String {
         guard
             let amount = amount,
-            let doubleAmount = Double(amount)
+            let kdAmount = Double(amount)
         else {
             return "0 \(currency)"
         }
+        // Fetch saved currency + exchange rate
+        let savedCurrencyCode = kSharedUserDefaults.getStringFor(key: .savedUserCurrency)
+        let savedExchangeRate = kSharedUserDefaults.getStringFor(key: .exchangeRateOfCurrency)
         
-        let roundedAmount = round(doubleAmount * 100) / 100
+        var finalAmount = kdAmount
+        var finalCurrency = currency
+        
+        // If saved values exist, convert KD amount
+        if let code = savedCurrencyCode,
+           !code.isEmpty,
+           let rateString = savedExchangeRate,
+           let rate = Double(rateString),
+           rate > 0 {
+            
+            finalAmount = kdAmount * rate
+            finalCurrency = code
+        }
+        
+        let roundedAmount = round(finalAmount * 100) / 100
         
         if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
-            return "\(Int(roundedAmount)) \(currency)"
+            return "\(Int(roundedAmount)) \(finalCurrency)"
         } else {
-            return String(format: "%.2f", roundedAmount) + " \(currency)"
+            return String(format: "%.2f", roundedAmount) + " \(finalCurrency)"
         }
     }
     
     static func formatPrice(_ amount: Double?, currency: String = "KD") -> String {
-        guard let amount = amount else { return "0 \(currency)" }
         
-        let roundedAmount = round(amount * 100) / 100   // Round to 2 decimal places
+        guard let kdAmount = amount else {
+            return "0 \(currency)"
+        }
+        
+        // Fetch saved currency + exchange rate
+        let savedCurrencyCode = kSharedUserDefaults.getStringFor(key: .savedUserCurrency)
+        let savedExchangeRate = kSharedUserDefaults.getStringFor(key: .exchangeRateOfCurrency)
+        
+        var finalAmount = kdAmount
+        var finalCurrency = currency
+        
+        // Convert if saved currency exists
+        if let code = savedCurrencyCode,
+           !code.isEmpty,
+           let rateString = savedExchangeRate,
+           let rate = Double(rateString),
+           rate > 0 {
+            
+            finalAmount = kdAmount * rate
+            finalCurrency = code
+        }
+        
+        let roundedAmount = round(finalAmount * 100) / 100
+        
         if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
-            // If whole number, show without decimal
-            return "\(Int(roundedAmount)) \(currency)"
+            return "\(Int(roundedAmount)) \(finalCurrency)"
         } else {
-            // Show up to 2 decimal places
-            return String(format: "%.2f", roundedAmount) + " \(currency)"
+            return String(format: "%.2f", roundedAmount) + " \(finalCurrency)"
         }
     }
+    
+//    static func formatPrice(_ amount: Double?, currency: String = "KD") -> String {
+//        guard let amount = amount else { return "0 \(currency)" }
+//        
+//        let roundedAmount = round(amount * 100) / 100   // Round to 2 decimal places
+//        if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
+//            // If whole number, show without decimal
+//            return "\(Int(roundedAmount)) \(currency)"
+//        } else {
+//            // Show up to 2 decimal places
+//            return String(format: "%.2f", roundedAmount) + " \(currency)"
+//        }
+//    }
     
     
     static func getDictionary(_ dictData: Any?) -> Dictionary<String, Any> {
@@ -173,19 +278,72 @@ class CommonUtils {
     }
     
     
-    static func updateDiscountPercentageLabel(_ label: UILabel, actualAmountLabel: UILabel, discountType: String?,discountValue: String?) {
+//    static func updateDiscountPercentageLabel(_ label: UILabel, actualAmountLabel: UILabel, discountType: String?,discountValue: String?) {
+//        let value = Double(discountValue ?? "0") ?? 0
+//        guard value > 0 else {
+//            label.isHidden = true
+//            actualAmountLabel.isHidden = true
+//            return
+//        }
+//        label.isHidden = false
+//        actualAmountLabel.isHidden = false
+//        if discountType == "1" {
+//            label.text = "\(discountValue ?? "")% Off"
+//        } else {
+//            label.text = "\(discountValue ?? "") KD Off"
+//        }
+//    }
+    
+    static func updateDiscountPercentageLabel(
+        _ label: UILabel,
+        actualAmountLabel: UILabel,
+        discountType: String?,
+        discountValue: String?
+    ) {
+        
         let value = Double(discountValue ?? "0") ?? 0
+        
         guard value > 0 else {
             label.isHidden = true
             actualAmountLabel.isHidden = true
             return
         }
+        
         label.isHidden = false
         actualAmountLabel.isHidden = false
+        
         if discountType == "1" {
-            label.text = "\(discountValue ?? "")% Off"
+            // Percentage discount
+            label.text = "\(discountValue ?? "0")% Off"
+            
         } else {
-            label.text = "\(discountValue ?? "") KD Off"
+            // Fixed amount discount with saved currency conversion
+            let savedCurrencyCode = kSharedUserDefaults.getStringFor(key: .savedUserCurrency)
+            let savedExchangeRate = kSharedUserDefaults.getStringFor(key: .exchangeRateOfCurrency)
+            
+            var finalAmount = value
+            var finalCurrency = "KD"
+            
+            if let code = savedCurrencyCode,
+               !code.isEmpty,
+               let rateString = savedExchangeRate,
+               let rate = Double(rateString),
+               rate > 0 {
+                
+                finalAmount = value * rate
+                finalCurrency = code
+            }
+            
+            let roundedAmount = round(finalAmount * 100) / 100
+            
+            let amountText: String
+            if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
+                amountText = "\(Int(roundedAmount))"
+            } else {
+                amountText = String(format: "%.2f", roundedAmount)
+            }
+            
+            label.text = "\(amountText) \(finalCurrency) Off"
         }
     }
     

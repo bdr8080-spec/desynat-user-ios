@@ -49,7 +49,7 @@ class AffiliatedUserHomeViewModel {
     func getDashboardData(fromDate: String,toDate: String, filterType: Int) {
         let param = ["from_date":fromDate, "to_date":toDate, "filter_type":filterType] as [String: Any]
         WebService.sharedInstance.getAffiliateDashboardDataService(param: param) { data in
-            self.hostVC.lblTotalRevenue.text = "\(data.totalRevenue ?? "") KD"
+            self.hostVC.lblTotalRevenue.text = CommonUtils.formatPriceStringInput(data.totalRevenue)
             self.hostVC.lblTotalProduct.text = "\(data.totalProducts ?? 0)"
             self.hostVC.lblTotalOrder.text = "(\(data.totalOrders ?? 0))"
             self.hostVC.lblOngoing.text = "\(data.totalOngoing ?? 0)"

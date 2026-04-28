@@ -30,6 +30,8 @@ class AffiliatedProfileDetailsViewModel {
     func getUserProfileApi(){
         WebService.sharedInstance.getAffiliatedProfileService() { response in
             kSharedUserDefaults.saveModelFor(key: .affiliatedUserDeatils, value: response)
+            kSharedUserDefaults.saveStringFor(Key: .savedUserCurrency, value: String.getString(response.userCurrency?.currencyCode))
+            kSharedUserDefaults.saveStringFor(Key: .exchangeRateOfCurrency, value: String.getString(response.userCurrency?.exchangeRate))
             self.affiliatedUserProfile = response
             self.populateData(data: response)
             self.setCountryIfPossible()

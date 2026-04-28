@@ -18,6 +18,9 @@ struct UserModel: Codable {
     let affiliatedAccessToken: String?
     let notification: Int?
     let appNotification: Int?
+    let selectedCountry: Int?
+    let selectedCurrency: Int?
+    let userCurrency: GetAllUserCountryModel?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -39,6 +42,9 @@ struct UserModel: Codable {
         case affiliatedAccessToken = "affiliated_accessToken"
         case notification
         case appNotification = "app_notification"
+        case selectedCountry = "selected_country"
+        case selectedCurrency = "selected_currency"
+        case userCurrency = "user_currency"
     }
 }
 

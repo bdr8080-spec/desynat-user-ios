@@ -193,12 +193,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 let nextVC = ChangeCurrencyViewController.instantiate(fromAppStoryboard: .DashBoard)
                 nextVC.comingReason = .comingFromCurrency
                 nextVC.comingUserRole = .normalUser
+                nextVC.selectedId = viewModel.savedUserProfile?.selectedCurrency ?? 89
                 self.navigationController?.pushViewController(nextVC, animated: true)
                 
             case "Change Country":
                 let nextVC = ChangeCurrencyViewController.instantiate(fromAppStoryboard: .DashBoard)
                 nextVC.comingReason = .comingFromCountry
                 nextVC.comingUserRole = .normalUser
+                nextVC.selectedId = viewModel.savedUserProfile?.selectedCountry ?? 89
                 self.navigationController?.pushViewController(nextVC, animated: true)
                 
             case "Cancellation Policy":

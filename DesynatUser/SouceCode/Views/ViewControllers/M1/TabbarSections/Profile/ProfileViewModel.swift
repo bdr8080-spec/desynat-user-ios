@@ -48,6 +48,8 @@ class ProfileViewModel {
     func getUserData(){
         WebService.sharedInstance.getProfileService { savedUser in
             self.savedUserProfile = savedUser
+            kSharedUserDefaults.saveStringFor(Key: .savedUserCurrency, value: String.getString(savedUser.userCurrency?.currencyCode))
+            kSharedUserDefaults.saveStringFor(Key: .exchangeRateOfCurrency, value: String.getString(savedUser.userCurrency?.exchangeRate))
             self.hostVC.usernameLabel.text = savedUser.fullName
             self.hostVC.emailLabel.text = savedUser.email
             self.hostVC.userProfileImageView.sd_imageIndicator = SDWebImageActivityIndicator.medium

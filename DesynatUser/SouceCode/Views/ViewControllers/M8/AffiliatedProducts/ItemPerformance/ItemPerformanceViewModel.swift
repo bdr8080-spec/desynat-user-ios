@@ -78,8 +78,8 @@ class ItemPerformanceViewModel {
             hostVC.productImageView.image = UIImage(named: "")
         }
         hostVC.productNameLabel.text = data.product?.productNameEn
-        hostVC.finalPriceLabel.text = "\(data.product?.productVariants?.first?.finalPrice ?? "") KD"
-        CommonUtils.setStrikethrough(label: hostVC.actualPriceLabel, text: "\(data.product?.productVariants?.first?.actualPrice ?? "") KD")
+        hostVC.finalPriceLabel.text = CommonUtils.formatPriceStringInput(data.product?.productVariants?.first?.finalPrice)
+        CommonUtils.setStrikethrough(label: hostVC.actualPriceLabel, text: CommonUtils.formatPriceStringInput(data.product?.productVariants?.first?.actualPrice))
         
         CommonUtils.updateDiscountPercentageLabel(hostVC.discountPercenteLabel, actualAmountLabel: hostVC.actualPriceLabel, discountType: data.product?.productVariants?.first?.discountType,discountValue: data.product?.productVariants?.first?.discountValue)
         hostVC.commissionPercentageLabel.text = "\(data.product?.affiliatedCommission ?? "0")% Commission"

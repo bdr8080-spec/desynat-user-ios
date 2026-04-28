@@ -48,7 +48,7 @@ struct GetAllUserCountryModel: Codable {
     let name, code, isoCode: String?
     let isoCodeNumber: String?
     let currencyName, currencyCode, currencySymbol: String?
-    let exchangeRateToUsd: String?
+    let exchangeRate: String?
     let dialCode: String?
     let flag: String?
     let flag1: String?
@@ -60,7 +60,7 @@ struct GetAllUserCountryModel: Codable {
         case currencyName = "currency_name"
         case currencyCode = "currency_code"
         case currencySymbol = "currency_symbol"
-        case exchangeRateToUsd = "exchange_rate_to_usd"
+        case exchangeRate = "exchange_rate_to_kwd"
         case dialCode = "dial_code"
         case flag
       case flag1 = "flag1"

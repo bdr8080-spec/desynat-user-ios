@@ -48,7 +48,6 @@ class OrderPlacedViewController: UIViewController { //}, SwiftyGifDelegate {
     @IBAction func trackYourOrderDidTapped(_ sender: Any) {
         let vc = MyOrderVC.instantiate(fromAppStoryboard: .MyOrder)
         vc.comingFromOrderTracking = true
-        //    vc.isCustomOrderSeleced = isCustomOrderSeleced
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -78,7 +77,7 @@ class OrderPlacedViewController: UIViewController { //}, SwiftyGifDelegate {
         let addressLine = "\(selectedAddress?.houseNo ?? ""), \(selectedAddress?.streetNo ?? ""), \(selectedAddress?.city ?? ""), \(selectedAddress?.state ?? ""), \(selectedAddress?.countryName ?? "")-\(selectedAddress?.postalCode ?? "")"
         addressDescriptionLabel.text = addressLine
         let amountValue = Double(data?.totalAmount ?? "0")
-        let amount = formatPrice(amountValue)
+        let amount = CommonUtils.formatPrice(amountValue)//formatPrice(amountValue)
         var paymentMethodText = ""
         if selectedMethod == 1 {
             paymentMethodText = "Paid Online"
@@ -109,14 +108,14 @@ class OrderPlacedViewController: UIViewController { //}, SwiftyGifDelegate {
         amountPaidLabel.attributedText = attributedString
     }
     
-    func formatPrice(_ amount: Double?, currency: String = "KD") -> String {
-        guard let amount = amount else { return "0 \(currency)" }
-        let roundedAmount = round(amount * 100) / 100
-        if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
-            return "\(Int(roundedAmount)) \(currency)"
-        } else {
-            return String(format: "%.2f", roundedAmount) + " \(currency)"
-        }
-    }
+//    func formatPrice(_ amount: Double?, currency: String = "KD") -> String {
+//        guard let amount = amount else { return "0 \(currency)" }
+//        let roundedAmount = round(amount * 100) / 100
+//        if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
+//            return "\(Int(roundedAmount)) \(currency)"
+//        } else {
+//            return String(format: "%.2f", roundedAmount) + " \(currency)"
+//        }
+//    }
     
 }

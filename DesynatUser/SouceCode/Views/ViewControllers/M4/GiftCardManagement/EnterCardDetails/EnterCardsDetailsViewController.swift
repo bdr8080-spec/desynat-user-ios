@@ -88,7 +88,12 @@ extension EnterCardsDetailsViewController: UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectOccassionCollectionViewCell", for: indexPath) as! SelectOccassionCollectionViewCell
         let data = amountArray[indexPath.row]
-        cell.titleLabel.text = data
+        if indexPath.row != 2 {
+            cell.titleLabel.text = CommonUtils.formatPriceStringInput(data.replacingOccurrences(of: " KD", with: ""))
+        } else {
+            cell.titleLabel.text = data
+        }
+        
         if selectedIndex == indexPath.row {
             cell.backgroundImageView.isHidden = false
             cell.titleLabel.textColor = .white

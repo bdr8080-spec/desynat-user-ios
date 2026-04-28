@@ -21,6 +21,8 @@ enum UserDefaultsKey : String {
     case sessionToken
     case userId
     case affiliatedAccessToken
+    case exchangeRateOfCurrency
+    case savedUserCurrency
 }
 
 extension UserDefaults {

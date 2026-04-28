@@ -42,8 +42,8 @@ class MyProductsCollectionViewCell: UICollectionViewCell {
         } else {
             mainImageView.image = UIImage(named: "")
         }
-        finalPriceLabel.text = "\(data?.productVariants?.first?.finalPrice ?? "") KD"
-        CommonUtils.setStrikethrough(label: actualPriceLabel, text: "\(data?.productVariants?.first?.actualPrice ?? "") KD")
+        finalPriceLabel.text = CommonUtils.formatPriceStringInput(data?.productVariants?.first?.finalPrice)
+        CommonUtils.setStrikethrough(label: actualPriceLabel, text: CommonUtils.formatPriceStringInput(data?.productVariants?.first?.actualPrice))
         
         CommonUtils.updateDiscountPercentageLabel(discountPriceLabel, actualAmountLabel: actualPriceLabel,discountType: data?.productVariants?.first?.discountType,discountValue: data?.productVariants?.first?.discountValue)
         commissionPercentageLabel.text = "\(data?.affiliatedCommission ?? "0")% Commission"

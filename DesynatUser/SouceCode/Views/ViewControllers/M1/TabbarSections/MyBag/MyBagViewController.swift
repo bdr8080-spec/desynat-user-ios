@@ -91,15 +91,15 @@ class MyBagViewController: UIViewController {
             self?.removeButtonOutlet.isHidden = false
             self?.applyPromocodeButtonOutlet.isHidden = true
             self?.selectedPromoCode = selectedPromo
-            self?.totalAmountLabel.text = self?.formatPrice(selectedPromo.finalAmount)
+            self?.totalAmountLabel.text = CommonUtils.formatPrice(selectedPromo.finalAmount)
             self?.promocodeLabel.text = selectedPromo.discountCode
             self?.couponDiscountTitleLabel.text = "Coupon Discount (\(selectedPromo.discountCode ?? ""))"
-            self?.couponDidcountLabel.text = self?.formatPrice(selectedPromo.applyDiscountValue)//"\(selectedPromo.applyDiscountValue ?? 0)"
+            self?.couponDidcountLabel.text = CommonUtils.formatPrice(selectedPromo.applyDiscountValue)//"\(selectedPromo.applyDiscountValue ?? 0)"
             self?.actualPriceLAbel.isHidden = false
             self?.isPromoCodeApplied = true
-            self?.finalPriceLabel.text = self?.formatPrice(selectedPromo.finalAmount)
+            self?.finalPriceLabel.text = CommonUtils.formatPrice(selectedPromo.finalAmount)
             let savingAmount = (self?.totalMRPDiscountValue ?? 0) + (selectedPromo.applyDiscountValue ?? 0)
-            self?.saveAmountLAbel.text = "You will save \(self?.formatPrice(savingAmount) ?? "") on this"
+            self?.saveAmountLAbel.text = "You will save \(CommonUtils.formatPrice(savingAmount)) on this"
         }
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -109,12 +109,12 @@ class MyBagViewController: UIViewController {
         self.couponDidcountLabel.text = ""
         self.slecetedPromocodeID = 0
         isPromoCodeApplied = false
-        self.totalAmountLabel.text = formatPrice(totalAmount)
-        self.finalPriceLabel.text = formatPrice(totalAmount)
+        self.totalAmountLabel.text = CommonUtils.formatPrice(totalAmount)
+        self.finalPriceLabel.text = CommonUtils.formatPrice(totalAmount)
         self.removeButtonOutlet.isHidden = true
         self.applyPromocodeButtonOutlet.isHidden = false
         let savingAmount = (self.totalMRPDiscountValue)
-        self.saveAmountLAbel.text = "You will save \(self.formatPrice(savingAmount)) on this"
+        self.saveAmountLAbel.text = "You will save \(CommonUtils.formatPrice(savingAmount)) on this"
         promocodeLabel.text = "Apply PromoCode"
         let normalOrderCount = viewModel.normalOrders.count
         if normalOrderCount == 0 {
@@ -130,8 +130,8 @@ class MyBagViewController: UIViewController {
                 }
                 .reduce(0.0, +)
             let finalAmountForCustomOrderOnly = max(0, (totalPrice) + (viewModel.bagDetails?.shippingFees ?? 0) + (viewModel.bagDetails?.tax ?? 0))
-            totalAmountLabel.text = formatPrice(finalAmountForCustomOrderOnly)
-            finalPriceLabel.text = formatPrice(finalAmountForCustomOrderOnly)
+            totalAmountLabel.text = CommonUtils.formatPrice(finalAmountForCustomOrderOnly)
+            finalPriceLabel.text = CommonUtils.formatPrice(finalAmountForCustomOrderOnly)
         }
         let customOrderCount = viewModel.customOrders.count
         if normalOrderCount != 0 && customOrderCount != 0 {
@@ -144,10 +144,10 @@ class MyBagViewController: UIViewController {
             }
                 .reduce(0.0, +)
             let finalAmount = max(0, (viewModel.bagDetails?.totalAmount ?? 0) + (totalPrice))
-            totalAmountLabel.text = formatPrice(finalAmount)
-            finalPriceLabel.text = formatPrice(finalAmount)
+            totalAmountLabel.text = CommonUtils.formatPrice(finalAmount)
+            finalPriceLabel.text = CommonUtils.formatPrice(finalAmount)
             let actualPriceWithputDiscount = max(0, (viewModel.bagDetails?.totalMrp ?? 0) + (totalPrice))
-            CommonUtils.setStrikethrough(label: actualPriceLAbel, text: formatPrice(actualPriceWithputDiscount))
+            CommonUtils.setStrikethrough(label: actualPriceLAbel, text: CommonUtils.formatPrice(actualPriceWithputDiscount))
         }
     }
     
@@ -168,34 +168,34 @@ class MyBagViewController: UIViewController {
     //MARK: Function's declaration
     func condifData(data: MyCartDetailsDataModel) {
         totalMRPDiscountValue = data.discountOnMrp ?? 0.0
-        totalMRP.text = formatPrice(data.totalMrp)
-        dricountOnMRP.text = formatPrice(data.discountOnMrp)
+        totalMRP.text = CommonUtils.formatPrice(data.totalMrp)
+        dricountOnMRP.text = CommonUtils.formatPrice(data.discountOnMrp)
         
         // FIX: Only use API value when promo NOT applied
         if isPromoCodeApplied, let selected = selectedPromoCode {
-            couponDidcountLabel.text = formatPrice(selected.applyDiscountValue)
-            finalPriceLabel.text = formatPrice(selected.finalAmount)
-            totalAmountLabel.text = formatPrice(selected.finalAmount)
+            couponDidcountLabel.text = CommonUtils.formatPrice(selected.applyDiscountValue)
+            finalPriceLabel.text = CommonUtils.formatPrice(selected.finalAmount)
+            totalAmountLabel.text = CommonUtils.formatPrice(selected.finalAmount)
             if isAnyItemRemovedFromCart {
                 let finalAmount = max(0, (data.totalAmount ?? 0) - (selected.applyDiscountValue ?? 0))
-                finalPriceLabel.text = formatPrice(finalAmount)
-                totalAmountLabel.text = formatPrice(finalAmount)
+                finalPriceLabel.text = CommonUtils.formatPrice(finalAmount)
+                totalAmountLabel.text = CommonUtils.formatPrice(finalAmount)
                 isAnyItemRemovedFromCart = false
             }
         } else {
-            couponDidcountLabel.text = formatPrice(data.discountCoupon)
-            finalPriceLabel.text = formatPrice(data.totalAmount)
-            totalAmountLabel.text = formatPrice(data.totalAmount)
+            couponDidcountLabel.text = CommonUtils.formatPrice(data.discountCoupon)
+            finalPriceLabel.text = CommonUtils.formatPrice(data.totalAmount)
+            totalAmountLabel.text = CommonUtils.formatPrice(data.totalAmount)
             let savingAmount = (data.discountOnMrp ?? 0)// - (data.totalAmount ?? 0)
-            saveAmountLAbel.text = "You will save \(formatPrice(savingAmount)) on this"
+            saveAmountLAbel.text = "You will save \(CommonUtils.formatPrice(savingAmount)) on this"
         }
         let selectedAddress = data.userAddress
         deliveryId = selectedAddress?.id ?? 0
         addressLabel.text = formattedAddress(from: data.userAddress)//addressLine
         shippingFeeLabel.text = CommonUtils.formatDeliveryCharges(data.shippingFees)//formatPrice(data.shippingFees)
-        taxLabel.text = formatPrice(data.tax)//CommonUtils.formatTax(data.tax)//
+        taxLabel.text = CommonUtils.formatPrice(data.tax)//CommonUtils.formatTax(data.tax)//
         totalAmount = data.totalAmount ?? 0
-        CommonUtils.setStrikethrough(label: actualPriceLAbel, text: formatPrice(data.totalMrp))
+        CommonUtils.setStrikethrough(label: actualPriceLAbel, text: CommonUtils.formatPrice(data.totalMrp))
         let customOrderCount = viewModel.customOrders.count
         if customOrderCount != 0 {
             customPriceStackView.isHidden = false
@@ -235,14 +235,14 @@ class MyBagViewController: UIViewController {
                 }
                 .reduce(0.0, +)
             let finalAmountForCustomOrderOnly = max(0, (totalPrice) + (data.shippingFees ?? 0) + (data.tax ?? 0))
-            totalAmountLabel.text = formatPrice(finalAmountForCustomOrderOnly)
-            finalPriceLabel.text = formatPrice(finalAmountForCustomOrderOnly)
+            totalAmountLabel.text = CommonUtils.formatPrice(finalAmountForCustomOrderOnly)
+            finalPriceLabel.text = CommonUtils.formatPrice(finalAmountForCustomOrderOnly)
             if isPromoCodeApplied, let selected = selectedPromoCode {
                 actualPriceLAbel.isHidden = false
                 let finalAmountForCustomOrderOnlyAfterApplyingPromo = max(0, (totalPrice) + (data.shippingFees ?? 0) + (data.tax ?? 0) - (selected.applyDiscountValue ?? 0))
-                totalAmountLabel.text = formatPrice(finalAmountForCustomOrderOnlyAfterApplyingPromo)
-                finalPriceLabel.text = formatPrice(finalAmountForCustomOrderOnlyAfterApplyingPromo)
-                CommonUtils.setStrikethrough(label: actualPriceLAbel, text: formatPrice(finalAmountForCustomOrderOnly))
+                totalAmountLabel.text = CommonUtils.formatPrice(finalAmountForCustomOrderOnlyAfterApplyingPromo)
+                finalPriceLabel.text = CommonUtils.formatPrice(finalAmountForCustomOrderOnlyAfterApplyingPromo)
+                CommonUtils.setStrikethrough(label: actualPriceLAbel, text: CommonUtils.formatPrice(finalAmountForCustomOrderOnly))
             } else {
                 actualPriceLAbel.isHidden = true
             }
@@ -258,30 +258,30 @@ class MyBagViewController: UIViewController {
             }
                 .reduce(0.0, +)
             let finalAmount = max(0, (data.totalAmount ?? 0) + (totalPrice))
-            totalAmountLabel.text = formatPrice(finalAmount)
-            finalPriceLabel.text = formatPrice(finalAmount)
+            totalAmountLabel.text = CommonUtils.formatPrice(finalAmount)
+            finalPriceLabel.text = CommonUtils.formatPrice(finalAmount)
             let actualPriceWithputDiscount = max(0, (data.totalMrp ?? 0) + (totalPrice))
-            CommonUtils.setStrikethrough(label: actualPriceLAbel, text: formatPrice(actualPriceWithputDiscount))
+            CommonUtils.setStrikethrough(label: actualPriceLAbel, text: CommonUtils.formatPrice(actualPriceWithputDiscount))
             if isPromoCodeApplied, let selected = selectedPromoCode {
                 let finalAmountAfterApplyingPromocode = max(0, (finalAmount) - (selected.applyDiscountValue ?? 0))
-                totalAmountLabel.text = formatPrice(finalAmountAfterApplyingPromocode)
-                finalPriceLabel.text = formatPrice(finalAmountAfterApplyingPromocode)
+                totalAmountLabel.text = CommonUtils.formatPrice(finalAmountAfterApplyingPromocode)
+                finalPriceLabel.text = CommonUtils.formatPrice(finalAmountAfterApplyingPromocode)
             }
         }
     }
     
-    func formatPrice(_ amount: Double?, currency: String = "KD") -> String {
-        guard let amount = amount else { return "0 \(currency)" }
-        
-        let roundedAmount = round(amount * 100) / 100   // Round to 2 decimal places
-        if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
-            // If whole number, show without decimal
-            return "\(Int(roundedAmount)) \(currency)"
-        } else {
-            // Show up to 2 decimal places
-            return String(format: "%.2f", roundedAmount) + " \(currency)"
-        }
-    }
+//    func formatPrice(_ amount: Double?, currency: String = "KD") -> String {
+//        guard let amount = amount else { return "0 \(currency)" }
+//        
+//        let roundedAmount = round(amount * 100) / 100   // Round to 2 decimal places
+//        if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
+//            // If whole number, show without decimal
+//            return "\(Int(roundedAmount)) \(currency)"
+//        } else {
+//            // Show up to 2 decimal places
+//            return String(format: "%.2f", roundedAmount) + " \(currency)"
+//        }
+//    }
     
     func formattedAddress(from address: SavedAddressList?) -> String {
         guard let address else { return "" }

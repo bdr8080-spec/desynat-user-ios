@@ -25,22 +25,14 @@ class ChangeCurrencyTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    //    func configData(comingReason: ComingReasonAtChangeCurrency) {
-    //        switch comingReason {
-    //        case .comingFromCurrency:
-    //            flagEmojiLabel.isHidden = true
-    //        case .comingFromCountry:
-    //            flagEmojiLabel.isHidden = false
-    //        }
-    //    }
+
     func configureCell(comingReason: ComingReasonAtChangeCurrency,
-                       currency: String? = nil,
                        country: GetAllUserCountryModel? = nil
     ) {
         switch comingReason {
             
         case .comingFromCurrency:
-            titleLabel.text = currency
+            titleLabel.text = country?.currencyCode
             flagEmojiLabel.isHidden = true
         case .comingFromCountry:
             titleLabel.text = country?.name

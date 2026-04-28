@@ -69,6 +69,22 @@ class HomeViewModel: NSObject {
         }
     }
     
+//    func getCountOfChatRequest() {
+//        let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
+//        if isGuestUser != "true" {
+//            WebService.sharedInstance.getAllChatsCount{ response in
+//                DispatchQueue.main.async {
+//                    if response > 0 {
+//                        self.hostVC.messageCountView.isHidden = false
+//                        self.hostVC.messageCountLabel.text = count.description
+//                    } else {
+//                        self.hostVC.messageCountView.isHidden = true
+//                    }
+//                }
+//            }
+//        }
+//    }
+    
     func getSubCategoriesListApi(categoryID: Int) {
         WebService.sharedInstance.getSubCategoriesService(categoryID: categoryID) { list in
             self.subCategoriesSection = list

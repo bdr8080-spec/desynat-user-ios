@@ -108,13 +108,48 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xkl-f5-Jhl" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                                <rect key="frame" x="372" y="47" width="20" height="20"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnGradient" translatesAutoresizingMaskIntoConstraints="NO" id="QTj-mi-6pS" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="circleCorner" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TBT-l6-I2O">
+                                        <rect key="frame" x="2" y="2" width="16" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="QTj-mi-6pS" firstAttribute="top" secondItem="xkl-f5-Jhl" secondAttribute="top" id="0cJ-H6-njB"/>
+                                    <constraint firstAttribute="bottom" secondItem="TBT-l6-I2O" secondAttribute="bottom" constant="2" id="5CJ-87-T3k"/>
+                                    <constraint firstItem="QTj-mi-6pS" firstAttribute="leading" secondItem="xkl-f5-Jhl" secondAttribute="leading" id="GEr-bN-B0k"/>
+                                    <constraint firstItem="TBT-l6-I2O" firstAttribute="top" secondItem="xkl-f5-Jhl" secondAttribute="top" constant="2" id="Lhg-ES-ebq"/>
+                                    <constraint firstAttribute="trailing" secondItem="TBT-l6-I2O" secondAttribute="trailing" constant="2" id="Rxl-Va-dbX"/>
+                                    <constraint firstAttribute="bottom" secondItem="QTj-mi-6pS" secondAttribute="bottom" id="cML-lb-ivj"/>
+                                    <constraint firstAttribute="trailing" secondItem="QTj-mi-6pS" secondAttribute="trailing" id="gOF-oy-JC6"/>
+                                    <constraint firstAttribute="width" constant="20" id="mhf-Pt-Rr0"/>
+                                    <constraint firstItem="TBT-l6-I2O" firstAttribute="leading" secondItem="xkl-f5-Jhl" secondAttribute="leading" constant="2" id="thD-8R-GYR"/>
+                                    <constraint firstAttribute="height" constant="20" id="y9V-Je-Xrh"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="circleCorner" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="mq9-A3-eFZ" firstAttribute="centerY" secondItem="7dd-cg-VI7" secondAttribute="centerY" id="4Pu-ya-MQG"/>
+                            <constraint firstAttribute="trailing" secondItem="xkl-f5-Jhl" secondAttribute="trailing" constant="20" id="E4o-Vt-9P9"/>
                             <constraint firstItem="a8q-my-1Hf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mq9-A3-eFZ" secondAttribute="trailing" constant="10" id="EMP-9f-aMW"/>
                             <constraint firstItem="7dd-cg-VI7" firstAttribute="centerY" secondItem="Zzp-Ll-1ey" secondAttribute="centerY" id="SFN-9g-6LK"/>
                             <constraint firstItem="mq9-A3-eFZ" firstAttribute="leading" secondItem="7dd-cg-VI7" secondAttribute="trailing" constant="15" id="kdg-HD-hu5"/>
+                            <constraint firstItem="xkl-f5-Jhl" firstAttribute="top" secondItem="a8q-my-1Hf" secondAttribute="bottom" constant="6" id="kxc-qI-Xxj"/>
                             <constraint firstItem="7dd-cg-VI7" firstAttribute="top" secondItem="Zzp-Ll-1ey" secondAttribute="top" constant="15" id="ntl-ly-Rpk"/>
                             <constraint firstItem="7dd-cg-VI7" firstAttribute="leading" secondItem="Zzp-Ll-1ey" secondAttribute="leading" constant="8" id="oYu-eP-p9T"/>
                             <constraint firstItem="a8q-my-1Hf" firstAttribute="centerY" secondItem="dlb-fs-ZDR" secondAttribute="centerY" id="uTn-lD-VKY"/>
@@ -142,9 +177,11 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="messageCountLabel" destination="TBT-l6-I2O" id="CCP-fZ-llc"/>
                 <outlet property="messageLabel" destination="raJ-3f-w47" id="HOU-g6-or5"/>
                 <outlet property="messageTypeLabel" destination="iXs-pO-7rA" id="4Qd-Vl-u3E"/>
                 <outlet property="messageTypeStatusView" destination="a8q-my-1Hf" id="Fzg-Ig-XnD"/>
+                <outlet property="messagecountView" destination="xkl-f5-Jhl" id="pet-QL-H77"/>
                 <outlet property="timeLabel" destination="g2i-ma-hre" id="Jkv-Eb-QtB"/>
                 <outlet property="userProfileImageView" destination="Z3L-Uo-ahH" id="Ppb-Jn-Myq"/>
                 <outlet property="usernameLabel" destination="dlb-fs-ZDR" id="IqB-xX-9Y2"/>
@@ -153,6 +190,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="btnGradient" width="343" height="38"/>
         <image name="userProfile" width="32" height="32.333332061767578"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

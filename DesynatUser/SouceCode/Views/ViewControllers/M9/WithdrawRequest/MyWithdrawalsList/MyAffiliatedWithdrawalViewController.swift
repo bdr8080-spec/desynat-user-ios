@@ -66,12 +66,12 @@ class MyAffiliatedWithdrawalViewController: UIViewController {
 extension MyAffiliatedWithdrawalViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.moneyWithdrawalData?.withdrawRequests?.count ?? 0
+        return viewModel.moneyWithdrawalData?.withdrawRequests?.data?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyAffiliatedWithdrawalTableViewCell", for: indexPath) as! MyAffiliatedWithdrawalTableViewCell
-        let data = viewModel.moneyWithdrawalData?.withdrawRequests?[indexPath.row]
+        let data = viewModel.moneyWithdrawalData?.withdrawRequests?.data?[indexPath.row]
         cell.configData(requestType: requestType, data: data)
         return cell
     }

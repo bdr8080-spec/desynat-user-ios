@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -3850,7 +3850,7 @@ want to continue with</string>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200 KD" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NR2-CX-Al6">
-                                                                        <rect key="frame" x="61" y="13.999999999999998" width="84" height="16.333333333333329"/>
+                                                                        <rect key="frame" x="61" y="13.999999999999998" width="46.666666666666657" height="16.333333333333329"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -3866,7 +3866,6 @@ want to continue with</string>
                                                                 <constraints>
                                                                     <constraint firstItem="oXn-Jb-0wQ" firstAttribute="leading" secondItem="71E-Ip-XMV" secondAttribute="leading" constant="15" id="23y-kK-IdY"/>
                                                                     <constraint firstItem="NR2-CX-Al6" firstAttribute="centerY" secondItem="oXn-Jb-0wQ" secondAttribute="centerY" id="5kH-qa-uU6"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="NR2-CX-Al6" secondAttribute="trailing" constant="200" id="6iV-dD-pA9"/>
                                                                     <constraint firstItem="oXn-Jb-0wQ" firstAttribute="top" secondItem="71E-Ip-XMV" secondAttribute="top" constant="10" id="96C-qw-Y3n"/>
                                                                     <constraint firstAttribute="trailing" secondItem="gpw-JV-66p" secondAttribute="trailing" constant="24" id="AFG-XO-JJq"/>
                                                                     <constraint firstAttribute="height" constant="44" id="O6A-kk-vAc"/>
