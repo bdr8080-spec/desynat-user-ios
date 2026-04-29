@@ -290,3 +290,14 @@ struct TopRatedDataModel: Codable {
         case productVariants = "product_variants"
     }
 }
+
+
+// MARK: - NotificationCountDataModel
+struct NotificationCountDataModel: Codable {
+    let notificationCount, chatUnreadCount: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case notificationCount = "notification_count"
+        case chatUnreadCount = "chat_unread_count"
+    }
+}

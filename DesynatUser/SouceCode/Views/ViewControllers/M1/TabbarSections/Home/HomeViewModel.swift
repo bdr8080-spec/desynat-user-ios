@@ -58,32 +58,24 @@ class HomeViewModel: NSObject {
     func getCountOfNotificationRequest(){
         let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
         if isGuestUser != "true" {
-            WebService.sharedInstance.getCountOfNotificationService { [self] count in
-                if count > 0 {
+            WebService.sharedInstance.getCountOfNotificationService { [self] response in
+                let notificationCount = response.notificationCount ?? 0
+                if notificationCount > 0 {
                     self.hostVC.notigicationView.isHidden = false
-                    self.hostVC.notificationCountLabel.text = count.description
+                    self.hostVC.notificationCountLabel.text = notificationCount.description
                 } else {
                     self.hostVC.notigicationView.isHidden = true
+                }
+                let chatUnreadCount = response.chatUnreadCount ?? 0
+                if chatUnreadCount > 0 {
+                    self.hostVC.messageCountView.isHidden = false
+                    self.hostVC.messageCountLabel.text = chatUnreadCount.description
+                } else {
+                    self.hostVC.messageCountView.isHidden = true
                 }
             }
         }
     }
-    
-//    func getCountOfChatRequest() {
-//        let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
-//        if isGuestUser != "true" {
-//            WebService.sharedInstance.getAllChatsCount{ response in
-//                DispatchQueue.main.async {
-//                    if response > 0 {
-//                        self.hostVC.messageCountView.isHidden = false
-//                        self.hostVC.messageCountLabel.text = count.description
-//                    } else {
-//                        self.hostVC.messageCountView.isHidden = true
-//                    }
-//                }
-//            }
-//        }
-//    }
     
     func getSubCategoriesListApi(categoryID: Int) {
         WebService.sharedInstance.getSubCategoriesService(categoryID: categoryID) { list in
