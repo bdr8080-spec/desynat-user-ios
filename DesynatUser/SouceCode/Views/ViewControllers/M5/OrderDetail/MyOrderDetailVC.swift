@@ -155,7 +155,8 @@ class MyOrderDetailVC: UIViewController {
     
     @IBAction func btnDownloadInvoice(_ sender: Any) {
         let orderId = orderData?.order?.orderID ?? ""
-        let urlString = "http://157.241.119.72/Invoice/\(orderId)"
+//        let urlString = "http://157.241.119.72/Invoice/\(orderId)"
+        let urlString = "\(BaseURL.value())InvoiceUser/\(orderId)"
         guard let url = URL(string: urlString) else {
             showAlert(msg: "Invalid invoice URL")
             return

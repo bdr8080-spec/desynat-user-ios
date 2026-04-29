@@ -61,7 +61,6 @@ extension WebService {
         }
     }
     
-    
     func updateAffiliatedBankDetailsService(param: [String: Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
         CommonUtils.showHud(show: true)

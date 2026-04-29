@@ -2,7 +2,7 @@
 //  AffiliatedUserPaymentsDataModel.swift
 //  DesynatUser
 //
-//  Created by Geetam   on 09/03/26.
+//  Created by Rakhi on 09/03/26.
 //
 
 import Foundation
