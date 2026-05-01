@@ -186,10 +186,6 @@ extension AffiliatedProductsViewController: UICollectionViewDelegate, UICollecti
         let width = (collectionView.frame.width - totalSpacing) / 2
         return CGSize(width: width, height: 295)
     }
-    
-    //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    //        viewModel.generateProductLink(productId: viewModel.productDetails[indexPath.row].id ?? 0)
-    //    }
 }
 
 extension AffiliatedProductsViewController: UIScrollViewDelegate {

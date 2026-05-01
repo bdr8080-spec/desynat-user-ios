@@ -24,11 +24,20 @@ class ChangeCurrencyViewModel{
         }
     }
     
+    func getAllUsersCurrencyList(){
+        WebService.sharedInstance.getAllUsersCurrencyList { list in
+            self.getAllUSerCountryList = list
+            DispatchQueue.main.async {
+                self.hostVc?.listTableView.reloadData()
+            }
+        }
+    }
+    
     func updateCountry(){
         let param: [String: Any] = ["country_id": hostVc?.selectedId ?? 1]
         WebService.sharedInstance.updatecountryList(param: param) { list in
             DispatchQueue.main.async {
-                CommonUtils.showToast(message: "Country updated successfully")
+                CommonUtils.showToast(message: "Country updated successfully".localiz())
                 self.hostVc?.navigationController?.popViewController(animated: true)
             }
         }
@@ -38,7 +47,7 @@ class ChangeCurrencyViewModel{
         let param: [String: Any] = ["currency": hostVc?.selectedId ?? 1]
         WebService.sharedInstance.updateCurrencyList(param: param) { list in
             DispatchQueue.main.async {
-                CommonUtils.showToast(message: "Currency updated successfully")
+                CommonUtils.showToast(message: "Currency updated successfully".localiz())
                 self.hostVc?.navigationController?.popViewController(animated: true)
             }
         }
@@ -48,7 +57,7 @@ class ChangeCurrencyViewModel{
         let param: [String: Any] = ["country_id": hostVc?.selectedId ?? 1]
         WebService.sharedInstance.updateAffiliatecountryList(param: param) { list in
             DispatchQueue.main.async {
-                CommonUtils.showToast(message: "Country updated successfully")
+                CommonUtils.showToast(message: "Country updated successfully".localiz())
                 self.hostVc?.navigationController?.popViewController(animated: true)
             }
         }
@@ -58,7 +67,7 @@ class ChangeCurrencyViewModel{
         let param: [String: Any] = ["currency": hostVc?.selectedId ?? 1]
         WebService.sharedInstance.updateAffiliateCurrencyList(param: param) { list in
             DispatchQueue.main.async {
-                CommonUtils.showToast(message: "Currency updated successfully")
+                CommonUtils.showToast(message: "Currency updated successfully".localiz())
                 self.hostVc?.navigationController?.popViewController(animated: true)
             }
         }

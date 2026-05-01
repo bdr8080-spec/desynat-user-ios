@@ -67,22 +67,22 @@ class StoryViewerViewController: UIViewController {
         let secondsAgo = Int(Date().timeIntervalSince(date))
 
         if secondsAgo < 60 {
-            return secondsAgo == 1 ? "1 sec ago" : "\(secondsAgo) sec ago"
+            return secondsAgo == 1 ? "1 sec ago".localiz() : "\(secondsAgo) \("sec ago".localiz())"
         }
 
         let minutes = secondsAgo / 60
         if minutes < 60 {
-            return minutes == 1 ? "1 min ago" : "\(minutes) min ago"
+            return minutes == 1 ? "1 min ago".localiz() : "\(minutes) \("min ago".localiz())"
         }
 
         let hours = minutes / 60
         if hours < 24 {
-            return hours == 1 ? "1 hr ago" : "\(hours) hr ago"
+            return hours == 1 ? "1 hr ago".localiz() : "\(hours) \("hr ago".localiz())"
         }
 
         let days = hours / 24
-        if days == 1 { return "Yesterday" }
-        return "\(days) days ago"
+        if days == 1 { return "Yesterday".localiz() }
+        return "\(days) \("days ago".localiz())"
     }
     
     private func setupCollectionViews() {
@@ -643,18 +643,7 @@ extension StoryViewerViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-//        if collectionView == topSliderCollectionView {
-//            let totalItems = CGFloat(usersStory.count)
-//            let spacing: CGFloat = 6.0
-//            let totalSpacing = spacing * (totalItems - 1)
-//            
-//            // Dynamic width: Equally divide available width
-//            let availableWidth = view.bounds.width - totalSpacing
-//            let itemWidth = availableWidth / totalItems
-//            
-//            return CGSize(width: max(itemWidth, 20), height: 4)
-//        }
+    
         if collectionView == topSliderCollectionView {
             
             let totalItems = CGFloat(usersStory.count)

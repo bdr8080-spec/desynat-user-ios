@@ -47,7 +47,7 @@ class AffiliatedProductsCollectionViewCell: UICollectionViewCell {
         CommonUtils.setStrikethrough(label: actualPriceLabel, text:  CommonUtils.formatPriceStringInput(data?.productVariants?.first?.actualPrice))
         
         CommonUtils.updateDiscountPercentageLabel(discountPriceLabel, actualAmountLabel: actualPriceLabel,discountType: data?.productVariants?.first?.discountType,discountValue: data?.productVariants?.first?.discountValue)
-        commissionPercentageLabel.text = "\(data?.affiliatedCommission ?? "0")% Commission"
+        commissionPercentageLabel.text = "\(data?.affiliatedCommission ?? "0")% \("Commission".localiz())"
     }
     
 }

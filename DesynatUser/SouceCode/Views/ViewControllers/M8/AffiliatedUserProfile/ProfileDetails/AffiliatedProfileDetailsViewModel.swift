@@ -131,7 +131,7 @@ class AffiliatedProfileDetailsViewModel {
             "let": hostVC.latitude ?? 0.0,
             "long": hostVC.longitude ?? 0.0]
         WebService.sharedInstance.updateAffiliatedAddressService(param: param) { response in
-            CommonUtils.showToast(message: "Address updated successfully")
+            CommonUtils.showToast(message: "Address updated successfully".localiz())
             //            self.hostVC.navigationController?.popViewController(animated: true)
         }
     }
@@ -198,7 +198,7 @@ class AffiliatedProfileDetailsViewModel {
                                     "document2": hostVC.uploadDocTwoImage]
         WebService.sharedInstance.updateAffiliatedProfileService(param: param) { response in
             kSharedUserDefaults.saveModelFor(key: .affiliatedUserDeatils, value: response)
-            CommonUtils.showToast(message: "Profile updated successfully")
+            CommonUtils.showToast(message: "Profile updated successfully".localiz())
             self.hostVC.navigationController?.popViewController(animated: true)
         }
     }
@@ -213,7 +213,7 @@ class AffiliatedProfileDetailsViewModel {
     func makeDefaultBankAccountAffilaitedUserApi(id: Int){
         let param: [String: Any] = ["id": id]
         WebService.sharedInstance.makeDefaultBankAccountAffilaitedUserService(param: param) { response in
-            CommonUtils.showToast(message: "Bank Account changed succesfully")
+            CommonUtils.showToast(message: "Bank Account changed succesfully".localiz())
             self.getUserProfileApi()
         }
     }

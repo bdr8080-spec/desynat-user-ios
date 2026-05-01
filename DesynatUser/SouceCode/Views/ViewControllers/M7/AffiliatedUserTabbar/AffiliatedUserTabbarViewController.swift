@@ -35,38 +35,57 @@ class AffiliatedUserTabbarViewController: UIViewController {
     }
     
     private func setUserButtonImages(selectedTag: Int) {
-        let unselectedImages = [
-            "homeUnselected",
-            "productsAffiliated",
-            "showAffiliated",
-            "paymentAffiliated",
-            "profileUnselected"]
         
-        let selectedImages = [
-            "homeSelected",
-            "selectedProductAffiliated",
-            "showAffiliated",
-            "selectedPaymnetAffiliated",
-            "profileSelected"]
+        let unselectedImages = ["homeUnselected","productsAffiliated","showAffiliated","paymentAffiliated","profileUnselected"]
+        let selectedImages = ["homeSelected","selectedProductAffiliated","showAffiliated","selectedPaymnetAffiliated","profileSelected"]
+        
+        let unselectedArImages = ["homeUnselectedAr","productsAffiliatedAr","showAffiliated","paymentAffiliatedAr","profileUnselectedAr"]
+        let selectedArImages = ["homeSelectedAr","selectedProductAffiliatedAr","showAffiliated","selectedPaymnetAffiliatedAr","profileSelectedAr"]
+        
+        let isArabic = AppLanguageManager.shared.currentLanguage == .ar
+        let currentUnselectedImages = isArabic ? unselectedArImages : unselectedImages
+        let currentSelectedImages = isArabic ? selectedArImages : selectedImages
+        
+        //        let paymentTabIndex = 3
+        //
+        //        let paymentImageName = (selectedTag == paymentTabIndex)
+        //        ? selectedImages[paymentTabIndex]
+        //        : unselectedImages[paymentTabIndex]
+        //
+        //        paymnetTabImageView.image = UIImage(named: paymentImageName)
+        //
+        //        // Update all button images except payment
+        //        for button in tabButtons {
+        //            if button.tag == paymentTabIndex {
+        //                button.setImage(nil, for: .normal) // image handled by imageView
+        //                continue
+        //            }
+        //
+        //            let imageName = (button.tag == selectedTag)
+        //            ? selectedImages[button.tag]
+        //            : unselectedImages[button.tag]
+        //
+        //            button.setImage(UIImage(named: imageName), for: .normal)
+        //        }
         
         let paymentTabIndex = 3
         
         let paymentImageName = (selectedTag == paymentTabIndex)
-        ? selectedImages[paymentTabIndex]
-        : unselectedImages[paymentTabIndex]
+        ? currentSelectedImages[paymentTabIndex]
+        : currentUnselectedImages[paymentTabIndex]
         
         paymnetTabImageView.image = UIImage(named: paymentImageName)
         
         // Update all button images except payment
         for button in tabButtons {
             if button.tag == paymentTabIndex {
-                button.setImage(nil, for: .normal) // image handled by imageView
+                button.setImage(nil, for: .normal) // handled separately
                 continue
             }
             
             let imageName = (button.tag == selectedTag)
-            ? selectedImages[button.tag]
-            : unselectedImages[button.tag]
+            ? currentSelectedImages[button.tag]
+            : currentUnselectedImages[button.tag]
             
             button.setImage(UIImage(named: imageName), for: .normal)
         }

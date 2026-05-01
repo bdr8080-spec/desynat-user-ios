@@ -61,7 +61,7 @@ class ItemPerformanceViewController: UIViewController {
     }
     
     @IBAction func deleteDidTapped(_ sender: Any) {
-        showConfirmationAlert(msg: "Are you sure you want to remove this product?"){ [weak self] in
+        showConfirmationAlert(msg: "Are you sure you want to remove this product?".localiz()){ [weak self] in
             guard let self = self else { return }
             viewModel.deleteAffiliatedProductData()
         }
@@ -94,27 +94,6 @@ class ItemPerformanceViewController: UIViewController {
 //MARK: UITextFieldDelegate Methods
 extension ItemPerformanceViewController: UITextFieldDelegate {
     
-//    private func setUpTextFields() {
-//        datePicker.preferredDatePickerStyle = .wheels
-//        datePicker.datePickerMode = .date
-//        datePicker.backgroundColor = .white
-//
-//        let toolbar = UIToolbar()
-//        toolbar.sizeToFit()
-//        
-//        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneDatePicker))
-//        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-//        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
-//        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-//        
-//        let textFields = [txtFromDate, txtToDate]
-//        textFields.forEach { textField in
-//            textField?.inputView = datePicker
-//            textField?.inputAccessoryView = toolbar
-//            textField?.delegate = self
-//        }
-//    }
-    
     private func setUpTextFields() {
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
@@ -123,7 +102,7 @@ extension ItemPerformanceViewController: UITextFieldDelegate {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
 
-        let cancelButton = UIBarButtonItem(title: "Cancel",
+        let cancelButton = UIBarButtonItem(title: "Cancel".localiz(),
                                            style: .plain,
                                            target: self,
                                            action: #selector(cancelDatePicker))
@@ -132,12 +111,12 @@ extension ItemPerformanceViewController: UITextFieldDelegate {
                                           target: nil,
                                           action: nil)
         
-        let clearButton = UIBarButtonItem(title: "Clear",
+        let clearButton = UIBarButtonItem(title: "Clear".localiz(),
                                           style: .plain,
                                           target: self,
                                           action: #selector(clearDateFilter))
 
-        let doneButton = UIBarButtonItem(title: "Done",
+        let doneButton = UIBarButtonItem(title: "Done".localiz(),
                                          style: .done,
                                          target: self,
                                          action: #selector(doneDatePicker))

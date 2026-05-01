@@ -85,7 +85,7 @@ class SelectReasonVC: UIViewController {
             
         case .cancelOrder:
             guard let reason = getSelectedCancelReason() else {
-                showAlert(msg: "Please select or enter a reason")
+                showAlert(msg: "Please select or enter a reason".localiz())
                 return
             }
             viewModel.cancelOrder(reason: reason) {
@@ -150,25 +150,25 @@ class SelectReasonVC: UIViewController {
         
         switch screenType {
         case .cancelOrder:
-            lblTitle.text = "Select Reason"
+            lblTitle.text = "Select Reason".localiz()
             viewReason.isHidden = false
             
         case .returnPro:
-            lblTitle.text = "Return Request"
+            lblTitle.text = "Return Request".localiz()
             viewReason.isHidden = false
             viewUploadPic.isHidden = false
             
         case .exchangePro:
-            lblTitle.text = "Select Reason"
+            lblTitle.text = "Select Reason".localiz()
             viewReason.isHidden = false
             //      viewSize.isHidden = false
             
         case .rating:
-            lblTitle.text = "Rate this product"
+            lblTitle.text = "Rate this product".localiz()
             viewRateProduct.isHidden = false
             
         case .customCancel:
-            lblTitle.text = "Select Reason"
+            lblTitle.text = "Select Reason".localiz()
             viewTotalItemReturn.isHidden = false
             viewReason.isHidden = false
             viewUploadPic.isHidden = false
@@ -186,7 +186,7 @@ class SelectReasonVC: UIViewController {
     
     func showExchangeSuccess() {
         let successVC = SuccessMsgVC.instantiate(fromAppStoryboard: .MyOrder)
-        successVC.message = "Order Exchange Request Sent successfully!"
+        successVC.message = "Order Exchange Request Sent successfully!".localiz()
         
         successVC.OnDismiss = { [weak self] in
             self?.dismiss(animated: true)
@@ -197,7 +197,7 @@ class SelectReasonVC: UIViewController {
     
     func showReturnSuccess() {
         let successVC = SuccessMsgVC.instantiate(fromAppStoryboard: .MyOrder)
-        successVC.message = "Order Return Request Sent successfully!"
+        successVC.message = "Order Return Request Sent successfully!".localiz()
         
         successVC.OnDismiss = { [weak self] in
             self?.dismiss(animated: true)
@@ -231,7 +231,7 @@ extension SelectReasonVC: UITableViewDelegate, UITableViewDataSource {
             let isOtherRow = indexPath.row == rejectReasonData.count
             
             if isOtherRow {
-                cell.titleLabel.text = "Others"
+                cell.titleLabel.text = "Others".localiz()
             } else {
                 let data = rejectReasonData[indexPath.row]
                 cell.titleLabel.text = data.reasonEnglish ?? ""

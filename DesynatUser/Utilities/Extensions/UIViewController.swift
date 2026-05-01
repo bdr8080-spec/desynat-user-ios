@@ -25,7 +25,7 @@ extension UIViewController {
         
         DispatchQueue.main.async {
             let alert = UIAlertController(title: Bundle.main.ApplicationName ?? "",
-                                          message: msg,
+                                          message: msg.localiz(),
                                           preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: StringConstant.ok.value(), style: .default, handler: { _ in
@@ -62,59 +62,6 @@ extension UIViewController {
         return images
     }
     
-    //    public func showAlert(msg: String, completion: (() -> ())? = nil) {
-    //        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-    //
-    //        // Image View
-    //        let imageView = UIImageView(image: UIImage(named: "alertImg"))
-    //        imageView.contentMode = .scaleAspectFit
-    //        imageView.layer.cornerRadius = 6
-    //        imageView.clipsToBounds = true
-    //        imageView.translatesAutoresizingMaskIntoConstraints = false
-    //        imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
-    //        imageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-    //
-    //        // Message Label
-    //        let messageLabel = UILabel()
-    //        messageLabel.text = msg
-    //        messageLabel.numberOfLines = 0
-    //        messageLabel.textAlignment = .center
-    //        messageLabel.font = UIFont.systemFont(ofSize: 14)
-    //        messageLabel.textColor = .label
-    //        messageLabel.translatesAutoresizingMaskIntoConstraints = false
-    //
-    //        // Separator Line
-    //        let separator = UIView()
-    //        separator.backgroundColor = UIColor.systemGray4
-    //        separator.translatesAutoresizingMaskIntoConstraints = false
-    //        separator.heightAnchor.constraint(equalToConstant: 1).isActive = true
-    //
-    //        // Stack View
-    //        let stackView = UIStackView(arrangedSubviews: [imageView, messageLabel, separator])
-    //        stackView.axis = .vertical
-    //        stackView.spacing = 12
-    //        stackView.alignment = .fill
-    //        stackView.translatesAutoresizingMaskIntoConstraints = false
-    //
-    //        alert.view.addSubview(stackView)
-    //
-    //        NSLayoutConstraint.activate([
-    //            stackView.topAnchor.constraint(equalTo: alert.view.topAnchor, constant: 20),
-    //            stackView.leadingAnchor.constraint(equalTo: alert.view.leadingAnchor, constant: 20),
-    //            stackView.trailingAnchor.constraint(equalTo: alert.view.trailingAnchor, constant: -20),
-    //            stackView.bottomAnchor.constraint(lessThanOrEqualTo: alert.view.bottomAnchor, constant: -70),
-    //            separator.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
-    //            separator.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
-    //        ])
-    //
-    //        // OK button
-    //        alert.addAction(UIAlertAction(title: StringConstant.ok.value(), style: .default, handler: { _ in
-    //            completion?()
-    //        }))
-    //
-    //        self.present(alert, animated: true)
-    //    }
-    
     public func showConfirmationAlert(
         msg: String,
         completion: (() -> Void)? = nil
@@ -131,13 +78,13 @@ extension UIViewController {
             )
             
             // Yes Action
-            let yesButton = UIAlertAction(title: "Yes", style: .default) { _ in
+            let yesButton = UIAlertAction(title: "Yes".localiz(), style: .default) { _ in
                 UIViewController.isAlertVisible = false
                 completion?()
             }
             
             // Cancel Action (red color)
-            let cancelButton = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            let cancelButton = UIAlertAction(title: "Cancel".localiz(), style: .cancel) { _ in
                 UIViewController.isAlertVisible = false
             }
             
@@ -163,19 +110,19 @@ extension UIViewController {
     public func showLoginAlert(completion: (() -> ())? = nil) {
         let alert = UIAlertController(
             title: Bundle.main.ApplicationName ?? "",
-            message: "Please login to proceed",
+            message: "Please login to proceed".localiz(),
             preferredStyle: .alert
         )
         
         // Login action
-        let loginAction = UIAlertAction(title: "Login", style: .default) { _ in
+        let loginAction = UIAlertAction(title: "Login".localiz(), style: .default) { _ in
             completion?()
             UserDefaults.standard.setValue("false", forKey:"isGuestLogin")
             kSharedSceneDelegate.navigateToLoginVc()
         }
         
         // Cancel action
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel".localiz(), style: .cancel, handler: nil)
         cancelAction.setValue(UIColor.red, forKey: "titleTextColor")
         
         alert.addAction(loginAction)
@@ -316,23 +263,6 @@ extension UIViewController {
         let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
         self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
     }
-    //    func backControllerOne() {
-    //        guard let nav = self.navigationController else { return }
-    //        let viewControllers = nav.viewControllers
-    //
-    //        if viewControllers.count >= 2 {
-    //            nav.popToViewController(viewControllers[viewControllers.count - 2], animated: true)
-    //        } else {
-    //            // No previous screen — decide what to do here
-    //            // e.g., navigate to ProfileSelectionVC or dismiss
-    //            let profileVC = ProfileSelectionVC.instantiate(fromAppStoryboard: .Main)
-    //            let nc = UINavigationController(rootViewController: profileVC)
-    //            nc.isNavigationBarHidden = true
-    //            let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as! SceneDelegate
-    //            sceneDelegate.window!.rootViewController = nc
-    //            sceneDelegate.window!.makeKeyAndVisible()
-    //        }
-    //    }
     
     func setColorBox(size: String, label: UILabel, hexColor: String, quantity: String) {
         
@@ -382,7 +312,7 @@ extension UIViewController {
         let coloredSquare = "■"
         let dot = "●"
         
-        let fullText = "Size: \(size)  \(dot)  Color: \(coloredSquare)"
+        let fullText = "\("Size:".localiz()) \(size)  \(dot)  \("Color:".localiz()) \(coloredSquare)"
         
         let attributedString = NSMutableAttributedString(
             string: fullText,
@@ -445,7 +375,7 @@ extension UITableViewCell {
         let coloredSquare = "■"
         let dot = "●"
         
-        let fullText = "Size: \(size)  \(dot)  Color: \(coloredSquare)  \(dot)  Qnt: \(quantity)"
+        let fullText = "\("Size:".localiz()) \(size)  \(dot)  \("Color:".localiz()) \(coloredSquare)  \(dot)  \("Qnt:".localiz()) \(quantity)"
         
         let attributedString = NSMutableAttributedString(
             string: fullText,
@@ -487,7 +417,7 @@ extension UITableViewCell {
         let coloredSquare = "■"
         let dot = "●"
         
-        let fullText = "Size: \(size)  \(dot)  Color: \(coloredSquare)"
+        let fullText = "\("Size:".localiz()) \(size)  \(dot)  \("Color:".localiz()) \(coloredSquare)"
         
         let attributedString = NSMutableAttributedString(
             string: fullText,

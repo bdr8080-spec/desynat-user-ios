@@ -43,7 +43,7 @@ class FiltersOptionsTableViewCell: UITableViewCell {
             titleLabel.font = UIFont.systemFont(ofSize: 14)
 
             // If it's Show More / Show Less → make bold
-            if option.title == "Show More" || option.title == "Show Less" {
+        if option.title == "Show More" || option.title == "Show Less" {
                 titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
             }
 
@@ -56,15 +56,6 @@ class FiltersOptionsTableViewCell: UITableViewCell {
 
         selectionImageView.image = UIImage(named: option.isSelected ? "selectedFilterCheckBox" : "unslectedStoreFilter")
     }
-  
-//  func configureProductFilter(option: ProductFilterOption) {
-//      titleLabel.text = option.title
-//    selectionImageView.isHidden = !option.isSelected  // ✅ show/hide based on isSelected
-//      if option.havingColourCode {
-//        colourView.backgroundColor = UIColor(hex: option.colourCode)
-//      }
-//  }
 
-    
 }
 

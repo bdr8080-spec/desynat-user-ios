@@ -46,7 +46,7 @@ class WithdrawMoneyViewController: UIViewController {
     
     @IBAction func submitRequestDidTapped(_ sender: Any) {
         guard let finalAmount = getFinalAmount(), finalAmount > 0 else {
-            showAlert(msg: "Please enter a valid amount")
+            showAlert(msg: "Please enter a valid amount".localiz())
             return
         }
         viewModel.affiliateSubmitWithdrawRequest()

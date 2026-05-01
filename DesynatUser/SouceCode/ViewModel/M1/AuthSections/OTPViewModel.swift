@@ -94,7 +94,7 @@ class OTPViewModel: NSObject {
                     kSharedSceneDelegate.navigateToAffiliatedUserHomeVc()
                 } else if response.adminVerify == "4" {
                     //                    self.hostVC.showAlert(msg: "Document Rejected. Please Reupload it.")
-                    self.hostVC.showAlert(msg: "Document Rejected. Please Reupload it.\n\(response.rejectReason ?? "")")
+                    self.hostVC.showAlert(msg: "\("Document Rejected. Please Reupload it.\n".localiz())\(response.rejectReason ?? "")")
                     let nextVC = CreateAffiliateUserAccountViewController.instantiate(fromAppStoryboard: .AffiliateUser)
                     nextVC.iscomingAfterDocumnetReject = true
                     nextVC.affiliatedUserDetails = response
@@ -114,20 +114,6 @@ class OTPViewModel: NSObject {
             }
         }
     }
-    
-    //    func verifyOtpAPIForAffiliatedUser(type: String) {
-    //        //        let params: [String: Any] = [
-    //        //            "user_id": hostVC.userId,
-    //        //            "otp": hostVC.otpDigits,
-    //        //            "type": type
-    //        //        ]
-    //        //        WebService.sharedInstance.verifyOTPService(withParams: params) { otp in
-    //        let vc = ResetPasswordViewController.instantiate(fromAppStoryboard: .Main)
-    //        //                vc.userId = self.hostVC.userId
-    //        vc.comingUserRole = .affiliateUser
-    //        self.hostVC.navigationController?.pushViewController(vc, animated: true)
-    //        //        }
-    //    }
     
     func resendOtpAPI() {
         var params: [String: Any] = ["email_mobile": hostVC.phoneNumber ?? ""]
@@ -230,8 +216,8 @@ class OTPViewModel: NSObject {
                     if let navController = self.hostVC.navigationController {
                         for controller in navController.viewControllers {
                             if let profileVC = controller as? AffiliatedProfileDetailsViewController {
-//                                profileVC.mobile = user.mobile
-//                                profileVC.countryCode = user. ?? ""
+                                //                                profileVC.mobile = user.mobile
+                                //                                profileVC.countryCode = user. ?? ""
                                 profileVC.comingAfterUpdate = true
                                 navController.popToViewController(profileVC, animated: true)
                                 break
@@ -247,7 +233,7 @@ class OTPViewModel: NSObject {
                     if let navController = self.hostVC.navigationController {
                         for controller in navController.viewControllers {
                             if let profileVC = controller as? AffiliatedProfileDetailsViewController {
-//                                profileVC.email = user.email
+                                //                                profileVC.email = user.email
                                 profileVC.comingAfterUpdate = true
                                 navController.popToViewController(profileVC, animated: true)
                                 break

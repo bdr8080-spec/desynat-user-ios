@@ -56,7 +56,7 @@ class MyOrderTableCell: UITableViewCell {
   }
   
   func configureStatus(with data: OrderModel) {
-    lblStatus.text = "Ongoing"
+      lblStatus.text = "Ongoing".localiz()
     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
     viewReturn.isHidden = true
     
@@ -68,69 +68,69 @@ class MyOrderTableCell: UITableViewCell {
       if paymentStatus == "1" {
         switch deliveryStatus {
         case "1": //Pending
-          lblStatus.text = "Ongoing"
+          lblStatus.text = "Ongoing".localiz()
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
           viewExchange.backgroundColor = UIColor(hexString: "#17854C").withAlphaComponent(0.1)
           lblOrderDate.textColor = UIColor(hexString: "#17854C")
-          lblOrderDate.text = "Expected Delivery Date : 3-5 working days"
+          lblOrderDate.text = "Expected Delivery Date : 3-5 working days".localiz()
             if data.returnType == "1" || data.returnType == "2" {
                 let approveType = data.rEApprove ?? "1"
                 if approveType == "1" {
-                    lblStatus.text = "Return Req."
+                    lblStatus.text = "Return Req.".localiz()
                 }
             }
           
         case "2", "2.1", "7": //Ongoing
-          lblStatus.text = "Ongoing"
+          lblStatus.text = "Ongoing".localiz()
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
           viewExchange.backgroundColor = UIColor(hexString: "#17854C").withAlphaComponent(0.1)
           lblOrderDate.textColor = UIColor(hexString: "#17854C")
-          lblOrderDate.text = "Expected Delivery Date : 3-5 working days"
+          lblOrderDate.text = "Expected Delivery Date : 3-5 working days".localiz()
             if data.deliveryStatus == "7" && (data.returnType == "1" || data.returnType == "2") {
                 let approveType = data.rEApprove ?? "1"
                 if approveType == "1" {
-                    lblStatus.text = "Return Req."
+                    lblStatus.text = "Return Req.".localiz()
                 }
             }
           
         case "3": //Delivered
-          lblStatus.text = "Delivered"
+          lblStatus.text = "Delivered".localiz()
           lblStatus.textColor = UIColor(hexString: "#16B364")
           viewExchange.backgroundColor = UIColor(hexString: "#16B364").withAlphaComponent(0.1)
           lblOrderDate.textColor = UIColor(hexString: "#16B364")
           if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
-            lblOrderDate.text = "Delivered On : \(isoDate)"
+              lblOrderDate.text = "\("Delivered On :".localiz()) \(isoDate)"
           } else {
-            lblOrderDate.text = "Delivered On : -"
+              lblOrderDate.text = "Delivered On :".localiz()
           }
             if data.returnType == "1" || data.returnType == "2" {
             handleReturnExchange(data: data)
           }
           
         case "4": //Cancelled
-          lblStatus.text = "Cancelled"
+          lblStatus.text = "Cancelled".localiz()
           lblStatus.textColor = UIColor(hexString: "#E70000")
           viewExchange.backgroundColor = UIColor(hexString: "#F4DDDD")
           lblOrderDate.textColor = UIColor(hexString: "#E70000")
           if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
-            lblOrderDate.text = "Cancelled Date : \(isoDate)"
+              lblOrderDate.text = "\("Cancelled Date :".localiz()) \(isoDate)"
           } else {
-            lblOrderDate.text = "Cancelled Date : -"
+              lblOrderDate.text = "Cancelled Date :".localiz()
           }
           
         default:
           return
         }
       } else if paymentStatus == "3" {
-        lblStatus.text = "Cancelled"
+        lblStatus.text = "Cancelled".localiz()
         lblStatus.textColor = UIColor(hexString: "#E70000")
         viewExchange.backgroundColor = UIColor(hexString: "#F4DDDD")
         lblOrderDate.textColor = UIColor(hexString: "#E70000")
-        lblOrderDate.text = "Pickup Expected Delivery Date : 3-5 days"
+          lblOrderDate.text = "Pickup Expected Delivery Date : 3-5 days".localiz()
         if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
-          lblOrderDate.text = "Cancelled Date : \(isoDate)"
+            lblOrderDate.text = "\("Cancelled Date :".localiz()) \(isoDate)"
         } else {
-          lblOrderDate.text = "Cancelled Date : -"
+          lblOrderDate.text = "Cancelled Date :".localiz()
         }
         
       }
@@ -138,7 +138,7 @@ class MyOrderTableCell: UITableViewCell {
       if paymentStatus == "0" || paymentStatus == "1" {
         switch deliveryStatus {
         case "1": //Pending
-          lblStatus.text = "Ongoing"
+          lblStatus.text = "Ongoing".localiz()
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
           viewExchange.backgroundColor = UIColor(hexString: "#17854C").withAlphaComponent(0.1)
           lblOrderDate.textColor = UIColor(hexString: "#17854C")
@@ -146,33 +146,32 @@ class MyOrderTableCell: UITableViewCell {
             if data.returnType == "1" || data.returnType == "2" {
                 let approveType = data.rEApprove ?? "1"
                 if approveType == "1" {
-                    lblStatus.text = "Return Req."
+                    lblStatus.text = "Return Req.".localiz()
                 }
             }
           
         case "2","2.1", "7": //Ongoing, Picked
-          lblStatus.text = "Ongoing"
+          lblStatus.text = "Ongoing".localiz()
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
           viewExchange.backgroundColor = UIColor(hexString: "#17854C").withAlphaComponent(0.1)
           lblOrderDate.textColor = UIColor(hexString: "#17854C")
-          lblOrderDate.text = "Expected Delivery Date : 3-5 working days"
-          
+          lblOrderDate.text = "Expected Delivery Date : 3-5 working days".localiz()
             if data.deliveryStatus == "7" && (data.returnType == "1" || data.returnType == "2") {
                 let approveType = data.rEApprove ?? "1"
                 if approveType == "1" {
-                    lblStatus.text = "Return Req."
+                    lblStatus.text = "Return Req.".localiz()
                 }
             }
             
         case "3": //Delivered
-          lblStatus.text = "Delivered"
+          lblStatus.text = "Delivered".localiz()
           lblStatus.textColor = UIColor(hexString: "#16B364")
           viewExchange.backgroundColor = UIColor(hexString: "#16B364").withAlphaComponent(0.1)
           lblOrderDate.textColor = UIColor(hexString: "#16B364")
           if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
-            lblOrderDate.text = "Delivered On : \(isoDate)"
+              lblOrderDate.text = "\("Delivered On :".localiz()) \(isoDate)"
           } else {
-            lblOrderDate.text = "Delivered On : -"
+              lblOrderDate.text = "Delivered On :".localiz()
           }
           
           
@@ -181,28 +180,28 @@ class MyOrderTableCell: UITableViewCell {
           }
           
         case "4", "8": //Cancelled
-          lblStatus.text = "Cancelled"
+          lblStatus.text = "Cancelled".localiz()
           lblStatus.textColor = UIColor(hexString: "#E70000")
           viewExchange.backgroundColor = UIColor(hexString: "#F4DDDD")
           lblOrderDate.textColor = UIColor(hexString: "#E70000")
           if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
-            lblOrderDate.text = "Cancelled Date : \(isoDate)"
+              lblOrderDate.text = "\("Cancelled Date :".localiz()) \(isoDate)"
           } else {
-            lblOrderDate.text = "Cancelled Date : -"
+              lblOrderDate.text = "Cancelled Date :".localiz()
           }
           
         default:
           return
         }
       } else if paymentStatus == "2" {
-        lblStatus.text = "Cancelled"
+        lblStatus.text = "Cancelled".localiz()
         lblStatus.textColor = UIColor(hexString: "#E70000")
         viewExchange.backgroundColor = UIColor(hexString: "#F4DDDD")
         lblOrderDate.textColor = UIColor(hexString: "#E70000")
         if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
-          lblOrderDate.text = "Cancelled Date : \(isoDate)"
+            lblOrderDate.text = "\("Cancelled Date :".localiz()) \(isoDate)"
         } else {
-          lblOrderDate.text = "Cancelled Date : -"
+          lblOrderDate.text = "Cancelled Date :".localiz()
         }
       }
     }
@@ -215,85 +214,85 @@ class MyOrderTableCell: UITableViewCell {
     viewReturn.isHidden = true
     
     if isReturnAllowed {
-      lblStatus.text = "Return Req."
+      lblStatus.text = "Return Req.".localiz()
       lblStatus.textColor = UIColor(hexString: "#FF5F1B")
       viewReturn.isHidden = false
-      lblReturn.text = "Return Request"
+      lblReturn.text = "Return Request".localiz()
       lblReturnDate.text = data.variationDetails?.createdAt?.formattedOrderDate() ?? ""
       if let isoDate = isoStringAddingDays(data.updatedAt, days: 6) {
-        lblOrderDate.text = "Pickup Date : \(isoDate)"
+          lblOrderDate.text = "\("Pickup Date :".localiz()) \(isoDate)"
       } else {
-        lblOrderDate.text = "Pickup Date : -"
+          lblOrderDate.text = "Pickup Date :".localiz()
       }
       
       viewExchange.backgroundColor = UIColor(hexString: "#FF5F1B").withAlphaComponent(0.1)
       lblOrderDate.textColor = UIColor(hexString: "#FF5F1B")
     } else if isExchangeAllowed {
-      lblStatus.text = "Exchange Req."
+      lblStatus.text = "Exchange Req.".localiz()
       lblStatus.textColor = UIColor(hexString: "#FF5F1B")
       viewReturn.isHidden = false
-      lblReturn.text = "Exchange Request"
+      lblReturn.text = "Exchange Request".localiz()
       lblReturnDate.text = data.variationDetails?.createdAt?.formattedOrderDate() ?? ""
       if let isoDate = isoStringAddingDays(data.updatedAt, days: 6) {
-        lblOrderDate.text = "Pickup Date : \(isoDate)"
+          lblOrderDate.text = "\("Pickup Date :".localiz()) \(isoDate)"
       } else {
-        lblOrderDate.text = "Pickup Date : -"
+          lblOrderDate.text = "Pickup Date :".localiz()
       }
       viewExchange.backgroundColor = UIColor(hexString: "#FF5F1B").withAlphaComponent(0.1)
       lblOrderDate.textColor = UIColor(hexString: "#FF5F1B")
     }
       if data.returnType == "1" {
-          lblStatus.text = "Return Req."
+          lblStatus.text = "Return Req.".localiz()
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
           if data.rEApprove == "1" {
               if data.deliveryStatus == "3"{
-                  lblStatus.text = "Returned"
+                  lblStatus.text = "Returned".localiz()
                   lblStatus.textColor = UIColor(hexString: "#16B364")
                   viewExchange.backgroundColor = UIColor(hexString: "#16B364").withAlphaComponent(0.1)
                   lblOrderDate.textColor = UIColor(hexString: "#16B364")
                   if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
-                      lblOrderDate.text = "Returned On : \(isoDate)"
+                      lblOrderDate.text = "\("Returned On :".localiz()) \(isoDate)"
                   } else {
-                      lblOrderDate.text = "Returned On : -"
+                      lblOrderDate.text = "Returned On :".localiz()
                   }
               }
           } else if data.rEApprove == "2" {
-              lblStatus.text = "Delivered"
+              lblStatus.text = "Delivered".localiz()
               lblStatus.textColor = UIColor(hexString: "#16B364")
               viewExchange.backgroundColor = UIColor(hexString: "#16B364").withAlphaComponent(0.1)
               lblOrderDate.textColor = UIColor(hexString: "#16B364")
               if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
-                lblOrderDate.text = "Delivered On : \(isoDate)"
+                  lblOrderDate.text = "\("Delivered On :".localiz()) \(isoDate)"
               } else {
-                lblOrderDate.text = "Delivered On : -"
+                lblOrderDate.text = "Delivered On :".localiz()
               }
           }
       } else if data.returnType == "2" {
-          lblStatus.text = "Exchange Req."
-          lblReturn.text = "Exchange Request"
+          lblStatus.text = "Exchange Req.".localiz()
+          lblReturn.text = "Exchange Request".localiz()
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
           if data.rEApprove == "1" {
               if data.deliveryStatus == "3"{
-                  lblStatus.text = "Exchange Req."
-                  lblReturn.text = "Exchange Request"
+                  lblStatus.text = "Exchange Req.".localiz()
+                  lblReturn.text = "Exchange Request".localiz()
                   lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                   viewExchange.backgroundColor = UIColor(hexString: "#FF5F1B").withAlphaComponent(0.1)
                   lblOrderDate.textColor = UIColor(hexString: "#FF5F1B")
                   if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
-                      lblOrderDate.text = "Delivered On : \(isoDate)"
+                      lblOrderDate.text = "\("Delivered On :".localiz()) \(isoDate)"
                   } else {
-                      lblOrderDate.text = "Delivered On : -"
+                      lblOrderDate.text = "Delivered On :".localiz()
                   }
               }
           } else if data.rEApprove == "2" {
-                  lblStatus.text = "Delivered"
+              lblStatus.text = "Delivered".localiz()
                   lblStatus.textColor = UIColor(hexString: "#16B364")
                   viewExchange.backgroundColor = UIColor(hexString: "#16B364").withAlphaComponent(0.1)
                   lblOrderDate.textColor = UIColor(hexString: "#16B364")
               if let isoDate = isoStringAddingDays(data.updatedAt, days: 0) {
-                lblOrderDate.text = "Delivered On : \(isoDate)"
+                  lblOrderDate.text = "\("Delivered On :".localiz()) \(isoDate)"
               } else {
-                lblOrderDate.text = "Delivered On : -"
+                lblOrderDate.text = "Delivered On :".localiz()
               }
           }
       }

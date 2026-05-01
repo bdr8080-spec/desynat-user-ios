@@ -36,7 +36,7 @@ class AddMoneyViewController: UIViewController {
     
     @IBAction func continueDidTapped(_ sender: Any) {
         guard let finalAmount = getFinalAmount(), finalAmount > 0 else {
-            showAlert(msg: "Please enter or select a valid amount")
+            showAlert(msg: "Please enter or select a valid amount".localiz())
             return
         }
         

@@ -58,7 +58,7 @@ class AffilaiteSupportChatViewController: UIViewController {
     
     @IBAction func sendMessageDidTapped(_ sender: Any) {
         guard let txt = self.messageTF.text?.trimmingCharacters(in: .whitespacesAndNewlines), !txt.isEmpty else {
-            self.showAlert(msg: "Please Enter Text to Send Message")
+            self.showAlert(msg: "Please Enter Text to Send Message".localiz())
             return
         }
         self.messageTF.text = nil
@@ -133,13 +133,13 @@ class AffilaiteSupportChatViewController: UIViewController {
         let hasChats = !chatList.isEmpty
         chatDetailsTableView.isHidden = !hasChats
     }
-
+    
 }
 
 // MARK: - TABLE VIEW METHODS
 extension AffilaiteSupportChatViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return chatList.count
+        return chatList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

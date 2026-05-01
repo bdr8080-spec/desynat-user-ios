@@ -66,13 +66,13 @@ class ChangeMobileViewController: UIViewController {
     
     func initialSetup() {
         if comingToUpdateMobile {
-            titleLabel.text = "Enter New Mobile Number"
-            descriptionLabel.text = "Great! now enter the mobile number that you\nwant to continue with"
+            titleLabel.text = "Enter New Mobile Number".localiz()
+            descriptionLabel.text = "Great! now enter the mobile number that you\nwant to continue with".localiz()
             emailView.isHidden = true
             mobileView.isHidden = false
         } else {
-            titleLabel.text = "Enter New Email "
-            descriptionLabel.text = "Great! now enter the email address that you\nwant to continue with"
+            titleLabel.text = "Enter New Email".localiz()
+            descriptionLabel.text = "Great! now enter the email address that you\nwant to continue with".localiz()
             emailView.isHidden = false
             mobileView.isHidden = true
         }

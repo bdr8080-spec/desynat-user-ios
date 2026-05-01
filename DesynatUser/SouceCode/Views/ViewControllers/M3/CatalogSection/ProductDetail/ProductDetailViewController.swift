@@ -97,8 +97,8 @@ class ProductDetailViewController: UIViewController {
     private var selectedColourIndex = 0
     private var selectedSizeIndex = 0
     private var checkDelivery: [CheckDeliveryModel] = [CheckDeliveryModel(image: "calender", title: "Get it by 24/12/2024"),
-                                                       CheckDeliveryModel(image: "cashOnDelivery", title: "Cash on Delivery Available"),
-                                                       CheckDeliveryModel(image: "returnExchamge", title: "7 Days Return & 5 days Exchange")]
+                                                       CheckDeliveryModel(image: "cashOnDelivery", title: "Cash on Delivery Available".localiz()),
+                                                       CheckDeliveryModel(image: "returnExchamge", title: "7 Days Return & 5 days Exchange".localiz())]
     var quantity = 0
     var uniqueColors: [Color] = []
     var filteredVariants: [ProductVariant] = []
@@ -162,7 +162,7 @@ class ProductDetailViewController: UIViewController {
             quantity = 1
             addProductToCart(forIncrement: true)
             bagCount = bagCount + 1
-            totalItemsInBagLabel.text = "(\(bagCount) Items) View My Bag"
+            totalItemsInBagLabel.text = "(\(bagCount) \("Items) View My Bag".localiz())"
         }
     }
     
@@ -177,7 +177,7 @@ class ProductDetailViewController: UIViewController {
             incrementDecrementView.isHidden = true
             bagItemCountView.isHidden = true
             bagCount = bagCount - 1
-            totalItemsInBagLabel.text = "(\(bagCount) Items) View My Bag"
+            totalItemsInBagLabel.text = "(\(bagCount) \("Items) View My Bag".localiz())"
         }
     }
     
@@ -206,7 +206,7 @@ class ProductDetailViewController: UIViewController {
                         }
                     }
                 } else {
-                    showAlert(msg: "Failed to add item to cart. Please try again.")
+                    showAlert(msg: "Failed to add item to cart. Please try again.".localiz())
                 }
             }
         }
@@ -231,10 +231,10 @@ class ProductDetailViewController: UIViewController {
                     self.productDetails?.wishlist = newStatus
                     let wishlist = productDetails?.wishlist ?? 1
                     if wishlist == 1 {
-                        CommonUtils.showToast(message: "Product added to wishlist")
+                        CommonUtils.showToast(message: "Product added to wishlist".localiz())
                         wishlistButtonOutlet.setImage(UIImage(systemName: "heart.fill"), for: .normal)
                     } else {
-                        CommonUtils.showToast(message: "Product removed from wishlist")
+                        CommonUtils.showToast(message: "Product removed from wishlist".localiz())
                         wishlistButtonOutlet.setImage(UIImage(systemName: "heart"), for: .normal)
                     }
                 } else {
@@ -280,7 +280,7 @@ class ProductDetailViewController: UIViewController {
                 self.incrementDecrementView.isHidden = false
                 self.itemCountLabel.text = "\(self.quantity)"
             } else {
-                showAlert(msg: "Failed to add item to cart. Please try again.")
+                showAlert(msg: "Failed to add item to cart. Please try again.".localiz())
             }
         }
     }
@@ -366,7 +366,7 @@ class ProductDetailViewController: UIViewController {
         //    checkAndUpdateCartStatus()
         checkAndPreselectCartVariant()
         bagCount = productDetails?.addtocartTotalProduct ?? 0
-        totalItemsInBagLabel.text = "(\(productDetails?.addtocartTotalProduct ?? 0) Items) View My Bag"
+        totalItemsInBagLabel.text = "(\(productDetails?.addtocartTotalProduct ?? 0) \("Items) View My Bag".localiz())"
     }
     
     private func checkAndUpdateCartStatus() {
@@ -781,25 +781,25 @@ extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegat
                 
             case 1:
                 cell.titleLabel.text = (cod == "1") ?
-                "Cash on Delivery Available" :
-                "Cash on Delivery Not Available"
+                "Cash on Delivery Available".localiz() :
+                "Cash on Delivery Not Available".localiz()
                 
             case 2:
                 
                 var title = ""
                 if returnable == "1" {
                     let days = productDetails?.returnDays ?? "0"
-                    title += "\(days) Days Return"
+                    title += "\(days) \("Days Return".localiz())"
                 } else {
-                    title += "Non Returnable"
+                    title += "Non Returnable".localiz()
                 }
                 
                 title += " & "
                 if exchangable == "1" {
                     let days = productDetails?.exchangableDays ?? "0"
-                    title += "\(days) Days Exchange"
+                    title += "\(days) \("Days Exchange".localiz())"
                 } else {
-                    title += "Non Exchangeable"
+                    title += "Non Exchangeable".localiz()
                 }
                 cell.titleLabel.text = title
             default:

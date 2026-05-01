@@ -15,16 +15,7 @@ class MyOrderVM: NSObject {
         self.hostVC = hostVC
     }
 
-//    func getCurrentFilter() -> OrderFilterType {
-//        return hostVC.isCustomOrderSeleced
-//            ? hostVC.customOrderFilter
-//            : hostVC.normalOrderFilter
-//    }
-
-//    func getOrders(type: Int) {
     func getOrders() {
-//        let filter = getCurrentFilter()
-
         var params: [String: Any] = [
 //            "order_type": type,
             "filter": hostVC.normalOrderFilter.rawValue   // FIX HERE

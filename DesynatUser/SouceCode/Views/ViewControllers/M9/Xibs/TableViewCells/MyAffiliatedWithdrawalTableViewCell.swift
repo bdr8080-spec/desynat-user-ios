@@ -43,22 +43,20 @@ class MyAffiliatedWithdrawalTableViewCell: UITableViewCell {
         rejectedReasonView.isHidden = true
         switch requestType {
         case .upcoming:
-            statusLabel.text = "Pending"
+            statusLabel.text = "Pending".localiz()
             statusLabel.textColor = UIColor(hexString: "#FE7D49")
         case .completed:
             transactionView.isHidden = false
             creditOnView.isHidden = false
-//            statusLabel.text = " Credited"
-//            statusLabel.textColor = UIColor(hexString: "#17854C")
             let adminVerify = data?.adminVerify ?? 1
             
             if adminVerify == 1 {
-                statusLabel.text = "Credited"
+                statusLabel.text = "Credited".localiz()
                 statusLabel.textColor = UIColor(hexString: "#17854C")
             } else {
                 rejectedReasonView.isHidden = false
-                statusLabel.text = "Rejected"
-                statusLabel.textColor = .red//UIColor(hexString: "#17854C")
+                statusLabel.text = "Rejected".localiz()
+                statusLabel.textColor = .red
             }
         }
     }

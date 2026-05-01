@@ -29,6 +29,7 @@ enum NetworkEndPoint: String {
     case resendOtp                          = "api/resend_otp"
     case country                            = "api/country"
     case allUserCountry                     = "api/all_country"
+    case allUserCurrency                    = "api/all_country_unique_currency"
     case logout                             = "api/user/logout"
     
     //M2 API

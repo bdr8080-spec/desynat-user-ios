@@ -93,13 +93,13 @@ class MyBagViewController: UIViewController {
             self?.selectedPromoCode = selectedPromo
             self?.totalAmountLabel.text = CommonUtils.formatPrice(selectedPromo.finalAmount)
             self?.promocodeLabel.text = selectedPromo.discountCode
-            self?.couponDiscountTitleLabel.text = "Coupon Discount (\(selectedPromo.discountCode ?? ""))"
+            self?.couponDiscountTitleLabel.text = "\("Coupon Discount".localiz()) (\(selectedPromo.discountCode ?? ""))"
             self?.couponDidcountLabel.text = CommonUtils.formatPrice(selectedPromo.applyDiscountValue)//"\(selectedPromo.applyDiscountValue ?? 0)"
             self?.actualPriceLAbel.isHidden = false
             self?.isPromoCodeApplied = true
             self?.finalPriceLabel.text = CommonUtils.formatPrice(selectedPromo.finalAmount)
             let savingAmount = (self?.totalMRPDiscountValue ?? 0) + (selectedPromo.applyDiscountValue ?? 0)
-            self?.saveAmountLAbel.text = "You will save \(CommonUtils.formatPrice(savingAmount)) on this"
+            self?.saveAmountLAbel.text = "\("You will save".localiz()) \(CommonUtils.formatPrice(savingAmount)) \("on this".localiz())"
         }
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -114,8 +114,8 @@ class MyBagViewController: UIViewController {
         self.removeButtonOutlet.isHidden = true
         self.applyPromocodeButtonOutlet.isHidden = false
         let savingAmount = (self.totalMRPDiscountValue)
-        self.saveAmountLAbel.text = "You will save \(CommonUtils.formatPrice(savingAmount)) on this"
-        promocodeLabel.text = "Apply PromoCode"
+        self.saveAmountLAbel.text = "\("You will save".localiz()) \(CommonUtils.formatPrice(savingAmount)) \("on this".localiz())"
+        promocodeLabel.text = "Apply PromoCode".localiz()
         let normalOrderCount = viewModel.normalOrders.count
         if normalOrderCount == 0 {
             actualPriceLAbel.isHidden = true
@@ -187,7 +187,7 @@ class MyBagViewController: UIViewController {
             finalPriceLabel.text = CommonUtils.formatPrice(data.totalAmount)
             totalAmountLabel.text = CommonUtils.formatPrice(data.totalAmount)
             let savingAmount = (data.discountOnMrp ?? 0)// - (data.totalAmount ?? 0)
-            saveAmountLAbel.text = "You will save \(CommonUtils.formatPrice(savingAmount)) on this"
+            saveAmountLAbel.text = "\("You will save".localiz()) \(CommonUtils.formatPrice(savingAmount)) \("on this".localiz())"
         }
         let selectedAddress = data.userAddress
         deliveryId = selectedAddress?.id ?? 0
@@ -270,19 +270,6 @@ class MyBagViewController: UIViewController {
         }
     }
     
-//    func formatPrice(_ amount: Double?, currency: String = "KD") -> String {
-//        guard let amount = amount else { return "0 \(currency)" }
-//        
-//        let roundedAmount = round(amount * 100) / 100   // Round to 2 decimal places
-//        if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
-//            // If whole number, show without decimal
-//            return "\(Int(roundedAmount)) \(currency)"
-//        } else {
-//            // Show up to 2 decimal places
-//            return String(format: "%.2f", roundedAmount) + " \(currency)"
-//        }
-//    }
-    
     func formattedAddress(from address: SavedAddressList?) -> String {
         guard let address else { return "" }
         
@@ -314,7 +301,7 @@ class MyBagViewController: UIViewController {
     
     private func guestLoginUIHandle() {
         noDataFoundLabel.isHidden = false
-        noDataFoundLabel.text = "Please login to view your bag"
+        noDataFoundLabel.text = "Please login to view your bag".localiz()
         bagDetailsView.isHidden = true
         totoalAmountPriceView.isHidden = true
     }

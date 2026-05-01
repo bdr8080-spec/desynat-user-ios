@@ -166,67 +166,18 @@ extension PlaceOrderPaymentMethodsTableViewCell {
 
 extension PlaceOrderPaymentMethodsTableViewCell{
   
-//  func setupApplePay() {
-//    paymentButtonView.addSubview(applePayButton)
-//    applePayButton.translatesAutoresizingMaskIntoConstraints = false
-//    NSLayoutConstraint.activate([
-//      applePayButton.leadingAnchor.constraint(equalTo: paymentButtonView.leadingAnchor),
-//      applePayButton.trailingAnchor.constraint(equalTo: paymentButtonView.trailingAnchor),
-//      applePayButton.topAnchor.constraint(equalTo: paymentButtonView.topAnchor),
-//      applePayButton.bottomAnchor.constraint(equalTo: paymentButtonView.bottomAnchor),
-//      applePayButton.heightAnchor.constraint(equalToConstant: 50)
-//    ])
-//  }
-  
-  func setupApplePayButton() {
-      paymentButtonView.subviews.forEach { $0.removeFromSuperview() }
-      paymentButtonView.addSubview(applePayButton)
-      applePayButton.translatesAutoresizingMaskIntoConstraints = false
-      NSLayoutConstraint.activate([
-          applePayButton.leadingAnchor.constraint(equalTo: paymentButtonView.leadingAnchor),
-          applePayButton.trailingAnchor.constraint(equalTo: paymentButtonView.trailingAnchor),
-          applePayButton.topAnchor.constraint(equalTo: paymentButtonView.topAnchor),
-          applePayButton.bottomAnchor.constraint(equalTo: paymentButtonView.bottomAnchor),
-          applePayButton.heightAnchor.constraint(equalToConstant: 50)
-      ])
-  }
-  
-//  func startApplePaySession() {
-//    let invoiceValue = Decimal(totalAmountToPay)
-//    let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
-//    request.displayCurrencyIso = .uAE_AED
-//    request.customerName = "Customer"
-//    request.userDefinedField = "ORDER-45794947574tr"
-//    MFPaymentRequest.shared.initiateSession(apiLanguage: .english) { [weak self] response in
-//      guard let self = self else { return }
-//      switch response {
-//      case .success(let session):
-//        print("Session initiated for Apple Pay")
-//        self.applePayButton.load(session, request, .english,
-//                                 startLoading: {
-//          print("Starting Apple Pay...")
-//        },
-//                                 completion: { response, invoiceId in
-//          switch response {
-//          case .success(let executeResponse):
-//            print("Apple Pay success: Invoice \(invoiceId ?? "N/A")")
-//            let transactionID = executeResponse.invoiceTransactions?.first?.transactionID ?? ""
-//            let gateway = executeResponse.invoiceTransactions?.first?.paymentGateway ?? "ApplePay"
-//            self.delegate?.paymentTransactionDetails = (transactionID, invoiceId ?? "", gateway)
-//            self.delegate?.paymentCompleted = true
-//              self.delegate?.handlePaymentCompletion(transactionID: transactionID, invoiceId: invoiceId ?? "", gateway: gateway)
-//                                                      
-//          case .failure(let error):
-//            print("Apple Pay failed: \(error.errorDescription)")
-//            self.delegate?.didReceivePaymentError("Apple Pay failed: \(error.errorDescription)")
-//          }
-//        })
-//      case .failure(let error):
-//        print("Failed to initiate session: \(error.localizedDescription)")
-//        self.delegate?.didReceivePaymentError("Failed to start Apple Pay session")
-//      }
-//    }
-//  }
+    func setupApplePayButton() {
+        paymentButtonView.subviews.forEach { $0.removeFromSuperview() }
+        paymentButtonView.addSubview(applePayButton)
+        applePayButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            applePayButton.leadingAnchor.constraint(equalTo: paymentButtonView.leadingAnchor),
+            applePayButton.trailingAnchor.constraint(equalTo: paymentButtonView.trailingAnchor),
+            applePayButton.topAnchor.constraint(equalTo: paymentButtonView.topAnchor),
+            applePayButton.bottomAnchor.constraint(equalTo: paymentButtonView.bottomAnchor),
+            applePayButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
   
   func startApplePayOnButtonTap(
       invoiceValue: Decimal,
@@ -291,7 +242,6 @@ extension PlaceOrderPaymentMethodsTableViewCell{
                               completion: @escaping (MFPaymentStatusResponse?, String?, Error?) -> Void) {
     let request = MFExecutePaymentRequest(invoiceValue: invoiceValue, paymentMethod: 8)
     request.customerReference = orderId
-    print("supplierId===>\(supplierId)")
     let supplier = MFSupplier(supplierCode: 1913, invoiceShare: invoiceValue)
     request.suppliers = [supplier]
     request.displayCurrencyIso = .uAE_AED

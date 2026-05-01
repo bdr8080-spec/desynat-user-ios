@@ -213,9 +213,9 @@ class SearchProductListViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.storesCollectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
                     if newStatus == 1 {
-                        CommonUtils.showToast(message: "Product added to wishlist")
+                        CommonUtils.showToast(message: "Product added to wishlist".localiz())
                     } else {
-                        CommonUtils.showToast(message: "Product removed from wishlist")
+                        CommonUtils.showToast(message: "Product removed from wishlist".localiz())
                     }
                 }
             } else {

@@ -27,22 +27,22 @@ class RateProductOrderViewModel {
     func validateInputs() -> Bool {
         
         if hostVC?.productRatingView.rating == 0 {
-            hostVC?.showAlert(msg: "Please rate the product.")
+            hostVC?.showAlert(msg: "Please rate the product.".localiz())
             return false
         }
         
         if hostVC?.productReviewTF.text?.trimmed().isEmpty == true {
-            hostVC?.showAlert(msg: "Please write a product review.")
+            hostVC?.showAlert(msg: "Please write a product review.".localiz())
             return false
         }
         
         if hostVC?.storeRatingView.rating == 0 {
-            hostVC?.showAlert(msg: "Please rate the store.")
+            hostVC?.showAlert(msg: "Please rate the store.".localiz())
             return false
         }
         
         if hostVC?.storeReviewTF.text?.trimmed().isEmpty == true {
-            hostVC?.showAlert(msg: "Please write a store review.")
+            hostVC?.showAlert(msg: "Please write a store review.".localiz())
             return false
         }
         

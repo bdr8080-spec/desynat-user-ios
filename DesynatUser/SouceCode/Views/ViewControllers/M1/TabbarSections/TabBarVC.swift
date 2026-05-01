@@ -45,8 +45,15 @@ class TabBarVC: UIViewController {
         let unselectedImages = ["homeUnselected", "catalogUnselected", "show", "bagUnselected", "profileUnselected"]
         let selectedImages = ["homeSelected", "catalogSelected", "show", "bagSelected", "profileSelected"]
         
+        let unselectedArImages = ["homeUnselectedAr", "catalogUnselectedAr", "show", "bagUnselectedAr", "profileUnselectedAr"]
+        let selectedArImages = ["homeSelectedAr", "catalogSelectedAr", "show", "bagSelectedAr", "profileSelectedAr"]
+        
+        let isArabic = AppLanguageManager.shared.currentLanguage == .ar
+        let currentUnselected = isArabic ? unselectedArImages : unselectedImages
+        let currentSelected = isArabic ? selectedArImages : selectedImages
+        
         for button in tabButtons {
-            let imageName = (button.tag == selectedTag) ? selectedImages[button.tag] : unselectedImages[button.tag]
+            let imageName = (button.tag == selectedTag) ? currentSelected[button.tag] : currentUnselected[button.tag]
             button.setImage(UIImage(named: imageName), for: .normal)
         }
     }

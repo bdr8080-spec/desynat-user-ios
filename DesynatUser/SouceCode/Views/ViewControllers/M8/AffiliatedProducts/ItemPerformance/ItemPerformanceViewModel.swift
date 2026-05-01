@@ -61,7 +61,7 @@ class ItemPerformanceViewModel {
         WebService.sharedInstance.deleteProductsDetailsService(param: param) { data in
             DispatchQueue.main.async {
                 self.hostVC.onProductIsRemoved?()
-                CommonUtils.showToast(message: "Product is removed successfully")
+                CommonUtils.showToast(message: "Product is removed successfully".localiz())
                 self.hostVC.navigationController?.popViewController(animated: true)
             }
         }
@@ -82,8 +82,8 @@ class ItemPerformanceViewModel {
         CommonUtils.setStrikethrough(label: hostVC.actualPriceLabel, text: CommonUtils.formatPriceStringInput(data.product?.productVariants?.first?.actualPrice))
         
         CommonUtils.updateDiscountPercentageLabel(hostVC.discountPercenteLabel, actualAmountLabel: hostVC.actualPriceLabel, discountType: data.product?.productVariants?.first?.discountType,discountValue: data.product?.productVariants?.first?.discountValue)
-        hostVC.commissionPercentageLabel.text = "\(data.product?.affiliatedCommission ?? "0")% Commission"
-        hostVC.linkLabel.text = "Link - off \(data.affiliateProductLink?.link ?? "")"
+        hostVC.commissionPercentageLabel.text = "\(data.product?.affiliatedCommission ?? "0")% \("Commission".localiz())"
+        hostVC.linkLabel.text = "\("Link - off".localiz()) \(data.affiliateProductLink?.link ?? "")"
         hostVC.totalCountLabel.text = data.totalClicks?.description
         hostVC.totalOrdersLabel.text = data.totalOrders?.description
         hostVC.conversionRateLabel.text = "\(data.conversionRate ?? 0) %"

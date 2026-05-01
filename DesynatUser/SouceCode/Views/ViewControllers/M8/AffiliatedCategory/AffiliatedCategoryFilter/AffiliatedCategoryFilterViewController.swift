@@ -244,7 +244,7 @@ extension AffiliatedCategoryFilterViewController: UITableViewDelegate, UITableVi
                     
                     let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
                     
-                    let title = isColorExpanded ? "Show Less" : "Show More"
+                    let title = isColorExpanded ? "Show Less".localiz() : "Show More".localiz()
                     
                     let showMoreOption = ProductFilterOption(
                         title: title,

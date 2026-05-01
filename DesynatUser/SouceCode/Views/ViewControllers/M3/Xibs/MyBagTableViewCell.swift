@@ -69,9 +69,9 @@ class MyBagTableViewCell: UITableViewCell {
         setColorBox(size: data.productVariants?.size?.name ?? "M", label: detailsLabel, hexColor: data.productVariants?.color?.hexCode ?? "#98ADFF", quantity: "\(data.quantity)")
         let returnabaiavle = data.product?.productReturn ?? "1"
         if returnabaiavle == "1" {
-            returnavaiableLabel.text = "\(data.product?.returnDays ?? "1") days return available"
+            returnavaiableLabel.text = "\(data.product?.returnDays ?? "1") \("days return available".localiz())"
         } else {
-            returnavaiableLabel.text = "Non returnable"
+            returnavaiableLabel.text = "Non returnable".localiz()
         }
         CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: actaulPriceLabel,
                                                   discountType: data.productVariants?.discountType,

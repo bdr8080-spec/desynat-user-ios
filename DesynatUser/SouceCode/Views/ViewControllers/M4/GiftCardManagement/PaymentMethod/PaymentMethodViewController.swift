@@ -77,7 +77,7 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
     
     @IBAction func proceedDidTapped(_ sender: Any) {
         guard selectedPaymentMethodID != nil || isCardIsSlecteed else {
-            showAlertAtPayment(msg: "Please select a payment option")
+            showAlertAtPayment(msg: "Please select a payment option".localiz())
             return
         }
         
@@ -89,7 +89,7 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
         // Saved Card flow
         if isCardIsSlecteed {
             guard paymentCompleted, let details = paymentTransactionDetails else {
-                showAlertAtPayment(msg: "Please complete card payment")
+                showAlertAtPayment(msg: "Please complete card payment".localiz())
                 return
             }
             viewModel.payNowRequest(transactionId: details.transactionID, paymentId: 1)
@@ -103,7 +103,7 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
         if selectedMethod.paymentMethodTitle == "In -App Wallet" {
             let walletBalance = viewModel.walletAmount ?? 0
             if walletBalance < payAmount {
-                showToast(msg: "Insufficient wallet balance")
+                showToast(msg: "Insufficient wallet balance".localiz())
                 return
             }
             viewModel.payNowRequest(transactionId: "WALLET_TXN", paymentId: 2)
@@ -133,7 +133,7 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
         if paymentCompleted, let details = paymentTransactionDetails {
             viewModel.payNowRequest(transactionId: details.transactionID, paymentId: 1)
         } else {
-            showAlertAtPayment(msg: "Payment not completed")
+            showAlertAtPayment(msg: "Payment not completed".localiz())
         }
     }
     
@@ -154,9 +154,9 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
     func initaislUISetup() {
         switch comingFrom {
         case .fromCardDetails:
-            buttontitleLabel.text = "Proceed"
+            buttontitleLabel.text = "Proceed".localiz()
         case .fromWalletMeonyAdd:
-            buttontitleLabel.text = "Confirm & Add Money"
+            buttontitleLabel.text = "Confirm & Add Money".localiz()
         }
     }
     
@@ -168,7 +168,7 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
         }
         
         let alert = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: "OK".localiz(), style: .default))
         
         currentAlert = alert
         present(alert, animated: true)
@@ -199,7 +199,7 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
                 //        viewModel.payForAddingCard(transactionId: transactionID)
             case .failure(let error):
                 print("Payment Error: \(error.errorDescription)")
-                self.showAlertAtPayment(msg: "Payment Failed: \(error.errorDescription)")
+                self.showAlertAtPayment(msg: "\("Payment Failed:".localiz()) \(error.errorDescription)")
             }
         }
     }
@@ -359,7 +359,7 @@ extension PaymentMethodViewController {
                 // Automatically complete backend registration
                 self.viewModel.payNowRequest(transactionId: transactionID, paymentId: 1)
             case .failure(_):
-                showAlertAtPayment(msg: "Payment not completed")
+                showAlertAtPayment(msg: "Payment not completed".localiz())
             }
         }
     }
@@ -385,7 +385,7 @@ extension PaymentMethodViewController {
                 self.viewModel.payNowRequest(transactionId: transactionID, paymentId: 1)
                 //              self.presentSuccessScreen()
             case .failure(_):
-                showAlertAtPayment(msg: "Payment not completed")
+                showAlertAtPayment(msg: "Payment not completed".localiz())
             }
         }
     }
@@ -396,7 +396,7 @@ extension PaymentMethodViewController {
         // Find the Apple Pay cell (row 1)
         guard let indexPath = IndexPath(row: 1, section: 0) as? IndexPath,
               let cell = paymentMethodsTableView.cellForRow(at: indexPath) as? PaymentMethodsTableViewCell else {
-            showToast(msg: "Apple Pay not available")
+            showToast(msg: "Apple Pay not available".localiz())
             return
         }
         
@@ -449,7 +449,7 @@ extension PaymentMethodViewController {
                     })
                     
                 case .failure(let error):
-                    self.showToast(msg: "Unable to start Apple Pay: \(error.localizedDescription)")
+                    self.showToast(msg: "\("Unable to start Apple Pay:".localiz()) \(error.localizedDescription)")
                     cell.viewApple.isHidden = true // Hide button on failure
                 }
             }

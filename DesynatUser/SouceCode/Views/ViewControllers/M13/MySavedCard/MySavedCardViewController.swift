@@ -64,7 +64,7 @@ extension MySavedCardViewController: HandleCardInteraction {
     func deleteDidTapped(indexPath: IndexPath) {
         let card = viewModel.savedCardsDetails?[indexPath.row]
         let id = card?.id ?? 0
-        self.showConfirmationAlert(msg: "Are you sure you want to delete this card?") { [weak self] in
+        self.showConfirmationAlert(msg: "Are you sure you want to delete this card?".localiz()) { [weak self] in
             guard let self = self else { return }
             self.viewModel.deleteCardAPI(cardId: id) { success in
                 if success {
@@ -74,7 +74,7 @@ extension MySavedCardViewController: HandleCardInteraction {
                     self.savedTableView.endUpdates()
                     self.noDataFoundLabel.isHidden = !(self.viewModel.savedCardsDetails?.isEmpty ?? true)
                 } else {
-                    self.showAlert(msg: "Failed to delete address. Try again.")
+                    self.showAlert(msg: "Failed to delete address. Try again.".localiz())
                 }
             }
         }
@@ -93,7 +93,7 @@ extension MySavedCardViewController: HandleCardInteraction {
                 onCardSelected?(selectedCard)
                 self.savedTableView.reloadData()
             } else {
-                self.showAlert(msg: "Failed to set default card")
+                self.showAlert(msg: "Failed to set default card".localiz())
             }
         }
     }

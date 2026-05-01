@@ -89,7 +89,7 @@ extension SavedAddressViewController: SavedAddressCellDelegate {
                 onAddressSelected?(selectedAddress)
                 self.savedAddressTableView.reloadData()
             } else {
-                self.showAlert(msg: "Failed to set default address")
+                self.showAlert(msg: "Failed to set default address".localiz())
             }
         }
     }
@@ -106,7 +106,7 @@ extension SavedAddressViewController: SavedAddressCellDelegate {
     func didTapDelete(indexPath: IndexPath) {
         let address = viewModel.savedAddressList[indexPath.row]
         let id = address.id ?? 0
-        self.showConfirmationAlert(msg: "Are you sure you want to delete this address?") { [weak self] in
+        self.showConfirmationAlert(msg: "Are you sure you want to delete this address?".localiz()) { [weak self] in
             guard let self = self else { return }
             self.viewModel.deleteAddressAPI(addressID: id) { success in
                 if success {
@@ -116,7 +116,7 @@ extension SavedAddressViewController: SavedAddressCellDelegate {
                     self.savedAddressTableView.endUpdates()
                     self.noDataFoundLabel.isHidden = !self.viewModel.savedAddressList.isEmpty
                 } else {
-                    self.showAlert(msg: "Failed to delete address. Try again.")
+                    self.showAlert(msg: "Failed to delete address. Try again.".localiz())
                 }
             }
         }

@@ -115,7 +115,7 @@ class ChatDetailsViewController: UIViewController {
     
     @IBAction func sendMessageDidTapped(_ sender: Any) {
         guard let txt = self.messageTF.text?.trimmingCharacters(in: .whitespacesAndNewlines), !txt.isEmpty else {
-            self.showAlert(msg: "Please Enter Text to Send Message")
+            self.showAlert(msg: "Please Enter Text to Send Message".localiz())
             return
         }
         self.messageTF.text = nil
@@ -155,7 +155,7 @@ class ChatDetailsViewController: UIViewController {
             productDetailsView.isHidden = false
             productDetailsActionButtonStackView.isHidden = false
             requestIdLabel.isHidden = false
-            requestIdLabel.text = "Request Id #\(quotationData?.id ?? 0)"
+            requestIdLabel.text = "\("Request Id".localiz()) #\(quotationData?.id ?? 0)"
             totalQuantityLabel.text = quotationData?.quantity
             productTableView.reloadData()
             addressLabel.text = viewModel.buildFullAddress(from: quotationData?.deliveryDetails)

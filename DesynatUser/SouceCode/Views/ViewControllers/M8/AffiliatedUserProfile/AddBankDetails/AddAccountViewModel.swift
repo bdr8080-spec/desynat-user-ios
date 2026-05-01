@@ -53,8 +53,8 @@ class AddAccountViewModel {
     
     func populateData() {
         if hostVC.comingForEdit {
-            hostVC.titleLabel.text = "Edit Account Details"
-            hostVC.buttonTitleLabel.text = "Save Changes"
+            hostVC.titleLabel.text = "Edit Account Details".localiz()
+            hostVC.buttonTitleLabel.text = "Save Changes".localiz()
             hostVC.bankNameTextField.text = hostVC.bankDetail?.bankName
             hostVC.accountHolderTextField.text = hostVC.bankDetail?.accountHolderName
             hostVC.accountNumberTF.text = hostVC.bankDetail?.accountNo
@@ -75,7 +75,7 @@ class AddAccountViewModel {
             "swift": hostVC.swiftTextField.text ?? ""]
         WebService.sharedInstance.addAffiliatedBankDetailsService(param:param) { user in
             self.hostVC.changesAreDone?()
-            CommonUtils.showToast(message: "Account added successfully")
+            CommonUtils.showToast(message: "Account added successfully".localiz())
             self.hostVC.navigationController?.popViewController(animated: true)
         }
     }
@@ -91,7 +91,7 @@ class AddAccountViewModel {
             "swift": hostVC.swiftTextField.text ?? ""]
         WebService.sharedInstance.updateAffiliatedBankDetailsService(param:param) { user in
             self.hostVC.changesAreDone?()
-            CommonUtils.showToast(message: "Bank details updated successfully")
+            CommonUtils.showToast(message: "Bank details updated successfully".localiz())
             self.hostVC.navigationController?.popViewController(animated: true)
         }
     }

@@ -24,7 +24,7 @@ extension WebService {
                     kSharedUserDefaults.saveStringFor(Key: .accessToken, value: response.accessToken)
                     kSharedUserDefaults.saveStringFor(Key: .savedUserCurrency, value: String.getString(response.userCurrency?.currencyCode))
                     kSharedUserDefaults.saveStringFor(Key: .exchangeRateOfCurrency, value: String.getString(response.userCurrency?.exchangeRate))
-                    CommonUtils.showToast(message: "OTP sent succesfully")
+                    CommonUtils.showToast(message: "OTP sent succesfully".localiz())
                     completion(response)
                 }
             }
@@ -42,7 +42,7 @@ extension WebService {
                     Global.shared.user = response
                     kSharedUserDefaults.saveModelFor(key: .user, value: response)
                     kSharedUserDefaults.saveStringFor(Key: .accessToken, value: response.accessToken)
-                    CommonUtils.showToast(message: "OTP sent succesfully")
+                    CommonUtils.showToast(message: "OTP sent succesfully".localiz())
                     completion(response)
                 }
             }
@@ -57,7 +57,7 @@ extension WebService {
                 if let error {
                     UIApplication.shared.topViewController()?.showAlert(msg: error)
                 } else if let response {
-                    CommonUtils.showToast(message: "OTP resent succesfully")
+                    CommonUtils.showToast(message: "OTP resent succesfully".localiz())
                     completion(response)
                 }
             }
@@ -77,7 +77,7 @@ extension WebService {
                     kSharedUserDefaults.saveStringFor(Key: .accessToken, value: String.getString(response.accessToken))
                     kSharedUserDefaults.saveStringFor(Key: .savedUserCurrency, value: String.getString(response.userCurrency?.currencyCode))
                     kSharedUserDefaults.saveStringFor(Key: .exchangeRateOfCurrency, value: String.getString(response.userCurrency?.exchangeRate))
-                    CommonUtils.showToast(message: message ?? "Login Successfully")
+                    CommonUtils.showToast(message: message ?? "Login Successfully".localiz())
                     completion(response)
                 }
             }
@@ -97,7 +97,7 @@ extension WebService {
                     kSharedUserDefaults.saveStringFor(Key: .accessToken, value: String.getString(response.accessToken))
                     kSharedUserDefaults.saveStringFor(Key: .savedUserCurrency, value: String.getString(response.userCurrency?.currencyCode))
                     kSharedUserDefaults.saveStringFor(Key: .exchangeRateOfCurrency, value: String.getString(response.userCurrency?.exchangeRate))
-                    CommonUtils.showToast(message: "OTP sent succesfully")
+                    CommonUtils.showToast(message: "OTP sent succesfully".localiz())
                     completion(response)
                 }
             }
@@ -130,7 +130,7 @@ extension WebService {
                     UIApplication.shared.topViewController()?.showAlert(msg: error)
                 } else if let response {
                     DispatchQueue.main.async {
-                        CommonUtils.showToast(message: "OTP sent successfully")
+                        CommonUtils.showToast(message: "OTP sent successfully".localiz())
                     }
                     completion(response)
                 }
@@ -578,9 +578,7 @@ extension WebService {
     
     func editAddressAPi(param: [String: Any], completion:@escaping (_ user:EmptyModel)-> Void) {
         CommonUtils.showHud(show: true)
-        
         NetworkManager.shared.request(withAPI: .endpoint(.editAddress), requestMethod: .put,  requestParams: param ,requestModel:EmptyModel.self) { result, code in
-            
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
@@ -598,6 +596,22 @@ extension WebService {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.allUserCountry), requestMethod: .get,requestModel:[GetAllUserCountryModel].self) { result, code in
             
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getAllUsersCurrencyList(completion:@escaping (_ user:[GetAllUserCountryModel])-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI:.endpoint(.allUserCurrency), requestMethod: .get,requestModel:[GetAllUserCountryModel].self) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
@@ -1290,7 +1304,7 @@ extension WebService {
                 if let error {
                     UIApplication.shared.topViewController()?.showAlert(msg: error)
                 } else if let response {
-                    CommonUtils.showToast(message: "OTP resent succesfully")
+                    CommonUtils.showToast(message: "OTP resent succesfully".localiz())
                     completion(response)
                 }
             }
@@ -1305,7 +1319,6 @@ extension WebService {
                 if let error {
                     UIApplication.shared.topViewController()?.showAlert(msg: error)
                 } else if let response {
-                    //            CommonUtils.showToast(message: "OTP resent succesfully")
                     completion(response)
                 }
             }
@@ -1320,7 +1333,7 @@ extension WebService {
                 if let error {
                     UIApplication.shared.topViewController()?.showAlert(msg: error)
                 } else if let response {
-                    CommonUtils.showToast(message: "OTP resent succesfully")
+                    CommonUtils.showToast(message: "OTP resent succesfully".localiz())
                     completion(response)
                 }
             }
@@ -1336,7 +1349,7 @@ extension WebService {
                     UIApplication.shared.topViewController()?.showAlert(msg: error)
                 } else if let response {
                     DispatchQueue.main.async {
-                        CommonUtils.showToast(message: "OTP sent successfully")
+                        CommonUtils.showToast(message: "OTP sent successfully".localiz())
                     }
                     completion(response)
                 }

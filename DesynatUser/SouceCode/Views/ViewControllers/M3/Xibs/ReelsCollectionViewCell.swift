@@ -37,60 +37,6 @@ class ReelsCollectionViewCell: UICollectionViewCell {
         onPlayTapped?()
     }
     
-    //    func configData(data: GetMyReelsList?) {
-    //
-    //        // Reset state
-    //        mainImageView.image = nil
-    //        playButton.isHidden = true
-    //        currentVideoURL = nil
-    //
-    //        guard let fileURLString = data?.file else {
-    //            mainImageView.image = UIImage(named: "placeholder")
-    //            return
-    //        }
-    //
-    //        let isVideo = fileURLString.lowercased().contains(".mp4")
-    //        let fileURL = URL(string: fileURLString)
-    //
-    //        // ----- VIDEO CASE -----
-    //        if isVideo {
-    //
-    //            currentVideoURL = fileURL
-    //            playButton.isHidden = false  // Show play icon
-    //
-    //            // Show placeholder first
-    //            mainImageView.image = UIImage(named: "placeholder")
-    //
-    //            // Load THUMBNAIL
-    //            if let thumbString = data?.thumbnail,
-    //               let thumbURL = URL(string: thumbString) {
-    //
-    //                mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-    //                mainImageView.sd_setImage(
-    //                    with: thumbURL,
-    //                    placeholderImage: UIImage(named: "placeholder"),
-    //                    options: [.retryFailed, .scaleDownLargeImages]
-    //                )
-    //            }
-    //
-    //        }
-    //        else {
-    //            // ----- IMAGE CASE -----
-    //            playButton.isHidden = true
-    //
-    //            if let url = fileURL {
-    //                mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-    //                mainImageView.sd_setImage(
-    //                    with: url,
-    //                    placeholderImage: UIImage(named: "placeholder"),
-    //                    options: [.retryFailed, .scaleDownLargeImages]
-    //                )
-    //            }
-    //        }
-    //
-    //
-    //    }
-    
     func configData(data: GetMyReelsList?){
         let fileString = data?.file ?? ""
         let thumbnailString = data?.thumbnail ?? ""

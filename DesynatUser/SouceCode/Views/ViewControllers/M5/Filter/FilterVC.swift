@@ -75,7 +75,7 @@ extension FilterVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
         let option = filtersOptions[indexPath.row]
-        cell.titleLabel.text = option
+        cell.titleLabel.text = option.localiz()
         if selectedIndex == indexPath.row {
             cell.selectionImageView.image = UIImage(named: "radioSelected")
         } else {

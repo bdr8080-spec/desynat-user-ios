@@ -9,11 +9,11 @@ import UIKit
 import SDWebImage
 import AVFAudio
 import Speech
+import CoreLocation
 
 class HomeViewController: UIViewController {
     
     // MARK: - IBOutlet's
-    
     @IBOutlet weak var messageCountLabel: UILabel!
     @IBOutlet weak var messageCountView: CustomView!
     @IBOutlet weak var adminstoryButtonOutlet: UIButton!
@@ -104,6 +104,7 @@ class HomeViewController: UIViewController {
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
     private var isListening = false
+    private let locationManager = CLLocationManager()
     
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
@@ -114,6 +115,7 @@ class HomeViewController: UIViewController {
         viewModel.getTopHomeBannersListApi()
         viewModel.getCenterHomeBannersListApi()
         viewModel.getSuggestedStoresRequest()
+        setupLocation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -139,13 +141,6 @@ class HomeViewController: UIViewController {
         stopPremiumAutoScroll()
         stopDiscountAutoScroll()
     }
-    
-//    override func viewWillLayoutSubviews() {
-//        super.viewWillLayoutSubviews()
-//        DispatchQueue.main.async {
-//            self.updateCollectionsHeight()
-//        }
-//    }
     
     // MARK: - Button's Action
     @IBAction func pageControlChanged(_ sender: UIPageControl) {
@@ -262,6 +257,14 @@ class HomeViewController: UIViewController {
             }
         }
     }
+    
+    private func setupLocation() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+        }
     
     // MARK: - Start Listening (Speech → Text)
     private func startListening() {
@@ -430,11 +433,6 @@ class HomeViewController: UIViewController {
         bannerPageController.currentPage = currentBannerIndex
     }
     
-//    private func updateCollectionsHeight() {
-//        
-//        heightConstraintOfNewestProductCollectionView.constant = newestProductsCollectionView.contentSize.height
-//    }
-    
     func updateCategoryCollectionHeight() {
         let itemCount = viewModel.subCategoriesSection.count
         let rows = ceil(Double(itemCount) / 3.0)
@@ -447,9 +445,9 @@ class HomeViewController: UIViewController {
     
     private func showUserData() {
         if isGuestLogin == "true" {
-            lblUserName.text = "Hello Guest"
+            lblUserName.text = "Hello Guest".localiz()
         } else {
-            lblUserName.text = "Deliver to \(Global.shared.user?.fullName ?? "")"
+            lblUserName.text = "\("Deliver to".localiz()) \(Global.shared.user?.fullName ?? "")"
         }
     }
     
@@ -732,12 +730,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
     }
     
-//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        if collectionView == categoriesCollectionView {
-//            viewWillLayoutSubviews()
-//        }
-//    }
-    
     // MARK: - Update Page Control on Scroll
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == bannerCollectionView {
@@ -753,5 +745,18 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             browseDiscountPageController.currentPage = pageIndex
             currentDiscountIndex = pageIndex
         }
+    }
+}
+
+extension HomeViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return }
+        manager.stopUpdatingLocation()
+        viewModel.getAddress(from: location)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location error:", error.localizedDescription)
+        lblLocatioin.text = "Unable to fetch location".localiz()
     }
 }

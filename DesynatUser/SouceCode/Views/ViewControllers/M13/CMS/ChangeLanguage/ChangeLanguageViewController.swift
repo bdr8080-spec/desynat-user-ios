@@ -8,7 +8,7 @@
 import UIKit
 
 class ChangeLanguageViewController: UIViewController {
-
+    
     // MARK: - IBOutlet's
     @IBOutlet weak var arabicView: CustomView!
     @IBOutlet weak var englishView: CustomView!
@@ -16,50 +16,71 @@ class ChangeLanguageViewController: UIViewController {
     @IBOutlet weak var imgEnglish: UIImageView!
     
     // MARK: - Property Decalaration
-    private var selectedLanguage: String = "en"
+    var selectedLanguage: Languages = .en
     var comingFromDashboard: Bool = false
     var comingUserRole: UserRoleType = .normalUser
     
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        LocationManager.sharedInstance.startUpdatingLocation()
+        selectedLanguage = AppLanguageManager.shared.currentLanguage
+        selectLanguage(isEnglishSelected: selectedLanguage != .ar)
     }
     
     // MARK: - Button's Action
     @IBAction func btnSelectLanguage(_ sender: UIButton) {
         if sender.tag == 0 {
-            // English selected
-            selectedLanguage = "en"
-            
-            imgArabic.image = UIImage(named: "radioUnselected")
-            imgEnglish.image = UIImage(named: "radioSelected")
-            
-            arabicView.layer.borderColor = UIColor.lightGray.cgColor
-            englishView.layer.borderColor = UIColor(named: "darkBrown")?.cgColor
+            selectedLanguage = .en
+            selectLanguage(isEnglishSelected: true)
         } else {
-            // Arabic selected
-            selectedLanguage = "ar"
-            
-            imgArabic.image = UIImage(named: "radioSelected")
-            imgEnglish.image = UIImage(named: "radioUnselected")
-            
-            arabicView.layer.borderColor = UIColor(named: "darkBrown")?.cgColor
-            englishView.layer.borderColor = UIColor.lightGray.cgColor
+            selectedLanguage = .ar
+            selectLanguage(isEnglishSelected: false)
         }
+        applyLanguageChange()
     }
     
     @IBAction func btnTapSave(_ sender: Any) {
-        UserDefaults.standard.setValue(selectedLanguage, forKey: "AppLanguage")
-        self.navigationController?.popViewController(animated: true)
+        AppLanguageManager.shared.setLanguage(language: selectedLanguage)
+        switch comingUserRole {
+        case .normalUser:
+            kSharedSceneDelegate.navigateToUserHomeVc()
+        case .affilaiteUser:
+            kSharedSceneDelegate.navigateToAffiliatedUserHomeVc()
+        }
     }
-
+    
     @IBAction func backDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    private func selectLanguage(isEnglishSelected: Bool) {
+        let selectedColor = UIColor(named: "darkBrown")?.cgColor
+        let deselectedColor = UIColor.lightGray.cgColor
+        
+        // English
+        englishView.layer.borderColor = isEnglishSelected ? selectedColor : deselectedColor
+        imgEnglish.image = UIImage(named: isEnglishSelected ? "radioSelected" : "radioUnselected")
+        
+        // Arabic
+        arabicView.layer.borderColor = isEnglishSelected ? deselectedColor : selectedColor
+        imgArabic.image = UIImage(named: isEnglishSelected ? "radioUnselected" : "radioSelected")
+    }
+    
+    private func applyLanguageChange() {
+        AppLanguageManager.shared.setLanguage(language: selectedLanguage)
+        if selectedLanguage == .ar {
+            UIView.appearance().semanticContentAttribute = .forceRightToLeft
+        } else {
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+        }
+        refreshUI()
+    }
+    
+    private func refreshUI() {
+        let nextVC = ChangeLanguageViewController.instantiate(fromAppStoryboard: .DashBoard)
+        nextVC.comingUserRole = comingUserRole
+        self.navigationController?.setViewControllers([nextVC], animated: false)
+    }
 }
 
-//enum ComingReasonAtChangeLanguageScreen {
-//    case fromNormalUserDashboard
-//}
 

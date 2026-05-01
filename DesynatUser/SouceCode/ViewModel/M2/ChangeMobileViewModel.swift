@@ -9,9 +9,10 @@ import Foundation
 import UIKit
 
 class ChangeMobileViewModel:NSObject{
+    
     private var hostVC:ChangeMobileViewController
-  var getAllUSerCountryList:[GetAllUserCountryModel] = []
-  
+    var getAllUSerCountryList:[GetAllUserCountryModel] = []
+    
     init(hostVC: ChangeMobileViewController) {
         self.hostVC = hostVC
     }
@@ -24,15 +25,15 @@ class ChangeMobileViewModel:NSObject{
             if input.isEmpty {
                 errorMessage = .changeNewMobile
             } else if !input.isValidPhoneNumber() {
-                    errorMessage = .validMobileNumber
+                errorMessage = .validMobileNumber
             }
         } else{
             let input = String.getString(hostVC.txtEmail.text).trimmingCharacters(in: .whitespacesAndNewlines)
             if input.isEmpty {
                 errorMessage = .chnageNewEmail
             } else if !input.isValidEmail() {
-                    errorMessage = .EnterValidEmailAddress
-                }
+                errorMessage = .EnterValidEmailAddress
+            }
         }
         
         if errorMessage != .none {
@@ -63,7 +64,7 @@ class ChangeMobileViewModel:NSObject{
                 
             ]
         }
-           
+        
         WebService.sharedInstance.changeMobileNumberService(withParams:param) { user in
             let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
             vc.id = "\(user.id ?? 0)"
@@ -80,8 +81,8 @@ class ChangeMobileViewModel:NSObject{
             self.hostVC.navigationController?.pushViewController(vc, animated: true)
         }
     }
-  
-  func getALlUserCountryListApi(){
+    
+    func getALlUserCountryListApi(){
         WebService.sharedInstance.getAllUserscountryList { list in
             self.getAllUSerCountryList = list
         }

@@ -165,7 +165,7 @@ extension EnterCardsDetailsViewController: UITextFieldDelegate, UITextViewDelega
             textView.placeholderTextView = ""
         } else {
             if textView == wishMessageTextView {
-                textView.placeholderTextView = "Enter wish message"
+                textView.placeholderTextView = "Enter wish message".localiz()
             }
         }
     }

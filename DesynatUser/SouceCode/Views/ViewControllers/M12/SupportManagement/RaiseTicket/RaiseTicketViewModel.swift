@@ -37,9 +37,9 @@ class RaiseTicketViewModel {
             }
         }
         
-//        if hostVC.selectedImageUrl.isEmpty {
-//            errorMessage = .Selectattachment
-//        }
+        //        if hostVC.selectedImageUrl.isEmpty {
+        //            errorMessage = .Selectattachment
+        //        }
         
         if errorMessage != .none {
             hostVC.showAlert(msg: errorMessage.rawValue)

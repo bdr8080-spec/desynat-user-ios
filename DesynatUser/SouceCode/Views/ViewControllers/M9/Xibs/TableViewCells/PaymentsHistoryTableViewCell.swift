@@ -40,33 +40,11 @@ class PaymentsHistoryTableViewCell: UITableViewCell {
         quantityLabel.text = "\(data?.quantity ?? 0)"
         totalAmountLabel.text = CommonUtils.formatPriceStringInput(data?.amount)
         purchasedOnLabel.text = formatDate(data?.createdAt ?? "")
-//        let deliveryStatus = data?.deliveryStatus ?? "1"
-//        let paymentStatus = data?.paymentStatus ?? "1"
-//        
-//        if paymentStatus == "2" || paymentStatus == "3" {
-//            orderStatusLabel.text = "Cancelled"
-//            orderStatusLabel.textColor = UIColor(hexString: "#D53B36") //(Red)
-//        } else {
-//            switch deliveryStatus {
-//            case "1":
-//                orderStatusLabel.text = "Pending"
-//                orderStatusLabel.textColor = UIColor(hexString: "#FE7D49") //(Orange)
-//            case "3":
-//                orderStatusLabel.text = "Completed"
-//                orderStatusLabel.textColor = UIColor(hexString: "#17854C") //(Green)
-//            case "4":
-//                orderStatusLabel.text = "Cancelled"
-//                orderStatusLabel.textColor = UIColor(hexString: "#D53B36") //(Red)
-//            default:
-//                orderStatusLabel.text = "Pending"
-//                orderStatusLabel.textColor = UIColor(hexString: "#FE7D49") //(Orange)
-//            }
-//        }
         configureStatus(with: data)
     }
     
     func configureStatus(with data: OrdersDataAffilaitedPaymentList?) {
-        orderStatusLabel.text = "Pending"
+        orderStatusLabel.text = "Pending".localiz()
         guard let data = data else { return }
         let paymentMethod = data.order?.paymentMethod
         let paymentStatus = data.paymentStatus //data.order?.paymentStatus
@@ -76,79 +54,79 @@ class PaymentsHistoryTableViewCell: UITableViewCell {
             if paymentStatus == "1" {
                 switch deliveryStatus {
                 case "1": //Pending
-                    orderStatusLabel.text = "Pending"
+                    orderStatusLabel.text = "Pending".localiz()
                     orderStatusLabel.textColor = UIColor(hexString: "#FF5F1B")
                     if data.returnType == "1" || data.returnType == "2" {
                         let approveType = data.rEApprove ?? "1"
                         if approveType == "1" {
-                            orderStatusLabel.text = "Return Req."
+                            orderStatusLabel.text = "Return Req.".localiz()
                         }
                     }
                     
                 case "2", "2.1", "7": //Pending
-                    orderStatusLabel.text = "Pending"
+                    orderStatusLabel.text = "Pending".localiz()
                     orderStatusLabel.textColor = UIColor(hexString: "#FF5F1B")
                     if data.deliveryStatus == "7" && (data.returnType == "1" || data.returnType == "2") {
                         let approveType = data.rEApprove ?? "1"
                         if approveType == "1" {
-                            orderStatusLabel.text = "Return Req."
+                            orderStatusLabel.text = "Return Req.".localiz()
                         }
                     }
                     
                 case "3": //Delivered
-                    orderStatusLabel.text = "Completed"
+                    orderStatusLabel.text = "Completed".localiz()
                     orderStatusLabel.textColor = UIColor(hexString: "#16B364")
                     if data.returnType == "1" || data.returnType == "2" {
                         handleReturnExchange(data: data)
                     }
                 case "4": //Cancelled
-                    orderStatusLabel.text = "Cancelled"
+                    orderStatusLabel.text = "Cancelled".localiz()
                     orderStatusLabel.textColor = UIColor(hexString: "#E70000")
                 default:
                     return
                 }
             } else if paymentStatus == "3" {
-                orderStatusLabel.text = "Cancelled"
+                orderStatusLabel.text = "Cancelled".localiz()
                 orderStatusLabel.textColor = UIColor(hexString: "#E70000")
             }
         } else if paymentMethod == "3" {
             if paymentStatus == "0" || paymentStatus == "1" {
                 switch deliveryStatus {
                 case "1": //Pending
-                    orderStatusLabel.text = "Pending"
+                    orderStatusLabel.text = "Pending".localiz()
                     orderStatusLabel.textColor = UIColor(hexString: "#FF5F1B")
                     if data.returnType == "1" || data.returnType == "2" {
                         let approveType = data.rEApprove ?? "1"
                         if approveType == "1" {
-                            orderStatusLabel.text = "Return Req."
+                            orderStatusLabel.text = "Return Req.".localiz()
                         }
                     }
                     
                 case "2","2.1", "7": //Pending, Picked
-                    orderStatusLabel.text = "Pending"
+                    orderStatusLabel.text = "Pending".localiz()
                     orderStatusLabel.textColor = UIColor(hexString: "#FF5F1B")
                     if data.deliveryStatus == "7" && (data.returnType == "1" || data.returnType == "2") {
                         let approveType = data.rEApprove ?? "1"
                         if approveType == "1" {
-                            orderStatusLabel.text = "Return Req."
+                            orderStatusLabel.text = "Return Req.".localiz()
                         }
                     }
                     
                 case "3": //Delivered
-                    orderStatusLabel.text = "Completed"
+                    orderStatusLabel.text = "Completed".localiz()
                     orderStatusLabel.textColor = UIColor(hexString: "#16B364")
                     if data.returnType == "1" || data.returnType == "2"{
                         handleReturnExchange(data: data)
                     }
                     
                 case "4", "8": //Cancelled
-                    orderStatusLabel.text = "Cancelled"
+                    orderStatusLabel.text = "Cancelled".localiz()
                     orderStatusLabel.textColor = UIColor(hexString: "#E70000")
                 default:
                     return
                 }
             } else if paymentStatus == "2" {
-                orderStatusLabel.text = "Cancelled"
+                orderStatusLabel.text = "Cancelled".localiz()
                 orderStatusLabel.textColor = UIColor(hexString: "#E70000")
             }
         }
@@ -159,33 +137,33 @@ class PaymentsHistoryTableViewCell: UITableViewCell {
         let isExchangeAllowed = data.productDetails?.productExchangable == "1"
         
         if isReturnAllowed {
-            orderStatusLabel.text = "Return Req."
+            orderStatusLabel.text = "Return Req.".localiz()
             orderStatusLabel.textColor = UIColor(hexString: "#FF5F1B")
         } else if isExchangeAllowed {
-            orderStatusLabel.text = "Exchange Req."
+            orderStatusLabel.text = "Exchange Req.".localiz()
             orderStatusLabel.textColor = UIColor(hexString: "#FF5F1B")
         }
         if data.returnType == "1" {
-            orderStatusLabel.text = "Return Req."
+            orderStatusLabel.text = "Return Req.".localiz()
             orderStatusLabel.textColor = UIColor(hexString: "#FF5F1B")
             if data.rEApprove == "1" {
                 if data.deliveryStatus == "3"{
-                    orderStatusLabel.text = "Returned"
+                    orderStatusLabel.text = "Returned".localiz()
                     orderStatusLabel.textColor = UIColor(hexString: "#16B364")
                 }
             } else if data.rEApprove == "2" {
-                orderStatusLabel.text = "Completed"
+                orderStatusLabel.text = "Completed".localiz()
                 orderStatusLabel.textColor = UIColor(hexString: "#16B364")
             }
         } else if data.returnType == "2" {
-            orderStatusLabel.text = "Exchange Req."
+            orderStatusLabel.text = "Exchange Req.".localiz()
             orderStatusLabel.textColor = UIColor(hexString: "#FF5F1B")
             if data.rEApprove == "1" {
                 if data.deliveryStatus == "3"{
-                    orderStatusLabel.text = "Exchange Req."
+                    orderStatusLabel.text = "Exchange Req.".localiz()
                 }
             } else if data.rEApprove == "2" {
-                orderStatusLabel.text = "Completed"
+                orderStatusLabel.text = "Completed".localiz()
                 orderStatusLabel.textColor = UIColor(hexString: "#16B364")
             }
         }

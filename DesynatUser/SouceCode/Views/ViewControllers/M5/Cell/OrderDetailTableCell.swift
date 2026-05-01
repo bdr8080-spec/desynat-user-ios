@@ -61,15 +61,6 @@ class OrderDetailTableCell: UITableViewCell {
             imgProduct.image = UIImage(named: "")
         }
         
-//        let discountType = data?.variationDetails?.discountType ?? "1"
-//        if discountType == "1" {
-//            discountPercentageLabel.text = "\(data?.variationDetails?.discountValue ?? "")% Off"
-//        } else {
-//            discountPercentageLabel.text = "\(data?.variationDetails?.discountValue ?? "") KD Off"
-//        }
-        
-        
-        
         if data?.orderType == "2" {
             customOrderStackView.isHidden = false
             totalQuntityLbel.text = data?.chatroomRecordtable?.quantity?.description//chatdata?.quantity?.description ?? data?.quantity?.description
@@ -78,7 +69,7 @@ class OrderDetailTableCell: UITableViewCell {
             setColorBoxWithQuanity(size: data?.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF")
             let unitPrice = Double(data?.amount ?? "") ?? 0
             lblDisPrice.text = CommonUtils.formatPrice(unitPrice)
-            lblDisPrice.text = CommonUtils.formatPriceStringInput(data?.chatroomRecordtable?.totalAmount ?? "0")////"Per Item Price \(CommonUtils.formatPrice(Double(unitPrice)))"
+            lblDisPrice.text = CommonUtils.formatPriceStringInput(data?.chatroomRecordtable?.totalAmount ?? "0")
             lblPrice.isHidden = true
             discountPercentageLabel.isHidden = true
         } else {
@@ -87,7 +78,6 @@ class OrderDetailTableCell: UITableViewCell {
             setColorBox(size: data?.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data?.quantity ?? 0)")
             lblDisPrice.text = CommonUtils.formatPriceStringInput(data?.variationDetails?.finalPrice, currency: "KD")
             lblPrice.isHidden = false
-//            discountPercentageLabel.isHidden = false
             CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: lblPrice,
                                                       discountType: data?.variationDetails?.discountType,
                                                       discountValue: data?.variationDetails?.discountValue)
@@ -98,9 +88,9 @@ class OrderDetailTableCell: UITableViewCell {
         
         let isReturnAllowed = data?.productDetails?.productReturn == "1"
         if isReturnAllowed {
-            lblReturnAvail.text = "\(data?.productDetails?.returnDays ?? "1") days return available"
+            lblReturnAvail.text = "\(data?.productDetails?.returnDays ?? "1") \("days return available".localiz())"
         } else {
-            lblReturnAvail.text = "No return available"
+            lblReturnAvail.text = "No return available".localiz()
         }
         if data?.orderType != "2" {
             lblReturnAvail.isHidden = false
@@ -109,33 +99,33 @@ class OrderDetailTableCell: UITableViewCell {
             if paymentStatus == "1" {
                 switch deliveryStatus {
                 case "1": //Pending
-                    lblStatus.text = "Ongoing"
+                    lblStatus.text = "Ongoing".localiz()
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     
                 case "2", "7": //Ongoing
-                    lblStatus.text = "Ongoing"
+                    lblStatus.text = "Ongoing".localiz()
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     
                 case "3": //Delivered
-                    lblStatus.text = "Delivered"
+                    lblStatus.text = "Delivered".localiz()
                     lblStatus.textColor = UIColor(hexString: "#16B364")
                     if data?.returnType == "1" {
-                        lblStatus.text = "Return Req."
+                        lblStatus.text = "Return Req.".localiz()
                         lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     }
                     
                 case "4": //Cancelled
-                    lblStatus.text = "Cancelled"
+                    lblStatus.text = "Cancelled".localiz()
                     lblStatus.textColor = UIColor(hexString: "#E70000")
                     if data?.orderType != "2" {
                         lblReturnAvail.isHidden = true
                     }
                 default:
-                    lblStatus.text = "Confirmed"
+                    lblStatus.text = "Confirmed".localiz()
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                 }
             } else if paymentStatus == "3" {
-                lblStatus.text = "Cancelled"
+                lblStatus.text = "Cancelled".localiz()
                 lblStatus.textColor = UIColor(hexString: "#E70000")
                 if data?.orderType != "2" {
                     lblReturnAvail.isHidden = true
@@ -145,34 +135,34 @@ class OrderDetailTableCell: UITableViewCell {
             if paymentStatus == "0" || paymentStatus == "1" {
                 switch deliveryStatus {
                 case "1": //Pending
-                    lblStatus.text = "Ongoing"
+                    lblStatus.text = "Ongoing".localiz()
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     
                 case "2", "7": //Ongoing, Picked
-                    lblStatus.text = "Ongoing"
+                    lblStatus.text = "Ongoing".localiz()
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     
                 case "3": //Delivered
-                    lblStatus.text = "Delivered"
+                    lblStatus.text = "Delivered".localiz()
                     lblStatus.textColor = UIColor(hexString: "#16B364")
                     
                     if data?.returnType == "1" {
-                        lblStatus.text = "Return Req."
+                        lblStatus.text = "Return Req.".localiz()
                         lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     }
                     
                 case "4", "8":
-                    lblStatus.text = "Cancelled"
+                    lblStatus.text = "Cancelled".localiz()
                     lblStatus.textColor = UIColor(hexString: "#E70000")
                     if data?.orderType != "2" {
                         lblReturnAvail.isHidden = true
                     }
                 default:
-                    lblStatus.text = "Confirmed"
+                    lblStatus.text = "Confirmed".localiz()
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                 }
             } else if paymentStatus == "2" {
-                lblStatus.text = "Cancelled"
+                lblStatus.text = "Cancelled".localiz()
                 lblStatus.textColor = UIColor(hexString: "#E70000")
                 if data?.orderType != "2" {
                     lblReturnAvail.isHidden = true

@@ -97,9 +97,9 @@ class AddaddressViewModel: NSObject {
     
     let service: (Any) -> Void = { response in
       if self.hostVC.comingReason == .forEditAddress {
-        CommonUtils.showToast(message: "Address updated successfully")
+          CommonUtils.showToast(message: "Address updated successfully".localiz())
       } else {
-        CommonUtils.showToast(message: "Address added successfully")
+          CommonUtils.showToast(message: "Address added successfully".localiz())
       }
       
       // ⏳ Delay navigation to allow toast to show clearly

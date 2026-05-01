@@ -20,23 +20,6 @@ class NotificationListViewModel {
         self.hostVC = hostVC
     }
     
-//    func getMyNotificationsListRequest() {
-//        WebService.sharedInstance.getMyNotificationsListService() { [weak self] response in
-//            guard let self = self else { return }
-//            notificationSentList = response
-//            hostVC.listTableView.reloadData()
-//            self.hostVC.noDataFoundLabel.isHidden = !self.notificationSentList.isEmpty
-//        }
-//    }
-    
-//    func markReadNotificationsRequest() {
-//        let param: [String:Any] = ["notification_id": [hostVC.selectedNotificationId]]
-//        WebService.sharedInstance.markReadNotificationsService(param: param) { [weak self] response in
-//            guard let self = self else { return }
-//            getMyNotificationsListRequest()
-//        }
-//    }
-//    
     func getMyNotificationsListRequest(reset: Bool = false) {
         
         guard !isFetching, hasMorePages else { return }

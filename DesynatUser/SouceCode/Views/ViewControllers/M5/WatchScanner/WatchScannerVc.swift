@@ -42,7 +42,7 @@ class WatchScannerVc : UIViewController {
         guard let device = AVCaptureDevice.default(.builtInWideAngleCamera,
                                                    for: .video,
                                                    position: .back) else {
-            self.showAlert(msg: "Camera not found"){
+            self.showAlert(msg: "Camera not found".localiz()){
                 self.navigationController?.popViewController(animated: true)
             }
             return
@@ -191,7 +191,7 @@ extension WatchScannerVc {
         
         viewModel.recognizeProduct(image: image) { result in
             guard let result = result else {
-                self.showAlert(msg: "Product not recognized")
+                self.showAlert(msg: "Product not recognized".localiz())
                 return
             }
             

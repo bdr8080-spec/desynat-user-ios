@@ -51,14 +51,14 @@ class ProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         if isGuestLogin == "true" {
             emailLabel.isHidden = true
-            usernameLabel.text = "Hello Guest"
+            usernameLabel.text = "Hello Guest".localiz()
             userProfileImageView.image = UIImage(named: "userProfile")
-            logoutLabel.text = "Login"
+            logoutLabel.text = "Login".localiz()
             logoutImageView.isHidden = true
         } else {
             emailLabel.isHidden = false
             viewModel.getUserData()
-            logoutLabel.text = "Logout"
+            logoutLabel.text = "Logout".localiz()
             logoutImageView.isHidden = false
         }
     }
@@ -82,7 +82,7 @@ class ProfileViewController: UIViewController {
         if isGuestLogin == "true" {
             kSharedSceneDelegate.navigateToLoginVc()
         } else {
-            self.showConfirmationAlert(msg: "Are you sure you want to logout?"){ [weak self] in
+            self.showConfirmationAlert(msg: "Are you sure you want to logout?".localiz()){ [weak self] in
                 guard let self = self else { return }
                 self.viewModel.logoutAPI()
             }

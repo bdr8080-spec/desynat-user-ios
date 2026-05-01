@@ -82,7 +82,7 @@ class RateProductOrderViewController: UIViewController {
     
     func showSuccess() {
         let successVC = SuccessMsgVC.instantiate(fromAppStoryboard: .MyOrder)
-        successVC.message = "Review submitted successfully!"
+        successVC.message = "Review submitted successfully!".localiz()
         
         successVC.OnDismiss = { [weak self] in
             self?.dismiss(animated: true) {

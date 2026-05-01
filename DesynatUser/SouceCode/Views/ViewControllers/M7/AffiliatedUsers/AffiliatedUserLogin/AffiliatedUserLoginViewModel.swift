@@ -83,7 +83,7 @@ class AffiliatedUserLoginViewModel {
                 UserDefaults.standard.setValue("true", forKey: "affiliatedAccountIsLoggedIn")
                 kSharedSceneDelegate.navigateToAffiliatedUserHomeVc()
             } else if response.adminVerify == "4" {
-                self.loginHostVC.showAlert(msg: "Document Rejected. Please Reupload it.\n\(response.rejectReason ?? "")")
+                self.loginHostVC.showAlert(msg: "\("Document Rejected. Please Reupload it.\n".localiz())\(response.rejectReason ?? "")")
                 let nextVC = CreateAffiliateUserAccountViewController.instantiate(fromAppStoryboard: .AffiliateUser)
                 nextVC.iscomingAfterDocumnetReject = true
                 nextVC.affiliatedUserDetails = response

@@ -59,7 +59,7 @@ class AffiliatedCameraSearchViewController: UIViewController {
         guard let device = AVCaptureDevice.default(.builtInWideAngleCamera,
                                                    for: .video,
                                                    position: .back) else {
-            self.showAlert(msg: "Camera not found"){
+            self.showAlert(msg: "Camera not found".localiz()){
                 self.navigationController?.popViewController(animated: true)
             }
             return
@@ -97,7 +97,7 @@ class AffiliatedCameraSearchViewController: UIViewController {
             // Start session
             captureSession?.startRunning()
         } catch {
-            self.showAlert(msg: "Error setting up camera") {
+            self.showAlert(msg: "Error setting up camera".localiz()) {
                 self.navigationController?.popViewController(animated: true)
             }
         }
@@ -165,7 +165,7 @@ extension AffiliatedCameraSearchViewController {
         
         viewModel.recognizeProduct(image: image) { result in
             guard let result = result else {
-                self.showAlert(msg: "Product not recognized")
+                self.showAlert(msg: "Product not recognized".localiz())
                 return
             }
             //

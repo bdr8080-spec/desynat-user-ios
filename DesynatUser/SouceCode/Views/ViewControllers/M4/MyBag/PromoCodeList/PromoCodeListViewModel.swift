@@ -42,7 +42,7 @@ class PromoCodeListViewModel {
               guard let self else { return }
             let promocodeId = self.hostVC.selectedPromocode?.id ?? 0
             self.hostVC.onPromoSelected?(response, promocodeId)
-            CommonUtils.showToast(message: "Promocode applied successfully")
+              CommonUtils.showToast(message: "Promocode applied successfully".localiz())
               self.hostVC.navigationController?.popViewController(animated: true)
           }
       }
@@ -61,7 +61,7 @@ class PromoCodeListViewModel {
 //              }
             let promocodeId = self.hostVC.selectedPromocode?.id ?? 0
             self.hostVC.onPromoSelected?(response, promocodeId)
-            CommonUtils.showToast(message: "Promocode applied successfully")
+              CommonUtils.showToast(message: "Promocode applied successfully".localiz())
               self.hostVC.navigationController?.popViewController(animated: true)
           }
       }

@@ -279,7 +279,7 @@ extension AffiliatedProfileDetailsViewController: UITableViewDelegate, UITableVi
             self?.navigationController?.pushViewController(nextVC, animated: true)
         }
         cell.deleteButtonAction = { [weak self] in
-            self?.showConfirmationAlert(msg: "Are you sure you want to delete this account?"){ [weak self] in
+            self?.showConfirmationAlert(msg: "Are you sure you want to delete this account?".localiz()){ [weak self] in
                 guard let self = self else { return }
                 viewModel.deleteBankAccountAffilaitedUserApi(id: viewModel.affiliatedUserProfile?.bankDetails?[indexPath.row].id ?? 0)
             }

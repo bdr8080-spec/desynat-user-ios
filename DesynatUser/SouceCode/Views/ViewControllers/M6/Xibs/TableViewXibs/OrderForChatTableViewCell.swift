@@ -68,7 +68,7 @@ class OrderForChatTableViewCell: UITableViewCell {
                 sendRequestButtonOutlet.isHidden = false
                 if requestType == "1" {
                     waitingButtonOutlet.isHidden = false
-                    waitingButtonOutlet.setTitle("Waiting", for: .normal)
+                    waitingButtonOutlet.setTitle("Waiting".localiz(), for: .normal)
                     sendRequestButtonOutlet.isHidden = true
                 }
             case "1", "2", "5":
@@ -78,12 +78,12 @@ class OrderForChatTableViewCell: UITableViewCell {
                     if isOrderPlaced {
                         viewRequestButtonOutlet.isHidden = true
                         waitingButtonOutlet.isHidden = false
-                        waitingButtonOutlet.setTitle("Placed", for: .normal)
+                        waitingButtonOutlet.setTitle("Placed".localiz(), for: .normal)
                     }
                 }
             case "4":
                 waitingButtonOutlet.isHidden = false
-                waitingButtonOutlet.setTitle("Rejected", for: .normal)
+                waitingButtonOutlet.setTitle("Rejected".localiz(), for: .normal)
                 
             default:
                 print("")

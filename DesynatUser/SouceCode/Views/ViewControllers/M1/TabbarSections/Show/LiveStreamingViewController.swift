@@ -106,7 +106,7 @@ class LiveStreamingViewController: UIViewController {
             let total = broadcasters + audienceTotal
 
             DispatchQueue.main.async {
-                self.lblUserCount.text = "Viewers: \(total)"
+                self.lblUserCount.text = "\("Viewers:".localiz()) \(total)"
                 print("👥 TOTAL users: \(total) | Broadcasters: \(broadcasters) | Audience: \(audienceTotal)")
             }
 
@@ -199,17 +199,17 @@ class LiveStreamingViewController: UIViewController {
                 agoraKit.setClientRole(.broadcaster)
                 agoraKit.enableLocalVideo(true)
                 setupLocalVideo()
-                btnGoLive.setTitle("Stop", for: .normal)
+                btnGoLive.setTitle("Stop".localiz(), for: .normal)
             } else {
                 print("👀 AUDIENCE MODE")
                 agoraKit.setClientRole(.audience)
                 agoraKit.stopPreview()
-                btnGoLive.setTitle("Go Live", for: .normal)
+                btnGoLive.setTitle("Go Live".localiz(), for: .normal)
             }
         case 3:
             isMuted.toggle()
                agoraKit.muteAllRemoteAudioStreams(isMuted)
-            muteLabel.text = isMuted ? "Unmute" : "Mute"
+            muteLabel.text = isMuted ? "Unmute".localiz() : "Mute".localiz()
         case 4:
             print("📴 End Stream")
             leaveChannel()
@@ -238,7 +238,7 @@ extension LiveStreamingViewController: AgoraRtcEngineDelegate {
         print("🚪 Remote Left: \(uid)")
         DispatchQueue.main.async {
             self.lblWaiting.isHidden = false
-            self.lblWaiting.text = "Host has ended the streaming"
+            self.lblWaiting.text = "Host has ended the streaming".localiz()
             self.muteView.isHidden = true
             self.clearVideoView()
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {

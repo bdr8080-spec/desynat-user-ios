@@ -78,23 +78,7 @@ class FavoruitesViewController: UIViewController {
                 self.favouriteCollectionView.performBatchUpdates({
                     self.favouriteCollectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
                 })
-                
-//                viewModel.getProductDetails()
             }
-        } else {
-//            guard let reelId = viewModel.reelsList?[index].id else { return }
-//
-//            viewModel.addToReelsWishelistRequest(reelId: reelId) { [weak self] success in
-//                guard let self = self, success else { return }
-//
-//                self.viewModel.reelsList?.remove(at: index)
-//
-//                self.favouriteCollectionView.performBatchUpdates({
-//                    self.favouriteCollectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
-//                })
-//
-////                viewModel.getReelsWishlistRequest()
-//            }
         }
     }
     
@@ -117,7 +101,7 @@ class FavoruitesViewController: UIViewController {
                 // ✅ If list is now empty, show "No reels found"
                 let isEmpty = self.viewModel.reelsList?.isEmpty ?? true
                 if isEmpty {
-                    self.emptyLabel.text = "No reels found"
+                    self.emptyLabel.text = "No reels found".localiz()
                     self.emptyLabel.isHidden = false
                 } else {
                     self.emptyLabel.isHidden = true

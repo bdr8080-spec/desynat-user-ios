@@ -158,7 +158,7 @@ class MyOrderDetailVC: UIViewController {
 //        let urlString = "http://157.241.119.72/Invoice/\(orderId)"
         let urlString = "\(BaseURL.value())InvoiceUser/\(orderId)"
         guard let url = URL(string: urlString) else {
-            showAlert(msg: "Invalid invoice URL")
+            showAlert(msg: "Invalid invoice URL".localiz())
             return
         }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -182,7 +182,7 @@ class MyOrderDetailVC: UIViewController {
         vc.delegate = self
         vc.onCancel = {
             let vc = SuccessMsgVC.instantiate(fromAppStoryboard: .MyOrder)
-            vc.message = "Order Cancelled successfully!"
+            vc.message = "Order Cancelled successfully!".localiz()
             self.dismiss(animated: true) {
                 self.navigationController?.present(vc, animated: true)
             }
@@ -198,7 +198,7 @@ class MyOrderDetailVC: UIViewController {
         vc.delegate = self
         vc.onCancel = {
             let vc = SuccessMsgVC.instantiate(fromAppStoryboard: .MyOrder)
-            vc.message = "Order Cancelled successfully!"
+            vc.message = "Order Cancelled successfully!".localiz()
             self.dismiss(animated: true) {
                 self.navigationController?.present(vc, animated: true)
             }
@@ -261,16 +261,15 @@ class MyOrderDetailVC: UIViewController {
     
     func setData() {
         guard let data = orderData else { return }
-        //CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: lblPrice,discountType: data.variationDetails?.discountType,discountValue: data.variationDetails?.discountValue)
         lblOrderId.text = "#\(data.id ?? 0)"
-        customOrderRequestIdLabel.text = "Request id #\(data.id ?? 0)"
-        lblPlacedDate.text = "Placed on \(data.createdAt?.formattedPlacedDate() ?? "")"
+        customOrderRequestIdLabel.text = "\("Request id".localiz()) #\(data.id ?? 0)"
+        lblPlacedDate.text = "\("Placed on".localiz()) \(data.createdAt?.formattedPlacedDate() ?? "")"
         quantityLAbel.text = data.quantity?.description
         let unitPrice = Double(data.amount ?? "") ?? 0
         let quantity = data.quantity ?? 1
         let totalPriceforCustom = unitPrice * Double(quantity)
         
-        itemPriceLabelForCustomOrder.text = "Custom Items Price"
+        itemPriceLabelForCustomOrder.text = "Custom Items Price".localiz()
         
         lblTotalMrp.text = CommonUtils.formatPriceStringInput(data.order?.totalMrp, currency: "KD")
         
@@ -290,22 +289,14 @@ class MyOrderDetailVC: UIViewController {
             //            discountPercentageLabel.isHidden = false
             CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: lblPrice,discountType: data.variationDetails?.discountType,discountValue: data.variationDetails?.discountValue)
         }
-        //        let discountType = data.variationDetails?.discountType ?? "1"
-        //        if discountType == "1" {
-        //            discountPercentageLabel.text = "\(data.variationDetails?.discountValue ?? "")% Off"
-        //        } else {
-        //            discountPercentageLabel.text = "\(data.variationDetails?.discountValue ?? "") KD Off"
-        //        }
-        
-        
-        
+      
         let orderProductPrice = CommonUtils.formatPrice(Double(data.variationDetails?.actualPrice ?? "0"))
         CommonUtils.setStrikethrough(label: lblPrice, text: orderProductPrice)
         let isReturnAllowed = data.productDetails?.productReturn == "1"
         if isReturnAllowed {
-            lblReturnAvail.text = "\(data.productDetails?.returnDays ?? "1") days return available"
+            lblReturnAvail.text = "\(data.productDetails?.returnDays ?? "1") \("days return available".localiz())"
         } else {
-            lblReturnAvail.text = "No return available"
+            lblReturnAvail.text = "No return available".localiz()
         }
         
         if data.order?.promocodeID != nil {
@@ -313,19 +304,13 @@ class MyOrderDetailVC: UIViewController {
             couponDiscountView.isHidden = false
             lblSavedAmount.isHidden = false
             lblCouponDis.text = CommonUtils.formatPriceStringInput(data.order?.promocodeValue ?? "")
-            //            lblTotalAmount.text = CommonUtils.formatPrice(selected.finalAmount)
-            //            totalPaidAmount = lblTotalAmount.text
             let discountMrp = Double(data.order?.discountMrp ?? "0") ?? 0.0
             let promoValue = Double(data.order?.promocodeValue ?? "0") ?? 0.0
             let discountValue = discountMrp + promoValue
-            lblSavedAmount.text = "You saved \(CommonUtils.formatPrice(discountValue)) on this"
+            lblSavedAmount.text = "\("You saved".localiz()) \(CommonUtils.formatPrice(discountValue)) \("on this".localiz())"
         } else {
             couponDiscountView.isHidden = true
-            lblSavedAmount.text = "You saved \(CommonUtils.formatPriceStringInput(data.order?.discountMrp ?? "0")) on this"
-            //            lblTotalAmount.text = CommonUtils.formatPrice(Double(data.order?.totalAmount ?? "0"))
-            //            let savingAmount = Double(data.order?.discountMrp ?? "0")
-            //            totalPaidAmount = lblTotalAmount.text
-            //            lblSavedAmount.text = "You saved \(CommonUtils.formatPrice(savingAmount)) on this"
+            lblSavedAmount.text = "\("You saved".localiz()) \(CommonUtils.formatPriceStringInput(data.order?.discountMrp ?? "0")) \("on this".localiz())"
         }
         
         let selectedAddress = data.order?.deliveryDetails
@@ -410,7 +395,7 @@ class MyOrderDetailVC: UIViewController {
     
     private func configureStatus(with data: OrderModel) {
         resetStepper()
-        lblStatus.text = "Ongoing"
+        lblStatus.text = "Ongoing".localiz()
         lblStatus.textColor = UIColor(hexString: "#FF5F1B")
         viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
         viewReturnDays.isHidden = true
@@ -434,12 +419,12 @@ class MyOrderDetailVC: UIViewController {
         
         if paymentMethod == "1" || paymentMethod == "2" {
             if paymentMethod == "1" {
-                lblPaidByCard.text = "Online"
+                lblPaidByCard.text = "Online".localiz()
                 lblTransactionId.isHidden = false
                 lblTransactionId.text = data.order?.transactionID
             } else if paymentMethod == "2" {
                 lblTransactionId.isHidden = true
-                lblPaidByCard.text = "Wallet"
+                lblPaidByCard.text = "Wallet".localiz()
             }
             if paymentStatus == "1" {
                 switch deliveryStatus {
@@ -447,21 +432,21 @@ class MyOrderDetailVC: UIViewController {
                     if data.returnType == "1" {
                         viewReturnEx.isHidden = true
                         if data.rEApprove == "1" {
-                            lblStatus.text = "Return Accepted"
+                            lblStatus.text = "Return Accepted".localiz()
                             lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                             viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
                             viewReturnEx.isHidden = true
                             resetStepper()
-                            activateStep(0, title: "Confirmed")
-                            activateStep(1, title: "In Progress")
-                            lbl3.text = "Picked Up"
-                            lbl4.text = "Completed"
+                            activateStep(0, title: "Confirmed".localiz())
+                            activateStep(1, title: "In Progress".localiz())
+                            lbl3.text = "Picked Up".localiz()
+                            lbl4.text = "Completed".localiz()
                             if let isoDate = CommonUtils.isoStringAddingDays(data.updatedAt, days: 6) {
-                                lblDeliveredOn.text = "Pickup Date : \(isoDate)"
+                                lblDeliveredOn.text = "\("Pickup Date :".localiz()) \(isoDate)"
                             } else {
-                                lblDeliveredOn.text = "Pickup Date : -"
+                                lblDeliveredOn.text = "Pickup Date :".localiz()
                             }
-                            lblPlacedDate.text = "Return request \(data.updatedAt?.formattedPlacedDate() ?? "")"
+                            lblPlacedDate.text = "\("Return request".localiz()) \(data.updatedAt?.formattedPlacedDate() ?? "")"
                             let returnImgeUpload = data.returnImage?.first ?? ""
                             if returnImgeUpload.isEmpty {
                                 viewUploadImg.isHidden = true
@@ -473,7 +458,7 @@ class MyOrderDetailVC: UIViewController {
                     
                     
                 case "1": //Pending
-                    lblStatus.text = "Ongoing"
+                    lblStatus.text = "Ongoing".localiz()
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
                     
@@ -486,10 +471,10 @@ class MyOrderDetailVC: UIViewController {
                         viewReturnDays.isHidden = false
                     }
                     viewPaidBy.isHidden = false
-                    activateStep(0, title: "Confirmed")
+                    activateStep(0, title: "Confirmed".localiz())
                     
                 case "2": //Ongoing
-                    lblStatus.text = "Ongoing"
+                    lblStatus.text = "Ongoing".localiz()
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
                     
@@ -502,9 +487,9 @@ class MyOrderDetailVC: UIViewController {
                         viewReturnDays.isHidden = false
                     }
                     viewPaidBy.isHidden = false
-                    activateStep(0, title: "Confirmed")
+                    activateStep(0, title: "Confirmed".localiz())
                 case "2.1":
-                    lblStatus.text = "Ongoing"
+                    lblStatus.text = "Ongoing".localiz()
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
                     if isCustomOrder {
@@ -519,11 +504,11 @@ class MyOrderDetailVC: UIViewController {
                         viewCancel.isHidden = false
                     }
                     viewPaidBy.isHidden = false
-                    activateStep(0, title: "Confirmed")
-                    activateStep(1, title: "Shipped")
+                    activateStep(0, title: "Confirmed".localiz())
+                    activateStep(1, title: "Shipped".localiz())
                     
                 case "3": //Delivered
-                    lblStatus.text = "Delivered"
+                    lblStatus.text = "Delivered".localiz()
                     lblStatus.textColor = UIColor(hexString: "#16B364")
                     viewStatus.borderColor = UIColor(hexString: "#16B364")
                     if isCustomOrder {
@@ -536,21 +521,21 @@ class MyOrderDetailVC: UIViewController {
                     viewReturnEx.isHidden = isCustomOrder//false
                     viewPaidBy.isHidden = false
                     viewDownloadInvoice.isHidden = false
-                    activateStep(0, title: "Confirmed")
-                    activateStep(1, title: "Shipped")
-                    activateStep(2, title: "On the Way")
-                    activateStep(3, title: "Delivered")
+                    activateStep(0, title: "Confirmed".localiz())
+                    activateStep(1, title: "Shipped".localiz())
+                    activateStep(2, title: "On the Way".localiz())
+                    activateStep(3, title: "Delivered".localiz())
                     handleReturnExchange(data: data)
                     if let isoDate = CommonUtils.isoStringAddingDays(data.updatedAt, days: 0) {
-                        lblDeliveredOn.text = "Delivered On : \(isoDate)"
+                        lblDeliveredOn.text = "\("Delivered On :".localiz()) \(isoDate)"
                     } else {
-                        lblDeliveredOn.text = "Delivered On : -"
+                        lblDeliveredOn.text = "Delivered On :".localiz()
                     }
                     if data.returnType == "1" || data.returnType == "2" { //Return Request
                         if data.returnType == "1" {
-                            lblStatus.text = "Return Request"
+                            lblStatus.text = "Return Request".localiz()
                         } else if data.returnType == "2"{
-                            lblStatus.text = "Exchange Request"
+                            lblStatus.text = "Exchange Request".localiz()
                         }
                         lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                         viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
@@ -558,12 +543,12 @@ class MyOrderDetailVC: UIViewController {
                         resetStepper()
                         img1.image = .unconfiremdOrder
                         img2.image = .shipped
-                        lbl3.text = "Picked Up"
-                        lbl4.text = "Completed"
+                        lbl3.text = "Picked Up".localiz()
+                        lbl4.text = "Completed".localiz()
                         if let isoDate = CommonUtils.isoStringAddingDays(data.updatedAt, days: 6) {
-                            lblDeliveredOn.text = "Pickup Date : \(isoDate)"
+                            lblDeliveredOn.text = "\("Pickup Date :".localiz()) \(isoDate)"
                         } else {
-                            lblDeliveredOn.text = "Pickup Date : -"
+                            lblDeliveredOn.text = "Pickup Date :".localiz()
                         }
                         
                         let returnImgeUpload = data.returnImage?.first ?? ""
@@ -572,29 +557,29 @@ class MyOrderDetailVC: UIViewController {
                         } else {
                             viewUploadImg.isHidden = false
                         }
-                        lblPlacedDate.text = "Return request \(data.updatedAt?.formattedPlacedDate() ?? "")"
+                        lblPlacedDate.text = "\("Return request".localiz()) \(data.updatedAt?.formattedPlacedDate() ?? "")"
                         if data.rEApprove == "1" {
                             //                            lblStatus.text = "Return Request"
                             if data.returnType == "1" {
-                                lblStatus.text = "Returned"//"Return Request"
-                                activateStep(0, title: "Confirmed")
-                                activateStep(1, title: "Shipped")
-                                activateStep(2, title: "Picked up")
-                                activateStep(3, title: "Completed")
+                                lblStatus.text = "Returned".localiz()//"Return Request"
+                                activateStep(0, title: "Confirmed".localiz())
+                                activateStep(1, title: "Shipped".localiz())
+                                activateStep(2, title: "Picked up".localiz())
+                                activateStep(3, title: "Completed".localiz())
                                 lblStatus.textColor = UIColor(hexString: "#16B364")
                                 viewStatus.borderColor = UIColor(hexString: "#16B364")
                             } else if data.returnType == "2"{
-                                lblStatus.text = "Exchange Request"
-                                activateStep(0, title: "Confirmed")
-                                activateStep(1, title: "In Progress")
-                                lbl3.text = "Picked &\nexchange"
-                                lbl4.text = "Completed"
+                                lblStatus.text = "Exchange Request".localiz()
+                                activateStep(0, title: "Confirmed".localiz())
+                                activateStep(1, title: "In Progress".localiz())
+                                lbl3.text = "Picked &\nexchange".localiz()
+                                lbl4.text = "Completed".localiz()
                                 if data.isPicked == "1" {
-                                    activateStep(2, title: "Picked &\nexchange")
+                                    activateStep(2, title: "Picked &\nexchange".localiz())
                                     let exchangeOrderDetails = data.exchangeOrderDetails?.deliveryStatus ?? "0"
                                     if exchangeOrderDetails == "3" {
-                                        activateStep(3, title: "Completed")
-                                        lblStatus.text = "Delivered"
+                                        activateStep(3, title: "Completed".localiz())
+                                        lblStatus.text = "Delivered".localiz()
                                         lblStatus.textColor = UIColor(hexString: "#16B364")
                                         viewStatus.borderColor = UIColor(hexString: "#16B364")
                                     }
@@ -602,17 +587,17 @@ class MyOrderDetailVC: UIViewController {
                             }
                             //                            lbl4.text = "Completed"
                         } else if data.rEApprove == "2" {
-                            lblStatus.text = "Delivered"//"Return Request"
-                            activateStep(0, title: "Confirmed")
-                            activateStep(1, title: "Shipped")
-                            activateStep(2, title: "On the way")
-                            activateStep(3, title: "Delivered") //
+                            lblStatus.text = "Delivered".localiz()//"Return Request"
+                            activateStep(0, title: "Confirmed".localiz())
+                            activateStep(1, title: "Shipped".localiz())
+                            activateStep(2, title: "On the way".localiz())
+                            activateStep(3, title: "Delivered".localiz()) //
                             viewReturnEx.isHidden = false
                         }
                     }
                     
                 case "4": //Cancelled
-                    lblStatus.text = "Cancelled"
+                    lblStatus.text = "Cancelled".localiz()
                     lblStatus.textColor = UIColor(hexString: "#E70000")
                     viewStatus.borderColor = UIColor(hexString: "#E70000")
                     if isCustomOrder {
@@ -625,19 +610,19 @@ class MyOrderDetailVC: UIViewController {
                     viewPaidBy.isHidden = false
                     hideStep(2)
                     hideStep(1)
-                    activateStep(0, title: "Confirmed")
-                    activateStep(3, title: "Cancelled")
+                    activateStep(0, title: "Confirmed".localiz())
+                    activateStep(3, title: "Cancelled".localiz())
                     img4.image = UIImage(named: "canclledOrdreRed")
                     lbl4.textColor = UIColor(hexString: "#D72E04")
                     if let isoDate = CommonUtils.isoStringAddingDays(data.updatedAt, days: 0) {
-                        lblDeliveredOn.text = "Cancelled Date : \(isoDate)"
+                        lblDeliveredOn.text = "\("Cancelled Date :".localiz()) \(isoDate)"
                     } else {
-                        lblDeliveredOn.text = "Cancelled Date : -"
+                        lblDeliveredOn.text = "Cancelled Date :".localiz()
                     }
                     lblReturnAvail.isHidden = true
                     
                 case "7": //Picked
-                    lblStatus.text = "Ongoing"
+                    lblStatus.text = "Ongoing".localiz()
                     lblStatus.textColor = UIColor(hexString: "#E70000")
                     viewStatus.borderColor = UIColor(hexString: "#E70000")
                     viewCancelDetail.isHidden = true
@@ -648,22 +633,22 @@ class MyOrderDetailVC: UIViewController {
                     } else {
                         viewReturnDays.isHidden = false
                     }
-                    activateStep(0, title: "Confirmed")
-                    activateStep(1, title: "Shipped")
-                    activateStep(2, title: "On the Way")
+                    activateStep(0, title: "Confirmed".localiz())
+                    activateStep(1, title: "Shipped".localiz())
+                    activateStep(2, title: "On the Way".localiz())
                     let returnType = data.returnType ?? "0"
                     
                     if returnType == "1" || returnType == "2" {
                         if data.isPicked == "1" {
-                            lblStatus.text = "Return Req."
-                            activateStep(1, title: "Shipped")
-                            activateStep(2, title: "Picked up")
-                            lbl4.text = "Completed"
+                            lblStatus.text = "Return Req.".localiz()
+                            activateStep(1, title: "Shipped".localiz())
+                            activateStep(2, title: "Picked up".localiz())
+                            lbl4.text = "Completed".localiz()
                         }
                     }
                     
                 case "8": //Cancelled
-                    lblStatus.text = "Cancelled"
+                    lblStatus.text = "Cancelled".localiz()
                     lblStatus.textColor = UIColor(hexString: "#E70000")
                     viewStatus.borderColor = UIColor(hexString: "#E70000")
                     viewCancelDetail.isHidden = false
@@ -672,21 +657,21 @@ class MyOrderDetailVC: UIViewController {
                     viewPaidBy.isHidden = false
                     hideStep(2)
                     hideStep(1)
-                    activateStep(0, title: "Confirmed")
-                    activateStep(3, title: "Cancelled")
+                    activateStep(0, title: "Confirmed".localiz())
+                    activateStep(3, title: "Cancelled".localiz())
                     img4.image = UIImage(named: "canclledOrdreRed")
                     lbl4.textColor = UIColor(hexString: "#D72E04")
                     if let isoDate = CommonUtils.isoStringAddingDays(data.updatedAt, days: 0) {
-                        lblDeliveredOn.text = "Cancelled Date : \(isoDate)"
+                        lblDeliveredOn.text = "\("Cancelled Date :".localiz()) \(isoDate)"
                     } else {
-                        lblDeliveredOn.text = "Cancelled Date : -"
+                        lblDeliveredOn.text = "Cancelled Date :".localiz()
                     }
                     lblReturnAvail.isHidden = true
                 default:
                     return
                 }
             } else if paymentStatus == "3" {
-                lblStatus.text = "Cancelled"
+                lblStatus.text = "Cancelled".localiz()
                 lblStatus.textColor = UIColor(hexString: "#E70000")
                 viewStatus.borderColor = UIColor(hexString: "#E70000")
                 viewCancelDetail.isHidden = false
@@ -694,14 +679,14 @@ class MyOrderDetailVC: UIViewController {
                 viewPaidBy.isHidden = false
                 hideStep(2)
                 hideStep(1)
-                activateStep(0, title: "Confirmed")
-                activateStep(3, title: "Cancelled")
+                activateStep(0, title: "Confirmed".localiz())
+                activateStep(3, title: "Cancelled".localiz())
                 img4.image = UIImage(named: "canclledOrdreRed")
                 lbl4.textColor = UIColor(hexString: "#D72E04")
                 if let isoDate = CommonUtils.isoStringAddingDays(data.updatedAt, days: 0) {
-                    lblDeliveredOn.text = "Cancelled Date : \(isoDate)"
+                    lblDeliveredOn.text = "\("Cancelled Date :".localiz()) \(isoDate)"
                 } else {
-                    lblDeliveredOn.text = "Cancelled Date : -"
+                    lblDeliveredOn.text = "Cancelled Date :".localiz()
                 }
                 lblReturnAvail.isHidden = true
             }
@@ -713,21 +698,21 @@ class MyOrderDetailVC: UIViewController {
                     if data.returnType == "1" {
                         viewReturnEx.isHidden = true
                         if data.rEApprove == "1" {
-                            lblStatus.text = "Return Accepted"
+                            lblStatus.text = "Return Accepted".localiz()
                             lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                             viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
                             viewReturnEx.isHidden = true
                             resetStepper()
-                            activateStep(0, title: "Confirmed")
-                            activateStep(1, title: "In Progress")
-                            lbl3.text = "Picked Up"
-                            lbl4.text = "Completed"
+                            activateStep(0, title: "Confirmed".localiz())
+                            activateStep(1, title: "In Progress".localiz())
+                            lbl3.text = "Picked Up".localiz()
+                            lbl4.text = "Completed".localiz()
                             if let isoDate = CommonUtils.isoStringAddingDays(data.updatedAt, days: 6) {
-                                lblDeliveredOn.text = "Pickup Date : \(isoDate)"
+                                lblDeliveredOn.text = "\("Pickup Date :".localiz()) \(isoDate)"
                             } else {
-                                lblDeliveredOn.text = "Pickup Date : -"
+                                lblDeliveredOn.text = "Pickup Date :".localiz()
                             }
-                            lblPlacedDate.text = "Return request \(data.updatedAt?.formattedPlacedDate() ?? "")"
+                            lblPlacedDate.text = "\("Return request".localiz()) \(data.updatedAt?.formattedPlacedDate() ?? "")"
                             let returnImgeUpload = data.returnImage?.first ?? ""
                             if returnImgeUpload.isEmpty {
                                 viewUploadImg.isHidden = true
@@ -738,7 +723,7 @@ class MyOrderDetailVC: UIViewController {
                     }
                     
                 case "1": //Pending
-                    lblStatus.text = "Ongoing"
+                    lblStatus.text = "Ongoing".localiz()
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
                     if isCustomOrder {
@@ -753,20 +738,20 @@ class MyOrderDetailVC: UIViewController {
                         viewCancel.isHidden = false
                     }
                     viewPaidBy.isHidden = false
-                    activateStep(0, title: "Confirmed")
+                    activateStep(0, title: "Confirmed".localiz())
                     let returnType = data.returnType ?? "1"
                     if returnType == "1" || returnType == "2" {
                         let approveType = data.rEApprove ?? "1"
                         if approveType == "1" {
-                            lblStatus.text = "Return Req."
-                            activateStep(1, title: "In Progress")
-                            lbl3.text = "Picked up"
-                            lbl4.text = "Completed"
+                            lblStatus.text = "Return Req.".localiz()
+                            activateStep(1, title: "In Progress".localiz())
+                            lbl3.text = "Picked up".localiz()
+                            lbl4.text = "Completed".localiz()
                         }
                     }
                     
                 case "2": //Ongoing
-                    lblStatus.text = "Ongoing"
+                    lblStatus.text = "Ongoing".localiz()
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
                     if isCustomOrder {
@@ -781,10 +766,10 @@ class MyOrderDetailVC: UIViewController {
                         viewCancel.isHidden = false
                     }
                     viewPaidBy.isHidden = false
-                    activateStep(0, title: "Confirmed")
+                    activateStep(0, title: "Confirmed".localiz())
                     
                 case "2.1":
-                    lblStatus.text = "Ongoing"
+                    lblStatus.text = "Ongoing".localiz()
                     lblStatus.textColor = UIColor(hexString: "#FF5F1B")
                     viewStatus.borderColor = UIColor(hexString: "#FF5F1B")
                     if isCustomOrder {
@@ -796,11 +781,11 @@ class MyOrderDetailVC: UIViewController {
                         viewReturnDays.isHidden = false
                     }
                     viewPaidBy.isHidden = false
-                    activateStep(0, title: "Confirmed")
-                    activateStep(1, title: "Shipped")
+                    activateStep(0, title: "Confirmed".localiz())
+                    activateStep(1, title: "Shipped".localiz())
                     
                 case "3": //Delivered
-                    lblStatus.text = "Delivered"
+                    lblStatus.text = "Delivered".localiz()
                     lblStatus.textColor = UIColor(hexString: "#16B364")
                     viewStatus.borderColor = UIColor(hexString: "#16B364")
                     if isCustomOrder {
@@ -813,21 +798,21 @@ class MyOrderDetailVC: UIViewController {
                     viewPaidBy.isHidden = false
                     viewDownloadInvoice.isHidden = false
                     viewCancelDetail.isHidden = true
-                    activateStep(0, title: "Confirmed")
-                    activateStep(1, title: "Shipped")
-                    activateStep(2, title: "On the Way")
-                    activateStep(3, title: "Delivered")
+                    activateStep(0, title: "Confirmed".localiz())
+                    activateStep(1, title: "Shipped".localiz())
+                    activateStep(2, title: "On the Way".localiz())
+                    activateStep(3, title: "Delivered".localiz())
                     handleReturnExchange(data: data)
                     if let isoDate = CommonUtils.isoStringAddingDays(data.updatedAt, days: 0) {
-                        lblDeliveredOn.text = "Delivered On : \(isoDate)"
+                        lblDeliveredOn.text = "\("Delivered On :".localiz()) \(isoDate)"
                     } else {
-                        lblDeliveredOn.text = "Delivered On : -"
+                        lblDeliveredOn.text = "Delivered On :".localiz()
                     }
                     if data.returnType == "1" || data.returnType == "2"{ //Return Request
                         if data.returnType == "1" {
-                            lblStatus.text = "Return Request"
+                            lblStatus.text = "Return Request".localiz()
                         } else if data.returnType == "2"{
-                            lblStatus.text = "Exchange Request"
+                            lblStatus.text = "Exchange Request".localiz()
                         }
                         
                         lblStatus.textColor = UIColor(hexString: "#FF5F1B")
@@ -836,14 +821,14 @@ class MyOrderDetailVC: UIViewController {
                         resetStepper()
                         img1.image = .unconfiremdOrder
                         img2.image = .shipped
-                        lbl3.text = "Picked Up"
-                        lbl4.text = "Completed"
+                        lbl3.text = "Picked Up".localiz()
+                        lbl4.text = "Completed".localiz()
                         if let isoDate = CommonUtils.isoStringAddingDays(data.updatedAt, days: 6) {
-                            lblDeliveredOn.text = "Pickup Date : \(isoDate)"
+                            lblDeliveredOn.text = "\("Pickup Date :".localiz()) \(isoDate)"
                         } else {
-                            lblDeliveredOn.text = "Pickup Date : -"
+                            lblDeliveredOn.text = "Pickup Date :".localiz()
                         }
-                        lblPlacedDate.text = "Return request \(data.updatedAt?.formattedPlacedDate() ?? "")"
+                        lblPlacedDate.text = "\("Return request".localiz()) \(data.updatedAt?.formattedPlacedDate() ?? "")"
                         let returnImgeUpload = data.returnImage?.first ?? ""
                         if returnImgeUpload.isEmpty {
                             viewUploadImg.isHidden = true
@@ -852,34 +837,34 @@ class MyOrderDetailVC: UIViewController {
                         }
                         if data.rEApprove == "1" {
                             if data.returnType == "1" {
-                                lblStatus.text = "Returned"
-                                activateStep(0, title: "Confirmed")
-                                activateStep(1, title: "Shipped")
-                                activateStep(2, title: "Picked up")
-                                activateStep(3, title: "Completed")
+                                lblStatus.text = "Returned".localiz()
+                                activateStep(0, title: "Confirmed".localiz())
+                                activateStep(1, title: "Shipped".localiz())
+                                activateStep(2, title: "Picked up".localiz())
+                                activateStep(3, title: "Completed".localiz())
                                 lblStatus.textColor = UIColor(hexString: "#16B364")
                                 viewStatus.borderColor = UIColor(hexString: "#16B364")
                             } else if data.returnType == "2"{
-                                lblStatus.text = "Exchange Request"
-                                activateStep(0, title: "Confirmed")
-                                activateStep(1, title: "In Progress")
-                                lbl3.text = "Picked &\nexchange"
-                                lbl4.text = "Completed"
+                                lblStatus.text = "Exchange Request".localiz()
+                                activateStep(0, title: "Confirmed".localiz())
+                                activateStep(1, title: "In Progress".localiz())
+                                lbl3.text = "Picked &\nexchange".localiz()
+                                lbl4.text = "Completed".localiz()
                                 if data.isPicked == "1" {
-                                    activateStep(2, title: "Picked &\nexchange")
+                                    activateStep(2, title: "Picked &\nexchange".localiz())
                                     let exchangeOrderDetails = data.exchangeOrderDetails?.deliveryStatus ?? "0"
                                     if exchangeOrderDetails == "3" {
-                                        activateStep(3, title: "Completed")
-                                        lblStatus.text = "Delivered"
+                                        activateStep(3, title: "Completed".localiz())
+                                        lblStatus.text = "Delivered".localiz()
                                     }
                                 }
                             }
                         } else if data.rEApprove == "2" {
-                            lblStatus.text = "Delivered"//"Return Request"
-                            activateStep(0, title: "Confirmed")
-                            activateStep(1, title: "Shipped")
-                            activateStep(2, title: "On the way")
-                            activateStep(3, title: "Delivered") //
+                            lblStatus.text = "Delivered".localiz()//"Return Request"
+                            activateStep(0, title: "Confirmed".localiz())
+                            activateStep(1, title: "Shipped".localiz())
+                            activateStep(2, title: "On the way".localiz())
+                            activateStep(3, title: "Delivered".localiz()) //
                             viewReturnEx.isHidden = false
                             lblStatus.textColor = UIColor(hexString: "#16B364")
                             viewStatus.borderColor = UIColor(hexString: "#16B364")
@@ -887,7 +872,7 @@ class MyOrderDetailVC: UIViewController {
                     }
                     
                 case "4": //Cancelled
-                    lblStatus.text = "Cancelled"
+                    lblStatus.text = "Cancelled".localiz()
                     lblStatus.textColor = UIColor(hexString: "#E70000")
                     viewStatus.borderColor = UIColor(hexString: "#E70000")
                     viewCancelDetail.isHidden = false
@@ -895,19 +880,19 @@ class MyOrderDetailVC: UIViewController {
                     viewPaidBy.isHidden = false
                     hideStep(2)
                     hideStep(1)
-                    activateStep(0, title: "Confirmed")
-                    activateStep(3, title: "Cancelled")
+                    activateStep(0, title: "Confirmed".localiz())
+                    activateStep(3, title: "Cancelled".localiz())
                     img4.image = UIImage(named: "canclledOrdreRed")
                     lbl4.textColor = UIColor(hexString: "#D72E04")
                     if let isoDate = CommonUtils.isoStringAddingDays(data.updatedAt, days: 0) {
-                        lblDeliveredOn.text = "Cancelled Date : \(isoDate)"
+                        lblDeliveredOn.text = "\("Cancelled Date :".localiz()) \(isoDate)"
                     } else {
-                        lblDeliveredOn.text = "Cancelled Date : -"
+                        lblDeliveredOn.text = "Cancelled Date :".localiz()
                     }
                     lblReturnAvail.isHidden = true
                     
                 case "7": //Picked
-                    lblStatus.text = "Ongoing"
+                    lblStatus.text = "Ongoing".localiz()
                     lblStatus.textColor = UIColor(hexString: "#E70000")
                     viewStatus.borderColor = UIColor(hexString: "#E70000")
                     viewCancelDetail.isHidden = true
@@ -918,22 +903,22 @@ class MyOrderDetailVC: UIViewController {
                     } else {
                         viewReturnDays.isHidden = false
                     }
-                    activateStep(0, title: "Confirmed")
-                    activateStep(1, title: "Shipped")
-                    activateStep(2, title: "On the Way")
+                    activateStep(0, title: "Confirmed".localiz())
+                    activateStep(1, title: "Shipped".localiz())
+                    activateStep(2, title: "On the Way".localiz())
                     let returnType = data.returnType ?? "0"
                     
                     if returnType == "1" || returnType == "2" {
                         if data.isPicked == "1" {
-                            lblStatus.text = "Return Req."
-                            activateStep(1, title: "Shipped")
-                            activateStep(2, title: "Picked up")
-                            lbl4.text = "Completed"
+                            lblStatus.text = "Return Req.".localiz()
+                            activateStep(1, title: "Shipped".localiz())
+                            activateStep(2, title: "Picked up".localiz())
+                            lbl4.text = "Completed".localiz()
                         }
                     }
                     
                 case "8": //Cancelled
-                    lblStatus.text = "Cancelled"
+                    lblStatus.text = "Cancelled".localiz()
                     lblStatus.textColor = UIColor(hexString: "#E70000")
                     viewStatus.borderColor = UIColor(hexString: "#E70000")
                     viewCancelDetail.isHidden = false
@@ -942,21 +927,21 @@ class MyOrderDetailVC: UIViewController {
                     viewPaidBy.isHidden = false
                     hideStep(2)
                     hideStep(1)
-                    activateStep(0, title: "Confirmed")
-                    activateStep(3, title: "Cancelled")
+                    activateStep(0, title: "Confirmed".localiz())
+                    activateStep(3, title: "Cancelled".localiz())
                     img4.image = UIImage(named: "canclledOrdreRed")
                     lbl4.textColor = UIColor(hexString: "#D72E04")
                     if let isoDate = CommonUtils.isoStringAddingDays(data.updatedAt, days: 0) {
-                        lblDeliveredOn.text = "Cancelled Date : \(isoDate)"
+                        lblDeliveredOn.text = "\("Cancelled Date :".localiz()) \(isoDate)"
                     } else {
-                        lblDeliveredOn.text = "Cancelled Date : -"
+                        lblDeliveredOn.text = "Cancelled Date :".localiz()
                     }
                     lblReturnAvail.isHidden = true
                 default:
                     return
                 }
             } else if paymentStatus == "2" {
-                lblStatus.text = "Cancelled"
+                lblStatus.text = "Cancelled".localiz()
                 lblStatus.textColor = UIColor(hexString: "#E70000")
                 viewStatus.borderColor = UIColor(hexString: "#E70000")
                 viewCancelDetail.isHidden = false
@@ -964,18 +949,18 @@ class MyOrderDetailVC: UIViewController {
                 viewPaidBy.isHidden = false
                 hideStep(2)
                 hideStep(1)
-                activateStep(0, title: "Confirmed")
-                activateStep(3, title: "Cancelled")
+                activateStep(0, title: "Confirmed".localiz())
+                activateStep(3, title: "Cancelled".localiz())
                 img4.image = UIImage(named: "canclledOrdreRed")
                 lbl4.textColor = UIColor(hexString: "#D72E04")
                 lblReturnAvail.isHidden = true
                 if let isoDate = CommonUtils.isoStringAddingDays(data.updatedAt, days: 0) {
-                    lblDeliveredOn.text = "Cancelled Date : \(isoDate)"
+                    lblDeliveredOn.text = "\("Cancelled Date :".localiz()) \(isoDate)"
                 } else {
-                    lblDeliveredOn.text = "Cancelled Date : -"
+                    lblDeliveredOn.text = "Cancelled Date :".localiz()
                 }
             }
-            lblPaidByCard.text = "COD"
+            lblPaidByCard.text = "COD".localiz()
             lblTransactionId.isHidden = true
         }
         

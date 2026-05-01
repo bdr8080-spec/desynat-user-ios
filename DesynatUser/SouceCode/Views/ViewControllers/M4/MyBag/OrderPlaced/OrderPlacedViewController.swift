@@ -8,7 +8,7 @@
 import UIKit
 import SwiftyGif
 
-class OrderPlacedViewController: UIViewController { //}, SwiftyGifDelegate {
+class OrderPlacedViewController: UIViewController {
     
     // MARK: - IBOutlet's
     @IBOutlet weak var payentDoneOrNotLabel: UILabel!
@@ -57,19 +57,10 @@ class OrderPlacedViewController: UIViewController { //}, SwiftyGifDelegate {
             let gif = try UIImage(gifName: "orderPlace.gif")
             let gifManager = SwiftyGifManager(memoryLimit: 20)
             imageVideo.setGifImage(gif, manager: gifManager, loopCount: 1)
-//            imageVideo.delegate = self
         } catch {
             print("No image found")
-//            imageVideo.image = .brownDone
         }
     }
-    
-//    func gifDidStop(sender: UIImageView) {
-//        if sender == imageVideo {
-//            imageVideo.image = .brownDone
-//        }
-//    }
-    
     
     func configData(data: OrderSummaryDataModel?) {
         locationLabel.text = data?.deliveryDetails?.name
@@ -107,15 +98,4 @@ class OrderPlacedViewController: UIViewController { //}, SwiftyGifDelegate {
         )
         amountPaidLabel.attributedText = attributedString
     }
-    
-//    func formatPrice(_ amount: Double?, currency: String = "KD") -> String {
-//        guard let amount = amount else { return "0 \(currency)" }
-//        let roundedAmount = round(amount * 100) / 100
-//        if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
-//            return "\(Int(roundedAmount)) \(currency)"
-//        } else {
-//            return String(format: "%.2f", roundedAmount) + " \(currency)"
-//        }
-//    }
-    
 }

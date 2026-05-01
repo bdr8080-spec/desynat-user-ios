@@ -43,16 +43,6 @@ class SupportChatViewController: UIViewController, WKNavigationDelegate {
                                             mobile: "732837468")
             loadTidioHTML(user: userDetails)
         }
-//        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-//        if let affiliatedAccessToken = affiliatedUserToken,
-//           !affiliatedAccessToken.isEmpty {
-//            if let savedUser: User = kSharedUserDefaults.retrieveModelFor(key: .affiliatedUserDeatils, model: User.self) {
-//                loadTidioHTML(user: savedUser)
-//            }
-//        } else if let accessToken = kSharedUserDefaults.getStringFor(key: .accessToken),
-//                  !accessToken.isEmpty {
-            
-//        }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             CommonUtils.showHud(show: false)

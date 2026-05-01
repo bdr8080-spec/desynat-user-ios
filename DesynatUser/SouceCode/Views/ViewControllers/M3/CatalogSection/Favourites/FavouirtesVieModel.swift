@@ -22,7 +22,7 @@ class FavouirtesVieModel: NSObject {
         WebService.sharedInstance.getWishlistService { list in
             self.productList = list
             let isEmpty = self.productList?.isEmpty ?? true
-            self.hostVC.emptyLabel.text = isEmpty ? "No product found" : ""
+            self.hostVC.emptyLabel.text = isEmpty ? "No product found".localiz() : ""
             self.hostVC.emptyLabel.isHidden = !isEmpty
             self.hostVC.favouriteCollectionView.reloadData()
         }
@@ -32,7 +32,7 @@ class FavouirtesVieModel: NSObject {
         WebService.sharedInstance.getReelsWishlistService { list in
             self.reelsList = list
             let isEmpty = self.reelsList?.isEmpty ?? true
-            self.hostVC.emptyLabel.text = isEmpty ? "No reels found" : ""
+            self.hostVC.emptyLabel.text = isEmpty ? "No reels found".localiz() : ""
             self.hostVC.emptyLabel.isHidden = !isEmpty
             self.hostVC.favouriteCollectionView.reloadData()
         }
@@ -45,12 +45,6 @@ class FavouirtesVieModel: NSObject {
             completion(true)
         }
     }
-    
-//    func shareReels(reelId: Int) {
-//        let param: [String: Any] = ["reel_id": reelId]
-//        WebService.sharedInstance.shareReelsService(param: param) { list in
-//        }
-//    }
     
     func shareReelsRequest(reelId: Int, completion: @escaping (String?) -> Void) {
 

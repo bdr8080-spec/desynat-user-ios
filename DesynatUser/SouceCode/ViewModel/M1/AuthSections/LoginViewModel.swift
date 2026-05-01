@@ -71,7 +71,7 @@ class LoginViewModel: NSObject {
             params["country_code"] = loginHostVC.countryCode
             params["type"] = "0"
         } else {
-            loginHostVC.showAlert(msg: AlertConstant.EnterValidEmailorMobile.rawValue)
+            loginHostVC.showAlert(msg: AlertConstant.EnterValidEmailorMobile.rawValue.localiz())
             return
         }
         WebService.sharedInstance.loginUserService(withParams: params) { (response) in
@@ -87,11 +87,5 @@ class LoginViewModel: NSObject {
             self.getAllUSerCountryList = list
         }
     }
-    
-//        func countryListApi(){
-//            WebService.sharedInstance.countryListService { list in
-//                self.countryList = list
-//            }
-//        }
 }
 

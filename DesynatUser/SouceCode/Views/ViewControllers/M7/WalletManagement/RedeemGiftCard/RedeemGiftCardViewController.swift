@@ -28,11 +28,11 @@ class RedeemGiftCardViewController: UIViewController {
     // MARK: - Button's Action
     @IBAction func redeemDidTapped(_ sender: Any) {
         guard let cardNumber = cardNumberTF.text, !cardNumber.isEmpty else {
-            showAlert(msg: "Please enter 16 Digit gift card number")
+            showAlert(msg: "Please enter 16 Digit gift card number".localiz())
             return
         }
         guard let pin = pinTF.text, !pin.isEmpty else {
-            showAlert(msg: "Please enter PIN")
+            showAlert(msg: "Please enter PIN".localiz())
             return
         }
         viewModel.addGiftCardApi(cardNumber: cardNumber, giftCardPin: pin)

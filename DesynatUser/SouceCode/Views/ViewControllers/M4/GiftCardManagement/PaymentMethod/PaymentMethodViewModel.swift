@@ -106,7 +106,7 @@ class PaymentMethodViewModel {
     func updateWalletDescription(amount: Double) {
         let formatted = formatAmount(amount)
         if let index = paymentMethods.firstIndex(where: { $0.paymentMethodTitle == PaymentMethodType.inAppWallet.rawValue }) {
-            paymentMethods[index].description = "Available Balance : \(CommonUtils.formatPriceStringInput(formatted))"
+            paymentMethods[index].description = "\("Available Balance :".localiz()) \(CommonUtils.formatPriceStringInput(formatted))"
         }
     }
     

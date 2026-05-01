@@ -45,7 +45,7 @@ class PromoCodeListViewController: UIViewController {
     @IBAction func applyDidTapped(_ sender: Any) {
         let prmocode = SearchTF.text?.trimmed() ?? ""
         if prmocode.isEmpty {
-            showAlert(msg: "Please enter Promocode")
+            showAlert(msg: "Please enter Promocode".localiz())
             return
         }
         viewModel.applyPromocodeFroSearch()

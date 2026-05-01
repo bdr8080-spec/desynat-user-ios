@@ -31,27 +31,27 @@ class RegisterationSuccessViewController: UIViewController {
     func initialSetup() {
         switch comingReason {
         case .passwordUpdated:
-            descriptionLabel.text = "Password Reset\nsuccessfully!"
+            descriptionLabel.text = "Password Reset\nsuccessfully!".localiz()
         case .accountCreated:
-            descriptionLabel.text = "Thank you for sinning up\nwith DESYNAT"
+            descriptionLabel.text = "Thank you for sinning up\nwith DESYNAT".localiz()
         case .changePassword:
-            descriptionLabel.text = "Password changed successfully!"
+            descriptionLabel.text = "Password changed successfully!".localiz()
         case .changeMobileNumber:
-            descriptionLabel.text = "Mobile Number Changed\nsuccessfully !"
+            descriptionLabel.text = "Mobile Number Changed\nsuccessfully!".localiz()
         case .changeEmailAddress:
-            descriptionLabel.text = "Email Address Changed\nsuccessfully !"
+            descriptionLabel.text = "Email Address Changed\nsuccessfully!".localiz()
         case .giftCardPurchased:
-            descriptionLabel.text = "Gift card purchased\nsuccessfully!"
+            descriptionLabel.text = "Gift card purchased\nsuccessfully!".localiz()
         case .quotationSentForCustomization:
-            descriptionLabel.text = "Request sent\nsuccessfully!"
+            descriptionLabel.text = "Request sent\nsuccessfully!".localiz()
         case .amountAddeddToWallet:
-            descriptionLabel.text = "Amount added\nsuccessfully!"
+            descriptionLabel.text = "Amount added\nsuccessfully!".localiz()
         case .giftCardRedeemed:
-            descriptionLabel.text = "Gift Card Redeemed\nsuccessfully!"
+            descriptionLabel.text = "Gift Card Redeemed\nsuccessfully!".localiz()
         case .changePasswordForAffiliatedUser:
-            descriptionLabel.text = "Password changed successfully!"
+            descriptionLabel.text = "Password changed successfully!".localiz()
         case .amountAddedIntoWalletForAffiliatedUser:
-            descriptionLabel.text = "Request sent successfully!"
+            descriptionLabel.text = "Request sent successfully!".localiz()
         }
     }
     

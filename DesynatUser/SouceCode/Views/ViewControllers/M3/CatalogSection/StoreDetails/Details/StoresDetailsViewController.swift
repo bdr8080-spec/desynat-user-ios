@@ -331,9 +331,9 @@ class StoresDetailsViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.storesCollectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
                     if newStatus == 1 {
-                        CommonUtils.showToast(message: "Product added to wishlist")
+                        CommonUtils.showToast(message: "Product added to wishlist".localiz())
                     } else {
-                        CommonUtils.showToast(message: "Product removed from wishlist")
+                        CommonUtils.showToast(message: "Product removed from wishlist".localiz())
                     }
                 }
             } else {
@@ -359,9 +359,9 @@ class StoresDetailsViewController: UIViewController {
                     self.reelsCollectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
                     
                     if newStatus == 1 {
-                        CommonUtils.showToast(message: "Reel added to wishlist")
+                        CommonUtils.showToast(message: "Reel added to wishlist".localiz())
                     } else {
-                        CommonUtils.showToast(message: "Reel removed from wishlist")
+                        CommonUtils.showToast(message: "Reel removed from wishlist".localiz())
                     }
                 }
             } else {

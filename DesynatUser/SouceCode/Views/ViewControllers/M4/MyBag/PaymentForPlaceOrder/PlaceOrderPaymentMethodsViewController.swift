@@ -56,7 +56,7 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
     // MARK: - Button's Action
     @IBAction func placeOrderDidTapped(_ sender: Any) {
         guard let method = selectedPaymentMethod else {
-            viewModel.showAlertAtPayment(msg: "Please select a payment method")
+            viewModel.showAlertAtPayment(msg: "Please select a payment method".localiz())
             return
         }
         switch method {
@@ -70,7 +70,7 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
             let walletBalance = viewModel.walletAmount ?? 0.0
             let amountToPay = totalAmountToPay
             if walletBalance < amountToPay {
-                viewModel.showAlertAtPayment(msg: "Insufficient wallet balance. Available: \(walletBalance) KD")
+                viewModel.showAlertAtPayment(msg: "\("Insufficient wallet balance. Available:".localiz()) \(walletBalance) KD")
                 return
             }
             proceedToPay()
@@ -80,7 +80,7 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
             if paymentCompleted, paymentTransactionDetails != nil {
                 proceedToPay()
             } else {
-                viewModel.showAlertAtPayment(msg: "Payment is being processed or not completed yet.")
+                viewModel.showAlertAtPayment(msg: "Payment is being processed or not completed yet.".localiz())
             }
         }
     }
@@ -96,7 +96,7 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
             giftCardDetails = cardDetails
             giftCardLabel.text = cardNumber
             giftCardAmountLabel.isHidden = false
-            giftCardAmountLabel.text = "\(cardDetails.giftCardAmount ?? "0") KD Gift Card Amount Redeemed"
+            giftCardAmountLabel.text = "\(CommonUtils.formatPriceStringInput(cardDetails.giftCardAmount)) \("Gift Card Amount Redeemed".localiz())"
             totalAmountToPay = totalAmountToPay - (Double(cardDetails.giftCardAmount ?? "0.0") ?? 0.0)
             checkMarkImageView.isHidden = false
         }
@@ -125,7 +125,7 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
             if !getToastMessage.isEmpty {
                 viewModel.showAlertAtPayment(msg: getToastMessage)
             } else {
-                viewModel.showAlertAtPayment(msg: "Please complete the payment")
+                viewModel.showAlertAtPayment(msg: "Please complete the payment".localiz())
             }
             return
         }
@@ -191,7 +191,7 @@ extension PlaceOrderPaymentMethodsViewController: UITableViewDelegate, UITableVi
                     } else if let error = error {
                         self.didReceivePaymentError(error.localizedDescription)
                     } else {
-                        self.didReceivePaymentError("Apple Pay was cancelled or failed")
+                        self.didReceivePaymentError("Apple Pay was cancelled or failed".localiz())
                     }
                 }
             } else if selectedPaymentMethod == .inAppWallet {

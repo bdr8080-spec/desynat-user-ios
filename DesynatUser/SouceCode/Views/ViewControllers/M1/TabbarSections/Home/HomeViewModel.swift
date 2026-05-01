@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import _LocationEssentials
+import CoreLocation
 
 class HomeViewModel: NSObject {
     
@@ -203,9 +205,9 @@ class HomeViewModel: NSObject {
                 DispatchQueue.main.async {
                     self.hostVC.topRatedCollectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
                     if newStatus == 1 {
-                        CommonUtils.showToast(message: "Product added to wishlist")
+                        CommonUtils.showToast(message: "Product added to wishlist".localiz())
                     } else {
-                        CommonUtils.showToast(message: "Product removed from wishlist")
+                        CommonUtils.showToast(message: "Product removed from wishlist".localiz())
                     }
                 }
             } else {
@@ -226,9 +228,9 @@ class HomeViewModel: NSObject {
                 DispatchQueue.main.async {
                     self.hostVC.bestSellingCollectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
                     if newStatus == 1 {
-                        CommonUtils.showToast(message: "Product added to wishlist")
+                        CommonUtils.showToast(message: "Product added to wishlist".localiz())
                     } else {
-                        CommonUtils.showToast(message: "Product removed from wishlist")
+                        CommonUtils.showToast(message: "Product removed from wishlist".localiz())
                     }
                 }
             } else {
@@ -249,9 +251,9 @@ class HomeViewModel: NSObject {
                 DispatchQueue.main.async {
                     self.hostVC.newestProductsCollectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
                     if newStatus == 1 {
-                        CommonUtils.showToast(message: "Product added to wishlist")
+                        CommonUtils.showToast(message: "Product added to wishlist".localiz())
                     } else {
-                        CommonUtils.showToast(message: "Product removed from wishlist")
+                        CommonUtils.showToast(message: "Product removed from wishlist".localiz())
                     }
                 }
             } else {
@@ -264,6 +266,35 @@ class HomeViewModel: NSObject {
         let param: [String: Any] = ["product_id": productId]
         WebService.sharedInstance.addToWishelistSercie(param: param) { list in
             completion(true)
+        }
+    }
+    
+    func getAddress(from location: CLLocation) {
+        let geocoder = CLGeocoder()
+        
+        geocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                print("Geocode error:", error.localizedDescription)
+                hostVC.lblLocatioin.text = "Address not found".localiz()
+                return
+            }
+            
+            if let place = placemarks?.first {
+                let address = [
+                    place.name,
+                    place.locality,
+                    place.administrativeArea,
+                    place.country
+                ]
+                .compactMap { $0 }
+                .joined(separator: ", ")
+                
+                DispatchQueue.main.async {
+                    self.hostVC.lblLocatioin.text = address
+                }
+            }
         }
     }
 }

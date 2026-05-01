@@ -32,7 +32,7 @@ class SelectOccassionViewController: UIViewController {
     // MARK: - Button's Action
     @IBAction func continueDidTapped(_ sender: Any) {
         guard let _ = selectedIndex else {
-            showAlert(msg: "Please select gift card category")
+            showAlert(msg: "Please select gift card category".localiz())
             return
         }
         let vc = EnterCardsDetailsViewController.instantiate(fromAppStoryboard: .Profile)

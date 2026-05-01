@@ -119,14 +119,14 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
     private func initialSetup() {
         switch comingReason {
         case .fromHome:
-            titleLabel.text = "Change Location"
-            buttonTitleLabel.text = "Continue"
+            titleLabel.text = "Change Location".localiz()
+            buttonTitleLabel.text = "Continue".localiz()
         case .fromAddAddress:
-            titleLabel.text = "Set Location"
-            buttonTitleLabel.text = "Continue"
+            titleLabel.text = "Set Location".localiz()
+            buttonTitleLabel.text = "Continue".localiz()
         case .affiliateUserAccountCreation:
-            titleLabel.text = "Add Address"
-            buttonTitleLabel.text = "Save"
+            titleLabel.text = "Add Address".localiz()
+            buttonTitleLabel.text = "Save".localiz()
         }
     }
 }

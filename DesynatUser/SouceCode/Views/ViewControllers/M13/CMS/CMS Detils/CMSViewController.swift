@@ -32,19 +32,19 @@ class CMSViewController: UIViewController {
     func initialSetup(){
         switch comingReason {
         case .aboutUs:
-            titleLbl.text = "About Us"
+            titleLbl.text = "About Us".localiz()
             viewmodel.getAboutUsRequest()
         case .termsAndConditions:
-            titleLbl.text = "Terms & Condition"
+            titleLbl.text = "Terms & Condition".localiz()
             viewmodel.getTermsAndConditionRequest()
         case .returnPolicy:
-            titleLbl.text = "Return Policy"
+            titleLbl.text = "Return Policy".localiz()
             viewmodel.getReturnPolicyRequest()
         case .cancellationPolicy:
-            titleLbl.text = "Cancellation Policy"
+            titleLbl.text = "Cancellation Policy".localiz()
             viewmodel.getCancellationPolicyRequest()
         case .exchangePolicy:
-            titleLbl.text = "Exchange Policy"
+            titleLbl.text = "Exchange Policy".localiz()
             viewmodel.getExchangePolicyRequest()
         default:
             return

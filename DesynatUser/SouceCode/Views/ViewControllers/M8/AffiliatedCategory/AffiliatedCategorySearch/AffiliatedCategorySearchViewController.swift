@@ -75,7 +75,7 @@ class AffiliatedCategorySearchViewController: UIViewController {
             ),
             !searchText.isEmpty
         else {
-            showAlert(msg: "Please search something")
+            showAlert(msg: "Please search something".localiz())
             return
         }
         let nextVC = SearchAffiliatedProductsViewController.instantiate(
@@ -173,7 +173,7 @@ class AffiliatedCategorySearchViewController: UIViewController {
                     ),
                     !searchText.isEmpty
                 else {
-                    showAlert(msg: "Please search something")
+                    showAlert(msg: "Please search something".localiz())
                     return
                 }
                 let nextVC = SearchAffiliatedProductsViewController.instantiate(

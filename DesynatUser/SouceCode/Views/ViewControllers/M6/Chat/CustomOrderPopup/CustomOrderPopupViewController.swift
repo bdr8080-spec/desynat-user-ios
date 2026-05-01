@@ -96,7 +96,7 @@ class CustomOrderPopupViewController: UIViewController {
         // Quantity
         guard let quantity = quantityTF.text?.trimmingCharacters(in: .whitespaces),
               !quantity.isEmpty else {
-            showAlert(msg: "Please enter quantity")
+            showAlert(msg: "Please enter quantity".localiz())
             quantityTF.becomeFirstResponder()
             return false
         }
@@ -104,7 +104,7 @@ class CustomOrderPopupViewController: UIViewController {
         // Custom details
         guard let details = customDetailsTextView.text?.trimmingCharacters(in: .whitespaces),
               !details.isEmpty else {
-            showAlert(msg: "Please enter custom details")
+            showAlert(msg: "Please enter custom details".localiz())
             customDetailsTextView.becomeFirstResponder()
             return false
         }

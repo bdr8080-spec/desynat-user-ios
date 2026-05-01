@@ -20,7 +20,7 @@ class AffiliatedCopyLinkViewModel {
         WebService.shared.addProductToMyProductsService(param: params) { [weak self] response in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                CommonUtils.showToast(message: "Product added successfully")
+                CommonUtils.showToast(message: "Product added successfully".localiz())
                 self.hostVC.onAddToProduct?()
                 self.hostVC.dismiss(animated: true)
             }

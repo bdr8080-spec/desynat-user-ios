@@ -65,7 +65,7 @@ class SearchVC: UIViewController {
         stopListening()
         guard let searchText = txtSearch.text?.trimmingCharacters(in: .whitespacesAndNewlines),
               !searchText.isEmpty else {
-            showAlert(msg: "Please search something")
+            showAlert(msg: "Please search something".localiz())
             return
         }
         let nextVC = SearchProductListViewController.instantiate(fromAppStoryboard: .MyOrder)
@@ -157,7 +157,7 @@ class SearchVC: UIViewController {
                 self.stopListening()
                 guard let searchText = txtSearch.text?.trimmingCharacters(in: .whitespacesAndNewlines),
                       !searchText.isEmpty else {
-                    showAlert(msg: "Please search something")
+                    showAlert(msg: "Please search something".localiz())
                     return
                 }
                 let nextVC = SearchProductListViewController.instantiate(fromAppStoryboard: .MyOrder)
@@ -313,7 +313,7 @@ extension SearchVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
             }
             guard let objects = objects, !objects.isEmpty else {
                 DispatchQueue.main.async {
-                    self.showAlert(msg: "No object detected")
+                    self.showAlert(msg: "No object detected".localiz())
                 }
                 return
             }

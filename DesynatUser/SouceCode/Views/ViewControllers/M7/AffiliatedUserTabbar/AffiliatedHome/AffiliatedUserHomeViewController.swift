@@ -113,9 +113,9 @@ extension AffiliatedUserHomeViewController: UITextFieldDelegate {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
-        let done = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneDatePicker))
+        let done = UIBarButtonItem(title: "Done".localiz(), style: .done, target: self, action: #selector(doneDatePicker))
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
+        let cancel = UIBarButtonItem(title: "Cancel".localiz(), style: .plain, target: self, action: #selector(cancelDatePicker))
         
         toolbar.setItems([cancel, space, done], animated: false)
         
@@ -171,7 +171,7 @@ extension AffiliatedUserHomeViewController: UITextFieldDelegate {
         
         // ❌ Validation
         if toDate < fromDate {
-            showAlert("To date cannot be less than From date")
+            showAlert("To date cannot be less than From date".localiz())
             toDateTextField.text = ""
             return
         }
@@ -188,8 +188,8 @@ extension AffiliatedUserHomeViewController: UITextFieldDelegate {
     }
     
     private func showAlert(_ message: String) {
-        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        let alert = UIAlertController(title: "Alert".localiz(), message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK".localiz(), style: .default))
         present(alert, animated: true)
     }
 }

@@ -12,8 +12,8 @@ import UIKit
 class ForgotPasswordViewModel: NSObject {
     
     private var hostVC: ForgotPasswordViewController
-  var getAllUSerCountryList:[GetAllUserCountryModel] = []
-  var getSevenCountryList:[CountryModel] = []
+    var getAllUSerCountryList:[GetAllUserCountryModel] = []
+    var getSevenCountryList:[CountryModel] = []
     
     init(hostVC: ForgotPasswordViewController) {
         self.hostVC = hostVC
@@ -48,19 +48,19 @@ class ForgotPasswordViewModel: NSObject {
     
     func forgotPasswordApi(mobileIsSelected: Bool) {
         var params: [String: Any] = [:]
-            
-            if mobileIsSelected {
-                params = [
-                    "type": "0", // 0 for mobile
-                    "country_code": hostVC.countryCode,
-                    "mobile": hostVC.mobileTextField.text?.trimmed() ?? ""
-                ]
-            } else {
-                params = [
-                    "type": "1", // 1 for email
-                    "email": hostVC.emailAddressTextField.text?.trimmed() ?? ""
-                ]
-            }
+        
+        if mobileIsSelected {
+            params = [
+                "type": "0", // 0 for mobile
+                "country_code": hostVC.countryCode,
+                "mobile": hostVC.mobileTextField.text?.trimmed() ?? ""
+            ]
+        } else {
+            params = [
+                "type": "1", // 1 for email
+                "email": hostVC.emailAddressTextField.text?.trimmed() ?? ""
+            ]
+        }
         WebService.sharedInstance.forgotPasswordService(withParams: params) { (response) in
             let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
             vc.comingReason = .forgotPassword
@@ -78,19 +78,19 @@ class ForgotPasswordViewModel: NSObject {
     
     func forgotPasswordApiForAffiliatedUser(mobileIsSelected: Bool) {
         var params: [String: Any] = [:]
-            
-            if mobileIsSelected {
-                params = [
-                    "type": "0", // 0 for mobile
-                    "country_code": hostVC.countryCode,
-                    "mobile": hostVC.mobileTextField.text?.trimmed() ?? ""
-                ]
-            } else {
-                params = [
-                    "type": "1", // 1 for email
-                    "email": hostVC.emailAddressTextField.text?.trimmed() ?? ""
-                ]
-            }
+        
+        if mobileIsSelected {
+            params = [
+                "type": "0", // 0 for mobile
+                "country_code": hostVC.countryCode,
+                "mobile": hostVC.mobileTextField.text?.trimmed() ?? ""
+            ]
+        } else {
+            params = [
+                "type": "1", // 1 for email
+                "email": hostVC.emailAddressTextField.text?.trimmed() ?? ""
+            ]
+        }
         WebService.sharedInstance.forgotPasswordForAffiliatedUserService(withParams: params) { (response) in
             let vc = OTPViewController.instantiate(fromAppStoryboard: .Main)
             vc.comingReason = .forgotPasswordForAffiliatedUser
@@ -106,7 +106,7 @@ class ForgotPasswordViewModel: NSObject {
         }
     }
     
-  func getALlUserCountryListApi(){
+    func getALlUserCountryListApi(){
         WebService.sharedInstance.getAllUserscountryList { list in
             self.getAllUSerCountryList = list
         }
@@ -117,5 +117,5 @@ class ForgotPasswordViewModel: NSObject {
             self.getSevenCountryList = list
         }
     }
-
+    
 }

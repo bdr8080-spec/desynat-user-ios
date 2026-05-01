@@ -25,11 +25,12 @@ class ChangeCurrencyViewController: UIViewController {
         super.viewDidLoad()
         switch comingReason {
         case .comingFromCurrency:
-            titleLabel.text = "Change Currency"
+            titleLabel.text = "Change Currency".localiz()
+            viewModel.getAllUsersCurrencyList()
         case .comingFromCountry:
-            titleLabel.text = "Change Country"
+            titleLabel.text = "Change Country".localiz()
+            viewModel.getALlUserCountryListApi()
         }
-        viewModel.getALlUserCountryListApi()
     }
 
     @IBAction func backDidTapped(_ sender: Any) {
@@ -40,7 +41,7 @@ class ChangeCurrencyViewController: UIViewController {
         switch comingReason {
         case .comingFromCurrency:
             guard selectedId != -1 else {
-                CommonUtils.showToast(message: "Please select country")
+                CommonUtils.showToast(message: "Please select country".localiz())
                 return
             }
             switch comingUserRole {
@@ -51,7 +52,7 @@ class ChangeCurrencyViewController: UIViewController {
             }
         case .comingFromCountry:
             guard selectedId != -1 else {
-                CommonUtils.showToast(message: "Please select country")
+                CommonUtils.showToast(message: "Please select country".localiz())
                 return
             }
             switch comingUserRole {

@@ -39,7 +39,7 @@ class ChatInboxTableViewCell: UITableViewCell {
         }
         usernameLabel.text = "\(data?.sellerDetails?.firstName ?? "") \(data?.sellerDetails?.lastName ?? "")"
         if data?.messageType == "1" {
-            messageLabel.text = "Sent an attachment"
+            messageLabel.text = "Sent an attachment".localiz()
         } else {
             messageLabel.text = data?.lastChat ?? ""
         }
@@ -64,34 +64,34 @@ class ChatInboxTableViewCell: UITableViewCell {
                 messageTypeStatusView.isHidden = true
                 if requestType == "1" {
                     messageTypeStatusView.isHidden = false
-                    messageTypeLabel.text = "Waiting"
+                    messageTypeLabel.text = "Waiting".localiz()
                     messageTypeLabel.textColor = UIColor(hex: "#EA9413") // orange
                     messageTypeStatusView.backgroundColor = UIColor(hex: "#EA9413").withAlphaComponent(0.15)
                 }
             case "1":
-                messageTypeLabel.text = "Quotation Received"
+                messageTypeLabel.text = "Quotation Received".localiz()
                 messageTypeLabel.textColor = UIColor(hex: "#172B85") // dark blue
                 messageTypeStatusView.backgroundColor = UIColor(hex: "#172B85").withAlphaComponent(0.15)
             case "2":
-                messageTypeLabel.text = "Quotation Received"
+                messageTypeLabel.text = "Quotation Received".localiz()
                 messageTypeLabel.textColor = UIColor(hex: "#172B85") // dark blue
                 messageTypeStatusView.backgroundColor = UIColor(hex: "#172B85").withAlphaComponent(0.15)
             case "4":
-                messageTypeLabel.text = "Rejected"
+                messageTypeLabel.text = "Rejected".localiz()
                 messageTypeLabel.textColor = UIColor(hex: "#EA9413") // red
                 messageTypeStatusView.backgroundColor = UIColor(hex: "#EA9413").withAlphaComponent(0.15)
             case "5":
-                messageTypeLabel.text = "Quotation Accepted"
+                messageTypeLabel.text = "Quotation Accepted".localiz()
                 messageTypeLabel.textColor = UIColor(hex: "#17854C") // green
                 messageTypeStatusView.backgroundColor = UIColor(hex: "#17854C").withAlphaComponent(0.15)
                 let isOrderPlaced = data?.orderCreateStatus?.id != nil
                 if isOrderPlaced {
-                    messageTypeLabel.text = "Placed"
+                    messageTypeLabel.text = "Placed".localiz()
                     messageTypeLabel.textColor = UIColor(hex: "#EA9413") // red
                     messageTypeStatusView.backgroundColor = UIColor(hex: "#EA9413").withAlphaComponent(0.15)
                 }
                 if data?.productBuyStatus == "1" {
-                    messageTypeLabel.text = "Placed"
+                    messageTypeLabel.text = "Placed".localiz()
                     messageTypeLabel.textColor = UIColor(hex: "#EA9413") // red
                     messageTypeStatusView.backgroundColor = UIColor(hex: "#EA9413").withAlphaComponent(0.15)
                 }
@@ -128,12 +128,12 @@ class ChatInboxTableViewCell: UITableViewCell {
         
         // Today
         if calendar.isDateInToday(date) {
-            return "Today \(timeFormatter.string(from: date))"
+            return "\("Today".localiz()) \(timeFormatter.string(from: date))"
         }
         
         // Yesterday
         if calendar.isDateInYesterday(date) {
-            return "Yesterday \(timeFormatter.string(from: date))"
+            return "\("Yesterday".localiz()) \(timeFormatter.string(from: date))"
         }
         
         // Older dates

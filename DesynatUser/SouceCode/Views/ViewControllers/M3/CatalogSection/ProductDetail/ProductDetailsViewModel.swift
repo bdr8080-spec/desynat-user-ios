@@ -50,7 +50,7 @@ class ProductDetailsViewModel: NSObject {
         }
         WebService.sharedInstance.addToCart(param: param) { list in
             DispatchQueue.main.async {
-                CommonUtils.showToast(message: "Product Added to Cart Succesfully")
+                CommonUtils.showToast(message: "Product Added to Cart Succesfully".localiz())
             }
             completion(true)
         }
@@ -68,7 +68,7 @@ class ProductDetailsViewModel: NSObject {
         }
         WebService.sharedInstance.addToCart(param: param) { list in
             DispatchQueue.main.async {
-                CommonUtils.showToast(message: "Product Added to Cart Succesfully")
+                CommonUtils.showToast(message: "Product Added to Cart Succesfully".localiz())
             }
             completion(true)
         }

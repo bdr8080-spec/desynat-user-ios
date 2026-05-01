@@ -148,11 +148,11 @@ class AddAddressViewController: UIViewController {
     private func initialUserSetup() {
         switch comingReason {
         case .forAddNewAddress:
-            titleLabel.text = "ADD NEW ADDRESS"
-            buttonLabel.text = "Add Address"
+            titleLabel.text = "ADD NEW ADDRESS".localiz()
+            buttonLabel.text = "Add Address".localiz()
         case .forEditAddress:
-            titleLabel.text = "EDIT ADDRESS"
-            buttonLabel.text = "Update"
+            titleLabel.text = "EDIT ADDRESS".localiz()
+            buttonLabel.text = "Update".localiz()
             prefillData()
         }
     }
