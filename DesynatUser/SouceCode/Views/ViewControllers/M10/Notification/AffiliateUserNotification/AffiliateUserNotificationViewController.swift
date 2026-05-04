@@ -13,7 +13,7 @@ class AffiliateUserNotificationViewController: UIViewController {
     @IBOutlet weak var noDataFoundLabel: UILabel!
     @IBOutlet weak var listTableView: UITableView!{
         didSet {
-            listTableView.registerCellFromNib(cellID: "MyNotificationsTableViewCell")
+            listTableView.registerCellFromNib(cellID: "NotificationsListTableViewCell")
         }
     }
     private lazy var viewModel = AffiliateUserNotificationViewModel(hostVC: self)

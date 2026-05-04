@@ -22,6 +22,8 @@ class CreateAffiliateUserAccountViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var txtCountryCode: UITextField!
     @IBOutlet weak var txtFieldLeading: NSLayoutConstraint!
+    @IBOutlet weak var termsAndConditionsButton: CustomButton!
+    @IBOutlet weak var policiesButton: CustomButton!
     
     // MARK: - Property Decalaration
     var isTermsAccepted: Bool = false
@@ -52,6 +54,8 @@ class CreateAffiliateUserAccountViewController: UIViewController {
             mobileTextField.isUserInteractionEnabled = true
             countryCodeButton.isUserInteractionEnabled = true
         }
+        termsAndConditionsButton.setTitle("Terms & Conditions".localiz(), for: .normal)
+        policiesButton.setTitle("Policies".localiz(), for: .normal)
     }
     
     // MARK: - Button's Action
@@ -154,9 +158,17 @@ class CreateAffiliateUserAccountViewController: UIViewController {
     }
     
     @IBAction func policiesAction(_ sender: Any) {
+        let vc = CMSViewController.instantiate(fromAppStoryboard: .DashBoard)
+        vc.comingReason = .termsAndConditions
+        vc.comingUserRole = .affilaiteUser
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func termsAndConditionAction(_ sender: Any) {
+        let vc = CMSViewController.instantiate(fromAppStoryboard: .DashBoard)
+        vc.comingReason = .termsAndConditions
+        vc.comingUserRole = .affilaiteUser
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     //MARK: Function's declaration

@@ -17,6 +17,8 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var createPasswordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
+    @IBOutlet weak var termsAndConditionsButton: CustomButton!
+    @IBOutlet weak var policiesButton: CustomButton!
     
     // MARK: - Property Decalaration
     var isTermsAccepted: Bool = false
@@ -29,6 +31,8 @@ class SignupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setDelegates()
+        termsAndConditionsButton.setTitle("Terms & Conditions".localiz(), for: .normal)
+        policiesButton.setTitle("Policies".localiz(), for: .normal)
     }
     
     // MARK: - Button's Action
@@ -57,12 +61,6 @@ class SignupViewController: UIViewController {
         isTermsAccepted.toggle()
         let imageName = isTermsAccepted ? "selectedCheckBox" : "unslectedCheckbox"
         sender.setImage(UIImage(named: imageName), for: .normal)
-    }
-    
-    @IBAction func termsDidTapped(_ sender: Any) {
-    }
-    
-    @IBAction func policiesDidTapped(_ sender: Any) {
     }
     
     @IBAction func uploadProfilePicDidTapped(_ sender: Any) {
@@ -106,6 +104,20 @@ class SignupViewController: UIViewController {
             self.setUpCountryCode(code: code)
             self.countryCode = code
         }
+    }
+    
+    @IBAction func policiesAction(_ sender: Any) {
+        let vc = CMSViewController.instantiate(fromAppStoryboard: .DashBoard)
+        vc.comingReason = .termsAndConditions
+        vc.comingUserRole = .normalUser
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func termsAndConditionAction(_ sender: Any) {
+        let vc = CMSViewController.instantiate(fromAppStoryboard: .DashBoard)
+        vc.comingReason = .termsAndConditions
+        vc.comingUserRole = .normalUser
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     //MARK: Function's declaration

@@ -29,7 +29,7 @@ class AffiliatedUserProfileViewController: UIViewController {
         SideMenuModel(title: "Change Language", image: "changeLanguage"),
         SideMenuModel(title: "Change Currency", image: "currency"),
         SideMenuModel(title: "Change Country", image: "countryChange"),
-        SideMenuModel(title: "Cancellation Policy", image: "cancellation"),
+//        SideMenuModel(title: "Cancellation Policy", image: "cancellation"),
         SideMenuModel(title: "Support", image: "support"),
         SideMenuModel(title: "Settings", image: "settings")]
     private lazy var viewModel = AffilatedUserProfileViewModel(hostVC: self)

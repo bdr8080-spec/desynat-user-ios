@@ -30,6 +30,7 @@ class MyBagTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+//        shopMoreButtonOutlet.setTitle("Shop More".localiz(), for: .normal)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -46,7 +47,6 @@ class MyBagTableViewCell: UITableViewCell {
     }
     
     func configData(data: CartItemList) {
-        
         if let imageUrlString = data.productVariants?.variantImage?.first,
            let url = URL(string: imageUrlString) {
             

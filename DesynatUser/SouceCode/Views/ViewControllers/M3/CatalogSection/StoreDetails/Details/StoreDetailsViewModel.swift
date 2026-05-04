@@ -50,6 +50,7 @@ class StoreDetailsViewModel: NSObject {
             DispatchQueue.main.async {
                 self.getSellerHighlightsService(sellerId: list.store?.sellerID ?? 0)
                 self.getSellerStory(sellerId: list.store?.sellerID ?? 0)
+                self.captureSellerStoreVisitorRequest(sellerId: list.store?.sellerID ?? 0)
                 if let store = list.store {
                     self.hostVC.configData(data: store)
                 }
@@ -128,11 +129,9 @@ class StoreDetailsViewModel: NSObject {
             if list.count > 0 {
                 self.hostVC.sellerProfileButton.setImage(.gerdaientBorder, for: .normal)
                 self.hostVC.sellerProfileButton.isUserInteractionEnabled = true
-//                self.hostVC.sellerProfileButton.layer.borderWidth = 3
             } else {
                 self.hostVC.sellerProfileButton.isUserInteractionEnabled = false
                 self.hostVC.sellerProfileButton.setImage(UIImage(named: ""), for: .normal)
-//                self.hostVC.sellerProfileButton.layer.borderWidth = 0
             }
         }
     }
@@ -142,6 +141,17 @@ class StoreDetailsViewModel: NSObject {
         WebService.shared.shareReelsService(param: param) { response in
             let link = response.file ?? ""
             completion(link)
+        }
+    }
+    
+    func captureSellerStoreVisitorRequest(sellerId: Int) {
+        var param: [String : Any] = ["seller_id": sellerId,
+                                     "store_id": hostVC.storeId ?? 0]
+        if let savedUser: UserModel = kSharedUserDefaults.retrieveModelFor(key: .user, model: UserModel.self) {
+            param["user_id"] = savedUser.id ?? 0
+        }
+        WebService.shared.captureSellerStoreVisitorService(param: param) { response in
+            print("visited")
         }
     }
 }

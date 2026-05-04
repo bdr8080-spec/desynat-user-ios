@@ -15,7 +15,6 @@ import AVKit
 class StoresDetailsViewController: UIViewController {
     
     // MARK: - IBOutlet's
-    
     @IBOutlet weak var sellerProfileButton: UIButton!
     @IBOutlet weak var noReelsFound: UILabel!
     @IBOutlet weak var statusView: CustomView!

@@ -37,6 +37,8 @@ class EnterCardsDetailsViewController: UIViewController {
         enterAmountView.isHidden = true
         setDelegateMethod()
         viewModel.getALlUserCountryListApi()
+        wishMessageTextView.placeholderTextView = "Enter wish message".localiz()
+        noteTextView.placeholderTextView = "Enter note".localiz()
     }
     
     // MARK: - Button's Action
@@ -166,6 +168,9 @@ extension EnterCardsDetailsViewController: UITextFieldDelegate, UITextViewDelega
         } else {
             if textView == wishMessageTextView {
                 textView.placeholderTextView = "Enter wish message".localiz()
+            }
+            if textView == noteTextView {
+                textView.placeholderTextView = "Enter note".localiz()
             }
         }
     }

@@ -16,6 +16,7 @@ class AffiliatedUserLoginViewController: UIViewController {
     @IBOutlet weak var emailMobileImageView: UIImageView!
     @IBOutlet weak var txtFieldLeading: NSLayoutConstraint!
     @IBOutlet weak var viewCountryCode: UIView!
+    @IBOutlet weak var switchUserButton: CustomButton!
     
     // MARK: - Property Decalaration
     private lazy var viewModel = AffiliatedUserLoginViewModel(loginHostVC: self)
@@ -32,6 +33,7 @@ class AffiliatedUserLoginViewController: UIViewController {
         viewCountryCode.isHidden = true
         self.txtFieldLeading.constant = -65
         emailMobileImageView.image = UIImage(named: "email")
+        switchUserButton.setTitle("Switch to User".localiz(), for: .normal)
     }
     
     // MARK: - Button's Action

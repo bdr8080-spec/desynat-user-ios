@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -28,7 +28,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iLQ-gt-f4C">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CFr-hf-6Z6">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CFr-hf-6Z6" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="tLq-jo-WgE"/>
@@ -264,7 +264,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfq-Db-6yp">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ch-d2-Tx8">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ch-d2-Tx8" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="dtt-2J-bpH"/>
@@ -1090,8 +1090,8 @@ Apartment, Kuwait</string>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XuM-Zf-UTX">
                                                                                 <rect key="frame" x="0.0" y="50" width="361" height="50"/>
                                                                                 <subviews>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discout on MRP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4f-vd-Zb4" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                        <rect key="frame" x="8" y="12" width="103" height="38"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discount on MRP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4f-vd-Zb4" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                        <rect key="frame" x="8" y="12" width="111" height="38"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.80101768090000003" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1958,17 +1958,17 @@ Apartment, Kuwait</string>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cal-ka-kjM">
                                                                 <rect key="frame" x="0.0" y="20" width="393" height="141.66666666666666"/>
                                                                 <subviews>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="cYL-qh-Iiy">
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="cYL-qh-Iiy">
                                                                         <rect key="frame" x="24" y="20" width="345" height="24.666666666666671"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Order Status" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="86o-a6-3pP">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="88.666666666666671" height="24.666666666666668"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order Status" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="86o-a6-3pP">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="171.66666666666666" height="24.666666666666668"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Expected Delivery : 3-5 days" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q62-eJ-CNU" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                <rect key="frame" x="90.666666666666671" y="0.0" width="254.33333333333331" height="24.666666666666668"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expected Delivery : 3-5 days" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q62-eJ-CNU" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                <rect key="frame" x="173.66666666666663" y="0.0" width="171.33333333333337" height="24.666666666666668"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
@@ -2516,9 +2516,7 @@ Apartment, Kuwait</string>
                         <outlet property="lbl3" destination="Kqb-0t-Ylg" id="qnk-ER-2Jg"/>
                         <outlet property="lbl4" destination="tZI-SE-86A" id="Uve-W9-hcv"/>
                         <outlet property="lblAddress" destination="NXM-Fd-WS7" id="GSh-WR-EXI"/>
-                        <outlet property="lblConfirm" destination="VxY-Im-0Qg" id="I7q-Eg-zhG"/>
                         <outlet property="lblCouponDis" destination="LHv-lU-jgp" id="GLo-E8-yEy"/>
-                        <outlet property="lblDelivered" destination="tZI-SE-86A" id="smZ-cA-fTc"/>
                         <outlet property="lblDeliveredOn" destination="Q62-eJ-CNU" id="uYa-aY-dAp"/>
                         <outlet property="lblDeliveryInst" destination="fpb-lW-vsF" id="6r9-4z-PRm"/>
                         <outlet property="lblDetails" destination="a5x-Lb-x1V" id="w2V-hE-Hxm"/>
@@ -2533,7 +2531,6 @@ Apartment, Kuwait</string>
                         <outlet property="lblProductName" destination="zBb-Q6-QIp" id="rDN-G0-eFn"/>
                         <outlet property="lblReturnAvail" destination="bCM-Ci-zYE" id="ceU-eZ-ql7"/>
                         <outlet property="lblSavedAmount" destination="UIe-i8-WCs" id="fTJ-C0-tdY"/>
-                        <outlet property="lblShip" destination="lHY-y1-FxY" id="IUH-Ba-b8h"/>
                         <outlet property="lblShippingAdd" destination="W7Y-eD-b9M" id="i5V-Xo-WL3"/>
                         <outlet property="lblShippingFee" destination="ToG-TY-ed5" id="joe-no-pYk"/>
                         <outlet property="lblSize" destination="KXh-b6-9Jr" id="3Wz-Us-zf2"/>
@@ -2543,7 +2540,6 @@ Apartment, Kuwait</string>
                         <outlet property="lblTotalMrp" destination="mck-Nn-l2x" id="pYo-QL-baR"/>
                         <outlet property="lblTotalQuantity" destination="SK2-KU-MCr" id="h14-7h-rQ2"/>
                         <outlet property="lblTransactionId" destination="x2v-KG-9B6" id="eEA-ag-WeS"/>
-                        <outlet property="lblWay" destination="Kqb-0t-Ylg" id="hG5-Tq-Aul"/>
                         <outlet property="line" destination="Ihr-c8-mwa" id="voH-90-OB0"/>
                         <outlet property="orderTableView" destination="ayj-51-3Ee" id="Hhn-oA-4nu"/>
                         <outlet property="quantityLAbel" destination="HNU-2x-syB" id="mlG-qN-Pi2"/>
@@ -2730,7 +2726,7 @@ Apartment, Kuwait</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5A-G5-hUX">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x7z-df-q5U">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x7z-df-q5U" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="Fds-ac-ah9"/>
@@ -3123,7 +3119,7 @@ Apartment, Kuwait</string>
                                 <rect key="frame" x="0.0" y="100" width="393" height="752"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Baf-EB-Ods">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="752.00000000000023"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="752"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9aJ-wo-f0X">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="1680.3333333333333"/>
@@ -3712,7 +3708,7 @@ Apartment, Kuwait</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0R-on-RUE">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FI8-tp-o9U">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FI8-tp-o9U" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="HFG-nL-s96"/>

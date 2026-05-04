@@ -156,7 +156,8 @@ enum NetworkEndPoint: String {
     case markAllReadNotifications = "dfv"
     case countOfNotifcation              = "api/user/count-user-notification"
     case countOfNotifcationForAffilated  = "api/affiliate/CountaffiliateUserNotification"
-    case getAffiliateDashboardData       = "api/affiliate/get_affiliate_dashboard_data"
+//    case getAffiliateDashboardData       = "api/affiliate/get_affiliate_dashboard_data"
+    case getAffiliateDashboardData       = "api/affiliate/affiliate_dashboard_data"
     case getSellerStories       = "api/user/get_seller_stories"
     case getAdminStories       = "api/user/get_admin_stories"
     case getSellerReels       = "api/user/get_seller_reels"
@@ -198,6 +199,11 @@ enum NetworkEndPoint: String {
     case addNewCard                      = "api/user/add_card"
     case updateUserCountry               = "api/user/update-user-selected-country"
     case updateUserCurrency              = "api/user/update-user-selected-currency"
+    
+    //M14
+    case deleteUserAccount               = "api/user/delete_account"
+    case deleteAffiliateUserAccount      = "api/affiliate/delete_affiliate_account"
+    case captureSellerStoreVisitor       = "api/CaptureSellerStoreVisitor"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

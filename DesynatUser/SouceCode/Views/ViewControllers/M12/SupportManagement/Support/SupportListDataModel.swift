@@ -85,8 +85,8 @@ enum TicketStatus: Int {
 
     var text: String {
         switch self {
-        case .pending: return "Pending"
-        case .resolved: return "Resolved"
+        case .pending: return "Pending".localiz()
+        case .resolved: return "Resolved".localiz()
         }
     }
     

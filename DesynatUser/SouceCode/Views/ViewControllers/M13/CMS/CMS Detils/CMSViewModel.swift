@@ -9,6 +9,7 @@ import Foundation
 class CMSViewModel {
     private var hostVC: CMSViewController
     var cmsDetailsData: CMSTermsConditionDataModel?
+    let isArabic = AppLanguageManager.shared.currentLanguage == .ar
     
     init(hostVC: CMSViewController) {
         self.hostVC = hostVC
@@ -19,7 +20,11 @@ class CMSViewModel {
         WebService.shared.getReturnPolicyService(parameter: param) { [weak self] response in
             guard let self = self else { return }
             cmsDetailsData = response
-            CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A", webView: hostVC.mainContentView)
+            if isArabic {
+                CommonUtils.loadHTMLContent(response.contentArabic ?? "N/A", webView: hostVC.mainContentView)
+            } else {
+                CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A", webView: hostVC.mainContentView)
+            }
         }
     }
     
@@ -28,7 +33,11 @@ class CMSViewModel {
         WebService.shared.getAboutUsPolicyService(parameter: param) { [weak self] response in
             guard let self = self else { return }
             cmsDetailsData = response
-            CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A", webView: hostVC.mainContentView)
+            if isArabic {
+                CommonUtils.loadHTMLContent(response.contentArabic ?? "N/A", webView: hostVC.mainContentView)
+            } else {
+                CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A", webView: hostVC.mainContentView)
+            }
         }
     }
     
@@ -37,7 +46,11 @@ class CMSViewModel {
         WebService.shared.getCancellationPolicyService(parameter: param) { [weak self] response in
             guard let self = self else { return }
             cmsDetailsData = response
-            CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A", webView: hostVC.mainContentView)
+            if isArabic {
+                CommonUtils.loadHTMLContent(response.contentArabic ?? "N/A", webView: hostVC.mainContentView)
+            } else {
+                CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A", webView: hostVC.mainContentView)
+            }
         }
     }
     
@@ -46,7 +59,11 @@ class CMSViewModel {
         WebService.shared.getExchangePolicyService(parameter: param) { [weak self] response in
             guard let self = self else { return }
             cmsDetailsData = response
-            CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A", webView: hostVC.mainContentView)
+            if isArabic {
+                CommonUtils.loadHTMLContent(response.contentArabic ?? "N/A", webView: hostVC.mainContentView)
+            } else {
+                CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A", webView: hostVC.mainContentView)
+            }
         }
     }
     func getTermsAndConditionRequest() {
@@ -54,7 +71,11 @@ class CMSViewModel {
         WebService.shared.getTermsConditionService(parameter: param) { [weak self] response in
             guard let self = self else { return }
             cmsDetailsData = response
-            CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A", webView: hostVC.mainContentView)
+            if isArabic {
+                CommonUtils.loadHTMLContent(response.contentArabic ?? "N/A", webView: hostVC.mainContentView)
+            } else {
+                CommonUtils.loadHTMLContent(response.contentEnglish ?? "N/A", webView: hostVC.mainContentView)
+            }
         }
     }
 }

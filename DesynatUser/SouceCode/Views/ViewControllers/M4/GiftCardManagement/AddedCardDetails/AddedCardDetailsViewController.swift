@@ -53,7 +53,7 @@ class AddedCardDetailsViewController: UIViewController {
         amountLabel.text = CommonUtils.formatPriceStringInput(giftCardDetails?.amount)
         recepientNameLabel.text = giftCardDetails?.receiverName
         recepientEmailLabel.text = giftCardDetails?.receiverEmail
-        quantityLabel.text = "Total Quantity- 1"
+        quantityLabel.text = "\("Total Quantity-".localiz()) 1"//"Total Quantity- 1"
         fromNameLabel.text = giftCardDetails?.senderName
         fromMessageLabel.text = giftCardDetails?.wishMessage
         

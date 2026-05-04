@@ -142,7 +142,7 @@ class MyOrderTableCell: UITableViewCell {
           lblStatus.textColor = UIColor(hexString: "#FF5F1B")
           viewExchange.backgroundColor = UIColor(hexString: "#17854C").withAlphaComponent(0.1)
           lblOrderDate.textColor = UIColor(hexString: "#17854C")
-          lblOrderDate.text = "Expected Delivery Date : 3-5 working days"
+            lblOrderDate.text = "Expected Delivery Date : 3-5 working days".localiz()
             if data.returnType == "1" || data.returnType == "2" {
                 let approveType = data.rEApprove ?? "1"
                 if approveType == "1" {

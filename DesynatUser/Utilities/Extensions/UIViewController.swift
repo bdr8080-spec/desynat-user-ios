@@ -28,7 +28,7 @@ extension UIViewController {
                                           message: msg.localiz(),
                                           preferredStyle: .alert)
             
-            alert.addAction(UIAlertAction(title: StringConstant.ok.value(), style: .default, handler: { _ in
+            alert.addAction(UIAlertAction(title: StringConstant.ok.value().localiz(), style: .default, handler: { _ in
                 UIViewController.isAlertVisible = false   // reset flag
                 completion?()
             }))
@@ -270,7 +270,7 @@ extension UIViewController {
         let coloredSquare = "■"
         let dot = "●"
         
-        let fullText = "Size: \(size)  \(dot)  Color: \(coloredSquare)  \(dot)  Qnt: \(quantity)"
+        let fullText = "\("Size:".localiz()) \(size)  \(dot)  \("Color:".localiz()) \(coloredSquare)  \(dot)  \("Qnt:".localiz()) \(quantity)"
         
         let attributedString = NSMutableAttributedString(
             string: fullText,

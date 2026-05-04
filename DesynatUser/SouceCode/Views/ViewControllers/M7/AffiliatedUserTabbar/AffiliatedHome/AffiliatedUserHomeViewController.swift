@@ -34,13 +34,15 @@ class AffiliatedUserHomeViewController: UIViewController {
     private var activeTextField: UITextField?
     
     enum FilterType: Int {
-        case custom = 0
+        //        case custom = 0
+        //1-today,2-this week,3-this month,4-this year
         case today = 1
         case week = 2
         case month = 3
+        //        case thisYear = 4
     }
-    
-    private var selectedFilter: FilterType = .today
+    private var selectedButton: UIButton?
+    private var selectedFilter: FilterType?
     
     //MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
@@ -49,9 +51,12 @@ class AffiliatedUserHomeViewController: UIViewController {
         // Default Today Selected
         updateRadioSelection(for: dateButtons, selectedButton: btnToday)
         selectedFilter = .today
-        
+        selectedButton = btnToday
         callDashboardAPI()
         viewModel.getUserData()
+        btnToday.setTitle("Today".localiz(), for: .normal)
+        btnThisWeek.setTitle("This week".localiz(), for: .normal)
+        btnThisMonth.setTitle("This Month".localiz(), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,11 +66,23 @@ class AffiliatedUserHomeViewController: UIViewController {
     
     // MARK: - Button's Action
     @IBAction func btnSelectDate(_ sender: UIButton) {
+        if selectedButton == sender {
+            selectedButton = nil
+            selectedFilter = nil
+            
+            for button in dateButtons {
+                button.setImage(UIImage(named: "unselcetdRadioHome"), for: .normal)
+            }
+            
+            callDashboardAPI()
+            return
+        }
+        
+        // 👉 New selection
+        selectedButton = sender
         updateRadioSelection(for: dateButtons, selectedButton: sender)
         
-        // Clear custom dates
-        fromDateTextField.text = ""
-        toDateTextField.text = ""
+        // ❌ DON'T clear dates anymore
         
         if sender == btnToday {
             selectedFilter = .today
@@ -80,7 +97,7 @@ class AffiliatedUserHomeViewController: UIViewController {
     
     @IBAction func bellDidTapepd(_ sender: Any) {
         let nextVC = AffiliateUserNotificationViewController.instantiate(fromAppStoryboard: .AffiliateUser)
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @IBAction func supportChatDidTapped(_ sender: Any) {
@@ -109,7 +126,7 @@ extension AffiliatedUserHomeViewController: UITextFieldDelegate {
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
         datePicker.backgroundColor = .white
-        
+        datePicker.maximumDate = Date()
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
@@ -131,21 +148,44 @@ extension AffiliatedUserHomeViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextField = textField
-    }
-    
-    @objc private func doneDatePicker() {
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         
+        if textField == fromDateTextField {
+            // ✅ From date → no minimum restriction
+            datePicker.minimumDate = nil
+            datePicker.maximumDate = Date()
+            
+        } else if textField == toDateTextField {
+            // ✅ To date → min = fromDate (if selected)
+            if let fromText = fromDateTextField.text,
+               let fromDate = formatter.date(from: fromText) {
+                
+                datePicker.minimumDate = fromDate
+            } else {
+                datePicker.minimumDate = nil
+            }
+            
+            datePicker.maximumDate = Date()
+        }
+    }
+    
+    @objc private func doneDatePicker() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
         let selectedDate = formatter.string(from: datePicker.date)
-        
         if activeTextField == fromDateTextField {
             fromDateTextField.text = selectedDate
+            if let fromDate = formatter.date(from: selectedDate),
+               let toText = toDateTextField.text,
+               let toDate = formatter.date(from: toText),
+               toDate < fromDate {
+                toDateTextField.text = ""
+            }
         } else if activeTextField == toDateTextField {
             toDateTextField.text = selectedDate
         }
-        
         validateAndApplyCustomDate()
         view.endEditing(true)
     }
@@ -169,21 +209,11 @@ extension AffiliatedUserHomeViewController: UITextFieldDelegate {
             let toDate = formatter.date(from: to)
         else { return }
         
-        // ❌ Validation
         if toDate < fromDate {
             showAlert("To date cannot be less than From date".localiz())
             toDateTextField.text = ""
             return
         }
-        
-        // ✅ Custom selected
-        selectedFilter = .custom
-        
-        // Unselect radio buttons
-        for button in dateButtons {
-            button.setImage(UIImage(named: "unselcetdRadioHome"), for: .normal)
-        }
-        
         callDashboardAPI()
     }
     
@@ -197,45 +227,14 @@ extension AffiliatedUserHomeViewController: UITextFieldDelegate {
 extension AffiliatedUserHomeViewController {
     
     private func callDashboardAPI() {
-        
-        var fromDate = ""
-        var toDate = ""
-        var filterType = selectedFilter.rawValue
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let today = Date()
-        
-        switch selectedFilter {
-            
-        case .today:
-            let date = formatter.string(from: today)
-            fromDate = date
-            toDate = date
-            
-        case .week:
-            let calendar = Calendar.current
-            let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today))!
-            fromDate = formatter.string(from: startOfWeek)
-            toDate = formatter.string(from: today)
-            
-        case .month:
-            let calendar = Calendar.current
-            let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: today))!
-            fromDate = formatter.string(from: startOfMonth)
-            toDate = formatter.string(from: today)
-            
-        case .custom:
-            fromDate = fromDateTextField.text ?? ""
-            toDate = toDateTextField.text ?? ""
-            filterType = 0
+        let fromDate = fromDateTextField.text ?? ""
+        let toDate = toDateTextField.text ?? ""
+        var filterModel = AffiliateDashboardFilterModel(fromDate: nil,toDate: nil,filter: selectedFilter?.rawValue)
+        if !fromDate.isEmpty && !toDate.isEmpty {
+            filterModel.fromDate = fromDate
+            filterModel.toDate = toDate
         }
-        
-        // 👉 YOUR VIEWMODEL METHOD
-        viewModel.getDashboardData(
-            fromDate: fromDate,
-            toDate: toDate,
-            filterType: filterType
-        )
+        viewModel.dashboardFilter = filterModel
+        viewModel.getDashboardData()
     }
 }

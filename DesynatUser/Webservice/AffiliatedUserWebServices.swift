@@ -395,8 +395,9 @@ extension WebService {
     }
     
     func getAffiliateNotificationsListService(param: [String:Any], completion: @escaping(NotificationsListDataModel) -> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI: .endpoint(.getAffiliateNotificationsList),requestMethod: .get, requestParams: param, requestModel: NotificationsListDataModel.self) { result, code in
+        NetworkManager.shared.request(withAPI: .endpoint(.getAffiliateNotificationsList),requestMethod: .get, requestParams: param, requestModel: NotificationsListDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 guard let response = response else {
@@ -429,8 +430,9 @@ extension WebService {
     }
     
     func markAffiliateNotificationsService(param: [String:Any], completion: @escaping(EmptyModel) -> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI: .endpoint(.markAffiliateReadNotifications),requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
+        NetworkManager.shared.request(withAPI: .endpoint(.markAffiliateReadNotifications),requestMethod: .post, requestParams: param, requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 guard let response = response else {
@@ -445,8 +447,9 @@ extension WebService {
     }
     
     func markAffiliateAllReadNotificationsService(param: [String:Any], completion: @escaping(EmptyModel) -> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI: .endpoint(.markAffiliateAllReadNotifications),requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
+        NetworkManager.shared.request(withAPI: .endpoint(.markAffiliateAllReadNotifications),requestMethod: .post, requestParams: param, requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 guard let response = response else {
@@ -459,28 +462,45 @@ extension WebService {
             }
         }
     }
-    
-    func markAllReadNotificationsService(param: [String:Any], completion: @escaping(EmptyModel) -> Void) {
-        CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI: .endpoint(.markAllReadNotifications),requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
-            CommonUtils.showHud(show: false)
-            self.evaluateWebServiceResponse(response: result) { response, message, error in
-                guard let response = response else {
-                    if let error {
-                        UIApplication.shared.topViewController()?.showAlert(msg: error)
-                    }
-                    return
-                }
-                completion(response)
-            }
-        }
-    }
-
     
     func getAffiliateDashboardDataService(param: [String:Any], completion: @escaping(AffiliateDashboardDataModel) -> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.getAffiliateDashboardData),requestMethod: .get, requestParams: param, requestModel: AffiliateDashboardDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(response)
+            }
+        }
+    }
+    
+    func affiliateUserPushNotificationSettingService(completion: @escaping(NotificationDataModel) -> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.affiliatePushNotificationOnOff),requestMethod: .post, requestModel: NotificationDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message, error in
+                guard let response = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(response)
+            }
+        }
+    }
+    
+    func affiliateUserInAppNotificationSettingService(completion: @escaping(NotificationDataModel) -> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.affiliateInAppNotificationOnOff),requestMethod: .post, requestModel: NotificationDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 guard let response = response else {
@@ -563,10 +583,27 @@ extension WebService {
     }
     
     func updateAffiliateCurrencyList(param: [String: Any], completion:@escaping (_ user: EmptyModel)-> Void) {
-        CommonUtils.showHud(show: true)
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+        CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.updateAffiliateUserCurrency), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
             
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func deleteAccountForAffiliateUserService(completion:@escaping (_ user: EmptyModel)-> Void) {
+        let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.deleteAffiliateUserAccount), requestMethod: .post, requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {

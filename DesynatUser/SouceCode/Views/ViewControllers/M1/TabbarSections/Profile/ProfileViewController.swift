@@ -151,10 +151,19 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if isGuestLogin == "true" {
-            showLoginAlert()
-        } else {
-            let selectedItem = sideMenuData[indexPath.row].title
+        let selectedItem = sideMenuData[indexPath.row].title
+            
+            // Allow only Change Language without login
+            if isGuestLogin == "true" && selectedItem != "Change Language" {
+                showLoginAlert()
+                tableView.deselectRow(at: indexPath, animated: true)
+                return
+            }
+            
+//        if isGuestLogin == "true" {
+//            showLoginAlert()
+//        } else {
+//            let selectedItem = sideMenuData[indexPath.row].title
             
             switch selectedItem {
             case "My Wallet":
@@ -243,7 +252,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
             // Deselect the row
             tableView.deselectRow(at: indexPath, animated: true)
-        }
+//        }
     }
     
 }

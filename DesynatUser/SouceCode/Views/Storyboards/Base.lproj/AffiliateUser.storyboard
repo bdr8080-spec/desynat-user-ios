@@ -42,12 +42,12 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fGH-YX-y0x">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="666"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3iI-rM-qcm" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="193" y="0.0" width="180" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3iI-rM-qcm" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
+                                                <rect key="frame" x="253" y="0.0" width="120" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="1G8-Yh-Yhk"/>
-                                                    <constraint firstAttribute="width" secondItem="3iI-rM-qcm" secondAttribute="height" multiplier="6:1" id="Srx-vh-hus"/>
+                                                    <constraint firstAttribute="width" secondItem="3iI-rM-qcm" secondAttribute="height" multiplier="4:1" id="Srx-vh-hus"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="14"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -416,6 +416,7 @@
                         <outlet property="emailMobileImageView" destination="DPU-c8-c7I" id="wAE-ga-LEV"/>
                         <outlet property="emailTextField" destination="Rnd-Nm-pkg" id="H3p-gB-d68"/>
                         <outlet property="passwordTextField" destination="wEa-rr-BEk" id="VU4-ja-RT7"/>
+                        <outlet property="switchUserButton" destination="3iI-rM-qcm" id="tac-Yu-bto"/>
                         <outlet property="txtFieldLeading" destination="2QM-Kf-wyf" id="3cg-kp-cgZ"/>
                         <outlet property="viewCountryCode" destination="CzZ-aI-l58" id="LEE-pc-IiP"/>
                     </connections>
@@ -438,11 +439,11 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90C-XE-jfF">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="666"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EwZ-82-Zg0" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="193" y="0.0" width="180" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EwZ-82-Zg0" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
+                                                <rect key="frame" x="253" y="0.0" width="120" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="EwZ-82-Zg0" secondAttribute="height" multiplier="6:1" id="I9P-x2-S9H"/>
+                                                    <constraint firstAttribute="width" secondItem="EwZ-82-Zg0" secondAttribute="height" multiplier="4:1" id="I9P-x2-S9H"/>
                                                     <constraint firstAttribute="height" constant="30" id="YlU-Ve-BtU"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="14"/>
@@ -715,6 +716,7 @@
                         <outlet property="countryCodeLabel" destination="yk9-eQ-LcY" id="FBn-je-Rjs"/>
                         <outlet property="emailMobileImageView" destination="w3L-X1-sVE" id="KYv-Et-ENT"/>
                         <outlet property="phoneTextField" destination="SEf-gD-ztu" id="nkK-gh-9E1"/>
+                        <outlet property="switchUserButton" destination="EwZ-82-Zg0" id="60L-Z6-Xl7"/>
                         <outlet property="txtFieldLeading" destination="8Cg-Lk-bnf" id="5G3-IF-5TB"/>
                         <outlet property="viewCountryCode" destination="bbb-xi-6Z3" id="Q1w-qk-p0o"/>
                     </connections>
@@ -775,7 +777,27 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gdb-b8-XJu">
                                                         <rect key="frame" x="0.0" y="130" width="353" height="160"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePic" translatesAutoresizingMaskIntoConstraints="NO" id="1PI-gj-mAc" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="txy-Ru-F19">
+                                                                <rect key="frame" x="152" y="39.666666666666686" width="49" height="49"/>
+                                                                <subviews>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadImageGray" translatesAutoresizingMaskIntoConstraints="NO" id="BDO-9F-kKo">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="49" height="49"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="49" id="1by-XT-gJW"/>
+                                                                            <constraint firstAttribute="width" constant="49" id="kzG-DV-Rlv"/>
+                                                                        </constraints>
+                                                                    </imageView>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFM-f7-4kh">
+                                                                <rect key="frame" x="135" y="93.666666666666686" width="83" height="33.666666666666657"/>
+                                                                <string key="text">Upload Profile
+Photo</string>
+                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                                                <color key="textColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grayBorderLine" translatesAutoresizingMaskIntoConstraints="NO" id="1PI-gj-mAc" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="116.66666666666666" y="20" width="120" height="120"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="120" id="2P5-qf-rZw"/>
@@ -798,13 +820,17 @@
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
+                                                            <constraint firstItem="zFM-f7-4kh" firstAttribute="centerX" secondItem="txy-Ru-F19" secondAttribute="centerX" id="8EA-Oj-wzT"/>
                                                             <constraint firstItem="1PI-gj-mAc" firstAttribute="top" secondItem="Gdb-b8-XJu" secondAttribute="top" constant="20" id="8Hu-fS-D2t"/>
+                                                            <constraint firstItem="zFM-f7-4kh" firstAttribute="top" secondItem="txy-Ru-F19" secondAttribute="bottom" constant="5" id="IhR-rL-3Pq"/>
                                                             <constraint firstItem="UDG-G5-K6k" firstAttribute="bottom" secondItem="1PI-gj-mAc" secondAttribute="bottom" id="LqN-RW-xgX"/>
+                                                            <constraint firstItem="txy-Ru-F19" firstAttribute="centerX" secondItem="1PI-gj-mAc" secondAttribute="centerX" id="Mab-i5-1fc"/>
                                                             <constraint firstItem="1PI-gj-mAc" firstAttribute="centerY" secondItem="Gdb-b8-XJu" secondAttribute="centerY" id="OCN-BE-ehi"/>
                                                             <constraint firstItem="1PI-gj-mAc" firstAttribute="centerX" secondItem="Gdb-b8-XJu" secondAttribute="centerX" id="V78-ZX-2LQ"/>
                                                             <constraint firstItem="UDG-G5-K6k" firstAttribute="leading" secondItem="1PI-gj-mAc" secondAttribute="leading" id="YBE-yx-4UO"/>
                                                             <constraint firstItem="UDG-G5-K6k" firstAttribute="trailing" secondItem="1PI-gj-mAc" secondAttribute="trailing" id="nIu-tM-cAv"/>
                                                             <constraint firstItem="UDG-G5-K6k" firstAttribute="top" secondItem="1PI-gj-mAc" secondAttribute="top" id="oyp-Ma-YoM"/>
+                                                            <constraint firstItem="txy-Ru-F19" firstAttribute="centerY" secondItem="1PI-gj-mAc" secondAttribute="centerY" multiplier="0.8" id="uGb-Fx-WCo"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vra-VB-iKD">
@@ -1016,7 +1042,25 @@
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L9r-67-kPQ" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="166.66666666666666" height="120"/>
                                                                                 <subviews>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadDoc1" translatesAutoresizingMaskIntoConstraints="NO" id="HHF-dO-AB8" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="flA-mY-iDx">
+                                                                                        <rect key="frame" x="58.666666666666671" y="29.666666666666629" width="49" height="49"/>
+                                                                                        <subviews>
+                                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="3fU-4c-CvH">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="49" height="49"/>
+                                                                                                <constraints>
+                                                                                                    <constraint firstAttribute="width" constant="49" id="W9N-g5-jUA"/>
+                                                                                                    <constraint firstAttribute="height" constant="49" id="fTF-UW-O0d"/>
+                                                                                                </constraints>
+                                                                                            </imageView>
+                                                                                        </subviews>
+                                                                                    </stackView>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Document 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qjy-lM-wzG">
+                                                                                        <rect key="frame" x="47.999999999999993" y="82.666666666666629" width="70.333333333333314" height="17"/>
+                                                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                                                                        <color key="textColor" red="0.52941176469999995" green="0.36078431370000003" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                    </label>
+                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dashedBorder" translatesAutoresizingMaskIntoConstraints="NO" id="HHF-dO-AB8" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                                                                         <rect key="frame" x="1.3333333333333286" y="0.0" width="164" height="120"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="width" constant="164" id="oia-Uq-fku"/>
@@ -1040,9 +1084,13 @@
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="bottom" secondItem="HHF-dO-AB8" secondAttribute="bottom" id="2d8-xw-vPT"/>
                                                                                     <constraint firstItem="HHF-dO-AB8" firstAttribute="centerX" secondItem="L9r-67-kPQ" secondAttribute="centerX" id="4Rb-bK-WsM"/>
+                                                                                    <constraint firstItem="qjy-lM-wzG" firstAttribute="top" secondItem="flA-mY-iDx" secondAttribute="bottom" constant="4" id="AGf-8M-IyF"/>
                                                                                     <constraint firstItem="HHF-dO-AB8" firstAttribute="top" secondItem="L9r-67-kPQ" secondAttribute="top" id="Af1-dz-CdY"/>
                                                                                     <constraint firstItem="ldI-tE-Rdr" firstAttribute="leading" secondItem="L9r-67-kPQ" secondAttribute="leading" id="EPU-ez-CQS"/>
                                                                                     <constraint firstItem="ldI-tE-Rdr" firstAttribute="top" secondItem="L9r-67-kPQ" secondAttribute="top" id="IFR-P7-Xnr"/>
+                                                                                    <constraint firstItem="qjy-lM-wzG" firstAttribute="centerX" secondItem="flA-mY-iDx" secondAttribute="centerX" id="OAM-Yn-GDJ"/>
+                                                                                    <constraint firstItem="flA-mY-iDx" firstAttribute="centerX" secondItem="L9r-67-kPQ" secondAttribute="centerX" id="VX6-hK-yxh"/>
+                                                                                    <constraint firstItem="flA-mY-iDx" firstAttribute="centerY" secondItem="L9r-67-kPQ" secondAttribute="centerY" multiplier="0.9" id="fJD-B2-8AR"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="ldI-tE-Rdr" secondAttribute="trailing" id="gLi-Te-x0Y"/>
                                                                                     <constraint firstAttribute="height" constant="120" id="lcD-fa-Hod"/>
                                                                                     <constraint firstAttribute="bottom" secondItem="ldI-tE-Rdr" secondAttribute="bottom" id="wRU-Ux-Lwu"/>
@@ -1072,7 +1120,25 @@
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e4W-Dk-6yD" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="166.33333333333334" height="120"/>
                                                                                 <subviews>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploaddoc2" translatesAutoresizingMaskIntoConstraints="NO" id="yBT-bh-QIP" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="3Ke-sq-oCe">
+                                                                                        <rect key="frame" x="58.666666666666657" y="29.666666666666629" width="49" height="49"/>
+                                                                                        <subviews>
+                                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="oHN-Dv-XVS">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="49" height="49"/>
+                                                                                                <constraints>
+                                                                                                    <constraint firstAttribute="width" constant="49" id="9sU-PE-GoU"/>
+                                                                                                    <constraint firstAttribute="height" constant="49" id="yGd-RD-Lf5"/>
+                                                                                                </constraints>
+                                                                                            </imageView>
+                                                                                        </subviews>
+                                                                                    </stackView>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Document 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wzv-NM-haR">
+                                                                                        <rect key="frame" x="46.333333333333336" y="82.666666666666629" width="73.333333333333314" height="17"/>
+                                                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                                                                        <color key="textColor" red="0.52941176469999995" green="0.36078431370000003" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                    </label>
+                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dashedBorder" translatesAutoresizingMaskIntoConstraints="NO" id="yBT-bh-QIP" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                                                                         <rect key="frame" x="1" y="0.0" width="164" height="120"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="width" constant="164" id="lhj-8K-XsI"/>
@@ -1095,11 +1161,15 @@
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="bottom" secondItem="yBT-bh-QIP" secondAttribute="bottom" id="2Zz-Pn-9r7"/>
+                                                                                    <constraint firstItem="3Ke-sq-oCe" firstAttribute="centerY" secondItem="yBT-bh-QIP" secondAttribute="centerY" multiplier="0.9" id="Fn2-k0-71k"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="IJx-ab-HK2" secondAttribute="trailing" id="H5f-0D-zMk"/>
                                                                                     <constraint firstItem="IJx-ab-HK2" firstAttribute="top" secondItem="e4W-Dk-6yD" secondAttribute="top" id="I4T-gs-JH9"/>
                                                                                     <constraint firstItem="yBT-bh-QIP" firstAttribute="centerX" secondItem="e4W-Dk-6yD" secondAttribute="centerX" id="KJ3-9v-RHm"/>
                                                                                     <constraint firstAttribute="height" constant="120" id="QoC-Pb-mUl"/>
+                                                                                    <constraint firstItem="3Ke-sq-oCe" firstAttribute="centerX" secondItem="yBT-bh-QIP" secondAttribute="centerX" id="aqM-Dg-ccc"/>
+                                                                                    <constraint firstItem="Wzv-NM-haR" firstAttribute="top" secondItem="3Ke-sq-oCe" secondAttribute="bottom" constant="4" id="l47-NM-XO1"/>
                                                                                     <constraint firstAttribute="bottom" secondItem="IJx-ab-HK2" secondAttribute="bottom" id="r5h-xI-x5k"/>
+                                                                                    <constraint firstItem="Wzv-NM-haR" firstAttribute="centerX" secondItem="3Ke-sq-oCe" secondAttribute="centerX" id="sJt-2D-eqE"/>
                                                                                     <constraint firstItem="IJx-ab-HK2" firstAttribute="leading" secondItem="e4W-Dk-6yD" secondAttribute="leading" id="sZz-KL-wTP"/>
                                                                                     <constraint firstItem="yBT-bh-QIP" firstAttribute="top" secondItem="e4W-Dk-6yD" secondAttribute="top" id="xFj-lU-af7"/>
                                                                                 </constraints>
@@ -1556,7 +1626,9 @@
                         <outlet property="emailTextField" destination="ndq-U8-H7H" id="9Fi-Zd-tL7"/>
                         <outlet property="fullNameTextField" destination="7Ed-KY-bTd" id="Dzs-TQ-lKL"/>
                         <outlet property="mobileTextField" destination="HFO-LK-lFO" id="DbC-hp-8e1"/>
+                        <outlet property="policiesButton" destination="vCC-P7-iIP" id="PJD-ya-Efs"/>
                         <outlet property="profilePicImageView" destination="1PI-gj-mAc" id="d2Y-2m-H0V"/>
+                        <outlet property="termsAndConditionsButton" destination="Gqy-ln-ReQ" id="ghM-Af-ld5"/>
                         <outlet property="txtConfirmPassword" destination="m5C-KI-QOs" id="2IW-4L-7VG"/>
                         <outlet property="txtCountryCode" destination="ah4-76-0yS" id="bbS-4T-Tjg"/>
                         <outlet property="txtCreatePassword" destination="hSd-oa-Dxa" id="VSx-fk-psq"/>
@@ -1589,7 +1661,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kd1-q3-JOn">
                                                         <rect key="frame" x="0.0" y="0.0" width="353" height="40"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zon-KH-1Pb">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zon-KH-1Pb" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="40" id="FeH-JV-FQ8"/>
@@ -2187,7 +2259,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="udL-sZ-Hes">
                                                         <rect key="frame" x="0.0" y="0.0" width="353" height="40"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Rc-jT-6c1">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Rc-jT-6c1" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="40" id="5zT-9O-CAA"/>
@@ -2681,7 +2753,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G6r-Tl-xMm">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G6r-Tl-xMm" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                 <rect key="frame" x="20" y="118" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="AWA-yN-Bd7"/>
@@ -3179,17 +3251,18 @@ you for your patience. Team Desynat App</string>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="6mw-51-4to">
+                                                            <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6mw-51-4to">
                                                                 <rect key="frame" x="16" y="91" width="361" height="24"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cTt-Pe-ClS">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="120.33333333333333" height="24"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="113.66666666666667" height="24"/>
                                                                         <subviews>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6qT-81-wqC">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="120.33333333333333" height="24"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="113.66666666666667" height="24"/>
                                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                                                <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                                <state key="normal" title="   Today" image="radioHome">
+                                                                                <state key="normal" title="Today" image="radioHome">
                                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 </state>
                                                                                 <connections>
@@ -3206,13 +3279,14 @@ you for your patience. Team Desynat App</string>
                                                                         </constraints>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LBG-63-Sh4">
-                                                                        <rect key="frame" x="120.33333333333334" y="0.0" width="120.33333333333334" height="24"/>
+                                                                        <rect key="frame" x="123.66666666666666" y="0.0" width="113.66666666666666" height="24"/>
                                                                         <subviews>
                                                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oZk-Dd-OBW">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="120.33333333333333" height="24"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="113.66666666666667" height="24"/>
                                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                                                <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                                <state key="normal" title="   This week" image="unselcetdRadioHome">
+                                                                                <state key="normal" title="This week" image="unselcetdRadioHome">
                                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 </state>
                                                                                 <connections>
@@ -3229,13 +3303,14 @@ you for your patience. Team Desynat App</string>
                                                                         </constraints>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5TM-Ab-6nW">
-                                                                        <rect key="frame" x="240.66666666666671" y="0.0" width="120.33333333333334" height="24"/>
+                                                                        <rect key="frame" x="247.33333333333329" y="0.0" width="113.66666666666666" height="24"/>
                                                                         <subviews>
                                                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLO-sV-IAV">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="120.33333333333333" height="24"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="113.66666666666667" height="24"/>
                                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                                                <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                                <state key="normal" title="   This Month" image="unselcetdRadioHome">
+                                                                                <state key="normal" title="This Month" image="unselcetdRadioHome">
                                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 </state>
                                                                                 <connections>
@@ -3283,7 +3358,7 @@ you for your patience. Team Desynat App</string>
                                                                             <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 KD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xNV-PQ-ZP2" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 KD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="30" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xNV-PQ-ZP2" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
                                                                         <rect key="frame" x="19" y="54.333333333333314" width="83.333333333333329" height="57"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="36"/>
                                                                         <nil key="textColor"/>
@@ -3306,6 +3381,7 @@ you for your patience. Team Desynat App</string>
                                                                     <constraint firstItem="tYR-sg-59U" firstAttribute="leading" secondItem="WO4-P1-ceM" secondAttribute="leading" constant="16" id="5tH-zd-ytk"/>
                                                                     <constraint firstAttribute="trailing" secondItem="tYR-sg-59U" secondAttribute="trailing" constant="16" id="GGB-zN-ADR"/>
                                                                     <constraint firstItem="tYR-sg-59U" firstAttribute="top" secondItem="WO4-P1-ceM" secondAttribute="top" constant="16" id="IDd-jW-hOx"/>
+                                                                    <constraint firstItem="Ico-SN-ibA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xNV-PQ-ZP2" secondAttribute="trailing" constant="10" id="IxF-MI-vh1"/>
                                                                     <constraint firstItem="xNV-PQ-ZP2" firstAttribute="top" secondItem="tYR-sg-59U" secondAttribute="bottom" constant="19" id="MxR-Mq-So5"/>
                                                                     <constraint firstAttribute="bottom" secondItem="xNV-PQ-ZP2" secondAttribute="bottom" constant="15" id="ORT-CJ-5gv"/>
                                                                     <constraint firstAttribute="bottom" secondItem="Ico-SN-ibA" secondAttribute="bottom" constant="13" id="aQz-yx-CYg"/>
@@ -3353,8 +3429,8 @@ you for your patience. Team Desynat App</string>
                                                                                     <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iez-fK-g8G" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                <rect key="frame" x="15.999999999999996" y="59" width="38.666666666666657" height="33"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iez-fK-g8G" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                <rect key="frame" x="16" y="59" width="14.666666666666664" height="33"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="33" id="SXK-yf-4cu"/>
                                                                                 </constraints>
@@ -3462,8 +3538,8 @@ you for your patience. Team Desynat App</string>
                                                                                     <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7aZ-ZX-xd4" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                <rect key="frame" x="15.999999999999996" y="51" width="38.666666666666657" height="33"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7aZ-ZX-xd4" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                <rect key="frame" x="16" y="51" width="14.666666666666664" height="33"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="33" id="GYM-EF-RTr"/>
                                                                                 </constraints>
@@ -3524,8 +3600,8 @@ you for your patience. Team Desynat App</string>
                                                                                     <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="51" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5c8-MW-s5f" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                <rect key="frame" x="16" y="51" width="24.666666666666671" height="33"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5c8-MW-s5f" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                <rect key="frame" x="16" y="51" width="14.666666666666664" height="33"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="33" id="KnO-Im-D1o"/>
                                                                                 </constraints>
@@ -3594,8 +3670,8 @@ you for your patience. Team Desynat App</string>
                                                                                     <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipe-zk-dof" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                <rect key="frame" x="15.999999999999996" y="51" width="38.666666666666657" height="33"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipe-zk-dof" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                <rect key="frame" x="16" y="51" width="14.666666666666664" height="33"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="33" id="Cd7-69-Dax"/>
                                                                                 </constraints>
@@ -3656,8 +3732,8 @@ you for your patience. Team Desynat App</string>
                                                                                     <userDefinedRuntimeAttribute type="string" keyPath="fontFamilyName" value="pop"/>
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="51" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quf-gq-e4q" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                                <rect key="frame" x="16" y="51" width="24.666666666666671" height="33"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quf-gq-e4q" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
+                                                                                <rect key="frame" x="16" y="51" width="14.666666666666664" height="33"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="33" id="WTW-OO-ncz"/>
                                                                                 </constraints>
@@ -4383,7 +4459,7 @@ you for your patience. Team Desynat App</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YbO-A8-a7S">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cxc-dE-Ln1">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cxc-dE-Ln1" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="ReK-X3-oE9"/>
@@ -4825,7 +4901,7 @@ you for your patience. Team Desynat App</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQz-8n-nA3">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYo-DY-VYF">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYo-DY-VYF" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="OCx-rJ-HSQ"/>
@@ -5150,7 +5226,7 @@ you for your patience. Team Desynat App</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zLe-nE-1HY">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rhC-JT-po0">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rhC-JT-po0" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="2R5-n0-mZx"/>
@@ -5757,7 +5833,25 @@ you for your patience. Team Desynat App</string>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="26x-17-80P" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="166.66666666666666" height="120"/>
                                                                                 <subviews>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadDoc1" translatesAutoresizingMaskIntoConstraints="NO" id="zxS-jU-OTx" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Ol5-PV-dct">
+                                                                                        <rect key="frame" x="58.666666666666671" y="29.666666666666629" width="49" height="49"/>
+                                                                                        <subviews>
+                                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="kLB-bv-n2A">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="49" height="49"/>
+                                                                                                <constraints>
+                                                                                                    <constraint firstAttribute="width" constant="49" id="sCC-p1-Qb7"/>
+                                                                                                    <constraint firstAttribute="height" constant="49" id="yXo-D4-xXy"/>
+                                                                                                </constraints>
+                                                                                            </imageView>
+                                                                                        </subviews>
+                                                                                    </stackView>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Document 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eaA-hH-5M8">
+                                                                                        <rect key="frame" x="47.999999999999993" y="82.666666666666629" width="70.333333333333314" height="17"/>
+                                                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                                                                        <color key="textColor" red="0.52941176469999995" green="0.36078431370000003" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                    </label>
+                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dashedBorder" translatesAutoresizingMaskIntoConstraints="NO" id="zxS-jU-OTx" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                                                                         <rect key="frame" x="1.3333333333333286" y="0.0" width="164" height="120"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="width" constant="164" id="yPA-mp-ELs"/>
@@ -5781,8 +5875,12 @@ you for your patience. Team Desynat App</string>
                                                                                 <constraints>
                                                                                     <constraint firstItem="eaL-dN-xQW" firstAttribute="leading" secondItem="26x-17-80P" secondAttribute="leading" id="3k8-YS-zim"/>
                                                                                     <constraint firstAttribute="bottom" secondItem="eaL-dN-xQW" secondAttribute="bottom" id="3ob-iR-Rbf"/>
+                                                                                    <constraint firstItem="eaA-hH-5M8" firstAttribute="centerX" secondItem="Ol5-PV-dct" secondAttribute="centerX" id="EPO-w3-Ozg"/>
+                                                                                    <constraint firstItem="Ol5-PV-dct" firstAttribute="centerX" secondItem="zxS-jU-OTx" secondAttribute="centerX" id="Ld8-bZ-puJ"/>
                                                                                     <constraint firstItem="zxS-jU-OTx" firstAttribute="centerX" secondItem="26x-17-80P" secondAttribute="centerX" id="Tp1-aq-16j"/>
                                                                                     <constraint firstItem="zxS-jU-OTx" firstAttribute="top" secondItem="26x-17-80P" secondAttribute="top" id="UIz-Uz-Xtb"/>
+                                                                                    <constraint firstItem="eaA-hH-5M8" firstAttribute="top" secondItem="Ol5-PV-dct" secondAttribute="bottom" constant="4" id="VnG-mj-Woe"/>
+                                                                                    <constraint firstItem="Ol5-PV-dct" firstAttribute="centerY" secondItem="zxS-jU-OTx" secondAttribute="centerY" multiplier="0.9" id="cfV-vH-V7I"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="eaL-dN-xQW" secondAttribute="trailing" id="fO8-ON-sgS"/>
                                                                                     <constraint firstAttribute="height" constant="120" id="gP7-rH-3fn"/>
                                                                                     <constraint firstAttribute="bottom" secondItem="zxS-jU-OTx" secondAttribute="bottom" id="qCG-Nw-0Oi"/>
@@ -5813,7 +5911,25 @@ you for your patience. Team Desynat App</string>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FEe-dE-tQq" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="166.33333333333334" height="120"/>
                                                                                 <subviews>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploaddoc2" translatesAutoresizingMaskIntoConstraints="NO" id="LEZ-WC-Nf6" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
+                                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="7up-b2-rGZ">
+                                                                                        <rect key="frame" x="58.666666666666657" y="29.666666666666629" width="49" height="49"/>
+                                                                                        <subviews>
+                                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uploadPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="OYE-Xz-PHs">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="49" height="49"/>
+                                                                                                <constraints>
+                                                                                                    <constraint firstAttribute="height" constant="49" id="2M5-Fw-9Le"/>
+                                                                                                    <constraint firstAttribute="width" constant="49" id="ovR-fy-lsz"/>
+                                                                                                </constraints>
+                                                                                            </imageView>
+                                                                                        </subviews>
+                                                                                    </stackView>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Document 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KML-jd-YXX">
+                                                                                        <rect key="frame" x="46.333333333333336" y="82.666666666666629" width="73.333333333333314" height="17"/>
+                                                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                                                                        <color key="textColor" red="0.52941176469999995" green="0.36078431370000003" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                    </label>
+                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dashedBorder" translatesAutoresizingMaskIntoConstraints="NO" id="LEZ-WC-Nf6" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                                                                         <rect key="frame" x="1" y="0.0" width="164" height="120"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="width" constant="164" id="v9D-WJ-mBM"/>
@@ -5835,9 +5951,13 @@ you for your patience. Team Desynat App</string>
                                                                                 </subviews>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <constraints>
+                                                                                    <constraint firstItem="KML-jd-YXX" firstAttribute="top" secondItem="7up-b2-rGZ" secondAttribute="bottom" constant="4" id="Jrg-0a-AoK"/>
+                                                                                    <constraint firstItem="7up-b2-rGZ" firstAttribute="centerY" secondItem="LEZ-WC-Nf6" secondAttribute="centerY" multiplier="0.9" id="PIc-FY-oXy"/>
                                                                                     <constraint firstAttribute="height" constant="120" id="YFQ-fi-R1h"/>
                                                                                     <constraint firstItem="4tl-eV-0K1" firstAttribute="leading" secondItem="FEe-dE-tQq" secondAttribute="leading" id="bah-Zy-x72"/>
                                                                                     <constraint firstItem="4tl-eV-0K1" firstAttribute="top" secondItem="FEe-dE-tQq" secondAttribute="top" id="hAj-Dj-zqN"/>
+                                                                                    <constraint firstItem="KML-jd-YXX" firstAttribute="centerX" secondItem="7up-b2-rGZ" secondAttribute="centerX" id="icE-bW-ckI"/>
+                                                                                    <constraint firstItem="7up-b2-rGZ" firstAttribute="centerX" secondItem="LEZ-WC-Nf6" secondAttribute="centerX" id="lXe-2g-R7B"/>
                                                                                     <constraint firstItem="LEZ-WC-Nf6" firstAttribute="top" secondItem="FEe-dE-tQq" secondAttribute="top" id="nq1-QQ-F9J"/>
                                                                                     <constraint firstItem="LEZ-WC-Nf6" firstAttribute="centerX" secondItem="FEe-dE-tQq" secondAttribute="centerX" id="oi5-0M-78u"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="4tl-eV-0K1" secondAttribute="trailing" id="q5c-xn-VAx"/>
@@ -6395,7 +6515,7 @@ you for your patience. Team Desynat App</string>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rcb-sA-GR7">
                                                         <rect key="frame" x="0.0" y="0.0" width="345" height="40"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B4q-WB-R3o">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B4q-WB-R3o" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="40" id="4NX-tY-HGP"/>
@@ -6877,7 +6997,7 @@ you for your patience. Team Desynat App</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s95-54-zap">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e42-IJ-9fx">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e42-IJ-9fx" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="W9V-ta-tOJ"/>
@@ -7521,7 +7641,7 @@ you for your patience. Team Desynat App</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YXf-Jw-ZBH">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWR-7P-WC2">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWR-7P-WC2" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="5mk-6u-VXz"/>
@@ -7668,8 +7788,8 @@ you for your patience. Team Desynat App</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T0T-wW-8Ht">
                                                 <rect key="frame" x="187.66666666666663" y="0.0" width="157.33333333333337" height="52"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ehe-f0-Kia">
-                                                        <rect key="frame" x="0.0" y="16.333333333333343" width="117.33333333333333" height="19.666666666666671"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ehe-f0-Kia">
+                                                        <rect key="frame" x="89.333333333333343" y="16.333333333333343" width="28" height="19.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -7693,7 +7813,6 @@ you for your patience. Team Desynat App</string>
                                                 <constraints>
                                                     <constraint firstItem="Tnd-QX-n9r" firstAttribute="centerY" secondItem="T0T-wW-8Ht" secondAttribute="centerY" id="7jH-Bf-5La"/>
                                                     <constraint firstAttribute="bottom" secondItem="trJ-I3-6z3" secondAttribute="bottom" id="E3F-ks-mbc"/>
-                                                    <constraint firstItem="Ehe-f0-Kia" firstAttribute="leading" secondItem="T0T-wW-8Ht" secondAttribute="leading" id="Jbt-TA-Zps"/>
                                                     <constraint firstItem="Tnd-QX-n9r" firstAttribute="leading" secondItem="Ehe-f0-Kia" secondAttribute="trailing" constant="20" id="Od8-fx-uLn"/>
                                                     <constraint firstItem="trJ-I3-6z3" firstAttribute="top" secondItem="T0T-wW-8Ht" secondAttribute="top" id="QhX-QY-fXD"/>
                                                     <constraint firstItem="Ehe-f0-Kia" firstAttribute="centerY" secondItem="Tnd-QX-n9r" secondAttribute="centerY" id="cim-o2-uts"/>
@@ -7864,7 +7983,7 @@ you for your patience. Team Desynat App</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="88r-rV-hKR">
                                 <rect key="frame" x="0.0" y="118" width="393" height="666"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abu-fh-nD9">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abu-fh-nD9" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="GXc-0g-q7B"/>
@@ -8221,7 +8340,7 @@ want to continue with</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LVA-LL-xar">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ca-KU-0Dd">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ca-KU-0Dd" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="PVL-Ou-3PL"/>
@@ -8384,7 +8503,7 @@ want to continue with</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nsv-he-4W2">
                                 <rect key="frame" x="24" y="118" width="345" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbj-If-Me6">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbj-If-Me6" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="EXi-ED-MEL"/>
@@ -8867,7 +8986,7 @@ want to continue with</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TeH-yQ-zBj">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7t-w6-phE">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7t-w6-phE" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Mw1-q9-xSG"/>
@@ -9469,7 +9588,7 @@ want to continue with</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sgQ-6O-MiL">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GWr-0Z-Lft">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GWr-0Z-Lft" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="kj5-cf-zYJ"/>
@@ -9565,7 +9684,7 @@ want to continue with</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rOB-J3-Nc8">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="158"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vlo-Ap-6g0">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vlo-Ap-6g0" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="118" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="MsA-j5-2Lk"/>
@@ -9797,6 +9916,7 @@ want to continue with</string>
         <image name="copyLink" width="17" height="17"/>
         <image name="country" width="20.333333969116211" height="31"/>
         <image name="cross" width="18" height="19.333333969116211"/>
+        <image name="dashedBorder" width="164" height="120"/>
         <image name="delete" width="24" height="24"/>
         <image name="downImag" width="24" height="24"/>
         <image name="email" width="22" height="22"/>
@@ -9806,6 +9926,7 @@ want to continue with</string>
         <image name="filterStore" width="17.666666030883789" height="16.333333969116211"/>
         <image name="firststep" width="343" height="12"/>
         <image name="fourtStep" width="343" height="12"/>
+        <image name="grayBorderLine" width="120" height="120"/>
         <image name="homeCamera" width="20" height="20"/>
         <image name="homeSelected" width="52" height="44"/>
         <image name="homeUnselected" width="52" height="44"/>
@@ -9820,7 +9941,6 @@ want to continue with</string>
         <image name="pencil" width="24" height="24"/>
         <image name="plus" width="16" height="16"/>
         <image name="productsAffiliated" width="53" height="44"/>
-        <image name="profilePic" width="120" height="120"/>
         <image name="profileSelected" width="52" height="44"/>
         <image name="profileUnselected" width="52" height="44"/>
         <image name="radioHome" width="24" height="24"/>
@@ -9840,9 +9960,9 @@ want to continue with</string>
         <image name="totalRevenue" width="22" height="22"/>
         <image name="unselcetdRadioHome" width="24" height="24"/>
         <image name="unslectedCheckbox" width="18" height="18"/>
-        <image name="uploadDoc1" width="164" height="120"/>
+        <image name="uploadImageGray" width="49" height="49"/>
+        <image name="uploadPhoto" width="49" height="49"/>
         <image name="uploadProof" width="343" height="137"/>
-        <image name="uploaddoc2" width="164" height="120"/>
         <image name="userProfile" width="32" height="32.333332061767578"/>
         <image name="whiteBack" width="9.6666669845581055" height="17.666666030883789"/>
         <namedColor name="171717">
@@ -9861,13 +9981,13 @@ want to continue with</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

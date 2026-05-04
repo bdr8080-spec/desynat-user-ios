@@ -29,6 +29,7 @@ class CMSViewController: UIViewController {
     @IBAction func backBtn(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    
     func initialSetup(){
         switch comingReason {
         case .aboutUs:

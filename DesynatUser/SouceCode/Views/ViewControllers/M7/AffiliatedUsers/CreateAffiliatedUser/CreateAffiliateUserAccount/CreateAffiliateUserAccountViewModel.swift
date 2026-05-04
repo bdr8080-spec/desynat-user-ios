@@ -85,13 +85,13 @@ class CreateAffiliateUserAccountViewModel: NSObject {
         }
         
         if errorMessage != .none {
-            hostVC.showAlert(msg: errorMessage.rawValue)
+            hostVC.showAlert(msg: errorMessage.rawValue.localiz())
         }
         
         hostVC.view.endEditing(true)
         return errorMessage == .none
     }
-
+    
     //Mark:->SignUpAPi
     func signUpApi(){
         let params:[String:Any] = [
@@ -123,9 +123,9 @@ class CreateAffiliateUserAccountViewModel: NSObject {
         let params:[String:Any] = [
             "profile_image": hostVC.profileImage,
             "full_name": hostVC.fullNameTextField.text ?? "",
-//            "country_code": hostVC.countryCode,
-//            "mobile": hostVC.mobileTextField.text ?? "",
-//            "email": hostVC.emailTextField.text ?? "",
+            //            "country_code": hostVC.countryCode,
+            //            "mobile": hostVC.mobileTextField.text ?? "",
+            //            "email": hostVC.emailTextField.text ?? "",
             "password": hostVC.txtCreatePassword.text ?? "",
             "confirm_password": hostVC.txtConfirmPassword.text ?? "",
             "document1": hostVC.uplaodDocuOneImage,

@@ -15,6 +15,7 @@ class LoginViaOTPAffilatedUserViewController: UIViewController {
     @IBOutlet weak var txtFieldLeading: NSLayoutConstraint!
     @IBOutlet weak var viewCountryCode: UIView!
     @IBOutlet weak var countryCodeLabel: UILabel!
+    @IBOutlet weak var switchUserButton: CustomButton!
     
     // MARK: - Property Decalaration
     private lazy var viewModel = LoginViaOTPAffiliatedUserViewModel(loginHostVC: self)
@@ -29,6 +30,7 @@ class LoginViaOTPAffilatedUserViewController: UIViewController {
         self.txtFieldLeading.constant = -65
         emailMobileImageView.image = UIImage(named: "email")
         viewModel.getALlUserCountryListApi()
+        switchUserButton.setTitle("Switch to User".localiz(), for: .normal)
     }
     
     // MARK: - Button's Action

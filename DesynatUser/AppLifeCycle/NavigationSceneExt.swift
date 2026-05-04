@@ -43,8 +43,9 @@ extension SceneDelegate {
         kSharedUserDefaults.removeValue(for: .affiliatedAccessToken)
     }
     
-    public func navigateToAffiliatedUserHomeVc() {
+    public func navigateToAffiliatedUserHomeVc(selectedIndex: Int = 0) {
         let vc = AffiliatedUserTabbarViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+        vc.initialTabIndex = selectedIndex
         navigateTo(vc: vc)
     }
     

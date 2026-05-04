@@ -70,7 +70,7 @@ class ItemPerformanceViewController: UIViewController {
     //MARK: Function's declaration
     private func showCopiedLabel() {
         let copiedLabel = UILabel()
-        copiedLabel.text = "  Copied  "
+        copiedLabel.text = "  Copied  ".localiz()
         copiedLabel.textAlignment = .center
         copiedLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         copiedLabel.textColor = .white

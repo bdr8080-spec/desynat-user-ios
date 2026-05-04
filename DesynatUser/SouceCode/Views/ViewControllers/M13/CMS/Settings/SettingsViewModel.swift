@@ -30,6 +30,7 @@ class SettingsViewModel {
             self.hostVC.updateAppNotificationUI()
         }
     }
+    
     func getProfile() {
         WebService.sharedInstance.getProfileService { [weak self] response in
             guard let self = self else { return }
@@ -71,5 +72,19 @@ class SettingsViewModel {
         }
     }
     
+    func deleteAccountRequest(){
+        WebService.sharedInstance.deleteAccountUserService() { (response) in
+            kSharedSceneDelegate.logoutUser()
+            kSharedSceneDelegate.navigateToLoginVc()
+            UserDefaults.standard.setValue("No", forKey:"isLogin")
+        }
+    }
+    
+    func deleteAffiliateAccountRequest() {
+        WebService.sharedInstance.deleteAccountForAffiliateUserService() { (response) in
+            kSharedSceneDelegate.logoutAfffiliatedUser()
+            kSharedSceneDelegate.navigateToLoginAffiliatedVc()
+            UserDefaults.standard.setValue("No", forKey:"affiliatedAccountIsLoggedIn")
+        }
+    }
 }
-

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -31,7 +31,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IWr-Vh-9so">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cOi-EC-s2O">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cOi-EC-s2O" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="DdL-0O-jAM"/>
@@ -49,7 +49,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile Details" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N7N-zc-5uV">
-                                        <rect key="frame" x="66" y="10.666666666666659" width="267" height="18.666666666666671"/>
+                                        <rect key="frame" x="66" y="8.6666666666666732" width="267" height="22.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -89,28 +89,31 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Your Password" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fqc-he-0Wk">
-                                                                <rect key="frame" x="20" y="15.999999999999998" width="146.66666666666666" height="16.333333333333329"/>
+                                                                <rect key="frame" x="20" y="14.333333333333345" width="164" height="19.666666666666664"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightArrow" translatesAutoresizingMaskIntoConstraints="NO" id="zmr-tL-xWd">
+                                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDc-mO-bUP" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="315" y="15" width="18" height="18"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="18" id="MT0-hN-J6I"/>
-                                                                    <constraint firstAttribute="width" secondItem="zmr-tL-xWd" secondAttribute="height" id="S2F-g6-nHV"/>
+                                                                    <constraint firstAttribute="width" constant="18" id="SUK-YP-kIr"/>
+                                                                    <constraint firstAttribute="height" constant="18" id="eg5-XA-9eT"/>
                                                                 </constraints>
-                                                            </imageView>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" image="rightArrow"/>
+                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" red="1" green="0.96710246799999999" blue="0.91878283019999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstItem="Fqc-he-0Wk" firstAttribute="leading" secondItem="X47-p3-FFA" secondAttribute="leading" constant="20" id="2YG-7E-f2H"/>
+                                                            <constraint firstAttribute="trailing" secondItem="lDc-mO-bUP" secondAttribute="trailing" constant="20" symbolic="YES" id="HJG-Ro-YXv"/>
+                                                            <constraint firstItem="lDc-mO-bUP" firstAttribute="leading" secondItem="Fqc-he-0Wk" secondAttribute="trailing" constant="131" id="L7w-6a-OT1"/>
                                                             <constraint firstItem="RTd-x6-o86" firstAttribute="leading" secondItem="X47-p3-FFA" secondAttribute="leading" id="LtV-7l-cmp"/>
                                                             <constraint firstItem="RTd-x6-o86" firstAttribute="top" secondItem="X47-p3-FFA" secondAttribute="top" id="SR7-zk-yLR"/>
                                                             <constraint firstAttribute="trailing" secondItem="RTd-x6-o86" secondAttribute="trailing" id="a84-Lh-eXn"/>
                                                             <constraint firstAttribute="bottom" secondItem="RTd-x6-o86" secondAttribute="bottom" id="eUh-2s-7Lw"/>
-                                                            <constraint firstItem="zmr-tL-xWd" firstAttribute="centerY" secondItem="Fqc-he-0Wk" secondAttribute="centerY" id="khI-9o-tLl"/>
-                                                            <constraint firstAttribute="trailing" secondItem="zmr-tL-xWd" secondAttribute="trailing" constant="20" id="oEg-s2-aIs"/>
+                                                            <constraint firstItem="lDc-mO-bUP" firstAttribute="centerY" secondItem="Fqc-he-0Wk" secondAttribute="centerY" id="iwe-9Z-YRG"/>
                                                             <constraint firstItem="Fqc-he-0Wk" firstAttribute="centerY" secondItem="X47-p3-FFA" secondAttribute="centerY" id="rQo-om-zii"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
@@ -160,7 +163,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Image" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQU-gC-ebk">
-                                                                        <rect key="frame" x="18.333333333333314" y="13" width="78.333333333333329" height="14"/>
+                                                                        <rect key="frame" x="12" y="11.666666666666686" width="91" height="17"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                                         <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -314,7 +317,7 @@
                                                                                 </connections>
                                                                             </button>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NPI-oJ-cyJ">
-                                                                                <rect key="frame" x="11.666666666666686" y="8" width="42" height="14"/>
+                                                                                <rect key="frame" x="8.3333333333333108" y="6.6666666666666856" width="48.666666666666657" height="17"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -421,7 +424,7 @@
                                                                                 </connections>
                                                                             </button>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="41e-rq-gw3">
-                                                                                <rect key="frame" x="11.666666666666686" y="8" width="42" height="14"/>
+                                                                                <rect key="frame" x="8.3333333333333108" y="6.6666666666666288" width="48.666666666666657" height="17"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -495,7 +498,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save Changes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8N-w5-bgB">
-                                                        <rect key="frame" x="131" y="10.999999999999998" width="91" height="16.333333333333329"/>
+                                                        <rect key="frame" x="125.33333333333334" y="9.333333333333373" width="102.66666666666666" height="19.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -570,7 +573,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2d8-MX-lFV">
                                 <rect key="frame" x="0.0" y="118" width="393" height="666"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1LG-pW-p9k">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1LG-pW-p9k" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="Ied-TE-WwF"/>
@@ -588,13 +591,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQ1-C7-kS0">
-                                        <rect key="frame" x="131" y="10.666666666666659" width="131" height="18.666666666666671"/>
+                                        <rect key="frame" x="123" y="8.6666666666666732" width="147" height="22.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="YMb-s4-90N">
-                                        <rect key="frame" x="20" y="64.333333333333343" width="353" height="255.00000000000003"/>
+                                        <rect key="frame" x="20" y="66.333333333333343" width="353" height="255.00000000000003"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3dP-kK-4IB">
                                                 <rect key="frame" x="0.0" y="0.0" width="353" height="75"/>
@@ -815,7 +818,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhH-PB-LeX">
-                                                <rect key="frame" x="119.33333333333334" y="10.999999999999998" width="114.66666666666666" height="16.333333333333329"/>
+                                                <rect key="frame" x="112.33333333333336" y="9.333333333333373" width="128.66666666666663" height="19.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -877,7 +880,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RJV-09-93C">
                                 <rect key="frame" x="0.0" y="118" width="393" height="666"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lF4-iO-qRB">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lF4-iO-qRB" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="2JF-yn-r6P"/>
@@ -895,16 +898,16 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter New Mobile Number " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="74w-mh-53c">
-                                        <rect key="frame" x="74" y="10.666666666666659" width="245" height="18.666666666666671"/>
+                                        <rect key="frame" x="74" y="8.6666666666666732" width="245" height="22.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Js9-z8-cgV">
-                                        <rect key="frame" x="20" y="64.333333333333357" width="353" height="212.66666666666663"/>
+                                        <rect key="frame" x="20" y="66.333333333333329" width="353" height="219.33333333333337"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgd-Y6-ooF">
-                                                <rect key="frame" x="0.0" y="0.0" width="353" height="32.666666666666664"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="353" height="39.333333333333336"/>
                                                 <string key="text">Great! now enter the mobile number that you 
 want to continue with</string>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
@@ -912,7 +915,7 @@ want to continue with</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NK1-gx-qXp">
-                                                <rect key="frame" x="0.0" y="47.666666666666657" width="353" height="75"/>
+                                                <rect key="frame" x="0.0" y="54.333333333333314" width="353" height="75"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter New Mobile Number " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzG-Da-ehq">
                                                         <rect key="frame" x="0.0" y="0.0" width="353" height="20"/>
@@ -921,7 +924,7 @@ want to continue with</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zU5-1q-eLv" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="25" width="353" height="50"/>
+                                                        <rect key="frame" x="0.0" y="25.000000000000028" width="353" height="50"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fYe-dZ-maN">
                                                                 <rect key="frame" x="15" y="5" width="75" height="40"/>
@@ -1003,7 +1006,7 @@ want to continue with</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zqM-hx-zeY">
-                                                <rect key="frame" x="0.0" y="137.66666666666666" width="353" height="75"/>
+                                                <rect key="frame" x="0.0" y="144.33333333333334" width="353" height="75"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O21-IE-cEq">
                                                         <rect key="frame" x="0.0" y="0.0" width="353" height="20"/>
@@ -1055,7 +1058,7 @@ want to continue with</string>
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LYM-ey-Oph">
-                                        <rect key="frame" x="20" y="312" width="353" height="38"/>
+                                        <rect key="frame" x="20" y="320.66666666666669" width="353" height="38"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q6k-wN-WJ6" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="353" height="38"/>
@@ -1076,7 +1079,7 @@ want to continue with</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zxJ-Em-dCd">
-                                                <rect key="frame" x="148.33333333333334" y="10.999999999999998" width="56.666666666666657" height="16.333333333333329"/>
+                                                <rect key="frame" x="144.33333333333334" y="9.3333333333333162" width="64.666666666666657" height="19.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -1143,7 +1146,7 @@ want to continue with</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ecd-2i-rHB">
                                 <rect key="frame" x="0.0" y="118" width="393" height="666"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ivz-jQ-5ZU">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ivz-jQ-5ZU" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="8Fq-lz-9vj"/>
@@ -1161,19 +1164,19 @@ want to continue with</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change location" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xqN-Fd-UXU">
-                                        <rect key="frame" x="138" y="10.666666666666659" width="117" height="18.666666666666671"/>
+                                        <rect key="frame" x="129.33333333333337" y="8.6666666666666732" width="134.66666666666663" height="22.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eL3-fv-86f">
-                                        <rect key="frame" x="0.0" y="44.333333333333314" width="393" height="621.66666666666674"/>
+                                        <rect key="frame" x="0.0" y="46.333333333333314" width="393" height="619.66666666666674"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jzo-0o-UdN">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="621.66666666666663"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="619.66666666666663"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qlR-XU-Wee" customClass="GMSMapView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="479"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="463"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="exq-7X-GhW" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
@@ -1220,7 +1223,7 @@ want to continue with</string>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDh-Dy-AeW" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
-                                                        <rect key="frame" x="178" y="408" width="195" height="46"/>
+                                                        <rect key="frame" x="178" y="392" width="195" height="46"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="uDh-Dy-AeW" secondAttribute="height" multiplier="195:46" id="HOq-mT-8D5"/>
@@ -1242,17 +1245,17 @@ want to continue with</string>
                                                         </connections>
                                                     </button>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location" translatesAutoresizingMaskIntoConstraints="NO" id="LKk-B1-uHq">
-                                                        <rect key="frame" x="182.66666666666666" y="221.99999999999997" width="28" height="35.000000000000028"/>
+                                                        <rect key="frame" x="182.66666666666666" y="213.99999999999997" width="28" height="35"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="MOm-ww-4rg"/>
                                                             <constraint firstAttribute="width" constant="28" id="nx2-z2-Ade"/>
                                                         </constraints>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0b-cM-g8J">
-                                                        <rect key="frame" x="0.0" y="479.00000000000006" width="393" height="142.66666666666669"/>
+                                                        <rect key="frame" x="0.0" y="463.00000000000006" width="393" height="156.66666666666669"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xK8-bW-lua" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
-                                                                <rect key="frame" x="24" y="17" width="345" height="18.666666666666671"/>
+                                                                <rect key="frame" x="24" y="17" width="345" height="22.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -1261,7 +1264,7 @@ want to continue with</string>
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihN-Xv-LUf">
-                                                                <rect key="frame" x="24" y="45.666666666666629" width="345" height="49"/>
+                                                                <rect key="frame" x="24" y="49.666666666666629" width="345" height="59"/>
                                                                 <string key="text">HN- 547, Street no,5 Block d new town hale, Saudi Arabia
 </string>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
@@ -1269,7 +1272,7 @@ want to continue with</string>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFd-CO-nId">
-                                                                <rect key="frame" x="24" y="104.66666666666663" width="345" height="38"/>
+                                                                <rect key="frame" x="24" y="118.66666666666663" width="345" height="38"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="647-M4-0zc" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="345" height="38"/>
@@ -1290,7 +1293,7 @@ want to continue with</string>
                                                                         </connections>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFv-9V-LYh">
-                                                                        <rect key="frame" x="144.33333333333334" y="10.999999999999998" width="56.666666666666657" height="16.333333333333329"/>
+                                                                        <rect key="frame" x="140.33333333333334" y="9.333333333333373" width="64.666666666666657" height="19.666666666666671"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -1395,7 +1398,7 @@ want to continue with</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wuo-Ot-Xzf">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rmd-Ui-JDY">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rmd-Ui-JDY" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="1On-CD-eDl"/>
@@ -1413,7 +1416,7 @@ want to continue with</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved Address" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z3U-Rz-n1C">
-                                        <rect key="frame" x="66" y="10.666666666666659" width="267" height="18.666666666666671"/>
+                                        <rect key="frame" x="66" y="8.6666666666666732" width="267" height="22.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1433,14 +1436,14 @@ want to continue with</string>
                                 <rect key="frame" x="20" y="183" width="353" height="48"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" translatesAutoresizingMaskIntoConstraints="NO" id="g1p-kX-nIq">
-                                        <rect key="frame" x="114.33333333333334" y="15" width="18" height="18"/>
+                                        <rect key="frame" x="109" y="15" width="18" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="4Re-03-P7M"/>
                                             <constraint firstAttribute="width" secondItem="g1p-kX-nIq" secondAttribute="height" id="Okb-WT-OL6"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add New Address" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJP-2v-pPD">
-                                        <rect key="frame" x="137.33333333333334" y="15.999999999999998" width="113.33333333333334" height="16.333333333333329"/>
+                                        <rect key="frame" x="132" y="14.333333333333345" width="124.33333333333331" height="19.666666666666664"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                         <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1512,7 +1515,7 @@ want to continue with</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Proceed" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5K-AP-c0H">
-                                                <rect key="frame" x="146.33333333333334" y="10.999999999999998" width="52.666666666666657" height="16.333333333333329"/>
+                                                <rect key="frame" x="143.66666666666666" y="9.333333333333373" width="58" height="19.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -1531,7 +1534,7 @@ want to continue with</string>
                                 </subviews>
                             </stackView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Address Added" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qht-V1-krS">
-                                <rect key="frame" x="128.33333333333331" y="441.66666666666669" width="136.33333333333331" height="18.666666666666686"/>
+                                <rect key="frame" x="121.66666666666667" y="439.66666666666669" width="149.66666666666663" height="22.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -1578,7 +1581,7 @@ want to continue with</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ood-Ww-oHM">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="khq-Sz-nCx">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="khq-Sz-nCx" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="BVc-9b-AhJ"/>
@@ -1596,7 +1599,7 @@ want to continue with</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADD NEW ADDRESS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="td5-W9-Pla">
-                                        <rect key="frame" x="66" y="10.666666666666659" width="267" height="18.666666666666671"/>
+                                        <rect key="frame" x="66" y="8.6666666666666732" width="267" height="22.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1616,7 +1619,7 @@ want to continue with</string>
                                 <rect key="frame" x="0.0" y="178" width="393" height="606"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="60b-PF-DUi">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="904.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="908.66666666666663"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hO3-OO-2tK" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="24" y="0.0" width="345" height="735"/>
@@ -2216,13 +2219,13 @@ want to continue with</string>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save Address As" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHR-fj-2CH">
-                                                <rect key="frame" x="24" y="755" width="345" height="18.666666666666629"/>
+                                                <rect key="frame" x="24" y="755" width="345" height="22.666666666666629"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="rZf-Hq-9xl">
-                                                <rect key="frame" x="24" y="793.66666666666663" width="345" height="48"/>
+                                                <rect key="frame" x="24" y="797.66666666666663" width="345" height="48"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sqc-TZ-GuU" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="165" height="48"/>
@@ -2235,7 +2238,7 @@ want to continue with</string>
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhZ-sp-xi4">
-                                                                <rect key="frame" x="42" y="15.999999999999998" width="103" height="16.333333333333329"/>
+                                                                <rect key="frame" x="42" y="14.333333333333373" width="103" height="19.666666666666664"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -2287,7 +2290,7 @@ want to continue with</string>
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Office" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mn0-Ra-ZIG">
-                                                                <rect key="frame" x="42" y="15.999999999999998" width="103" height="16.333333333333329"/>
+                                                                <rect key="frame" x="42" y="14.333333333333373" width="103" height="19.666666666666664"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -2330,7 +2333,7 @@ want to continue with</string>
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g04-S2-Oxm">
-                                                <rect key="frame" x="24" y="866.66666666666674" width="345" height="38"/>
+                                                <rect key="frame" x="24" y="870.66666666666674" width="345" height="38"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hVD-Mv-qhl" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="345" height="38"/>
@@ -2351,7 +2354,7 @@ want to continue with</string>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Address" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9A9-Ir-qM4">
-                                                        <rect key="frame" x="132" y="10.999999999999998" width="81.333333333333314" height="16.333333333333329"/>
+                                                        <rect key="frame" x="127.33333333333334" y="9.3333333333332593" width="90.333333333333343" height="19.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -2446,7 +2449,7 @@ want to continue with</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pIR-uT-5pE">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oEK-8W-Mnc">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oEK-8W-Mnc" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Yof-0m-w6y"/>
@@ -2464,7 +2467,7 @@ want to continue with</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gift cards" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TGf-Za-9GE">
-                                        <rect key="frame" x="66" y="10.666666666666659" width="267" height="18.666666666666671"/>
+                                        <rect key="frame" x="66" y="8.6666666666666732" width="267" height="22.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2547,7 +2550,7 @@ want to continue with</string>
                                 </connections>
                             </tableView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Cards Found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Zx-aB-rno">
-                                <rect key="frame" x="137.66666666666666" y="441.66666666666669" width="118" height="18.666666666666686"/>
+                                <rect key="frame" x="132" y="439.66666666666669" width="129" height="22.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -2591,7 +2594,7 @@ want to continue with</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sJy-4d-TGi">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L3o-O1-q4R">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L3o-O1-q4R" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="809-Gl-o1e"/>
@@ -2609,7 +2612,7 @@ want to continue with</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Gift Card Category" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qda-hC-jaF">
-                                        <rect key="frame" x="66" y="10.666666666666659" width="267" height="18.666666666666671"/>
+                                        <rect key="frame" x="66" y="8.6666666666666732" width="267" height="22.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2676,7 +2679,7 @@ want to continue with</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zoS-wK-uzU">
-                                        <rect key="frame" x="143.33333333333334" y="10.999999999999998" width="56.666666666666657" height="16.333333333333329"/>
+                                        <rect key="frame" x="139.33333333333334" y="9.333333333333373" width="64.666666666666657" height="19.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2732,7 +2735,7 @@ want to continue with</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XGB-Bz-ED6">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQ9-Os-rvJ">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQ9-Os-rvJ" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="4ge-JL-Zr3"/>
@@ -2750,7 +2753,7 @@ want to continue with</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Details" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V5v-jS-oau">
-                                        <rect key="frame" x="66" y="10.666666666666659" width="267" height="18.666666666666671"/>
+                                        <rect key="frame" x="66" y="8.6666666666666732" width="267" height="22.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2770,22 +2773,22 @@ want to continue with</string>
                                 <rect key="frame" x="0.0" y="183" width="393" height="601"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sPM-ub-EW9">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="934"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="946"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="zJ9-cP-H5y">
-                                                <rect key="frame" x="24" y="0.0" width="344" height="934"/>
+                                                <rect key="frame" x="24" y="0.0" width="344" height="946"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="HkD-Bb-XNb">
-                                                        <rect key="frame" x="0.0" y="0.0" width="344" height="153.66666666666666"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="344" height="157.66666666666666"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Amount" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wtS-Fv-euQ">
-                                                                <rect key="frame" x="0.0" y="0.0" width="344" height="18.666666666666668"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="344" height="22.666666666666668"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3G0-6h-NdL">
-                                                                <rect key="frame" x="0.0" y="38.666666666666657" width="344" height="45"/>
+                                                                <rect key="frame" x="0.0" y="42.666666666666657" width="344" height="45"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="45" id="GyG-1q-Npi"/>
@@ -2803,7 +2806,7 @@ want to continue with</string>
                                                                 </connections>
                                                             </collectionView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SYz-du-xFd" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="103.66666666666669" width="344" height="50"/>
+                                                                <rect key="frame" x="0.0" y="107.66666666666669" width="344" height="50"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZbZ-Hg-Xup">
                                                                         <rect key="frame" x="20" y="5" width="304" height="40"/>
@@ -2834,16 +2837,16 @@ want to continue with</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="erP-6a-tY9">
-                                                        <rect key="frame" x="0.0" y="173.66666666666666" width="344" height="288.66666666666674"/>
+                                                        <rect key="frame" x="0.0" y="177.66666666666666" width="344" height="292.66666666666674"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recepient Details" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hE0-r8-aun">
-                                                                <rect key="frame" x="0.0" y="0.0" width="344" height="18.666666666666668"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="344" height="22.666666666666668"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYL-C9-1L7">
-                                                                <rect key="frame" x="0.0" y="33.666666666666629" width="344" height="75"/>
+                                                                <rect key="frame" x="0.0" y="37.666666666666629" width="344" height="75"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5s-ia-MUL">
                                                                         <rect key="frame" x="0.0" y="0.0" width="344" height="20"/>
@@ -2893,7 +2896,7 @@ want to continue with</string>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KZw-UN-DCH">
-                                                                <rect key="frame" x="0.0" y="123.66666666666663" width="344" height="75"/>
+                                                                <rect key="frame" x="0.0" y="127.66666666666663" width="344" height="75"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email ID" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ke-PJ-YId">
                                                                         <rect key="frame" x="0.0" y="0.0" width="344" height="20"/>
@@ -2902,7 +2905,7 @@ want to continue with</string>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsa-U9-nJP" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="25" width="344" height="50"/>
+                                                                        <rect key="frame" x="0.0" y="25.000000000000057" width="344" height="50"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DyR-d2-d8G">
                                                                                 <rect key="frame" x="20" y="5" width="304" height="40"/>
@@ -2943,7 +2946,7 @@ want to continue with</string>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ioq-WS-ic9">
-                                                                <rect key="frame" x="0.0" y="213.66666666666669" width="344" height="75"/>
+                                                                <rect key="frame" x="0.0" y="217.66666666666669" width="344" height="75"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WhatsApp Number " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwZ-Ud-9z6">
                                                                         <rect key="frame" x="0.0" y="0.0" width="344" height="20"/>
@@ -3036,16 +3039,16 @@ want to continue with</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="cjA-6M-6ZA">
-                                                        <rect key="frame" x="0.0" y="482.33333333333337" width="344" height="353.66666666666663"/>
+                                                        <rect key="frame" x="0.0" y="490.33333333333337" width="344" height="357.66666666666663"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qrw-Bs-Op5">
-                                                                <rect key="frame" x="0.0" y="0.0" width="344" height="18.666666666666668"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="344" height="22.666666666666668"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aBJ-aX-zKx">
-                                                                <rect key="frame" x="0.0" y="33.666666666666629" width="344" height="75"/>
+                                                                <rect key="frame" x="0.0" y="37.666666666666629" width="344" height="75"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biV-qR-0gp">
                                                                         <rect key="frame" x="0.0" y="0.0" width="344" height="20"/>
@@ -3095,7 +3098,7 @@ want to continue with</string>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2gh-Pt-ppL">
-                                                                <rect key="frame" x="0.0" y="123.66666666666663" width="344" height="100"/>
+                                                                <rect key="frame" x="0.0" y="127.66666666666663" width="344" height="100"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wish Message" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hga-DY-WnW">
                                                                         <rect key="frame" x="0.0" y="0.0" width="344" height="13"/>
@@ -3150,13 +3153,13 @@ want to continue with</string>
                                                                 </constraints>
                                                             </view>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iGS-Ul-MVh">
-                                                                <rect key="frame" x="0.0" y="238.66666666666663" width="344" height="0.0"/>
+                                                                <rect key="frame" x="0.0" y="242.66666666666663" width="344" height="0.0"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Uj-un-bOC">
-                                                                <rect key="frame" x="0.0" y="253.66666666666663" width="344" height="100"/>
+                                                                <rect key="frame" x="0.0" y="257.66666666666663" width="344" height="100"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuB-se-jdR">
                                                                         <rect key="frame" x="0.0" y="0.0" width="344" height="13"/>
@@ -3213,7 +3216,7 @@ want to continue with</string>
                                                         </subviews>
                                                     </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q0M-ke-hDa">
-                                                        <rect key="frame" x="0.0" y="856" width="344" height="20"/>
+                                                        <rect key="frame" x="0.0" y="868" width="344" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="saK-8H-Lgz"/>
                                                         </constraints>
@@ -3222,7 +3225,7 @@ want to continue with</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CC5-oQ-tFm">
-                                                        <rect key="frame" x="0.0" y="896" width="344" height="38"/>
+                                                        <rect key="frame" x="0.0" y="908" width="344" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oGB-Hq-mz7" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="344" height="38"/>
@@ -3243,7 +3246,7 @@ want to continue with</string>
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eqB-pG-2a9">
-                                                                <rect key="frame" x="160.33333333333334" y="10.999999999999998" width="23.666666666666657" height="16.333333333333329"/>
+                                                                <rect key="frame" x="159" y="9.3333333333332593" width="26" height="19.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -3322,7 +3325,7 @@ want to continue with</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5wy-vR-Eqq">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRD-Ku-YUy">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRD-Ku-YUy" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="LoR-YE-3Pb"/>
@@ -3340,7 +3343,7 @@ want to continue with</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment method" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I0o-A0-dds">
-                                        <rect key="frame" x="66" y="10.666666666666659" width="267" height="18.666666666666671"/>
+                                        <rect key="frame" x="66" y="8.6666666666666732" width="267" height="22.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -3360,19 +3363,19 @@ want to continue with</string>
                                 <rect key="frame" x="0.0" y="183" width="393" height="601"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jkn-rm-c1P">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="756.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="760.66666666666663"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="S87-FN-C1c">
-                                                <rect key="frame" x="24" y="0.0" width="344" height="756.66666666666663"/>
+                                                <rect key="frame" x="24" y="0.0" width="344" height="760.66666666666663"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SELECT PAYMENT METHOD" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B0Z-2N-BAt">
-                                                        <rect key="frame" x="0.0" y="0.0" width="344" height="18.666666666666668"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="344" height="22.666666666666668"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u60-EW-pHb" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="38.666666666666629" width="344" height="620"/>
+                                                        <rect key="frame" x="0.0" y="42.666666666666629" width="344" height="620"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="stA-Qp-d7p">
                                                                 <rect key="frame" x="15" y="15" width="314" height="50"/>
@@ -3400,7 +3403,7 @@ want to continue with</string>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credit/ Debit Card" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ip7-GB-diO">
-                                                                        <rect key="frame" x="78" y="17" width="212" height="16.333333333333329"/>
+                                                                        <rect key="frame" x="78" y="15.333333333333345" width="212" height="19.666666666666671"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -3459,7 +3462,7 @@ want to continue with</string>
                                                                 <rect key="frame" x="0.0" y="315" width="344" height="0.0"/>
                                                                 <subviews>
                                                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ Add new card" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GQl-pS-h7l">
-                                                                        <rect key="frame" x="15.000000000000007" y="9.9999999999999982" width="99.666666666666686" height="16.333333333333329"/>
+                                                                        <rect key="frame" x="15" y="10.000000000000002" width="112" height="19.666666666666671"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -3526,7 +3529,7 @@ want to continue with</string>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gOH-9P-Akq">
-                                                        <rect key="frame" x="0.0" y="678.66666666666663" width="344" height="20"/>
+                                                        <rect key="frame" x="0.0" y="682.66666666666663" width="344" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="gCB-3t-QLE"/>
                                                         </constraints>
@@ -3535,7 +3538,7 @@ want to continue with</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="95Z-iD-yM5">
-                                                        <rect key="frame" x="0.0" y="718.66666666666663" width="344" height="38"/>
+                                                        <rect key="frame" x="0.0" y="722.66666666666663" width="344" height="38"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nRZ-7f-cZx" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="344" height="38"/>
@@ -3556,7 +3559,7 @@ want to continue with</string>
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Proceed" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLR-9e-L1I">
-                                                                <rect key="frame" x="145.66666666666666" y="10.999999999999998" width="52.666666666666657" height="16.333333333333329"/>
+                                                                <rect key="frame" x="143" y="9.333333333333373" width="58" height="19.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -3633,7 +3636,7 @@ want to continue with</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="deh-si-zW4">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDz-er-5fI">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDz-er-5fI" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="3xs-TT-BxK"/>
@@ -3651,13 +3654,13 @@ want to continue with</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AJ7-2P-2fd">
-                                        <rect key="frame" x="159" y="10.666666666666659" width="75" height="18.666666666666671"/>
+                                        <rect key="frame" x="159" y="8.6666666666666732" width="75" height="22.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="06 Aug 25, 6:15 pm" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dug-Ul-dLq">
-                                        <rect key="frame" x="239" y="13" width="130" height="14"/>
+                                        <rect key="frame" x="239" y="11.666666666666657" width="130" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="130" id="hKx-Ih-kjm"/>
                                         </constraints>
@@ -3682,7 +3685,7 @@ want to continue with</string>
                                 <rect key="frame" x="0.0" y="178" width="393" height="606"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yY6-SD-4bu">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="692"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="720"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cards" translatesAutoresizingMaskIntoConstraints="NO" id="JKw-sV-4xZ" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="24" y="0.0" width="345" height="167"/>
@@ -3696,7 +3699,7 @@ want to continue with</string>
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="wjR-Na-KbM">
-                                                <rect key="frame" x="24" y="187" width="345" height="485"/>
+                                                <rect key="frame" x="24" y="187" width="345" height="513"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hoV-Yo-aeM">
                                                         <rect key="frame" x="0.0" y="0.0" width="345" height="15"/>
@@ -3719,28 +3722,28 @@ want to continue with</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="7yU-um-0Yb">
-                                                        <rect key="frame" x="0.0" y="40.000000000000007" width="345" height="110.66666666666669"/>
+                                                        <rect key="frame" x="0.0" y="40.000000000000007" width="345" height="126.66666666666669"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recepient Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpm-9h-mv7">
-                                                                <rect key="frame" x="0.0" y="0.0" width="345" height="18.666666666666668"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="345" height="22.666666666666668"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                 <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Atif Aslam" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQy-IV-Am5">
-                                                                <rect key="frame" x="0.0" y="30.666666666666686" width="345" height="18.666666666666671"/>
+                                                                <rect key="frame" x="0.0" y="34.666666666666686" width="345" height="22.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Atif23@gmail.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZU-vy-Sah">
-                                                                <rect key="frame" x="0.0" y="61.333333333333307" width="345" height="18.666666666666664"/>
+                                                                <rect key="frame" x="0.0" y="69.333333333333314" width="345" height="22.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Quantity- 2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zph-rH-hCt">
-                                                                <rect key="frame" x="0.0" y="92" width="345" height="18.666666666666671"/>
+                                                                <rect key="frame" x="0.0" y="104" width="345" height="22.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -3748,16 +3751,16 @@ want to continue with</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="X91-yl-QlU">
-                                                        <rect key="frame" x="0.0" y="175.66666666666663" width="345" height="49.333333333333343"/>
+                                                        <rect key="frame" x="0.0" y="191.66666666666663" width="345" height="57.333333333333343"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B2X-VH-nDm">
-                                                                <rect key="frame" x="0.0" y="0.0" width="345" height="18.666666666666668"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="345" height="22.666666666666668"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                 <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hasan Ali" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acK-JI-BLw">
-                                                                <rect key="frame" x="0.0" y="30.666666666666742" width="345" height="18.666666666666671"/>
+                                                                <rect key="frame" x="0.0" y="34.666666666666742" width="345" height="22.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -3765,16 +3768,16 @@ want to continue with</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TLD-Cr-LbS">
-                                                        <rect key="frame" x="0.0" y="250" width="345" height="126"/>
+                                                        <rect key="frame" x="0.0" y="274" width="345" height="130"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNK-ED-o5k">
-                                                                <rect key="frame" x="0.0" y="0.0" width="345" height="18.666666666666668"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="345" height="22.666666666666668"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                 <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fLg-u9-QbP" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28.666666666666622" width="345" height="97.333333333333314"/>
+                                                                <rect key="frame" x="0.0" y="32.666666666666622" width="345" height="97.333333333333314"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d60-Q9-MQv">
                                                                         <rect key="frame" x="12" y="15" width="321" height="67.333333333333329"/>
@@ -3806,25 +3809,25 @@ want to continue with</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="M9t-GR-1RR">
-                                                        <rect key="frame" x="0.0" y="401" width="345" height="15"/>
+                                                        <rect key="frame" x="0.0" y="429" width="345" height="15"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Paid by" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQd-9G-6TW">
-                                                                <rect key="frame" x="0.0" y="0.0" width="155" height="15"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="142.33333333333334" height="15"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="pun-Vz-Gw1">
-                                                                <rect key="frame" x="167" y="0.0" width="178" height="15"/>
+                                                                <rect key="frame" x="154.33333333333337" y="0.0" width="190.66666666666663" height="15"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Transaction Id:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcJ-mI-lpD">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="92" height="15"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="104.66666666666667" height="15"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                         <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="215313131231" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EU8-fE-ap4">
-                                                                        <rect key="frame" x="94" y="0.0" width="84" height="15"/>
+                                                                        <rect key="frame" x="106.66666666666666" y="0.0" width="84" height="15"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="15" id="NiH-XI-KXB"/>
                                                                         </constraints>
@@ -3837,7 +3840,7 @@ want to continue with</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="d0u-rh-7N2">
-                                                        <rect key="frame" x="0.0" y="441" width="345" height="44"/>
+                                                        <rect key="frame" x="0.0" y="469" width="345" height="44"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="71E-Ip-XMV" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="44"/>
@@ -3850,13 +3853,13 @@ want to continue with</string>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200 KD" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NR2-CX-Al6">
-                                                                        <rect key="frame" x="61" y="13.999999999999998" width="46.666666666666657" height="16.333333333333329"/>
+                                                                        <rect key="frame" x="61" y="12.333333333333373" width="48.666666666666657" height="19.666666666666671"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paid by Card" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpw-JV-66p">
-                                                                        <rect key="frame" x="239.33333333333329" y="13.999999999999998" width="81.666666666666657" height="16.333333333333329"/>
+                                                                        <rect key="frame" x="229.66666666666666" y="12.333333333333373" width="91.333333333333343" height="19.666666666666671"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -3954,12 +3957,12 @@ want to continue with</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnGradient" translatesAutoresizingMaskIntoConstraints="NO" id="vEb-v3-pPo">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="354.33333333333331"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="367.66666666666669"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DPu-qR-UsB">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BsT-Fq-St3">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BsT-Fq-St3" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="TVL-5q-KhB"/>
@@ -3977,7 +3980,7 @@ want to continue with</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Wallet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rfd-6q-HSv">
-                                        <rect key="frame" x="66" y="10.666666666666659" width="267" height="18.666666666666671"/>
+                                        <rect key="frame" x="66" y="8.6666666666666732" width="267" height="22.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -3997,19 +4000,19 @@ want to continue with</string>
                                 <rect key="frame" x="0.0" y="158" width="393" height="626"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="299 KD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qzm-zt-7hM">
-                                        <rect key="frame" x="24" y="0.0" width="345" height="42"/>
+                                        <rect key="frame" x="24" y="0.0" width="345" height="50.666666666666664"/>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="36"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available Balance" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qVq-wB-evd">
-                                        <rect key="frame" x="24" y="47" width="345" height="23.333333333333329"/>
+                                        <rect key="frame" x="24" y="55.666666666666657" width="345" height="28"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="QrL-uv-Ooj">
-                                        <rect key="frame" x="24" y="85.333333333333343" width="345" height="91"/>
+                                        <rect key="frame" x="24" y="98.666666666666686" width="345" height="91"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ip-Vh-wUM">
                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="38"/>
@@ -4032,7 +4035,7 @@ want to continue with</string>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Money" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhd-hw-TQz">
-                                                        <rect key="frame" x="136.33333333333334" y="10.999999999999998" width="72.333333333333343" height="16.333333333333329"/>
+                                                        <rect key="frame" x="132.66666666666666" y="9.3333333333333162" width="79.666666666666657" height="19.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                         <color key="textColor" red="0.65978980060000003" green="0.52553981540000005" blue="0.37635815140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -4049,7 +4052,7 @@ want to continue with</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qxe-vc-thn">
-                                                <rect key="frame" x="0.0" y="52.999999999999972" width="345" height="38"/>
+                                                <rect key="frame" x="0.0" y="53" width="345" height="38"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5MZ-bc-3uc" customClass="CustomButton" customModule="DesynatUser" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="345" height="38"/>
@@ -4069,7 +4072,7 @@ want to continue with</string>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Redeem Gift Card" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g1y-5K-LIU">
-                                                        <rect key="frame" x="116" y="10.999999999999998" width="113" height="16.333333333333329"/>
+                                                        <rect key="frame" x="109.66666666666666" y="9.3333333333333162" width="125.66666666666666" height="19.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                         <color key="textColor" red="0.65978980060000003" green="0.52553981540000005" blue="0.37635815140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -4088,13 +4091,13 @@ want to continue with</string>
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Transactions" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qif-1g-5cq">
-                                        <rect key="frame" x="24" y="226.33333333333331" width="345" height="18.666666666666657"/>
+                                        <rect key="frame" x="24" y="239.66666666666669" width="345" height="22.666666666666686"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="fzu-kD-U0e">
-                                        <rect key="frame" x="24" y="265" width="345" height="361"/>
+                                        <rect key="frame" x="24" y="282.33333333333326" width="345" height="343.66666666666674"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="8v1-gG-h3f" id="hTN-kj-PIa"/>
@@ -4102,7 +4105,7 @@ want to continue with</string>
                                         </connections>
                                     </tableView>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No transactions available" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mA9-zY-ZPH">
-                                        <rect key="frame" x="106.66666666666669" y="374" width="180" height="18.666666666666686"/>
+                                        <rect key="frame" x="93" y="372" width="207" height="22.666666666666686"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -4168,7 +4171,7 @@ want to continue with</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6o7-lb-QAe">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hel-JH-uQy">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hel-JH-uQy" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="Pja-7f-Ncp"/>
@@ -4186,7 +4189,7 @@ want to continue with</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Money" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xBp-KE-9bv">
-                                        <rect key="frame" x="66" y="10.666666666666659" width="267" height="18.666666666666671"/>
+                                        <rect key="frame" x="66" y="8.6666666666666732" width="267" height="22.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -4274,7 +4277,7 @@ want to continue with</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fS7-3i-WwX">
-                                        <rect key="frame" x="144.33333333333334" y="10.999999999999998" width="56.666666666666657" height="16.333333333333329"/>
+                                        <rect key="frame" x="140.33333333333334" y="9.333333333333373" width="64.666666666666657" height="19.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -4346,7 +4349,7 @@ want to continue with</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qlg-rN-rCh">
                                 <rect key="frame" x="0.0" y="118" width="393" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNK-ek-ROu">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNK-ek-ROu" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="24" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="TvW-YT-4ln"/>
@@ -4364,7 +4367,7 @@ want to continue with</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gift Card" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rCG-ky-e2m">
-                                        <rect key="frame" x="66" y="10.666666666666659" width="267" height="18.666666666666671"/>
+                                        <rect key="frame" x="66" y="8.6666666666666732" width="267" height="22.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -4381,13 +4384,13 @@ want to continue with</string>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Gift Card Details" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gkf-Xu-aPq">
-                                <rect key="frame" x="24" y="178" width="345" height="18.666666666666657"/>
+                                <rect key="frame" x="24" y="178" width="345" height="22.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zz7-QN-iXm" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                <rect key="frame" x="24" y="211.66666666666663" width="345" height="200"/>
+                                <rect key="frame" x="24" y="215.66666666666663" width="345" height="200"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="eUm-MN-WrX">
                                         <rect key="frame" x="15" y="15" width="315" height="170"/>
@@ -4536,7 +4539,7 @@ want to continue with</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Redeem" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAX-v6-UEm">
-                                        <rect key="frame" x="146.33333333333334" y="10.999999999999998" width="52.666666666666657" height="16.333333333333329"/>
+                                        <rect key="frame" x="143" y="9.333333333333373" width="59" height="19.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -4598,7 +4601,7 @@ want to continue with</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F8y-Es-gXK">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="115"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WVX-50-XOF">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WVX-50-XOF" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="20" y="70" width="35" height="45"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -4624,7 +4627,7 @@ want to continue with</string>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi There 👋" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9gK-kf-P0J">
-                                        <rect key="frame" x="115" y="83.333333333333329" width="278" height="18.666666666666671"/>
+                                        <rect key="frame" x="115" y="81.333333333333329" width="278" height="22.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -4696,10 +4699,10 @@ want to continue with</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

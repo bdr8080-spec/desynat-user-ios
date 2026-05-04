@@ -50,13 +50,9 @@ class MyOrderDetailVC: UIViewController {
     @IBOutlet weak var lblDeliveryInst: CustomLabelFont!
     @IBOutlet weak var lblDeliveredOn: CustomLabelFont!
     @IBOutlet weak var imgConfirm: UIImageView!
-    @IBOutlet weak var lblConfirm: UILabel!
     @IBOutlet weak var imgShip: UIImageView!
-    @IBOutlet weak var lblShip: UILabel!
     @IBOutlet weak var imgWay: UIImageView!
-    @IBOutlet weak var lblWay: UILabel!
     @IBOutlet weak var imgDelivered: UIImageView!
-    @IBOutlet weak var lblDelivered: UILabel!
     @IBOutlet weak var lblShippingAdd: CustomLabelFont!
     @IBOutlet weak var lblTransactionId: CustomLabelFont!
     @IBOutlet weak var lblPaidByCardAmount: CustomLabelFont!

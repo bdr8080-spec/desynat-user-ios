@@ -20,17 +20,16 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         switch comingUserRole {
-            case .normalUser:
-                viewModel.getProfile()
+        case .normalUser:
+            viewModel.getProfile()
         case .affilaiteUser:
             viewModel.affiliateUserGetProfile()
         }
-        
     }
     
     @IBAction func inappDidTapped(_ sender: Any) {
         switch comingUserRole {
-            case .normalUser:
+        case .normalUser:
             viewModel.updateInAppNotificationSettingRequest()
         case .affilaiteUser:
             viewModel.affiliateUserInAppNotificationSettingRequest()
@@ -39,7 +38,7 @@ class SettingsViewController: UIViewController {
     
     @IBAction func pushDidTapped(_ sender: Any) {
         switch comingUserRole {
-            case .normalUser:
+        case .normalUser:
             viewModel.updatePushNotificationSettingRequest()
         case .affilaiteUser:
             viewModel.affiliateUserPushNotificationSettingRequest()
@@ -50,7 +49,12 @@ class SettingsViewController: UIViewController {
         let nextVC = DeleteAccountViewController.instantiate(fromAppStoryboard: .DashBoard)
         nextVC.onYesTapped = { [weak self] in
             guard let self = self else { return }
-            self.deleteAccountRequest()
+            switch comingUserRole {
+            case .normalUser:
+                viewModel.deleteAccountRequest()
+            case .affilaiteUser:
+                viewModel.deleteAffiliateAccountRequest()
+            }
         }
         self.navigationController?.present(nextVC, animated: true)
     }
@@ -59,13 +63,6 @@ class SettingsViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func deleteAccountRequest(){
-        //        WebService.sharedInstance.logoutService() { (response) in
-        //            kSharedSceneDelegate.logoutUser()
-        //            kSharedSceneDelegate.navigateToLoginVc()
-        //            UserDefaults.standard.setValue("No", forKey:"isLogin")
-        //        }
-    }
     // MARK: - UI Update
     func updateAppNotificationUI() {
         let imageName = isAppNotification ? "toggleOn" : "toggleOff"

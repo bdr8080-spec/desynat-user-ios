@@ -25,6 +25,8 @@ class RaiseTicketViewController: UIViewController {
         super.viewDidLoad()
         setUpUI()
         viewModel.ticketTypeListApi()
+        descriptionTextView.delegate = self
+        descriptionTextView.placeholderTextView = "Enter Description".localiz()
     }
     
     // MARK: - Navigation
@@ -103,4 +105,17 @@ class RaiseTicketViewController: UIViewController {
         titleView.clipsToBounds = true
     }
     
+}
+
+extension RaiseTicketViewController: UITextFieldDelegate, UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.text.count > 0 {
+            textView.placeholderTextView = ""
+        } else {
+            if textView == descriptionTextView {
+                textView.placeholderTextView = "Enter Description".localiz()
+            }
+        }
+    }
 }

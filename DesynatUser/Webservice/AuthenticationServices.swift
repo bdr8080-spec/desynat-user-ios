@@ -155,7 +155,6 @@ extension WebService {
     func logoutService(completion:@escaping (_ user:EmptyModel)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.logout), requestMethod: .get, encoding: JSONEncoding.default, requestModel: EmptyModel.self) { result, code in
-            
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
@@ -164,7 +163,7 @@ extension WebService {
                     }
                     return
                 }
-                CommonUtils.showToast(message: message ?? "")
+                CommonUtils.showToast(message: "Logged out successfully".localiz())
                 completion(user)
             }
         }
@@ -1495,6 +1494,22 @@ extension WebService {
         }
     }
     
+    func captureSellerStoreVisitorService(param: [String:Any], completion:@escaping (_ user: EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.captureSellerStoreVisitor), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
     func addToReelsWishelistSercie(param: [String: Any], completion:@escaping (_ user:EmptyModel)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.addRemoveReelsFromwishlist), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self) { result, code in
@@ -1547,6 +1562,23 @@ extension WebService {
     func raiseTicketForNormalUserService(param: [String:Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.raiseTicket), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    
+    func deleteAccountUserService(completion:@escaping (_ user: EmptyModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.deleteUserAccount), requestMethod: .post, requestModel: EmptyModel.self) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
