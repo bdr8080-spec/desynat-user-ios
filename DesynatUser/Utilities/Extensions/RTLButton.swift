@@ -24,3 +24,22 @@ class RTLButton: UIButton {
         }
     }
 }
+
+
+class RTLImage: UIImageView {
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        applyRTL()
+    }
+    
+    private func applyRTL() {
+        if AppLanguageManager.shared.isRightToLeft {
+            self.semanticContentAttribute = .forceRightToLeft
+            self.transform = CGAffineTransform(scaleX: -1, y: 1)
+        } else {
+            self.semanticContentAttribute = .forceLeftToRight
+            self.transform = .identity
+        }
+    }
+}

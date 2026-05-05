@@ -26,7 +26,7 @@ class EnterCardsDetailsViewController: UIViewController {
     }
     
     // MARK: - Property Decalaration
-    var amountArray = ["100 KD", "1000 KD", "Enter amount"]
+    var amountArray = ["100 KD", "1000 KD", "Enter Amount"]
     var selectedIndex: Int? = 0
     var selectedOccassionId: Int = 0
     private lazy var viewModel = EnterCardsDetailsViewModel(hostVC: self)
@@ -93,7 +93,7 @@ extension EnterCardsDetailsViewController: UICollectionViewDelegate, UICollectio
         if indexPath.row != 2 {
             cell.titleLabel.text = CommonUtils.formatPriceStringInput(data.replacingOccurrences(of: " KD", with: ""))
         } else {
-            cell.titleLabel.text = data
+            cell.titleLabel.text = data.localiz()
         }
         
         if selectedIndex == indexPath.row {

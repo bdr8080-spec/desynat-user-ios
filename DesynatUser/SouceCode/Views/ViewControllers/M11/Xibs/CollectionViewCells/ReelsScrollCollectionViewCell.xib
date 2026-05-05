@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -65,7 +65,7 @@
                                             <constraint firstAttribute="height" constant="35" id="rrS-Mp-ja5"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFx-xk-VEO">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFx-xk-VEO" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="NaL-Dt-nce"/>
@@ -164,7 +164,7 @@
                 <outlet property="captionLabel" destination="OVd-fN-XOr" id="eVK-53-Czf"/>
                 <outlet property="likeButton" destination="HSB-p0-LQJ" id="yOe-Dm-mUd"/>
                 <outlet property="playPauseButton" destination="jJ1-BF-W3F" id="w5O-gh-G8d"/>
-                <outlet property="shareButton" destination="KFx-xk-VEO" id="N2i-g9-kEa"/>
+                <outlet property="shareButton" destination="KFx-xk-VEO" id="Wk9-ue-oMu"/>
                 <outlet property="videoContainerView" destination="ikg-1T-aeS" id="A5P-Wq-i88"/>
             </connections>
             <point key="canvasLocation" x="189.31297709923663" y="127.11267605633803"/>

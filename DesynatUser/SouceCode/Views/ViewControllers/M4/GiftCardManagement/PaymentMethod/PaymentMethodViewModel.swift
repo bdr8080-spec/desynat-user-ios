@@ -13,9 +13,9 @@ class PaymentMethodViewModel {
     private var hostVC: PaymentMethodViewController
     var paymentMethods: [PaymentMethod] = [PaymentMethod(paymentMethodImage: "paymentMethods", paymentMethodTitle: "Pay by KNET", showDescription: true, description: ""),
                                            PaymentMethod(paymentMethodImage: "applePay", paymentMethodTitle: "Apple Pay", showDescription: true, description: ""),
-                                           PaymentMethod(paymentMethodImage: "vispay", paymentMethodTitle: "Visapay", showDescription: true, description: ""),
+                                           PaymentMethod(paymentMethodImage: "vispay", paymentMethodTitle: "Visa Pay", showDescription: true, description: ""),
                                            // PaymentMethod(paymentMethodImage: "samsungPay", paymentMethodTitle: "Samsung Pay", showDescription: true),
-                                           PaymentMethod(paymentMethodImage: "inAppWallet", paymentMethodTitle: "In -App Wallet", showDescription: false, description: "")]
+                                           PaymentMethod(paymentMethodImage: "inAppWallet", paymentMethodTitle: "In - App Wallet", showDescription: false, description: "")]
     
     init(hostVC: PaymentMethodViewController) {
         self.hostVC = hostVC

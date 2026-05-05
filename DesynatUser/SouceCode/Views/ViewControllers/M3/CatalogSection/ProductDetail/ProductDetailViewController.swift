@@ -96,7 +96,7 @@ class ProductDetailViewController: UIViewController {
     var bagCount: Int = 0
     private var selectedColourIndex = 0
     private var selectedSizeIndex = 0
-    private var checkDelivery: [CheckDeliveryModel] = [CheckDeliveryModel(image: "calender", title: "Get it by 24/12/2024"),
+    private var checkDelivery: [CheckDeliveryModel] = [CheckDeliveryModel(image: "calender", title: "Get it within 3-5 Working Days".localiz()),
                                                        CheckDeliveryModel(image: "cashOnDelivery", title: "Cash on Delivery Available".localiz()),
                                                        CheckDeliveryModel(image: "returnExchamge", title: "7 Days Return & 5 days Exchange".localiz())]
     var quantity = 0

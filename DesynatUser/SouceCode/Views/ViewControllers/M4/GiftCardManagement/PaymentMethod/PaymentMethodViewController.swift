@@ -41,7 +41,7 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
     var displayPaymentMethods: [PaymentMethod] {
         if comingFrom == .fromWalletMeonyAdd {
             return viewModel.paymentMethods.filter {
-                $0.paymentMethodTitle != "In -App Wallet"
+                $0.paymentMethodTitle != "In - App Wallet"
             }
         }
         return viewModel.paymentMethods

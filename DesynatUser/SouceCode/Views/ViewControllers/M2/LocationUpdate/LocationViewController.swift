@@ -17,6 +17,7 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var txtSearch: UITextField!
     @IBOutlet weak var viewMap: GMSMapView!
     @IBOutlet weak var lblLocation: UILabel!
+    @IBOutlet weak var useCurrenLocationButton: CustomButton!
     
     // MARK: - Property Decalaration
     var locationFor = ""
@@ -43,7 +44,7 @@ class LocationViewController: UIViewController, UITextFieldDelegate {
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        useCurrenLocationButton.setTitle("Use Current Location".localiz(), for: .normal)
         txtSearch.delegate = self
         viewMap.delegate = self
         locationManager.delegate = self

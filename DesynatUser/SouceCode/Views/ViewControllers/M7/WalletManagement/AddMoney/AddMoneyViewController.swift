@@ -50,6 +50,11 @@ class AddMoneyViewController: UIViewController {
     //MARK: Function's declaration
     func getFinalAmount() -> Double? {
         // Check TextField first
+        let amount = amountTF.text ?? ""
+        let value = amount
+            .replacingOccurrences(of: "KD", with: "")
+            .trimmingCharacters(in: .whitespaces)
+        amountToPay = Double(value)
         if let text = amountTF.text,
            !text.trimmingCharacters(in: .whitespaces).isEmpty,
            let amount = Double(text.trimmingCharacters(in: .whitespaces)) {
@@ -76,17 +81,24 @@ extension AddMoneyViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddMoneyCollectionViewCell", for: indexPath) as! AddMoneyCollectionViewCell
         let data = moneyList[indexPath.row]
-        cell.titleLabel.text = data
+        
+//        if indexPath.row != 2 {
+            cell.titleLabel.text = CommonUtils.formatPriceStringInput(data.replacingOccurrences(of: " KD", with: ""))
+//        } else {
+//            cell.titleLabel.text = data.localiz()
+//        }
+        
+//        cell.titleLabel.text = data
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedMoneyIndex = indexPath.row
-        let value = moneyList[indexPath.row]
-            .replacingOccurrences(of: "KD", with: "")
-            .trimmingCharacters(in: .whitespaces)
-        amountToPay = Double(value)
-        amountTF.text = value
+//        let value = moneyList[indexPath.row]
+//            .replacingOccurrences(of: "KD", with: "")
+//            .trimmingCharacters(in: .whitespaces)
+//        amountToPay = Double(value)
+        amountTF.text = moneyList[indexPath.row]//value
         amountCollectionview.reloadData()
     }
     

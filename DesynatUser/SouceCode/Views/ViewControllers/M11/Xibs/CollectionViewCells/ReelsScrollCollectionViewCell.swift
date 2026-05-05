@@ -14,7 +14,7 @@ class ReelsScrollCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var videoContainerView: UIView!
     @IBOutlet weak var captionLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton!
-    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var shareButton: RTLButton!
     @IBOutlet weak var likeButton: UIButton!
     
     private var player: AVPlayer?

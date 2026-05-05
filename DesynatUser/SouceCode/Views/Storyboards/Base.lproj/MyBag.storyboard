@@ -985,7 +985,7 @@
                                         <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightArrow" translatesAutoresizingMaskIntoConstraints="NO" id="IqN-R3-Cu8">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightArrow" translatesAutoresizingMaskIntoConstraints="NO" id="IqN-R3-Cu8" customClass="RTLImage" customModule="DesynatUser" customModuleProvider="target">
                                         <rect key="frame" x="312" y="15" width="18" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="IqN-R3-Cu8" secondAttribute="height" id="1eh-6N-DkQ"/>

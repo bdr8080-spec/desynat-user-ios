@@ -181,6 +181,10 @@ class StoresDetailsViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: false)
     }
     
+    @IBAction func shareStoreDidTapped(_ sender: Any) {
+        
+    }
+    
     //MARK: Function's declaration
     private func requestPermissions() {
         SFSpeechRecognizer.requestAuthorization { status in

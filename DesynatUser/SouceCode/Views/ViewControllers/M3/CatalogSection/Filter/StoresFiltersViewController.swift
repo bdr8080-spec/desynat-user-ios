@@ -129,7 +129,7 @@ extension StoresFiltersViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "FilterHeaderTableViewCell") as! FilterHeaderTableViewCell
-        header.titlelabel.text = filtersOptions[section].header
+        header.titlelabel.text = filtersOptions[section].header.localiz()
         header.decriptionLabel.isHidden = true
         return header
     }
@@ -144,10 +144,8 @@ extension StoresFiltersViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
-        
         let option = filtersOptions[indexPath.section].options[indexPath.row]
         cell.configure(option: option)
-        
         return cell
     }
     

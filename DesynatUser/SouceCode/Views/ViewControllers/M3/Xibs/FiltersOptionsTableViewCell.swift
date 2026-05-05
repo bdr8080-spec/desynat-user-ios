@@ -23,7 +23,7 @@ class FiltersOptionsTableViewCell: UITableViewCell {
     }
     
     func configure(option: StoreFilterOption) {
-        titleLabel.text = option.title
+        titleLabel.text = option.title.localiz()
         
         let imageName = option.isSelected ? option.seletedImage : option.unselectedImage
         selectionImageView.image = UIImage(named: imageName)
@@ -38,12 +38,12 @@ class FiltersOptionsTableViewCell: UITableViewCell {
   }
     
     func configureProductFilter(option: ProductFilterOption) {
-        titleLabel.text = option.title
+        titleLabel.text = option.title.localiz()
         // Reset to default first (IMPORTANT for reuse)
             titleLabel.font = UIFont.systemFont(ofSize: 14)
 
             // If it's Show More / Show Less → make bold
-        if option.title == "Show More" || option.title == "Show Less" {
+        if option.title == "Show More".localiz() || option.title == "Show Less".localiz() {
                 titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
             }
 

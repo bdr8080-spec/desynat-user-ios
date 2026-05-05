@@ -21,7 +21,7 @@ class MyBagViewController: UIViewController {
             cutomOrderTableView.registerCellFromNib(cellID: "MyBagForCustomOrderTableViewCell")
         }
     }
-    @IBOutlet weak var applyPromocodeButtonOutlet: UIButton!
+    @IBOutlet weak var applyPromocodeButtonOutlet: RTLButton!
     @IBOutlet weak var removeButtonOutlet: UIButton!
     @IBOutlet weak var coupoanStackView: UIStackView!
     @IBOutlet weak var couponDiscountTitleLabel: UILabel!

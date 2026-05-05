@@ -31,7 +31,7 @@ class PaymentMethodsTableViewCell: UITableViewCell {
   }
   
   func configData(data: PaymentMethod) {
-    titleLabel.text = data.paymentMethodTitle
+    titleLabel.text = data.paymentMethodTitle.localiz()
     paymentMethodImageView.image = UIImage(named: data.paymentMethodImage)
     descriptionLable.isHidden = data.showDescription
     descriptionLable.text = data.description

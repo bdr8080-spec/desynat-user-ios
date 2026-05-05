@@ -155,7 +155,7 @@ extension PlaceOrderPaymentMethodsViewController: UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceOrderPaymentMethodsTableViewCell", for: indexPath) as! PlaceOrderPaymentMethodsTableViewCell
         
         let data = viewModel.paymentMethods[indexPath.row]
-        cell.titleLabel.text = data.paymentMethodTitle
+        cell.titleLabel.text = data.paymentMethodTitle.localiz()
         cell.paymentMethdImageView.image = UIImage(named: data.paymentMethodImage)
         cell.descriptionLabel.text = data.description
         cell.delegate = self

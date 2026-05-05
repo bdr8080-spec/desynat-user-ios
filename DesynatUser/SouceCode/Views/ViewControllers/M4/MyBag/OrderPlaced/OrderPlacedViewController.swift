@@ -71,11 +71,11 @@ class OrderPlacedViewController: UIViewController {
         let amount = CommonUtils.formatPrice(amountValue)//formatPrice(amountValue)
         var paymentMethodText = ""
         if selectedMethod == 1 {
-            paymentMethodText = "Paid Online"
+            paymentMethodText = "Paid Online".localiz()
         } else if selectedMethod == 2 {
-            paymentMethodText = "Paid Using Wallet"
+            paymentMethodText = "Paid Using Wallet".localiz()
         } else if selectedMethod == 3 {
-            paymentMethodText = "Cash on Delivery (COD)"
+            paymentMethodText = "Cash on Delivery (COD)".localiz()
         }
         let finalText = "\(amount) \(paymentMethodText)"
         let attributedString = NSMutableAttributedString(string: finalText)

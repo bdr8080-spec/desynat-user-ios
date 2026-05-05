@@ -21,6 +21,8 @@ class ProductsFiltersViewController: UIViewController {
     var selectedMinPrice: Int?
     var selectedMaxPrice: Int?
     var onApplyFilters: (([String], [String], [String], [String], [String], Int?, Int?) -> Void)?
+    var isColorExpanded = false
+    let maxVisibleColors = 9
     
     // MARK: - FILTER SECTIONS
     var filtersOptions: [ProductFilterSection] = [
@@ -152,16 +154,41 @@ class ProductsFiltersViewController: UIViewController {
     }
     
     func prepareColorSection() {
-        let options = viewModel.getAllColorsList.map {
+        var options = viewModel.getAllColorsList.map {
             ProductFilterOption(
                 title: $0.name ?? "",
-                isSelected: selectedColorIDs.contains("\($0.id ?? 0)"), // important
+                isSelected: selectedColorIDs.contains("\($0.id ?? 0)"),
                 apiParcing: "\($0.id ?? 0)",
                 havingColourCode: true,
                 colourCode: $0.hexCode ?? "#000000"
             )
         }
-        filtersOptions[3].options = options
+        
+        if !isColorExpanded && options.count > maxVisibleColors {
+            let limited = Array(options.prefix(maxVisibleColors))
+            let showMore = ProductFilterOption(
+                title: "Show More",
+                isSelected: false,
+                apiParcing: "show_more",
+                havingColourCode: false,
+                colourCode: ""
+            )
+            filtersOptions[3].options = limited + [showMore]
+            
+        } else if isColorExpanded && options.count > maxVisibleColors {
+            let showLess = ProductFilterOption(
+                title: "Show Less",
+                isSelected: false,
+                apiParcing: "show_less",
+                havingColourCode: false,
+                colourCode: ""
+            )
+            filtersOptions[3].options = options + [showLess]
+            
+        } else {
+            filtersOptions[3].options = options
+        }
+        
         filtersTableView.reloadSections(IndexSet(integer: 3), with: .none)
     }
     
@@ -198,7 +225,7 @@ extension ProductsFiltersViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerCell = Bundle.main.loadNibNamed("FilterHeaderTableViewCell", owner: self, options: nil)?.first as? FilterHeaderTableViewCell else { return nil }
-        headerCell.titlelabel.text = filtersOptions[section].header
+        headerCell.titlelabel.text = filtersOptions[section].header.localiz()
         headerCell.decriptionLabel.isHidden = filtersOptions[section].description.isEmpty
         headerCell.decriptionLabel.text = filtersOptions[section].description
         return headerCell.contentView
@@ -207,22 +234,15 @@ extension ProductsFiltersViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if filtersOptions[indexPath.section].header == "Price" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PriceRangeSliderTableViewCell", for: indexPath) as! PriceRangeSliderTableViewCell
-            
-            // Preselect previously chosen values
             cell.minPrice = selectedMinPrice ?? 0
             cell.maxPrice = selectedMaxPrice ?? 100000
-            
             cell.onPriceChanged = { [weak self] min, max in
                 guard let self = self else { return }
                 self.selectedMinPrice = min
                 self.selectedMaxPrice = max
             }
-            
             return cell
         }
-        
-        
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
         let option = filtersOptions[indexPath.section].options[indexPath.row]
         cell.configureProductFilter(option: option)
@@ -232,9 +252,8 @@ extension ProductsFiltersViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section = indexPath.section
         let sectionName = filtersOptions[section].header
-        
         if sectionName == "Price" {
-            return 65
+            return 70
         } else {
             return UITableView.automaticDimension
         }
@@ -271,6 +290,21 @@ extension ProductsFiltersViewController: UITableViewDelegate, UITableViewDataSou
             }
             
         case "Color":
+            let option = filtersOptions[section].options[indexPath.row]
+            
+            if option.apiParcing == "show_more" {
+                isColorExpanded = true
+                prepareColorSection()
+                return
+            }
+            
+            if option.apiParcing == "show_less" {
+                isColorExpanded = false
+                prepareColorSection()
+                return
+            }
+            
+            // Normal selection logic
             if isSelected {
                 selectedColorIDs.append(option.apiParcing)
             } else {

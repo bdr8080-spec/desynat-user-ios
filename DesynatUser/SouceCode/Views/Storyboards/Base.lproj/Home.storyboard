@@ -49,16 +49,16 @@
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jWZ-hT-wr9">
-                                                <rect key="frame" x="75" y="49.666666666666671" width="121.33333333333331" height="36.666666666666671"/>
+                                                <rect key="frame" x="75" y="49.666666666666671" width="74.333333333333314" height="36.666666666666671"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deliver to Reshab" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXx-nu-GuV">
-                                                        <rect key="frame" x="0.0" y="0.0" width="121.33333333333333" height="19.666666666666668"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi Guest" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXx-nu-GuV">
+                                                        <rect key="frame" x="0.0" y="0.0" width="74.333333333333329" height="19.666666666666668"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="CeR-rT-IDV">
-                                                        <rect key="frame" x="0.0" y="19.666666666666664" width="121.33333333333333" height="17"/>
+                                                        <rect key="frame" x="0.0" y="19.666666666666664" width="74.333333333333329" height="17"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="locationMarker" translatesAutoresizingMaskIntoConstraints="NO" id="YQI-45-n4q" customClass="CustomImageView" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="2.6666666666666714" width="12" height="12"/>
@@ -68,7 +68,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Durgapur" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwV-Gx-m3P">
-                                                                <rect key="frame" x="16.999999999999993" y="0.0" width="104.33333333333331" height="17"/>
+                                                                <rect key="frame" x="17.000000000000004" y="0.0" width="57.333333333333343" height="17"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -78,7 +78,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Edq-4n-TKa">
-                                                <rect key="frame" x="75" y="49.666666666666671" width="121.33333333333331" height="36.666666666666671"/>
+                                                <rect key="frame" x="75" y="49.666666666666671" width="74.333333333333314" height="36.666666666666671"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <connections>
                                                     <action selector="changeLocationButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="gvh-KI-tB3"/>
@@ -1293,7 +1293,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Sfq-C1-fUv">
-                                                        <rect key="frame" x="295" y="5.6666666666666856" width="40" height="40"/>
+                                                        <rect key="frame" x="300" y="5.6666666666666856" width="40" height="40"/>
                                                         <subviews>
                                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zni-7P-Ake">
                                                                 <rect key="frame" x="0.0" y="0.0" width="59" height="32"/>
@@ -1311,7 +1311,7 @@
                                                                     <action selector="removeDidTapped:" destination="f9R-UR-r1C" eventType="touchUpInside" id="4Fn-GZ-DEa"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cik-gZ-eGY">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cik-gZ-eGY" customClass="RTLButton" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="40" id="Fkh-K5-qeS"/>
@@ -1334,7 +1334,7 @@
                                                     <constraint firstItem="GaI-Xc-5Az" firstAttribute="leading" secondItem="JeO-gX-XKA" secondAttribute="leading" constant="12" id="87S-KY-vSL"/>
                                                     <constraint firstItem="GaI-Xc-5Az" firstAttribute="centerY" secondItem="JeO-gX-XKA" secondAttribute="centerY" id="Ae9-AJ-Sun"/>
                                                     <constraint firstItem="b89-rm-T2W" firstAttribute="leading" secondItem="GaI-Xc-5Az" secondAttribute="trailing" constant="12" id="Rv1-jf-q4h"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Sfq-C1-fUv" secondAttribute="trailing" constant="10" id="f24-fh-yax"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Sfq-C1-fUv" secondAttribute="trailing" constant="5" id="f24-fh-yax"/>
                                                     <constraint firstItem="b89-rm-T2W" firstAttribute="centerY" secondItem="JeO-gX-XKA" secondAttribute="centerY" id="tGL-6e-DdM"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
@@ -1367,14 +1367,14 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VP8-kc-gR0">
                                                         <rect key="frame" x="255" y="7.3333333333333712" width="80" height="35"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightArrow" translatesAutoresizingMaskIntoConstraints="NO" id="XOJ-vv-lgF">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightArrow" translatesAutoresizingMaskIntoConstraints="NO" id="XOJ-vv-lgF" customClass="RTLImage" customModule="DesynatUser" customModuleProvider="target">
                                                                 <rect key="frame" x="65" y="10" width="15" height="15"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="15" id="W5t-X4-dbG"/>
                                                                     <constraint firstAttribute="height" constant="15" id="vEE-35-gy3"/>
                                                                 </constraints>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MLQ-nl-xiM">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MLQ-nl-xiM">
                                                                 <rect key="frame" x="5" y="0.0" width="55" height="35"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="55" id="SxT-Mz-H32"/>
@@ -1647,7 +1647,7 @@
                                         </constraints>
                                     </view>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="or2-jE-djv">
-                                        <rect key="frame" x="80.333333333333329" y="380" width="232.66666666666669" height="45"/>
+                                        <rect key="frame" x="80.333333333333329" y="403" width="232.66666666666669" height="45"/>
                                         <string key="text">There is nothing in your bag. 
 Let's add some items. </string>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
@@ -1755,7 +1755,7 @@ Let's add some items. </string>
                     <connections>
                         <outlet property="actualPriceLAbel" destination="5hT-ZT-fti" id="qRn-BY-B4g"/>
                         <outlet property="addressLabel" destination="JF3-Vq-yqE" id="jqG-3M-OYZ"/>
-                        <outlet property="applyPromocodeButtonOutlet" destination="cik-gZ-eGY" id="E6R-Dr-f0q"/>
+                        <outlet property="applyPromocodeButtonOutlet" destination="cik-gZ-eGY" id="Ja0-kZ-TSB"/>
                         <outlet property="bagDetailsView" destination="QlT-Cw-HBc" id="20G-9c-hnu"/>
                         <outlet property="bagTableView" destination="cg1-Qi-044" id="2wH-Zi-fXz"/>
                         <outlet property="bagTableViewHeightConstraint" destination="nod-6D-kXq" id="sJM-5x-EBX"/>
@@ -1920,7 +1920,7 @@ Let's add some items. </string>
                                                                                 </connections>
                                                                             </button>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gift Cards" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjh-Dj-suT">
-                                                                                <rect key="frame" x="35.333333333333329" y="10.666666666666659" width="80.999999999999986" height="22.666666666666671"/>
+                                                                                <rect key="frame" x="35.333333333333329" y="10.666666666666659" width="81" height="22.666666666666671"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -2133,7 +2133,7 @@ Let's add some items. </string>
                                                         <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logout" translatesAutoresizingMaskIntoConstraints="NO" id="sue-q9-Pcq">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logout" translatesAutoresizingMaskIntoConstraints="NO" id="sue-q9-Pcq" customClass="RTLImage" customModule="DesynatUser" customModuleProvider="target">
                                                         <rect key="frame" x="126.66666666666666" y="10" width="18" height="18"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="sue-q9-Pcq" secondAttribute="height" id="TMi-SC-NND"/>
