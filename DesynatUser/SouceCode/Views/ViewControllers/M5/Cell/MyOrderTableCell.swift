@@ -45,11 +45,13 @@ class MyOrderTableCell: UITableViewCell {
       } else {
           lblPrice.text = CommonUtils.formatPriceStringInput(data.amount)//"\(data.amount ?? "") KD"
       }
-    lblModelPiece.text = data.productDetails?.productNameEn ?? ""
-          
-    
-    setColorBox(size: data.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data.quantity ?? 0)")
-      
+      if AppLanguageManager.shared.currentLanguage == .ar {
+          lblModelPiece.text = data.productDetails?.productNameAr ?? ""
+          setColorBox(size: data.variationDetails?.size?.nameAr ?? "", label: lblSize, hexColor: data.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data.quantity ?? 0)")
+      }else{
+          lblModelPiece.text = data.productDetails?.productNameEn ?? ""
+          setColorBox(size: data.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data.quantity ?? 0)")
+      }
     
     lblPlacedDate.text = data.createdAt?.formattedOrderDate() ?? ""
     configureStatus(with: data)
@@ -298,50 +300,91 @@ class MyOrderTableCell: UITableViewCell {
       }
   }
   
-  func isoStringAddingDays(_ isoString: String?, days: Int = 0) -> String? {
-    guard let isoString = isoString else { return nil }
+//  func isoStringAddingDays(_ isoString: String?, days: Int = 0) -> String? {
+//    guard let isoString = isoString else { return nil }
+//    
+//    // 1️⃣ Parse the ISO date string from API
+//    let isoFormatter = DateFormatter()
+//    isoFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
+//    isoFormatter.locale = Locale(identifier: "en_US_POSIX")
+//    isoFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+//    
+//    guard let date = isoFormatter.date(from: isoString) else { return nil }
+//    
+//    // 2️⃣ Add days if needed
+//    let calendar = Calendar(identifier: .gregorian)
+//    let newDate = calendar.date(byAdding: .day, value: days, to: date) ?? date
+//    
+//    // 3️⃣ Format to desired output: 12 SEP 25
+//    let outputFormatter = DateFormatter()
+//    outputFormatter.dateFormat = "dd MMM yy"
+//    outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+//    outputFormatter.timeZone = TimeZone.current
+//    
+//    return outputFormatter.string(from: newDate)
+//  }
     
-    // 1️⃣ Parse the ISO date string from API
-    let isoFormatter = DateFormatter()
-    isoFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
-    isoFormatter.locale = Locale(identifier: "en_US_POSIX")
-    isoFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-    
-    guard let date = isoFormatter.date(from: isoString) else { return nil }
-    
-    // 2️⃣ Add days if needed
-    let calendar = Calendar(identifier: .gregorian)
-    let newDate = calendar.date(byAdding: .day, value: days, to: date) ?? date
-    
-    // 3️⃣ Format to desired output: 12 SEP 25
-    let outputFormatter = DateFormatter()
-    outputFormatter.dateFormat = "dd MMM yy"
-    outputFormatter.locale = Locale(identifier: "en_US_POSIX")
-    outputFormatter.timeZone = TimeZone.current
-    
-    return outputFormatter.string(from: newDate)
-  }
+    func isoStringAddingDays(_ isoString: String?, days: Int = 0) -> String? {
+        guard let isoString = isoString else { return nil }
+        
+        // Parse ISO date string
+        let isoFormatter = DateFormatter()
+        isoFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
+        isoFormatter.locale = Locale(identifier: "en_US_POSIX")
+        isoFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
+        guard let date = isoFormatter.date(from: isoString) else { return nil }
+        
+        // Add days
+        let calendar = Calendar(identifier: .gregorian)
+        let newDate = calendar.date(byAdding: .day, value: days, to: date) ?? date
+        
+        // Output formatter
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "dd MMM yy"
+        outputFormatter.timeZone = TimeZone.current
+        
+        // Arabic support
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            outputFormatter.locale = Locale(identifier: "ar")
+        } else {
+            outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        }
+        
+        return outputFormatter.string(from: newDate)
+    }
   
   
 }
 
 
 extension String {
-  func formattedOrderDate() -> String {
-    let isoFormatter = DateFormatter()
-    isoFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
-    isoFormatter.locale = Locale(identifier: "en_US_POSIX")
-    isoFormatter.timeZone = TimeZone(abbreviation: "UTC")
-    
-    guard let date = isoFormatter.date(from: self) else {
-      return ""
+    func formattedOrderDate() -> String {
+        
+        let isoFormatter = DateFormatter()
+        isoFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
+        isoFormatter.locale = Locale(identifier: "en_US_POSIX")
+        isoFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        
+        guard let date = isoFormatter.date(from: self) else {
+            return ""
+        }
+        
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "h a | dd-MM-yy"
+        outputFormatter.timeZone = TimeZone.current
+        
+        // ✅ Arabic Localization
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            outputFormatter.locale = Locale(identifier: "ar")
+            outputFormatter.amSymbol = "ص"
+            outputFormatter.pmSymbol = "م"
+        } else {
+            outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+            outputFormatter.amSymbol = "AM"
+            outputFormatter.pmSymbol = "PM"
+        }
+        
+        return outputFormatter.string(from: date)
     }
-    
-    let outputFormatter = DateFormatter()
-    outputFormatter.dateFormat = "h a | dd-MM-yy"
-    outputFormatter.locale = Locale.current
-    outputFormatter.timeZone = TimeZone.current
-    
-    return outputFormatter.string(from: date)
-  }
 }

@@ -43,7 +43,12 @@ class BestSellingsCollectionViewCell: UICollectionViewCell {
     }
     
     func configData(data: BestSellingProductsDataModel?) {
-        titleLabel.text = data?.productNameEn
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            titleLabel.text = data?.productNameAr
+        }else{
+            titleLabel.text = data?.productNameEn
+        }
+       
         ratingView.rating = data?.productAvgRating ?? 0
         if let imageUrlString = data?.productVariants?.first?.variantImage?.first,
            let url = URL(string: imageUrlString) {
@@ -66,7 +71,11 @@ class BestSellingsCollectionViewCell: UICollectionViewCell {
     }
     
     func configDataForTopRatedProducts(data: TopRatedDataModel?) {
-        titleLabel.text = data?.productNameEn
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            titleLabel.text = data?.productNameAr
+        }else{
+            titleLabel.text = data?.productNameEn
+        }
         ratingView.rating = data?.productAvgRating ?? 0
         if let imageUrlString = data?.productVariants?.first?.variantImage?.first,
            let url = URL(string: imageUrlString) {

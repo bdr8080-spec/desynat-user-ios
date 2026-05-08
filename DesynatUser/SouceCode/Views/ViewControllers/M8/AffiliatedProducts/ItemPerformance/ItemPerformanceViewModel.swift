@@ -77,7 +77,7 @@ class ItemPerformanceViewModel {
         } else {
             hostVC.productImageView.image = UIImage(named: "")
         }
-        hostVC.productNameLabel.text = data.product?.productNameEn
+        hostVC.productNameLabel.text = AppLanguageManager.shared.currentLanguage == .ar ? data.product?.productNameAr : data.product?.productNameEn
         hostVC.finalPriceLabel.text = CommonUtils.formatPriceStringInput(data.product?.productVariants?.first?.finalPrice)
         CommonUtils.setStrikethrough(label: hostVC.actualPriceLabel, text: CommonUtils.formatPriceStringInput(data.product?.productVariants?.first?.actualPrice))
         

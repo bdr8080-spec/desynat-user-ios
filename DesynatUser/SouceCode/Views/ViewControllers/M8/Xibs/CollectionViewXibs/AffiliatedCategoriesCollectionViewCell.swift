@@ -19,7 +19,7 @@ class AffiliatedCategoriesCollectionViewCell: UICollectionViewCell {
     }
 
     func configDataForCategory(data: CategoriesDataModel?) {
-        titleLabel.text = data?.name
+        titleLabel.text = AppLanguageManager.shared.currentLanguage == .ar ? data?.nameAr : data?.name
         if let imageUrlString = data?.image,
            let url = URL(string: imageUrlString) {
             mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray

@@ -28,7 +28,13 @@ class CatalogTableViewCell: UITableViewCell {
     }
     
     func configData(data: CategoriesDataModel) {
-        titleLabel.text = data.name
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            titleLabel.text = data.nameAr
+            
+        }else{
+            titleLabel.text = data.name
+            //descriptionLabel.text = data.description
+        }
         descriptionLabel.text = data.description
         if let imageUrlString = data.image,
            let url = URL(string: imageUrlString) {

@@ -128,7 +128,9 @@ class ProductsFiltersViewController: UIViewController {
     func prepareCategorySection() {
         let options = viewModel.getAllCategoriesList.map {
             ProductFilterOption(
-                title: $0.name ?? "",
+                title: AppLanguageManager.shared.currentLanguage == .ar
+                ? ($0.nameAr ?? $0.name ?? "")
+                : ($0.name ?? ""),
                 isSelected: selectedCategoryIDs.contains("\($0.id ?? 0)"), // important
                 apiParcing: "\($0.id ?? 0)",
                 havingColourCode: false,
@@ -142,7 +144,9 @@ class ProductsFiltersViewController: UIViewController {
     func prepareBrandSection() {
         let options = viewModel.getAllBrandsList.map {
             ProductFilterOption(
-                title: $0.nameEnglish ?? "",
+                title: AppLanguageManager.shared.currentLanguage == .ar
+                ? ($0.nameArabic ?? $0.nameEnglish ?? "")
+                : ($0.nameEnglish ?? ""),
                 isSelected: selectedBrandIDs.contains("\($0.id ?? 0)"), // important
                 apiParcing: "\($0.id ?? 0)",
                 havingColourCode: false,
@@ -156,7 +160,9 @@ class ProductsFiltersViewController: UIViewController {
     func prepareColorSection() {
         var options = viewModel.getAllColorsList.map {
             ProductFilterOption(
-                title: $0.name ?? "",
+                title: AppLanguageManager.shared.currentLanguage == .ar
+                ? ($0.nameAr ?? $0.name ?? "")
+                : ($0.name ?? ""),
                 isSelected: selectedColorIDs.contains("\($0.id ?? 0)"),
                 apiParcing: "\($0.id ?? 0)",
                 havingColourCode: true,
@@ -195,7 +201,9 @@ class ProductsFiltersViewController: UIViewController {
     func prepareSizeSection() {
         let options = viewModel.getAllSizesList.map {
             ProductFilterOption(
-                title: $0.name ?? "",
+                title: AppLanguageManager.shared.currentLanguage == .ar
+                ? ($0.nameAr ?? $0.name ?? "")
+                : ($0.name ?? ""),
                 isSelected: selectedSizeIDs.contains("\($0.id ?? 0)"), // important
                 apiParcing: "\($0.id ?? 0)",
                 havingColourCode: false,
@@ -227,7 +235,11 @@ extension ProductsFiltersViewController: UITableViewDelegate, UITableViewDataSou
         guard let headerCell = Bundle.main.loadNibNamed("FilterHeaderTableViewCell", owner: self, options: nil)?.first as? FilterHeaderTableViewCell else { return nil }
         headerCell.titlelabel.text = filtersOptions[section].header.localiz()
         headerCell.decriptionLabel.isHidden = filtersOptions[section].description.isEmpty
-        headerCell.decriptionLabel.text = filtersOptions[section].description
+        if AppLanguageManager.shared.currentLanguage == .en {
+            headerCell.decriptionLabel.text = filtersOptions[section].description
+        } else {
+            headerCell.decriptionLabel.isHidden = true
+        }
         return headerCell.contentView
     }
     

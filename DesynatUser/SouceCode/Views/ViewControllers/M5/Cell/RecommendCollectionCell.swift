@@ -26,8 +26,12 @@ class RecommendCollectionCell: UICollectionViewCell {
     } else {
       mainImageView.image = UIImage(named: "")
     }
-    
-    titleLabel.text = data?.nameEnglish
+      if AppLanguageManager.shared.currentLanguage == .ar {
+          titleLabel.text = data?.nameArabic
+      }else{
+          titleLabel.text = data?.nameEnglish
+      }
+   
   }
 
 }

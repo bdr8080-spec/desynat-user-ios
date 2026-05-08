@@ -195,13 +195,14 @@ struct ProductVariant: Codable {
 // MARK: - Color
 struct Color: Codable {
     let id: Int?
-    let name, hexCode, createdAt, updatedAt: String?
+    let name,nameAr, hexCode, createdAt, updatedAt: String?
 
     enum CodingKeys: String, CodingKey {
         case id, name
         case hexCode = "hex_code"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case nameAr = "name_ar"
     }
 }
 

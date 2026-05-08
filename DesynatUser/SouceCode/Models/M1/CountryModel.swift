@@ -9,7 +9,7 @@
 // MARK: - Country
 struct CountryModel: Codable {
     let id: Int?
-    let name: String?
+    let name,nameAr: String?
     let isoCode: String?
     let currencyName: String?
     let currencyCode: String?
@@ -31,6 +31,7 @@ struct CountryModel: Codable {
         case exchangeRateToKwd = "exchange_rate_to_kwd"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case nameAr = "name_ar"
     }
 }
 
@@ -45,7 +46,7 @@ enum comingReasonAtAddAddress {
 // MARK: - GetAllUserCountryModel
 struct GetAllUserCountryModel: Codable {
     let id: Int?
-    let name, code, isoCode: String?
+    let name,nameAr, code, isoCode: String?
     let isoCodeNumber: String?
     let currencyName, currencyCode, currencySymbol: String?
     let exchangeRate: String?
@@ -63,6 +64,7 @@ struct GetAllUserCountryModel: Codable {
         case exchangeRate = "exchange_rate_to_kwd"
         case dialCode = "dial_code"
         case flag
+        case nameAr = "name_ar"
       case flag1 = "flag1"
     }
 }

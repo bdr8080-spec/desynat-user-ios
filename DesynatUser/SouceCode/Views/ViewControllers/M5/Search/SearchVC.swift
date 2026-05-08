@@ -243,6 +243,11 @@ extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource , UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == latestSearchCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LatestSearchCollectionCell", for: indexPath) as! LatestSearchCollectionCell
+//            if AppLanguageManager.shared.currentLanguage == .ar {
+//                cell.titleLabel.text = recentData[indexPath.row].
+//            }else{
+//               
+//            }
             cell.titleLabel.text = recentData[indexPath.row].name
             return cell
         } else {

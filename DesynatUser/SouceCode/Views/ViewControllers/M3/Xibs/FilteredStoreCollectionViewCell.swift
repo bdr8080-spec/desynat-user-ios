@@ -35,7 +35,12 @@ class FilteredStoreCollectionViewCell: UICollectionViewCell {
     }
     
     func configData(data: ProductList?) {
-        titleLabel.text = data?.productNameEn
+        
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            titleLabel.text = data?.productNameAr
+        }else{
+            titleLabel.text = data?.productNameEn
+        }
         if let imageUrlString = data?.productVariants?.first?.variantImage?.first,
            let url = URL(string: imageUrlString) {
             
@@ -59,7 +64,12 @@ class FilteredStoreCollectionViewCell: UICollectionViewCell {
     }
     
     func configDataForFavouites(data: FavoruitesDataModel?) {
-        titleLabel.text = data?.productNameEn
+//        titleLabel.text = data?.productNameEn
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            titleLabel.text = data?.productNameAr
+        }else{
+            titleLabel.text = data?.productNameEn
+        }
         if let imageUrlString = data?.productVariants?.first?.variantImage?.first,
            let url = URL(string: imageUrlString) {
             mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray

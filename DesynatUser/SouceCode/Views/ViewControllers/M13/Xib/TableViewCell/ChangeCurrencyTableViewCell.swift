@@ -35,7 +35,12 @@ class ChangeCurrencyTableViewCell: UITableViewCell {
             titleLabel.text = country?.currencyCode
             flagEmojiLabel.isHidden = true
         case .comingFromCountry:
-            titleLabel.text = country?.name
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                titleLabel.text = country?.nameAr
+            }else{
+                titleLabel.text = country?.name
+            }
+            
             flagEmojiLabel.isHidden = false
             flagEmojiLabel.text = country?.flag1
         }

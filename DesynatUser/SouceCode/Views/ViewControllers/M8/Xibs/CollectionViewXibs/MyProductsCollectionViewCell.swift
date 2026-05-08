@@ -33,7 +33,7 @@ class MyProductsCollectionViewCell: UICollectionViewCell {
     }
     
     func configData(data: AffiliatedProductsList?) {
-        titleLabel.text = data?.productNameEn
+        titleLabel.text = AppLanguageManager.shared.currentLanguage == .ar ? data?.productNameAr : data?.productNameEn
         if let imageUrlString = data?.productVariants?.first?.variantImage?.first,
            let url = URL(string: imageUrlString) {
             mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray

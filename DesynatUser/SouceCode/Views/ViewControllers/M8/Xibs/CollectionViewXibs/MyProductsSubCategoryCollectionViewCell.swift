@@ -20,6 +20,8 @@ class MyProductsSubCategoryCollectionViewCell: UICollectionViewCell {
     
     func configData(data: SubCategoriesDataModel?) {
         titleLabel.text = data?.nameEnglish
+        titleLabel.text = AppLanguageManager.shared.currentLanguage == .ar ? data?.nameArabic : data?.nameEnglish
+        
         if let imageUrlString = data?.image,
            let url = URL(string: imageUrlString) {
           mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray

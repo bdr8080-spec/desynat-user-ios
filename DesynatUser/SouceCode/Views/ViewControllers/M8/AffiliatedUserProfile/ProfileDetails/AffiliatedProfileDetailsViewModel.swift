@@ -54,7 +54,7 @@ class AffiliatedProfileDetailsViewModel {
            let url = URL(string: imageUrlString) {
             hostVC.documentOneImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             hostVC.documentOneImageView.sd_imageIndicator?.startAnimatingIndicator()
-            hostVC.documentOneImageView.sd_setImage(with: url, placeholderImage: .uploadDoc1)
+            hostVC.documentOneImageView.sd_setImage(with: url, placeholderImage: .dashedBorder)
             hostVC.documentOneImageView.enableFullscreenZoom()
             hostVC.uplaodDocuOneImage = imageUrlString
         }
@@ -62,7 +62,7 @@ class AffiliatedProfileDetailsViewModel {
            let url = URL(string: imageUrlString) {
             hostVC.documentTwoImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             hostVC.documentTwoImageView.sd_imageIndicator?.startAnimatingIndicator()
-            hostVC.documentTwoImageView.sd_setImage(with: url, placeholderImage: .uploaddoc2)
+            hostVC.documentTwoImageView.sd_setImage(with: url, placeholderImage: .dashedBorder)
             hostVC.documentTwoImageView.enableFullscreenZoom()
             hostVC.uploadDocTwoImage = imageUrlString
         }

@@ -19,9 +19,10 @@ class CommonUtils {
     }
     
     static func isoStringAddingDays(_ isoString: String?, days: Int = 0) -> String? {
+        
         guard let isoString = isoString else { return nil }
         
-        // Parse the ISO date string from API
+        // Parse ISO date string
         let isoFormatter = DateFormatter()
         isoFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
         isoFormatter.locale = Locale(identifier: "en_US_POSIX")
@@ -29,78 +30,197 @@ class CommonUtils {
         
         guard let date = isoFormatter.date(from: isoString) else { return nil }
         
-        // Add days if needed
+        // Add days
         let calendar = Calendar(identifier: .gregorian)
         let newDate = calendar.date(byAdding: .day, value: days, to: date) ?? date
         
-        // Format to desired output: 12 SEP 25
+        // Output formatter
         let outputFormatter = DateFormatter()
         outputFormatter.dateFormat = "dd MMM yy"
-        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
         outputFormatter.timeZone = TimeZone.current
+        
+        // ✅ Arabic month support
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            outputFormatter.locale = Locale(identifier: "ar")
+        } else {
+            outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        }
         
         return outputFormatter.string(from: newDate)
     }
     
+    //    static func loadHTMLContent(_ content: String, webView: WKWebView) {
+    //
+    //        let cleanedContent = content
+    //            .replacingOccurrences(of: "\u{2028}", with: "<br>")
+    //            .replacingOccurrences(of: "\u{2029}", with: "<br><br>")
+    //            .trimmingCharacters(in: .whitespacesAndNewlines) // IMPORTANT: remove leading blank lines
+    //
+    //        let html = """
+    //        <html>
+    //        <head>
+    //            <meta name="viewport"
+    //                  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    //
+    //            <style>
+    //                body {
+    //                    margin: 0;                           /* remove body margin */
+    //                    padding: 0;
+    //                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    //                    font-size: 16px;
+    //                    line-height: 1.6;
+    //                    -webkit-text-size-adjust: 100%;
+    //                    white-space: normal !important;      /* reset body */
+    //                }
+    //
+    //                /* Clean paragraphs completely */
+    //                p {
+    //                    margin: 0 !important;
+    //                    padding: 0 !important;
+    //                    white-space: pre-wrap !important;
+    //                }
+    //
+    //                div, span {
+    //                    white-space: pre-wrap !important;
+    //                    margin: 0 !important;
+    //                    padding: 0 !important;
+    //                }
+    //
+    //                img {
+    //                    max-width: 100%;
+    //                    height: auto;
+    //                }
+    //
+    //                table {
+    //                    width: 100% !important;
+    //                }
+    //
+    //                /* Add controlled spacing between elements */
+    //                p + p {
+    //                   margin-top: 10px !important;
+    //                }
+    //            </style>
+    //        </head>
+    //        <body>
+    //            <div style="padding: 12px;">\(cleanedContent)</div>
+    //        </body>
+    //        </html>
+    //        """
+    //
+    //        webView.loadHTMLString(html, baseURL: nil)
+    //    }
+    //
+    
     static func loadHTMLContent(_ content: String, webView: WKWebView) {
         
         let cleanedContent = content
+        
             .replacingOccurrences(of: "\u{2028}", with: "<br>")
+        
             .replacingOccurrences(of: "\u{2029}", with: "<br><br>")
-            .trimmingCharacters(in: .whitespacesAndNewlines) // IMPORTANT: remove leading blank lines
+        
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        // ✅ RTL Support
+        
+        let isArabic = AppLanguageManager.shared.currentLanguage == .ar
+        
+        let direction = isArabic ? "rtl" : "ltr"
+        
+        let textAlign = isArabic ? "right" : "left"
         
         let html = """
-        <html>
+        <html dir="\(direction)">
         <head>
-            <meta name="viewport"
+        <meta name="viewport"
+        
                   content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+        
             <style>
+        
                 body {
-                    margin: 0;                           /* remove body margin */
+        
+                    margin: 0;
+        
                     padding: 0;
+        
                     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        
                     font-size: 16px;
+        
                     line-height: 1.6;
+        
                     -webkit-text-size-adjust: 100%;
-                    white-space: normal !important;      /* reset body */
+        
+                    white-space: normal !important;
+        
+                    direction: \(direction);
+        
+                    text-align: \(textAlign);
+        
                 }
-
-                /* Clean paragraphs completely */
+        
                 p {
+        
                     margin: 0 !important;
+        
                     padding: 0 !important;
+        
                     white-space: pre-wrap !important;
+        
+                    direction: \(direction);
+        
+                    text-align: \(textAlign);
+        
                 }
-
+        
                 div, span {
+        
                     white-space: pre-wrap !important;
+        
                     margin: 0 !important;
+        
                     padding: 0 !important;
+        
+                    direction: \(direction);
+        
+                    text-align: \(textAlign);
+        
                 }
-
+        
                 img {
+        
                     max-width: 100%;
+        
                     height: auto;
+        
                 }
-
+        
                 table {
+        
                     width: 100% !important;
+        
+                    direction: \(direction);
+        
                 }
-
-                /* Add controlled spacing between elements */
+        
                 p + p {
-                   margin-top: 10px !important;
+        
+                    margin-top: 10px !important;
+        
                 }
-            </style>
+        </style>
         </head>
+        
         <body>
-            <div style="padding: 12px;">\(cleanedContent)</div>
+        <div style="padding: 12px;">\(cleanedContent)</div>
         </body>
         </html>
+        
         """
         
         webView.loadHTMLString(html, baseURL: nil)
+        
     }
     
     
@@ -119,22 +239,22 @@ class CommonUtils {
         return timeDifference <= (3 * 60 * 60)
     }
     
-//    static func formatPriceStringInput(_ amount: String?, currency: String = "KD") -> String {
-//        guard
-//            let amount = amount,
-//            let doubleAmount = Double(amount)
-//        else {
-//            return "0 \(currency)"
-//        }
-//        
-//        let roundedAmount = round(doubleAmount * 100) / 100
-//        
-//        if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
-//            return "\(Int(roundedAmount)) \(currency)"
-//        } else {
-//            return String(format: "%.2f", roundedAmount) + " \(currency)"
-//        }
-//    }
+    //    static func formatPriceStringInput(_ amount: String?, currency: String = "KD") -> String {
+    //        guard
+    //            let amount = amount,
+    //            let doubleAmount = Double(amount)
+    //        else {
+    //            return "0 \(currency)"
+    //        }
+    //
+    //        let roundedAmount = round(doubleAmount * 100) / 100
+    //
+    //        if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
+    //            return "\(Int(roundedAmount)) \(currency)"
+    //        } else {
+    //            return String(format: "%.2f", roundedAmount) + " \(currency)"
+    //        }
+    //    }
     
     static func convertDisplayedPriceToKD(_ priceText: String?) -> Double {
         
@@ -241,18 +361,18 @@ class CommonUtils {
         }
     }
     
-//    static func formatPrice(_ amount: Double?, currency: String = "KD") -> String {
-//        guard let amount = amount else { return "0 \(currency)" }
-//        
-//        let roundedAmount = round(amount * 100) / 100   // Round to 2 decimal places
-//        if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
-//            // If whole number, show without decimal
-//            return "\(Int(roundedAmount)) \(currency)"
-//        } else {
-//            // Show up to 2 decimal places
-//            return String(format: "%.2f", roundedAmount) + " \(currency)"
-//        }
-//    }
+    //    static func formatPrice(_ amount: Double?, currency: String = "KD") -> String {
+    //        guard let amount = amount else { return "0 \(currency)" }
+    //
+    //        let roundedAmount = round(amount * 100) / 100   // Round to 2 decimal places
+    //        if roundedAmount.truncatingRemainder(dividingBy: 1) == 0 {
+    //            // If whole number, show without decimal
+    //            return "\(Int(roundedAmount)) \(currency)"
+    //        } else {
+    //            // Show up to 2 decimal places
+    //            return String(format: "%.2f", roundedAmount) + " \(currency)"
+    //        }
+    //    }
     
     
     static func getDictionary(_ dictData: Any?) -> Dictionary<String, Any> {
@@ -278,21 +398,21 @@ class CommonUtils {
     }
     
     
-//    static func updateDiscountPercentageLabel(_ label: UILabel, actualAmountLabel: UILabel, discountType: String?,discountValue: String?) {
-//        let value = Double(discountValue ?? "0") ?? 0
-//        guard value > 0 else {
-//            label.isHidden = true
-//            actualAmountLabel.isHidden = true
-//            return
-//        }
-//        label.isHidden = false
-//        actualAmountLabel.isHidden = false
-//        if discountType == "1" {
-//            label.text = "\(discountValue ?? "")% Off"
-//        } else {
-//            label.text = "\(discountValue ?? "") KD Off"
-//        }
-//    }
+    //    static func updateDiscountPercentageLabel(_ label: UILabel, actualAmountLabel: UILabel, discountType: String?,discountValue: String?) {
+    //        let value = Double(discountValue ?? "0") ?? 0
+    //        guard value > 0 else {
+    //            label.isHidden = true
+    //            actualAmountLabel.isHidden = true
+    //            return
+    //        }
+    //        label.isHidden = false
+    //        actualAmountLabel.isHidden = false
+    //        if discountType == "1" {
+    //            label.text = "\(discountValue ?? "")% Off"
+    //        } else {
+    //            label.text = "\(discountValue ?? "") KD Off"
+    //        }
+    //    }
     
     static func updateDiscountPercentageLabel(
         _ label: UILabel,
@@ -314,7 +434,7 @@ class CommonUtils {
         
         if discountType == "1" {
             // Percentage discount
-            label.text = "\(discountValue ?? "0")% Off"
+            label.text = "\(discountValue ?? "0")% \("Off".localiz())"
             
         } else {
             // Fixed amount discount with saved currency conversion
@@ -343,7 +463,7 @@ class CommonUtils {
                 amountText = String(format: "%.2f", roundedAmount)
             }
             
-            label.text = "\(amountText) \(finalCurrency) Off"
+            label.text = "\(amountText) \(finalCurrency) \("Off".localiz())"
         }
     }
     
@@ -379,7 +499,7 @@ class CommonUtils {
     
     static func formatTax(_ tax: Double?) -> String {
         if tax == 0 {
-            return "Free"
+            return "Free".localiz()
         } else {
             return formatPrice(tax) // Assuming formatPrice(_:) returns a formatted string like "$10.00"
         }
@@ -645,6 +765,34 @@ extension Date {
     func change_DateIntoString(format:DateCustomFormat) -> String{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format.rawValue
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            dateFormatter.locale = Locale(identifier: "ar")
+        } else {
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        }
         return dateFormatter.string(from: self)
     }
 }
+
+
+//extension Date {
+//    public enum DateCustomFormat: String {
+//        case dd_MMM_yy_h_mm_a = "dd MMM yy, h:mm a"
+//        case h_mm_a = "h:mm a"
+//    }
+//    func change_DateIntoString(format: DateCustomFormat) -> String {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = format.rawValue
+//        // ✅ Arabic Localization
+//        if AppLanguageManager.shared.currentLanguage == .ar {
+//            dateFormatter.locale = Locale(identifier: "ar")
+//            dateFormatter.amSymbol = "ص"
+//            dateFormatter.pmSymbol = "م"
+//        } else {
+//            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+//            dateFormatter.amSymbol = "AM"
+//            dateFormatter.pmSymbol = "PM"
+//        }
+//        return dateFormatter.string(from: self)
+//    }
+//}

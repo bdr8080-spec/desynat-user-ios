@@ -80,7 +80,7 @@ class WatchScannerVc : UIViewController {
             // Start session
             captureSession?.startRunning()
         } catch {
-            self.showAlert(msg: "❌ Error setting up camera") {
+            self.showAlert(msg: "❌ Error setting up camera".localiz()) {
                 self.navigationController?.popViewController(animated: true)
             }
         }

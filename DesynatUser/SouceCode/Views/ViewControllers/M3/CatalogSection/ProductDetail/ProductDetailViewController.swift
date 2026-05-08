@@ -287,15 +287,30 @@ class ProductDetailViewController: UIViewController {
     
     func prepareVariantData() {
         guard let variants = productDetails?.productVariants else { return }
-        let storeName = productDetails?.store?.storeName ?? productDetails?.productNameEn ?? ""
-        pagetitleLabel.text = storeName
-        productNameLabel.text = productDetails?.productNameEn
-        ratingView.rating = productDetails?.averageRating ?? 0
-        if productDetails?.brand?.nameEnglish == "Other" {
-            productLabel.text = productDetails?.otherEn
-        } else {
-            productLabel.text = productDetails?.brand?.nameEnglish
+        
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            productNameLabel.text = productDetails?.productNameAr
+            if productDetails?.brand?.nameEnglish == "Other" {
+                productLabel.text = productDetails?.otherAr
+            } else {
+                productLabel.text = productDetails?.brand?.nameArabic
+            }
+            let storeName = productDetails?.store?.storeName ?? productDetails?.productNameAr ?? ""
+            pagetitleLabel.text = storeName
+        }else{
+            productNameLabel.text = productDetails?.productNameEn
+            if productDetails?.brand?.nameEnglish == "Other" {
+                productLabel.text = productDetails?.otherEn
+            } else {
+                productLabel.text = productDetails?.brand?.nameEnglish
+            }
+            let storeName = productDetails?.store?.storeName ?? productDetails?.productNameEn ?? ""
+            pagetitleLabel.text = storeName
         }
+        //productNameLabel.text = productDetails?.productNameEn
+        ratingView.rating = productDetails?.averageRating ?? 0
+        
+        
         
         if productDetails?.customizedProduct == "1" {
             customOrderView.isHidden = false
@@ -655,7 +670,11 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
         case sizeCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SizeVariantCollectionViewCell", for: indexPath) as! SizeVariantCollectionViewCell
             let variant = filteredVariants[indexPath.row]
-            cell.titleLabel.text = variant.size?.name
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                cell.titleLabel.text = variant.size?.nameAr
+            } else {
+                cell.titleLabel.text = variant.size?.name
+            }
             let stock = Int(variant.totalStock ?? "0") ?? 0
             if stock > 0 {
                 cell.titleLabel.textColor = .black
@@ -670,6 +689,7 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
             return cell
         case similarProductCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BestSellingsCollectionViewCell", for: indexPath) as! BestSellingsCollectionViewCell
+            
             return cell
         default:
             return UICollectionViewCell()

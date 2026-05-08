@@ -24,8 +24,14 @@ class NotificationsListTableViewCell: UITableViewCell {
     }
     
     func configData(data: NotificationsList?) {
-        titleLabel.text = data?.titleEnglish
-        descriptionLabel.text = data?.descriptionEnglish
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            titleLabel.text = data?.titleArabic
+            descriptionLabel.text = data?.descriptionArabic
+        }else{
+            titleLabel.text = data?.titleEnglish
+            descriptionLabel.text = data?.descriptionEnglish
+        }
+        
         if data?.isRead == 1 {
             mainImageView.image = .unselectedBellIcon
         } else {

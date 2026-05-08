@@ -19,7 +19,12 @@ class SubCatgoryCollectionViewCell: UICollectionViewCell {
     }
   
   func configData(data: SubCategoriesDataModel) {
-      titleLabel.text = data.nameEnglish
+      if AppLanguageManager.shared.currentLanguage == .ar {
+          titleLabel.text = data.nameArabic
+      }else{
+          titleLabel.text = data.nameEnglish
+      }
+      
       if let imageUrlString = data.image,
              let url = URL(string: imageUrlString) {
 

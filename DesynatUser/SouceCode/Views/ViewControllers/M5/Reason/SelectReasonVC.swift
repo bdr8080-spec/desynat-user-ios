@@ -234,7 +234,12 @@ extension SelectReasonVC: UITableViewDelegate, UITableViewDataSource {
                 cell.titleLabel.text = "Others".localiz()
             } else {
                 let data = rejectReasonData[indexPath.row]
-                cell.titleLabel.text = data.reasonEnglish ?? ""
+                if AppLanguageManager.shared.currentLanguage == .ar {
+                    cell.titleLabel.text = data.reasonArabic ?? ""
+                }else{
+                    cell.titleLabel.text = data.reasonEnglish ?? ""
+                }
+                
             }
             
             if selectedIndex == indexPath.row {

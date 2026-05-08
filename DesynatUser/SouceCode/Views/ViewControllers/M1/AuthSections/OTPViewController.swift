@@ -51,7 +51,12 @@ class   OTPViewController: UIViewController {
         if isEnteredPhoneNumber {
             phoneNumberLabel.text = "\(countryCode ?? "")\(phoneNumber ?? "")"
         } else {
-            phoneNumberLabel.text = phoneNumber
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                phoneNumberLabel.text = phoneNumber  // arabic key Add karni hai 
+            }else{
+                phoneNumberLabel.text = phoneNumber
+            }
+            
         }
         switch comingReason {
         case .accountCreateAffiliateUser:

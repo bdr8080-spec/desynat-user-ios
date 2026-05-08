@@ -25,8 +25,20 @@ extension String {
         
         let outputFormatter = DateFormatter()
         outputFormatter.dateFormat = "dd/MM/yy 'at' h:mm a"
-        outputFormatter.locale = Locale.current
         outputFormatter.timeZone = TimeZone.current
+        
+        // Arabic localization
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            outputFormatter.locale = Locale(identifier: "ar")
+            outputFormatter.amSymbol = "ص"
+            outputFormatter.pmSymbol = "م"
+            outputFormatter.dateFormat = "dd/MM/yy 'في' h:mm a"
+        } else {
+            outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+            outputFormatter.amSymbol = "AM"
+            outputFormatter.pmSymbol = "PM"
+            outputFormatter.dateFormat = "dd/MM/yy 'at' h:mm a"
+        }
         
         return outputFormatter.string(from: date)
     }

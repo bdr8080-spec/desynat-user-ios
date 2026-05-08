@@ -47,14 +47,20 @@ class OrderForChatTableViewCell: UITableViewCell {
         } else {
             productImageView.image = UIImage(named: "")
         }
-        productNameLabel.text = data?.productVariation?.productDetails?.productNameEn ?? ""
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            productNameLabel.text = data?.productVariation?.productDetails?.productNameAr ?? ""
+            setColorBoxWithQuanity(size: data?.productVariation?.size?.nameAr ?? "", label: productDetailsLabel, hexColor: data?.productVariation?.color?.hexCode ?? "#98ADFF")
+        } else {
+            productNameLabel.text = data?.productVariation?.productDetails?.productNameEn ?? ""
+            setColorBoxWithQuanity(size: data?.productVariation?.size?.name ?? "", label: productDetailsLabel, hexColor: data?.productVariation?.color?.hexCode ?? "#98ADFF")
+        }
         
         CommonUtils.updateDiscountPercentageLabel(discountPriceLabel, actualAmountLabel: actualPriceLabel,discountType: data?.productVariation?.discountType,discountValue: data?.productVariation?.discountValue)
         
         finalPriceLabel.text = CommonUtils.formatPriceStringInput(data?.productVariation?.finalPrice)
         CommonUtils.setStrikethrough(label: actualPriceLabel, text: CommonUtils.formatPriceStringInput(data?.productVariation?.actualPrice))
         
-        setColorBoxWithQuanity(size: data?.productVariation?.size?.name ?? "", label: productDetailsLabel, hexColor: data?.productVariation?.color?.hexCode ?? "#98ADFF")
+        
         
         let messageType = data?.type ?? "1" // normal msg, customization send
         let requestType = data?.productRequest ?? "1"

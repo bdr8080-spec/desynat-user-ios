@@ -31,6 +31,7 @@ class AffiliatedUserProductViewModel {
             let allCategory = CategoriesDataModel(
                 id: -1,
                 name: "All",
+                nameAr: "الكل",
                 description: nil,
                 image: nil,
                 status: 1,

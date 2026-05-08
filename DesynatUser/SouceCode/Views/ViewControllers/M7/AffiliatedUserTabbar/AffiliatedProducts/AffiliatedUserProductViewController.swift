@@ -84,7 +84,7 @@ extension AffiliatedUserProductViewController: UICollectionViewDelegate, UIColle
         switch collectionView {
         case categoryCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyProductsCategoryCollectionViewCell", for: indexPath) as! MyProductsCategoryCollectionViewCell
-            cell.titleLabel.text = viewModel.categoriesSection[indexPath.row].name
+            cell.titleLabel.text = AppLanguageManager.shared.currentLanguage == .ar ? viewModel.categoriesSection[indexPath.row].nameAr : viewModel.categoriesSection[indexPath.row].name
             if selectedCatrgoryId == viewModel.categoriesSection[indexPath.row].id {
                 cell.mainView.borderWidth = 2
             } else {

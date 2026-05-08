@@ -42,7 +42,7 @@ struct AllBrandsListData: Codable {
 // MARK: - AllColorsList
 struct AllColorsList: Codable {
     let id: Int?
-    let name, hexCode: String?
+    let name,nameAr, hexCode: String?
     let createdAt, updatedAt: String?
 
     enum CodingKeys: String, CodingKey {
@@ -50,17 +50,19 @@ struct AllColorsList: Codable {
         case hexCode = "hex_code"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case nameAr = "name_ar"
     }
 }
 
 // MARK: - AllSizesList
 struct AllSizesList: Codable {
     let id: Int?
-    let name, createdAt, updatedAt: String?
+    let name,nameAr, createdAt, updatedAt: String?
 
     enum CodingKeys: String, CodingKey {
         case id, name
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case nameAr = "name_ar"
     }
 }

@@ -68,7 +68,7 @@ struct SupportList: Codable {
 // MARK: - TicketTypeDetails
 struct TicketTypeDetails: Codable {
     let id: Int?
-    let name: String?
+    let name, nameArabic: String?
     let status: Int?
     let createdAt, updatedAt: String?
 
@@ -76,6 +76,7 @@ struct TicketTypeDetails: Codable {
         case id, name, status
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case nameArabic = "name_arabic"
     }
 }
 
@@ -102,7 +103,7 @@ enum TicketStatus: Int {
 // MARK: - TicketTypesList
 struct TicketTypesList: Codable {
     let id: Int?
-    let name: String?
+    let name,nameArabic : String?
     let status: Int?
     let createdAt, updatedAt: String?
 
@@ -110,6 +111,7 @@ struct TicketTypesList: Codable {
         case id, name, status
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case nameArabic  = "name_arabic"
     }
 }
 

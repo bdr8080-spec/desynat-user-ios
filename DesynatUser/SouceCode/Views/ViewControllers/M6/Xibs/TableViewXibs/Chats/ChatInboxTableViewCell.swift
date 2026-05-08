@@ -41,7 +41,11 @@ class ChatInboxTableViewCell: UITableViewCell {
         if data?.messageType == "1" {
             messageLabel.text = "Sent an attachment".localiz()
         } else {
-            messageLabel.text = data?.lastChat ?? ""
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                messageLabel.text = data?.lastChatAr ?? data?.lastChat ?? ""
+            } else{
+                messageLabel.text = data?.lastChat ?? ""
+            }
         }
         timeLabel.text = formattedChatTime(from: data?.updatedAt ?? "")
         let unreadMesageCount = data?.unreadCount ?? 0
@@ -102,42 +106,51 @@ class ChatInboxTableViewCell: UITableViewCell {
     }
     
     func formattedChatTime(from isoString: String) -> String {
-        
-        // Parse ISO string
-        let isoFormatter = ISO8601DateFormatter()
-        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        
-        guard let date = isoFormatter.date(from: isoString) else {
-            return ""
+            
+            // Parse ISO string
+            let isoFormatter = ISO8601DateFormatter()
+            isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+            
+            guard let date = isoFormatter.date(from: isoString) else {
+                return ""
+            }
+            
+            let calendar = Calendar.current
+            
+            // Time formatter
+            let timeFormatter = DateFormatter()
+            timeFormatter.timeZone = .current
+            timeFormatter.dateFormat = "h:mm a"
+            
+            // Date formatter
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = .current
+            dateFormatter.dateFormat = "dd/MM/yy, h:mm a"
+            
+            // ✅ Localize AM/PM + numbers
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                timeFormatter.locale = Locale(identifier: "ar")
+                dateFormatter.locale = Locale(identifier: "ar")
+            } else {
+                timeFormatter.locale = Locale(identifier: "en_US_POSIX")
+                dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            }
+            
+            // Today
+            if calendar.isDateInToday(date) {
+                let text = "Today".localiz()
+                return "\(text) \(timeFormatter.string(from: date))"
+            }
+            
+            // Yesterday
+            if calendar.isDateInYesterday(date) {
+                let text = "Yesterday".localiz()
+                return "\(text) \(timeFormatter.string(from: date))"
+            }
+            
+            // Older dates
+            return dateFormatter.string(from: date)
         }
-        
-        let calendar = Calendar.current
-        //      let now = Date()
-        
-        // Time formatter
-        let timeFormatter = DateFormatter()
-        timeFormatter.locale = Locale.current
-        timeFormatter.timeZone = .current
-        timeFormatter.dateFormat = "h:mm a"
-        
-        // Date formatter (fallback)
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale.current
-        dateFormatter.timeZone = .current
-        dateFormatter.dateFormat = "dd/MM/yy, h:mm a"
-        
-        // Today
-        if calendar.isDateInToday(date) {
-            return "\("Today".localiz()) \(timeFormatter.string(from: date))"
-        }
-        
-        // Yesterday
-        if calendar.isDateInYesterday(date) {
-            return "\("Yesterday".localiz()) \(timeFormatter.string(from: date))"
-        }
-        
-        // Older dates
-        return dateFormatter.string(from: date)
-    }
+     
     
 }

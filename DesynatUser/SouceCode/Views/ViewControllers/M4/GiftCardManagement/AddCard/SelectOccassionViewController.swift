@@ -70,7 +70,14 @@ extension SelectOccassionViewController: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectOccassionCollectionViewCell", for: indexPath) as! SelectOccassionCollectionViewCell
         let data = viewModel.occassionsList?[indexPath.row]
-        cell.titleLabel.text = data?.nameEnglish ?? ""
+        
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            cell.titleLabel.text = data?.nameArabic ?? ""
+        }else{
+            cell.titleLabel.text = data?.nameEnglish ?? ""
+        }
+        
+        
         if selectedIndex == data?.id {
             cell.backgroundImageView.isHidden = false
             cell.titleLabel.textColor = .white

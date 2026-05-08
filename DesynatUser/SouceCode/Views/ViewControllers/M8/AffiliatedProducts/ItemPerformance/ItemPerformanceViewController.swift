@@ -98,7 +98,11 @@ extension ItemPerformanceViewController: UITextFieldDelegate {
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .date
         datePicker.backgroundColor = .white
-
+        if AppLanguageManager.shared.currentLanguage == .ar {
+                    datePicker.locale = Locale(identifier: "ar")
+                } else {
+                    datePicker.locale = Locale(identifier: "en_US")
+                }
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
 

@@ -66,7 +66,7 @@ extension SotByAffiliatedProductsViewController: UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
         let option = viewModel.sortedStoreList?[indexPath.row]
-        cell.titleLabel.text = option?.name
+        cell.titleLabel.text = AppLanguageManager.shared.currentLanguage == .ar ? option?.nameAr : option?.name
         if selectedIndex == indexPath.row {
             cell.selectionImageView.image = UIImage(named: "radioSelected")
         } else {

@@ -621,7 +621,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case categoriesSectionCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoriesSectionCollectionViewCell", for: indexPath) as! CategoriesSectionCollectionViewCell
             let data = viewModel.categoriesSection[indexPath.row]
-            cell.titleLabel.text = data.name
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                cell.titleLabel.text = data.nameAr
+            } else {
+                cell.titleLabel.text = data.name
+            }
             if viewModel.selectedCategoriesSection == data.id {
                 cell.bottomLabel.isHidden = false
             } else {

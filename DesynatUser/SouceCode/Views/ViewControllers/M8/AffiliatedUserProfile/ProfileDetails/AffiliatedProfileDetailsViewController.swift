@@ -138,7 +138,7 @@ class AffiliatedProfileDetailsViewController: UIViewController {
                     self.uplaodDocuOneImage = imageURL.url ?? ""
                     if let url = URL(string: imageURL.url ?? "") {
                         self.documentOneImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                        self.documentOneImageView.sd_setImage(with: url,placeholderImage: .uploadDoc1)
+                        self.documentOneImageView.sd_setImage(with: url,placeholderImage: .dashedBorder)
                     }
                 }
             }
@@ -152,7 +152,7 @@ class AffiliatedProfileDetailsViewController: UIViewController {
                     self.uploadDocTwoImage = imageURL.url ?? ""
                     if let url = URL(string: imageURL.url ?? "") {
                         self.documentTwoImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                        self.documentTwoImageView.sd_setImage(with: url,placeholderImage: .uploaddoc2)
+                        self.documentTwoImageView.sd_setImage(with: url,placeholderImage: .dashedBorder)
                     }
                 }
             }
@@ -209,11 +209,19 @@ class AffiliatedProfileDetailsViewController: UIViewController {
     }
     
     @IBAction func countryDidTapped(_ sender: UIButton) {
+//        let countryNames = viewModel.countryList.map { country -> String in
+//            let name = country.name ?? ""
+//            let flag = country.flag ?? "🇰🇼"
+//            return "\(flag) \(name)"
+//        }
         let countryNames = viewModel.countryList.map { country -> String in
-            let name = country.name ?? ""
-            let flag = country.flag ?? "🇰🇼"
-            return "\(flag) \(name)"
-        }
+                    let isArabic = AppLanguageManager.shared.currentLanguage == .ar
+                    let name = isArabic ? (country.nameAr ?? country.name ?? "") : (country.name ?? "")
+                    let dialCode = country.dialCode ?? ""
+                    let flag = country.flag ?? "🇰🇼"
+                    return "\(flag)  \(name) (\(dialCode))"
+                }
+        
         kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
             let selectedCountry = self.viewModel.countryList[index]
             let name = selectedCountry.name

@@ -66,7 +66,11 @@ class OrderDetailTableCell: UITableViewCell {
             totalQuntityLbel.text = data?.chatroomRecordtable?.quantity?.description//chatdata?.quantity?.description ?? data?.quantity?.description
             customDetailsLabel.text = data?.chatroomRecordtable?.customDetails//chatdata?.customDetails
             lblReturnAvail.isHidden = true
-            setColorBoxWithQuanity(size: data?.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF")
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                setColorBoxWithQuanity(size: data?.variationDetails?.size?.nameAr ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF")
+            } else {
+                setColorBoxWithQuanity(size: data?.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF")
+            }
             let unitPrice = Double(data?.amount ?? "") ?? 0
             lblDisPrice.text = CommonUtils.formatPrice(unitPrice)
             lblDisPrice.text = CommonUtils.formatPriceStringInput(data?.chatroomRecordtable?.totalAmount ?? "0")
@@ -75,7 +79,12 @@ class OrderDetailTableCell: UITableViewCell {
         } else {
             customOrderStackView.isHidden = true
             lblReturnAvail.isHidden = false
-            setColorBox(size: data?.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data?.quantity ?? 0)")
+            if AppLanguageManager.shared.currentLanguage == .ar {
+                setColorBox(size: data?.variationDetails?.size?.nameAr ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data?.quantity ?? 0)")
+            } else {
+                setColorBox(size: data?.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data?.quantity ?? 0)")
+            }
+            
             lblDisPrice.text = CommonUtils.formatPriceStringInput(data?.variationDetails?.finalPrice, currency: "KD")
             lblPrice.isHidden = false
             CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: lblPrice,
@@ -84,7 +93,14 @@ class OrderDetailTableCell: UITableViewCell {
         }
         
         CommonUtils.setStrikethrough(label: lblPrice, text: "\(data?.variationDetails?.actualPrice ?? "0") KD")
-        lblProductName.text = data?.productDetails?.productNameEn
+        
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            lblProductName.text = data?.productDetails?.productNameAr
+        }else{
+            lblProductName.text = data?.productDetails?.productNameEn
+        }
+        
+        //lblProductName.text = data?.productDetails?.productNameEn
         
         let isReturnAllowed = data?.productDetails?.productReturn == "1"
         if isReturnAllowed {

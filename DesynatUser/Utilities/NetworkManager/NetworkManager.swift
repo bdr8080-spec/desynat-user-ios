@@ -296,6 +296,11 @@ final class NetworkManager {
            !sessionToken.isEmpty {
             headers.add(name: "session_token", value: sessionToken)
         }
+        
+        headers.add(
+                    name: "Accept-Language",
+                    value: AppLanguageManager.shared.currentLanguage == .ar ? "ar" : "en"
+                )
 
         return headers
     }

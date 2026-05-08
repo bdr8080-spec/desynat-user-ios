@@ -49,7 +49,7 @@ class AddedCardDetailsViewController: UIViewController {
         }
         dateLabel.text = formatDate(giftCardDetails?.createdAt ?? "")
         
-        cardLabel.text = giftCardDetails?.giftDetails?.nameEnglish
+        cardLabel.text = AppLanguageManager.shared.currentLanguage == .ar ? giftCardDetails?.giftDetails?.nameArabic : giftCardDetails?.giftDetails?.nameEnglish
         amountLabel.text = CommonUtils.formatPriceStringInput(giftCardDetails?.amount)
         recepientNameLabel.text = giftCardDetails?.receiverName
         recepientEmailLabel.text = giftCardDetails?.receiverEmail
@@ -62,14 +62,28 @@ class AddedCardDetailsViewController: UIViewController {
     }
     
     private func formatDate(_ isoString: String) -> String {
+        
         let isoFormatter = ISO8601DateFormatter()
         isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        
         guard let date = isoFormatter.date(from: isoString) else {
             return "Invalid date"
         }
+        
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "dd MMM yy, h:mm a"
+        
+        // ✅ Arabic support
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            formatter.locale = Locale(identifier: "ar")
+            formatter.amSymbol = "ص"
+            formatter.pmSymbol = "م"
+        } else {
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.amSymbol = "AM"
+            formatter.pmSymbol = "PM"
+        }
+        
         return formatter.string(from: date).lowercased()
     }
     
