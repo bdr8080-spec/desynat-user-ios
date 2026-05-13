@@ -390,11 +390,10 @@ class StoryViewerViewController: UIViewController {
     private func startVideoProgressObserver() {
         guard let player = player,
               player.currentItem?.status == .readyToPlay else {
-            print("❌ Video not ready yet")
+//            print("❌ Video not ready yet")
             return
         }
         
-        // ✅ CRITICAL: Remove previous observer first
         removeVideoTimeObserver()
         
         let interval = CMTime(seconds: 0.03, preferredTimescale: 600)  // 30fps smooth
@@ -406,7 +405,7 @@ class StoryViewerViewController: UIViewController {
             self?.updateVideoProgress(time: time)
         }
         
-        print("✅ Video observer started")
+//        print("✅ Video observer started")
     }
     
     private func removeVideoTimeObserver() {
@@ -515,13 +514,8 @@ class StoryViewerViewController: UIViewController {
             
             switch player.timeControlStatus {
             case .playing:
-                print("✅ Video playing - starting progress")
                 player.isMuted = false
-                
-                // ✅ CRITICAL: Start observer NOW (video ready)
                 startVideoProgressObserver()
-                
-                // Call completion to start other logic
                 onCompletion?()
                 
             case .waitingToPlayAtSpecifiedRate:

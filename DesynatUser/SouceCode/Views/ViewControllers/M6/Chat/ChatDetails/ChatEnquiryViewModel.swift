@@ -83,9 +83,7 @@ class ChatEnquiryViewModel {
                                     "description_english": "You have a new message",
                                     "notification_type": "chat_message"]
         WebService.sharedInstance.sendNotificationDetails(param: param) { [weak self] response in
-            DispatchQueue.main.async { [weak self] in
-                print("send")
-            }
+            print("send")
         }
     }
     

@@ -161,7 +161,6 @@ class SupportViewController: UIViewController {
         }
     
     //MARK: Function's declaration
-    
     func setUp() {
         supportEmailLabe.text =  viewModel.contactListData?.contentEnglish?.email
         supportPhoneLabel.text =  viewModel.contactListData?.contentEnglish?.mobile

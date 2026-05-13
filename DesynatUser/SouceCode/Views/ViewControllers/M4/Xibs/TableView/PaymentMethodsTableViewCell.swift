@@ -63,7 +63,7 @@ extension PaymentMethodsTableViewCell{
       guard let self = self else { return }
       switch response {
       case .success(let session):
-        print("Session initiated for Apple Pay")
+//        print("Session initiated for Apple Pay")
         self.applePayButton.load(session, request, .english,
                                  startLoading: {
           print("Starting Apple Pay...")
@@ -71,19 +71,19 @@ extension PaymentMethodsTableViewCell{
                                  completion: { response, invoiceId in
           switch response {
           case .success(let executeResponse):
-            print("Apple Pay success: Invoice \(invoiceId ?? "N/A")")
+//            print("Apple Pay success: Invoice \(invoiceId ?? "N/A")")
             let transactionID = executeResponse.invoiceTransactions?.first?.transactionID ?? ""
             let gateway = executeResponse.invoiceTransactions?.first?.paymentGateway ?? "ApplePay"
             self.delegate?.paymentTransactionDetails = (transactionID, invoiceId ?? "", gateway)
             self.delegate?.paymentCompleted = true
             self.delegate?.handlePaymentCompletion(transactionID: transactionID, invoiceId: invoiceId ?? "", gateway: gateway)
           case .failure(let error):
-            print("Apple Pay failed: \(error.errorDescription)")
+//            print("Apple Pay failed: \(error.errorDescription)")
             self.delegate?.didReceivePaymentError("Apple Pay failed: \(error.errorDescription)")
           }
         })
       case .failure(let error):
-        print("Failed to initiate session: \(error.localizedDescription)")
+//        print("Failed to initiate session: \(error.localizedDescription)")
         self.delegate?.didReceivePaymentError("Failed to start Apple Pay session")
       }
     }

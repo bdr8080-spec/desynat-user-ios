@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -1668,10 +1668,10 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GXa-VY-y1D">
-                                <rect key="frame" x="0.0" y="173" width="393" height="490"/>
+                                <rect key="frame" x="0.0" y="173" width="393" height="485"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sR0-nr-xIS">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="2083.3333333333335"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="2055.3333333333335"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bx9-KH-IkX">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="393"/>
@@ -1724,14 +1724,14 @@
                                                     <action selector="pageControlChanged:" destination="5zc-q2-3nJ" eventType="touchUpInside" id="DhW-eG-GIU"/>
                                                 </connections>
                                             </pageControl>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iQB-mO-Bcs">
-                                                <rect key="frame" x="24" y="448" width="345" height="28"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iQB-mO-Bcs">
+                                                <rect key="frame" x="24" y="448" width="345" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="20"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="LGX-gY-XxW">
-                                                <rect key="frame" x="24" y="486" width="95" height="14"/>
+                                                <rect key="frame" x="24" y="458" width="95" height="14"/>
                                                 <subviews>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWQ-Kl-reZ" customClass="CosmosView" customModule="Cosmos">
                                                         <rect key="frame" x="0.0" y="0.0" width="75" height="14"/>
@@ -1772,13 +1772,13 @@
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sD-IV-Ig3">
-                                                <rect key="frame" x="24" y="505" width="345" height="0.0"/>
+                                                <rect key="frame" x="24" y="477" width="345" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tVo-EA-mXW">
-                                                <rect key="frame" x="24" y="515" width="31.666666666666671" height="21"/>
+                                                <rect key="frame" x="24" y="487" width="31.666666666666671" height="21"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03i-no-L7m">
                                                         <rect key="frame" x="0.0" y="0.0" width="4" height="21"/>
@@ -1807,19 +1807,19 @@
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="inclusive of all taxes" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dB-CG-VOo">
-                                                <rect key="frame" x="24" y="541" width="345" height="19.666666666666629"/>
+                                                <rect key="frame" x="24" y="513" width="345" height="19.666666666666629"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                 <color key="textColor" red="0.086274509803921567" green="0.70196078431372544" blue="0.39215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More Color" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qP-nw-UfR">
-                                                <rect key="frame" x="24" y="580.66666666666663" width="345" height="22.666666666666629"/>
+                                                <rect key="frame" x="24" y="552.66666666666663" width="345" height="22.666666666666629"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="81t-H9-OGV">
-                                                <rect key="frame" x="24" y="613.33333333333337" width="369" height="50"/>
+                                                <rect key="frame" x="24" y="585.33333333333337" width="369" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="P1q-q9-ll3"/>
@@ -1837,13 +1837,13 @@
                                                 </connections>
                                             </collectionView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Size" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCI-hl-VyZ">
-                                                <rect key="frame" x="24.000000000000007" y="688.33333333333337" width="84.666666666666686" height="22.666666666666629"/>
+                                                <rect key="frame" x="24.000000000000007" y="660.33333333333337" width="84.666666666666686" height="22.666666666666629"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SZI-5a-ISS">
-                                                <rect key="frame" x="294" y="682.33333333333337" width="75" height="35"/>
+                                                <rect key="frame" x="294" y="654.33333333333337" width="75" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="E98-vv-SpK"/>
                                                     <constraint firstAttribute="width" constant="75" id="eIn-P3-QDp"/>
@@ -1858,7 +1858,7 @@
                                                 </connections>
                                             </button>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ecb-nQ-4Sz">
-                                                <rect key="frame" x="24" y="721" width="369" height="50"/>
+                                                <rect key="frame" x="24" y="693" width="369" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="spK-9X-QyC"/>
@@ -1876,7 +1876,7 @@
                                                 </connections>
                                             </collectionView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="54L-hF-kGE">
-                                                <rect key="frame" x="24" y="771" width="345" height="80"/>
+                                                <rect key="frame" x="24" y="743" width="345" height="80"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="unC-Op-uAu">
                                                         <rect key="frame" x="0.0" y="0.0" width="345" height="20"/>
@@ -1941,7 +1941,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F2p-lB-VWy" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="24" y="851" width="345" height="212"/>
+                                                <rect key="frame" x="24" y="823" width="345" height="212"/>
                                                 <subviews>
                                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="k4K-zg-Zum">
                                                         <rect key="frame" x="10" y="0.0" width="325" height="212"/>
@@ -2089,7 +2089,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="n5Q-DZ-YtE">
-                                                <rect key="frame" x="24" y="1063" width="345" height="20"/>
+                                                <rect key="frame" x="24" y="1035" width="345" height="20"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IqN-VD-hVq">
                                                         <rect key="frame" x="0.0" y="0.0" width="345" height="20"/>
@@ -2104,7 +2104,7 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uhL-5z-0E4" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                                <rect key="frame" x="24" y="1083" width="345" height="191"/>
+                                                <rect key="frame" x="24" y="1055" width="345" height="191"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hVI-ws-pvW">
                                                         <rect key="frame" x="18" y="20" width="309" height="22.666666666666671"/>
@@ -2165,7 +2165,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i6W-8e-xas">
-                                                <rect key="frame" x="0.0" y="1299" width="393" height="192.66666666666674"/>
+                                                <rect key="frame" x="0.0" y="1271" width="393" height="192.66666666666674"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check delivery" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ts-pm-ePl">
                                                         <rect key="frame" x="24" y="25" width="119" height="22.666666666666671"/>
@@ -2259,13 +2259,13 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Customers Ratings" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7S1-Ms-aHi">
-                                                <rect key="frame" x="24" y="1521.6666666666667" width="154" height="22.666666666666742"/>
+                                                <rect key="frame" x="24" y="1493.6666666666667" width="154" height="22.666666666666742"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ugh-jl-liC">
-                                                <rect key="frame" x="324" y="1515.6666666666667" width="45" height="35"/>
+                                                <rect key="frame" x="324" y="1487.6666666666667" width="45" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="mhU-sQ-0kb"/>
                                                 </constraints>
@@ -2276,7 +2276,7 @@
                                                 </state>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tan-dr-2J3">
-                                                <rect key="frame" x="24" y="1564.3333333333333" width="345" height="200"/>
+                                                <rect key="frame" x="24" y="1536.3333333333333" width="345" height="200"/>
                                                 <subviews>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="lwQ-w5-gg2">
                                                         <rect key="frame" x="0.0" y="0.0" width="345" height="200"/>
@@ -2311,13 +2311,13 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Simillar Products" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAG-lX-DqK">
-                                                <rect key="frame" x="24" y="1799.3333333333333" width="135.66666666666666" height="22.666666666666742"/>
+                                                <rect key="frame" x="24" y="1771.3333333333333" width="135.66666666666666" height="22.666666666666742"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KEG-Ix-GRR">
-                                                <rect key="frame" x="324" y="1793.3333333333333" width="45" height="35"/>
+                                                <rect key="frame" x="324" y="1765.3333333333333" width="45" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="NnG-yf-BGK"/>
                                                 </constraints>
@@ -2328,7 +2328,7 @@
                                                 </state>
                                             </button>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9D1-Sq-YyK">
-                                                <rect key="frame" x="24" y="1843.3333333333333" width="369" height="219.99999999999977"/>
+                                                <rect key="frame" x="24" y="1815.3333333333333" width="369" height="220"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="220" id="wwe-7V-QL9"/>
@@ -2427,11 +2427,20 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="Xb4-kL-rYn"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="wws-dq-W1i"/>
                             </scrollView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="Uhi-P7-VRE">
-                                <rect key="frame" x="24" y="673" width="345" height="111"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Uhi-P7-VRE">
+                                <rect key="frame" x="24" y="658" width="345" height="126"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKl-4Q-GNM">
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="0.0"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" id="fUF-xq-O8I"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
+                                        <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lzO-rz-h11" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="345" height="48"/>
+                                        <rect key="frame" x="0.0" y="20" width="345" height="48"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QlE-Wp-LVR">
                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="48"/>
@@ -2476,7 +2485,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="2B3-BO-msT">
-                                        <rect key="frame" x="0.0" y="73" width="345" height="38"/>
+                                        <rect key="frame" x="0.0" y="88" width="345" height="38"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4eE-Dm-CXx" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="105" height="38"/>
@@ -2646,14 +2655,16 @@
                             <constraint firstItem="Uw0-fL-swW" firstAttribute="trailing" secondItem="win-MF-i4W" secondAttribute="trailing" id="cT8-zL-uro"/>
                             <constraint firstItem="GXa-VY-y1D" firstAttribute="leading" secondItem="Uw0-fL-swW" secondAttribute="leading" id="fmZ-zd-MTy"/>
                             <constraint firstItem="Uw0-fL-swW" firstAttribute="top" secondItem="win-MF-i4W" secondAttribute="top" id="h0c-ba-JX4"/>
-                            <constraint firstItem="Uhi-P7-VRE" firstAttribute="top" secondItem="GXa-VY-y1D" secondAttribute="bottom" constant="10" id="j85-F5-2pc"/>
+                            <constraint firstItem="Uhi-P7-VRE" firstAttribute="top" secondItem="GXa-VY-y1D" secondAttribute="bottom" id="j85-F5-2pc"/>
                             <constraint firstItem="GXa-VY-y1D" firstAttribute="trailing" secondItem="Uw0-fL-swW" secondAttribute="trailing" id="mUC-Ep-i7k"/>
                             <constraint firstItem="Uw0-fL-swW" firstAttribute="bottom" secondItem="Uhi-P7-VRE" secondAttribute="bottom" id="vt1-8f-N0C"/>
                             <constraint firstItem="Uw0-fL-swW" firstAttribute="trailing" secondItem="Uhi-P7-VRE" secondAttribute="trailing" constant="24" id="zVk-Zi-c4j"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="actionButtonsStackView" destination="2B3-BO-msT" id="pPG-Zy-njI"/>
                         <outlet property="actualPriceLAbel" destination="9Bd-3D-cgV" id="gPI-xT-vjQ"/>
+                        <outlet property="addToBagBootomStackView" destination="Uhi-P7-VRE" id="rSo-O5-mG4"/>
                         <outlet property="addToBagView" destination="4eE-Dm-CXx" id="pSB-RZ-JPg"/>
                         <outlet property="bagItemCountView" destination="lzO-rz-h11" id="dvx-Mr-S6c"/>
                         <outlet property="bottomSpaceForWomenDetails" destination="IqN-VD-hVq" id="h0r-EZ-Mnk"/>
@@ -2666,6 +2677,7 @@
                         <outlet property="customOrderView" destination="enH-0e-NgZ" id="IWo-li-YIS"/>
                         <outlet property="descriptionLabel" destination="ByW-74-GZn" id="G3s-IO-yQ0"/>
                         <outlet property="discountPercentageLabel" destination="Tog-ki-8ps" id="4Uc-h2-Iik"/>
+                        <outlet property="extraSpaceLabelAtBottomButtonstackView" destination="mKl-4Q-GNM" id="xqO-p4-oCp"/>
                         <outlet property="finalPriceLAbel" destination="03i-no-L7m" id="llv-ey-TU2"/>
                         <outlet property="hipLabel" destination="veq-oq-ii0" id="v7j-ul-UKW"/>
                         <outlet property="hipView" destination="oZD-Zu-2VP" id="2MX-ja-8w7"/>
@@ -3087,8 +3099,8 @@
         <image name="cross" width="18" height="19.333333969116211"/>
         <image name="decrement" width="40" height="40"/>
         <image name="delivery" width="24" height="24"/>
-        <image name="emptyStar" width="12" height="12"/>
-        <image name="filledStar" width="12" height="12"/>
+        <image name="emptyStar" width="10" height="10"/>
+        <image name="filledStar" width="10" height="10"/>
         <image name="filter" width="50" height="36"/>
         <image name="filterStore" width="17.666666030883789" height="16.333333969116211"/>
         <image name="gerdaientBorder" width="44" height="44"/>

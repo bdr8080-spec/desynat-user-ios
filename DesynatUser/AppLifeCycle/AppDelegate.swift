@@ -158,7 +158,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate {
             if let error = error {
                 print("Error fetching remote instange ID: \(error)")
             } else if let result = token {
-                print("Remote instance ID token: \(result)")
+//                print("Remote instance ID token: \(result)")
                 kSharedUserDefaults.saveModelFor(key: .deviceToken, value: token)
             }
         }

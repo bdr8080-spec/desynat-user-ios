@@ -36,7 +36,7 @@ class SavedCardTableViewCell: UITableViewCell {
     
     func configData(data: SavedCardsDataModel?) {
         cardNumberLabel.text = maskedCardNumber(data?.cardNumber ?? "")
-        titleLabel.text = data?.cardType ?? ""
+        titleLabel.text = AppLanguageManager.shared.currentLanguage == .ar ? data?.cardTypeAr : data?.cardType ?? ""
         if let imageUrlString = data?.cardImage,
            let url = URL(string: imageUrlString) {
           mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray

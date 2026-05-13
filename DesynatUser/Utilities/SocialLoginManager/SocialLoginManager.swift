@@ -81,7 +81,7 @@ extension SocialLoginManager: ASAuthorizationControllerDelegate, ASAuthorization
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        print("Sign in with Apple failed: \(error.localizedDescription)")
+//        print("Sign in with Apple failed: \(error.localizedDescription)")
         self.appleSignUpStatus?(nil, error)
     }
     
@@ -97,25 +97,3 @@ extension SocialLoginManager: ASAuthorizationControllerDelegate, ASAuthorization
         }
     }
 }
-
-/// usuage
-
-//SocialLoginManager.shared.signupWithGoogle(self) { result, error in
-//    if let error = error {
-//        print("Google Sign-In error: \(error.localizedDescription)")
-//    } else if let userInfo = result {
-//        print("Google User info: \(userInfo)")
-//    }
-//}
-
-
-//SocialLoginManager.shared.appleSignUpStatus = { result, error in
-//    if let error = error {
-//        print("Apple Sign-In error: \(error.localizedDescription)")
-//    } else if let userInfo = result {
-//        print("Apple User info: \(userInfo)")
-//    }
-//}
-//
-//// Call sign-in
-//SocialLoginManager.shared.signupWithApple(self)

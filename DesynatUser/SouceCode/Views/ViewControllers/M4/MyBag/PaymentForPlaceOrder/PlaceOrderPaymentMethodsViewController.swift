@@ -129,7 +129,7 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
             }
             return
         }
-        print("Payment completed with details: \(details)")
+//        print("Payment completed with details: \(details)")
         proceedToPay()
     }
     

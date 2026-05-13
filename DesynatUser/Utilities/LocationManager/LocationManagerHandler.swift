@@ -32,7 +32,7 @@ class LocationManager:NSObject, CLLocationManagerDelegate {
             self.location = CLLocationCoordinate2D(latitude: loc.latitude,
                                                    longitude: loc.longitude)
         }
-        printInConsole("latitude \(String(describing: locations.first)),longitude \(String(describing: locations.first))")
+//        printInConsole("latitude \(String(describing: locations.first)),longitude \(String(describing: locations.first))")
         
         if let location {
             self.reverseGeocodeCoordinate(location) { add in
@@ -50,7 +50,7 @@ class LocationManager:NSObject, CLLocationManagerDelegate {
         ceo.reverseGeocodeLocation(loc, completionHandler:
                                     {(placemarks, error) in
             if (error != nil) {
-                print("reverse geodcode fail: \(error!.localizedDescription)")
+//                print("reverse geodcode fail: \(error!.localizedDescription)")
             }
             guard let pm = placemarks as? [CLPlacemark] else {return}
             if pm.count > 0 {
@@ -78,15 +78,15 @@ class LocationManager:NSObject, CLLocationManagerDelegate {
                 completion(addressString)
                 self.getPickCity = pm.locality ?? ""
                 
-                print("subLocality\(pm.subLocality ?? "")")
-                print("pm.thoroughfare\(pm.thoroughfare ?? "")")
-                print("pm.locality\(pm.locality ?? "")")
-                print("pm.country\(pm.country ?? "")")
-                print("pm.postalCode\(pm.postalCode ?? "")")
-                print("pm.name\(pm.name)")
-                print("pm.subThoroughfare\(pm.subThoroughfare ?? "")")
-                print("pm.administrativeArea\(pm.administrativeArea ?? "")")
-                print("pm.subAdministrativeArea\(pm.subAdministrativeArea ?? "")")
+//                print("subLocality\(pm.subLocality ?? "")")
+//                print("pm.thoroughfare\(pm.thoroughfare ?? "")")
+//                print("pm.locality\(pm.locality ?? "")")
+//                print("pm.country\(pm.country ?? "")")
+//                print("pm.postalCode\(pm.postalCode ?? "")")
+//                print("pm.name\(pm.name)")
+//                print("pm.subThoroughfare\(pm.subThoroughfare ?? "")")
+//                print("pm.administrativeArea\(pm.administrativeArea ?? "")")
+//                print("pm.subAdministrativeArea\(pm.subAdministrativeArea ?? "")")
                 
             }
         })

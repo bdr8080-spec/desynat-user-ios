@@ -95,7 +95,7 @@ extension AffiliatedUserProductViewController: UICollectionViewDelegate, UIColle
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyProductsSubCategoryCollectionViewCell", for: indexPath) as! MyProductsSubCategoryCollectionViewCell
             if indexPath.row == 0 {
                 cell.titleLabel.isHidden = true
-                cell.mainImageView.image = .allSubCatgeory
+                cell.mainImageView.image = AppLanguageManager.shared.currentLanguage == .ar ? .allSubCatgeoryAr : .allSubCatgeory
             } else {
                 cell.titleLabel.isHidden = false
                 cell.configData(data: viewModel.subCategoriesSection[indexPath.row])

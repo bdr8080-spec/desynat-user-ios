@@ -189,7 +189,7 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
             
             switch response {
             case .success(let paymentStatus):
-                print("Payment successful with invoiceId: \(invoiceId ?? "N/A")")
+//                print("Payment successful with invoiceId: \(invoiceId ?? "N/A")")
                 let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
                 let paymentGateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "card"
                 paymentTransactionDetails = (transactionID, invoiceId ?? "", paymentGateway)
@@ -198,7 +198,7 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
                 
                 //        viewModel.payForAddingCard(transactionId: transactionID)
             case .failure(let error):
-                print("Payment Error: \(error.errorDescription)")
+//                print("Payment Error: \(error.errorDescription)")
                 self.showAlertAtPayment(msg: "\("Payment Failed:".localiz()) \(error.errorDescription)")
             }
         }
@@ -431,7 +431,7 @@ extension PaymentMethodViewController {
                         DispatchQueue.main.async {
                             switch result {
                             case .success(let executeResponse):
-                                print("Apple Pay payment successful")
+//                                print("Apple Pay payment successful")
                                 let transactionID = executeResponse.invoiceTransactions?.first?.transactionID ?? ""
                                 let gateway = executeResponse.invoiceTransactions?.first?.paymentGateway ?? "ApplePay"
                                 
@@ -442,7 +442,7 @@ extension PaymentMethodViewController {
                                 self.viewModel.payNowRequest(transactionId: transactionID, paymentId: 1)
                                 
                             case .failure(let error):
-                                print("Apple Pay payment failed: \(error.errorDescription)")
+//                                print("Apple Pay payment failed: \(error.errorDescription)")
                                 self.showToast(msg: "Apple Pay failed: \(error.errorDescription)")
                             }
                         }

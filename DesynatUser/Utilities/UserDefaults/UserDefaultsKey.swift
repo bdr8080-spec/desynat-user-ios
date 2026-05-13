@@ -71,7 +71,7 @@ extension UserDefaults {
             let decodedObject = try JSONDecoder().decode(model, from: data)
             return decodedObject
         } catch {
-            print("❌ Failed to decode model for key \(key.rawValue): \(error)")
+//            print("❌ Failed to decode model for key \(key.rawValue): \(error)")
             return nil
         }
     }
@@ -88,7 +88,7 @@ extension UserDefaults {
                 let response = try JSONDecoder().decode(model, from: data)
                 completion(.success(response))
             } catch let err {
-                printInConsole("Error Fetching model from user default\n\(err)")
+//                printInConsole("Error Fetching model from user default\n\(err)")
                 completion(.failure(.errorDecodingData))
             }
         } else {

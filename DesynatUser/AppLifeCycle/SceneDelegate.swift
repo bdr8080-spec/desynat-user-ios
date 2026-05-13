@@ -58,7 +58,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let isAffiliatedUserLoggedIn = UserDefaults.standard.string(forKey:"affiliatedAccountIsLoggedIn")
         
         if isAffiliatedUserLoggedIn == "true" {
-            print("Affiliated user detected - FORCE LOGGING OUT")
+//            print("Affiliated user detected - FORCE LOGGING OUT")
             logoutAffiliatedUserOnly()
         }
         
@@ -71,7 +71,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if islogin == "Yes" {
             // Normal user logged in → Go to home
             kSharedSceneDelegate.navigateToUserHomeVc()
-            print("Normal user home set as back target")
+//            print("Normal user home set as back target")
         } else {
             // Guest user → Go to appropriate screen (Welcome/Login)
             if let isAppInstalled = UserDefaults.standard.string(forKey:"isAppInstall") {
@@ -83,21 +83,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             } else {
                 kSharedSceneDelegate.navigateToSelectLanguage()
             }
-            print("Guest user flow set as back target")
+//            print("Guest user flow set as back target")
         }
     }
     
     private func processDeepLink(_ url: URL) {
-        print("Deep link URL: \(url.absoluteString)")
+//        print("Deep link URL: \(url.absoluteString)")
         
         let pathComponents = url.pathComponents
-        print("Path components: \(pathComponents)")
+//        print("Path components: \(pathComponents)")
         
         if let detailIndex = pathComponents.firstIndex(of: "detail-page"),
            detailIndex + 1 < pathComponents.count,
            let productId = Int(pathComponents[detailIndex + 1]) {
             
-            print("Product ID: \(productId)")
+//            print("Product ID: \(productId)")
             
             // Set up proper back target FIRST
             forceNormalUserHomeFlow()
@@ -112,7 +112,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let storeIndex = pathComponents.firstIndex(of: "store-details"),
            storeIndex + 1 < pathComponents.count,
            let storeId = Int(pathComponents[storeIndex + 1]) {
-            print("Store ID: \(storeId)")
+//            print("Store ID: \(storeId)")
             
             forceNormalUserHomeFlow()
             
@@ -128,7 +128,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func logoutAffiliatedUserOnly() {
         kSharedSceneDelegate.logoutAfffiliatedUser()  // Your logout API call
         UserDefaults.standard.setValue("No", forKey:"affiliatedAccountIsLoggedIn")
-        print("Affiliated logout complete")
+//        print("Affiliated logout complete")
     }
     
     // Keep your existing logoutAPI for manual logout

@@ -277,7 +277,7 @@ class HomeViewController: UIViewController {
             try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
             try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
-            print("Audio session error: \(error)")
+//            print("Audio session error: \(error)")
             return
         }
         
@@ -314,7 +314,7 @@ class HomeViewController: UIViewController {
             isListening = true
             searchTF.becomeFirstResponder() // optional: show cursor
         } catch {
-            print("Failed to start audio engine: \(error)")
+//            print("Failed to start audio engine: \(error)")
             stopListening()
         }
     }
@@ -760,7 +760,7 @@ extension HomeViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Location error:", error.localizedDescription)
+//        print("Location error:", error.localizedDescription)
         lblLocatioin.text = "Unable to fetch location".localiz()
     }
 }

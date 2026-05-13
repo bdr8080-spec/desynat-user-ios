@@ -215,7 +215,7 @@ extension OTPViewController {
             return false
         }
         otpDigits = String.getString(textField1.text) + String.getString(textField2.text) + String.getString(textField3.text) + String.getString(textField4.text) + String.getString(textField5.text) + String.getString(textField6.text)
-        print("Entered OTP: \(otpText)")
+//        print("Entered OTP: \(otpText)")
         return true
     }
 }

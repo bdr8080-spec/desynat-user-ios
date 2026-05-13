@@ -177,7 +177,7 @@ class WatchRecognizer {
             self.lastVisionResponse = json
             
             
-            printInConsole("Watches Scan: \(json)")
+//            printInConsole("Watches Scan: \(json)")
             
             var brand: RecentDataModel? = nil
             var model: String? = nil

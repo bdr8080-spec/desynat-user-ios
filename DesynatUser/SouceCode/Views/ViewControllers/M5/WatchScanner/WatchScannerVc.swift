@@ -195,11 +195,11 @@ extension WatchScannerVc {
                 return
             }
             
-            print("CATEGORY:", result.category ?? "")
-            print("BRAND:", result.brand ?? "")
-            print("PRODUCT:", result.productName ?? "")
-            print("ATTRIBUTES:", result.attributes)
-            print("COLORS:", result.colors)
+//            print("CATEGORY:", result.category ?? "")
+//            print("BRAND:", result.brand ?? "")
+//            print("PRODUCT:", result.productName ?? "")
+//            print("ATTRIBUTES:", result.attributes)
+//            print("COLORS:", result.colors)
             
             DispatchQueue.main.async {
                 if self.comingFromSearchProduct {

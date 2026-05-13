@@ -44,9 +44,9 @@ class BestSellingsCollectionViewCell: UICollectionViewCell {
     
     func configData(data: BestSellingProductsDataModel?) {
         if AppLanguageManager.shared.currentLanguage == .ar {
-            titleLabel.text = data?.productNameAr
+            titleLabel.text = "\(data?.productNameAr ?? "") (بواسطة \(data?.store?.storeName ?? ""))"
         }else{
-            titleLabel.text = data?.productNameEn
+            titleLabel.text = "\(data?.productNameEn ?? "") (by \(data?.store?.storeName ?? ""))"
         }
        
         ratingView.rating = data?.productAvgRating ?? 0
@@ -72,9 +72,9 @@ class BestSellingsCollectionViewCell: UICollectionViewCell {
     
     func configDataForTopRatedProducts(data: TopRatedDataModel?) {
         if AppLanguageManager.shared.currentLanguage == .ar {
-            titleLabel.text = data?.productNameAr
+            titleLabel.text = "\(data?.productNameAr ?? "") (بواسطة \(data?.store?.storeName ?? ""))"
         }else{
-            titleLabel.text = data?.productNameEn
+            titleLabel.text = "\(data?.productNameEn ?? "") (by \(data?.store?.storeName ?? ""))"
         }
         ratingView.rating = data?.productAvgRating ?? 0
         if let imageUrlString = data?.productVariants?.first?.variantImage?.first,

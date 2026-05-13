@@ -202,7 +202,7 @@ extension WelcomeScreenViewController: UICollectionViewDelegate, UICollectionVie
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         let page = Int(scrollView.contentOffset.x / scrollView.frame.width)
-        print("Scroll ended (animation) at page: \(page), offset: \(scrollView.contentOffset)")
+//        print("Scroll ended (animation) at page: \(page), offset: \(scrollView.contentOffset)")
         currentCellIndex = page
         updateUI(for: page)
         let indexPath = IndexPath(item: page, section: 0)

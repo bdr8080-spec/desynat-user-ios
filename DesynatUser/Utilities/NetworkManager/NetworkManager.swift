@@ -40,7 +40,7 @@ final class NetworkManager {
         let printableParams: String = self.getPrintableParamsFromJson(postData: params ?? [:])
         printInConsole("Header: \(header)")
         printInConsole("Connecting to Host with URL \(url) with parameters: \(printableParams)")
-        
+//        
         AF.request(url, method: method, parameters: params, encoding: encoding ?? URLEncoding.default, headers: header){ $0.timeoutInterval = 20.0 }.responseDecodable(of: BaseResponse<T>.self) { response in
             
             printInConsole(response.debugDescription)
@@ -102,9 +102,9 @@ final class NetworkManager {
         AF.upload(multipartFormData: { multipartFormData in
             assets.forEach { uploadData in
                 if uploadData.mimeType == .image {
-                    print("FILE NAME\(uploadData.file as? UIImage)")
-                    print("FILE NAME\(uploadData.file)")
-                    print("FILE NAME\(uploadData)")
+//                    print("FILE NAME\(uploadData.file as? UIImage)")
+//                    print("FILE NAME\(uploadData.file)")
+//                    print("FILE NAME\(uploadData)")
                     if let file = uploadData.file as? UIImage, let imageData = file.jpegData(compressionQuality: 0.4) {
                         multipartFormData.append(imageData, withName: uploadData.fileName, fileName: "\(UUID().uuidString).jpeg", mimeType: uploadData.mimeType.rawValue)
                     } else {

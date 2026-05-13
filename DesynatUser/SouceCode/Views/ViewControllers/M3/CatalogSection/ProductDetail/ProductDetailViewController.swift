@@ -88,6 +88,9 @@ class ProductDetailViewController: UIViewController {
     }
     @IBOutlet weak var totalBoughtLabel: UILabel!
     @IBOutlet weak var ratingView: CosmosView!
+    @IBOutlet weak var addToBagBootomStackView: UIStackView!
+    @IBOutlet weak var actionButtonsStackView: UIStackView!
+    @IBOutlet weak var extraSpaceLabelAtBottomButtonstackView: UILabel!
     
     // MARK: - Property Decalaration
     private lazy var viewModel = ProductDetailsViewModel(hostVC: self)
@@ -277,6 +280,7 @@ class ProductDetailViewController: UIViewController {
             if success {
                 self.addToBagView.isHidden = true
                 self.bagItemCountView.isHidden = false
+//                self.bagItemCountView.isHidden = productDetails?.store?.storeAvailability != 1
                 self.incrementDecrementView.isHidden = false
                 self.itemCountLabel.text = "\(self.quantity)"
             } else {
@@ -289,7 +293,7 @@ class ProductDetailViewController: UIViewController {
         guard let variants = productDetails?.productVariants else { return }
         
         if AppLanguageManager.shared.currentLanguage == .ar {
-            productNameLabel.text = productDetails?.productNameAr
+            productNameLabel.text = "\(productDetails?.productNameAr ?? "") (بواسطة \(productDetails?.store?.storeName ?? ""))"
             if productDetails?.brand?.nameEnglish == "Other" {
                 productLabel.text = productDetails?.otherAr
             } else {
@@ -298,7 +302,7 @@ class ProductDetailViewController: UIViewController {
             let storeName = productDetails?.store?.storeName ?? productDetails?.productNameAr ?? ""
             pagetitleLabel.text = storeName
         }else{
-            productNameLabel.text = productDetails?.productNameEn
+            productNameLabel.text = "\(productDetails?.productNameEn ?? "") (by \(productDetails?.store?.storeName ?? ""))"
             if productDetails?.brand?.nameEnglish == "Other" {
                 productLabel.text = productDetails?.otherEn
             } else {
@@ -307,12 +311,17 @@ class ProductDetailViewController: UIViewController {
             let storeName = productDetails?.store?.storeName ?? productDetails?.productNameEn ?? ""
             pagetitleLabel.text = storeName
         }
-        //productNameLabel.text = productDetails?.productNameEn
         ratingView.rating = productDetails?.averageRating ?? 0
-        
-        
-        
-        if productDetails?.customizedProduct == "1" {
+        if productDetails?.store?.storeAvailability == 1 {
+            addToBagBootomStackView.isHidden = false
+            extraSpaceLabelAtBottomButtonstackView.isHidden = false
+            actionButtonsStackView.isHidden = false
+        } else {
+            addToBagBootomStackView.isHidden = true
+            extraSpaceLabelAtBottomButtonstackView.isHidden = true
+            actionButtonsStackView.isHidden = true
+        }
+        if productDetails?.customizedProduct == "1" && productDetails?.store?.storeAvailability == 1 {
             customOrderView.isHidden = false
             spaceTopLabel.isHidden = false
         } else {
@@ -403,6 +412,7 @@ class ProductDetailViewController: UIViewController {
         quantity = cartItem.quantity ?? 1
         addToBagView.isHidden = true
         bagItemCountView.isHidden = false
+//        bagItemCountView.isHidden = productDetails.store?.storeAvailability != 1
         incrementDecrementView.isHidden = false
         itemCountLabel.text = "\(quantity)"
     }
@@ -452,6 +462,7 @@ class ProductDetailViewController: UIViewController {
             addToBagView.isHidden = true
             incrementDecrementView.isHidden = false
             bagItemCountView.isHidden = false
+//            bagItemCountView.isHidden = productDetails.store?.storeAvailability != 1
             itemCountLabel.text = "\(quantity)"
             
             // Step 7: Scroll and highlight selected color & size
@@ -606,6 +617,7 @@ class ProductDetailViewController: UIViewController {
     
     private func updateUI() {
         bagItemCountView.isHidden = false
+//        bagItemCountView.isHidden = productDetails?.store?.storeAvailability != 1
         incrementDecrementView.isHidden = false
         addToBagView.isHidden = true
         itemCountLabel.text = "\(quantity)"

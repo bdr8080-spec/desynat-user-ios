@@ -84,7 +84,7 @@ class LiveUsersCell: UITableViewCell {
         inputFormatter.timeZone = TimeZone(identifier: "Asia/Kuwait")
         
         guard let date = inputFormatter.date(from: inputDate) else {
-            print("❌ Parse failed: \(inputDate)")
+//            print("❌ Parse failed: \(inputDate)")
             return ""
         }
         
@@ -115,7 +115,7 @@ class LiveUsersCell: UITableViewCell {
 
         guard let startDate = formatter.date(from: startString),
               let endDate = formatter.date(from: endString) else {
-            print("Parsing failed:", startString, endString)
+//            print("Parsing failed:", startString, endString)
             return false
         }
 

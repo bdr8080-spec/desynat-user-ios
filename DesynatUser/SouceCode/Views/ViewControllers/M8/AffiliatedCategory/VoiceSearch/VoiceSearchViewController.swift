@@ -78,7 +78,7 @@ class VoiceSearchViewController: UIViewController {
             try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
             try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
-            print("Audio session error: \(error)")
+//            print("Audio session error: \(error)")
             return
         }
         
@@ -108,7 +108,7 @@ class VoiceSearchViewController: UIViewController {
             }
             
             if let error = error {
-                print("Recognition error:", error)
+//                print("Recognition error:", error)
                 DispatchQueue.main.async {
                     self.finishListening()
                 }
@@ -129,7 +129,7 @@ class VoiceSearchViewController: UIViewController {
                 self.startMicPulse()
             }
         } catch {
-            print("Failed to start audio engine: \(error)")
+//            print("Failed to start audio engine: \(error)")
             stopListening()
         }
     }
@@ -165,7 +165,7 @@ class VoiceSearchViewController: UIViewController {
     private func navigateToNextScreen() {
         let searchText = latestSpokenText
         stopListening()
-        print("Navigate with text: \(searchText)")
+//        print("Navigate with text: \(searchText)")
         dismiss(animated: true) { [weak self] in
             self?.onSearchedCompletionTxt?(searchText)
         }
