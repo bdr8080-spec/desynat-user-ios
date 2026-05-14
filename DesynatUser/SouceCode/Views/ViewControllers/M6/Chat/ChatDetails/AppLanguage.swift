@@ -17,16 +17,16 @@ enum AppLanguage {
     }
 }
 
-class LanguageManager {
-
-    static var currentLanguageCode: String {
-        return UserDefaults.standard.string(forKey: "AppLanguage") ?? "en"
-    }
-
-    static var isArabic: Bool {
-        return currentLanguageCode == "ar"
-    }
-}
+//class LanguageManager {
+//
+//    static var currentLanguageCode: String {
+//        return UserDefaults.standard.string(forKey: "AppLanguage") ?? "en"
+//    }
+//
+//    static var isArabic: Bool {
+//        return currentLanguageCode == "ar"
+//    }
+//}
 
 
 class TranslationService {

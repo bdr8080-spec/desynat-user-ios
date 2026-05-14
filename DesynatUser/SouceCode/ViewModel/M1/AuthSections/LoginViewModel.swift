@@ -62,7 +62,7 @@ class LoginViewModel: NSObject {
         var params: [String: Any] = [
             "device_type": 1,//0 web 1 ios 2 andriod
             "fcm_token": kSharedUserDefaults.retrieveModelFor(key: .deviceToken, model: String.self) ?? "",
-            "lang": LanguageManager.currentLanguageCode,
+            "lang": AppLanguageManager.shared.currentLanguage.rawValue,//LanguageManager.currentLanguageCode,
             "password": password,
             "email_mobile": input]
         if input.isEmail() {

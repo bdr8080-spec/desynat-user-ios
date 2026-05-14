@@ -91,6 +91,7 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet weak var addToBagBootomStackView: UIStackView!
     @IBOutlet weak var actionButtonsStackView: UIStackView!
     @IBOutlet weak var extraSpaceLabelAtBottomButtonstackView: UILabel!
+    @IBOutlet weak var deliveryAddressLabel: UITextField!
     
     // MARK: - Property Decalaration
     private lazy var viewModel = ProductDetailsViewModel(hostVC: self)
@@ -119,6 +120,7 @@ class ProductDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetUp()
+        viewModel.getSavedAddressListAPI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -169,13 +171,13 @@ class ProductDetailViewController: UIViewController {
         }
     }
     
-    
     @IBAction func minusDidTapped(_ sender: Any) {
         if quantity > 1 {
             quantity -= 1
             addProductToCart(forIncrement: false)
         } else {
             quantity = 0
+            viewModel.handleIncrementDecrement(cartID: productDetails?.addtocart?.id ?? 0)
             addToBagView.isHidden = false
             incrementDecrementView.isHidden = true
             bagItemCountView.isHidden = true
@@ -270,6 +272,45 @@ class ProductDetailViewController: UIViewController {
         )
     }
     
+    @IBAction func deliveryAddressAction(_ sender: Any) {
+        let nextVC = SavedAddressViewController.instantiate(fromAppStoryboard: .Profile)
+        nextVC.comingFromBag = true
+        nextVC.onAddressSelected = { [weak self] selectedAddress in
+//            self?.deliveryAddressLabel = selectedAddress.id ?? 0
+            self?.deliveryAddressLabel.text = self?.formattedAddress(from: selectedAddress)
+        }
+        self.navigationController?.pushViewController(nextVC, animated: false)
+    }
+    
+    func formattedAddress(from address: SavedAddressList?) -> String {
+        guard let address else { return "" }
+        
+        let nameAndHouse = [
+            address.name,
+            address.houseNo
+        ].compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+            .joined(separator: "-")
+        
+        let mainParts = [
+            nameAndHouse,
+            address.streetNo,
+            address.city,
+            address.state,
+            address.countryName
+        ].compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+        
+        var result = mainParts.joined(separator: ", ")
+        
+        if let postalCode = address.postalCode,
+           !postalCode.trimmingCharacters(in: .whitespaces).isEmpty {
+            result += " - \(postalCode)"
+        }
+        
+        return result
+    }
+    
     //MARK: Function's declaration
     private func addProductToCart(forIncrement: Bool) {
         guard let productId = productDetails?.id else { return }
@@ -278,11 +319,13 @@ class ProductDetailViewController: UIViewController {
         viewModel.addToCart(productId: productId, variantId: variantId, quantity: quantity, forIncrement: forIncrement) { [weak self] success in
             guard let self = self else { return }
             if success {
-                self.addToBagView.isHidden = true
-                self.bagItemCountView.isHidden = false
-//                self.bagItemCountView.isHidden = productDetails?.store?.storeAvailability != 1
-                self.incrementDecrementView.isHidden = false
-                self.itemCountLabel.text = "\(self.quantity)"
+                if self.quantity > 0 {
+                    self.addToBagView.isHidden = true
+                    self.bagItemCountView.isHidden = false
+                    //                self.bagItemCountView.isHidden = productDetails?.store?.storeAvailability != 1
+                    self.incrementDecrementView.isHidden = false
+                    self.itemCountLabel.text = "\(self.quantity)"
+                }
             } else {
                 showAlert(msg: "Failed to add item to cart. Please try again.".localiz())
             }
@@ -312,22 +355,7 @@ class ProductDetailViewController: UIViewController {
             pagetitleLabel.text = storeName
         }
         ratingView.rating = productDetails?.averageRating ?? 0
-        if productDetails?.store?.storeAvailability == 1 {
-            addToBagBootomStackView.isHidden = false
-            extraSpaceLabelAtBottomButtonstackView.isHidden = false
-            actionButtonsStackView.isHidden = false
-        } else {
-            addToBagBootomStackView.isHidden = true
-            extraSpaceLabelAtBottomButtonstackView.isHidden = true
-            actionButtonsStackView.isHidden = true
-        }
-        if productDetails?.customizedProduct == "1" && productDetails?.store?.storeAvailability == 1 {
-            customOrderView.isHidden = false
-            spaceTopLabel.isHidden = false
-        } else {
-            customOrderView.isHidden = true
-            spaceTopLabel.isHidden = true
-        }
+        
         finalPriceLAbel.text = CommonUtils.formatPriceStringInput(variants.first?.finalPrice, currency: "KD")
         CommonUtils.setStrikethrough(label: actualPriceLAbel, text: CommonUtils.formatPriceStringInput(variants.first?.actualPrice, currency: "KD"))
         CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: actualPriceLAbel,
@@ -391,6 +419,24 @@ class ProductDetailViewController: UIViewController {
         checkAndPreselectCartVariant()
         bagCount = productDetails?.addtocartTotalProduct ?? 0
         totalItemsInBagLabel.text = "(\(productDetails?.addtocartTotalProduct ?? 0) \("Items) View My Bag".localiz())"
+        
+        if productDetails?.store?.storeAvailability == 1 {
+            addToBagBootomStackView.isHidden = false
+            extraSpaceLabelAtBottomButtonstackView.isHidden = false
+            actionButtonsStackView.isHidden = false
+        } else {
+            addToBagBootomStackView.isHidden = true
+            extraSpaceLabelAtBottomButtonstackView.isHidden = true
+            actionButtonsStackView.isHidden = true
+        }
+        if productDetails?.customizedProduct == "1" && productDetails?.store?.storeAvailability == 1 {
+            customOrderView.isHidden = false
+            spaceTopLabel.isHidden = false
+        } else {
+            customOrderView.isHidden = true
+            spaceTopLabel.isHidden = true
+        }
+        deliveryAddressLabel.text = formattedAddress(from: viewModel.savedAddress)
     }
     
     private func checkAndUpdateCartStatus() {

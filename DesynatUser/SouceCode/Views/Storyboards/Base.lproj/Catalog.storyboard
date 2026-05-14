@@ -2199,8 +2199,11 @@
                                                                 <state key="normal" title="Change">
                                                                     <color key="titleColor" name="darkBrown"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="deliveryAddressAction:" destination="5zc-q2-3nJ" eventType="touchUpInside" id="2Nd-b3-OIo"/>
+                                                                </connections>
                                                             </button>
-                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Xy-3A-FAE">
+                                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Xy-3A-FAE">
                                                                 <rect key="frame" x="57" y="0.0" width="227" height="51"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
@@ -2453,8 +2456,8 @@
                                                     <action selector="viewMyBagDidTapped:" destination="5zc-q2-3nJ" eventType="touchUpInside" id="lQK-am-apQ"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(2 Items) View My Bag" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8K-uU-6Rm">
-                                                <rect key="frame" x="20" y="14.333333333333373" width="158" height="19.666666666666671"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(0 Items) View My Bag" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8K-uU-6Rm">
+                                                <rect key="frame" x="20" y="14.333333333333373" width="159" height="19.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2675,6 +2678,7 @@
                         <outlet property="checkDeliveryTableViewHeightConstraint" destination="yV0-X0-897" id="l5h-Ks-QOz"/>
                         <outlet property="colorsCollectionView" destination="81t-H9-OGV" id="PqB-uB-h71"/>
                         <outlet property="customOrderView" destination="enH-0e-NgZ" id="IWo-li-YIS"/>
+                        <outlet property="deliveryAddressLabel" destination="5Xy-3A-FAE" id="bYi-Y2-84l"/>
                         <outlet property="descriptionLabel" destination="ByW-74-GZn" id="G3s-IO-yQ0"/>
                         <outlet property="discountPercentageLabel" destination="Tog-ki-8ps" id="4Uc-h2-Iik"/>
                         <outlet property="extraSpaceLabelAtBottomButtonstackView" destination="mKl-4Q-GNM" id="xqO-p4-oCp"/>

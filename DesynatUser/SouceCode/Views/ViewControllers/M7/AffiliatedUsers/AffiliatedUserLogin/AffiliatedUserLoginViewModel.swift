@@ -59,7 +59,7 @@ class AffiliatedUserLoginViewModel {
             "device_type": 1,//0 web 1 ios 2 andriod
             "fcm_token": kSharedUserDefaults.retrieveModelFor(key: .deviceToken, model: String.self) ?? "",
             "password": password,
-            "lang": LanguageManager.currentLanguageCode,
+            "lang": AppLanguageManager.shared.currentLanguage.rawValue,//LanguageManager.currentLanguageCode,
             "email_mobile": input]
         if input.isEmail() {
             params["type"] = "1"

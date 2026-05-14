@@ -13,9 +13,28 @@ class ProductDetailsViewModel: NSObject {
     private var hostVC: ProductDetailViewController!
     var singleStoresSection: SingleStoreDetailsDataModel?
     var searchText: String = ""
+    var savedAddress: SavedAddressList?
     
     init(hostVC: ProductDetailViewController) {
         self.hostVC = hostVC
+    }
+    
+    func getSavedAddressListAPI() {
+
+        WebService.sharedInstance.getSavedAddressList { [weak self] list in
+
+            guard let self = self else { return }
+
+            // Default address
+            self.savedAddress = list.first(where: {
+                $0.setAsDefault == "1"
+            })
+
+            // Fallback to first address
+            if self.savedAddress == nil {
+                self.savedAddress = list.first
+            }
+        }
     }
     
     func getProductDetails() {
@@ -85,6 +104,15 @@ class ProductDetailsViewModel: NSObject {
                 nextVC.comingFromChatInbox = false
                 self.hostVC.navigationController?.pushViewController(nextVC, animated: true)
             }
+        }
+    }
+    
+    func handleIncrementDecrement(cartID: Int) {
+        let param: [String: Any] = [
+            "cart_id": "\(cartID)",
+            "type": "decrement"]
+        WebService.sharedInstance.incrementDecrement(param: param) { [weak self] list in
+            guard let self = self else { return }
         }
     }
 }
