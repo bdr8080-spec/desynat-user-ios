@@ -443,14 +443,26 @@ class HomeViewController: UIViewController {
         heightConstraintOfCategoryColelctionView.constant = totalHeight
     }
     
+//    private func showUserData() {
+//        if isGuestLogin == "true" {
+//            lblUserName.text = "Hello Guest".localiz()
+//        } else {
+//            lblUserName.text = "\("Deliver to".localiz()) \(Global.shared.user?.fullName ?? "")"
+//        }
+//    }
+    
     private func showUserData() {
         if isGuestLogin == "true" {
             lblUserName.text = "Hello Guest".localiz()
         } else {
-            lblUserName.text = "\("Deliver to".localiz()) \(Global.shared.user?.fullName ?? "")"
+            let fullName = Global.shared.user?.fullName?.trimmingCharacters(in: .whitespacesAndNewlines)
+            if let fullName = fullName, !fullName.isEmpty, fullName.lowercased() != "null" {
+                lblUserName.text = "\("Deliver to".localiz()) \(fullName)"
+            } else {
+                lblUserName.text = "Delivery at".localiz()
+            }
         }
     }
-    
     
 }
 
@@ -693,7 +705,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             categoriesSectionCollectionView.reloadData()
         case categoriesCollectionView:
             let nextVC = StoresViewController.instantiate(fromAppStoryboard: .Catalog)
-            nextVC.slectedsubCategoryId = viewModel.selectedCategoriesSection
+            nextVC.slectedsubCategoryId = viewModel.subCategoriesSection[indexPath.row].id//viewModel.selectedCategoriesSection
             nextVC.slecetedCategoryID = viewModel.selectedCategoriesSection
             self.navigationController?.pushViewController(nextVC, animated: true)
         case bannerCollectionView:

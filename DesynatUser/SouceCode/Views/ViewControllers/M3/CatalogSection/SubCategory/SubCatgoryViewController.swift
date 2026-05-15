@@ -74,7 +74,7 @@ extension SubCatgoryViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let nextVC = StoresViewController.instantiate(fromAppStoryboard: .Catalog)
-        nextVC.slectedsubCategoryId = categoryId
+        nextVC.slectedsubCategoryId = viewModel.subCategoriesSection[indexPath.row].id ?? 0
         nextVC.slecetedCategoryID = categoryId ?? 0
         navigationController?.pushViewController(nextVC, animated: true)
     }

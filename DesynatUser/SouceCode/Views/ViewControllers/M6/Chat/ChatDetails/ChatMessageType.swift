@@ -34,14 +34,22 @@ struct Chat: Equatable, Codable {
         return formatter.date(from: times)
     }
     
+//    func localizedMessage() -> String {
+//            switch AppLanguage.current {
+//            case .arabic:
+//                return messageAr ?? message ?? ""
+//            case .english:
+//                return message ?? ""
+//            }
+//        }
+    
     func localizedMessage() -> String {
-            switch AppLanguage.current {
-            case .arabic:
-                return messageAr ?? message ?? ""
-            case .english:
-                return message ?? ""
-            }
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            return messageAr ?? message ?? ""
+        } else {
+            return message ?? ""
         }
+    }
 
     func toBackendDictionary(uniqueId: String) -> [String: Any] {
         let formatter = ISO8601DateFormatter()

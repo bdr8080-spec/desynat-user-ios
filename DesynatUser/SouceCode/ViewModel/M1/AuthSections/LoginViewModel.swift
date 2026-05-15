@@ -58,7 +58,6 @@ class LoginViewModel: NSObject {
     func loginApi() {
         let input = loginHostVC.emailTextField.text?.trimmed() ?? ""
         let password = loginHostVC.passwordTextField.text?.trimmed() ?? ""
-        
         var params: [String: Any] = [
             "device_type": 1,//0 web 1 ios 2 andriod
             "fcm_token": kSharedUserDefaults.retrieveModelFor(key: .deviceToken, model: String.self) ?? "",
@@ -81,6 +80,14 @@ class LoginViewModel: NSObject {
         }
     }
     
+    
+    func socialSignupApi(params: [String: Any]) {
+        WebService.sharedInstance.socialLoginUserService(withParams: params) { (response) in
+            UserDefaults.standard.setValue("Yes", forKey:"isLogin")
+            UserDefaults.standard.setValue("false", forKey:"isGuestLogin")
+            kSharedSceneDelegate.navigateToUserHomeVc()
+        }
+    }
     
     func getALlUserCountryListApi(){
         WebService.sharedInstance.getAllUserscountryList { list in

@@ -95,9 +95,6 @@ class ProductDetailViewController: UIViewController {
     
     // MARK: - Property Decalaration
     private lazy var viewModel = ProductDetailsViewModel(hostVC: self)
-    var refernceLink: String? = ""
-    var productId: Int? = 0
-    var bagCount: Int = 0
     private var selectedColourIndex = 0
     private var selectedSizeIndex = 0
     private var checkDelivery: [CheckDeliveryModel] = [CheckDeliveryModel(image: "calender", title: "Get it within 3-5 Working Days".localiz()),
@@ -109,6 +106,9 @@ class ProductDetailViewController: UIViewController {
     var selectedVariantImages: [String] = []
     var productDetails: ProductDetailsDataModel?
     let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
+    var refernceLink: String? = ""
+    var productId: Int? = 0
+    var bagCount: Int = 0
     var selectedVariant: ProductVariant? {
         guard !filteredVariants.isEmpty else { return nil }
         guard selectedSizeIndex >= 0 else { return filteredVariants[0] }
@@ -276,7 +276,6 @@ class ProductDetailViewController: UIViewController {
         let nextVC = SavedAddressViewController.instantiate(fromAppStoryboard: .Profile)
         nextVC.comingFromBag = true
         nextVC.onAddressSelected = { [weak self] selectedAddress in
-//            self?.deliveryAddressLabel = selectedAddress.id ?? 0
             self?.deliveryAddressLabel.text = self?.formattedAddress(from: selectedAddress)
         }
         self.navigationController?.pushViewController(nextVC, animated: false)
@@ -436,7 +435,7 @@ class ProductDetailViewController: UIViewController {
             customOrderView.isHidden = true
             spaceTopLabel.isHidden = true
         }
-        deliveryAddressLabel.text = formattedAddress(from: viewModel.savedAddress)
+        
     }
     
     private func checkAndUpdateCartStatus() {
@@ -663,7 +662,6 @@ class ProductDetailViewController: UIViewController {
     
     private func updateUI() {
         bagItemCountView.isHidden = false
-//        bagItemCountView.isHidden = productDetails?.store?.storeAvailability != 1
         incrementDecrementView.isHidden = false
         addToBagView.isHidden = true
         itemCountLabel.text = "\(quantity)"
@@ -684,7 +682,6 @@ class ProductDetailViewController: UIViewController {
         }) {
             selectedSizeIndex = index
         } else {
-            // If NO SIZE is in stock
             selectedSizeIndex = -1
         }
     }

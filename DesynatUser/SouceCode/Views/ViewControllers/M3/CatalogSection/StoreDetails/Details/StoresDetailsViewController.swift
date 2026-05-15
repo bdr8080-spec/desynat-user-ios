@@ -392,6 +392,7 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
         case reelsCollectionView:
             let nextVC = ReelsScrollViewController.instantiate(fromAppStoryboard: .Catalog)
             nextVC.sellerId = sellerId
+            nextVC.currentIndex = indexPath.item
             nextVC.modalPresentationStyle = .fullScreen
             self.navigationController?.present(nextVC, animated: false)
         case storiesCollectionView:

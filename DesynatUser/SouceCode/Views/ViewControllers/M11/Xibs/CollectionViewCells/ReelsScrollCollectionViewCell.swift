@@ -36,22 +36,42 @@ class ReelsScrollCollectionViewCell: UICollectionViewCell {
         togglePlayPause()
     }
     
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//
+//        NotificationCenter.default.removeObserver(self)
+//
+//        player?.pause()
+//        player = nil
+//
+//        playerLayer?.player = nil
+//        playerLayer?.removeFromSuperlayer()
+//        playerLayer = nil
+//    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
 
         NotificationCenter.default.removeObserver(self)
 
         player?.pause()
+        player?.replaceCurrentItem(with: nil)
         player = nil
 
         playerLayer?.player = nil
         playerLayer?.removeFromSuperlayer()
         playerLayer = nil
+
+        playPauseButton.isHidden = true
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         playerLayer?.frame = videoContainerView.bounds
+    }
+    
+    func isPlaying() -> Bool {
+        return player?.timeControlStatus == .playing
     }
     
     func configure(with reel: Reel) {
@@ -95,22 +115,46 @@ class ReelsScrollCollectionViewCell: UICollectionViewCell {
     
     // MARK: - PLAY / PAUSE CONTROL
     func playVideo() {
+
         guard let player = player else { return }
+
         player.play()
+
         playPauseButton.isHidden = true
     }
 
-    func pauseVideo() {
+//    func pauseVideo() {
+//        player?.pause()
+//        playPauseButton.isHidden = false
+//    }
+    
+    func pauseVideo(showPlayIcon: Bool = false) {
+
         player?.pause()
-        playPauseButton.isHidden = false
+
+        playPauseButton.isHidden = !showPlayIcon
     }
     
+//    func togglePlayPause() {
+//        guard let player = player else { return }
+//        
+//        if player.timeControlStatus == .playing {
+//            pauseVideo()
+//        } else {
+//            playVideo()
+//        }
+//    }
+    
     func togglePlayPause() {
+
         guard let player = player else { return }
-        
+
         if player.timeControlStatus == .playing {
-            pauseVideo()
+
+            pauseVideo(showPlayIcon: true)
+
         } else {
+
             playVideo()
         }
     }

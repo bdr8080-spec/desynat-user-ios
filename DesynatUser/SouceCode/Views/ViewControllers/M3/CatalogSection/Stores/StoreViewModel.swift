@@ -20,7 +20,9 @@ class StoreViewModel: NSObject {
     }
     
     func getStoresListApi() {
-        var param: [String: Any] = ["category_id": hostVC.slectedsubCategoryId ?? 0]
+        var param: [String: Any] = ["category_id": hostVC.slecetedCategoryID,
+                                    "subcategory": hostVC.slectedsubCategoryId ?? 0
+        ]
         if !searchText.isEmpty {
             param["search"] = searchText
         }

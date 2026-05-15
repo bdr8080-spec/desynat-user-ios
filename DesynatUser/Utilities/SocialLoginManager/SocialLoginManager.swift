@@ -15,7 +15,7 @@ class SocialLoginManager: NSObject {
     
     // MARK: - Singleton
     static let shared = SocialLoginManager()
-    
+    private weak var presentingVC: UIViewController?
     // MARK: - Typealiases
     public typealias SignupCompletion = ([String: Any]?, Error?) -> Void
     
@@ -30,22 +30,51 @@ class SocialLoginManager: NSObject {
 // MARK: - Google Sign-In
 extension SocialLoginManager {
     
-    public func signupWithGoogle(_ vc: UIViewController, completion: @escaping SignupCompletion) {
+//    public func signupWithGoogle(_ vc: UIViewController, completion: @escaping SignupCompletion) {
+//        GIDSignIn.sharedInstance.signIn(withPresenting: vc) { signInResult, error in
+//            if let error = error {
+//                completion(nil, error)
+//                return
+//            }
+//            guard let result = signInResult else {
+//                completion(nil, nil)
+//                return
+//            }
+//            
+//            let finalDict: [String: Any] = [
+//                "social_id": result.user.userID ?? "",
+//                "social_login_type": "google",
+//                "email": result.user.profile?.email ?? ""
+//            ]
+//            completion(finalDict, nil)
+//        }
+//    }
+    
+    public func signupWithGoogle(_ vc: UIViewController,
+                                 completion: @escaping SignupCompletion) {
+        
         GIDSignIn.sharedInstance.signIn(withPresenting: vc) { signInResult, error in
+            
             if let error = error {
                 completion(nil, error)
                 return
             }
+            
             guard let result = signInResult else {
                 completion(nil, nil)
                 return
             }
             
+            let user = result.user
+            
             let finalDict: [String: Any] = [
-                "social_id": result.user.userID ?? "",
+                "social_id": user.userID ?? "",
                 "social_login_type": "google",
-                "email": result.user.profile?.email ?? ""
+                "email": user.profile?.email ?? "",
+                "name": user.profile?.name ?? "",
+                "profile_image": user.profile?.imageURL(withDimension: 200)?.absoluteString ?? ""
             ]
+            
             completion(finalDict, nil)
         }
     }
@@ -55,28 +84,74 @@ extension SocialLoginManager {
 extension SocialLoginManager: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     
     public func signupWithApple(_ vc: UIViewController) {
+
+        self.presentingVC = vc
+
         let appleIDProvider = ASAuthorizationAppleIDProvider()
+
         let request = appleIDProvider.createRequest()
+
         request.requestedScopes = [.fullName, .email]
-        
-        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+
+        let authorizationController = ASAuthorizationController(
+            authorizationRequests: [request]
+        )
+
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
+
         authorizationController.performRequests()
     }
     
     // MARK: ASAuthorizationControllerDelegate
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+//    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+//        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+//            let fullName = [
+//                appleIDCredential.fullName?.givenName,
+//                appleIDCredential.fullName?.familyName
+//            ]
+//            .compactMap { $0 }
+//            .joined(separator: " ")
+//            let finalDict: [String: Any] = [
+//                "social_id": appleIDCredential.user,
+//                "name": fullName,
+//                "email": appleIDCredential.email ?? "",
+//                "social_login_type": "apple"
+//            ]
+//            self.appleSignUpStatus?(finalDict, nil)
+//        } else {
+//            self.appleSignUpStatus?(nil, nil)
+//        }
+//    }
+    
+    func authorizationController(controller: ASAuthorizationController,
+                                 didCompleteWithAuthorization authorization: ASAuthorization) {
+        
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            
+            let fullName = [
+                appleIDCredential.fullName?.givenName,
+                appleIDCredential.fullName?.familyName
+            ]
+            .compactMap { $0 }
+            .joined(separator: " ")
+            
             let finalDict: [String: Any] = [
                 "social_id": appleIDCredential.user,
-                "name": appleIDCredential.fullName?.givenName ?? "",
+                "name": fullName,
                 "email": appleIDCredential.email ?? "",
                 "social_login_type": "apple"
             ]
+            
             self.appleSignUpStatus?(finalDict, nil)
+            
         } else {
-            self.appleSignUpStatus?(nil, nil)
+            
+            let error = NSError(domain: "",
+                                code: -1,
+                                userInfo: [NSLocalizedDescriptionKey: "Apple Sign-In failed"])
+            
+            self.appleSignUpStatus?(nil, error)
         }
     }
     
@@ -86,14 +161,42 @@ extension SocialLoginManager: ASAuthorizationControllerDelegate, ASAuthorization
     }
     
     // MARK: ASAuthorizationControllerPresentationContextProviding
+//    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+//        if #available(iOS 13.0, *) {
+//            return UIApplication.shared.connectedScenes
+//                .compactMap { $0 as? UIWindowScene }
+//                .flatMap { $0.windows }
+//                .first { $0.isKeyWindow } ?? ASPresentationAnchor()
+//        } else {
+//            return UIApplication.shared.keyWindow ?? ASPresentationAnchor()
+//        }
+//    }
+    
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        if #available(iOS 13.0, *) {
-            return UIApplication.shared.connectedScenes
-                .compactMap { $0 as? UIWindowScene }
-                .flatMap { $0.windows }
-                .first { $0.isKeyWindow } ?? ASPresentationAnchor()
-        } else {
-            return UIApplication.shared.keyWindow ?? ASPresentationAnchor()
-        }
+
+        return presentingVC?.view.window ?? ASPresentationAnchor()
     }
 }
+
+
+/// usuage
+
+//SocialLoginManager.shared.signupWithGoogle(self) { result, error in
+//    if let error = error {
+//        print("Google Sign-In error: \(error.localizedDescription)")
+//    } else if let userInfo = result {
+//        print("Google User info: \(userInfo)")
+//    }
+//}
+
+
+//SocialLoginManager.shared.appleSignUpStatus = { result, error in
+//    if let error = error {
+//        print("Apple Sign-In error: \(error.localizedDescription)")
+//    } else if let userInfo = result {
+//        print("Apple User info: \(userInfo)")
+//    }
+//}
+//
+//// Call sign-in
+//SocialLoginManager.shared.signupWithApple(self)

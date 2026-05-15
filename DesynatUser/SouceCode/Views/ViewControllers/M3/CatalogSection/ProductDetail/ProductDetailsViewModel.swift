@@ -20,20 +20,13 @@ class ProductDetailsViewModel: NSObject {
     }
     
     func getSavedAddressListAPI() {
-
         WebService.sharedInstance.getSavedAddressList { [weak self] list in
-
             guard let self = self else { return }
-
-            // Default address
-            self.savedAddress = list.first(where: {
-                $0.setAsDefault == "1"
-            })
-
-            // Fallback to first address
+            self.savedAddress = list.first(where: { $0.setAsDefault == "1" })
             if self.savedAddress == nil {
                 self.savedAddress = list.first
             }
+            hostVC.deliveryAddressLabel.text = hostVC.formattedAddress(from: savedAddress)
         }
     }
     

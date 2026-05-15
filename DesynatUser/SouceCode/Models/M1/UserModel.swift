@@ -10,7 +10,7 @@ struct UserModel: Codable {
     let id: Int?
     let fullName, countryCode, mobile, email, profileImage: String?
     let emailVerifiedAt: String?
-    let otp, otpVerify: String?
+//    let otp, otpVerify: String?
 //    let deviceType: String?
     let deviceToken, dataLet, long: String?
     let createdAt, updatedAt, accessToken: String?
@@ -21,6 +21,7 @@ struct UserModel: Codable {
     let selectedCountry: Int?
     let selectedCurrency: Int?
     let userCurrency: GetAllUserCountryModel?
+    let socialType: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -28,8 +29,8 @@ struct UserModel: Codable {
         case countryCode = "country_code"
         case mobile, email
         case emailVerifiedAt = "email_verified_at"
-        case otp
-        case otpVerify = "otp_verify"
+//        case otp
+//        case otpVerify = "otp_verify"
 //        case deviceType = "device_type"
         case deviceToken = "device_token"
         case dataLet = "let"
@@ -45,6 +46,7 @@ struct UserModel: Codable {
         case selectedCountry = "selected_country"
         case selectedCurrency = "selected_currency"
         case userCurrency = "user_currency"
+        case socialType
     }
 }
 

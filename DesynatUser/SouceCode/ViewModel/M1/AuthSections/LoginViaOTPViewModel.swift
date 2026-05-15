@@ -43,8 +43,7 @@ class LoginViaOTPViewModel: NSObject {
         var params: [String:Any] = ["email_mobile": loginHostVC.phoneTextField.text?.trimmed() ?? "",
                                     "lang": AppLanguageManager.shared.currentLanguage.rawValue,//LanguageManager.currentLanguageCode,
                                     "device_type": 1,//0 web 1 ios 2 andriod
-                                    "fcm_token": kSharedUserDefaults.retrieveModelFor(key: .deviceToken, model: String.self) ?? ""
-        ]
+                                    "fcm_token": kSharedUserDefaults.retrieveModelFor(key: .deviceToken, model: String.self) ?? ""]
         if input.isEmail() {
             isEnterPhoneNumber = false
             params["type"] = "1"
@@ -68,6 +67,14 @@ class LoginViaOTPViewModel: NSObject {
     func getALlUserCountryListApi(){
         WebService.sharedInstance.getAllUserscountryList { list in
             self.getAllUSerCountryList = list
+        }
+    }
+    
+    func socialSignupApi(params: [String: Any]) {
+        WebService.sharedInstance.socialLoginUserService(withParams: params) { (response) in
+            UserDefaults.standard.setValue("Yes", forKey:"isLogin")
+            UserDefaults.standard.setValue("false", forKey:"isGuestLogin")
+            kSharedSceneDelegate.navigateToUserHomeVc()
         }
     }
 }

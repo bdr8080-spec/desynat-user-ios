@@ -204,6 +204,7 @@ enum NetworkEndPoint: String {
     case deleteUserAccount               = "api/user/delete_account"
     case deleteAffiliateUserAccount      = "api/affiliate/delete_affiliate_account"
     case captureSellerStoreVisitor       = "api/CaptureSellerStoreVisitor"
+    case socialSignup                    = "api/socialSignup"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"
