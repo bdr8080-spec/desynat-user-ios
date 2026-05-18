@@ -18,9 +18,11 @@ class ProductsFiltersViewController: UIViewController {
     var selectedColorIDs: [String] = []
     var selectedSizeIDs: [String] = []
     var selectedDiscountIDs: [String] = []
+    var selectedRatings: [String] = []
+    var selectedDeliveryTime: [String] = []
     var selectedMinPrice: Int?
     var selectedMaxPrice: Int?
-    var onApplyFilters: (([String], [String], [String], [String], [String], Int?, Int?) -> Void)?
+    var onApplyFilters: (([String], [String], [String], [String], [String], Int?, Int?, [String]?, [String]?) -> Void)?
     var isColorExpanded = false
     let maxVisibleColors = 9
     
@@ -46,9 +48,9 @@ class ProductsFiltersViewController: UIViewController {
             ProductFilterOption(title: "5 Star", isSelected: false, apiParcing: "5", havingColourCode: false, colourCode: "")
         ]),
         ProductFilterSection(header: "Delivery Time", description: "", options: [
-            ProductFilterOption(title: "Today - 2 days", isSelected: false, apiParcing: "1", havingColourCode: false, colourCode: ""),
-            ProductFilterOption(title: "3 - 5 days", isSelected: false, apiParcing: "2", havingColourCode: false, colourCode: ""),
-            ProductFilterOption(title: "6 - 12 days", isSelected: false, apiParcing: "3", havingColourCode: false, colourCode: "")
+            ProductFilterOption(title: "Today - 2 days", isSelected: false, apiParcing: "2", havingColourCode: false, colourCode: ""),
+            ProductFilterOption(title: "3 - 5 days", isSelected: false, apiParcing: "3", havingColourCode: false, colourCode: ""),
+            ProductFilterOption(title: "6 - 12 days", isSelected: false, apiParcing: "6", havingColourCode: false, colourCode: "")
         ]),
     ]
     private lazy var viewModel = ProductsFiltersViewModel(hostVC: self)
@@ -58,6 +60,9 @@ class ProductsFiltersViewController: UIViewController {
         super.viewDidLoad()
         registerXib()
         callDynamicFilterAPIs()
+        prepareDiscountSection()
+        prepareRatingsSection()
+        prepareDeliveryTimeSection()
     }
     
     // MARK: - Button's Action
@@ -66,6 +71,15 @@ class ProductsFiltersViewController: UIViewController {
     }
     
     @IBAction func applydidTapped(_ sender: Any) {
+        //        onApplyFilters?(
+        //            selectedCategoryIDs,
+        //            selectedBrandIDs,
+        //            selectedColorIDs,
+        //            selectedSizeIDs,
+        //            selectedDiscountIDs,
+        //            selectedMinPrice,
+        //            selectedMaxPrice
+        //        )
         onApplyFilters?(
             selectedCategoryIDs,
             selectedBrandIDs,
@@ -73,7 +87,9 @@ class ProductsFiltersViewController: UIViewController {
             selectedSizeIDs,
             selectedDiscountIDs,
             selectedMinPrice,
-            selectedMaxPrice
+            selectedMaxPrice,
+            selectedRatings,
+            selectedDeliveryTime
         )
         self.navigationController?.popViewController(animated: true)
     }
@@ -86,7 +102,8 @@ class ProductsFiltersViewController: UIViewController {
         selectedDiscountIDs.removeAll()
         selectedMinPrice = nil
         selectedMaxPrice = nil
-        
+        selectedRatings.removeAll()
+        selectedDeliveryTime.removeAll()
         // Reset all options
         for sectionIndex in filtersOptions.indices {
             for optionIndex in filtersOptions[sectionIndex].options.indices {
@@ -95,6 +112,15 @@ class ProductsFiltersViewController: UIViewController {
         }
         
         filtersTableView.reloadData()
+        //        onApplyFilters?(
+        //            selectedCategoryIDs,
+        //            selectedBrandIDs,
+        //            selectedColorIDs,
+        //            selectedSizeIDs,
+        //            selectedDiscountIDs,
+        //            selectedMinPrice,
+        //            selectedMaxPrice
+        //        )
         onApplyFilters?(
             selectedCategoryIDs,
             selectedBrandIDs,
@@ -102,7 +128,9 @@ class ProductsFiltersViewController: UIViewController {
             selectedSizeIDs,
             selectedDiscountIDs,
             selectedMinPrice,
-            selectedMaxPrice
+            selectedMaxPrice,
+            selectedRatings,
+            selectedDeliveryTime
         )
         self.navigationController?.popViewController(animated: true)
     }
@@ -213,6 +241,27 @@ class ProductsFiltersViewController: UIViewController {
         filtersOptions[5].options = options
         filtersTableView.reloadSections(IndexSet(integer: 5), with: .none)
     }
+    
+    func prepareDiscountSection() {
+        for i in filtersOptions[4].options.indices {
+            let value = filtersOptions[4].options[i].apiParcing
+            filtersOptions[4].options[i].isSelected = selectedDiscountIDs.contains(value)
+        }
+    }
+    
+    func prepareRatingsSection() {
+        for i in filtersOptions[6].options.indices {
+            let value = filtersOptions[6].options[i].apiParcing
+            filtersOptions[6].options[i].isSelected = selectedRatings.contains(value)
+        }
+    }
+    
+    func prepareDeliveryTimeSection() {
+        for i in filtersOptions[7].options.indices {
+            let value = filtersOptions[7].options[i].apiParcing
+            filtersOptions[7].options[i].isSelected = selectedDeliveryTime.contains(value)
+        }
+    }
 }
 
 // MARK: - TABLE VIEW METHODS
@@ -257,7 +306,7 @@ extension ProductsFiltersViewController: UITableViewDelegate, UITableViewDataSou
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
         let option = filtersOptions[indexPath.section].options[indexPath.row]
-        cell.configureProductFilter(option: option)
+        cell.configureProductFilter(option: option, sectionName: filtersOptions[indexPath.section].header)
         return cell
     }
     
@@ -330,17 +379,74 @@ extension ProductsFiltersViewController: UITableViewDelegate, UITableViewDataSou
                 selectedSizeIDs.removeAll { $0 == option.apiParcing }
             }
             
+//        case "Discount Range":
+//            if isSelected {
+//                selectedDiscountIDs.append(option.apiParcing)
+//            } else {
+//                selectedDiscountIDs.removeAll { $0 == option.apiParcing }
+//            }
+            
         case "Discount Range":
-            if isSelected {
-                selectedDiscountIDs.append(option.apiParcing)
+            for i in filtersOptions[section].options.indices {
+                filtersOptions[section].options[i].isSelected = false
+            }
+            filtersOptions[section].options[indexPath.row].isSelected = !selectedDiscountIDs.contains(option.apiParcing)
+            
+            if filtersOptions[section].options[indexPath.row].isSelected {
+                selectedDiscountIDs = [option.apiParcing]
             } else {
-                selectedDiscountIDs.removeAll { $0 == option.apiParcing }
+                selectedDiscountIDs.removeAll()
             }
             
+//        case "Ratings":
+//            if isSelected {
+//                if !selectedRatings.contains(option.apiParcing) {
+//                    selectedRatings.append(option.apiParcing)
+//                }
+//            } else {
+//                selectedRatings.removeAll { $0 == option.apiParcing }
+//            }
+            
+        case "Ratings":
+            for i in filtersOptions[section].options.indices {
+                filtersOptions[section].options[i].isSelected = false
+            }
+            
+            filtersOptions[section].options[indexPath.row].isSelected = !selectedRatings.contains(option.apiParcing)
+            
+            if filtersOptions[section].options[indexPath.row].isSelected {
+                selectedRatings = [option.apiParcing]
+            } else {
+                selectedRatings.removeAll()
+            }
+            
+//        case "Delivery Time":
+//            if isSelected {
+//                if !selectedDeliveryTime.contains(option.apiParcing) {
+//                    selectedDeliveryTime.append(option.apiParcing)
+//                }
+//            } else {
+//                selectedDeliveryTime.removeAll { $0 == option.apiParcing }
+//            }
+        case "Delivery Time":
+            for i in filtersOptions[section].options.indices {
+                filtersOptions[section].options[i].isSelected = false
+            }
+            
+            filtersOptions[section].options[indexPath.row].isSelected = !selectedDeliveryTime.contains(option.apiParcing)
+            
+            if filtersOptions[section].options[indexPath.row].isSelected {
+                selectedDeliveryTime = [option.apiParcing]
+            } else {
+                selectedDeliveryTime.removeAll()
+            }
         default:
             break
         }
         
-        tableView.reloadSections(IndexSet(integer: section), with: .none)
+//        tableView.reloadSections(IndexSet(integer: section), with: .none)
+        UIView.performWithoutAnimation {
+            tableView.reloadRows(at: tableView.indexPathsForVisibleRows ?? [], with: .none)
+        }
     }
 }

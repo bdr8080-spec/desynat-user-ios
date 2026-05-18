@@ -48,7 +48,10 @@ class SearchProductListViewController: UIViewController {
         nextVC.selectedDiscountIDs = viewModel.selectedDiscountIDs
         nextVC.selectedMinPrice = viewModel.minPrice
         nextVC.selectedMaxPrice = viewModel.maxPrice
-        nextVC.onApplyFilters = { [weak self] categories, brands, colors, sizes, discounts, minPrice, maxPrice in
+        nextVC.selectedRatings = viewModel.selectedRatings
+        nextVC.selectedDeliveryTime = viewModel.selectedDelivertTime
+//        nextVC.onApplyFilters = { [weak self] categories, brands, colors, sizes, discounts, minPrice, maxPrice in
+        nextVC.onApplyFilters = { [weak self] categories, brands, colors, sizes, discounts, minPrice, maxPrice, ratings, deliveryTime in
             guard let self = self else { return }
             self.viewModel.selectedCategoryIDs = categories
             self.viewModel.selectedBrandIDs = brands
@@ -57,6 +60,8 @@ class SearchProductListViewController: UIViewController {
             self.viewModel.selectedDiscountIDs = discounts
             self.viewModel.minPrice = minPrice
             self.viewModel.maxPrice = maxPrice
+            self.viewModel.selectedRatings = ratings ?? []
+            self.viewModel.selectedDelivertTime = deliveryTime ?? []
             self.viewModel.getProductsApi()
         }
         self.navigationController?.pushViewController(nextVC, animated: true)

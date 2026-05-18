@@ -28,7 +28,7 @@ class TicketManagementTableViewCell: UITableViewCell {
         ticketIdLabel.text = data?.ticketID ?? ""
         if AppLanguageManager.shared.currentLanguage == .ar {
             ticketTypeLabel.text = data?.ticketTypeDetails?.nameArabic ?? ""
-        }else{
+        } else {
             ticketTypeLabel.text = data?.ticketTypeDetails?.name ?? ""
         }
         raisedOnDateLabel.text = convertServerDate(data?.createdAt ?? "")

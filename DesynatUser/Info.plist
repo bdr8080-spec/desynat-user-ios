@@ -2,6 +2,22 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
     <dict>
+        <key>FacebookAppID</key>
+        <string>YOUR_APP_ID</string>
+        
+        <key>FacebookClientToken</key>
+        <string>YOUR_CLIENT_TOKEN</string>
+        
+        <key>FacebookDisplayName</key>
+        <string>Desynat</string>
+        
+        <key>LSApplicationQueriesSchemes</key>
+        <array>
+            <string>fbapi</string>
+            <string>fb-messenger-share-api</string>
+            <string>fbauth2</string>
+            <string>fbshareextension</string>
+        </array>
         <key>CFBundleDisplayName</key>
         <string>Desynat</string>
         <key>com.apple.developer.applesignin</key>
@@ -16,6 +32,7 @@
                 <key>CFBundleURLSchemes</key>
                 <array>
                     <string>DesynatUser</string>
+                    <string>fbYOUR_APP_ID</string>
                 </array>
             </dict>
             <dict>
@@ -24,12 +41,14 @@
                 
                 <key>CFBundleURLSchemes</key>
                 <array>
-                    <string>com.googleusercontent.apps.169757839806-haqbujcci39otvl7heanjj2hu04k2jg2</string>
+<!--                    <string>com.googleusercontent.apps.169757839806-haqbujcci39otvl7heanjj2hu04k2jg2</string>-->
+                    <string>com.googleusercontent.apps.75672899656-ese0stfnbs9b1jun5hludtd2lvbqqsnf</string>
                 </array>
             </dict>
         </array>
         <key>GIDClientID</key>
-        <string>169757839806-haqbujcci39otvl7heanjj2hu04k2jg2.apps.googleusercontent.com</string>
+<!--        <string>169757839806-haqbujcci39otvl7heanjj2hu04k2jg2.apps.googleusercontent.com</string>-->
+        <string>75672899656-ese0stfnbs9b1jun5hludtd2lvbqqsnf.apps.googleusercontent.com</string>
         <key>Configuration</key>
         <string>$(CONFIGURATION)</string>
         <key>NSAppTransportSecurity</key>

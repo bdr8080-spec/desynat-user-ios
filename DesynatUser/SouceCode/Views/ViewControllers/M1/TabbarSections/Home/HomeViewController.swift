@@ -86,7 +86,6 @@ class HomeViewController: UIViewController {
     
     // MARK: - Property Decalaration
     private var bottomLabels: [UILabel] = []
-//    private var newProductCount = 6
     let isGuestLogin = UserDefaults.standard.string(forKey:"isGuestLogin")  ?? "false"
     private lazy var viewModel = HomeViewModel(hostVC: self)
     var slecetdCategoryId: Int? = 0
@@ -312,9 +311,8 @@ class HomeViewController: UIViewController {
         do {
             try audioEngine.start()
             isListening = true
-            searchTF.becomeFirstResponder() // optional: show cursor
+            searchTF.becomeFirstResponder()
         } catch {
-//            print("Failed to start audio engine: \(error)")
             stopListening()
         }
     }
@@ -442,14 +440,6 @@ class HomeViewController: UIViewController {
         let totalHeight = (CGFloat(rows) * itemHeight) + ((CGFloat(rows - 1)) * verticalSpacing)
         heightConstraintOfCategoryColelctionView.constant = totalHeight
     }
-    
-//    private func showUserData() {
-//        if isGuestLogin == "true" {
-//            lblUserName.text = "Hello Guest".localiz()
-//        } else {
-//            lblUserName.text = "\("Deliver to".localiz()) \(Global.shared.user?.fullName ?? "")"
-//        }
-//    }
     
     private func showUserData() {
         if isGuestLogin == "true" {

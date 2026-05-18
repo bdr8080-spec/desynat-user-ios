@@ -37,7 +37,7 @@ class FiltersOptionsTableViewCell: UITableViewCell {
       selectionImageView.image = UIImage(named: imageName)
   }
     
-    func configureProductFilter(option: ProductFilterOption) {
+    func configureProductFilter(option: ProductFilterOption, sectionName: String) {
         titleLabel.text = option.title.localiz()
         // Reset to default first (IMPORTANT for reuse)
             titleLabel.font = UIFont.systemFont(ofSize: 14)
@@ -54,7 +54,27 @@ class FiltersOptionsTableViewCell: UITableViewCell {
             colourView.isHidden = true
         }
 
-        selectionImageView.image = UIImage(named: option.isSelected ? "selectedFilterCheckBox" : "unslectedStoreFilter")
+//        selectionImageView.image = UIImage(named: option.isSelected ? "selectedFilterCheckBox" : "unslectedStoreFilter")
+        
+        // Radio button only for these 3 sections
+           if sectionName == "Discount Range" ||
+               sectionName == "Ratings" ||
+               sectionName == "Delivery Time" {
+               
+               selectionImageView.image = UIImage(
+                   named: option.isSelected
+                   ? "radioSelected"
+                   : "radioUnselected"
+               )
+               
+           } else {
+               
+               selectionImageView.image = UIImage(
+                   named: option.isSelected
+                   ? "selectedFilterCheckBox"
+                   : "unslectedStoreFilter"
+               )
+           }
     }
 
 }

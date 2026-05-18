@@ -48,9 +48,9 @@ class AffiliatedCategoryFilterViewController: UIViewController {
             ProductFilterOption(title: "5 Star", isSelected: false, apiParcing: "5", havingColourCode: false, colourCode: "")
         ]),
         ProductFilterSection(header: "Delivery Time", description: "", options: [
-            ProductFilterOption(title: "Today - 2 days", isSelected: false, apiParcing: "1", havingColourCode: false, colourCode: ""),
-            ProductFilterOption(title: "3 - 5 days", isSelected: false, apiParcing: "2", havingColourCode: false, colourCode: ""),
-            ProductFilterOption(title: "6 - 12 days", isSelected: false, apiParcing: "3", havingColourCode: false, colourCode: "")
+            ProductFilterOption(title: "Today - 2 days", isSelected: false, apiParcing: "2", havingColourCode: false, colourCode: ""),
+            ProductFilterOption(title: "3 - 5 days", isSelected: false, apiParcing: "3", havingColourCode: false, colourCode: ""),
+            ProductFilterOption(title: "6 - 12 days", isSelected: false, apiParcing: "6", havingColourCode: false, colourCode: "")
         ])
     ]
     
@@ -264,7 +264,7 @@ extension AffiliatedCategoryFilterViewController: UITableViewDelegate, UITableVi
                         colourCode: ""
                     )
                     
-                    cell.configureProductFilter(option: showMoreOption)
+                    cell.configureProductFilter(option: showMoreOption, sectionName: filtersOptions[indexPath.section].header)
                     
                     return cell
                 }
@@ -276,12 +276,12 @@ extension AffiliatedCategoryFilterViewController: UITableViewDelegate, UITableVi
             
             let option = visibleOptions[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
-            cell.configureProductFilter(option: option)
+            cell.configureProductFilter(option: option, sectionName: filtersOptions[indexPath.section].header)
             return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersOptionsTableViewCell", for: indexPath) as! FiltersOptionsTableViewCell
         let option = filtersOptions[indexPath.section].options[indexPath.row]
-        cell.configureProductFilter(option: option)
+        cell.configureProductFilter(option: option, sectionName: filtersOptions[indexPath.section].header)
         return cell
     }
     

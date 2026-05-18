@@ -18,6 +18,8 @@ class SearchProductListViewModel {
     var selectedColorIDs: [String] = []
     var selectedSizeIDs: [String] = []
     var selectedDiscountIDs: [String] = []
+    var selectedRatings: [String] = []
+    var selectedDelivertTime: [String] = []
     var minPrice: Int?
     var maxPrice: Int?
     

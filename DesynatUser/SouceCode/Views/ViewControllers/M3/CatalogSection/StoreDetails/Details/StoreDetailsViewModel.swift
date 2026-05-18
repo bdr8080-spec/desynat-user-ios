@@ -18,6 +18,8 @@ class StoreDetailsViewModel: NSObject {
     var selectedColorIDs: [String] = []
     var selectedSizeIDs: [String] = []
     var selectedDiscountIDs: [String] = []
+    var selectedRatings: [String] = []
+    var selectedDeliveryTime: [String] = []
     var minPrice: Int?
     var maxPrice: Int?
     var sellerHighlights: [GetHighLightsList] = []
@@ -37,8 +39,10 @@ class StoreDetailsViewModel: NSObject {
         if !selectedBrandIDs.isEmpty { param["brand_id"] = selectedBrandIDs }
         if !selectedColorIDs.isEmpty { param["color_id"] = selectedColorIDs }
         if !selectedSizeIDs.isEmpty { param["size_id"] = selectedSizeIDs }
-        if !selectedDiscountIDs.isEmpty { param["discount_range_id"] = selectedDiscountIDs }
-        
+//        if !selectedDiscountIDs.isEmpty { param["discount_range_id"] = selectedDiscountIDs }
+        if !selectedDiscountIDs.isEmpty { param["discount"] = selectedDiscountIDs }
+        if !selectedRatings.isEmpty { param["rating"] = selectedRatings }
+        if !selectedDeliveryTime.isEmpty { param["delivery_time"] = selectedDeliveryTime }
         if let minPrice = minPrice { param["price_min"] = minPrice }
         if let maxPrice = maxPrice { param["price_max"] = maxPrice }
         

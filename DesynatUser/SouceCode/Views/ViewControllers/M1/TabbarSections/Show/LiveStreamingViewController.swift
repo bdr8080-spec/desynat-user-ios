@@ -103,8 +103,9 @@ class LiveStreamingViewController: UIViewController {
             let audience = (dataObj["audience"] as? [Any])?.count ?? 0
             let audienceTotal = dataObj["audience_total"] as? Int ?? audience
 
-            let total = broadcasters + audienceTotal
-
+//            let total = broadcasters + audienceTotal
+            let total =  audienceTotal
+            
             DispatchQueue.main.async {
                 self.lblUserCount.text = "\("Viewers:".localiz()) \(total)"
 //                print("👥 TOTAL users: \(total) | Broadcasters: \(broadcasters) | Audience: \(audienceTotal)")

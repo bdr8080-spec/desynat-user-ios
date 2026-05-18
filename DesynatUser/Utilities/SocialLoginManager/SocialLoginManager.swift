@@ -9,6 +9,8 @@ import Foundation
 import GoogleSignIn
 import AuthenticationServices
 import UIKit
+import FBSDKLoginKit
+import FBSDKCoreKit
 
 // MARK: - Social Login Manager
 class SocialLoginManager: NSObject {
@@ -29,26 +31,6 @@ class SocialLoginManager: NSObject {
 
 // MARK: - Google Sign-In
 extension SocialLoginManager {
-    
-//    public func signupWithGoogle(_ vc: UIViewController, completion: @escaping SignupCompletion) {
-//        GIDSignIn.sharedInstance.signIn(withPresenting: vc) { signInResult, error in
-//            if let error = error {
-//                completion(nil, error)
-//                return
-//            }
-//            guard let result = signInResult else {
-//                completion(nil, nil)
-//                return
-//            }
-//            
-//            let finalDict: [String: Any] = [
-//                "social_id": result.user.userID ?? "",
-//                "social_login_type": "google",
-//                "email": result.user.profile?.email ?? ""
-//            ]
-//            completion(finalDict, nil)
-//        }
-//    }
     
     public func signupWithGoogle(_ vc: UIViewController,
                                  completion: @escaping SignupCompletion) {
@@ -80,6 +62,64 @@ extension SocialLoginManager {
     }
 }
 
+// MARK: - Facebook Login
+extension SocialLoginManager {
+    
+    public func signupWithFacebook(_ vc: UIViewController, completion: @escaping SignupCompletion) {
+        let loginManager = LoginManager()
+        loginManager.logIn(permissions: ["public_profile", "email"], from: vc) { result, error in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            
+            guard let result = result else {
+                completion(nil, nil)
+                return
+            }
+            
+            if result.isCancelled {
+                let cancelError = NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Facebook login cancelled"])
+                completion(nil, cancelError)
+                return
+            }
+            self.fetchFacebookUserData(completion: completion)
+        }
+    }
+    
+    // MARK: - Fetch Facebook User Data
+    private func fetchFacebookUserData(completion: @escaping SignupCompletion) {
+        guard AccessToken.current != nil else {
+            let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No active Facebook access token"])
+            completion(nil, error)
+            return
+        }
+        let parameters = ["fields": "id,name,email,picture.type(large)"]
+        GraphRequest(graphPath: "me", parameters: parameters).start { _, result, error in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            guard let userData = result as? [String: Any] else {
+                let error = NSError(domain: "",code: -1,userInfo: [NSLocalizedDescriptionKey: "Unable to fetch Facebook user data"])
+                completion(nil, error)
+                return
+            }
+            let pictureDict = userData["picture"] as? [String: Any]
+            let dataDict = pictureDict?["data"] as? [String: Any]
+            let imageURL = dataDict?["url"] as? String
+            let finalDict: [String: Any] = [
+                "social_id": userData["id"] as? String ?? "",
+                "social_login_type": "facebook",
+                "email": userData["email"] as? String ?? "",
+                "name": userData["name"] as? String ?? "",
+                "profile_image": imageURL ?? ""
+            ]
+            completion(finalDict, nil)
+        }
+    }
+}
+
 // MARK: - Apple Sign-In
 extension SocialLoginManager: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     
@@ -104,26 +144,6 @@ extension SocialLoginManager: ASAuthorizationControllerDelegate, ASAuthorization
     }
     
     // MARK: ASAuthorizationControllerDelegate
-//    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-//        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
-//            let fullName = [
-//                appleIDCredential.fullName?.givenName,
-//                appleIDCredential.fullName?.familyName
-//            ]
-//            .compactMap { $0 }
-//            .joined(separator: " ")
-//            let finalDict: [String: Any] = [
-//                "social_id": appleIDCredential.user,
-//                "name": fullName,
-//                "email": appleIDCredential.email ?? "",
-//                "social_login_type": "apple"
-//            ]
-//            self.appleSignUpStatus?(finalDict, nil)
-//        } else {
-//            self.appleSignUpStatus?(nil, nil)
-//        }
-//    }
-    
     func authorizationController(controller: ASAuthorizationController,
                                  didCompleteWithAuthorization authorization: ASAuthorization) {
         
@@ -161,17 +181,6 @@ extension SocialLoginManager: ASAuthorizationControllerDelegate, ASAuthorization
     }
     
     // MARK: ASAuthorizationControllerPresentationContextProviding
-//    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-//        if #available(iOS 13.0, *) {
-//            return UIApplication.shared.connectedScenes
-//                .compactMap { $0 as? UIWindowScene }
-//                .flatMap { $0.windows }
-//                .first { $0.isKeyWindow } ?? ASPresentationAnchor()
-//        } else {
-//            return UIApplication.shared.keyWindow ?? ASPresentationAnchor()
-//        }
-//    }
-    
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
 
         return presentingVC?.view.window ?? ASPresentationAnchor()

@@ -59,13 +59,6 @@ class LoginViaOTPAffilatedUserViewController: UIViewController {
     }
     
     @IBAction func countryDidTapped(_ sender: UIButton) {
-//        let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
-//            let name = country.name ?? ""
-//            let dialCode = country.dialCode ?? ""
-//            let flag = country.flag ?? "🇰🇼"
-//            return "\(flag)  \(name) (\(dialCode))"
-//        }
-        
         let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
                     let isArabic = AppLanguageManager.shared.currentLanguage == .ar
                     let name = isArabic ? (country.nameAr ?? country.name ?? "") : (country.name ?? "")

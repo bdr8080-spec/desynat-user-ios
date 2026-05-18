@@ -58,63 +58,80 @@ class LoginViaOTPViewController: UIViewController {
     }
     
     @IBAction func facebookDidTapped(_ sender: Any) {
-        
+//        SocialLoginManager.shared.signupWithFacebook(self) { data, error in
+//            if let error = error {
+//                print(error.localizedDescription)
+//                self.showAlert(msg: "The user canceled the sign-in flow.".localiz())
+//                return
+//            }
+//            guard let data = data else { return }
+//            print(data)
+//            let param: [String: Any] = [
+//                "full_name": data["name"] as? String ?? "",
+//                "device_type": 1, // 0 web 1 ios 2 android
+//                "fcm_token": kSharedUserDefaults.retrieveModelFor(key: .deviceToken, model: String.self) ?? "",
+//                "lang": AppLanguageManager.shared.currentLanguage.rawValue,
+//                "unique_id": data["social_id"] as? String ?? "",
+//                "socialType": 2, //1 google 2 facebook 3 apple
+//                "profile_image": data["profile_image"] as? String ?? "",
+//                "email": data["email"] as? String ?? ""]
+//            self.viewModel.socialSignupApi(params: param)
+//        }
     }
     
     @IBAction func appleDidTapped(_ sender: Any) {
         SocialLoginManager.shared.appleSignUpStatus = { [weak self] result, error in
-                guard let self = self else { return }
-                if let error = error {
-//                    print("Apple Sign-In error: \(error.localizedDescription)")
-                    self.showAlert(msg: "The user canceled the sign-in flow.".localiz())
-                } else if let userInfo = result {
-                    print("Apple User info: \(userInfo)")
-                    let param: [String: Any] = [
-                               "full_name": userInfo["name"] as? String ?? "",
-                               "device_type": 1, // 0 web 1 ios 2 android
-                               "fcm_token": kSharedUserDefaults.retrieveModelFor(key: .deviceToken, model: String.self) ?? "",
-                               "lang": AppLanguageManager.shared.currentLanguage.rawValue,
-                               "unique_id": userInfo["social_id"] as? String ?? "",
-                               "socialType": 3, //1 google 2 facebook 3 apple
-                               "profile_image": "",
-                               "email": userInfo["email"] as? String ?? ""]
-                           self.viewModel.socialSignupApi(params: param)
-                }
+            guard let self = self else { return }
+            if let error = error {
+                //                    print("Apple Sign-In error: \(error.localizedDescription)")
+                self.showAlert(msg: "The user canceled the sign-in flow.".localiz())
+            } else if let userInfo = result {
+                print("Apple User info: \(userInfo)")
+                let param: [String: Any] = [
+                    "full_name": userInfo["name"] as? String ?? "",
+                    "device_type": 1, // 0 web 1 ios 2 android
+                    "fcm_token": kSharedUserDefaults.retrieveModelFor(key: .deviceToken, model: String.self) ?? "",
+                    "lang": AppLanguageManager.shared.currentLanguage.rawValue,
+                    "unique_id": userInfo["social_id"] as? String ?? "",
+                    "socialType": 3, //1 google 2 facebook 3 apple
+                    "profile_image": "",
+                    "email": userInfo["email"] as? String ?? ""]
+                self.viewModel.socialSignupApi(params: param)
             }
-            // IMPORTANT
-            SocialLoginManager.shared.signupWithApple(self)
+        }
+        SocialLoginManager.shared.signupWithApple(self)
     }
     
     @IBAction func googleDidTapped(_ sender: Any) {
         SocialLoginManager.shared.signupWithGoogle(self) { result, error in
             if let error = error {
-//                print("Google Sign-In error: \(error.localizedDescription)")
+                //                print("Google Sign-In error: \(error.localizedDescription)")
                 self.showAlert(msg: error.localizedDescription.localiz())
             } else if let userInfo = result {
                 print("Google User info: \(userInfo)")
                 //Call api here
                 let param: [String: Any] = [
-                        "full_name": userInfo["name"] as? String ?? "",
-                        "device_type": 1,
-                        "fcm_token": kSharedUserDefaults.retrieveModelFor(key: .deviceToken, model: String.self) ?? "",
-                        "lang": AppLanguageManager.shared.currentLanguage.rawValue,
-                        "unique_id": userInfo["social_id"] as? String ?? "",
-                        "socialType": 1, // 1 google 2 facebook 3 apple
-                        "profile_image": userInfo["profile_image"] as? String ?? "",
-                        "email": userInfo["email"] as? String ?? ""]
-                    self.viewModel.socialSignupApi(params: param)
+                    "full_name": userInfo["name"] as? String ?? "",
+                    "device_type": 1,
+                    "fcm_token": kSharedUserDefaults.retrieveModelFor(key: .deviceToken, model: String.self) ?? "",
+                    "lang": AppLanguageManager.shared.currentLanguage.rawValue,
+                    "unique_id": userInfo["social_id"] as? String ?? "",
+                    "socialType": 1, // 1 google 2 facebook 3 apple
+                    "profile_image": userInfo["profile_image"] as? String ?? "",
+                    "email": userInfo["email"] as? String ?? ""]
+                self.viewModel.socialSignupApi(params: param)
             }
         }
     }
     
     @IBAction func countryDidTapped(_ sender: UIButton) {
         let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
-                    let isArabic = AppLanguageManager.shared.currentLanguage == .ar
-                    let name = isArabic ? (country.nameAr ?? country.name ?? "") : (country.name ?? "")
-                    let dialCode = country.dialCode ?? ""
-                    let flag = country.flag1 ?? "🇰🇼"
-                    return "\(flag)  \(name) (\(dialCode))"
-                }
+            let isArabic = AppLanguageManager.shared.currentLanguage == .ar
+            let name = isArabic ? (country.nameAr ?? country.name ?? "") : (country.name ?? "")
+            let dialCode = country.dialCode ?? ""
+            let flag = country.flag1 ?? "🇰🇼"
+            return "\(flag)  \(name) (\(dialCode))"
+        }
         
         kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
             let selectedCountry = self.viewModel.getAllUSerCountryList[index]

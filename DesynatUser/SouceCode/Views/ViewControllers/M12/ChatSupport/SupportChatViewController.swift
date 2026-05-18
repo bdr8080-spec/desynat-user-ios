@@ -44,7 +44,7 @@ class SupportChatViewController: UIViewController, WKNavigationDelegate {
             loadTidioHTML(user: userDetails)
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
             CommonUtils.showHud(show: false)
         }
     }
