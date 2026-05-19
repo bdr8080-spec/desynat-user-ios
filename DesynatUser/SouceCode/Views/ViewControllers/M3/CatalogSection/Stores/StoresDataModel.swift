@@ -17,6 +17,7 @@ struct StoreListDataModel: Codable {
     let bio, datumLet, long, createdAt: String?
     let updatedAt: String?
     let sellerInformation: SellerInformation?
+    let sellerHighlightsModel: [SellerHighlightsModel]?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -37,6 +38,7 @@ struct StoreListDataModel: Codable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case sellerInformation = "seller_information"
+        case sellerHighlightsModel = "seller_stories"
     }
 }
 

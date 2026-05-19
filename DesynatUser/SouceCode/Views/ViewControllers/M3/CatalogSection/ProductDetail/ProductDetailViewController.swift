@@ -92,6 +92,9 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet weak var actionButtonsStackView: UIStackView!
     @IBOutlet weak var extraSpaceLabelAtBottomButtonstackView: UILabel!
     @IBOutlet weak var deliveryAddressLabel: UITextField!
+    @IBOutlet weak var buyNowView: UIView!
+    @IBOutlet weak var buyNowButton: CustomButton!
+    @IBOutlet weak var customButtonOutlet: UIButton!
     
     // MARK: - Property Decalaration
     private lazy var viewModel = ProductDetailsViewModel(hostVC: self)
@@ -577,11 +580,15 @@ class ProductDetailViewController: UIViewController {
         // Reset Add to Bag state every time color changes
         addToBagView.alpha = 1
         addToBagView.isUserInteractionEnabled = true
-        
+        buyNowView.alpha = 1
+        buyNowButton.isUserInteractionEnabled = true
+        customOrderView.alpha = 1
+        customButtonOutlet.isUserInteractionEnabled = true
         if selectedSizeIndex >= 0 {
             // At least one size IN STOCK
             updateImagesForSelectedSize()
             updateUIForSelectedVariant()
+            
         } else {
             // No size in stock
             selectedVariantImages = []
@@ -595,6 +602,10 @@ class ProductDetailViewController: UIViewController {
             addToBagView.isHidden = false
             addToBagView.alpha = 0.4
             addToBagView.isUserInteractionEnabled = false
+            buyNowView.alpha = 0.4
+            buyNowButton.isUserInteractionEnabled = false
+            customOrderView.alpha = 0.4
+            customButtonOutlet.isUserInteractionEnabled = false
         }
         
         // Reload UI

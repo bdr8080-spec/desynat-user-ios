@@ -28,17 +28,17 @@ class StoresViewController: UIViewController {
     }
     
     // MARK: - Property Decalaration
-    var slectedsubCategoryId: Int? = 0
     private lazy var viewModel = StoreViewModel(hostVC: self)
+    private var searchWorkItem: DispatchWorkItem?
+    private var bannerAutoScrollTimer: Timer?
+    private var currentBannerIndex = 0
+    private let bannerAutoScrollDelay: TimeInterval = 6
+    var slecetedCategoryID: Int = 0
+    var slectedsubCategoryId: Int? = 0
     var appliedRatings: [String] = []
     var appliedAvailability: String = ""
     var appliedShortest: Bool = false
     var appliedHighest: Bool = false
-    private var searchWorkItem: DispatchWorkItem?
-    var slecetedCategoryID: Int = 0
-    private var bannerAutoScrollTimer: Timer?
-    private var currentBannerIndex = 0
-    private let bannerAutoScrollDelay: TimeInterval = 6
     
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
@@ -96,7 +96,6 @@ class StoresViewController: UIViewController {
     // MARK: - Page Control Tap Handling
     @IBAction func pageControlChanged(_ sender: UIPageControl) {
         currentBannerIndex = sender.currentPage
-        
         let indexPath = IndexPath(item: currentBannerIndex, section: 0)
         bannerCollectionView.scrollToItem(
             at: indexPath,
@@ -196,6 +195,12 @@ extension StoresViewController: UICollectionViewDelegate, UICollectionViewDataSo
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoresCollectionViewCell", for: indexPath) as! StoresCollectionViewCell
             let data = viewModel.storesSection[indexPath.row]
             cell.configData(data: data)
+            cell.onProfileTapped = { [weak self] in
+                let nextVC = StoryViewerViewController.instantiate(fromAppStoryboard: .Home)
+                nextVC.comingFor = .forSellerStory
+                nextVC.sellerId = data.sellerID ?? 0
+                self?.navigationController?.pushViewController(nextVC, animated: false)
+            }
             return cell
         default:
             return UICollectionViewCell()

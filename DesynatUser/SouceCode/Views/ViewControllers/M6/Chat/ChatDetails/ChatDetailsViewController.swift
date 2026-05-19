@@ -306,6 +306,7 @@ extension ChatDetailsViewController: UITableViewDelegate, UITableViewDataSource 
                 let popupVC = CustomOrderPopupViewController.instantiate(fromAppStoryboard: .Chat)
                 popupVC.uniqueId = self.viewModel.chatDetailsUniqueId
                 popupVC.requestIsSent = {
+                    //self.viewModel.sendNotificationDetails(message: "New Quotation")
                     self.viewModel.singleChatDetailRequest()
                 }
                 let navVC = UINavigationController(rootViewController: popupVC)
