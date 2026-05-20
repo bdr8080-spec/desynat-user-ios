@@ -23,6 +23,7 @@ class HomeViewModel: NSObject {
     var bestSellingProductsList: [BestSellingProductsDataModel] = []
     var topRatedProductsList: [TopRatedDataModel] = []
     var newestProductsList: [TopRatedDataModel] = []
+    var allCategories: [CategorySectionModel] = []
     
     var selectedCategoriesSection = 0 {
         didSet {
@@ -35,12 +36,69 @@ class HomeViewModel: NSObject {
         self.hostVC = hostVC
     }
     
-    func getCategoriesListApi(){
-        WebService.sharedInstance.getCategoriesService { [self] list in
+//    func getCategoriesListApi(){
+//        WebService.sharedInstance.getCategoriesService { [self] list in
+//            self.categoriesSection = list
+//            self.hostVC.categoriesSectionCollectionView.reloadData()
+//            self.selectedCategoriesSection = categoriesSection.first?.id ?? 0
+//            
+//        }
+//    }
+    
+    func getCategoriesListApi() {
+
+        // Static categories (always visible)
+        allCategories = [
+            CategorySectionModel(
+                id: 1,
+                name: "Men",
+                nameAr: "الرجال",
+                isEnabled: false
+            ),
+            CategorySectionModel(
+                id: 2,
+                name: "Women",
+                nameAr: "النساء",
+                isEnabled: false
+            ),
+            CategorySectionModel(
+                id: 3,
+                name: "Kids",
+                nameAr: "أطفال",
+                isEnabled: false
+            )
+        ]
+
+        WebService.sharedInstance.getCategoriesService { [weak self] list in
+
+            guard let self = self else { return }
+
+            // Store original API list if needed
             self.categoriesSection = list
+
+            // First disable all
+            self.allCategories.indices.forEach {
+                self.allCategories[$0].isEnabled = false
+            }
+
+            // Enable categories coming from API
+            for item in list {
+
+                if let index = self.allCategories.firstIndex(where: {
+                    $0.id == item.id
+                }) {
+
+                    self.allCategories[index].isEnabled = true
+                }
+            }
+
+            // Default selected = first enabled category
+            self.selectedCategoriesSection =
+                self.allCategories.first(where: {
+                    $0.isEnabled
+                })?.id ?? 0
+
             self.hostVC.categoriesSectionCollectionView.reloadData()
-            self.selectedCategoriesSection = categoriesSection.first?.id ?? 0
-            
         }
     }
     

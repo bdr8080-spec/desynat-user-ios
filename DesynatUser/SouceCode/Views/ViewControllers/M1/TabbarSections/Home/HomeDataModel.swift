@@ -24,6 +24,13 @@ struct CategoriesDataModel: Codable {
     }
 }
 
+struct CategorySectionModel {
+    var id: Int
+    var name: String
+    var nameAr: String
+    var isEnabled: Bool
+}
+
 
 // MARK: - SubCategoriesDataModel
 struct SubCategoriesDataModel: Codable {

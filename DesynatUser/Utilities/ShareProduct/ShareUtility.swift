@@ -95,7 +95,6 @@ final class ShareUtility {
         }
         else if let imageURL = imageURL,
                 let url = URL(string: fullyDecoded(imageURL)) {
-            
             URLSession.shared.dataTask(with: url) { data, _, _ in
                 DispatchQueue.main.async {
                     if let data = data,

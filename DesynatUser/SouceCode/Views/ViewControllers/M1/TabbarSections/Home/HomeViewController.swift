@@ -258,12 +258,12 @@ class HomeViewController: UIViewController {
     }
     
     private func setupLocation() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.startUpdatingLocation()
-        }
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
     
     // MARK: - Start Listening (Speech → Text)
     private func startListening() {
@@ -276,7 +276,7 @@ class HomeViewController: UIViewController {
             try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
             try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
-//            print("Audio session error: \(error)")
+            //            print("Audio session error: \(error)")
             return
         }
         
@@ -493,7 +493,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case newestProductsCollectionView:
             return viewModel.newestProductsList.count
         case categoriesSectionCollectionView:
-            return viewModel.categoriesSection.count
+            return viewModel.allCategories.count//viewModel.categoriesSection.count
         default:
             return 0
         }
@@ -622,16 +622,31 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
         case categoriesSectionCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoriesSectionCollectionViewCell", for: indexPath) as! CategoriesSectionCollectionViewCell
-            let data = viewModel.categoriesSection[indexPath.row]
+            //            let data = viewModel.categoriesSection[indexPath.row]
+            //            if AppLanguageManager.shared.currentLanguage == .ar {
+            //                cell.titleLabel.text = data.nameAr
+            //            } else {
+            //                cell.titleLabel.text = data.name
+            //            }
+            //            if viewModel.selectedCategoriesSection == data.id {
+            //                cell.bottomLabel.isHidden = false
+            //            } else {
+            //                cell.bottomLabel.isHidden = true
+            //            }
+            
+            let data = viewModel.allCategories[indexPath.row]
             if AppLanguageManager.shared.currentLanguage == .ar {
                 cell.titleLabel.text = data.nameAr
             } else {
                 cell.titleLabel.text = data.name
             }
-            if viewModel.selectedCategoriesSection == data.id {
-                cell.bottomLabel.isHidden = false
+            cell.bottomLabel.isHidden = viewModel.selectedCategoriesSection != data.id
+            if data.isEnabled {
+                cell.contentView.alpha = 1.0
+                cell.isUserInteractionEnabled = true
             } else {
-                cell.bottomLabel.isHidden = true
+                cell.contentView.alpha = 0.3
+                cell.isUserInteractionEnabled = false
             }
             return cell
         default:
@@ -691,8 +706,16 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
         case categoriesSectionCollectionView:
-            viewModel.selectedCategoriesSection = viewModel.categoriesSection[indexPath.row].id ?? 1
+            //            viewModel.selectedCategoriesSection = viewModel.categoriesSection[indexPath.row].id ?? 1
+            //            categoriesSectionCollectionView.reloadData()
+            
+            let selectedCategory = viewModel.allCategories[indexPath.row]
+            guard selectedCategory.isEnabled else {
+                return
+            }
+            viewModel.selectedCategoriesSection = selectedCategory.id
             categoriesSectionCollectionView.reloadData()
+            
         case categoriesCollectionView:
             let nextVC = StoresViewController.instantiate(fromAppStoryboard: .Catalog)
             nextVC.slectedsubCategoryId = viewModel.subCategoriesSection[indexPath.row].id//viewModel.selectedCategoriesSection
@@ -762,7 +785,7 @@ extension HomeViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-//        print("Location error:", error.localizedDescription)
+        //        print("Location error:", error.localizedDescription)
         lblLocatioin.text = "Unable to fetch location".localiz()
     }
 }
