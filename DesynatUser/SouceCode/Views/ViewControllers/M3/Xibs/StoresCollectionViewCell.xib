@@ -114,10 +114,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Gpl-FW-zWK">
-                                <rect key="frame" x="10" y="183" width="90" height="15"/>
+                                <rect key="frame" x="10" y="175" width="90" height="10"/>
                                 <subviews>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gIH-Ed-SbD" customClass="CosmosView" customModule="Cosmos">
-                                        <rect key="frame" x="0.0" y="0.0" width="70" height="15"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="10"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="rating">
@@ -127,7 +127,7 @@
                                                 <integer key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="starSize">
-                                                <real key="value" value="15"/>
+                                                <real key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
                                                 <color key="value" red="0.94901967050000002" green="0.65882354970000001" blue="0.25490197539999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -141,14 +141,14 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(1)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Gl-mM-2uX">
-                                        <rect key="frame" x="75" y="0.0" width="15" height="15"/>
+                                        <rect key="frame" x="75" y="0.0" width="15" height="10"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="khM-Mh-guZ"/>
+                                    <constraint firstAttribute="height" constant="10" id="khM-Mh-guZ"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -163,7 +163,7 @@
                             <constraint firstItem="tmU-gT-jh4" firstAttribute="top" secondItem="nLu-24-KRv" secondAttribute="top" id="Q59-ec-Uij"/>
                             <constraint firstItem="DzT-9S-W4D" firstAttribute="top" secondItem="tmU-gT-jh4" secondAttribute="bottom" constant="10" id="SFu-xz-hB0"/>
                             <constraint firstAttribute="trailing" secondItem="bqz-0q-KAX" secondAttribute="trailing" constant="10" id="WK0-nt-Y5G"/>
-                            <constraint firstItem="Gpl-FW-zWK" firstAttribute="top" secondItem="DzT-9S-W4D" secondAttribute="bottom" constant="13" id="WU1-xT-60k"/>
+                            <constraint firstItem="Gpl-FW-zWK" firstAttribute="top" secondItem="DzT-9S-W4D" secondAttribute="bottom" constant="5" id="WU1-xT-60k"/>
                             <constraint firstItem="F90-sr-N4o" firstAttribute="centerY" secondItem="DzT-9S-W4D" secondAttribute="centerY" id="Zoa-Fg-66Z"/>
                             <constraint firstItem="DzT-9S-W4D" firstAttribute="leading" secondItem="nLu-24-KRv" secondAttribute="leading" constant="10" id="cds-ck-2pz"/>
                             <constraint firstAttribute="trailing" secondItem="tmU-gT-jh4" secondAttribute="trailing" id="mur-09-Eer"/>
@@ -207,7 +207,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

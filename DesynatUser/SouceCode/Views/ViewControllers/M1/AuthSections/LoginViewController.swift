@@ -68,25 +68,25 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func facebookDidTapped(_ sender: Any) {
-//        SocialLoginManager.shared.signupWithFacebook(self) { data, error in
-//            if let error = error {
-//                print(error.localizedDescription)
-//                self.showAlert(msg: "The user canceled the sign-in flow.".localiz())
-//                return
-//            }
-//            guard let data = data else { return }
-//            print(data)
-//            let param: [String: Any] = [
-//                "full_name": data["name"] as? String ?? "",
-//                "device_type": 1, // 0 web 1 ios 2 android
-//                "fcm_token": kSharedUserDefaults.retrieveModelFor(key: .deviceToken, model: String.self) ?? "",
-//                "lang": AppLanguageManager.shared.currentLanguage.rawValue,
-//                "unique_id": data["social_id"] as? String ?? "",
-//                "socialType": 2, //1 google 2 facebook 3 apple
-//                "profile_image": data["profile_image"] as? String ?? "",
-//                "email": data["email"] as? String ?? ""]
-//            self.viewModel.socialSignupApi(params: param)
-//        }
+        SocialLoginManager.shared.signupWithFacebook(self) { data, error in
+            if let error = error {
+                print(error.localizedDescription)
+                self.showAlert(msg: "The user canceled the sign-in flow.".localiz())
+                return
+            }
+            guard let data = data else { return }
+            print(data)
+            let param: [String: Any] = [
+                "full_name": data["name"] as? String ?? "",
+                "device_type": 1, // 0 web 1 ios 2 android
+                "fcm_token": kSharedUserDefaults.retrieveModelFor(key: .deviceToken, model: String.self) ?? "",
+                "lang": AppLanguageManager.shared.currentLanguage.rawValue,
+                "unique_id": data["social_id"] as? String ?? "",
+                "socialType": 2, //1 google 2 facebook 3 apple
+                "profile_image": data["profile_image"] as? String ?? "",
+                "email": data["email"] as? String ?? ""]
+            self.viewModel.socialSignupApi(params: param)
+        }
     }
     
     @IBAction func appleDidTapped(_ sender: Any) {

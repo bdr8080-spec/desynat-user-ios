@@ -214,8 +214,9 @@ extension StoresViewController: UICollectionViewDelegate, UICollectionViewDataSo
         case storesCollectionView:
             let spacing: CGFloat = 10
             let totalSpacing = spacing * 2 // 3 cells per row → 2 spaces between
-            let width = (collectionView.frame.width - totalSpacing) / 2
-            return CGSize(width: width, height: 194)
+            let width = (collectionView.frame.width - totalSpacing) / 3
+            //            return CGSize(width: width, height: 194)
+            return CGSize(width: width, height: 154)
         default:
             return CGSize.zero
         }

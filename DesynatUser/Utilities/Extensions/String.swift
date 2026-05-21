@@ -91,8 +91,6 @@ extension String {
         return NSPredicate(format: "SELF MATCHES %@", passwordRegex)
             .evaluate(with: self)
     }
-
-
     
     func isNumber() -> Bool {
         if self.isStringEmpty() {

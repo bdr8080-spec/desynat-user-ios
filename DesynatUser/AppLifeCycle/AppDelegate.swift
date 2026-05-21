@@ -16,6 +16,7 @@ import Branch
 import UserNotifications
 import SDWebImageSVGCoder
 import FirebaseMessaging
+import FBSDKCoreKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
@@ -23,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     var forOpenFilePickerView = ""
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         Thread.sleep(forTimeInterval: 5.0)
         LocationManager.sharedInstance.startUpdatingLocation()
         IQKeyboardManager.shared.enableAutoToolbar = true
@@ -37,6 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
         Messaging.messaging().isAutoInitEnabled = true
+        Settings.shared.appID = "2050785725796089"
+        Settings.shared.clientToken = "40955d10a2953936be4b9d4074906a02"
+        Settings.shared.displayName = "Desynat"
         confrigNotification(application: application)
         let SVGCoder = SDImageSVGCoder.shared
         SDImageCodersManager.shared.addCoder(SVGCoder)
