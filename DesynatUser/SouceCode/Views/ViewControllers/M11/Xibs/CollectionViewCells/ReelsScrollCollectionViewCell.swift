@@ -25,7 +25,6 @@ class ReelsScrollCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         // Tap gesture on video
         let tap = UITapGestureRecognizer(target: self, action: #selector(videoTapped))
         videoContainerView.addGestureRecognizer(tap)
@@ -36,32 +35,15 @@ class ReelsScrollCollectionViewCell: UICollectionViewCell {
         togglePlayPause()
     }
     
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//
-//        NotificationCenter.default.removeObserver(self)
-//
-//        player?.pause()
-//        player = nil
-//
-//        playerLayer?.player = nil
-//        playerLayer?.removeFromSuperlayer()
-//        playerLayer = nil
-//    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
-
         NotificationCenter.default.removeObserver(self)
-
         player?.pause()
         player?.replaceCurrentItem(with: nil)
         player = nil
-
         playerLayer?.player = nil
         playerLayer?.removeFromSuperlayer()
         playerLayer = nil
-
         playPauseButton.isHidden = true
     }
     
@@ -77,10 +59,7 @@ class ReelsScrollCollectionViewCell: UICollectionViewCell {
     func configure(with reel: Reel) {
         captionLabel.text = reel.caption ?? ""
         setupVideo(urlString: reel.videoURL)
-
-        // Always hide play/pause button on new cell
         playPauseButton.isHidden = true
-
         btnLike.image = reel.isWhishlisted == 1 ? .selectedHeart : .besSellLike
     }
     
@@ -88,73 +67,41 @@ class ReelsScrollCollectionViewCell: UICollectionViewCell {
     private func setupVideo(urlString: String?) {
         guard let urlString = urlString,
               let url = URL(string: urlString) else { return }
-        
         // Avoid duplicate layer stacking
         playerLayer?.removeFromSuperlayer()
-        
         // Build new Player
         let item = AVPlayerItem(url: url)
         player = AVPlayer(playerItem: item)
-        
         playerLayer = AVPlayerLayer(player: player)
         playerLayer?.videoGravity = .resizeAspectFill
         playerLayer?.frame = videoContainerView.bounds
-        
         if let layer = playerLayer {
             videoContainerView.layer.insertSublayer(layer, at: 0)
         }
-        
         // Loop video
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(loopVideo),
-            name: .AVPlayerItemDidPlayToEndTime,
-            object: item
-        )
+        NotificationCenter.default.addObserver(self,selector: #selector(loopVideo),name: .AVPlayerItemDidPlayToEndTime,object: item)
     }
     
     // MARK: - PLAY / PAUSE CONTROL
     func playVideo() {
-
+        
         guard let player = player else { return }
-
+        
         player.play()
-
+        
         playPauseButton.isHidden = true
     }
-
-//    func pauseVideo() {
-//        player?.pause()
-//        playPauseButton.isHidden = false
-//    }
     
     func pauseVideo(showPlayIcon: Bool = false) {
-
         player?.pause()
-
         playPauseButton.isHidden = !showPlayIcon
     }
     
-//    func togglePlayPause() {
-//        guard let player = player else { return }
-//        
-//        if player.timeControlStatus == .playing {
-//            pauseVideo()
-//        } else {
-//            playVideo()
-//        }
-//    }
-    
     func togglePlayPause() {
-
         guard let player = player else { return }
-
         if player.timeControlStatus == .playing {
-
             pauseVideo(showPlayIcon: true)
-
         } else {
-
             playVideo()
         }
     }

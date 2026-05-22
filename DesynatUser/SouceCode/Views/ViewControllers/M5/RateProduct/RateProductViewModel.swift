@@ -23,6 +23,12 @@ class RateProductOrderViewModel {
         }
     }
     
+    func uploadDocument(file: Any, isImage: Bool, completion: @escaping(String) -> Void) {
+        let param: MultipartUpload = MultipartUpload(fileName: "image", file: file, mimeType: isImage ? .image : .pdf)
+        WebService.sharedInstance.uploadFile(withParams: param) { url, msg, code in
+            completion(url)
+        }
+    }
     
     func validateInputs() -> Bool {
         

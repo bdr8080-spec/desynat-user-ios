@@ -65,7 +65,7 @@ class StorieTopSliderCollectionViewCell: UICollectionViewCell {
             return
         }
 
-        // 3️⃣ Future stories
+        // Future stories
         progressBackgroundView.backgroundColor = UIColor.white.withAlphaComponent(0.25)
         progressFillView.backgroundColor = .white
         progressFillWidthConstraint.constant = 0

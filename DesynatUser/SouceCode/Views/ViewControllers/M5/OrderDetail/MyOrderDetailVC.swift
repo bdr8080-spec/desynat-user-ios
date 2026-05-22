@@ -164,6 +164,7 @@ class MyOrderDetailVC: UIViewController {
         let vc = RateProductOrderViewController.instantiate(fromAppStoryboard: .MyOrder)
         vc.orderId = self.orderId
         vc.orderDetailId = self.orderDetailId
+        vc.orderData = self.orderData
         vc.ratingDone = { [weak self] in
             self?.viewModel.getOrderDetail()
         }
