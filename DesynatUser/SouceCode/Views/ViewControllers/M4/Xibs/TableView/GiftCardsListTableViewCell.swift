@@ -40,18 +40,13 @@ class GiftCardsListTableViewCell: UITableViewCell {
   }
   
     private func formatDate(_ isoString: String) -> String {
-        
         let isoFormatter = ISO8601DateFormatter()
         isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        
         guard let date = isoFormatter.date(from: isoString) else {
             return "Invalid date"
         }
-        
         let formatter = DateFormatter()
         formatter.dateFormat = "dd MMM yy, h:mm a"
-        
-        // ✅ Arabic Localization
         if AppLanguageManager.shared.currentLanguage == .ar {
             formatter.locale = Locale(identifier: "ar")
             formatter.amSymbol = "ص"
@@ -61,7 +56,6 @@ class GiftCardsListTableViewCell: UITableViewCell {
             formatter.amSymbol = "AM"
             formatter.pmSymbol = "PM"
         }
-        
         return formatter.string(from: date).lowercased()
     }
   

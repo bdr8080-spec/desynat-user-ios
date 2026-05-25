@@ -90,19 +90,13 @@ class SignupViewController: UIViewController {
     }
     
     @IBAction func countryCodeDidTapped(_ sender: UIButton) {
-//        let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
-//            let name = country.name ?? ""
-//            let dialCode = country.dialCode ?? ""
-//            let flag = country.flag1 ?? "🇰🇼"
-//            return "\(flag)  \(name) (\(dialCode))"
-//        }
         let countryNames = viewModel.getAllUSerCountryList.map { country -> String in
-                    let isArabic = AppLanguageManager.shared.currentLanguage == .ar
-                    let name = isArabic ? (country.nameAr ?? country.name ?? "") : (country.name ?? "")
-                    let dialCode = country.dialCode ?? ""
-                    let flag = country.flag1 ?? "🇰🇼"
-                    return "\(flag)  \(name) (\(dialCode))"
-                }
+            let isArabic = AppLanguageManager.shared.currentLanguage == .ar
+            let name = isArabic ? (country.nameAr ?? country.name ?? "") : (country.name ?? "")
+            let dialCode = country.dialCode ?? ""
+            let flag = country.flag1 ?? "🇰🇼"
+            return "\(flag)  \(name) (\(dialCode))"
+        }
         
         kSharedAppDelegate.dropDown(dataSource: countryNames, anchorView: sender) { index, item in
             let selectedCountry = self.viewModel.getAllUSerCountryList[index]

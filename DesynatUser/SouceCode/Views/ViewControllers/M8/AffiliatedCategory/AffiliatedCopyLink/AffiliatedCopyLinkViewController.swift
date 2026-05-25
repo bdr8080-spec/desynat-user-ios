@@ -12,6 +12,7 @@ class AffiliatedCopyLinkViewController: UIViewController {
     // MARK: - IBOutlet's
     @IBOutlet weak var linkTF: UITextField!
     @IBOutlet weak var titleView: UIView!
+    @IBOutlet weak var addToProductsButtonOutle: CustomButton!
     
     // MARK: - Property Decalaration
     private lazy var viewModel = AffiliatedCopyLinkViewModel(hostVC: self)
@@ -24,6 +25,7 @@ class AffiliatedCopyLinkViewController: UIViewController {
         super.viewDidLoad()
         initialSetup()
         linkTF.text = productLink
+        addToProductsButtonOutle.setTitle("Add to Products".localiz(), for: .normal)
     }
     
     // MARK: - Button's Action

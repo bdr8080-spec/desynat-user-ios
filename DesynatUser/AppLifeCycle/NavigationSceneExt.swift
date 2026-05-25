@@ -6,13 +6,13 @@
 ////
 //
 import Foundation
-import UIKit                 
+import UIKit
 import DropDown
 
 extension SceneDelegate {
     
     public func navigateToLoginVc() {
-      
+        
         navigateTo(vc: LoginViewController.instantiate(fromAppStoryboard: .Main))
     }
     
@@ -21,7 +21,7 @@ extension SceneDelegate {
         vc.initialTabIndex = selectedIndex   // set tab here
         navigateTo(vc: vc)
     }
-
+    
     
     public func navigateToWelcomeScreen() {
         let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
@@ -32,7 +32,7 @@ extension SceneDelegate {
         let vc = SelectLanguageViewController.instantiate(fromAppStoryboard:.Main)
         navigateTo(vc: vc)
     }
-
+    
     // Logout current user and navigate to loginVc
     func logoutUser() {
         kSharedUserDefaults.clearAllData(except: [.deviceToken,.userLocation,.selectedLanguage, .defaultLanguage, .language])
@@ -52,8 +52,8 @@ extension SceneDelegate {
     public func navigateToLoginAffiliatedVc() {
         navigateTo(vc: AffiliatedUserLoginViewController.instantiate(fromAppStoryboard: .AffiliateUser))
     }
-//
-//    ///Pass custom vc to make it root controller
+    
+    //Pass custom vc to make it root controller
     public func navigateTo(vc:UIViewController) {
         let nc = UINavigationController(rootViewController: vc)
         nc.isNavigationBarHidden = true
@@ -61,5 +61,4 @@ extension SceneDelegate {
         sceneDelegate.window!.rootViewController = nc
         sceneDelegate.window!.makeKeyAndVisible()
     }
-    
 }

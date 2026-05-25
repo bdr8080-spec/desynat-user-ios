@@ -66,66 +66,27 @@ class WalletMoneyListTableViewCell: UITableViewCell {
             amountLabel.text = "+\(CommonUtils.formatPriceStringInput(data?.amount, currency: "KD"))"
         }
     }
-    
-//    func formatDate(_ isoDate: String) -> String {
-//        let isoFormatter = ISO8601DateFormatter()
-//        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-//        isoFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-//
-//        guard let date = isoFormatter.date(from: isoDate) else {
-//            return ""
-//        }
-//
-//        let outputFormatter = DateFormatter()
-//        outputFormatter.dateFormat = "dd/MM/yyyy,hh:mma"
-//        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
-//        outputFormatter.timeZone = TimeZone.current
-//
-//        return outputFormatter.string(from: date)
-//    }
 
     func formatDate(_ isoDate: String) -> String {
-
         let isoFormatter = ISO8601DateFormatter()
-
         isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-
         isoFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-
         guard let date = isoFormatter.date(from: isoDate) else {
-
             return ""
-
         }
-
         let outputFormatter = DateFormatter()
-
         outputFormatter.dateFormat = "dd/MM/yyyy,hh:mma"
-
         outputFormatter.timeZone = TimeZone.current
-
-        // ✅ Arabic Localization
-
         if AppLanguageManager.shared.currentLanguage == .ar {
-
             outputFormatter.locale = Locale(identifier: "ar")
-
             outputFormatter.amSymbol = "ص"
-
             outputFormatter.pmSymbol = "م"
-
         } else {
-
             outputFormatter.locale = Locale(identifier: "en_US_POSIX")
-
             outputFormatter.amSymbol = "AM"
-
             outputFormatter.pmSymbol = "PM"
-
         }
-
         return outputFormatter.string(from: date)
-
     }
      
 }

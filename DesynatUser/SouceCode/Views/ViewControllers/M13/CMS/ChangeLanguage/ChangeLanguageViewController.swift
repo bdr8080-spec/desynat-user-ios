@@ -50,7 +50,6 @@ class ChangeLanguageViewController: UIViewController {
     }
     
     @IBAction func backDidTapped(_ sender: Any) {
-//        self.navigationController?.popViewController(animated: true)
         switch comingUserRole {
         case .normalUser:
             kSharedSceneDelegate.navigateToUserHomeVc(selectedIndex: 4)
@@ -87,7 +86,4 @@ class ChangeLanguageViewController: UIViewController {
         nextVC.comingUserRole = comingUserRole
         self.navigationController?.setViewControllers([nextVC], animated: false)
     }
-    
 }
-
-

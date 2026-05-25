@@ -82,7 +82,7 @@ class AffiliatedProfileDetailsViewModel {
         
         if let matchedCountry = countryList.first(where: { $0.id?.description == code }) {
             DispatchQueue.main.async {
-                self.hostVC.countryTF.text = matchedCountry.name
+                self.hostVC.countryTF.text = AppLanguageManager.shared.currentLanguage == .ar ? matchedCountry.nameAr : matchedCountry.name
             }
         }
     }

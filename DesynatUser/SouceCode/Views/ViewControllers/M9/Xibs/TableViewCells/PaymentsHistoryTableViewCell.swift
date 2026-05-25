@@ -35,8 +35,8 @@ class PaymentsHistoryTableViewCell: UITableViewCell {
         transactionIdLabel.text = "#\(data?.id ?? 0)"
         myEarningLabel.text = CommonUtils.formatPriceStringInput(data?.affiliateCommission)
         purchasedLabel.text = data?.userDetails?.fullName
-        productNameLabel.text = data?.productDetails?.productNameEn
-        categoryNameLabel.text = data?.productDetails?.category?.name
+        productNameLabel.text = AppLanguageManager.shared.currentLanguage == .ar ?  data?.productDetails?.productNameAr : data?.productDetails?.productNameEn
+        categoryNameLabel.text = AppLanguageManager.shared.currentLanguage == .ar ? data?.productDetails?.category?.nameAr : data?.productDetails?.category?.name
         quantityLabel.text = "\(data?.quantity ?? 0)"
         totalAmountLabel.text = CommonUtils.formatPriceStringInput(data?.amount)
         purchasedOnLabel.text = formatDate(data?.createdAt ?? "")
@@ -174,15 +174,18 @@ class PaymentsHistoryTableViewCell: UITableViewCell {
         inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
         inputFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         inputFormatter.locale = Locale(identifier: "en_US_POSIX")
-        
         guard let date = inputFormatter.date(from: isoDate) else {
             return ""
         }
-        
         let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "dd/MM/yyyy 'at' hh:mm a"
         outputFormatter.timeZone = TimeZone.current
-        
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            outputFormatter.locale = Locale(identifier: "ar")
+            outputFormatter.dateFormat = "dd/MM/yyyy 'في' hh:mm a"
+        } else {
+            outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+            outputFormatter.dateFormat = "dd/MM/yyyy 'at' hh:mm a"
+        }
         return outputFormatter.string(from: date)
     }
     

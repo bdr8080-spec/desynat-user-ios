@@ -528,7 +528,6 @@ class CommonUtils {
         return outputFormatter.string(from: date)
     }
     
-    
     static let displayFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd MMM yyyy"
@@ -541,9 +540,6 @@ class CommonUtils {
         formatter.timeZone = TimeZone(abbreviation: "UTC")
         return formatter
     }()
-    
-    
-    
     
     static func formatDateToYYYYMMDD(date: Date) -> String {
         let formatter = DateFormatter()

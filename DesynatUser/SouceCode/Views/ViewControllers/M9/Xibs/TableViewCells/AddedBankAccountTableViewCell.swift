@@ -8,14 +8,14 @@
 import UIKit
 
 class AddedBankAccountTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -34,7 +34,6 @@ class AddedBankAccountTableViewCell: UITableViewCell {
         guard accountNumber.count > 8 else {
             return accountNumber
         }
-        
         let firstFour = accountNumber.prefix(5)
         let lastFour = accountNumber.suffix(3)
         let maskedCount = accountNumber.count - 8

@@ -8,7 +8,7 @@
 import UIKit
 
 class MyAffiliatedWithdrawalTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var rejectReasonLabel: CustomLabelFont!
     @IBOutlet weak var rejectedReasonView: UIStackView!
     @IBOutlet weak var requestedOnDateLabel: CustomLabelFont!
@@ -24,10 +24,9 @@ class MyAffiliatedWithdrawalTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
     }
     
     func configData(requestType: WithdrawRequestType, data: WithdrawRequestList?) {
@@ -49,7 +48,6 @@ class MyAffiliatedWithdrawalTableViewCell: UITableViewCell {
             transactionView.isHidden = false
             creditOnView.isHidden = false
             let adminVerify = data?.adminVerify ?? 1
-            
             if adminVerify == 1 {
                 statusLabel.text = "Credited".localiz()
                 statusLabel.textColor = UIColor(hexString: "#17854C")
@@ -65,12 +63,10 @@ class MyAffiliatedWithdrawalTableViewCell: UITableViewCell {
         guard accountNumber.count > 8 else {
             return accountNumber
         }
-        
         let firstFour = accountNumber.prefix(5)
         let lastFour = accountNumber.suffix(3)
         let maskedCount = accountNumber.count - 8
         let maskedPart = String(repeating: "X", count: maskedCount)
-        
         return "\(firstFour)\(maskedPart)\(lastFour)"
     }
     
@@ -79,17 +75,18 @@ class MyAffiliatedWithdrawalTableViewCell: UITableViewCell {
         inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
         inputFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         inputFormatter.locale = Locale(identifier: "en_US_POSIX")
-
         guard let date = inputFormatter.date(from: isoDate) else {
             return ""
         }
-
         let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "dd/MM/yyyy 'at' hh:mm a"
         outputFormatter.timeZone = TimeZone.current
-
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            outputFormatter.locale = Locale(identifier: "ar")
+            outputFormatter.dateFormat = "dd/MM/yyyy 'في' hh:mm a"
+        } else {
+            outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+            outputFormatter.dateFormat = "dd/MM/yyyy 'at' hh:mm a"
+        }
         return outputFormatter.string(from: date)
     }
-
-    
 }

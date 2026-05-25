@@ -1175,7 +1175,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yhF-Pa-lQk">
-                                <rect key="frame" x="0.0" y="150.66666666666666" width="393" height="458.33333333333326"/>
+                                <rect key="frame" x="0.0" y="150.66666666666666" width="393" height="458.33333333333337"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QlT-Cw-HBc">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="857"/>
@@ -1647,7 +1647,7 @@
                                         </constraints>
                                     </view>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="or2-jE-djv">
-                                        <rect key="frame" x="85.333333333333329" y="374" width="222.66666666666669" height="45"/>
+                                        <rect key="frame" x="85.333333333333329" y="278" width="222.66666666666669" height="45"/>
                                         <string key="text">There is nothing in the cart. 
 Let's add some items. </string>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
@@ -1919,14 +1919,15 @@ Let's add some items. </string>
                                                                                     <action selector="giftCardsDidTapped:" destination="Lgj-Mf-ic7" eventType="touchUpInside" id="fka-XH-StI"/>
                                                                                 </connections>
                                                                             </button>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gift Cards" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjh-Dj-suT">
-                                                                                <rect key="frame" x="35.333333333333329" y="10.666666666666659" width="80.999999999999986" height="22.666666666666671"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gift Cards" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjh-Dj-suT">
+                                                                                <rect key="frame" x="6" y="10.666666666666659" width="139.66666666666666" height="22.666666666666671"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                         </subviews>
                                                                         <constraints>
+                                                                            <constraint firstItem="xjh-Dj-suT" firstAttribute="leading" secondItem="V1M-gM-n74" secondAttribute="leading" constant="6" id="0Ku-mP-QXA"/>
                                                                             <constraint firstAttribute="trailing" secondItem="Yaq-Bp-H8O" secondAttribute="trailing" id="1cc-QM-war"/>
                                                                             <constraint firstAttribute="bottom" secondItem="Yaq-Bp-H8O" secondAttribute="bottom" id="991-nI-6nb"/>
                                                                             <constraint firstItem="xjh-Dj-suT" firstAttribute="centerY" secondItem="V1M-gM-n74" secondAttribute="centerY" id="Lmm-IM-UnL"/>
@@ -1961,8 +1962,8 @@ Let's add some items. </string>
                                                                                     <action selector="btnMyOrder:" destination="Lgj-Mf-ic7" eventType="touchUpInside" id="Ppc-3O-Z9U"/>
                                                                                 </connections>
                                                                             </button>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Orders" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SBL-Lf-apH">
-                                                                                <rect key="frame" x="34.666666666666686" y="10.666666666666659" width="82" height="22.666666666666671"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Orders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SBL-Lf-apH">
+                                                                                <rect key="frame" x="5" y="10.666666666666659" width="141.33333333333334" height="22.666666666666671"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -1971,6 +1972,7 @@ Let's add some items. </string>
                                                                         <constraints>
                                                                             <constraint firstItem="SBL-Lf-apH" firstAttribute="centerY" secondItem="8Qr-o2-5pA" secondAttribute="centerY" id="36c-c4-2Ma"/>
                                                                             <constraint firstAttribute="bottom" secondItem="YGo-rL-N4S" secondAttribute="bottom" id="4kL-8L-pJL"/>
+                                                                            <constraint firstItem="SBL-Lf-apH" firstAttribute="leading" secondItem="8Qr-o2-5pA" secondAttribute="leading" constant="5" id="8xZ-tI-t0k"/>
                                                                             <constraint firstItem="SBL-Lf-apH" firstAttribute="centerX" secondItem="8Qr-o2-5pA" secondAttribute="centerX" id="Iws-t7-pN4"/>
                                                                             <constraint firstItem="YGo-rL-N4S" firstAttribute="leading" secondItem="8Qr-o2-5pA" secondAttribute="leading" id="Pxv-7N-wpk"/>
                                                                             <constraint firstItem="YGo-rL-N4S" firstAttribute="top" secondItem="8Qr-o2-5pA" secondAttribute="top" id="fKR-84-6Gs"/>
@@ -2008,8 +2010,8 @@ Let's add some items. </string>
                                                                                     <action selector="maySavedCardsDidTapped:" destination="Lgj-Mf-ic7" eventType="touchUpInside" id="a9n-oD-JRr"/>
                                                                                 </connections>
                                                                             </button>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Saved Cards" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xht-aR-i39">
-                                                                                <rect key="frame" x="6" y="10.666666666666659" width="139.66666666666666" height="22.666666666666671"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Saved Cards" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xht-aR-i39">
+                                                                                <rect key="frame" x="5" y="10.666666666666659" width="141.66666666666666" height="22.666666666666671"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -2022,7 +2024,7 @@ Let's add some items. </string>
                                                                             <constraint firstItem="ErP-Ze-xRa" firstAttribute="leading" secondItem="LmV-vu-QZv" secondAttribute="leading" id="iDY-fl-Lwn"/>
                                                                             <constraint firstItem="xht-aR-i39" firstAttribute="centerY" secondItem="LmV-vu-QZv" secondAttribute="centerY" id="koA-hj-wl2"/>
                                                                             <constraint firstAttribute="trailing" secondItem="ErP-Ze-xRa" secondAttribute="trailing" id="sxU-VK-PnH"/>
-                                                                            <constraint firstItem="xht-aR-i39" firstAttribute="leading" secondItem="LmV-vu-QZv" secondAttribute="leading" constant="6" id="vgO-hT-kFY"/>
+                                                                            <constraint firstItem="xht-aR-i39" firstAttribute="leading" secondItem="LmV-vu-QZv" secondAttribute="leading" constant="5" id="vgO-hT-kFY"/>
                                                                         </constraints>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ADv-Wt-fEi">
@@ -2051,8 +2053,8 @@ Let's add some items. </string>
                                                                                     <action selector="savedAddressDidTapped:" destination="Lgj-Mf-ic7" eventType="touchUpInside" id="G2Z-W8-qVz"/>
                                                                                 </connections>
                                                                             </button>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved Addresses" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nvb-VY-aHB">
-                                                                                <rect key="frame" x="6" y="10.666666666666659" width="139.33333333333334" height="22.666666666666671"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved Addresses" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nvb-VY-aHB">
+                                                                                <rect key="frame" x="5" y="10.666666666666659" width="141.33333333333334" height="22.666666666666671"/>
                                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -2063,7 +2065,7 @@ Let's add some items. </string>
                                                                             <constraint firstItem="Nvb-VY-aHB" firstAttribute="centerX" secondItem="ADv-Wt-fEi" secondAttribute="centerX" id="Bh7-4G-iP5"/>
                                                                             <constraint firstItem="Nvb-VY-aHB" firstAttribute="centerY" secondItem="ADv-Wt-fEi" secondAttribute="centerY" id="GQv-XL-0Lf"/>
                                                                             <constraint firstAttribute="bottom" secondItem="bhd-kv-T5t" secondAttribute="bottom" id="GzV-al-Zmp"/>
-                                                                            <constraint firstItem="Nvb-VY-aHB" firstAttribute="leading" secondItem="ADv-Wt-fEi" secondAttribute="leading" constant="6" id="Ugd-LL-CeI"/>
+                                                                            <constraint firstItem="Nvb-VY-aHB" firstAttribute="leading" secondItem="ADv-Wt-fEi" secondAttribute="leading" constant="5" id="Ugd-LL-CeI"/>
                                                                             <constraint firstItem="bhd-kv-T5t" firstAttribute="top" secondItem="ADv-Wt-fEi" secondAttribute="top" id="dvu-Jp-l2s"/>
                                                                             <constraint firstAttribute="trailing" secondItem="bhd-kv-T5t" secondAttribute="trailing" id="gog-Pz-nbp"/>
                                                                         </constraints>
