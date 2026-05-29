@@ -3052,7 +3052,7 @@ you for your patience. Team Desynat App</string>
                                             <constraint firstAttribute="width" constant="40" id="cAf-Cb-ZNI"/>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="2" minY="4" maxX="2" maxY="0.0"/>
-                                        <state key="normal" image="chatBot"/>
+                                        <state key="normal" image="support"/>
                                         <connections>
                                             <action selector="supportChatDidTapped:" destination="fXL-ZR-1QQ" eventType="touchUpInside" id="hcL-kG-7Rr"/>
                                         </connections>
@@ -5325,7 +5325,7 @@ you for your patience. Team Desynat App</string>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MaC-9p-ANc">
-                                                        <rect key="frame" x="28.333333333333314" y="9.3333333333333446" width="57.999999999999986" height="19.666666666666671"/>
+                                                        <rect key="frame" x="28.333333333333314" y="9.3333333333333446" width="58" height="19.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -5439,7 +5439,7 @@ you for your patience. Team Desynat App</string>
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Your Password" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7u4-h3-JE0">
-                                                                <rect key="frame" x="20" y="14.333333333333345" width="164" height="19.666666666666664"/>
+                                                                <rect key="frame" x="20" y="14.333333333333345" width="164" height="19.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -6393,7 +6393,7 @@ you for your patience. Team Desynat App</string>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add another account" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fms-wH-H5q">
-                                                <rect key="frame" x="114.33333333333336" y="14.333333333333373" width="150.66666666666663" height="19.666666666666664"/>
+                                                <rect key="frame" x="114.33333333333336" y="14.333333333333373" width="150.66666666666663" height="19.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -9912,7 +9912,6 @@ want to continue with</string>
         <image name="btnGradient" width="343" height="38"/>
         <image name="cameraUpload" width="76" height="76"/>
         <image name="catalogSelected" width="52" height="44"/>
-        <image name="chatBot" width="28" height="26.666666030883789"/>
         <image name="conversionRate" width="22" height="22"/>
         <image name="copyLink" width="17" height="17"/>
         <image name="country" width="20.333333969116211" height="31"/>
@@ -9954,6 +9953,7 @@ want to continue with</string>
         <image name="sendButton" width="40" height="40"/>
         <image name="showAffiliated" width="52.666667938232422" height="52.666667938232422"/>
         <image name="sortStore" width="20" height="20"/>
+        <image name="support" width="28" height="28"/>
         <image name="thirdStep" width="343" height="12"/>
         <image name="topTabbar" width="114.33333587646484" height="38"/>
         <image name="totalClicks" width="19.666666030883789" height="15.333333015441895"/>
@@ -9982,13 +9982,13 @@ want to continue with</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

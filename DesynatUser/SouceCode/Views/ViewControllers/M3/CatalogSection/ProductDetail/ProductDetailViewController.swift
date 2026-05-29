@@ -124,6 +124,7 @@ class ProductDetailViewController: UIViewController {
         super.viewDidLoad()
         initialSetUp()
         viewModel.getSavedAddressListAPI()
+        actionButtonsStackView.semanticContentAttribute = .forceLeftToRight
     }
     
     override func viewWillAppear(_ animated: Bool) {
