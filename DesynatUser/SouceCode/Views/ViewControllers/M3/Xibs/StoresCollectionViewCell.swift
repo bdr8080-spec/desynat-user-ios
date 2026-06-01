@@ -54,13 +54,23 @@ class StoresCollectionViewCell: UICollectionViewCell {
         } else {
             profilePic.image = UIImage(named: "")
         }
-        let storyCount = data.sellerHighlightsModel?.count ?? 0
-        if storyCount > 0 {
-            storyView.borderWidth = 1
-            storyButton.isUserInteractionEnabled = true
-        } else {
-            storyView.borderWidth = 0
+        updateStoryUI(stories: data.sellerHighlightsModel ?? [])
+    }
+    
+    func updateStoryUI(stories: [SellerHighlightsModel]) {
+        guard !stories.isEmpty else {
+            storyView.layer.borderWidth = 0
             storyButton.isUserInteractionEnabled = false
+            return
+        }
+        storyButton.isUserInteractionEnabled = true
+        storyView.borderWidth = 1
+        let hasUnseenStory = stories.contains { $0.isSeen == 0 }
+        
+        if hasUnseenStory {
+            storyView.borderColor = UIColor.accent
+        } else {
+            storyView.borderColor = UIColor(hexString: "AC7F5E")
         }
     }
     

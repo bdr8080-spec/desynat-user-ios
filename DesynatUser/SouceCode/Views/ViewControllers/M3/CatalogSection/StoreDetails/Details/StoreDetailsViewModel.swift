@@ -24,6 +24,7 @@ class StoreDetailsViewModel: NSObject {
     var maxPrice: Int?
     var sellerHighlights: [GetHighLightsList] = []
     var sellerReels: [GetMyReelsList] = []
+    var sellerStories: [SellerHighlightsModel] = []
     
     init(hostVC: StoresDetailsViewController) {
         self.hostVC = hostVC
@@ -130,13 +131,44 @@ class StoreDetailsViewModel: NSObject {
     func getSellerStory(sellerId: Int) {
         let param: [String:Any] = ["seller_id": sellerId]
         WebService.sharedInstance.getSellerStoryService(param: param) { list in
-            if list.count > 0 {
-                self.hostVC.sellerProfileButton.setImage(.gerdaientBorder, for: .normal)
-                self.hostVC.sellerProfileButton.isUserInteractionEnabled = true
-            } else {
-                self.hostVC.sellerProfileButton.isUserInteractionEnabled = false
-                self.hostVC.sellerProfileButton.setImage(UIImage(named: ""), for: .normal)
-            }
+            self.sellerStories = list
+            self.updateStoryUI()
+//            if list.count > 0 {
+//                self.hostVC.sellerProfileButton.setImage(.gerdaientBorder, for: .normal)
+//                self.hostVC.sellerProfileButton.isUserInteractionEnabled = true
+//            } else {
+//                self.hostVC.sellerProfileButton.isUserInteractionEnabled = false
+//                self.hostVC.sellerProfileButton.setImage(UIImage(named: ""), for: .normal)
+//            }
+        }
+    }
+    
+    func updateStoryUI() {
+        let stories = sellerStories // ?? []
+        
+        // No stories uploaded
+        guard !stories.isEmpty else {
+            hostVC.sellerProfileButton.setImage(UIImage(named: ""), for: .normal)
+            hostVC.sellerProfileButton.layer.borderWidth = 0
+            hostVC.sellerProfileButton.isUserInteractionEnabled = false
+            return
+        }
+        
+        hostVC.sellerProfileButton.isUserInteractionEnabled = true
+        
+        let hasUnseenStory = stories.contains { $0.isSeen == 0 }
+        
+        if hasUnseenStory {
+            // Show border for unseen stories
+            hostVC.sellerProfileButton.setImage(nil, for: .normal)
+            hostVC.sellerProfileButton.layer.borderWidth = 3
+            hostVC.sellerProfileButton.layer.borderColor = UIColor.accent.cgColor
+            hostVC.sellerProfileButton.layer.cornerRadius = hostVC.sellerProfileButton.frame.width / 2
+            hostVC.sellerProfileButton.clipsToBounds = true
+        } else {
+            // All stories seen
+            hostVC.sellerProfileButton.layer.borderWidth = 0
+            hostVC.sellerProfileButton.setImage(.gerdaientBorder, for: .normal)
         }
     }
     

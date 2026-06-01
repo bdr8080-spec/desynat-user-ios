@@ -58,31 +58,48 @@ class StoryViewerViewController: UIViewController {
     }
     
     private func ContentUpladedTimeDuration(from isoString: String) -> String {
-
+        
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-
+        
         guard let date = formatter.date(from: isoString) else { return "" }
-
+        
         let secondsAgo = Int(Date().timeIntervalSince(date))
-
+        
         if secondsAgo < 60 {
             return secondsAgo == 1 ? "1 sec ago".localiz() : "\(secondsAgo) \("sec ago".localiz())"
         }
-
+        
         let minutes = secondsAgo / 60
         if minutes < 60 {
             return minutes == 1 ? "1 min ago".localiz() : "\(minutes) \("min ago".localiz())"
         }
-
+        
         let hours = minutes / 60
         if hours < 24 {
             return hours == 1 ? "1 hr ago".localiz() : "\(hours) \("hr ago".localiz())"
         }
-
+        
         let days = hours / 24
         if days == 1 { return "Yesterday".localiz() }
         return "\(days) \("days ago".localiz())"
+    }
+    
+    private func markCurrentStoryAsSeen() {
+        switch comingFor {
+        case .forAdminStory:
+            guard currentStoryIndex < viewModel.adminStories.count else {
+                return
+            }
+            viewModel.seeStoryService(storyId: viewModel.adminStories[currentStoryIndex].id ?? 0)
+        case .forSellerStory:
+            guard currentStoryIndex < viewModel.sellerStories.count else {
+                return
+            }
+            viewModel.seeStoryService(storyId: viewModel.sellerStories[currentStoryIndex].id ?? 0)
+        default:
+            print("")
+        }
     }
     
     private func setupCollectionViews() {
@@ -166,20 +183,49 @@ class StoryViewerViewController: UIViewController {
                 )
             }
             
+//            DispatchQueue.main.async {
+//                
+//                if self.usersStory.isEmpty {
+//                    self.dismiss(animated: true)
+//                    return
+//                }
+//                
+//                self.storiesCollectionView.reloadData()
+//                self.topSliderCollectionView.reloadData()
+//                
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+//                    self.startCurrentStory()
+//                }
+//            }
+            
             DispatchQueue.main.async {
-                
-                if self.usersStory.isEmpty {
-                    self.dismiss(animated: true)
-                    return
+                    if self.usersStory.isEmpty {
+                        self.dismiss(animated: true)
+                        return
+                    }
+
+                    // Open first unseen story
+                    if let firstUnseenIndex = self.viewModel.sellerStories.firstIndex(where: {
+                        $0.isSeen == 0
+                    }) {
+                        self.currentStoryIndex = firstUnseenIndex
+                    } else {
+                        // All stories already seen
+                        self.currentStoryIndex = 0
+                    }
+
+                    // Mark previous stories as already seen in slider
+                    for i in 0..<self.currentStoryIndex {
+                        self.seenStories.insert(i)
+                    }
+
+                    self.storiesCollectionView.reloadData()
+                    self.topSliderCollectionView.reloadData()
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.startCurrentStory()
+                    }
                 }
-                
-                self.storiesCollectionView.reloadData()
-                self.topSliderCollectionView.reloadData()
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.startCurrentStory()
-                }
-            }
         }
     }
     
@@ -246,10 +292,38 @@ class StoryViewerViewController: UIViewController {
                 )
             }
             
+            //            DispatchQueue.main.async {
+            //                if self.usersStory.isEmpty {
+            //                    self.dismiss(animated: true)
+            //                    return
+            //                }
+            //
+            //                self.storiesCollectionView.reloadData()
+            //                self.topSliderCollectionView.reloadData()
+            //
+            //                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            //                    self.startCurrentStory()
+            //                }
+            //            }
             DispatchQueue.main.async {
                 if self.usersStory.isEmpty {
                     self.dismiss(animated: true)
                     return
+                }
+                
+                // Open first unseen story
+                if let firstUnseenIndex = self.viewModel.adminStories.firstIndex(where: {
+                    $0.isSeen == 0
+                }) {
+                    self.currentStoryIndex = firstUnseenIndex
+                } else {
+                    // All stories already seen
+                    self.currentStoryIndex = 0
+                }
+                
+                // Mark previous stories as already seen in slider
+                for i in 0..<self.currentStoryIndex {
+                    self.seenStories.insert(i)
                 }
                 
                 self.storiesCollectionView.reloadData()
@@ -311,6 +385,7 @@ class StoryViewerViewController: UIViewController {
         if comingFor == .forSellerHighlight {
             highlightTitleLabel.text = viewModel.sellerHighlight[safe: currentStoryIndex]?.title ?? ""
         }
+        markCurrentStoryAsSeen()
         uploadedTimeView.isHidden = false
         uploadedTimeLabel.text = ContentUpladedTimeDuration(from: story.uploadedTime ?? "")
         // Get the NOW visible cell (after scroll completes)
@@ -390,7 +465,7 @@ class StoryViewerViewController: UIViewController {
     private func startVideoProgressObserver() {
         guard let player = player,
               player.currentItem?.status == .readyToPlay else {
-//            print("❌ Video not ready yet")
+            //            print("❌ Video not ready yet")
             return
         }
         
@@ -405,7 +480,7 @@ class StoryViewerViewController: UIViewController {
             self?.updateVideoProgress(time: time)
         }
         
-//        print("✅ Video observer started")
+        //        print("✅ Video observer started")
     }
     
     private func removeVideoTimeObserver() {
@@ -486,7 +561,7 @@ class StoryViewerViewController: UIViewController {
         playerLayer = AVPlayerLayer(player: player)
         playerLayer?.frame = cell.mainImageView.bounds
         playerLayer?.videoGravity = .resizeAspectFill
-//        CommonUtils.showHud(show: false)
+        //        CommonUtils.showHud(show: false)
         cell.mainImageView.layer.insertSublayer(playerLayer!, at: 0)
         
         // Listen for ready state BEFORE play
@@ -637,19 +712,19 @@ extension StoryViewerViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    
+        
         if collectionView == topSliderCollectionView {
             
             let totalItems = CGFloat(usersStory.count)
             let spacing: CGFloat = 6.0
             let totalSpacing = spacing * (totalItems - 1)
-
+            
             let totalWidth = collectionView.bounds.width
             let availableWidth = totalWidth - totalSpacing
-
+            
             var itemWidth = availableWidth / totalItems
             itemWidth = floor(itemWidth * UIScreen.main.scale) / UIScreen.main.scale  // ← FIX
-
+            
             return CGSize(width: itemWidth, height: 4)
         }
         
