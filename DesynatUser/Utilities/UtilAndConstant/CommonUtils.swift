@@ -675,16 +675,34 @@ class CommonUtils {
     /// Get thumnail from video url
     /// - Parameter url: desired video url
     /// - Parameter completion: if found asset at url then will return uiimage else ll return nil
-    static func getThumbnailImage(forUrl url: URL, completion:@escaping(UIImage?)->()) {
-        let asset: AVAsset = AVAsset(url: url)
+    static func generateThumbnail(url: URL, completion: @escaping (UIImage?) -> Void) {
+        let asset = AVURLAsset(url: url)
         let imageGenerator = AVAssetImageGenerator(asset: asset)
         imageGenerator.appliesPreferredTrackTransform = true
-        do {
-            let thumbnailImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 60) ,
-                                                                actualTime: nil)
-            completion(UIImage(cgImage: thumbnailImage))
-        } catch _ {
-            completion(nil)
+        imageGenerator.maximumSize = CGSize(width: 800, height: 800)
+        
+        let timesToTry: [Double] = [0.0, 1.0, 2.0, 3.0]
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            for seconds in timesToTry {
+                let time = CMTime(seconds: seconds, preferredTimescale: 600)
+                do {
+                    let cgImage = try imageGenerator.copyCGImage(at: time, actualTime: nil)
+                    let thumbnail = UIImage(cgImage: cgImage)
+                    
+                    DispatchQueue.main.async {
+                        completion(thumbnail)
+                    }
+                    return
+                } catch {
+                    print("Thumbnail attempt at \(seconds)s failed: \(error.localizedDescription)")
+                }
+            }
+            
+            // All failed
+            DispatchQueue.main.async {
+                completion(UIImage(named: "placeholder"))
+            }
         }
     }
     

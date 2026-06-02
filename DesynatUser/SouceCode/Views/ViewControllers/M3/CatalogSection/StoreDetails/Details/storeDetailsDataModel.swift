@@ -301,6 +301,10 @@ struct SellerHighlightsModel: Codable {
                 isWhishlisted = value
             }
             
+            if let value  = try? container.decodeIfPresent(Int.self, forKey: .isSeen) {
+                isSeen = value
+            }
+            
         } catch {
             print("error:",error.localizedDescription)
         }

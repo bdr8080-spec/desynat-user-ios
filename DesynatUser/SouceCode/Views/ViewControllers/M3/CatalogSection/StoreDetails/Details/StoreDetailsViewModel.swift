@@ -74,7 +74,6 @@ class StoreDetailsViewModel: NSObject {
         }
     }
     
-    
     func addToWishlist(productId: Int, completion: @escaping (Bool) -> Void) {
         let param: [String: Any] = ["product_id": productId]
         WebService.sharedInstance.addToWishelistSercie(param: param) { list in

@@ -7,6 +7,8 @@
 
 import UIKit
 import Cosmos
+import AVFoundation
+import AVKit
 
 class ProductDetailViewController: UIViewController {
     
@@ -461,7 +463,7 @@ class ProductDetailViewController: UIViewController {
         quantity = cartItem.quantity ?? 1
         addToBagView.isHidden = true
         bagItemCountView.isHidden = false
-//        bagItemCountView.isHidden = productDetails.store?.storeAvailability != 1
+        //        bagItemCountView.isHidden = productDetails.store?.storeAvailability != 1
         incrementDecrementView.isHidden = false
         itemCountLabel.text = "\(quantity)"
     }
@@ -511,7 +513,7 @@ class ProductDetailViewController: UIViewController {
             addToBagView.isHidden = true
             incrementDecrementView.isHidden = false
             bagItemCountView.isHidden = false
-//            bagItemCountView.isHidden = productDetails.store?.storeAvailability != 1
+            //            bagItemCountView.isHidden = productDetails.store?.storeAvailability != 1
             itemCountLabel.text = "\(quantity)"
             
             // Step 7: Scroll and highlight selected color & size
@@ -545,7 +547,7 @@ class ProductDetailViewController: UIViewController {
         
         // 2. Actual Price (strikethrough)
         CommonUtils.setStrikethrough(label: actualPriceLAbel, text: CommonUtils.formatPriceStringInput(selectedVariant.actualPrice, currency: "KD"))
-
+        
         CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: actualPriceLAbel,
                                                   discountType: selectedVariant.discountType,
                                                   discountValue: selectedVariant.discountValue)
@@ -723,7 +725,12 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
         case productImageCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductDetailImageCollectionViewCell", for: indexPath) as! ProductDetailImageCollectionViewCell
             let img = selectedVariantImages[indexPath.row]
-            cell.configData(data: img)
+//            //            cell.configData(data: img)
+            cell.configure(mediaURL: img)
+//            if let images = selectedVariant?.variantImage, images.count > indexPath.row {
+//                //                cell.configData(variantImageUrl: images[indexPath.row])
+//                cell.configure(mediaURL: images[indexPath.row])
+//            }
             return cell
         case colorsCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorsCollectionViewCell", for: indexPath) as! ColorsCollectionViewCell
@@ -731,7 +738,7 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
             cell.mainView.backgroundColor = UIColor(hex: colorData.hexCode ?? "#FFFFFF")
             
             cell.borderView.layer.borderColor =
-            (selectedColourIndex == indexPath.row ? UIColor.darkBrown : UIColor.clear).cgColor
+            (selectedColourIndex == indexPath.row ? UIColor.darkBrown : UIColor.lightGray).cgColor
             
             return cell
         case sizeCollectionView:
@@ -767,12 +774,31 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
         case productImageCollectionView:
-            guard let images = selectedVariant?.variantImage else { return }
-            let vc = FullscreenGalleryViewController()
-            vc.images = images
-            vc.startIndex = indexPath.row
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true)
+            //            guard let images = selectedVariant?.variantImage else { return }
+            //            let vc = FullscreenGalleryViewController()
+            //            vc.images = images
+            //            vc.startIndex = indexPath.row
+            //            vc.modalPresentationStyle = .fullScreen
+            //            present(vc, animated: true)
+            
+            guard let mediaItems = selectedVariant?.variantImage else { return }
+            let selectedUrl = mediaItems[indexPath.row]
+            guard let url = URL(string: selectedUrl) else { return }
+            let videoExtensions = ["mp4", "mov", "m4v", "avi"]
+            if videoExtensions.contains(url.pathExtension.lowercased()) {
+                let player = AVPlayer(url: url)
+                let playerVC = AVPlayerViewController()
+                playerVC.player = player
+                present(playerVC, animated: true) {
+                    player.play()
+                }
+            } else {
+                let vc = FullscreenGalleryViewController()
+                vc.images = mediaItems
+                vc.startIndex = indexPath.row
+                vc.modalPresentationStyle = .fullScreen
+                present(vc, animated: true)
+            }
         case colorsCollectionView:
             selectedColourIndex = indexPath.row
             filterVariantsForSelectedColor()
@@ -803,9 +829,11 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
         case productImageCollectionView:
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         case colorsCollectionView:
-            return CGSize(width: 54, height: 45)
+            //            return CGSize(width: 54, height: 45)
+            return CGSize(width: 45, height: 35)
         case sizeCollectionView:
-            return CGSize(width: 55, height: 42)
+            //            return CGSize(width: 55, height: 42)
+            return CGSize(width: 45, height: 35)
         case similarProductCollectionView:
             let spacing: CGFloat = 10
             let totalSpacing = spacing * 2 // 3 cells per row → 2 spaces between
