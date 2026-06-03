@@ -127,6 +127,10 @@ class ProductDetailViewController: UIViewController {
         initialSetUp()
         viewModel.getSavedAddressListAPI()
         actionButtonsStackView.semanticContentAttribute = .forceLeftToRight
+        //        sizeCollectionView.semanticContentAttribute = .forceLeftToRight
+        //            sizeCollectionView.collectionViewLayout.semanticContentAttribute = .forceLeftToRight
+        //        colorsCollectionView.semanticContentAttribute = .forceLeftToRight
+        setupCollectionViewDirection()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -141,6 +145,24 @@ class ProductDetailViewController: UIViewController {
             self.specificationTableViewHieghtConstraint.constant = self.specificationTableView.contentSize.height
             self.ratingTableViewHeightConstriant.constant = self.ratingsTableView.contentSize.height
         }
+    }
+    
+    private func setupCollectionViewDirection() {
+        let isArabic = AppLanguageManager.shared.currentLanguage == .ar
+        
+        sizeCollectionView.semanticContentAttribute = isArabic ? .forceRightToLeft : .forceLeftToRight
+        colorsCollectionView.semanticContentAttribute = isArabic ? .forceRightToLeft : .forceLeftToRight
+        
+        if let flowLayout = sizeCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.scrollDirection = .horizontal
+        }
+        
+        if let flowLayout = colorsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.scrollDirection = .horizontal
+        }
+        
+        sizeCollectionView.reloadData()
+        colorsCollectionView.reloadData()
     }
     
     // MARK: - Button's Action
@@ -725,12 +747,12 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
         case productImageCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductDetailImageCollectionViewCell", for: indexPath) as! ProductDetailImageCollectionViewCell
             let img = selectedVariantImages[indexPath.row]
-//            //            cell.configData(data: img)
+            //            //            cell.configData(data: img)
             cell.configure(mediaURL: img)
-//            if let images = selectedVariant?.variantImage, images.count > indexPath.row {
-//                //                cell.configData(variantImageUrl: images[indexPath.row])
-//                cell.configure(mediaURL: images[indexPath.row])
-//            }
+            //            if let images = selectedVariant?.variantImage, images.count > indexPath.row {
+            //                //                cell.configData(variantImageUrl: images[indexPath.row])
+            //                cell.configure(mediaURL: images[indexPath.row])
+            //            }
             return cell
         case colorsCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorsCollectionViewCell", for: indexPath) as! ColorsCollectionViewCell
@@ -803,7 +825,7 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
             selectedColourIndex = indexPath.row
             filterVariantsForSelectedColor()
             colorsCollectionView.reloadData()
-            colorsCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            colorsCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
             checkAndUpdateCartStatus()
         case sizeCollectionView:
             let variant = filteredVariants[indexPath.row]
