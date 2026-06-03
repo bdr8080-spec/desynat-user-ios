@@ -27,7 +27,12 @@ class StoryViewerViewModel {
     }
     
     func getSelfStory(completion: @escaping () -> Void) {
-        let param: [String:Any] = ["seller_id": hostVC.sellerId]
+        let savedUser = kSharedUserDefaults.retrieveModelFor(key: .user, model: UserModel.self)
+        var param: [String:Any] = ["seller_id": hostVC.sellerId]//,
+//                                   "user_id": savedUser?.id]
+        if let userId = savedUser?.id {
+            param["user_id"] = userId
+        }
         WebService.sharedInstance.getSellerStoryService(param: param) { list in
             self.sellerStories = list
             completion()

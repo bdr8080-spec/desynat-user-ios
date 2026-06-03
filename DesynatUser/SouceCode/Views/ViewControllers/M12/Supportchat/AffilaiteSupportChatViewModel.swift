@@ -84,23 +84,23 @@ class AffilaiteSupportChatViewModel {
               let id = detail.id,
               let ref = self.chatReference else { return }
         
-        TranslationService.translateToArabic(msg) { arabicText in
-            let formatter = ISO8601DateFormatter()
-            formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-            let isoDate = formatter.string(from: Date())
-            let chat = Chat(
-                uniqueId: self.chatDetailsUniqueId,
-                senderId: String(id),
-                type: type,
-                message: msg,
-                messageAr: arabicText,
-                by: by,
-                read: 0,
-                times: isoDate)
-            
-            ref.childByAutoId()
-                .updateChildValues(chat.toBackendDictionary(uniqueId: self.chatDetailsUniqueId))
-        }
+//        TranslationService.translateToArabic(msg) { arabicText in
+//            let formatter = ISO8601DateFormatter()
+//            formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+//            let isoDate = formatter.string(from: Date())
+//            let chat = Chat(
+//                uniqueId: self.chatDetailsUniqueId,
+//                senderId: String(id),
+//                type: type,
+//                message: msg,
+//                messageAr: arabicText,
+//                by: by,
+//                read: 0,
+//                times: isoDate)
+//            
+//            ref.childByAutoId()
+//                .updateChildValues(chat.toBackendDictionary(uniqueId: self.chatDetailsUniqueId))
+//        }
         
     }
     

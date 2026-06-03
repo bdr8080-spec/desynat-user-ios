@@ -128,7 +128,13 @@ class StoreDetailsViewModel: NSObject {
     }
     
     func getSellerStory(sellerId: Int) {
-        let param: [String:Any] = ["seller_id": sellerId]
+        let savedUser = kSharedUserDefaults.retrieveModelFor(key: .user, model: UserModel.self)
+        var param: [String:Any] = ["seller_id": sellerId]//,
+        
+        if let userId = savedUser?.id {
+            param["user_id"] = userId
+        }
+//                                   "user_id": savedUser?.id ?? null]
         WebService.sharedInstance.getSellerStoryService(param: param) { list in
             self.sellerStories = list
             self.updateStoryUI()

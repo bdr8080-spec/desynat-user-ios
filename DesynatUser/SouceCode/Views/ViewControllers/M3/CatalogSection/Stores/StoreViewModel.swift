@@ -20,9 +20,14 @@ class StoreViewModel: NSObject {
     }
     
     func getStoresListApi() {
+        let savedUser = kSharedUserDefaults.retrieveModelFor(key: .user, model: UserModel.self)
+
         var param: [String: Any] = ["category_id": hostVC.slecetedCategoryID,
                                     "subcategory": hostVC.slectedsubCategoryId ?? 0
         ]
+        if let userId = savedUser?.id {
+            param["user_id"] = userId
+        }
         if !searchText.isEmpty {
             param["search"] = searchText
         }
