@@ -127,9 +127,6 @@ class ProductDetailViewController: UIViewController {
         initialSetUp()
         viewModel.getSavedAddressListAPI()
         actionButtonsStackView.semanticContentAttribute = .forceLeftToRight
-        //        sizeCollectionView.semanticContentAttribute = .forceLeftToRight
-        //            sizeCollectionView.collectionViewLayout.semanticContentAttribute = .forceLeftToRight
-        //        colorsCollectionView.semanticContentAttribute = .forceLeftToRight
         setupCollectionViewDirection()
     }
     
@@ -147,11 +144,31 @@ class ProductDetailViewController: UIViewController {
         }
     }
     
+//    private func setupCollectionViewDirection() {
+//        let isArabic = AppLanguageManager.shared.currentLanguage == .ar
+//        
+//        sizeCollectionView.semanticContentAttribute = isArabic ? .forceRightToLeft : .forceLeftToRight
+//        colorsCollectionView.semanticContentAttribute = isArabic ? .forceRightToLeft : .forceLeftToRight
+//        
+//        if let flowLayout = sizeCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+//            flowLayout.scrollDirection = .horizontal
+//        }
+//        
+//        if let flowLayout = colorsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+//            flowLayout.scrollDirection = .horizontal
+//        }
+//        
+//        sizeCollectionView.reloadData()
+//        colorsCollectionView.reloadData()
+//    }
+    
     private func setupCollectionViewDirection() {
         let isArabic = AppLanguageManager.shared.currentLanguage == .ar
         
-        sizeCollectionView.semanticContentAttribute = isArabic ? .forceRightToLeft : .forceLeftToRight
-        colorsCollectionView.semanticContentAttribute = isArabic ? .forceRightToLeft : .forceLeftToRight
+        // IMPORTANT: Force LeftToRight for both color and size selectors
+        // This makes first item appear on LEFT side (better UX for chips)
+        colorsCollectionView.semanticContentAttribute = .forceLeftToRight
+        sizeCollectionView.semanticContentAttribute = .forceLeftToRight
         
         if let flowLayout = sizeCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.scrollDirection = .horizontal
@@ -161,8 +178,8 @@ class ProductDetailViewController: UIViewController {
             flowLayout.scrollDirection = .horizontal
         }
         
-        sizeCollectionView.reloadData()
-        colorsCollectionView.reloadData()
+        // Optional: Flip content for Arabic only if needed (but we don't want it here)
+        // colorsCollectionView.transform = isArabic ? CGAffineTransform(scaleX: -1, y: 1) : .identity
     }
     
     // MARK: - Button's Action
@@ -588,11 +605,21 @@ class ProductDetailViewController: UIViewController {
     }
     
     private func filterVariantsForSelectedColor() {
+//        guard let variants = productDetails?.productVariants,
+//              !variants.isEmpty,
+//              selectedColourIndex < uniqueColors.count else {
+//            return
+//        }
+        
         guard let variants = productDetails?.productVariants,
-              !variants.isEmpty,
-              selectedColourIndex < uniqueColors.count else {
-            return
-        }
+                  !variants.isEmpty,
+                  selectedColourIndex < uniqueColors.count else {
+                // Clear everything if no data
+                filteredVariants = []
+                selectedSizeIndex = -1
+                sizeCollectionView.reloadData()
+                return
+            }
         
         let selectedColor = uniqueColors[selectedColourIndex]
         
@@ -639,16 +666,54 @@ class ProductDetailViewController: UIViewController {
         resetImageCarouselToFirst()
         
         // Highlight selected size ONLY if in-stock
-        if selectedSizeIndex >= 0 {
-            DispatchQueue.main.async {
-                let indexPath = IndexPath(item: self.selectedSizeIndex, section: 0)
-                self.sizeCollectionView.selectItem(at: indexPath,
-                                                   animated: false,
-                                                   scrollPosition: .centeredHorizontally)
+//        if selectedSizeIndex >= 0 {
+//            DispatchQueue.main.async {
+//                let indexPath = IndexPath(item: self.selectedSizeIndex, section: 0)
+//                self.sizeCollectionView.selectItem(at: indexPath,
+//                                                   animated: false,
+//                                                   scrollPosition: .centeredHorizontally)
+//            }
+//        }
+        
+        // Highlight selected size - Fixed for RTL
+        // Highlight selected size - Safe for RTL + Empty State
+//        if selectedSizeIndex >= 0 && selectedSizeIndex < filteredVariants.count {
+//            let indexPath = IndexPath(item: self.selectedSizeIndex, section: 0)
+//            
+//            // Safely select
+//            sizeCollectionView.selectItem(at: indexPath,
+//                                          animated: false,
+//                                          scrollPosition: [])
+//            
+//            DispatchQueue.main.async { [weak self] in
+//                guard let self = self else { return }
+//                
+//                let isRTL = self.view.semanticContentAttribute == .forceRightToLeft
+//                
+//                // Prefer .left in RTL so content starts from right side naturally
+//                let scrollPosition: UICollectionView.ScrollPosition = isRTL ? .left : .centeredHorizontally
+//                
+//                self.sizeCollectionView.scrollToItem(at: indexPath,
+//                                                     at: scrollPosition,
+//                                                     animated: true)
+//            }
+//        }
+        
+        // Highlight selected size - Safe & Consistent
+        if selectedSizeIndex >= 0 && selectedSizeIndex < filteredVariants.count {
+            let indexPath = IndexPath(item: self.selectedSizeIndex, section: 0)
+            
+            sizeCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+            
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.sizeCollectionView.scrollToItem(at: indexPath,
+                                                     at: .centeredHorizontally,
+                                                     animated: true)
             }
         }
         
-        sizeCollectionView.reloadData()
+//        sizeCollectionView.reloadData()
         colorsCollectionView.reloadData()
         resetImageCarouselToFirst()
         
@@ -676,6 +741,11 @@ class ProductDetailViewController: UIViewController {
         resetImageCarouselToFirst()
         
         updateUIForSelectedVariant()
+    }
+    
+    private func isIndexPathVisible(_ indexPath: IndexPath, in collectionView: UICollectionView) -> Bool {
+        let visibleIndexPaths = collectionView.indexPathsForVisibleItems
+        return visibleIndexPaths.contains(indexPath)
     }
     
     private func resetImageCarouselToFirst() {
@@ -822,11 +892,23 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
                 present(vc, animated: true)
             }
         case colorsCollectionView:
+//            selectedColourIndex = indexPath.row
+//            filterVariantsForSelectedColor()
+//            colorsCollectionView.reloadData()
+//            colorsCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+//            checkAndUpdateCartStatus()
+            
             selectedColourIndex = indexPath.row
-            filterVariantsForSelectedColor()
-            colorsCollectionView.reloadData()
-            colorsCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-            checkAndUpdateCartStatus()
+                filterVariantsForSelectedColor()
+                colorsCollectionView.reloadData()
+                
+                // Scroll to selected color - Always from left
+                DispatchQueue.main.async {
+                    self.colorsCollectionView.scrollToItem(at: indexPath,
+                                                           at: .centeredHorizontally,
+                                                           animated: true)
+                }
+                checkAndUpdateCartStatus()
         case sizeCollectionView:
             let variant = filteredVariants[indexPath.row]
             let stock = Int(variant.totalStock ?? "0") ?? 0
