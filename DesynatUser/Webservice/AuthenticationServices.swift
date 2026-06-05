@@ -126,7 +126,7 @@ extension WebService {
     
     func countryListService(completion:@escaping (_ user:[CountryModel])-> Void) {
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI:.endpoint(.country), requestMethod: .get,requestModel:[CountryModel].self) { result, code in
+        NetworkManager.shared.request(withAPI:.endpoint(.allUserCountry), requestMethod: .get,requestModel:[CountryModel].self) { result, code in
             
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
@@ -611,9 +611,9 @@ extension WebService {
         }
     }
     
-    func getAllUserscountryList(completion:@escaping (_ user:[GetAllUserCountryModel])-> Void) {
+    func getAllUserscountryList(completion:@escaping (_ user:[CountryModel])-> Void) {
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI:.endpoint(.allUserCountry), requestMethod: .get,requestModel:[GetAllUserCountryModel].self) { result, code in
+        NetworkManager.shared.request(withAPI:.endpoint(.allUserCountry), requestMethod: .get,requestModel:[CountryModel].self) { result, code in
             
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
@@ -628,9 +628,9 @@ extension WebService {
         }
     }
     
-    func getAllUsersCurrencyList(completion:@escaping (_ user:[GetAllUserCountryModel])-> Void) {
+    func getAllUsersCurrencyList(completion:@escaping (_ user:[CountryModel])-> Void) {
         CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI:.endpoint(.allUserCurrency), requestMethod: .get,requestModel:[GetAllUserCountryModel].self) { result, code in
+        NetworkManager.shared.request(withAPI:.endpoint(.allUserCurrency), requestMethod: .get,requestModel:[CountryModel].self) { result, code in
             CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {

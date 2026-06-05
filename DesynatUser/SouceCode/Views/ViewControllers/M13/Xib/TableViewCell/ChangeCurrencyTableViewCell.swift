@@ -27,7 +27,7 @@ class ChangeCurrencyTableViewCell: UITableViewCell {
     
 
     func configureCell(comingReason: ComingReasonAtChangeCurrency,
-                       country: GetAllUserCountryModel? = nil
+                       country: CountryModel? = nil
     ) {
         switch comingReason {
             
@@ -42,7 +42,7 @@ class ChangeCurrencyTableViewCell: UITableViewCell {
             }
             
             flagEmojiLabel.isHidden = false
-            flagEmojiLabel.text = country?.flag1
+            flagEmojiLabel.text = country?.flag
         }
     }
     

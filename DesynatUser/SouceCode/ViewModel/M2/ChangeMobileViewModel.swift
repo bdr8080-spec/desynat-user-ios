@@ -11,7 +11,7 @@ import UIKit
 class ChangeMobileViewModel:NSObject{
     
     private var hostVC:ChangeMobileViewController
-    var getAllUSerCountryList:[GetAllUserCountryModel] = []
+    var getAllUSerCountryList:[CountryModel] = []
     
     init(hostVC: ChangeMobileViewController) {
         self.hostVC = hostVC

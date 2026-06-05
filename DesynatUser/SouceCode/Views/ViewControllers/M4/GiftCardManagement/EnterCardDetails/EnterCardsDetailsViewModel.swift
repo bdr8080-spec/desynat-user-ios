@@ -10,7 +10,7 @@ import Foundation
 class EnterCardsDetailsViewModel {
   
   private var hostVC: EnterCardsDetailsViewController
-  var getAllUSerCountryList:[GetAllUserCountryModel] = []
+  var getAllUSerCountryList:[CountryModel] = []
   
   init(hostVC: EnterCardsDetailsViewController) {
     self.hostVC = hostVC
@@ -45,11 +45,14 @@ class EnterCardsDetailsViewModel {
     
     let recepientEmail = hostVC.emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
     if errorMessage == .none {
-      if recepientEmail.isEmpty {
-        errorMessage = .EnterRecepientEmail
-      } else if !recepientEmail.isValidEmail() {
-        errorMessage = .EnterValidEmailAddress
-      }
+      if !recepientEmail.isEmpty {
+//        errorMessage = .EnterRecepientEmail
+          if !recepientEmail.isValidEmail() {
+            errorMessage = .EnterValidEmailAddress
+          }
+      } //else if !recepientEmail.isValidEmail() {
+//        errorMessage = .EnterValidEmailAddress
+//      }
     }
     
     let recepientMobile = hostVC.whatsAppNumberTF.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""

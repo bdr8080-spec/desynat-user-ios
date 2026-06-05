@@ -27,8 +27,9 @@ enum NetworkEndPoint: String {
     case createPassword                     = "api/create_password"
     case uploadFile                         = "api/upload"
     case resendOtp                          = "api/resend_otp"
-    case country                            = "api/country"
-    case allUserCountry                     = "api/all_country"
+//    case country                            = "api/country" //FOR 6 COUNTRIES LIST
+//    case allUserCountry                     = "api/all_country" // FOR ALL COUNTRIES LIST
+    case allUserCountry                     = "api/country" //FOR 6 COUNTRIES LIST
     case allUserCurrency                    = "api/all_country_unique_currency"
     case logout                             = "api/user/logout"
     

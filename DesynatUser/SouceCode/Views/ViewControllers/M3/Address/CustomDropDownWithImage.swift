@@ -52,7 +52,7 @@ class CustomDropdown: UIView {
     private let tableView = UITableView()
     private var heightConstraint: NSLayoutConstraint?
     
-    var countries: [GetAllUserCountryModel] = [] {
+    var countries: [CountryModel] = [] {
         didSet {
             tableView.reloadData()
             updateHeight()

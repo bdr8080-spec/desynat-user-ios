@@ -11,7 +11,7 @@ import UIKit
 class AddaddressViewModel: NSObject {
   
   private var hostVC: AddAddressViewController
-  var getAllUSerCountryList:[GetAllUserCountryModel] = []
+  var getAllUSerCountryList:[CountryModel] = []
   
   init(hostVC: AddAddressViewController) {
     self.hostVC = hostVC

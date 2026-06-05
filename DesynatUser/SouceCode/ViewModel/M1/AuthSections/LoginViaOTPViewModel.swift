@@ -12,7 +12,7 @@ class LoginViaOTPViewModel: NSObject {
     
     private var loginHostVC: LoginViaOTPViewController
     private var isEnterPhoneNumber: Bool = false
-    var getAllUSerCountryList:[GetAllUserCountryModel] = []
+    var getAllUSerCountryList:[CountryModel] = []
     
     init(loginHostVC: LoginViaOTPViewController) {
         self.loginHostVC = loginHostVC

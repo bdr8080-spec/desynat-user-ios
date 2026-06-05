@@ -12,7 +12,7 @@ import UIKit
 class ForgotPasswordViewModel: NSObject {
     
     private var hostVC: ForgotPasswordViewController
-    var getAllUSerCountryList:[GetAllUserCountryModel] = []
+    var getAllUSerCountryList:[CountryModel] = []
     var getSevenCountryList:[CountryModel] = []
     
     init(hostVC: ForgotPasswordViewController) {

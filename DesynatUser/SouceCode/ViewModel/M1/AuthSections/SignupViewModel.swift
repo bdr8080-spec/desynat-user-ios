@@ -11,7 +11,7 @@ import UIKit
 
 class SignupViewModel: NSObject {
     private var hostVC: SignupViewController
-  var getAllUSerCountryList:[GetAllUserCountryModel] = []
+  var getAllUSerCountryList:[CountryModel] = []
   
     
     init(hostVC: SignupViewController) {

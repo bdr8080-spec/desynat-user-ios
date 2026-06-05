@@ -11,7 +11,7 @@ import UIKit
 class AddNewAddressForCustomViewModel {
   
   private var hostVC: AddNewAddressForCustomViewController
-  var getAllUSerCountryList:[GetAllUserCountryModel] = []
+  var getAllUSerCountryList:[CountryModel] = []
   
   init(hostVC: AddNewAddressForCustomViewController) {
     self.hostVC = hostVC

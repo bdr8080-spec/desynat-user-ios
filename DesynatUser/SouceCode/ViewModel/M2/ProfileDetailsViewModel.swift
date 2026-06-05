@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileDetailsViewModel:NSObject{
     private var hostVC: ProfileDetailsViewController
-    var getAllUSerCountryList:[GetAllUserCountryModel] = []
+    var getAllUSerCountryList:[CountryModel] = []
     
     init(hostVC: ProfileDetailsViewController) {
         self.hostVC = hostVC

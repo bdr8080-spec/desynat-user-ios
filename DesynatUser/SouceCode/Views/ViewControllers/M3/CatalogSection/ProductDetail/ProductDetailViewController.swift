@@ -114,6 +114,7 @@ class ProductDetailViewController: UIViewController {
     var refernceLink: String? = ""
     var productId: Int? = 0
     var bagCount: Int = 0
+    
     var selectedVariant: ProductVariant? {
         guard !filteredVariants.isEmpty else { return nil }
         guard selectedSizeIndex >= 0 else { return filteredVariants[0] }
@@ -127,7 +128,7 @@ class ProductDetailViewController: UIViewController {
         initialSetUp()
         viewModel.getSavedAddressListAPI()
         actionButtonsStackView.semanticContentAttribute = .forceLeftToRight
-        setupCollectionViewDirection()
+//        setupCollectionViewDirection()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -145,10 +146,13 @@ class ProductDetailViewController: UIViewController {
     }
     
 //    private func setupCollectionViewDirection() {
-//        let isArabic = AppLanguageManager.shared.currentLanguage == .ar
-//        
-//        sizeCollectionView.semanticContentAttribute = isArabic ? .forceRightToLeft : .forceLeftToRight
-//        colorsCollectionView.semanticContentAttribute = isArabic ? .forceRightToLeft : .forceLeftToRight
+//        if AppLanguageManager.shared.currentLanguage == .ar {
+//            colorsCollectionView.semanticContentAttribute = .forceRightToLeft
+//            sizeCollectionView.semanticContentAttribute = .forceRightToLeft
+//        } else {
+//            colorsCollectionView.semanticContentAttribute = .forceLeftToRight
+//            sizeCollectionView.semanticContentAttribute = .forceLeftToRight
+//        }
 //        
 //        if let flowLayout = sizeCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
 //            flowLayout.scrollDirection = .horizontal
@@ -157,30 +161,7 @@ class ProductDetailViewController: UIViewController {
 //        if let flowLayout = colorsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
 //            flowLayout.scrollDirection = .horizontal
 //        }
-//        
-//        sizeCollectionView.reloadData()
-//        colorsCollectionView.reloadData()
 //    }
-    
-    private func setupCollectionViewDirection() {
-        let isArabic = AppLanguageManager.shared.currentLanguage == .ar
-        
-        // IMPORTANT: Force LeftToRight for both color and size selectors
-        // This makes first item appear on LEFT side (better UX for chips)
-        colorsCollectionView.semanticContentAttribute = .forceLeftToRight
-        sizeCollectionView.semanticContentAttribute = .forceLeftToRight
-        
-        if let flowLayout = sizeCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.scrollDirection = .horizontal
-        }
-        
-        if let flowLayout = colorsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.scrollDirection = .horizontal
-        }
-        
-        // Optional: Flip content for Arabic only if needed (but we don't want it here)
-        // colorsCollectionView.transform = isArabic ? CGAffineTransform(scaleX: -1, y: 1) : .identity
-    }
     
     // MARK: - Button's Action
     @IBAction func backDidTapped(_ sender: Any) {
@@ -459,7 +440,6 @@ class ProductDetailViewController: UIViewController {
         
         specificationTableView.reloadData()
         checkDeliveryTableView.reloadData()
-        //    checkAndUpdateCartStatus()
         checkAndPreselectCartVariant()
         bagCount = productDetails?.addtocartTotalProduct ?? 0
         totalItemsInBagLabel.text = "(\(productDetails?.addtocartTotalProduct ?? 0) \("Items) View My Bag".localiz())"
@@ -480,7 +460,6 @@ class ProductDetailViewController: UIViewController {
             customOrderView.isHidden = true
             spaceTopLabel.isHidden = true
         }
-        
     }
     
     private func checkAndUpdateCartStatus() {
@@ -502,7 +481,6 @@ class ProductDetailViewController: UIViewController {
         quantity = cartItem.quantity ?? 1
         addToBagView.isHidden = true
         bagItemCountView.isHidden = false
-        //        bagItemCountView.isHidden = productDetails.store?.storeAvailability != 1
         incrementDecrementView.isHidden = false
         itemCountLabel.text = "\(quantity)"
     }
@@ -556,16 +534,18 @@ class ProductDetailViewController: UIViewController {
             itemCountLabel.text = "\(quantity)"
             
             // Step 7: Scroll and highlight selected color & size
-            DispatchQueue.main.async {
-                if self.uniqueColors.count > self.selectedColourIndex {
-                    let colorIndexPath = IndexPath(item: self.selectedColourIndex, section: 0)
-                    self.colorsCollectionView.selectItem(at: colorIndexPath, animated: false, scrollPosition: .centeredHorizontally)
-                }
-                if self.selectedSizeIndex >= 0 && self.selectedSizeIndex < self.filteredVariants.count {
-                    let sizeIndexPath = IndexPath(item: self.selectedSizeIndex, section: 0)
-                    self.sizeCollectionView.selectItem(at: sizeIndexPath, animated: false, scrollPosition: .centeredHorizontally)
-                }
-            }
+//            DispatchQueue.main.async {
+//                if self.uniqueColors.count > self.selectedColourIndex {
+//                    let colorIndexPath = IndexPath(item: self.selectedColourIndex, section: 0)
+//                    self.colorsCollectionView.selectItem(at: colorIndexPath, animated: false, scrollPosition: .centeredHorizontally)
+//                    self.colorsCollectionView.reloadData()
+//                }
+//                if self.selectedSizeIndex >= 0 && self.selectedSizeIndex < self.filteredVariants.count {
+//                    let sizeIndexPath = IndexPath(item: self.selectedSizeIndex, section: 0)
+//                    self.sizeCollectionView.selectItem(at: sizeIndexPath, animated: false, scrollPosition: .centeredHorizontally)
+//                    self.sizeCollectionView.reloadData()
+//                }
+//            }
         } else {
             // Cart item exists but variant not found → fallback to default
             selectedColourIndex = 0
@@ -605,21 +585,16 @@ class ProductDetailViewController: UIViewController {
     }
     
     private func filterVariantsForSelectedColor() {
-//        guard let variants = productDetails?.productVariants,
-//              !variants.isEmpty,
-//              selectedColourIndex < uniqueColors.count else {
-//            return
-//        }
-        
+        let isArabic = AppLanguageManager.shared.currentLanguage == .ar
         guard let variants = productDetails?.productVariants,
-                  !variants.isEmpty,
-                  selectedColourIndex < uniqueColors.count else {
-                // Clear everything if no data
-                filteredVariants = []
-                selectedSizeIndex = -1
-                sizeCollectionView.reloadData()
-                return
-            }
+              !variants.isEmpty,
+              selectedColourIndex < uniqueColors.count else {
+            // Clear everything if no data
+            filteredVariants = []
+            selectedSizeIndex = -1
+            sizeCollectionView.reloadData()
+            return
+        }
         
         let selectedColor = uniqueColors[selectedColourIndex]
         
@@ -665,59 +640,24 @@ class ProductDetailViewController: UIViewController {
         colorsCollectionView.reloadData()
         resetImageCarouselToFirst()
         
-        // Highlight selected size ONLY if in-stock
-//        if selectedSizeIndex >= 0 {
-//            DispatchQueue.main.async {
-//                let indexPath = IndexPath(item: self.selectedSizeIndex, section: 0)
-//                self.sizeCollectionView.selectItem(at: indexPath,
-//                                                   animated: false,
-//                                                   scrollPosition: .centeredHorizontally)
-//            }
-//        }
-        
-        // Highlight selected size - Fixed for RTL
-        // Highlight selected size - Safe for RTL + Empty State
-//        if selectedSizeIndex >= 0 && selectedSizeIndex < filteredVariants.count {
-//            let indexPath = IndexPath(item: self.selectedSizeIndex, section: 0)
-//            
-//            // Safely select
-//            sizeCollectionView.selectItem(at: indexPath,
-//                                          animated: false,
-//                                          scrollPosition: [])
-//            
-//            DispatchQueue.main.async { [weak self] in
-//                guard let self = self else { return }
-//                
-//                let isRTL = self.view.semanticContentAttribute == .forceRightToLeft
-//                
-//                // Prefer .left in RTL so content starts from right side naturally
-//                let scrollPosition: UICollectionView.ScrollPosition = isRTL ? .left : .centeredHorizontally
-//                
-//                self.sizeCollectionView.scrollToItem(at: indexPath,
-//                                                     at: scrollPosition,
-//                                                     animated: true)
-//            }
-//        }
-        
         // Highlight selected size - Safe & Consistent
         if selectedSizeIndex >= 0 && selectedSizeIndex < filteredVariants.count {
             let indexPath = IndexPath(item: self.selectedSizeIndex, section: 0)
             
-            sizeCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
-            
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.sizeCollectionView.scrollToItem(at: indexPath,
-                                                     at: .centeredHorizontally,
-                                                     animated: true)
+//            sizeCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+            sizeCollectionView.reloadData()
+//            DispatchQueue.main.async { [weak self] in
+//                guard let self = self else { return }
+//                self.sizeCollectionView.scrollToItem(at: indexPath,
+//                                                     at: .centeredHorizontally,
+//                                                     animated: true)
+//                self.sizeCollectionView.scrollToItem(at: indexPath,
+//                                                     at: isArabic ? .right : .left,
+//                                                     animated: true)
             }
-        }
-        
-//        sizeCollectionView.reloadData()
+//        }
         colorsCollectionView.reloadData()
         resetImageCarouselToFirst()
-        
-        // Add this:
         checkAndUpdateCartStatus()
     }
     
@@ -817,12 +757,7 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
         case productImageCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductDetailImageCollectionViewCell", for: indexPath) as! ProductDetailImageCollectionViewCell
             let img = selectedVariantImages[indexPath.row]
-            //            //            cell.configData(data: img)
             cell.configure(mediaURL: img)
-            //            if let images = selectedVariant?.variantImage, images.count > indexPath.row {
-            //                //                cell.configData(variantImageUrl: images[indexPath.row])
-            //                cell.configure(mediaURL: images[indexPath.row])
-            //            }
             return cell
         case colorsCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorsCollectionViewCell", for: indexPath) as! ColorsCollectionViewCell
@@ -866,13 +801,6 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
         case productImageCollectionView:
-            //            guard let images = selectedVariant?.variantImage else { return }
-            //            let vc = FullscreenGalleryViewController()
-            //            vc.images = images
-            //            vc.startIndex = indexPath.row
-            //            vc.modalPresentationStyle = .fullScreen
-            //            present(vc, animated: true)
-            
             guard let mediaItems = selectedVariant?.variantImage else { return }
             let selectedUrl = mediaItems[indexPath.row]
             guard let url = URL(string: selectedUrl) else { return }
@@ -892,23 +820,20 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
                 present(vc, animated: true)
             }
         case colorsCollectionView:
-//            selectedColourIndex = indexPath.row
-//            filterVariantsForSelectedColor()
-//            colorsCollectionView.reloadData()
-//            colorsCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-//            checkAndUpdateCartStatus()
-            
             selectedColourIndex = indexPath.row
-                filterVariantsForSelectedColor()
-                colorsCollectionView.reloadData()
-                
-                // Scroll to selected color - Always from left
-                DispatchQueue.main.async {
-                    self.colorsCollectionView.scrollToItem(at: indexPath,
-                                                           at: .centeredHorizontally,
-                                                           animated: true)
-                }
-                checkAndUpdateCartStatus()
+            filterVariantsForSelectedColor()
+            colorsCollectionView.reloadData()
+//            let isArabic = AppLanguageManager.shared.currentLanguage == .ar
+            // Scroll to selected color - Always from left
+//            DispatchQueue.main.async {
+////                self.colorsCollectionView.scrollToItem(at: indexPath,
+////                                                       at: .centeredHorizontally,
+////                                                       animated: true)
+//                self.colorsCollectionView.scrollToItem(at: indexPath,
+//                                                       at: isArabic ? .right : .left,
+//                                                       animated: true)
+//            }
+            checkAndUpdateCartStatus()
         case sizeCollectionView:
             let variant = filteredVariants[indexPath.row]
             let stock = Int(variant.totalStock ?? "0") ?? 0
@@ -933,10 +858,8 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
         case productImageCollectionView:
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         case colorsCollectionView:
-            //            return CGSize(width: 54, height: 45)
             return CGSize(width: 45, height: 35)
         case sizeCollectionView:
-            //            return CGSize(width: 55, height: 42)
             return CGSize(width: 45, height: 35)
         case similarProductCollectionView:
             let spacing: CGFloat = 10
@@ -1047,5 +970,12 @@ extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegat
         default:
             return UITableView.automaticDimension
         }
+    }
+}
+
+class RTLCollectionViewFlowLayout: UICollectionViewFlowLayout {
+
+    override var flipsHorizontallyInOppositeLayoutDirection: Bool {
+        return true
     }
 }

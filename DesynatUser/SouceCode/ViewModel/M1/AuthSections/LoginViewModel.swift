@@ -12,7 +12,7 @@ import UIKit
 class LoginViewModel: NSObject {
     
     private var loginHostVC: LoginViewController
-    var getAllUSerCountryList:[GetAllUserCountryModel] = []
+    var getAllUSerCountryList:[CountryModel] = []
     
     init(loginHostVC: LoginViewController) {
         self.loginHostVC = loginHostVC

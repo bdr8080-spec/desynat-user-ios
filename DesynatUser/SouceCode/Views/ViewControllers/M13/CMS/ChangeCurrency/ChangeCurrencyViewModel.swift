@@ -9,7 +9,7 @@ import Foundation
 class ChangeCurrencyViewModel{
     
     var hostVc: ChangeCurrencyViewController?
-    var getAllUSerCountryList:[GetAllUserCountryModel] = []
+    var getAllUSerCountryList:[CountryModel] = []
     
     init(hostVc: ChangeCurrencyViewController? = nil) {
         self.hostVc = hostVc
