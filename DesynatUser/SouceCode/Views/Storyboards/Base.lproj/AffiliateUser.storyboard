@@ -5325,7 +5325,7 @@ you for your patience. Team Desynat App</string>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MaC-9p-ANc">
-                                                        <rect key="frame" x="28.333333333333314" y="9.3333333333333446" width="58" height="19.666666666666671"/>
+                                                        <rect key="frame" x="28.333333333333314" y="9.3333333333333446" width="57.999999999999986" height="19.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -5439,7 +5439,7 @@ you for your patience. Team Desynat App</string>
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Your Password" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7u4-h3-JE0">
-                                                                <rect key="frame" x="20" y="14.333333333333345" width="164" height="19.666666666666671"/>
+                                                                <rect key="frame" x="20" y="14.333333333333345" width="164" height="19.666666666666664"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -6393,7 +6393,7 @@ you for your patience. Team Desynat App</string>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add another account" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fms-wH-H5q">
-                                                <rect key="frame" x="114.33333333333336" y="14.333333333333373" width="150.66666666666663" height="19.666666666666671"/>
+                                                <rect key="frame" x="114.33333333333336" y="14.333333333333373" width="150.66666666666663" height="19.666666666666664"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                 <color key="textColor" red="0.35294117650000001" green="0.20784313730000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -8486,6 +8486,7 @@ want to continue with</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonActionStackView" destination="xoQ-4j-aw8" id="rB4-14-xlY"/>
                         <outlet property="filtersTableView" destination="FxE-3c-ZWX" id="PYJ-uf-oTk"/>
                     </connections>
                 </viewController>
@@ -8966,6 +8967,7 @@ want to continue with</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonActionStackView" destination="5PL-nS-aia" id="LEc-q7-bdL"/>
                         <outlet property="fromTextField" destination="HdL-uI-1hv" id="HSh-E2-Ux8"/>
                         <outlet property="headerView" destination="nVm-Xu-GEw" id="KtG-CX-CfF"/>
                         <outlet property="statusTableView" destination="KPI-Sw-Rtm" id="iSF-Ed-zRi"/>

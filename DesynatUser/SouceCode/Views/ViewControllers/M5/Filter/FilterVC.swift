@@ -11,6 +11,7 @@ class FilterVC: UIViewController {
     
     // MARK: - IBOutlet's
     @IBOutlet weak var titleView: UIView!
+    @IBOutlet weak var buttonActionStackView: UIStackView!
     @IBOutlet weak var filterTableview: UITableView!
     
     // MARK: - Property Decalaration
@@ -28,6 +29,7 @@ class FilterVC: UIViewController {
         registerXib()
         initialSetup()
         applyPreselection()
+        buttonActionStackView.semanticContentAttribute = .forceLeftToRight
     }
     
     // MARK: - Button's Action

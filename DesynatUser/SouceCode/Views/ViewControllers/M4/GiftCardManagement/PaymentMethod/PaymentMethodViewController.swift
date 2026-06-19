@@ -178,11 +178,11 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
         let invoiceValue = Decimal(payAmount)
         let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
         request.customerReference = self.orderId
-        let supplierId = Int.random(in: 1000...9999)
-        let supplier = MFSupplier(
-            supplierCode: supplierId, invoiceShare: invoiceValue
-        )
-        request.suppliers = [supplier]
+//        let supplierId = Int.random(in: 1000...9999)
+//        let supplier = MFSupplier(
+//            supplierCode: supplierId, invoiceShare: invoiceValue
+//        )
+//        request.suppliers = [supplier]
         
         viewPayment.pay(request, .english) { [weak self] response, invoiceId in
             guard let self = self else { return }
@@ -336,15 +336,15 @@ extension PaymentMethodViewController {
     }
     
     func startVisaPayPayment() {
-        let supplierId = Int.random(in: 1000...9999)
+//        let supplierId = Int.random(in: 1000...9999)
         let amountDecimal = Decimal(string: String(format: "%.3f", payAmount)) ?? 0
         let request = MFExecutePaymentRequest(invoiceValue: amountDecimal, paymentMethod: 2)
         
         request.customerReference = orderId
         request.displayCurrencyIso = .kuwait_KWD
         
-        let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: Decimal(payAmount))
-        request.suppliers = [supplier]
+//        let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: Decimal(payAmount))
+//        request.suppliers = [supplier]
         
         MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { [weak self] result, invoiceId in
             guard let self = self else { return }
@@ -365,13 +365,13 @@ extension PaymentMethodViewController {
     }
     
     func startKNETPayment() {
-        let supplierId = Int.random(in: 1000...9999)
+//        let supplierId = Int.random(in: 1000...9999)
         let request = MFExecutePaymentRequest(invoiceValue: Decimal(payAmount), paymentMethod: 1)
         request.customerReference = orderId
         request.displayCurrencyIso = .kuwait_KWD
         
-        let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: Decimal(payAmount))
-        request.suppliers = [supplier]
+//        let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: Decimal(payAmount))
+//        request.suppliers = [supplier]
         
         MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { [weak self] result, invoiceId in
             guard let self = self else { return }

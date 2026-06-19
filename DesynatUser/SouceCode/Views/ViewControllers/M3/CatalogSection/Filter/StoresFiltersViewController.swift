@@ -11,6 +11,7 @@ class StoresFiltersViewController: UIViewController {
     
     // MARK: - IBOutlet's
     @IBOutlet weak var filtersTableView: UITableView!
+    @IBOutlet weak var buttonActionStackView: UIStackView!
     
     // MARK: - Closure Callback (same as your provided file)
     var onFilterApplied: ((_ ratings: [String], _ availability: String, _ shortest: Bool, _ highest: Bool) -> Void)?
@@ -31,6 +32,7 @@ class StoresFiltersViewController: UIViewController {
         super.viewDidLoad()
         registerXib()
         prepareFilters()
+        buttonActionStackView.semanticContentAttribute = .forceLeftToRight
     }
     
     // MARK: - Button's Action

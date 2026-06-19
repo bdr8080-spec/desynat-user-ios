@@ -18,6 +18,8 @@ class WithdrawalFiltersViewController: UIViewController {
             statusTableView.registerCellFromNib(cellID: "ChatsFilterTableViewCell")
         }
     }
+    @IBOutlet weak var buttonActionStackView: UIStackView!
+    
     // MARK: - Property Decalaration
     let datePicker = UIDatePicker()
     private var activeTextField: UITextField?
@@ -37,6 +39,7 @@ class WithdrawalFiltersViewController: UIViewController {
         super.viewDidLoad()
         handleUISetup()
         applyPreselectedData()
+        buttonActionStackView.semanticContentAttribute = .forceLeftToRight
     }
     
     // MARK: - Button's Action

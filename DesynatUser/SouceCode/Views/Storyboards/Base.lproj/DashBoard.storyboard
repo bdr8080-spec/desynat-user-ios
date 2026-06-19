@@ -2391,6 +2391,9 @@ your account?</string>
                             <constraint firstItem="uND-OA-vVh" firstAttribute="centerY" secondItem="9Q0-7S-KOk" secondAttribute="centerY" id="stk-Vs-gRK"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="buttonActionStackView" destination="pYY-Kq-sng" id="5vG-RU-Kgv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2ZK-Dk-FTY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

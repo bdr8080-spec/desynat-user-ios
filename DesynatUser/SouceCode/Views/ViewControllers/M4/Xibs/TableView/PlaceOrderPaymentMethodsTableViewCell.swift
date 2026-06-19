@@ -136,17 +136,17 @@ extension PlaceOrderPaymentMethodsTableViewCell {
   
   func payWithSelectedCard(invoiceValue: Decimal,
                            orderId: String,
-                           supplierId: String?,
+//                           supplierId: String?,
                            completion: @escaping (MFPaymentStatusResponse?, String?, Error?) -> Void) {
-    guard let supplierIDString = supplierId,
-          let supplierCode = Int(supplierIDString) else {
-      completion(nil, nil, NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid supplier ID."]))
-      return
-    }
+//    guard let supplierIDString = supplierId,
+//          let supplierCode = Int(supplierIDString) else {
+//      completion(nil, nil, NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid supplier ID."]))
+//      return
+//    }
     let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
     request.customerReference = orderId
-    let supplier = MFSupplier(supplierCode: supplierCode, invoiceShare: invoiceValue)
-    request.suppliers = [supplier]
+//    let supplier = MFSupplier(supplierCode: supplierCode, invoiceShare: invoiceValue)
+//    request.suppliers = [supplier]
     viewPayment.pay(request, .english) { [self] result, invoiceId in
       switch result {
       case .success(let paymentStatus):
@@ -238,12 +238,12 @@ extension PlaceOrderPaymentMethodsTableViewCell{
   
   func creditDebitCardPayment(invoiceValue: Decimal,
                               orderId: String,
-                              supplierId: Int,
+//                              supplierId: Int,
                               completion: @escaping (MFPaymentStatusResponse?, String?, Error?) -> Void) {
     let request = MFExecutePaymentRequest(invoiceValue: invoiceValue, paymentMethod: 8)
     request.customerReference = orderId
-    let supplier = MFSupplier(supplierCode: 1913, invoiceShare: invoiceValue)
-    request.suppliers = [supplier]
+//    let supplier = MFSupplier(supplierCode: 1913, invoiceShare: invoiceValue)
+//    request.suppliers = [supplier]
     request.displayCurrencyIso = .uAE_AED
     MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { result, invoiceId in
       switch result {
@@ -263,13 +263,13 @@ extension PlaceOrderPaymentMethodsTableViewCell{
   
   func payByKNET(invoiceValue: Decimal,
                  orderId: String,
-                 supplierId: Int,
+//                 supplierId: Int,
                  completion: @escaping (MFPaymentStatusResponse?, String?, Error?) -> Void) {
     let request = MFExecutePaymentRequest(invoiceValue: invoiceValue, paymentMethod: 1)
     request.customerReference = orderId
     request.displayCurrencyIso = .kuwait_KWD
-    let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: invoiceValue)
-    request.suppliers = [supplier]
+//    let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: invoiceValue)
+//    request.suppliers = [supplier]
     MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { result, invoiceId in
       switch result {
       case .success(let paymentStatus):
@@ -288,14 +288,14 @@ extension PlaceOrderPaymentMethodsTableViewCell{
   
   func payByVisaPay(invoiceValue: Decimal,
                     orderId: String,
-                    supplierId: Int,
+//                    supplierId: Int,
                     completion: @escaping (MFPaymentStatusResponse?, String?, Error?) -> Void) {
     // Payment method ID 2 for VisaPay
     let request = MFExecutePaymentRequest(invoiceValue: invoiceValue, paymentMethod: 2)
     request.customerReference = orderId
     
-    let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: invoiceValue)
-    request.suppliers = [supplier]
+//    let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: invoiceValue)
+//    request.suppliers = [supplier]
     request.displayCurrencyIso = .uAE_AED
     
     MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { result, invoiceId in

@@ -15,6 +15,7 @@ class LiveStreamingViewController: UIViewController {
     @IBOutlet weak var lblWaiting: UILabel!
     @IBOutlet weak var muteView: UIView!
     @IBOutlet weak var lblUserCount: UILabel!
+    @IBOutlet weak var buttonActionStackView: UIStackView!
     
     // MARK: - Agora
     var agoraKit: AgoraRtcEngineKit!
@@ -45,6 +46,7 @@ class LiveStreamingViewController: UIViewController {
         }
         joinChannel()
         startUserCountTimer()
+        buttonActionStackView.semanticContentAttribute = .forceLeftToRight
     }
     
     override func viewWillDisappear(_ animated: Bool) {

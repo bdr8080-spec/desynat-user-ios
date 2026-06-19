@@ -91,13 +91,13 @@ extension PaymentMethodsTableViewCell{
   
   func payByKNET(invoiceValue: Decimal,
                  orderId: String,
-                 supplierId: Int,
+//                 supplierId: Int,
                  completion: @escaping (MFPaymentStatusResponse?, String?, Error?) -> Void) {
     let request = MFExecutePaymentRequest(invoiceValue: invoiceValue, paymentMethod: 1)
     request.customerReference = orderId
     request.displayCurrencyIso = .kuwait_KWD
-    let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: invoiceValue)
-    request.suppliers = [supplier]
+//    let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: invoiceValue)
+//    request.suppliers = [supplier]
     
     MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { result, invoiceId in
       switch result {
@@ -120,15 +120,15 @@ extension PaymentMethodsTableViewCell{
   
   func payByVisaPay(invoiceValue: Decimal,
                     orderId: String,
-                    supplierId: Int,
+//                    supplierId: Int,
                     completion: @escaping (MFPaymentStatusResponse?, String?, Error?) -> Void) {
     
     // Payment method ID 2 for VisaPay
     let request = MFExecutePaymentRequest(invoiceValue: invoiceValue, paymentMethod: 2)
     request.customerReference = orderId
     
-    let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: invoiceValue)
-    request.suppliers = [supplier]
+//    let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: invoiceValue)
+//    request.suppliers = [supplier]
     request.displayCurrencyIso = .uAE_AED // Or your currency
     
     MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { result, invoiceId in

@@ -238,11 +238,6 @@ extension PlaceOrderPaymentMethodsViewController {
         let request = MFExecutePaymentRequest(invoiceValue: Decimal(totalAmountToPay), paymentMethod: 1)
         request.customerReference = orderID
         request.displayCurrencyIso = .kuwait_KWD
-        
-        let supplierId = Int.random(in: 1000...9999)
-        let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: Decimal(totalAmountToPay))
-        request.suppliers = [supplier]
-        
         MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { [weak self] response, invoiceId in
             guard let self = self else { return }
             switch response {
@@ -260,10 +255,6 @@ extension PlaceOrderPaymentMethodsViewController {
         let request = MFExecutePaymentRequest(invoiceValue: Decimal(totalAmountToPay), paymentMethod: 2)
         request.customerReference = orderID
         request.displayCurrencyIso = .kuwait_KWD
-        let supplierId = Int.random(in: 1000...9999)
-        let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: Decimal(totalAmountToPay))
-        request.suppliers = [supplier]
-        
         MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { [weak self] response, invoiceId in
             guard let self = self else { return }
             switch response {

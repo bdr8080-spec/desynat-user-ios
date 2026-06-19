@@ -16,6 +16,7 @@ class ChatFilterViewController: UIViewController {
         }
     }
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var buttonActionStackView: UIStackView!
     
     // MARK: - Property Decalaration
     let datePicker = UIDatePicker()
@@ -31,6 +32,7 @@ class ChatFilterViewController: UIViewController {
         super.viewDidLoad()
         handleUISetup()
         applyPreselectedData()
+        buttonActionStackView.semanticContentAttribute = .forceLeftToRight
     }
     
     // MARK: - Button's Action

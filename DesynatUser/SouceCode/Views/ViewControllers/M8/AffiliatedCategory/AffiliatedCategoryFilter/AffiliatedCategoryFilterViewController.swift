@@ -11,6 +11,7 @@ class AffiliatedCategoryFilterViewController: UIViewController {
     
     // MARK: - IBOutlet's
     @IBOutlet weak var filtersTableView: UITableView!
+    @IBOutlet weak var buttonActionStackView: UIStackView!
     
     // MARK: - Property Decalaration
     private lazy var viewModel = AffiliatedProductsFiltersViewModel(hostVC: self)
@@ -59,6 +60,7 @@ class AffiliatedCategoryFilterViewController: UIViewController {
         super.viewDidLoad()
         registerXib()
         callDynamicFilterAPIs()
+        buttonActionStackView.semanticContentAttribute = .forceLeftToRight
     }
     
     // MARK: - Button's Action

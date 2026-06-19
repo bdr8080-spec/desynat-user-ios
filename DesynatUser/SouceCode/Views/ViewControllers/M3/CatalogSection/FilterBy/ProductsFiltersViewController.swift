@@ -11,6 +11,7 @@ class ProductsFiltersViewController: UIViewController {
     
     // MARK: - IBOutlet's
     @IBOutlet weak var filtersTableView: UITableView!
+    @IBOutlet weak var buttonActionStackView: UIStackView!
     
     // MARK: - Property Decalaration
     var selectedCategoryIDs: [String] = []
@@ -63,6 +64,7 @@ class ProductsFiltersViewController: UIViewController {
         prepareDiscountSection()
         prepareRatingsSection()
         prepareDeliveryTimeSection()
+        buttonActionStackView.semanticContentAttribute = .forceLeftToRight
     }
     
     // MARK: - Button's Action
