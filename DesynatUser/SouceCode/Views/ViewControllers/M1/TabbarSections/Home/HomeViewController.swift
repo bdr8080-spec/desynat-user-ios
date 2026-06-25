@@ -622,18 +622,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
         case categoriesSectionCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoriesSectionCollectionViewCell", for: indexPath) as! CategoriesSectionCollectionViewCell
-            //            let data = viewModel.categoriesSection[indexPath.row]
-            //            if AppLanguageManager.shared.currentLanguage == .ar {
-            //                cell.titleLabel.text = data.nameAr
-            //            } else {
-            //                cell.titleLabel.text = data.name
-            //            }
-            //            if viewModel.selectedCategoriesSection == data.id {
-            //                cell.bottomLabel.isHidden = false
-            //            } else {
-            //                cell.bottomLabel.isHidden = true
-            //            }
-            
             let data = viewModel.allCategories[indexPath.row]
             if AppLanguageManager.shared.currentLanguage == .ar {
                 cell.titleLabel.text = data.nameAr
@@ -645,7 +633,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 cell.contentView.alpha = 1.0
                 cell.isUserInteractionEnabled = true
             } else {
-                cell.contentView.alpha = 0.3
+                cell.contentView.alpha = 0//0.3
                 cell.isUserInteractionEnabled = false
             }
             return cell

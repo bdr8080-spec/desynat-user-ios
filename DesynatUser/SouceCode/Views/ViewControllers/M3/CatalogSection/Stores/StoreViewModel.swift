@@ -67,7 +67,8 @@ class StoreViewModel: NSObject {
     
     func getTopHomeBannersListApi(type: Int, category: Int) {
         let param: [String: Any] = ["type": type,
-                                    "category": category]
+                                    "category": category,
+                                    "subcategory": hostVC.slectedsubCategoryId ?? 0]
         WebService.sharedInstance.getHomeScreenAllBannersListService(param: param) { list in
             DispatchQueue.main.async {
                 self.homeScreenAllBannersList = list
