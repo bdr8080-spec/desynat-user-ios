@@ -24,7 +24,11 @@ extension SceneDelegate {
     
     
     public func navigateToWelcomeScreen() {
-        let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
+//        let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
+//        navigateTo(vc: vc)
+        
+        let vc = LoginViewController.instantiate(fromAppStoryboard: .Main)
+        UserDefaults.standard.setValue("false", forKey: "isAppInstall")
         navigateTo(vc: vc)
     }
     

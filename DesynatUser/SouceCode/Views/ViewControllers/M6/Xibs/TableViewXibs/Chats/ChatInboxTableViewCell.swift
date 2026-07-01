@@ -47,7 +47,8 @@ class ChatInboxTableViewCell: UITableViewCell {
                 messageLabel.text = data?.lastChat ?? ""
             }
         }
-        timeLabel.text = formattedChatTime(from: data?.updatedAt ?? "")
+//        timeLabel.text = formattedChatTime(from: data?.updatedAt ?? "")
+        timeLabel.text = data?.lastChatTime ?? formattedChatTime(from: data?.updatedAt ?? "")
         let unreadMesageCount = data?.unreadCount ?? 0
         if unreadMesageCount > 0 {
             messagecountView.isHidden = false

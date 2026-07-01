@@ -49,7 +49,7 @@ class OrderForChatTableViewCell: UITableViewCell {
         }
         if AppLanguageManager.shared.currentLanguage == .ar {
             productNameLabel.text = data?.productVariation?.productDetails?.productNameAr ?? ""
-            setColorBoxWithQuanity(size: data?.productVariation?.size?.nameAr ?? "", label: productDetailsLabel, hexColor: data?.productVariation?.color?.hexCode ?? "#98ADFF")
+            setColorBoxWithQuanity(size: data?.productVariation?.size?.name ?? "", label: productDetailsLabel, hexColor: data?.productVariation?.color?.hexCode ?? "#98ADFF")
         } else {
             productNameLabel.text = data?.productVariation?.productDetails?.productNameEn ?? ""
             setColorBoxWithQuanity(size: data?.productVariation?.size?.name ?? "", label: productDetailsLabel, hexColor: data?.productVariation?.color?.hexCode ?? "#98ADFF")

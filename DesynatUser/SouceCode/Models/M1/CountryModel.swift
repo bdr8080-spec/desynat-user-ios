@@ -15,7 +15,7 @@ struct CountryModel: Codable {
     let currencyCode: String?
     let currencySymbol: String?
     let dialCode: String?
-    let flag: String?
+    let flag, flag1: String?
     let exchangeRateToKwd: String?
     let createdAt: String?
     let updatedAt: String?
@@ -27,7 +27,7 @@ struct CountryModel: Codable {
         case currencyCode = "currency_code"
         case currencySymbol = "currency_symbol"
         case dialCode = "dial_code"
-        case flag
+        case flag, flag1
         case exchangeRateToKwd = "exchange_rate_to_kwd"
         case createdAt = "created_at"
         case updatedAt = "updated_at"

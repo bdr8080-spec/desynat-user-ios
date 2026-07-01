@@ -334,9 +334,9 @@ class MyOrderDetailVC: UIViewController {
         if AppLanguageManager.shared.currentLanguage == .ar {
             lblProductName.text = data.productDetails?.productNameAr ?? ""
             if isCustomOrder {
-                setColorBoxWithQuanityInView(size: data.variationDetails?.size?.nameAr ?? "", label: lblSize, hexColor: data.variationDetails?.color?.hexCode ?? "#98ADFF")
+                setColorBoxWithQuanityInView(size: data.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data.variationDetails?.color?.hexCode ?? "#98ADFF")
             } else {
-                setColorBox(size: data.variationDetails?.size?.nameAr ?? "", label: lblSize, hexColor: data.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data.quantity ?? 0)")
+                setColorBox(size: data.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data.quantity ?? 0)")
             }
         }else{
             lblProductName.text = data.productDetails?.productNameEn ?? ""

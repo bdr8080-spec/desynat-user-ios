@@ -47,7 +47,7 @@ class MyOrderTableCell: UITableViewCell {
       }
       if AppLanguageManager.shared.currentLanguage == .ar {
           lblModelPiece.text = data.productDetails?.productNameAr ?? ""
-          setColorBox(size: data.variationDetails?.size?.nameAr ?? "", label: lblSize, hexColor: data.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data.quantity ?? 0)")
+          setColorBox(size: data.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data.quantity ?? 0)")
       }else{
           lblModelPiece.text = data.productDetails?.productNameEn ?? ""
           setColorBox(size: data.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data.quantity ?? 0)")

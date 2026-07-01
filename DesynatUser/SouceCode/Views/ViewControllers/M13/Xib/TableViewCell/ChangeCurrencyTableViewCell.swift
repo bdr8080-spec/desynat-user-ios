@@ -42,7 +42,7 @@ class ChangeCurrencyTableViewCell: UITableViewCell {
             }
             
             flagEmojiLabel.isHidden = false
-            flagEmojiLabel.text = country?.flag
+            flagEmojiLabel.text = country?.flag1
         }
     }
     

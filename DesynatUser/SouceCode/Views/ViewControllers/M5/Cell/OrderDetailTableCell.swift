@@ -67,7 +67,7 @@ class OrderDetailTableCell: UITableViewCell {
             customDetailsLabel.text = data?.chatroomRecordtable?.customDetails//chatdata?.customDetails
             lblReturnAvail.isHidden = true
             if AppLanguageManager.shared.currentLanguage == .ar {
-                setColorBoxWithQuanity(size: data?.variationDetails?.size?.nameAr ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF")
+                setColorBoxWithQuanity(size: data?.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF")
             } else {
                 setColorBoxWithQuanity(size: data?.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF")
             }
@@ -80,7 +80,7 @@ class OrderDetailTableCell: UITableViewCell {
             customOrderStackView.isHidden = true
             lblReturnAvail.isHidden = false
             if AppLanguageManager.shared.currentLanguage == .ar {
-                setColorBox(size: data?.variationDetails?.size?.nameAr ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data?.quantity ?? 0)")
+                setColorBox(size: data?.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data?.quantity ?? 0)")
             } else {
                 setColorBox(size: data?.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data?.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data?.quantity ?? 0)")
             }

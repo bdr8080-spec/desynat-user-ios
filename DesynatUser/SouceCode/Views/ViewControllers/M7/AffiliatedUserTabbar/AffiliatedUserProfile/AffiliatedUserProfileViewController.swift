@@ -120,14 +120,14 @@ extension AffiliatedUserProfileViewController: UITableViewDelegate, UITableViewD
             let nextVC = ChangeCurrencyViewController.instantiate(fromAppStoryboard: .DashBoard)
             nextVC.comingReason = .comingFromCurrency
             nextVC.comingUserRole = .affilaiteUser
-            nextVC.selectedId = viewModel.savedUserProfile?.selectedCurrency ?? 89
+            nextVC.selectedId = viewModel.savedUserProfile?.selectedCurrency ?? 1
             self.navigationController?.pushViewController(nextVC, animated: true)
             
         case "Change Country":
             let nextVC = ChangeCurrencyViewController.instantiate(fromAppStoryboard: .DashBoard)
             nextVC.comingReason = .comingFromCountry
             nextVC.comingUserRole = .affilaiteUser
-            nextVC.selectedId = viewModel.savedUserProfile?.selectedCountry ?? 89
+            nextVC.selectedId = viewModel.savedUserProfile?.selectedCountry ?? 1
             self.navigationController?.pushViewController(nextVC, animated: true)
             
         case "Support":

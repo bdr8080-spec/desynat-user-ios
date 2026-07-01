@@ -33,12 +33,12 @@ class ProductDetailsViewModel: NSObject {
     func getProductDetails() {
         let param: [String: Any] = ["product_id": hostVC.productId ?? 0]
         WebService.sharedInstance.getProductDetailsService(param: param) { list in
-            WebService.sharedInstance.getProductDetailsService(param: param) { list in
+//            WebService.sharedInstance.getProductDetailsService(param: param) { list in
                 
                 self.hostVC.productDetails = list
                 self.hostVC.prepareVariantData()
                 self.hostVC.noDataFoundLabel.isHidden = (list.review?.isEmpty == false)
-            }
+//            }
         }
     }
     

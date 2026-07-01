@@ -15,14 +15,14 @@ class ChangeCurrencyViewModel{
         self.hostVc = hostVc
     }
     
-    func getALlUserCountryListApi(){
-        WebService.sharedInstance.getAllUserscountryList { list in
-            self.getAllUSerCountryList = list
-            DispatchQueue.main.async {
-                self.hostVc?.listTableView.reloadData()
-            }
-        }
-    }
+//    func getALlUserCountryListApi(){
+//        WebService.sharedInstance.getAllUserscountryList { list in
+//            self.getAllUSerCountryList = list
+//            DispatchQueue.main.async {
+//                self.hostVc?.listTableView.reloadData()
+//            }
+//        }
+//    }
     
     func getAllUsersCurrencyList(){
         WebService.sharedInstance.getAllUsersCurrencyList { list in

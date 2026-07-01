@@ -34,6 +34,7 @@ struct ProductDetailsDataModel: Codable {
     let productSpecifications: [ProductSpecification]?
     let productVariants: [ProductVariant]?
     let review: [Review]?
+    let similarProducts: [BestSellingProductsDataModel]?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -71,6 +72,7 @@ struct ProductDetailsDataModel: Codable {
         case store = "store"
         case review
         case averageRating = "average_rating"
+        case similarProducts = "similar_products"
     }
 }
 
@@ -96,8 +98,9 @@ struct Addtocart: Codable {
 struct Review: Codable {
     let id, userID, orderID, orderdetailsID: Int?
     let productID: Int?
-    let productRating, productReview, productImage: String?
+    let productRating, productReview: String?
     let storeID: Int?
+    let productImage: [String]?
     let storeRating, storeReview, storeImage, createdAt: String?
     let updatedAt: String?
     let userDetails: UserDetails?

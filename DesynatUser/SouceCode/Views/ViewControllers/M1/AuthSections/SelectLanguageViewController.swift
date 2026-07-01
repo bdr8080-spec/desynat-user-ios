@@ -43,7 +43,9 @@ class SelectLanguageViewController: UIViewController {
         UserDefaults.standard.setValue(selectedLanguage.rawValue, forKey: "AppLanguage")
         UserDefaults.standard.setValue("true", forKey: "isAppInstall")
         AppLanguageManager.shared.setLanguage(language: selectedLanguage)
-        let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
+//        let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
+//        self.navigationController?.pushViewController(vc, animated: true)
+        let vc = LoginViewController.instantiate(fromAppStoryboard: .Main)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

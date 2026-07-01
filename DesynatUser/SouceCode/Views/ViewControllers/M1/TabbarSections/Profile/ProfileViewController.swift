@@ -202,14 +202,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 let nextVC = ChangeCurrencyViewController.instantiate(fromAppStoryboard: .DashBoard)
                 nextVC.comingReason = .comingFromCurrency
                 nextVC.comingUserRole = .normalUser
-                nextVC.selectedId = viewModel.savedUserProfile?.selectedCurrency ?? 89
+                nextVC.selectedId = viewModel.savedUserProfile?.selectedCurrency ?? 1
                 self.navigationController?.pushViewController(nextVC, animated: true)
                 
             case "Change Country":
                 let nextVC = ChangeCurrencyViewController.instantiate(fromAppStoryboard: .DashBoard)
                 nextVC.comingReason = .comingFromCountry
                 nextVC.comingUserRole = .normalUser
-                nextVC.selectedId = viewModel.savedUserProfile?.selectedCountry ?? 89
+                nextVC.selectedId = viewModel.savedUserProfile?.selectedCountry ?? 1
                 self.navigationController?.pushViewController(nextVC, animated: true)
                 
             case "Cancellation Policy":
@@ -232,9 +232,12 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             case "Become An Affiliate":
                 if let userdetails = viewModel.savedUserProfile {
                     if userdetails.affiliatedUserdetails == nil {
-                        let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
-                        vc.comingUserRole = .affiliateUser
-                        self.navigationController?.pushViewController(vc, animated: true)
+//                        let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
+//                        vc.comingUserRole = .affiliateUser
+//                        self.navigationController?.pushViewController(vc, animated: true)
+                        
+                        let nextVC = AffiliatedUserLoginViewController.instantiate(fromAppStoryboard: .AffiliateUser)
+                        self.navigationController?.pushViewController(nextVC, animated: true)
                     } else {
                         let nextVC = AffiliatedUserLoginViewController.instantiate(fromAppStoryboard: .AffiliateUser)
                         self.navigationController?.pushViewController(nextVC, animated: true)

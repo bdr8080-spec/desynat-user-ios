@@ -126,9 +126,12 @@ class ProductDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetUp()
-        viewModel.getSavedAddressListAPI()
         actionButtonsStackView.semanticContentAttribute = .forceLeftToRight
 //        setupCollectionViewDirection()
+        if isGuestUser == "true" {
+        } else {
+            viewModel.getSavedAddressListAPI()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -746,7 +749,7 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
         case sizeCollectionView:
             return filteredVariants.count
         case similarProductCollectionView:
-            return 5
+            return productDetails?.similarProducts?.count ?? 0
         default:
             return 0
         }
@@ -771,11 +774,11 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
         case sizeCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SizeVariantCollectionViewCell", for: indexPath) as! SizeVariantCollectionViewCell
             let variant = filteredVariants[indexPath.row]
-            if AppLanguageManager.shared.currentLanguage == .ar {
-                cell.titleLabel.text = variant.size?.nameAr
-            } else {
+//            if AppLanguageManager.shared.currentLanguage == .ar {
+//                cell.titleLabel.text = variant.size?.nameAr
+//            } else {
                 cell.titleLabel.text = variant.size?.name
-            }
+//            }
             let stock = Int(variant.totalStock ?? "0") ?? 0
             if stock > 0 {
                 cell.titleLabel.textColor = .black
@@ -790,7 +793,8 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
             return cell
         case similarProductCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BestSellingsCollectionViewCell", for: indexPath) as! BestSellingsCollectionViewCell
-            
+            let data = productDetails?.similarProducts?[indexPath.row]
+            cell.configData(data: data)
             return cell
         default:
             return UICollectionViewCell()

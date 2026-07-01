@@ -660,7 +660,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case bestSellingCollectionView:
             let spacing: CGFloat = 10
             let totalSpacing = spacing * 2 // 3 cells per row → 2 spaces between
-            let width = (collectionView.frame.width - totalSpacing) / 2
+            let width = (collectionView.frame.width - totalSpacing) / 2 - 30
             return CGSize(width: width, height: bestSellingCollectionView.frame.height)
             
         case browsePrimiumCollectionView:
@@ -669,7 +669,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case topRatedCollectionView:
             let spacing: CGFloat = 10
             let totalSpacing = spacing * 2 // 3 cells per row → 2 spaces between
-            let width = (collectionView.frame.width - totalSpacing) / 2
+            let width = (collectionView.frame.width - totalSpacing) / 2 - 30
             return CGSize(width: width, height: topRatedCollectionView.frame.height)
             
         case bowseSomeDisCountCollectionView:

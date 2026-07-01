@@ -16,7 +16,7 @@ class ChangeCurrencyViewController: UIViewController {
         }
     }
     
-    var selectedId = 89 // kuwait
+    var selectedId = 1 // kuwait
     var comingReason: ComingReasonAtChangeCurrency = .comingFromCurrency
     var comingUserRole: UserRoleType = .normalUser
     private lazy var viewModel = ChangeCurrencyViewModel(hostVc: self)
@@ -26,11 +26,12 @@ class ChangeCurrencyViewController: UIViewController {
         switch comingReason {
         case .comingFromCurrency:
             titleLabel.text = "Change Currency".localiz()
-            viewModel.getAllUsersCurrencyList()
+//            viewModel.getAllUsersCurrencyList()
         case .comingFromCountry:
             titleLabel.text = "Change Country".localiz()
-            viewModel.getALlUserCountryListApi()
+//            viewModel.getALlUserCountryListApi()
         }
+        viewModel.getAllUsersCurrencyList()
     }
 
     @IBAction func backDidTapped(_ sender: Any) {

