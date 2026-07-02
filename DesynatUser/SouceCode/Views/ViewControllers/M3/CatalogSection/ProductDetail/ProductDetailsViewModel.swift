@@ -30,15 +30,24 @@ class ProductDetailsViewModel: NSObject {
         }
     }
     
-    func getProductDetails() {
+    func getProductDetails(isCallingFromSameScreen: Bool = false) {
         let param: [String: Any] = ["product_id": hostVC.productId ?? 0]
         WebService.sharedInstance.getProductDetailsService(param: param) { list in
-//            WebService.sharedInstance.getProductDetailsService(param: param) { list in
-                
-                self.hostVC.productDetails = list
-                self.hostVC.prepareVariantData()
-                self.hostVC.noDataFoundLabel.isHidden = (list.review?.isEmpty == false)
-//            }
+            //            WebService.sharedInstance.getProductDetailsService(param: param) { list in
+            
+            self.hostVC.productDetails = list
+            self.hostVC.prepareVariantData()
+            self.hostVC.noDataFoundLabel.isHidden = (list.review?.isEmpty == false)
+            
+            self.hostVC.similarProductLabel.isHidden = (list.similarProducts?.isEmpty == true)
+            self.hostVC.similarProductCollectionView.isHidden = (list.similarProducts?.isEmpty == true)
+            self.hostVC.similarProductCollectionView.reloadData()
+            if isCallingFromSameScreen {
+                DispatchQueue.main.async {
+                    self.hostVC.parentScrollView.setContentOffset(.zero, animated: true)
+                }
+            }
+            //            }
         }
     }
     

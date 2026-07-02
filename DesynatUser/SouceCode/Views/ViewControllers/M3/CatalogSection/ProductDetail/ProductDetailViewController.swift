@@ -97,6 +97,8 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet weak var buyNowView: UIView!
     @IBOutlet weak var buyNowButton: CustomButton!
     @IBOutlet weak var customButtonOutlet: UIButton!
+    @IBOutlet weak var similarProductLabel: UILabel!
+    @IBOutlet weak var parentScrollView: UIScrollView!
     
     // MARK: - Property Decalaration
     private lazy var viewModel = ProductDetailsViewModel(hostVC: self)
@@ -851,7 +853,9 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
             // Add this:
             checkAndUpdateCartStatus()
         case similarProductCollectionView:
-            print("")
+            self.productId = self.productDetails?.similarProducts?[indexPath.row].id
+            viewModel.getProductDetails(isCallingFromSameScreen: true)
+            
         default:
             print("")
         }
@@ -868,7 +872,7 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
         case similarProductCollectionView:
             let spacing: CGFloat = 10
             let totalSpacing = spacing * 2 // 3 cells per row → 2 spaces between
-            let width = (collectionView.frame.width - totalSpacing) / 2
+            let width = (collectionView.frame.width - totalSpacing) / 2 - 30
             return CGSize(width: width, height: similarProductCollectionView.frame.height)
         default:
             return CGSize(width: 0, height: 0)

@@ -1670,7 +1670,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GXa-VY-y1D">
-                                <rect key="frame" x="0.0" y="173" width="393" height="485"/>
+                                <rect key="frame" x="0.0" y="173" width="393" height="484.99999999999955"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sR0-nr-xIS">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="2055.3333333333335"/>
@@ -2321,7 +2321,7 @@
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KEG-Ix-GRR">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KEG-Ix-GRR">
                                                 <rect key="frame" x="324" y="1765.3333333333333" width="45" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="NnG-yf-BGK"/>
@@ -2697,6 +2697,7 @@
                         <outlet property="lengthStackView" destination="a27-nB-PBB" id="4lr-ow-B2k"/>
                         <outlet property="noDataFoundLabel" destination="dsZ-Ls-lpV" id="FtZ-hm-r4d"/>
                         <outlet property="pagetitleLabel" destination="aLn-7K-IMa" id="qdg-No-kj5"/>
+                        <outlet property="parentScrollView" destination="GXa-VY-y1D" id="Qlp-tg-Gna"/>
                         <outlet property="productImageCollectionView" destination="bx9-KH-IkX" id="hbO-Qq-EH3"/>
                         <outlet property="productLabel" destination="7sD-IV-Ig3" id="ry0-kk-J1K"/>
                         <outlet property="productNameLabel" destination="iQB-mO-Bcs" id="cQw-ds-PFS"/>
@@ -2707,6 +2708,7 @@
                         <outlet property="shoulderLabel" destination="Nqo-9A-XrY" id="hY1-gd-Q10"/>
                         <outlet property="shoulderView" destination="Jx4-mX-Iwq" id="nal-N9-ljS"/>
                         <outlet property="similarProductCollectionView" destination="9D1-Sq-YyK" id="pGV-Kl-Mg6"/>
+                        <outlet property="similarProductLabel" destination="pAG-lX-DqK" id="j0B-ef-IWf"/>
                         <outlet property="sizeCollectionView" destination="ecb-nQ-4Sz" id="KU1-XN-LWf"/>
                         <outlet property="sleeveLengthLabel" destination="ULF-kK-Dk5" id="HLD-N7-LqT"/>
                         <outlet property="sleeveLengthStackView" destination="kIt-6F-4wx" id="kYs-h2-eQT"/>
