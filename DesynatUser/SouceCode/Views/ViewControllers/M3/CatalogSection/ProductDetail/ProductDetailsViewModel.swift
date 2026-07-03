@@ -38,7 +38,7 @@ class ProductDetailsViewModel: NSObject {
             self.hostVC.productDetails = list
             self.hostVC.prepareVariantData()
             self.hostVC.noDataFoundLabel.isHidden = (list.review?.isEmpty == false)
-            
+            self.hostVC.updateDeliveryInfo()
             self.hostVC.similarProductLabel.isHidden = (list.similarProducts?.isEmpty == true)
             self.hostVC.similarProductCollectionView.isHidden = (list.similarProducts?.isEmpty == true)
             self.hostVC.similarProductCollectionView.reloadData()

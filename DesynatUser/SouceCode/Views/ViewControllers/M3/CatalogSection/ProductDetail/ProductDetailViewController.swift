@@ -104,9 +104,11 @@ class ProductDetailViewController: UIViewController {
     private lazy var viewModel = ProductDetailsViewModel(hostVC: self)
     private var selectedColourIndex = 0
     private var selectedSizeIndex = 0
-    private var checkDelivery: [CheckDeliveryModel] = [CheckDeliveryModel(image: "calender", title: "Get it within 3-5 Working Days".localiz()),
-                                                       CheckDeliveryModel(image: "cashOnDelivery", title: "Cash on Delivery Available".localiz()),
-                                                       CheckDeliveryModel(image: "returnExchamge", title: "7 Days Return & 5 days Exchange".localiz())]
+    private var checkDelivery: [CheckDeliveryModel] = []
+    
+    //[CheckDeliveryModel(image: "calender", title: "Get it within 3-5 Working Days".localiz()),
+//                                                       CheckDeliveryModel(image: "cashOnDelivery", title: "Cash on Delivery Available".localiz()),
+//                                                       CheckDeliveryModel(image: "returnExchamge", title: "7 Days Return & 5 days Exchange".localiz())]
     var quantity = 0
     var uniqueColors: [Color] = []
     var filteredVariants: [ProductVariant] = []
@@ -149,24 +151,6 @@ class ProductDetailViewController: UIViewController {
             self.ratingTableViewHeightConstriant.constant = self.ratingsTableView.contentSize.height
         }
     }
-    
-//    private func setupCollectionViewDirection() {
-//        if AppLanguageManager.shared.currentLanguage == .ar {
-//            colorsCollectionView.semanticContentAttribute = .forceRightToLeft
-//            sizeCollectionView.semanticContentAttribute = .forceRightToLeft
-//        } else {
-//            colorsCollectionView.semanticContentAttribute = .forceLeftToRight
-//            sizeCollectionView.semanticContentAttribute = .forceLeftToRight
-//        }
-//        
-//        if let flowLayout = sizeCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-//            flowLayout.scrollDirection = .horizontal
-//        }
-//        
-//        if let flowLayout = colorsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-//            flowLayout.scrollDirection = .horizontal
-//        }
-//    }
     
     // MARK: - Button's Action
     @IBAction func backDidTapped(_ sender: Any) {
@@ -360,6 +344,30 @@ class ProductDetailViewController: UIViewController {
                 showAlert(msg: "Failed to add item to cart. Please try again.".localiz())
             }
         }
+    }
+    
+    func updateDeliveryInfo() {
+        let isArabic = AppLanguageManager.shared.currentLanguage == .ar
+        var days = isArabic
+            ? (productDetails?.exptectedDeliveryTime?.nameAr ?? "")
+            : (productDetails?.exptectedDeliveryTime?.name ?? "")
+
+        if isArabic {
+            days = days.replacingOccurrences(of: "أيام", with: "").trimmingCharacters(in: .whitespaces)
+        } else {
+            days = days.replacingOccurrences(of: "Days", with: "").trimmingCharacters(in: .whitespaces)
+        }
+        let deliveryText = String(
+            format: "Get it within %@ Working Days".localiz(),
+            days
+        )
+        checkDelivery = [
+            CheckDeliveryModel(image: "calender", title: deliveryText),
+            CheckDeliveryModel(image: "cashOnDelivery", title: "Cash on Delivery Available".localiz()),
+            CheckDeliveryModel(image: "returnExchamge", title: "7 Days Return & 5 days Exchange".localiz())
+        ]
+
+        checkDeliveryTableView.reloadData()
     }
     
     func prepareVariantData() {

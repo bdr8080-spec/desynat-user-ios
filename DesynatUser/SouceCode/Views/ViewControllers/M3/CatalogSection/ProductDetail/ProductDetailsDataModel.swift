@@ -35,6 +35,7 @@ struct ProductDetailsDataModel: Codable {
     let productVariants: [ProductVariant]?
     let review: [Review]?
     let similarProducts: [BestSellingProductsDataModel]?
+    let exptectedDeliveryTime: ExpectedDeilveryTimeModel?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -73,6 +74,7 @@ struct ProductDetailsDataModel: Codable {
         case review
         case averageRating = "average_rating"
         case similarProducts = "similar_products"
+        case exptectedDeliveryTime = "delivery_time"
     }
 }
 
@@ -148,6 +150,21 @@ struct UserDetails: Codable {
         case deviceToken = "device_token"
         case userDetailsLet = "let"
         case long, status
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+}
+
+// MARK: - ExpectedDeilveryTimeModel
+struct ExpectedDeilveryTimeModel: Codable {
+    let id: Int?
+    let name, nameAr, status, createdAt: String?
+    let updatedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id, name
+        case nameAr = "name_ar"
+        case status
         case createdAt = "created_at"
         case updatedAt = "updated_at"
     }
