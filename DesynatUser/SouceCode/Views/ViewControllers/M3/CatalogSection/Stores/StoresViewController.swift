@@ -228,11 +228,15 @@ extension StoresViewController: UICollectionViewDelegate, UICollectionViewDataSo
             if !viewModel.homeScreenAllBannersList.isEmpty {
                 let nextVC = StoresDetailsViewController.instantiate(fromAppStoryboard: .Catalog)
                 nextVC.storeId = viewModel.homeScreenAllBannersList[indexPath.row].sellerDetails?.storeInfo?.id
+                nextVC.viewModel.selectedCategoryIDs = ["\(self.slecetedCategoryID)"]
+                nextVC.viewModel.selectedSubCategoryIDs = slectedsubCategoryId ?? -1
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
         case storesCollectionView:
             let nextVC = StoresDetailsViewController.instantiate(fromAppStoryboard: .Catalog)
             nextVC.storeId = viewModel.storesSection[indexPath.row].id
+            nextVC.viewModel.selectedCategoryIDs = ["\(self.slecetedCategoryID)"]
+            nextVC.viewModel.selectedSubCategoryIDs = slectedsubCategoryId ?? -1
             self.navigationController?.pushViewController(nextVC, animated: true)
         default:
             print("")

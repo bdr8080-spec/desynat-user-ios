@@ -14,6 +14,7 @@ class StoreDetailsViewModel: NSObject {
     var singleStoresSection: SingleStoreDetailsDataModel?
     var searchText: String = ""
     var selectedCategoryIDs: [String] = []
+    var selectedSubCategoryIDs: Int = -1
     var selectedBrandIDs: [String] = []
     var selectedColorIDs: [String] = []
     var selectedSizeIDs: [String] = []
@@ -35,6 +36,10 @@ class StoreDetailsViewModel: NSObject {
         var param: [String: Any] = [
             "store_id": hostVC.storeId ?? 0
         ]
+        
+        if selectedSubCategoryIDs != -1 {
+            param["subcategory_id"] = selectedSubCategoryIDs
+        }
         
         if !selectedCategoryIDs.isEmpty { param["category_id"] = selectedCategoryIDs }
         if !selectedBrandIDs.isEmpty { param["brand_id"] = selectedBrandIDs }

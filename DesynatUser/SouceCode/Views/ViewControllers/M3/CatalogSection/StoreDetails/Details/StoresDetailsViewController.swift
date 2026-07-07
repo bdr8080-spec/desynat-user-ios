@@ -53,7 +53,7 @@ class StoresDetailsViewController: UIViewController {
     @IBOutlet weak var noHighlightsFound: UILabel!
     
     // MARK: - Property Decalaration
-    private lazy var viewModel = StoreDetailsViewModel(hostVC: self)
+    lazy var viewModel = StoreDetailsViewModel(hostVC: self)
     private var searchWorkItem: DispatchWorkItem?
     var appliedSortFilter: Int?
     let isGuestUser = UserDefaults.standard.string(forKey: "isGuestLogin") ?? "false"
