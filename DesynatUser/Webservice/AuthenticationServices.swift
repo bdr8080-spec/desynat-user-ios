@@ -1166,10 +1166,10 @@ extension WebService {
     }
     
     func getSuggestedStoresListService(completion:@escaping (_ user: [SuggestedStoresDataModel])-> Void) {
-        CommonUtils.showHud(show: true)
+//        CommonUtils.showHud(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.suggestStore), requestMethod: .get, requestModel:[SuggestedStoresDataModel].self) { result, code in
             
-            CommonUtils.showHud(show: false)
+//            CommonUtils.showHud(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {

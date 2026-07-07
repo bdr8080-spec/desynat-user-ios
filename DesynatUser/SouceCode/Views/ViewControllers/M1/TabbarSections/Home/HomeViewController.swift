@@ -104,6 +104,7 @@ class HomeViewController: UIViewController {
     private let audioEngine = AVAudioEngine()
     private var isListening = false
     private let locationManager = CLLocationManager()
+    private var suggestedStoresTimer: Timer?
     
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
@@ -113,7 +114,7 @@ class HomeViewController: UIViewController {
         requestPermissions()
         viewModel.getTopHomeBannersListApi()
         viewModel.getCenterHomeBannersListApi()
-        viewModel.getSuggestedStoresRequest()
+//        viewModel.getSuggestedStoresRequest()
         setupLocation()
     }
     
@@ -127,6 +128,7 @@ class HomeViewController: UIViewController {
         viewModel.getBestSellingProductsRequest()
         viewModel.getTopRatedListRequest()
         viewModel.getNewestProductListRequest()
+        startSuggestedStoresTimer()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -139,6 +141,7 @@ class HomeViewController: UIViewController {
         stopBannerAutoScroll()
         stopPremiumAutoScroll()
         stopDiscountAutoScroll()
+        stopSuggestedStoresTimer()
     }
     
     // MARK: - Button's Action
@@ -237,6 +240,14 @@ class HomeViewController: UIViewController {
     }
     
     //MARK: Function's declaration
+    func startSuggestedStoresTimer() {
+        viewModel.getSuggestedStoresRequest()
+        suggestedStoresTimer?.invalidate()
+        suggestedStoresTimer = Timer.scheduledTimer(withTimeInterval: 8.0, repeats: true) { [weak self] _ in
+            self?.viewModel.getSuggestedStoresRequest()
+        }
+    }
+    
     private func requestPermissions() {
         SFSpeechRecognizer.requestAuthorization { status in
             print("Speech permission: \(status)")
@@ -394,6 +405,11 @@ class HomeViewController: UIViewController {
     func stopDiscountAutoScroll() {
         discountAutoScrollTimer?.invalidate()
         discountAutoScrollTimer = nil
+    }
+    
+    func stopSuggestedStoresTimer() {
+        suggestedStoresTimer?.invalidate()
+        suggestedStoresTimer = nil
     }
     
     @objc private func autoScrollDiscount() {
