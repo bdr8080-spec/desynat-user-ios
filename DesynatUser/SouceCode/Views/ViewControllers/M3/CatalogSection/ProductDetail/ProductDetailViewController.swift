@@ -105,10 +105,6 @@ class ProductDetailViewController: UIViewController {
     private var selectedColourIndex = 0
     private var selectedSizeIndex = 0
     private var checkDelivery: [CheckDeliveryModel] = []
-    
-    //[CheckDeliveryModel(image: "calender", title: "Get it within 3-5 Working Days".localiz()),
-//                                                       CheckDeliveryModel(image: "cashOnDelivery", title: "Cash on Delivery Available".localiz()),
-//                                                       CheckDeliveryModel(image: "returnExchamge", title: "7 Days Return & 5 days Exchange".localiz())]
     var quantity = 0
     var uniqueColors: [Color] = []
     var filteredVariants: [ProductVariant] = []
@@ -131,16 +127,11 @@ class ProductDetailViewController: UIViewController {
         super.viewDidLoad()
         initialSetUp()
         actionButtonsStackView.semanticContentAttribute = .forceLeftToRight
-//        setupCollectionViewDirection()
+        viewModel.getProductDetails()
         if isGuestUser == "true" {
         } else {
             viewModel.getSavedAddressListAPI()
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        viewModel.getProductDetails()
     }
     
     override func viewWillLayoutSubviews() {
@@ -288,12 +279,16 @@ class ProductDetailViewController: UIViewController {
     }
     
     @IBAction func deliveryAddressAction(_ sender: Any) {
-        let nextVC = SavedAddressViewController.instantiate(fromAppStoryboard: .Profile)
-        nextVC.comingFromBag = true
-        nextVC.onAddressSelected = { [weak self] selectedAddress in
-            self?.deliveryAddressLabel.text = self?.formattedAddress(from: selectedAddress)
+        if isGuestUser == "true" {
+            showLoginAlert()
+        } else {
+            let nextVC = SavedAddressViewController.instantiate(fromAppStoryboard: .Profile)
+            nextVC.comingFromBag = true
+            nextVC.onAddressSelected = { [weak self] selectedAddress in
+                self?.deliveryAddressLabel.text = self?.formattedAddress(from: selectedAddress)
+            }
+            self.navigationController?.pushViewController(nextVC, animated: false)
         }
-        self.navigationController?.pushViewController(nextVC, animated: false)
     }
     
     func formattedAddress(from address: SavedAddressList?) -> String {
