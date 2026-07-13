@@ -42,7 +42,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Abaya" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sD4-ho-qUh">
-                                <rect key="frame" x="7.6666666666666643" y="70" width="59.999999999999993" height="17"/>
+                                <rect key="frame" x="2.6666666666666643" y="70" width="70" height="17"/>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -50,11 +50,11 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="sD4-ho-qUh" firstAttribute="leading" secondItem="97G-rP-blm" secondAttribute="leading" id="5aU-fx-jub"/>
+                            <constraint firstItem="sD4-ho-qUh" firstAttribute="leading" secondItem="97G-rP-blm" secondAttribute="leading" constant="-5" id="5aU-fx-jub"/>
                             <constraint firstAttribute="trailing" secondItem="97G-rP-blm" secondAttribute="trailing" constant="7.3333333333333428" id="9Zo-F6-0tb"/>
                             <constraint firstItem="97G-rP-blm" firstAttribute="leading" secondItem="iko-Md-8cs" secondAttribute="leading" constant="7.6666666666666607" id="GN3-SB-07p"/>
                             <constraint firstItem="sD4-ho-qUh" firstAttribute="top" secondItem="97G-rP-blm" secondAttribute="bottom" constant="10" id="NVj-gb-5Ui"/>
-                            <constraint firstItem="sD4-ho-qUh" firstAttribute="trailing" secondItem="97G-rP-blm" secondAttribute="trailing" id="iaT-V8-mko"/>
+                            <constraint firstItem="sD4-ho-qUh" firstAttribute="trailing" secondItem="97G-rP-blm" secondAttribute="trailing" constant="5" id="iaT-V8-mko"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="sD4-ho-qUh" secondAttribute="bottom" constant="15" id="ivD-ag-nHg"/>
                             <constraint firstItem="97G-rP-blm" firstAttribute="top" secondItem="iko-Md-8cs" secondAttribute="top" id="t7j-kd-Hc9"/>
                         </constraints>

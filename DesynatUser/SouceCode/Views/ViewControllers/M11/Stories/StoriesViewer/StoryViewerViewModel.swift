@@ -12,7 +12,7 @@ class StoryViewerViewModel {
     
     var adminStories: [SellerHighlightsModel] = []
     var sellerStories: [SellerHighlightsModel] = []
-    var sellerHighlight: [GetHighLightsList] = []
+    var sellerHighlight: [HighlightsList] = []
     private var hostVC: StoryViewerViewController
     
     init(hostVC: StoryViewerViewController) {
@@ -35,14 +35,6 @@ class StoryViewerViewModel {
         }
         WebService.sharedInstance.getSellerStoryService(param: param) { list in
             self.sellerStories = list
-            completion()
-        }
-    }
-    
-    func getSelfHighlight(completion: @escaping () -> Void) {
-        let param: [String:Any] = ["seller_id": hostVC.sellerId]
-        WebService.sharedInstance.getSellerHighlightsService(param: param) { list in
-            self.sellerHighlight = list
             completion()
         }
     }

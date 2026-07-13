@@ -402,6 +402,7 @@ extension StoresDetailsViewController: UICollectionViewDelegate, UICollectionVie
             let nextVC = StoryViewerViewController.instantiate(fromAppStoryboard: .Home)
             nextVC.comingFor = .forSellerHighlight
             nextVC.sellerId = sellerId
+            nextVC.viewModel.sellerHighlight = viewModel.sellerHighlights[indexPath.row].highlights ?? []
             self.navigationController?.pushViewController(nextVC, animated: false)
         default:
             break

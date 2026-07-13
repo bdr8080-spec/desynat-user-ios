@@ -18,22 +18,21 @@ class StoryViewerViewController: UIViewController {
     @IBOutlet weak var uploadedTimeView: CustomView!
     
     // MARK: - Variables
-    var usersStory: [Story] = []
-    var currentStoryIndex = 0
-    
-    var player: AVPlayer?
-    var playerLayer: AVPlayerLayer?
     private var videoTimeObserver: Any?
     private var seenStories: Set<Int> = []
     private var progressTimer: Timer?
     private var currentProgress: CGFloat = 0.0
-    
-    private lazy var viewModel = StoryViewerViewModel(hostVC: self)
+    lazy var viewModel = StoryViewerViewModel(hostVC: self)
+    var usersStory: [Story] = []
+    var currentStoryIndex = 0
+    var player: AVPlayer?
+    var playerLayer: AVPlayerLayer?
     var sellerId = Int()
     var selectedIndex: Int = 0
     var selectedStory: SellerHighlightsModel?
     var comingFor: ComingReasonAtStoryViewer = .forAdminStory
     var onCompletion: (() -> Void)?
+    var sliderCheck = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,131 +49,37 @@ class StoryViewerViewController: UIViewController {
             fetchSelfHighlight()
             highlightTitleView.isHidden = false
         }
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         tapGesture.cancelsTouchesInView = false
         storiesCollectionView.addGestureRecognizer(tapGesture)
-        
     }
     
-    private func ContentUpladedTimeDuration(from isoString: String) -> String {
-        
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        
-        guard let date = formatter.date(from: isoString) else { return "" }
-        
-        let secondsAgo = Int(Date().timeIntervalSince(date))
-        
-        if secondsAgo < 60 {
-            return secondsAgo == 1 ? "1 sec ago".localiz() : "\(secondsAgo) \("sec ago".localiz())"
-        }
-        
-        let minutes = secondsAgo / 60
-        if minutes < 60 {
-            return minutes == 1 ? "1 min ago".localiz() : "\(minutes) \("min ago".localiz())"
-        }
-        
-        let hours = minutes / 60
-        if hours < 24 {
-            return hours == 1 ? "1 hr ago".localiz() : "\(hours) \("hr ago".localiz())"
-        }
-        
-        let days = hours / 24
-        if days == 1 { return "Yesterday".localiz() }
-        return "\(days) \("days ago".localiz())"
+    // MARK: - Lifecycle
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        invalidateProgressTimer()
+        player?.pause()
+        playerLayer?.removeFromSuperlayer()
     }
     
-    private func markCurrentStoryAsSeen() {
-        switch comingFor {
-        case .forAdminStory:
-            guard currentStoryIndex < viewModel.adminStories.count else {
-                return
-            }
-            viewModel.seeStoryService(storyId: viewModel.adminStories[currentStoryIndex].id ?? 0)
-        case .forSellerStory:
-            guard currentStoryIndex < viewModel.sellerStories.count else {
-                return
-            }
-            viewModel.seeStoryService(storyId: viewModel.sellerStories[currentStoryIndex].id ?? 0)
-        default:
-            print("")
-        }
-    }
-    
-    private func setupCollectionViews() {
-        // Register Cells
-        storiesCollectionView.register(UINib(nibName: "StorieDetailsCollectionViewCell", bundle: nil),forCellWithReuseIdentifier: "StorieDetailsCollectionViewCell")
-        
-        topSliderCollectionView.register(UINib(nibName: "StorieTopSliderCollectionViewCell", bundle: nil),
-                                         forCellWithReuseIdentifier: "StorieTopSliderCollectionViewCell")
-        
-        storiesCollectionView.delegate = self
-        storiesCollectionView.dataSource = self
-        topSliderCollectionView.delegate = self
-        topSliderCollectionView.dataSource = self
-        
-        // Stories Collection Setup
-        if let layout = storiesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-            layout.minimumLineSpacing = 0
-            layout.minimumInteritemSpacing = 0
-        }
-        
-        storiesCollectionView.isPagingEnabled = true
-        storiesCollectionView.showsHorizontalScrollIndicator = false
-        
-        // Top Slider Setup - IMPORTANT CHANGES
-        if let layout = topSliderCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-            layout.minimumLineSpacing = 6
-            layout.minimumInteritemSpacing = 6
-        }
-        
-        // Disable scrolling on top slider
-        topSliderCollectionView.isScrollEnabled = false
-        topSliderCollectionView.showsHorizontalScrollIndicator = false
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        playerLayer?.frame = storiesCollectionView.bounds
     }
     
     @IBAction func crossDidTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: false)
     }
     
-    private func closeScreen() {
-        if let nav = navigationController {
-            nav.popViewController(animated: true)
-        } else {
-            dismiss(animated: true)
-        }
-    }
-    
-    @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
-        let location = gesture.location(in: storiesCollectionView)
-        let width = storiesCollectionView.frame.width
-        
-        if location.x > width / 2 {
-            goToNextStory()
-        } else {
-            goToPreviousStory()
-        }
-    }
-    
     func fetchSelfStories() {
-        
-        // 👉 sellerId pass karo (yaha dynamic bhi kar sakte ho)
         viewModel.getSelfStory() { [weak self] in
             guard let self = self else { return }
-            
             self.usersStory = self.viewModel.sellerStories.compactMap { item in
-                
                 guard let url = item.file else { return nil }
-                
                 let lowerURL = url.lowercased()
-                
                 let isVideo = lowerURL.hasSuffix(".mp4") ||
                 lowerURL.hasSuffix(".mov") ||
                 lowerURL.contains(".m3u8")
-                
                 return Story(
                     url: url,
                     isVideo: isVideo,
@@ -182,46 +87,23 @@ class StoryViewerViewController: UIViewController {
                     uploadedTime: item.createdAt
                 )
             }
-            
-//            DispatchQueue.main.async {
-//                
-//                if self.usersStory.isEmpty {
-//                    self.dismiss(animated: true)
-//                    return
-//                }
-//                
-//                self.storiesCollectionView.reloadData()
-//                self.topSliderCollectionView.reloadData()
-//                
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-//                    self.startCurrentStory()
-//                }
-//            }
-            
             DispatchQueue.main.async {
                     if self.usersStory.isEmpty {
                         self.dismiss(animated: true)
                         return
                     }
-
-                    // Open first unseen story
                     if let firstUnseenIndex = self.viewModel.sellerStories.firstIndex(where: {
                         $0.isSeen == 0
                     }) {
                         self.currentStoryIndex = firstUnseenIndex
                     } else {
-                        // All stories already seen
                         self.currentStoryIndex = 0
                     }
-
-                    // Mark previous stories as already seen in slider
                     for i in 0..<self.currentStoryIndex {
                         self.seenStories.insert(i)
                     }
-
                     self.storiesCollectionView.reloadData()
                     self.topSliderCollectionView.reloadData()
-
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         self.startCurrentStory()
                     }
@@ -230,20 +112,14 @@ class StoryViewerViewController: UIViewController {
     }
     
     func fetchSelfHighlight() {
-        
-        viewModel.getSelfHighlight() { [weak self] in
-            guard let self = self else { return }
-            
+//        viewModel.getSelfHighlight() { [weak self] in
+//            guard let self = self else { return }
             self.usersStory = self.viewModel.sellerHighlight.compactMap { item in
-                
                 guard let url = item.file else { return nil }
-                
                 let lowerURL = url.lowercased()
-                
                 let isVideo = lowerURL.hasSuffix(".mp4") ||
                 lowerURL.hasSuffix(".mov") ||
                 lowerURL.contains(".m3u8")
-                
                 return Story(
                     url: url,
                     isVideo: isVideo,
@@ -251,14 +127,11 @@ class StoryViewerViewController: UIViewController {
                     uploadedTime: item.createdAt
                 )
             }
-            
             DispatchQueue.main.async {
-                
                 if self.usersStory.isEmpty {
                     self.dismiss(animated: true)
                     return
                 }
-                
                 self.storiesCollectionView.reloadData()
                 self.topSliderCollectionView.reloadData()
                 self.highlightTitleLabel.text = self.viewModel.sellerHighlight.first?.title ?? ""
@@ -266,24 +139,18 @@ class StoryViewerViewController: UIViewController {
                     self.startCurrentStory()
                 }
             }
-        }
+//        }
     }
     
     func fetchAdminStoriesFrom() {
-        
         viewModel.getAdminStory { [weak self] in
             guard let self = self else { return }
-            
             self.usersStory = self.viewModel.adminStories.compactMap { item in
-                
                 guard let url = item.file else { return nil }
-                
                 let lowerURL = url.lowercased()
-                
                 let isVideo = lowerURL.hasSuffix(".mp4") ||
                 lowerURL.hasSuffix(".mov") ||
                 lowerURL.contains(".m3u8")
-                
                 return Story(
                     url: url,
                     isVideo: isVideo,
@@ -291,44 +158,23 @@ class StoryViewerViewController: UIViewController {
                     uploadedTime: item.createdAt
                 )
             }
-            
-            //            DispatchQueue.main.async {
-            //                if self.usersStory.isEmpty {
-            //                    self.dismiss(animated: true)
-            //                    return
-            //                }
-            //
-            //                self.storiesCollectionView.reloadData()
-            //                self.topSliderCollectionView.reloadData()
-            //
-            //                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            //                    self.startCurrentStory()
-            //                }
-            //            }
             DispatchQueue.main.async {
                 if self.usersStory.isEmpty {
                     self.dismiss(animated: true)
                     return
                 }
-                
-                // Open first unseen story
                 if let firstUnseenIndex = self.viewModel.adminStories.firstIndex(where: {
                     $0.isSeen == 0
                 }) {
                     self.currentStoryIndex = firstUnseenIndex
                 } else {
-                    // All stories already seen
                     self.currentStoryIndex = 0
                 }
-                
-                // Mark previous stories as already seen in slider
                 for i in 0..<self.currentStoryIndex {
                     self.seenStories.insert(i)
                 }
-                
                 self.storiesCollectionView.reloadData()
                 self.topSliderCollectionView.reloadData()
-                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     self.startCurrentStory()
                 }
@@ -337,16 +183,13 @@ class StoryViewerViewController: UIViewController {
     }
     
     func goToNextStory() {
-        
         invalidateProgressTimer()
         player?.pause()
         playerLayer?.removeFromSuperlayer()
-        
         guard currentStoryIndex < usersStory.count - 1 else {
             closeScreen()
             return
         }
-        
         currentStoryIndex += 1
         scrollToCurrentStory(animated: false)
     }
@@ -362,24 +205,19 @@ class StoryViewerViewController: UIViewController {
         scrollToCurrentStory(animated: false)
     }
     
-    // ✅ NEW: Centralized scroll method with proper sync
     private func scrollToCurrentStory(animated: Bool) {
         resetSliderForBackwardNavigation()
-        
         let indexPath = IndexPath(item: currentStoryIndex, section: 0)
         storiesCollectionView.scrollToItem(
             at: indexPath,
             at: .centeredHorizontally,
             animated: animated
         )
-        
-        // ✅ Wait for scroll completion before configuring
         DispatchQueue.main.asyncAfter(deadline: .now() + (animated ? 0.3 : 0.1)) {
             self.configureAndStartCurrentStory()
         }
     }
     
-    // ✅ NEW: Single source of truth for story setup
     private func configureAndStartCurrentStory() {
         guard let story = usersStory[safe: currentStoryIndex] else { return }
         if comingFor == .forSellerHighlight {
@@ -415,12 +253,10 @@ class StoryViewerViewController: UIViewController {
     
     // MARK: - Cell Configuration
     private func configureCell(_ cell: StorieDetailsCollectionViewCell, with story: Story, completion: @escaping (() -> Void)) {
-        // Global cleanup
         player?.pause()
         playerLayer?.removeFromSuperlayer()
         cell.mainImageView.image = nil
         cell.mainImageView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
-        
         if story.isVideo {
             let videoURLString = story.url ?? ""
             if !videoURLString.isEmpty {
@@ -446,9 +282,7 @@ class StoryViewerViewController: UIViewController {
         let increment = CGFloat(interval / duration)
         progressTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] timer in
             guard let self = self else { return }
-            
             self.currentProgress += increment
-            
             if self.currentProgress >= 1.0 {
                 self.currentProgress = 1.0
                 self.updateTopSliderProgress()
@@ -457,7 +291,6 @@ class StoryViewerViewController: UIViewController {
                 self.sliderCheck = false
                 return
             }
-            
             self.updateTopSliderProgress()
         }
     }
@@ -465,22 +298,16 @@ class StoryViewerViewController: UIViewController {
     private func startVideoProgressObserver() {
         guard let player = player,
               player.currentItem?.status == .readyToPlay else {
-            //            print("❌ Video not ready yet")
             return
         }
-        
         removeVideoTimeObserver()
-        
-        let interval = CMTime(seconds: 0.03, preferredTimescale: 600)  // 30fps smooth
-        
+        let interval = CMTime(seconds: 0.03, preferredTimescale: 600)
         videoTimeObserver = player.addPeriodicTimeObserver(
             forInterval: interval,
             queue: .main
         ) { [weak self] time in
             self?.updateVideoProgress(time: time)
         }
-        
-        //        print("✅ Video observer started")
     }
     
     private func removeVideoTimeObserver() {
@@ -521,7 +348,7 @@ class StoryViewerViewController: UIViewController {
     private func invalidateProgressTimer() {
         progressTimer?.invalidate()
         progressTimer = nil
-        removeVideoTimeObserver()  // ✅ Video cleanup
+        removeVideoTimeObserver()
     }
     
     // MARK: - Image & Video
@@ -546,25 +373,18 @@ class StoryViewerViewController: UIViewController {
         }.resume()
     }
     
-    // ✅ FIXED: Updated playVideo with completion handler
     private func playVideo(in cell: StorieDetailsCollectionViewCell, urlString: String, completion: @escaping (() -> Void)) {
         guard let url = URL(string: urlString) else {
             completion()
             return
         }
-        
-        // Clean up previous player
         player?.pause()
         playerLayer?.removeFromSuperlayer()
-        
         player = AVPlayer(url: url)
         playerLayer = AVPlayerLayer(player: player)
         playerLayer?.frame = cell.mainImageView.bounds
         playerLayer?.videoGravity = .resizeAspectFill
-        //        CommonUtils.showHud(show: false)
         cell.mainImageView.layer.insertSublayer(playerLayer!, at: 0)
-        
-        // Listen for ready state BEFORE play
         player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.new], context: nil)
         NotificationCenter.default.addObserver(
             self,
@@ -574,8 +394,6 @@ class StoryViewerViewController: UIViewController {
         )
         CommonUtils.showHud(show: false)
         player?.play()
-        
-        // Call completion when video is ready (handled in observeValue)
     }
     
     
@@ -583,74 +401,131 @@ class StoryViewerViewController: UIViewController {
                                of object: Any?,
                                change: [NSKeyValueChangeKey : Any]?,
                                context: UnsafeMutableRawPointer?) {
-        
         if keyPath == "timeControlStatus",
            let player = object as? AVPlayer {
-            
             switch player.timeControlStatus {
             case .playing:
                 player.isMuted = false
                 startVideoProgressObserver()
                 onCompletion?()
-                
             case .waitingToPlayAtSpecifiedRate:
                 print("⏳ Video buffering...")
-                
             case .paused:
                 print("⏸ Video paused")
-                
             @unknown default:
                 break
             }
         }
     }
-    deinit {
-        removeVideoTimeObserver()
-        player?.removeObserver(self, forKeyPath: "timeControlStatus")
-        NotificationCenter.default.removeObserver(self)
-    }
-    @objc private func videoDidFinishPlaying() {
-        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
-        goToNextStory()
-    }
-    
-    // MARK: - Lifecycle
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        invalidateProgressTimer()
-        player?.pause()
-        playerLayer?.removeFromSuperlayer()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        playerLayer?.frame = storiesCollectionView.bounds
-    }
-    
     
     private func resetSliderForBackwardNavigation() {
-        
-        // 1. BEFORE current index → all should be seen (white)
         if currentStoryIndex > 0 {
             for i in 0..<currentStoryIndex {
                 seenStories.insert(i)
             }
         }
-        
-        // 2. AFTER current index → all should be NOT SEEN (gray)
         if currentStoryIndex < usersStory.count - 1 {
             for i in (currentStoryIndex + 1)..<usersStory.count {
                 seenStories.remove(i)
             }
         }
-        
-        // 3. Reset progress for active cell
         currentProgress = 0
-        
-        // 4. Update slider UI
         topSliderCollectionView.reloadData()
     }
-    var sliderCheck = false
+    
+    private func ContentUpladedTimeDuration(from isoString: String) -> String {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        guard let date = formatter.date(from: isoString) else { return "" }
+        let secondsAgo = Int(Date().timeIntervalSince(date))
+        if secondsAgo < 60 {
+            return secondsAgo == 1 ? "1 sec ago".localiz() : "\(secondsAgo) \("sec ago".localiz())"
+        }
+        let minutes = secondsAgo / 60
+        if minutes < 60 {
+            return minutes == 1 ? "1 min ago".localiz() : "\(minutes) \("min ago".localiz())"
+        }
+        let hours = minutes / 60
+        if hours < 24 {
+            return hours == 1 ? "1 hr ago".localiz() : "\(hours) \("hr ago".localiz())"
+        }
+        let days = hours / 24
+        if days == 1 { return "Yesterday".localiz() }
+        return "\(days) \("days ago".localiz())"
+    }
+    
+    private func markCurrentStoryAsSeen() {
+        switch comingFor {
+        case .forAdminStory:
+            guard currentStoryIndex < viewModel.adminStories.count else {
+                return
+            }
+            viewModel.seeStoryService(storyId: viewModel.adminStories[currentStoryIndex].id ?? 0)
+        case .forSellerStory:
+            guard currentStoryIndex < viewModel.sellerStories.count else {
+                return
+            }
+            viewModel.seeStoryService(storyId: viewModel.sellerStories[currentStoryIndex].id ?? 0)
+        default:
+            print("")
+        }
+    }
+    
+    private func setupCollectionViews() {
+        storiesCollectionView.register(UINib(nibName: "StorieDetailsCollectionViewCell", bundle: nil),forCellWithReuseIdentifier: "StorieDetailsCollectionViewCell")
+        
+        topSliderCollectionView.register(UINib(nibName: "StorieTopSliderCollectionViewCell", bundle: nil),
+                                         forCellWithReuseIdentifier: "StorieTopSliderCollectionViewCell")
+        
+        storiesCollectionView.delegate = self
+        storiesCollectionView.dataSource = self
+        topSliderCollectionView.delegate = self
+        topSliderCollectionView.dataSource = self
+        if let layout = storiesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+            layout.minimumLineSpacing = 0
+            layout.minimumInteritemSpacing = 0
+        }
+        storiesCollectionView.isPagingEnabled = true
+        storiesCollectionView.showsHorizontalScrollIndicator = false
+        if let layout = topSliderCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+            layout.minimumLineSpacing = 6
+            layout.minimumInteritemSpacing = 6
+        }
+        topSliderCollectionView.isScrollEnabled = false
+        topSliderCollectionView.showsHorizontalScrollIndicator = false
+    }
+    
+    private func closeScreen() {
+        if let nav = navigationController {
+            nav.popViewController(animated: true)
+        } else {
+            dismiss(animated: true)
+        }
+    }
+    
+    @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
+        let location = gesture.location(in: storiesCollectionView)
+        let width = storiesCollectionView.frame.width
+        
+        if location.x > width / 2 {
+            goToNextStory()
+        } else {
+            goToPreviousStory()
+        }
+    }
+    
+    @objc private func videoDidFinishPlaying() {
+        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
+        goToNextStory()
+    }
+    
+    deinit {
+        removeVideoTimeObserver()
+        player?.removeObserver(self, forKeyPath: "timeControlStatus")
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 // MARK: - Collection View DataSource & Delegate

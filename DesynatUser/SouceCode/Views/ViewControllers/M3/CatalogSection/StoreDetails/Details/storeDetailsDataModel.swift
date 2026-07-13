@@ -310,14 +310,38 @@ struct SellerHighlightsModel: Codable {
         }
     }
 }
+//
+//// MARK: - GetHighLightsList
+//struct GetHighLightsList: Codable {
+//    let id, type, sellerID: Int?
+//    let file: String?
+//    let title: String?
+//    let thumbnail: String?
+//    let status: Int?
+//    let createdAt, updatedAt: String?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id, type
+//        case sellerID = "seller_id"
+//        case file, title, status, thumbnail
+//        case createdAt = "created_at"
+//        case updatedAt = "updated_at"
+//    }
+//}
 
 // MARK: - GetHighLightsList
 struct GetHighLightsList: Codable {
+    let title: String?
+    let highlights: [HighlightsList]?
+}
+
+// MARK: - HighlightsList
+struct HighlightsList: Codable {
     let id, type, sellerID: Int?
     let file: String?
     let title: String?
-    let thumbnail: String?
     let status: Int?
+    let thumbnail: String?
     let createdAt, updatedAt: String?
 
     enum CodingKeys: String, CodingKey {
