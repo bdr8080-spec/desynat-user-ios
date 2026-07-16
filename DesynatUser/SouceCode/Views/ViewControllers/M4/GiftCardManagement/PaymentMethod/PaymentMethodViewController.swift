@@ -100,7 +100,7 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
         let selectedMethod = displayPaymentMethods[index]
         
         // In-App Wallet (ONLY fromCardDetails)
-        if selectedMethod.paymentMethodTitle == "In -App Wallet" {
+        if selectedMethod.paymentMethodTitle == "In - App Wallet" {
             let walletBalance = viewModel.walletAmount ?? 0
             if walletBalance < payAmount {
                 showToast(msg: "Insufficient wallet balance".localiz())

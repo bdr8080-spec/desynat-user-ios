@@ -36,6 +36,7 @@ class EnterCardsDetailsViewController: UIViewController {
         super.viewDidLoad()
         enterAmountView.isHidden = true
         setDelegateMethod()
+        whatsAppNumberTF.delegate = self
         viewModel.getALlUserCountryListApi()
         wishMessageTextView.placeholderTextView = "Enter wish message".localiz()
         noteTextView.placeholderTextView = "Enter note".localiz()
@@ -153,6 +154,16 @@ extension EnterCardsDetailsViewController: UITextFieldDelegate, UITextViewDelega
         if textField == self.emailTextField {
             var validation: StringValidation?
             validation = StringValidation(string: currentText, characterCount: 65, validation: .emailId)
+            if let data = validation {
+                return data.validate()
+            } else {
+                return true
+            }
+        }
+        
+        else if textField == self.whatsAppNumberTF {
+            var validation: StringValidation?
+            validation = StringValidation(string: currentText, characterCount: 15, validation: .mobileNo)
             if let data = validation {
                 return data.validate()
             } else {
