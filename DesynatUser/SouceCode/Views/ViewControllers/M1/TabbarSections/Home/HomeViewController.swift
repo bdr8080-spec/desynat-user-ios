@@ -243,7 +243,7 @@ class HomeViewController: UIViewController {
     func startSuggestedStoresTimer() {
         viewModel.getSuggestedStoresRequest()
         suggestedStoresTimer?.invalidate()
-        suggestedStoresTimer = Timer.scheduledTimer(withTimeInterval: 8.0, repeats: true) { [weak self] _ in
+        suggestedStoresTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
             self?.viewModel.getSuggestedStoresRequest()
         }
     }
@@ -271,7 +271,6 @@ class HomeViewController: UIViewController {
     private func setupLocation() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
