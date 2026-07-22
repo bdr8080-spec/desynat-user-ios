@@ -7,15 +7,23 @@
 
 import UIKit
 import AVFoundation
+import SDWebImage
 
 class StoryViewerViewController: UIViewController {
     
+    @IBOutlet weak var profileAndNameStackView: UIStackView!
+    @IBOutlet weak var timerLabelLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var logoView: UIView!
+    @IBOutlet weak var logoImageView: CustomImageView!
+    @IBOutlet weak var sellerStoreNameLabel: UILabel!
     @IBOutlet weak var uploadedTimeLabel: UILabel!
     @IBOutlet weak var highlightTitleLabel: UILabel!
     @IBOutlet weak var highlightTitleView: CustomView!
     @IBOutlet weak var storiesCollectionView: UICollectionView!
     @IBOutlet weak var topSliderCollectionView: UICollectionView!
     @IBOutlet weak var uploadedTimeView: CustomView!
+    @IBOutlet weak var timerView: CustomView!
+    @IBOutlet weak var timeLabel: UILabel!
     
     // MARK: - Variables
     private var videoTimeObserver: Any?
@@ -33,19 +41,27 @@ class StoryViewerViewController: UIViewController {
     var comingFor: ComingReasonAtStoryViewer = .forAdminStory
     var onCompletion: (() -> Void)?
     var sliderCheck = false
+    var storIDForNavigation: Int? = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
         setupCollectionViews()
+//        sellerStoreNameLabel.isHidden = true
         switch comingFor {
         case .forAdminStory:
+            profileAndNameStackView.isHidden = false
+            timerView.isHidden = true
             fetchAdminStoriesFrom()
             highlightTitleView.isHidden = true
         case .forSellerStory:
+            profileAndNameStackView.isHidden = true
+            timerView.isHidden = false
             fetchSelfStories()
             highlightTitleView.isHidden = true
         case .forSellerHighlight:
+            timerView.isHidden = false
+            profileAndNameStackView.isHidden = true
             fetchSelfHighlight()
             highlightTitleView.isHidden = false
         }
@@ -71,6 +87,12 @@ class StoryViewerViewController: UIViewController {
         self.navigationController?.popViewController(animated: false)
     }
     
+    @IBAction func profileLogoDidTapped(_ sender: Any) {
+        let nextVC = StoresDetailsViewController.instantiate(fromAppStoryboard: .Catalog)
+        nextVC.storeId = storIDForNavigation
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
     func fetchSelfStories() {
         viewModel.getSelfStory() { [weak self] in
             guard let self = self else { return }
@@ -84,47 +106,9 @@ class StoryViewerViewController: UIViewController {
                     url: url,
                     isVideo: isVideo,
                     duration: isVideo ? nil : 10.0,
-                    uploadedTime: item.createdAt
-                )
-            }
-            DispatchQueue.main.async {
-                    if self.usersStory.isEmpty {
-                        self.dismiss(animated: true)
-                        return
-                    }
-                    if let firstUnseenIndex = self.viewModel.sellerStories.firstIndex(where: {
-                        $0.isSeen == 0
-                    }) {
-                        self.currentStoryIndex = firstUnseenIndex
-                    } else {
-                        self.currentStoryIndex = 0
-                    }
-                    for i in 0..<self.currentStoryIndex {
-                        self.seenStories.insert(i)
-                    }
-                    self.storiesCollectionView.reloadData()
-                    self.topSliderCollectionView.reloadData()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        self.startCurrentStory()
-                    }
-                }
-        }
-    }
-    
-    func fetchSelfHighlight() {
-//        viewModel.getSelfHighlight() { [weak self] in
-//            guard let self = self else { return }
-            self.usersStory = self.viewModel.sellerHighlight.compactMap { item in
-                guard let url = item.file else { return nil }
-                let lowerURL = url.lowercased()
-                let isVideo = lowerURL.hasSuffix(".mp4") ||
-                lowerURL.hasSuffix(".mov") ||
-                lowerURL.contains(".m3u8")
-                return Story(
-                    url: url,
-                    isVideo: isVideo,
-                    duration: isVideo ? nil : 10.0,
-                    uploadedTime: item.createdAt
+                    uploadedTime: item.createdAt,
+                    type: item.type,
+                    sellerDetails: item.sellerDetails
                 )
             }
             DispatchQueue.main.async {
@@ -132,14 +116,53 @@ class StoryViewerViewController: UIViewController {
                     self.dismiss(animated: true)
                     return
                 }
+                if let firstUnseenIndex = self.viewModel.sellerStories.firstIndex(where: {
+                    $0.isSeen == 0
+                }) {
+                    self.currentStoryIndex = firstUnseenIndex
+                } else {
+                    self.currentStoryIndex = 0
+                }
+                for i in 0..<self.currentStoryIndex {
+                    self.seenStories.insert(i)
+                }
                 self.storiesCollectionView.reloadData()
                 self.topSliderCollectionView.reloadData()
-                self.highlightTitleLabel.text = self.viewModel.sellerHighlight.first?.title ?? ""
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     self.startCurrentStory()
                 }
             }
-//        }
+        }
+    }
+    
+    func fetchSelfHighlight() {
+        self.usersStory = self.viewModel.sellerHighlight.compactMap { item in
+            guard let url = item.file else { return nil }
+            let lowerURL = url.lowercased()
+            let isVideo = lowerURL.hasSuffix(".mp4") ||
+            lowerURL.hasSuffix(".mov") ||
+            lowerURL.contains(".m3u8")
+            return Story(
+                url: url,
+                isVideo: isVideo,
+                duration: isVideo ? nil : 10.0,
+                uploadedTime: item.createdAt,
+                type: 2,
+                sellerDetails: nil
+            )
+        }
+        DispatchQueue.main.async {
+            if self.usersStory.isEmpty {
+                self.dismiss(animated: true)
+                return
+            }
+            self.storiesCollectionView.reloadData()
+            self.topSliderCollectionView.reloadData()
+            self.highlightTitleLabel.text = self.viewModel.sellerHighlight.first?.title ?? ""
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.startCurrentStory()
+            }
+        }
     }
     
     func fetchAdminStoriesFrom() {
@@ -155,7 +178,9 @@ class StoryViewerViewController: UIViewController {
                     url: url,
                     isVideo: isVideo,
                     duration: isVideo ? nil : 10.0,
-                    uploadedTime: item.createdAt
+                    uploadedTime: item.createdAt,
+                    type: item.type,
+                    sellerDetails: item.sellerDetails
                 )
             }
             DispatchQueue.main.async {
@@ -224,25 +249,41 @@ class StoryViewerViewController: UIViewController {
             highlightTitleLabel.text = viewModel.sellerHighlight[safe: currentStoryIndex]?.title ?? ""
         }
         markCurrentStoryAsSeen()
-        uploadedTimeView.isHidden = false
+        switch comingFor {
+        case .forAdminStory:
+            uploadedTimeView.isHidden = false
+            timerView.isHidden = true
+        default:
+            uploadedTimeView.isHidden = true
+            timerView.isHidden = false
+        }
+        
         uploadedTimeLabel.text = ContentUpladedTimeDuration(from: story.uploadedTime ?? "")
-        // Get the NOW visible cell (after scroll completes)
+        timeLabel.text = ContentUpladedTimeDuration(from: story.uploadedTime ?? "")
+//        sellerStoreNameLabel.isHidden = story.type == 1
+        sellerStoreNameLabel.text = story.sellerDetails?.storeInfo?.storeName ?? "Admin"
+        storIDForNavigation = story.sellerDetails?.storeInfo?.id ?? 0
+        if story.type == 1 {
+            logoImageView.image = UIImage(named: "adminStroyEmpty")
+        } else {
+            if let imageUrl = story.sellerDetails?.storeInfo?.storeImage, let url = URL(string: imageUrl) {
+                logoImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                logoImageView.sd_imageIndicator?.startAnimatingIndicator()
+                logoImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+            } else {
+                logoImageView.image = UIImage(named: "adminStroyEmpty")
+            }
+        }
         guard let cell = storiesCollectionView.visibleCells
             .compactMap({ $0 as? StorieDetailsCollectionViewCell })
             .first else { return }
-        
-        // Clean previous content
         cell.mainImageView.image = nil
         cell.mainImageView.layer.sublayers?.removeAll()
         CommonUtils.showHud(show: true)
-        // Configure with completion callback
         configureCell(cell, with: story) { [weak self] in
             guard let self = self else { return }
-            
             self.resetSliderForBackwardNavigation()
             self.updateTopSliderProgress()
-            
-            // Start progress tracking
             if story.isVideo {
                 self.startVideoProgressObserver()
             } else {
@@ -260,14 +301,14 @@ class StoryViewerViewController: UIViewController {
         if story.isVideo {
             let videoURLString = story.url ?? ""
             if !videoURLString.isEmpty {
-                playVideo(in: cell, urlString: videoURLString, completion: completion)
+                playVideo(in: cell, type: story.type ?? 1, urlString: videoURLString, completion: completion)
             } else {
                 completion()
             }
         } else {
             let imageURLString = story.url ?? ""
             if !imageURLString.isEmpty {
-                loadImage(in: cell, urlString: imageURLString, completion: completion)
+                loadImage(in: cell, type: story.type ?? 1, urlString: imageURLString, completion: completion)
             } else {
                 completion()
             }
@@ -352,12 +393,11 @@ class StoryViewerViewController: UIViewController {
     }
     
     // MARK: - Image & Video
-    private func loadImage(in cell: StorieDetailsCollectionViewCell, urlString: String, completion: @escaping (() -> Void)) {
+    private func loadImage(in cell: StorieDetailsCollectionViewCell, type: Int, urlString: String, completion: @escaping (() -> Void)) {
         guard let url = URL(string: urlString) else {
             completion()
             return
         }
-        
         URLSession.shared.dataTask(with: url) { [weak cell] data, _, _ in
             guard let data = data,
                   let image = UIImage(data: data),
@@ -368,12 +408,14 @@ class StoryViewerViewController: UIViewController {
             CommonUtils.showHud(show: false)
             DispatchQueue.main.async {
                 cell.mainImageView.image = image
+                cell.addTagView.isHidden = type == 1
+                cell.addTagLabel.isHidden = type == 1
                 completion()
             }
         }.resume()
     }
     
-    private func playVideo(in cell: StorieDetailsCollectionViewCell, urlString: String, completion: @escaping (() -> Void)) {
+    private func playVideo(in cell: StorieDetailsCollectionViewCell, type: Int, urlString: String, completion: @escaping (() -> Void)) {
         guard let url = URL(string: urlString) else {
             completion()
             return
@@ -385,6 +427,8 @@ class StoryViewerViewController: UIViewController {
         playerLayer?.frame = cell.mainImageView.bounds
         playerLayer?.videoGravity = .resizeAspectFill
         cell.mainImageView.layer.insertSublayer(playerLayer!, at: 0)
+        cell.addTagView.isHidden = type == 1
+        cell.addTagLabel.isHidden = type == 1
         player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.new], context: nil)
         NotificationCenter.default.addObserver(
             self,
@@ -395,29 +439,7 @@ class StoryViewerViewController: UIViewController {
         CommonUtils.showHud(show: false)
         player?.play()
     }
-    
-    
-    override func observeValue(forKeyPath keyPath: String?,
-                               of object: Any?,
-                               change: [NSKeyValueChangeKey : Any]?,
-                               context: UnsafeMutableRawPointer?) {
-        if keyPath == "timeControlStatus",
-           let player = object as? AVPlayer {
-            switch player.timeControlStatus {
-            case .playing:
-                player.isMuted = false
-                startVideoProgressObserver()
-                onCompletion?()
-            case .waitingToPlayAtSpecifiedRate:
-                print("⏳ Video buffering...")
-            case .paused:
-                print("⏸ Video paused")
-            @unknown default:
-                break
-            }
-        }
-    }
-    
+
     private func resetSliderForBackwardNavigation() {
         if currentStoryIndex > 0 {
             for i in 0..<currentStoryIndex {
@@ -508,7 +530,6 @@ class StoryViewerViewController: UIViewController {
     @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
         let location = gesture.location(in: storiesCollectionView)
         let width = storiesCollectionView.frame.width
-        
         if location.x > width / 2 {
             goToNextStory()
         } else {
@@ -537,24 +558,17 @@ extension StoryViewerViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == topSliderCollectionView {
-            let sliderCell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "StorieTopSliderCollectionViewCell",
-                for: indexPath
-            ) as! StorieTopSliderCollectionViewCell
-            
+            let sliderCell = collectionView.dequeueReusableCell(withReuseIdentifier: "StorieTopSliderCollectionViewCell",for: indexPath) as! StorieTopSliderCollectionViewCell
             let isActive = (indexPath.item == currentStoryIndex)
             let isSeen = seenStories.contains(indexPath.item)
             let progress: CGFloat = isActive ? currentProgress : 0.0
             sliderCell.configure(isActive: isActive, isSeen: isSeen, progress: progress)
-            
             return sliderCell
         }
         
         // Stories cell - minimal setup only
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "StorieDetailsCollectionViewCell",
-            for: indexPath
-        ) as! StorieDetailsCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StorieDetailsCollectionViewCell",for: indexPath) as! StorieDetailsCollectionViewCell
+        
         cell.mainImageView.image = nil
         return cell
     }
@@ -587,25 +601,17 @@ extension StoryViewerViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         if collectionView == topSliderCollectionView {
-            
             let totalItems = CGFloat(usersStory.count)
             let spacing: CGFloat = 6.0
             let totalSpacing = spacing * (totalItems - 1)
-            
             let totalWidth = collectionView.bounds.width
             let availableWidth = totalWidth - totalSpacing
-            
             var itemWidth = availableWidth / totalItems
-            itemWidth = floor(itemWidth * UIScreen.main.scale) / UIScreen.main.scale  // ← FIX
-            
+            itemWidth = floor(itemWidth * UIScreen.main.scale) / UIScreen.main.scale
             return CGSize(width: itemWidth, height: 4)
         }
-        
-        // Full screen story
-        return CGSize(width: collectionView.bounds.width,
-                      height: collectionView.bounds.height)
+        return CGSize(width: collectionView.bounds.width,height: collectionView.bounds.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

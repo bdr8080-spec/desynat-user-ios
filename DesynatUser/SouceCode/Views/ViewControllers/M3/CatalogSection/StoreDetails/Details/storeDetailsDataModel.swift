@@ -257,6 +257,7 @@ struct SellerHighlightsModel: Codable {
     var createdAt, updatedAt: String?
     var isWhishlisted: Int?
     var isSeen: Int?
+    var sellerDetails: SellerDetails?
 
     enum CodingKeys: String, CodingKey {
         case id, type
@@ -266,6 +267,7 @@ struct SellerHighlightsModel: Codable {
         case updatedAt = "updated_at"
         case isWhishlisted = "is_whishlisted"
         case isSeen = "is_seen"
+        case sellerDetails = "seller_details"
 
     }
     
@@ -303,6 +305,10 @@ struct SellerHighlightsModel: Codable {
             
             if let value  = try? container.decodeIfPresent(Int.self, forKey: .isSeen) {
                 isSeen = value
+            }
+            
+            if let value  = try? container.decodeIfPresent(SellerDetails.self, forKey: .sellerDetails) {
+                sellerDetails = value
             }
             
         } catch {

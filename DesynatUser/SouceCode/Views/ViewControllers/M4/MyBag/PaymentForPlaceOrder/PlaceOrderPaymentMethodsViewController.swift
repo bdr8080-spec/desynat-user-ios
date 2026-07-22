@@ -242,6 +242,7 @@ extension PlaceOrderPaymentMethodsViewController {
             guard let self = self else { return }
             switch response {
             case .success(let paymentStatus):
+                print("paymentStatus=====> \(paymentStatus)")
                 let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
                 let gateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "KNET"
                 self.handlePaymentCompletion(transactionID: transactionID, invoiceId: invoiceId ?? "", gateway: gateway)
@@ -259,6 +260,7 @@ extension PlaceOrderPaymentMethodsViewController {
             guard let self = self else { return }
             switch response {
             case .success(let paymentStatus):
+                print("paymentStatus=====> \(paymentStatus)")
                 let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
                 let gateway = "VisaPay"
                 self.handlePaymentCompletion(transactionID: transactionID, invoiceId: invoiceId ?? "", gateway: gateway)

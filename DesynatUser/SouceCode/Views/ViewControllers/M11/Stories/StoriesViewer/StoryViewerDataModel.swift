@@ -13,11 +13,15 @@ struct Story {
     let isVideo: Bool
     let duration: TimeInterval?   // nil for videos
     let uploadedTime: String?
+    let type: Int?
+    let sellerDetails: SellerDetails?
     
-    init(url: String?, isVideo: Bool, duration: TimeInterval?, uploadedTime: String?) {
+    init(url: String?, isVideo: Bool, duration: TimeInterval?, uploadedTime: String?, type: Int?, sellerDetails: SellerDetails?) {
         self.url = url
         self.isVideo = isVideo
         self.duration = duration
         self.uploadedTime = uploadedTime
+        self.type = type
+        self.sellerDetails = sellerDetails
     }
 }

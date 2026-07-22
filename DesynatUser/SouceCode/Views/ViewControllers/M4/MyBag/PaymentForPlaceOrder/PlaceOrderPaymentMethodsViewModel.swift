@@ -62,11 +62,11 @@ class PlaceOrderPaymentMethodsViewModel {
         }
     }
     
-    func completeOrderApi(orderID: String) {
+    func completeOrderApi(orderID: String) {//}, paymentID: String) {
         guard let selectedMethod = hostVC.selectedPaymentMethod else { return }
         let param: [String: Any] = ["order_id": orderID,
-                                    "payment_status": 1]
-        //                                "Payment_method": selectedMethod.apiValue]
+                                    "payment_status": 1]//,
+//                                    "payment_id": paymentID]
         WebService.sharedInstance.completeOrderApi(param: param) { response in
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
