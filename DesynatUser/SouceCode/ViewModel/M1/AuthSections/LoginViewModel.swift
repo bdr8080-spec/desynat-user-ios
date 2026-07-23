@@ -76,6 +76,7 @@ class LoginViewModel: NSObject {
         WebService.sharedInstance.loginUserService(withParams: params) { (response) in
             UserDefaults.standard.setValue("Yes", forKey:"isLogin")
             UserDefaults.standard.setValue("false", forKey:"isGuestLogin")
+            UserDefaults.standard.set("true", forKey: "hasShownFullscreenBanner")
             kSharedSceneDelegate.navigateToUserHomeVc()
         }
     }
@@ -85,6 +86,7 @@ class LoginViewModel: NSObject {
         WebService.sharedInstance.socialLoginUserService(withParams: params) { (response) in
             UserDefaults.standard.setValue("Yes", forKey:"isLogin")
             UserDefaults.standard.setValue("false", forKey:"isGuestLogin")
+            UserDefaults.standard.set("true", forKey: "hasShownFullscreenBanner")
             kSharedSceneDelegate.navigateToUserHomeVc()
         }
     }

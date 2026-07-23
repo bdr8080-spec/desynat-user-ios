@@ -31,7 +31,7 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
     // MARK: - Property Decalaration
     private var currentAlert: UIAlertController?
     var getToastMessage: String = ""
-    var paymentTransactionDetails: (transactionID: String, invoiceId: String, paymentGateway: String)?
+    var paymentTransactionDetails: (transactionID: String, paymentId: String, invoiceId: String, paymentGateway: String)?
     var paymentCompleted: Bool = false
     var payAmount: Double = 0.0
     var orderId: String = ""
@@ -191,10 +191,11 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
             case .success(let paymentStatus):
 //                print("Payment successful with invoiceId: \(invoiceId ?? "N/A")")
                 let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
+                let paymentId = paymentStatus.invoiceTransactions?.first?.paymentID ?? ""
                 let paymentGateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "card"
-                paymentTransactionDetails = (transactionID, invoiceId ?? "", paymentGateway)
+                paymentTransactionDetails = (transactionID, paymentId, invoiceId ?? "", paymentGateway)
                 paymentCompleted = true
-                self.handlePaymentCompletion(transactionID: transactionID, invoiceId: invoiceId ?? "", gateway: paymentGateway)
+                self.handlePaymentCompletion(transactionID: transactionID, paymentId: paymentId, invoiceId: invoiceId ?? "", gateway: paymentGateway)
                 
                 //        viewModel.payForAddingCard(transactionId: transactionID)
             case .failure(let error):
@@ -208,18 +209,14 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
         showAlertAtPayment(msg: message)
     }
     
-    func handlePaymentCompletion(transactionID: String, invoiceId: String, gateway: String) {
-        // Kill any alert immediately
+    func handlePaymentCompletion(transactionID: String, paymentId: String, invoiceId: String, gateway: String) {
         if let alert = currentAlert {
             alert.dismiss(animated: false)
             currentAlert = nil
         }
-        
-        paymentTransactionDetails = (transactionID, invoiceId, gateway)
+        paymentTransactionDetails = (transactionID, paymentId, invoiceId, gateway)
         paymentCompleted = true
-        
-        // Automatically call API for all non-wallet payments
-        if selectedPaymentMethodID != 3 { // 3 = Wallet
+        if selectedPaymentMethodID != 3 {
             viewModel.payNowRequest(transactionId: transactionID, paymentId: 1)
         }
     }
@@ -265,38 +262,24 @@ extension PaymentMethodViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == cardsTableiew { return }
-        
-        // Reset card selection
         isCardIsSlecteed = false
         cardSelectionImageView.image = UIImage(named: "radioUnselected")
         viewCreditCard.isHidden = true
-        
         selectedPaymentMethodID = indexPath.row
         paymentMethodsTableView.reloadData()
-        
         let selectedMethod = displayPaymentMethods[indexPath.row]
-        
-        // 🚨 Wallet Add Money → NEVER start SDK here
         if comingFrom == .fromWalletMeonyAdd {
             return
         }
-        
-        // ✅ fromCardDetails → auto start EXCEPT wallet
         switch selectedMethod.paymentMethodTitle {
-            
         case "Pay by KNET":
             startKNETPayment()
-            
         case "Visapay":
             startVisaPayPayment()
-            
         case "Apple Pay":
             startApplePay()
-            
         case "In -App Wallet":
-            // Wallet must wait for Proceed button
             break
-            
         default:
             break
         }
@@ -336,27 +319,19 @@ extension PaymentMethodViewController {
     }
     
     func startVisaPayPayment() {
-//        let supplierId = Int.random(in: 1000...9999)
         let amountDecimal = Decimal(string: String(format: "%.3f", payAmount)) ?? 0
         let request = MFExecutePaymentRequest(invoiceValue: amountDecimal, paymentMethod: 2)
-        
         request.customerReference = orderId
         request.displayCurrencyIso = .kuwait_KWD
-        
-//        let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: Decimal(payAmount))
-//        request.suppliers = [supplier]
-        
         MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { [weak self] result, invoiceId in
             guard let self = self else { return }
             switch result {
             case .success(let paymentStatus):
                 let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
+                let paymentID = paymentStatus.invoiceTransactions?.first?.paymentID ?? ""
                 let gateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "VisaPay"
-                
-                self.paymentTransactionDetails = (transactionID, invoiceId ?? "", gateway)
+                self.paymentTransactionDetails = (transactionID, paymentID, invoiceId ?? "", gateway)
                 self.paymentCompleted = true
-                
-                // Automatically complete backend registration
                 self.viewModel.payNowRequest(transactionId: transactionID, paymentId: 1)
             case .failure(_):
                 showAlertAtPayment(msg: "Payment not completed".localiz())
@@ -365,25 +340,19 @@ extension PaymentMethodViewController {
     }
     
     func startKNETPayment() {
-//        let supplierId = Int.random(in: 1000...9999)
         let request = MFExecutePaymentRequest(invoiceValue: Decimal(payAmount), paymentMethod: 1)
         request.customerReference = orderId
         request.displayCurrencyIso = .kuwait_KWD
-        
-//        let supplier = MFSupplier(supplierCode: supplierId, invoiceShare: Decimal(payAmount))
-//        request.suppliers = [supplier]
-        
         MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { [weak self] result, invoiceId in
             guard let self = self else { return }
             switch result {
             case .success(let paymentStatus):
                 let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
                 let gateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "KNET"
-                
-                self.paymentTransactionDetails = (transactionID, invoiceId ?? "", gateway)
+                let paymentID = paymentStatus.invoiceTransactions?.first?.paymentID ?? ""
+                self.paymentTransactionDetails = (transactionID, paymentID, invoiceId ?? "", gateway)
                 self.paymentCompleted = true
                 self.viewModel.payNowRequest(transactionId: transactionID, paymentId: 1)
-                //              self.presentSuccessScreen()
             case .failure(_):
                 showAlertAtPayment(msg: "Payment not completed".localiz())
             }
@@ -391,71 +360,50 @@ extension PaymentMethodViewController {
     }
     
     func startApplePay() {
-        // Show loading indicator
-        
-        // Find the Apple Pay cell (row 1)
         guard let indexPath = IndexPath(row: 1, section: 0) as? IndexPath,
               let cell = paymentMethodsTableView.cellForRow(at: indexPath) as? PaymentMethodsTableViewCell else {
             showToast(msg: "Apple Pay not available".localiz())
             return
         }
-        
-        // Show Apple Pay button container
         cell.viewApple.isHidden = false
-        cell.setupApplePay() // Add button to view
-        
-        // Force layout update so button appears immediately
+        cell.setupApplePay()
         cell.layoutIfNeeded()
         paymentMethodsTableView.layoutIfNeeded()
-        
         let invoiceValue = Decimal(payAmount)
         let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
         request.displayCurrencyIso = .kuwait_KWD
         request.customerName = "Customer"
         request.customerReference = orderId
         request.userDefinedField = "ORDER-\(orderId)"
-        
         MFPaymentRequest.shared.initiateSession(apiLanguage: .english) { [weak self] response in
             guard let self = self else { return }
-            
             DispatchQueue.main.async {
                 switch response {
                 case .success(let session):
                     print("Apple Pay session initiated successfully")
-                    // Load the button with session
-                    cell.applePayButton.load(session, request, .english,
-                                             startLoading: {
-                        print("Apple Pay button loading...")
-                    },
-                                             completion: { result, invoiceId in
+                    cell.applePayButton.load(session, request, .english, startLoading: {
+                        print("Apple Pay button loading...") },  completion: { result, invoiceId in
                         DispatchQueue.main.async {
                             switch result {
                             case .success(let executeResponse):
-//                                print("Apple Pay payment successful")
                                 let transactionID = executeResponse.invoiceTransactions?.first?.transactionID ?? ""
+                                let paymentId = executeResponse.invoiceTransactions?.first?.paymentID ?? ""
                                 let gateway = executeResponse.invoiceTransactions?.first?.paymentGateway ?? "ApplePay"
-                                
-                                self.paymentTransactionDetails = (transactionID, invoiceId ?? "", gateway)
+                                self.paymentTransactionDetails = (transactionID, paymentId, invoiceId ?? "", gateway)
                                 self.paymentCompleted = true
-                                
-                                // Complete backend registration & show success
                                 self.viewModel.payNowRequest(transactionId: transactionID, paymentId: 1)
-                                
                             case .failure(let error):
-//                                print("Apple Pay payment failed: \(error.errorDescription)")
                                 self.showToast(msg: "Apple Pay failed: \(error.errorDescription)")
                             }
                         }
                     })
-                    
                 case .failure(let error):
                     self.showToast(msg: "\("Unable to start Apple Pay:".localiz()) \(error.localizedDescription)")
-                    cell.viewApple.isHidden = true // Hide button on failure
+                    cell.viewApple.isHidden = true
                 }
             }
         }
     }
-    
 }
 
 enum ComingReason {

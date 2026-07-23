@@ -108,7 +108,8 @@ class StoryViewerViewController: UIViewController {
                     duration: isVideo ? nil : 10.0,
                     uploadedTime: item.createdAt,
                     type: item.type,
-                    sellerDetails: item.sellerDetails
+                    sellerDetails: item.sellerDetails,
+                    isPromotional: item.isPromotional
                 )
             }
             DispatchQueue.main.async {
@@ -148,7 +149,8 @@ class StoryViewerViewController: UIViewController {
                 duration: isVideo ? nil : 10.0,
                 uploadedTime: item.createdAt,
                 type: 2,
-                sellerDetails: nil
+                sellerDetails: nil,
+                isPromotional: item.isPromotional
             )
         }
         DispatchQueue.main.async {
@@ -180,7 +182,8 @@ class StoryViewerViewController: UIViewController {
                     duration: isVideo ? nil : 10.0,
                     uploadedTime: item.createdAt,
                     type: item.type,
-                    sellerDetails: item.sellerDetails
+                    sellerDetails: item.sellerDetails,
+                    isPromotional: item.isPromotional
                 )
             }
             DispatchQueue.main.async {
@@ -261,7 +264,7 @@ class StoryViewerViewController: UIViewController {
         uploadedTimeLabel.text = ContentUpladedTimeDuration(from: story.uploadedTime ?? "")
         timeLabel.text = ContentUpladedTimeDuration(from: story.uploadedTime ?? "")
 //        sellerStoreNameLabel.isHidden = story.type == 1
-        sellerStoreNameLabel.text = story.sellerDetails?.storeInfo?.storeName ?? "Admin"
+        sellerStoreNameLabel.text = story.sellerDetails?.storeInfo?.storeName ?? "Desynat"
         storIDForNavigation = story.sellerDetails?.storeInfo?.id ?? 0
         if story.type == 1 {
             logoImageView.image = UIImage(named: "adminStroyEmpty")
@@ -301,14 +304,14 @@ class StoryViewerViewController: UIViewController {
         if story.isVideo {
             let videoURLString = story.url ?? ""
             if !videoURLString.isEmpty {
-                playVideo(in: cell, type: story.type ?? 1, urlString: videoURLString, completion: completion)
+                playVideo(in: cell, story: story, urlString: videoURLString, completion: completion)
             } else {
                 completion()
             }
         } else {
             let imageURLString = story.url ?? ""
             if !imageURLString.isEmpty {
-                loadImage(in: cell, type: story.type ?? 1, urlString: imageURLString, completion: completion)
+                loadImage(in: cell, story: story, urlString: imageURLString, completion: completion)
             } else {
                 completion()
             }
@@ -393,7 +396,7 @@ class StoryViewerViewController: UIViewController {
     }
     
     // MARK: - Image & Video
-    private func loadImage(in cell: StorieDetailsCollectionViewCell, type: Int, urlString: String, completion: @escaping (() -> Void)) {
+    private func loadImage(in cell: StorieDetailsCollectionViewCell, story: Story, urlString: String, completion: @escaping (() -> Void)) {
         guard let url = URL(string: urlString) else {
             completion()
             return
@@ -408,14 +411,14 @@ class StoryViewerViewController: UIViewController {
             CommonUtils.showHud(show: false)
             DispatchQueue.main.async {
                 cell.mainImageView.image = image
-                cell.addTagView.isHidden = type == 1
-                cell.addTagLabel.isHidden = type == 1
+                cell.addTagView.isHidden = !(story.type == 2 && story.isPromotional == "1")
+                cell.addTagLabel.isHidden = !(story.type == 2 && story.isPromotional == "1")
                 completion()
             }
         }.resume()
     }
     
-    private func playVideo(in cell: StorieDetailsCollectionViewCell, type: Int, urlString: String, completion: @escaping (() -> Void)) {
+    private func playVideo(in cell: StorieDetailsCollectionViewCell, story: Story, urlString: String, completion: @escaping (() -> Void)) {
         guard let url = URL(string: urlString) else {
             completion()
             return
@@ -427,8 +430,8 @@ class StoryViewerViewController: UIViewController {
         playerLayer?.frame = cell.mainImageView.bounds
         playerLayer?.videoGravity = .resizeAspectFill
         cell.mainImageView.layer.insertSublayer(playerLayer!, at: 0)
-        cell.addTagView.isHidden = type == 1
-        cell.addTagLabel.isHidden = type == 1
+        cell.addTagView.isHidden = !(story.type == 2 && story.isPromotional == "1")
+        cell.addTagLabel.isHidden = !(story.type == 2 && story.isPromotional == "1")
         player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.new], context: nil)
         NotificationCenter.default.addObserver(
             self,

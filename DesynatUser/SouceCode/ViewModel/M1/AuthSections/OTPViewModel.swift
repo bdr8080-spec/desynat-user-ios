@@ -30,6 +30,7 @@ class OTPViewModel: NSObject {
                 vc.callBackDismiss = {
                     UserDefaults.standard.setValue("Yes", forKey:"isLogin")
                     UserDefaults.standard.setValue("false", forKey:"isGuestLogin")
+                    UserDefaults.standard.set("true", forKey: "hasShownFullscreenBanner")
                     kSharedSceneDelegate.navigateToUserHomeVc()
                 }
                 self.hostVC.navigationController?.present(vc, animated: true)
@@ -37,6 +38,7 @@ class OTPViewModel: NSObject {
                 CommonUtils.showToast(message: "Login Successfully")
                 UserDefaults.standard.setValue("Yes", forKey:"isLogin")
                 UserDefaults.standard.setValue("false", forKey:"isGuestLogin")
+                UserDefaults.standard.set("true", forKey: "hasShownFullscreenBanner")
                 kSharedSceneDelegate.navigateToUserHomeVc()
             case .forgotPassword:
                 let vc = ResetPasswordViewController.instantiate(fromAppStoryboard: .Main)

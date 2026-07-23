@@ -27,6 +27,10 @@ class GiftCardsListViewController: UIViewController {
         super.viewDidLoad()
         noDataLabel.isHidden = true
         searchTF.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         viewModel.getAllGiftsCards()
     }
     

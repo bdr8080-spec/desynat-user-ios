@@ -28,7 +28,7 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
     var giftIsChecked: Bool = false
     var param: [String: Any] = [:]
     let applePayButton = MFApplePayButton()
-    var paymentTransactionDetails: (transactionID: String, invoiceId: String, paymentGateway: String)?
+    var paymentTransactionDetails: (transactionID: String, paymentId: String, invoiceId: String, paymentGateway: String)?
     var paymentCompleted: Bool = false
     var getToastMessage: String = ""
     var totalAmountToPay: Double = 0.0
@@ -73,12 +73,12 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
                 viewModel.showAlertAtPayment(msg: "\("Insufficient wallet balance. Available:".localiz()) \(walletBalance) KD")
                 return
             }
-            proceedToPay()
+            proceedToPay(paymentID: "")
         case .cashOnDelivery:
-            proceedToPay()
+            proceedToPay(paymentID: "")
         default:
             if paymentCompleted, paymentTransactionDetails != nil {
-                proceedToPay()
+                proceedToPay(paymentID: "")
             } else {
                 viewModel.showAlertAtPayment(msg: "Payment is being processed or not completed yet.".localiz())
             }
@@ -104,19 +104,19 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
     }
     
     //MARK: Function's declaration
-    func proceedToPay() {
+    func proceedToPay(paymentID: String) {
         guard let selectedMethod = selectedPaymentMethod else { return }
         if comingForCustomeOrderPlace {
             let customOrderParam: [String :Any] = ["unique_id": customChatUniqueId,
                                                    "giftcard_id": giftCardDetails?.id ?? "",
                                                    "giftcard_amount": giftCardDetails?.giftCardAmount ?? "",
                                                    "Payment_method": selectedMethod.apiValue]
-            viewModel.placeCustomOrderApi(param: customOrderParam)
+            viewModel.placeCustomOrderApi(param: customOrderParam, paymentID: paymentID, paymentMethod: selectedMethod)
         } else {
             param["Payment_method"] = selectedMethod.apiValue
             param["giftcard_amount"] = giftCardDetails?.giftCardAmount
             param["giftcard_id"] = giftCardDetails?.id
-            viewModel.placeOrderApi(param: param)
+            viewModel.placeOrderApi(param: param, paymentID: paymentID, paymentMethod: selectedMethod)
         }
     }
     
@@ -129,8 +129,7 @@ class PlaceOrderPaymentMethodsViewController: UIViewController {
             }
             return
         }
-//        print("Payment completed with details: \(details)")
-        proceedToPay()
+        proceedToPay(paymentID: details.paymentId)
     }
     
     func updatePaymentTableHeight() {
@@ -183,11 +182,9 @@ extension PlaceOrderPaymentMethodsViewController: UITableViewDelegate, UITableVi
                     guard let self = self else { return }
                     if let paymentStatus = paymentStatusResponse {
                         let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
+                        let paymentID = paymentStatus.invoiceTransactions?.first?.paymentID ?? ""
                         let gateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "ApplePay"
-                        self.handlePaymentCompletion(
-                            transactionID: transactionID,
-                            invoiceId: invoiceId ?? "",
-                            gateway: gateway)
+                        self.handlePaymentCompletion(transactionID: transactionID, paymentId: paymentID, invoiceId: invoiceId ?? "", gateway: gateway)
                     } else if let error = error {
                         self.didReceivePaymentError(error.localizedDescription)
                     } else {
@@ -242,10 +239,10 @@ extension PlaceOrderPaymentMethodsViewController {
             guard let self = self else { return }
             switch response {
             case .success(let paymentStatus):
-                print("paymentStatus=====> \(paymentStatus)")
                 let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
+                let paymentId = paymentStatus.invoiceTransactions?.first?.paymentID ?? ""
                 let gateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "KNET"
-                self.handlePaymentCompletion(transactionID: transactionID, invoiceId: invoiceId ?? "", gateway: gateway)
+                self.handlePaymentCompletion(transactionID: transactionID, paymentId: paymentId, invoiceId: invoiceId ?? "", gateway: gateway)
             case .failure(let error):
                 self.didReceivePaymentError(error.errorDescription)
             }
@@ -260,10 +257,10 @@ extension PlaceOrderPaymentMethodsViewController {
             guard let self = self else { return }
             switch response {
             case .success(let paymentStatus):
-                print("paymentStatus=====> \(paymentStatus)")
                 let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
+                let paymentId = paymentStatus.invoiceTransactions?.first?.paymentID ?? ""
                 let gateway = "VisaPay"
-                self.handlePaymentCompletion(transactionID: transactionID, invoiceId: invoiceId ?? "", gateway: gateway)
+                self.handlePaymentCompletion(transactionID: transactionID, paymentId: paymentId, invoiceId: invoiceId ?? "", gateway: gateway)
             case .failure(let error):
                 self.didReceivePaymentError(error.errorDescription)
             }
@@ -273,9 +270,9 @@ extension PlaceOrderPaymentMethodsViewController {
 
 extension PlaceOrderPaymentMethodsViewController: PlaceOrderPaymentMethodsCellDelegate {
     
-    func handlePaymentCompletion(transactionID: String, invoiceId: String, gateway: String) {
-        self.paymentTransactionDetails = (transactionID, invoiceId, gateway)
+    func handlePaymentCompletion(transactionID: String, paymentId: String, invoiceId: String, gateway: String) {
+        self.paymentTransactionDetails = (transactionID, paymentId, invoiceId, gateway)
         self.paymentCompleted = true
-        proceedToPay()
+        proceedToPay(paymentID: paymentId)
     }
 }

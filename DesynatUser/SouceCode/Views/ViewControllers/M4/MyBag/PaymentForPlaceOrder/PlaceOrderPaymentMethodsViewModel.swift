@@ -26,20 +26,20 @@ class PlaceOrderPaymentMethodsViewModel {
     }
     
     
-    func placeOrderApi(param: [String: Any]) {
+    func placeOrderApi(param: [String: Any], paymentID: String, paymentMethod: PaymentMethodType) {
         WebService.sharedInstance.placeOrderApi(param: param) { response in
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
-                completeOrderApi(orderID: response.orderID ?? "")
+                completeOrderApi(orderID: response.orderID ?? "", paymentID: paymentID, paymentMethod: paymentMethod)
             }
         }
     }
     
-    func placeCustomOrderApi(param: [String: Any]) {
+    func placeCustomOrderApi(param: [String: Any], paymentID: String, paymentMethod: PaymentMethodType) {
         WebService.sharedInstance.createCustomOrderRequest(param: param) { response in
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
-                completeOrderApi(orderID: response.orderID ?? "")
+                completeOrderApi(orderID: response.orderID ?? "", paymentID: paymentID, paymentMethod: paymentMethod)
             }
         }
     }
@@ -62,11 +62,14 @@ class PlaceOrderPaymentMethodsViewModel {
         }
     }
     
-    func completeOrderApi(orderID: String) {//}, paymentID: String) {
+    func completeOrderApi(orderID: String, paymentID: String, paymentMethod: PaymentMethodType) {
         guard let selectedMethod = hostVC.selectedPaymentMethod else { return }
-        let param: [String: Any] = ["order_id": orderID,
-                                    "payment_status": 1]//,
-//                                    "payment_id": paymentID]
+        var param: [String: Any] = ["order_id": orderID,
+                                    "payment_status": 1]
+        if paymentMethod.apiValue == 1 {
+            param["payment_id"] = paymentID
+        }
+                                    
         WebService.sharedInstance.completeOrderApi(param: param) { response in
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }

@@ -157,11 +157,13 @@ class HomeViewModel: NSObject {
                 WebService.sharedInstance.getAllFullscreenBannersList() { list in
                     self.fullScreenBannersList = list
                     if !list.isEmpty {
-                        let nextVC = FullScreenBannerViewController.instantiate(fromAppStoryboard: .Home)
-                        nextVC.viewModel.fullScreenBannersList = self.fullScreenBannersList
-                        DispatchQueue.main.async {
-                            self.hostVC.navigationController?.present(nextVC, animated: true) {
-                                UserDefaults.standard.set("false", forKey: "hasShownFullscreenBanner")
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            let nextVC = FullScreenBannerViewController.instantiate(fromAppStoryboard: .Home)
+                            nextVC.viewModel.fullScreenBannersList = self.fullScreenBannersList
+                            DispatchQueue.main.async {
+                                self.hostVC.navigationController?.present(nextVC, animated: true) {
+                                    UserDefaults.standard.set("false", forKey: "hasShownFullscreenBanner")
+                                }
                             }
                         }
                     }

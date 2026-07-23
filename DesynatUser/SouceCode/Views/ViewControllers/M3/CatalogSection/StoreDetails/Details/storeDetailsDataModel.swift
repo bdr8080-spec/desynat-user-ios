@@ -254,7 +254,7 @@ struct SellerHighlightsModel: Codable {
     var file: String?
     var title: String?
     var status: Int?
-    var createdAt, updatedAt: String?
+    var createdAt, updatedAt, isPromotional: String?
     var isWhishlisted: Int?
     var isSeen: Int?
     var sellerDetails: SellerDetails?
@@ -268,6 +268,7 @@ struct SellerHighlightsModel: Codable {
         case isWhishlisted = "is_whishlisted"
         case isSeen = "is_seen"
         case sellerDetails = "seller_details"
+        case isPromotional = "is_promotional"
 
     }
     
@@ -311,6 +312,10 @@ struct SellerHighlightsModel: Codable {
                 sellerDetails = value
             }
             
+            if let value  = try? container.decodeIfPresent(String.self, forKey: .isPromotional) {
+                isPromotional = value
+            }
+            
         } catch {
             print("error:",error.localizedDescription)
         }
@@ -347,7 +352,7 @@ struct HighlightsList: Codable {
     let file: String?
     let title: String?
     let status: Int?
-    let thumbnail: String?
+    let thumbnail, isPromotional: String?
     let createdAt, updatedAt: String?
 
     enum CodingKeys: String, CodingKey {
@@ -356,5 +361,6 @@ struct HighlightsList: Codable {
         case file, title, status, thumbnail
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case isPromotional = "is_promotional"
     }
 }
