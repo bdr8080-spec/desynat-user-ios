@@ -24,6 +24,8 @@ class StoryViewerViewController: UIViewController {
     @IBOutlet weak var uploadedTimeView: CustomView!
     @IBOutlet weak var timerView: CustomView!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var addTagLabel: UILabel!
+    @IBOutlet weak var addTagView: CustomView!
     
     // MARK: - Variables
     private var videoTimeObserver: Any?
@@ -46,6 +48,9 @@ class StoryViewerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        addTagLabel.text = "Ad".localiz()
+        topSliderCollectionView.semanticContentAttribute = .forceLeftToRight
+        storiesCollectionView.semanticContentAttribute = .forceLeftToRight
         setupCollectionViews()
 //        sellerStoreNameLabel.isHidden = true
         switch comingFor {
@@ -411,8 +416,8 @@ class StoryViewerViewController: UIViewController {
             CommonUtils.showHud(show: false)
             DispatchQueue.main.async {
                 cell.mainImageView.image = image
-                cell.addTagView.isHidden = !(story.type == 2 && story.isPromotional == "1")
-                cell.addTagLabel.isHidden = !(story.type == 2 && story.isPromotional == "1")
+                self.addTagView.isHidden = !(story.type == 2 && story.isPromotional == "1")
+                self.addTagLabel.isHidden = !(story.type == 2 && story.isPromotional == "1")
                 completion()
             }
         }.resume()
@@ -430,8 +435,8 @@ class StoryViewerViewController: UIViewController {
         playerLayer?.frame = cell.mainImageView.bounds
         playerLayer?.videoGravity = .resizeAspectFill
         cell.mainImageView.layer.insertSublayer(playerLayer!, at: 0)
-        cell.addTagView.isHidden = !(story.type == 2 && story.isPromotional == "1")
-        cell.addTagLabel.isHidden = !(story.type == 2 && story.isPromotional == "1")
+        addTagView.isHidden = !(story.type == 2 && story.isPromotional == "1")
+        addTagLabel.isHidden = !(story.type == 2 && story.isPromotional == "1")
         player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.new], context: nil)
         NotificationCenter.default.addObserver(
             self,

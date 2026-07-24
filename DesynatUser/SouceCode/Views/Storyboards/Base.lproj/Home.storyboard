@@ -2852,6 +2852,26 @@ the event</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view hidden="YES" alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANL-yi-sTM" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
+                                <rect key="frame" x="298" y="704" width="65" height="30"/>
+                                <color key="backgroundColor" red="0.19848281149999999" green="0.1875433624" blue="0.1687309444" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="65" id="aCC-Ov-dZs"/>
+                                    <constraint firstAttribute="height" constant="30" id="iI3-Pg-Ghb"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="circleCorner" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ad" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4H5-eX-zfi">
+                                <rect key="frame" x="322.33333333333331" y="710.66666666666663" width="16.333333333333314" height="17"/>
+                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="h8i-I6-f3a"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2859,21 +2879,27 @@ the event</string>
                             <constraint firstItem="14G-Ia-LI5" firstAttribute="top" secondItem="fZy-18-EZm" secondAttribute="bottom" constant="10" id="50x-3n-hAf"/>
                             <constraint firstItem="Etl-ip-F6Y" firstAttribute="top" secondItem="Y8L-lV-IWs" secondAttribute="top" constant="-10" id="5hv-yr-o26"/>
                             <constraint firstItem="gCt-L9-Rkj" firstAttribute="leading" secondItem="tEf-by-Myr" secondAttribute="leading" id="8ZT-oX-hGB"/>
+                            <constraint firstItem="4H5-eX-zfi" firstAttribute="centerX" secondItem="ANL-yi-sTM" secondAttribute="centerX" id="C0W-lE-aBy"/>
                             <constraint firstItem="WAT-K6-Kin" firstAttribute="top" secondItem="tEf-by-Myr" secondAttribute="bottom" constant="35" id="OAC-2R-VQs"/>
                             <constraint firstItem="WAT-K6-Kin" firstAttribute="leading" secondItem="tEf-by-Myr" secondAttribute="leading" id="Opp-az-rXD"/>
                             <constraint firstItem="Etl-ip-F6Y" firstAttribute="leading" secondItem="Y8L-lV-IWs" secondAttribute="leading" id="Otw-QD-2H3"/>
                             <constraint firstItem="WAT-K6-Kin" firstAttribute="leading" secondItem="h8i-I6-f3a" secondAttribute="leading" constant="24" id="Qsl-2C-PWn"/>
                             <constraint firstItem="h8i-I6-f3a" firstAttribute="top" secondItem="fZy-18-EZm" secondAttribute="top" id="SAX-7w-Q7a"/>
                             <constraint firstAttribute="bottom" secondItem="Etl-ip-F6Y" secondAttribute="bottom" constant="-10" id="VbL-3A-b8W"/>
+                            <constraint firstItem="h8i-I6-f3a" firstAttribute="trailing" secondItem="ANL-yi-sTM" secondAttribute="trailing" constant="30" id="Vsc-j0-NqT"/>
                             <constraint firstItem="fZy-18-EZm" firstAttribute="leading" secondItem="h8i-I6-f3a" secondAttribute="leading" constant="10" id="ZI6-Ip-csN"/>
                             <constraint firstItem="h8i-I6-f3a" firstAttribute="trailing" secondItem="14G-Ia-LI5" secondAttribute="trailing" constant="20" id="Zey-gY-QRZ"/>
                             <constraint firstAttribute="trailing" secondItem="Etl-ip-F6Y" secondAttribute="trailing" id="bei-Xn-kNv"/>
                             <constraint firstItem="h8i-I6-f3a" firstAttribute="trailing" secondItem="fZy-18-EZm" secondAttribute="trailing" constant="10" id="cxo-FP-Rfm"/>
                             <constraint firstItem="gCt-L9-Rkj" firstAttribute="centerY" secondItem="tEf-by-Myr" secondAttribute="centerY" id="nxj-0f-DUI"/>
+                            <constraint firstItem="h8i-I6-f3a" firstAttribute="bottom" secondItem="ANL-yi-sTM" secondAttribute="bottom" constant="50" id="ppd-UU-zox"/>
+                            <constraint firstItem="4H5-eX-zfi" firstAttribute="centerY" secondItem="ANL-yi-sTM" secondAttribute="centerY" id="rea-0a-hOW"/>
                             <constraint firstItem="tEf-by-Myr" firstAttribute="top" secondItem="fZy-18-EZm" secondAttribute="bottom" constant="10" id="zgt-oF-c2z"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addTagLabel" destination="4H5-eX-zfi" id="3Xv-up-Ffg"/>
+                        <outlet property="addTagView" destination="ANL-yi-sTM" id="h3O-IV-BRT"/>
                         <outlet property="highlightTitleLabel" destination="0aR-SA-UDP" id="66b-ir-vHN"/>
                         <outlet property="highlightTitleView" destination="WAT-K6-Kin" id="7rE-Rd-hyE"/>
                         <outlet property="logoImageView" destination="DR7-v5-6Uo" id="8ZO-w6-OsC"/>
