@@ -85,4 +85,62 @@ class FilteredStoreCollectionViewCell: UICollectionViewCell {
         ratingView.rating = data?.productAvgRating ?? 0
     }
     
+    
+    func configBestSellingData(data: BestSellingProductsDataModel?) {
+        
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            titleLabel.text = data?.productNameAr
+        }else{
+            titleLabel.text = data?.productNameEn
+        }
+        if let imageUrlString = data?.productVariants?.first?.variantImage?.first,
+           let url = URL(string: imageUrlString) {
+            
+            mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            mainImageView.sd_imageIndicator?.startAnimatingIndicator()
+            mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+        } else {
+            mainImageView.image = UIImage(named: "")
+        }
+        finalPriceLabel.text = CommonUtils.formatPriceStringInput(data?.productVariants?.first?.finalPrice, currency: "KD")
+        CommonUtils.setStrikethrough(label: actualPriceLabel, text: CommonUtils.formatPriceStringInput(data?.productVariants?.first?.actualPrice, currency: "KD"))
+        
+        CommonUtils.updateDiscountPercentageLabel(iscountPriceLabel, actualAmountLabel: actualPriceLabel,discountType: data?.productVariants?.first?.discountType,discountValue: data?.productVariants?.first?.discountValue)
+        
+        if data?.wishlist == 1 {
+            likeButtonOutlet.setImage(UIImage(named: "selectedHeartImage"), for: .normal)
+        } else {
+            likeButtonOutlet.setImage(UIImage(named: "besSellLike"), for: .normal)
+        }
+        ratingView.rating = data?.productAvgRating ?? 0
+    }
+    
+    func configTopRatedData(data: TopRatedDataModel?) {
+        
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            titleLabel.text = data?.productNameAr
+        }else{
+            titleLabel.text = data?.productNameEn
+        }
+        if let imageUrlString = data?.productVariants?.first?.variantImage?.first,
+           let url = URL(string: imageUrlString) {
+            
+            mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            mainImageView.sd_imageIndicator?.startAnimatingIndicator()
+            mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: ""))
+        } else {
+            mainImageView.image = UIImage(named: "")
+        }
+        finalPriceLabel.text = CommonUtils.formatPriceStringInput(data?.productVariants?.first?.finalPrice, currency: "KD")
+        CommonUtils.setStrikethrough(label: actualPriceLabel, text: CommonUtils.formatPriceStringInput(data?.productVariants?.first?.actualPrice, currency: "KD"))
+        
+        CommonUtils.updateDiscountPercentageLabel(iscountPriceLabel, actualAmountLabel: actualPriceLabel,discountType: data?.productVariants?.first?.discountType,discountValue: data?.productVariants?.first?.discountValue)
+        
+        if data?.wishlist == 1 {
+            likeButtonOutlet.setImage(UIImage(named: "selectedHeartImage"), for: .normal)
+        } else {
+            likeButtonOutlet.setImage(UIImage(named: "besSellLike"), for: .normal)
+        }
+        ratingView.rating = data?.productAvgRating ?? 0
+    }
 }

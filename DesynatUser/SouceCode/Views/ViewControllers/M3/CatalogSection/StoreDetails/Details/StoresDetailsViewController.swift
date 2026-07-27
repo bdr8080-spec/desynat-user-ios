@@ -158,12 +158,12 @@ class StoresDetailsViewController: UIViewController {
     // MARK: - Mic Button – This is what you wanted!
     @IBAction func micDidTapped(_ sender: UIButton) {
         let nextVC = VoiceSearchViewController.instantiate(fromAppStoryboard: .AffiliateUser)
-                nextVC.onSearchedCompletionTxt = { [weak self] searchText in
-                    self?.searchTF.text = searchText
-                    self?.viewModel.searchText = searchText
-                    self?.viewModel.getSingleStoresApi()
-                }
-                self.navigationController?.present(nextVC, animated: true)
+        nextVC.onSearchedCompletionTxt = { [weak self] searchText in
+            self?.searchTF.text = searchText
+            self?.viewModel.searchText = searchText
+            self?.viewModel.getSingleStoresApi()
+        }
+        self.navigationController?.present(nextVC, animated: true)
     }
     
     @IBAction func sellerStoryDidTapped(_ sender: Any) {

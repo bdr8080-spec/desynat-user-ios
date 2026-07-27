@@ -1612,4 +1612,36 @@ extension WebService {
         }
     }
     
+    
+    func getBestSellingListService(param: [String: Any], completion:@escaping (_ user:BestSellingListModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.bestSellingList), requestMethod: .post,requestParams: param, requestModel:BestSellingListModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
+    
+    func getTopRatingListService(param: [String: Any], completion:@escaping (_ user:TopRatingListModel)-> Void) {
+        CommonUtils.showHud(show: true)
+        NetworkManager.shared.request(withAPI: .endpoint(.topRatedList), requestMethod: .post,requestParams: param, requestModel:TopRatingListModel.self) { result, code in
+            CommonUtils.showHud(show: false)
+            self.evaluateWebServiceResponse(response: result) { response, message,error in
+                guard let user = response else {
+                    if let error {
+                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+                    }
+                    return
+                }
+                completion(user)
+            }
+        }
+    }
 }

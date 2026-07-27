@@ -59,7 +59,7 @@ class MyBagViewController: UIViewController {
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,6 +106,7 @@ class MyBagViewController: UIViewController {
     
     @IBAction func removeDidTapped(_ sender: Any) {
         self.coupoanStackView.isHidden = true
+        actualPriceLAbel.isHidden = true
         self.couponDidcountLabel.text = ""
         self.slecetedPromocodeID = 0
         isPromoCodeApplied = false
@@ -146,8 +147,8 @@ class MyBagViewController: UIViewController {
             let finalAmount = max(0, (viewModel.bagDetails?.totalAmount ?? 0) + (totalPrice))
             totalAmountLabel.text = CommonUtils.formatPrice(finalAmount)
             finalPriceLabel.text = CommonUtils.formatPrice(finalAmount)
-            let actualPriceWithputDiscount = max(0, (viewModel.bagDetails?.totalMrp ?? 0) + (totalPrice))
-            CommonUtils.setStrikethrough(label: actualPriceLAbel, text: CommonUtils.formatPrice(actualPriceWithputDiscount))
+           // let actualPriceWithputDiscount = max(0, (viewModel.bagDetails?.totalMrp ?? 0) + (totalPrice))
+           // CommonUtils.setStrikethrough(label: actualPriceLAbel, text: CommonUtils.formatPrice(actualPriceWithputDiscount))
         }
     }
     
@@ -195,7 +196,12 @@ class MyBagViewController: UIViewController {
         shippingFeeLabel.text = CommonUtils.formatDeliveryCharges(data.shippingFees)//formatPrice(data.shippingFees)
         taxLabel.text = CommonUtils.formatPrice(data.tax)//CommonUtils.formatTax(data.tax)//
         totalAmount = data.totalAmount ?? 0
-        CommonUtils.setStrikethrough(label: actualPriceLAbel, text: CommonUtils.formatPrice(data.totalMrp))
+        if isPromoCodeApplied == false {
+            actualPriceLAbel.isHidden = true
+        }else {
+            actualPriceLAbel.isHidden = false
+            CommonUtils.setStrikethrough(label: actualPriceLAbel, text: CommonUtils.formatPrice(data.totalMrp))
+        }
         let customOrderCount = viewModel.customOrders.count
         if customOrderCount != 0 {
             customPriceStackView.isHidden = false
@@ -219,7 +225,7 @@ class MyBagViewController: UIViewController {
             totalMRPStackView.isHidden = false
             discountOnMrpStackView.isHidden = false
             saveAmountLAbel.isHidden = false
-            actualPriceLAbel.isHidden = false
+           // actualPriceLAbel.isHidden = false
         } else {
             totalMRPStackView.isHidden = true
             discountOnMrpStackView.isHidden = true

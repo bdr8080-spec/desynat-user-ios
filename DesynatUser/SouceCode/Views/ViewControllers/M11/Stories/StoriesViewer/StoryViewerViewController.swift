@@ -437,7 +437,7 @@ class StoryViewerViewController: UIViewController {
         cell.mainImageView.layer.insertSublayer(playerLayer!, at: 0)
         addTagView.isHidden = !(story.type == 2 && story.isPromotional == "1")
         addTagLabel.isHidden = !(story.type == 2 && story.isPromotional == "1")
-        player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.new], context: nil)
+//        player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.new], context: nil)
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(videoDidFinishPlaying),
@@ -552,7 +552,7 @@ class StoryViewerViewController: UIViewController {
     
     deinit {
         removeVideoTimeObserver()
-        player?.removeObserver(self, forKeyPath: "timeControlStatus")
+      //  player?.removeObserver(self, forKeyPath: "timeControlStatus")
         NotificationCenter.default.removeObserver(self)
     }
 }

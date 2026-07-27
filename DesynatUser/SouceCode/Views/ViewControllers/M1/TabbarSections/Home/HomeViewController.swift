@@ -83,6 +83,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var noBestSellingDataFound: UILabel!
     @IBOutlet weak var noTopRatedDataFoundLabel: UILabel!
     @IBOutlet weak var newestDataFoundLabel: UILabel!
+    @IBOutlet weak var btnTopRated: UIButton!
+    @IBOutlet weak var btnBestSelling: UIButton!
     
     // MARK: - Property Decalaration
     private var bottomLabels: [UILabel] = []
@@ -109,6 +111,8 @@ class HomeViewController: UIViewController {
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        btnTopRated.setTitle("View All".localiz(), for: .normal)
+        btnBestSelling.setTitle("View All".localiz(), for: .normal)
         viewModel.getCategoriesListApi()
         showUserData()
         requestPermissions()
@@ -153,6 +157,18 @@ class HomeViewController: UIViewController {
             at: .centeredHorizontally,
             animated: true
         )
+    }
+    
+    @IBAction func btnActionBestSellingViewAll(_ sender: UIButton) {
+        let nextVC = ViewAllProductVC.instantiate(fromAppStoryboard: .Catalog)
+        nextVC.accessibilityHint = "Best Selling"
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @IBAction func btnActionTopRatedViewAll(_ sender: UIButton) {
+        let nextVC = ViewAllProductVC.instantiate(fromAppStoryboard: .Catalog)
+        nextVC.accessibilityHint = "Top Rated"
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @IBAction func browsePrimiumChanges(_ sender: UIPageControl) {

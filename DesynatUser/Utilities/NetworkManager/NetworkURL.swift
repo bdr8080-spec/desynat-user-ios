@@ -208,6 +208,8 @@ enum NetworkEndPoint: String {
     case socialSignup                    = "api/socialSignup"
     
     case seeStory                           = "api/see_story"
+    case bestSellingList                           = "api/user/best-selling-products-list"
+    case topRatedList                           = "api/user/top-rating-products-list"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"
