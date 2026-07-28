@@ -90,6 +90,7 @@ class ProductDetailViewController: UIViewController {
     }
     @IBOutlet weak var totalBoughtLabel: UILabel!
     @IBOutlet weak var ratingView: CosmosView!
+    @IBOutlet weak var lblRating: UILabel!
     @IBOutlet weak var addToBagBootomStackView: UIStackView!
     @IBOutlet weak var actionButtonsStackView: UIStackView!
     @IBOutlet weak var extraSpaceLabelAtBottomButtonstackView: UILabel!
@@ -388,6 +389,7 @@ class ProductDetailViewController: UIViewController {
             pagetitleLabel.text = storeName
         }
         ratingView.rating = productDetails?.averageRating ?? 0
+        lblRating.text = "(\(Double(productDetails?.averageRating ?? 0)))"
         
         finalPriceLAbel.text = CommonUtils.formatPriceStringInput(variants.first?.finalPrice, currency: "KD")
         CommonUtils.setStrikethrough(label: actualPriceLAbel, text: CommonUtils.formatPriceStringInput(variants.first?.actualPrice, currency: "KD"))

@@ -224,6 +224,7 @@ struct Store: Codable {
     let bio, storeLet, long, createdAt: String?
     let updatedAt: String?
     let sellerInformation: SellerInformation?
+    var averageStoreRating: Int?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -244,6 +245,7 @@ struct Store: Codable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case sellerInformation = "seller_information"
+        case averageStoreRating = "average_store_rating"
     }
 }
 

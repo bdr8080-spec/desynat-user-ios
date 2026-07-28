@@ -1311,6 +1311,7 @@
                     <connections>
                         <outlet property="brandLabel" destination="fN1-8P-nTX" id="cJJ-fV-clP"/>
                         <outlet property="descriptionLabel" destination="ugV-BJ-eaT" id="0aQ-wK-eFq"/>
+                        <outlet property="lblRating" destination="MLa-oV-7ud" id="Hba-oA-bqW"/>
                         <outlet property="noHighlightsFound" destination="xCn-am-hEp" id="Ecf-vK-kOO"/>
                         <outlet property="noProductsFoundLabel" destination="5Im-NW-LtS" id="5tW-Mx-J4k"/>
                         <outlet property="noReelsFound" destination="bGe-vb-Hr8" id="nfd-RD-eeZ"/>
@@ -1333,6 +1334,7 @@
                         <outlet property="storesCollectionViewHeightConstraint" destination="htw-Eb-shz" id="Wed-P9-wrv"/>
                         <outlet property="storiesCollectionView" destination="T3r-Ow-ke4" id="Fxa-oD-zox"/>
                         <outlet property="userProfileImage" destination="vST-5K-7c7" id="XqI-UN-Iyb"/>
+                        <outlet property="viewRating" destination="jKP-p7-3jn" id="okA-4v-rXt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gPH-fp-PUc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2693,6 +2695,7 @@
                         <outlet property="imagesPageController" destination="rgS-Rh-MM5" id="DF7-Ef-aWn"/>
                         <outlet property="incrementDecrementView" destination="Y54-BG-E42" id="lBD-MR-Cht"/>
                         <outlet property="itemCountLabel" destination="zgy-Z8-fdD" id="cSV-gh-MPY"/>
+                        <outlet property="lblRating" destination="xV9-zW-Koe" id="0EO-ty-X4E"/>
                         <outlet property="lengthLabel" destination="WDQ-gO-tUn" id="hFD-bx-9we"/>
                         <outlet property="lengthStackView" destination="a27-nB-PBB" id="4lr-ow-B2k"/>
                         <outlet property="noDataFoundLabel" destination="dsZ-Ls-lpV" id="FtZ-hm-r4d"/>

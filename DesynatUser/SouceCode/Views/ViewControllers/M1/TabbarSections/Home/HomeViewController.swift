@@ -483,6 +483,13 @@ class HomeViewController: UIViewController {
                 lblUserName.text = "Delivery at".localiz()
             }
         }
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            bestSellingCollectionView.semanticContentAttribute = .forceRightToLeft
+            topRatedCollectionView.semanticContentAttribute = .forceRightToLeft
+        } else {
+            bestSellingCollectionView.semanticContentAttribute = .forceLeftToRight
+            topRatedCollectionView.semanticContentAttribute = .forceLeftToRight
+        }
     }
     
 }

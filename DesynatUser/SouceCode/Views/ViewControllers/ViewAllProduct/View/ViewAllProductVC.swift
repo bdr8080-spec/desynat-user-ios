@@ -203,7 +203,6 @@ extension ViewAllProductVC: UICollectionViewDelegate, UICollectionViewDataSource
                 showLoginAlert()
                 return
             }
-
             self.handleWishlistTap(index: indexPath.row)
         }
 
@@ -211,17 +210,15 @@ extension ViewAllProductVC: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
         let nextVC = ProductDetailViewController.instantiate(fromAppStoryboard: .Catalog)
-
         if accessibilityHint == "Best Selling" {
             nextVC.productId = viewModel.bestSellingProductsList[indexPath.row].id
         } else {
             nextVC.productId = viewModel.topRatedProductsList[indexPath.row].id
         }
-
         navigationController?.pushViewController(nextVC, animated: true)
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt
                         indexPath: IndexPath) -> CGSize {
         let spacing: CGFloat = 10
@@ -231,7 +228,6 @@ extension ViewAllProductVC: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         let height = scrollView.frame.size.height

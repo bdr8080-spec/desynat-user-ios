@@ -18,6 +18,7 @@ struct StoreListDataModel: Codable {
     let updatedAt: String?
     let sellerInformation: SellerInformation?
     let sellerHighlightsModel: [SellerHighlightsModel]?
+    var averageStoreRating: Double?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -39,6 +40,7 @@ struct StoreListDataModel: Codable {
         case updatedAt = "updated_at"
         case sellerInformation = "seller_information"
         case sellerHighlightsModel = "seller_stories"
+        case averageStoreRating = "average_store_rating"
     }
 }
 

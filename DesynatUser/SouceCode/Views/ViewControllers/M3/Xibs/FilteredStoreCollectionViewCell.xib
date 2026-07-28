@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -181,6 +181,7 @@
                 <outlet property="actualPriceLabel" destination="Sx8-aW-sgl" id="84m-lA-Pni"/>
                 <outlet property="finalPriceLabel" destination="GL6-DP-SCP" id="4D7-LJ-zna"/>
                 <outlet property="iscountPriceLabel" destination="6ry-gc-2rr" id="rrz-Pv-6U7"/>
+                <outlet property="lblRating" destination="GYD-aW-Lqe" id="A5K-kE-4WH"/>
                 <outlet property="likeButtonOutlet" destination="NsE-hV-mUH" id="ujX-Fj-ryi"/>
                 <outlet property="mainImageView" destination="bzT-u9-KC6" id="d96-mq-oHH"/>
                 <outlet property="ratingView" destination="jJg-WG-ggE" id="OOH-2g-uPI"/>

@@ -18,6 +18,7 @@ class FilteredStoreCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var finalPriceLabel: UILabel!
     @IBOutlet weak var mainImageView: CustomImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var lblRating: UILabel!
     
     var wishlistButtonTapped: (() -> Void)?
     var shareButtonTapped: (() -> Void)?
@@ -61,6 +62,7 @@ class FilteredStoreCollectionViewCell: UICollectionViewCell {
             likeButtonOutlet.setImage(UIImage(named: "besSellLike"), for: .normal)
         }
         ratingView.rating = data?.productAvgRating ?? 0
+        lblRating.text = "(\(Double(data?.productAvgRating ?? 0)))"
     }
     
     func configDataForFavouites(data: FavoruitesDataModel?) {
@@ -83,6 +85,7 @@ class FilteredStoreCollectionViewCell: UICollectionViewCell {
         CommonUtils.updateDiscountPercentageLabel(iscountPriceLabel, actualAmountLabel: actualPriceLabel,discountType: data?.productVariants?.first?.discountType,discountValue: data?.productVariants?.first?.discountValue)
         likeButtonOutlet.setImage(UIImage(named: "selectedHeartImage"), for: .normal)
         ratingView.rating = data?.productAvgRating ?? 0
+        lblRating.text = "(\(Double(data?.productAvgRating ?? 0)))"
     }
     
     
@@ -112,7 +115,8 @@ class FilteredStoreCollectionViewCell: UICollectionViewCell {
         } else {
             likeButtonOutlet.setImage(UIImage(named: "besSellLike"), for: .normal)
         }
-        ratingView.rating = data?.productAvgRating ?? 0
+        ratingView.rating = data?.averageRating ?? 0.0
+        lblRating.text = "(\(Double(data?.averageRating ?? 0.0)))"
     }
     
     func configTopRatedData(data: TopRatedDataModel?) {
@@ -141,6 +145,7 @@ class FilteredStoreCollectionViewCell: UICollectionViewCell {
         } else {
             likeButtonOutlet.setImage(UIImage(named: "besSellLike"), for: .normal)
         }
-        ratingView.rating = data?.productAvgRating ?? 0
+        ratingView.rating = data?.averageRating ?? 0
+        lblRating.text = "(\(Double(data?.averageRating ?? 0)))"
     }
 }

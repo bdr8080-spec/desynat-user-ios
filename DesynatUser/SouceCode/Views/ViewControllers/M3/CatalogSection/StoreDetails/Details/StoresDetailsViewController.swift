@@ -11,6 +11,7 @@ import AVFAudio
 import Speech
 import AVFoundation
 import AVKit
+import Cosmos
 
 class StoresDetailsViewController: UIViewController {
     
@@ -51,6 +52,8 @@ class StoresDetailsViewController: UIViewController {
         }
     }
     @IBOutlet weak var noHighlightsFound: UILabel!
+    @IBOutlet weak var lblRating: UILabel!
+    @IBOutlet weak var viewRating: CosmosView!
     
     // MARK: - Property Decalaration
     lazy var viewModel = StoreDetailsViewModel(hostVC: self)
@@ -180,6 +183,10 @@ class StoresDetailsViewController: UIViewController {
     //MARK: Function's declaration
     
     func configData(data: Store) {
+        viewRating.settings.updateOnTouch = false
+        viewRating.settings.fillMode = .half
+        viewRating.rating = Double(data.averageStoreRating ?? 0)
+        lblRating.text = "(\(Double(data.averageStoreRating ?? 0)))"
         pageTitleLabel.text = data.storeName
         storeTitleLabel.text = "\(data.sellerInformation?.firstName ?? "") \(data.sellerInformation?.lastName ?? "")"
         brandLabel.text = data.storeName

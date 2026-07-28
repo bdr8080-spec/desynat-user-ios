@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -114,7 +114,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Gpl-FW-zWK">
-                                <rect key="frame" x="10" y="175" width="90" height="10"/>
+                                <rect key="frame" x="10" y="175" width="85" height="10"/>
                                 <subviews>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gIH-Ed-SbD" customClass="CosmosView" customModule="Cosmos">
                                         <rect key="frame" x="0.0" y="0.0" width="70" height="10"/>
@@ -141,8 +141,8 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(1)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Gl-mM-2uX">
-                                        <rect key="frame" x="75" y="0.0" width="15" height="10"/>
-                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                        <rect key="frame" x="75" y="0.0" width="10" height="10"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="8"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -191,9 +191,11 @@
             </constraints>
             <size key="customSize" width="234" height="276"/>
             <connections>
+                <outlet property="lblRating" destination="5Gl-mM-2uX" id="XqB-uW-ZSY"/>
                 <outlet property="mainImageView" destination="tmU-gT-jh4" id="eXg-8b-hhx"/>
                 <outlet property="profilePic" destination="API-gj-n5u" id="0Tn-nf-O9m"/>
                 <outlet property="ratingCountLabel" destination="5Gl-mM-2uX" id="prV-EQ-ZAi"/>
+                <outlet property="ratingView" destination="gIH-Ed-SbD" id="oqA-27-LJg"/>
                 <outlet property="statusView" destination="Rzq-Ps-Tgf" id="gbX-KW-Zdb"/>
                 <outlet property="storyButton" destination="sRR-i7-MnN" id="EBQ-vN-sjC"/>
                 <outlet property="storyView" destination="DzT-9S-W4D" id="Dr0-SW-sfh"/>

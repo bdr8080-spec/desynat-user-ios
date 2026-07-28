@@ -19,6 +19,7 @@ class BestSellingsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var actualPriceLabel: CustomLabelFont!
     @IBOutlet weak var finalPriceLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var lblRating: UILabel!
     
     var wishlistButtonTapped: (() -> Void)?
     var shareButtonTapped: (() -> Void)?
@@ -50,6 +51,8 @@ class BestSellingsCollectionViewCell: UICollectionViewCell {
         }
        
         ratingView.rating = data?.productAvgRating ?? 0
+        lblRating.text = "(\(Double(data?.productAvgRating ?? 0)))"
+       // print("rating =====",Double(data?.productAvgRating ?? 0))
         if let imageUrlString = data?.productVariants?.first?.variantImage?.first,
            let url = URL(string: imageUrlString) {
             mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
@@ -77,6 +80,7 @@ class BestSellingsCollectionViewCell: UICollectionViewCell {
             titleLabel.text = "\(data?.productNameEn ?? "") (by \(data?.store?.storeName ?? ""))"
         }
         ratingView.rating = data?.productAvgRating ?? 0
+        lblRating.text = String(format: "(%.1f)", data?.productAvgRating ?? 0.0)
         if let imageUrlString = data?.productVariants?.first?.variantImage?.first,
            let url = URL(string: imageUrlString) {
             mainImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray

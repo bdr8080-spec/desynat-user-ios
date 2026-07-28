@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import Cosmos
 
 class StoresCollectionViewCell: UICollectionViewCell {
     
@@ -17,6 +18,8 @@ class StoresCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mainImageView: CustomImageView!
     @IBOutlet weak var statusView: CustomView!
     @IBOutlet weak var storyView: CustomView!
+    @IBOutlet weak var ratingView: CosmosView!
+    @IBOutlet weak var lblRating: UILabel!
     
     var onProfileTapped: (() -> Void)?
     
@@ -28,6 +31,8 @@ class StoresCollectionViewCell: UICollectionViewCell {
     }
     
     func configData(data: StoreListDataModel) {
+        ratingView.rating = data.averageStoreRating ?? 0
+        lblRating.text = "(\(Double(data.averageStoreRating ?? 0)))"
         titleLabel.text = data.storeName
         if let imageUrlString = data.storeImage,
            let url = URL(string: imageUrlString) {
