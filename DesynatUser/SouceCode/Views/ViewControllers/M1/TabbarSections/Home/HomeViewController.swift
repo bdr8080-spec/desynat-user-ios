@@ -118,8 +118,19 @@ class HomeViewController: UIViewController {
         requestPermissions()
         viewModel.getTopHomeBannersListApi()
         viewModel.getCenterHomeBannersListApi()
-//        viewModel.getSuggestedStoresRequest()
+        //viewModel.getSuggestedStoresRequest()
         setupLocation()
+        
+        let isRTL = AppLanguageManager.shared.currentLanguage == .ar
+        if isRTL {
+            // best Selling Collection View
+            bestSellingCollectionView.transform = CGAffineTransform(scaleX: -1, y: 1)
+            bestSellingCollectionView.reloadData()
+            
+            // topRated Collection View
+            topRatedCollectionView.transform = CGAffineTransform(scaleX: -1, y: 1)
+            topRatedCollectionView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

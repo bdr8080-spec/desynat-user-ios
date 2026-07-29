@@ -393,9 +393,7 @@ class ProductDetailViewController: UIViewController {
         
         finalPriceLAbel.text = CommonUtils.formatPriceStringInput(variants.first?.finalPrice, currency: "KD")
         CommonUtils.setStrikethrough(label: actualPriceLAbel, text: CommonUtils.formatPriceStringInput(variants.first?.actualPrice, currency: "KD"))
-        CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: actualPriceLAbel,
-                                                  discountType: variants.first?.discountType,
-                                                  discountValue: variants.first?.discountValue)
+        CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: actualPriceLAbel, discountType: variants.first?.discountType, discountValue: variants.first?.discountValue)
         
         descriptionLabel.text = productDetails?.descriptionEn
         // Get unique colors
@@ -577,9 +575,7 @@ class ProductDetailViewController: UIViewController {
         // 2. Actual Price (strikethrough)
         CommonUtils.setStrikethrough(label: actualPriceLAbel, text: CommonUtils.formatPriceStringInput(selectedVariant.actualPrice, currency: "KD"))
         
-        CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: actualPriceLAbel,
-                                                  discountType: selectedVariant.discountType,
-                                                  discountValue: selectedVariant.discountValue)
+        CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: actualPriceLAbel, discountType: selectedVariant.discountType, discountValue: selectedVariant.discountValue)
         let value = Double(selectedVariant.discountValue ?? "0") ?? 0
         if value > 0 {
             separtaorInPriceLabel.isHidden = false
@@ -607,7 +603,6 @@ class ProductDetailViewController: UIViewController {
         }
         
         let selectedColor = uniqueColors[selectedColourIndex]
-        
         // Filter variants for selected color
         filteredVariants = variants.filter { $0.color?.id == selectedColor.id }
         
@@ -625,7 +620,6 @@ class ProductDetailViewController: UIViewController {
             // At least one size IN STOCK
             updateImagesForSelectedSize()
             updateUIForSelectedVariant()
-            
         } else {
             // No size in stock
             selectedVariantImages = []
@@ -652,7 +646,7 @@ class ProductDetailViewController: UIViewController {
         
         // Highlight selected size - Safe & Consistent
         if selectedSizeIndex >= 0 && selectedSizeIndex < filteredVariants.count {
-            let indexPath = IndexPath(item: self.selectedSizeIndex, section: 0)
+        let indexPath = IndexPath(item: self.selectedSizeIndex, section: 0)
             
 //            sizeCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
             sizeCollectionView.reloadData()
@@ -741,7 +735,6 @@ class ProductDetailViewController: UIViewController {
             selectedSizeIndex = -1
         }
     }
-    
 }
 
 // MARK: - COLLECTION VIEW METHODS
@@ -776,8 +769,8 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
             
             cell.borderView.layer.borderColor =
             (selectedColourIndex == indexPath.row ? UIColor.darkBrown : UIColor.lightGray).cgColor
-            
             return cell
+            
         case sizeCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SizeVariantCollectionViewCell", for: indexPath) as! SizeVariantCollectionViewCell
             let variant = filteredVariants[indexPath.row]
@@ -806,7 +799,6 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
         default:
             return UICollectionViewCell()
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -891,7 +883,6 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
             imagesPageController.currentPage = pageIndex
         }
     }
-    
 }
 
 // MARK: - TABLE VIEW METHODS
@@ -908,7 +899,6 @@ extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegat
         default:
             return 0
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -940,7 +930,6 @@ extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegat
                 "Cash on Delivery Not Available".localiz()
                 
             case 2:
-                
                 var title = ""
                 if returnable == "1" {
                     let days = productDetails?.returnDays ?? "0"
@@ -987,7 +976,6 @@ extension ProductDetailViewController: UITableViewDataSource, UITableViewDelegat
 }
 
 class RTLCollectionViewFlowLayout: UICollectionViewFlowLayout {
-
     override var flipsHorizontallyInOppositeLayoutDirection: Bool {
         return true
     }

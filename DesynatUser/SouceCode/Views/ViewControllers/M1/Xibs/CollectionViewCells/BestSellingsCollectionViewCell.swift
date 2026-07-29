@@ -41,6 +41,9 @@ class BestSellingsCollectionViewCell: UICollectionViewCell {
         mainImageView.layer.cornerRadius = 8
         mainImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         mainImageView.clipsToBounds = true
+        if AppLanguageManager.shared.currentLanguage == .ar {
+                    self.transform = CGAffineTransform(scaleX: -1, y: 1)
+                }
     }
     
     func configData(data: BestSellingProductsDataModel?) {

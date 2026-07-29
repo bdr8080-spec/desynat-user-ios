@@ -225,6 +225,7 @@ class HomeViewModel: NSObject {
                 self.hostVC.bestSellingCollectionView.isHidden = self.bestSellingProductsList.isEmpty
                 self.hostVC.noBestSellingDataFound.isHidden = !self.bestSellingProductsList.isEmpty
                 self.hostVC.bestSellingCollectionView.reloadData()
+                
             }
         }
     }
@@ -236,6 +237,7 @@ class HomeViewModel: NSObject {
                 self.hostVC.topRatedCollectionView.isHidden = self.topRatedProductsList.isEmpty
                 self.hostVC.noTopRatedDataFoundLabel.isHidden = !self.topRatedProductsList.isEmpty
                 self.hostVC.topRatedCollectionView.reloadData()
+                
             }
         }
     }
@@ -252,6 +254,8 @@ class HomeViewModel: NSObject {
             }
         }
     }
+    
+    
     
     func handleWishlistTapForTopRated(index: Int) {
         let productId = topRatedProductsList[index].id ?? 0
