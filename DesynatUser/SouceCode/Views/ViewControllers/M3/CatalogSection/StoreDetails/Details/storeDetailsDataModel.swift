@@ -224,7 +224,7 @@ struct Store: Codable {
     let bio, storeLet, long, createdAt: String?
     let updatedAt: String?
     let sellerInformation: SellerInformation?
-    var averageStoreRating: Int?
+    var averageStoreRating: Double?
 
     enum CodingKeys: String, CodingKey {
         case id

@@ -51,6 +51,12 @@ class SubCatgoryViewController: UIViewController {
         self.navigationController?.present(nextVC, animated: true)
     }
     
+    @IBAction func storyDidTapped(_ sender: Any) {
+        let nextVC = StoryViewerViewController.instantiate(fromAppStoryboard: .Home)
+        nextVC.comingFor = .forAdminStory
+        self.navigationController?.pushViewController(nextVC, animated: false)
+    }
+    
     //MARK: Function's declaration
     @objc private func searchTextChanged(_ textField: UITextField) {
         let text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""

@@ -4023,11 +4023,13 @@ Apartment, Kuwait</string>
                                                         <real key="value" value="35"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
-                                                        <color key="value" red="0.9492221475" green="0.65959686039999998" blue="0.25711658599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
-                                                        <color key="value" red="0.90085881950000002" green="0.90085881950000002" blue="0.90085881950000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="filledStar"/>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="emptyStar"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write Review" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1eQ-Fb-BCq" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
@@ -4161,11 +4163,13 @@ Apartment, Kuwait</string>
                                                         <real key="value" value="35"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
-                                                        <color key="value" red="0.9492221475" green="0.65959686039999998" blue="0.25711658599999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
-                                                        <color key="value" red="0.90085881950000002" green="0.90085881950000002" blue="0.90085881950000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="filledStar"/>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="emptyStar"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write Review" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5C-4S-c9X" customClass="CustomLabelFont" customModule="DesynatUser" customModuleProvider="target">
@@ -4498,7 +4502,7 @@ Apartment, Kuwait</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
