@@ -67,8 +67,15 @@ class SearchVC: UIViewController {
     }
     
     @IBAction func btnCamera(_ sender: Any) {
-        let vc = WatchScannerVc.viewFromNIB
-        self.navigationController?.pushViewController(vc, animated: true)
+        ImagePickerHelper.shared.showPickerControllerForCameraSearch(
+            onCameraSelected: { [weak self] in
+                let vc = WatchScannerVc.viewFromNIB
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+        ) { [weak self] image, _ in
+            guard let self = self, let image = image else { return }
+            self.checkForImage(image: image)
+        }
     }
     
     @IBAction func btnMic(_ sender: UIButton) {
@@ -235,3 +242,21 @@ extension SearchVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
     
 }
 
+extension SearchVC {
+    
+    func checkForImage(image: UIImage) {
+        viewModel.recognizeProduct(image: image) { result in
+            guard let result = result else {
+                self.showAlert(msg: "Product not recognized".localiz())
+                return
+            }
+            DispatchQueue.main.async {
+                let nextVC = SearchProductListViewController
+                    .instantiate(fromAppStoryboard: .MyOrder)
+                nextVC.comingFromImageScanner = true
+                nextVC.viewModel.attributeText = result.attributes
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+        }
+    }
+}

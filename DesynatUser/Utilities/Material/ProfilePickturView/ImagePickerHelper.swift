@@ -64,7 +64,52 @@ class ImagePickerHelper: NSObject {
         
         pickerCallBack = handler
     }
+    
+//    func showPickerControllerForCameraSearchfunc(cameraCallback: (() -> Void)? = nil, _ handler: @escaping PickerImage) {
+//        self.showActionSheet(withTitle: "Choose Option".localiz(), withAlertMessage: nil, withOptions: ["Take Picture".localiz(), "Open Gallery".localiz()]) { [weak self] selectedIndex in
+//            guard let self = self else { return }
+//            switch selectedIndex {
+//            case OpenMediaType.camera.rawValue:
+//                self.checkCameraPermission { granted in
+//                    if granted {
+//                        cameraCallback?()
+//                    } else {
+//                        self.showCameraPermissionAlert()
+//                    }
+//                }
+//
+//            case OpenMediaType.photoLibrary.rawValue:
+//                self.openGallery(onlyImagePicker: true, handler: handler)
+//            default:
+//                break
+//            }
+//        }
+//        pickerCallBack = handler
+//    }
+    
+    func showPickerControllerForCameraSearch(onCameraSelected: (() -> Void)? = nil, _ handler: PickerImage) {
+        pickerCallBack = handler
+        self.showActionSheet(withTitle: "Choose Option".localiz(),withAlertMessage: nil, withOptions: ["Take Picture".localiz(), "Open Gallery".localiz()]
+        ) { [weak self] (selectedIndex: Int) in
+            guard let self = self else { return }
+            switch selectedIndex {
+            case OpenMediaType.camera.rawValue:
+                self.checkCameraPermission { granted in
+                    if granted {
+                        onCameraSelected?()
+                    } else {
+                        self.showCameraPermissionAlert()
+                    }
+                }
+            case OpenMediaType.photoLibrary.rawValue:
+                self.openGallery(onlyImagePicker: true, handler: handler)
+            default:
+                break
+            }
+        }
+    }
 
+    
     private func checkCameraPermission(completion: @escaping (Bool) -> Void) {
         let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
         

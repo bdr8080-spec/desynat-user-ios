@@ -11,9 +11,7 @@ class WatchRecognizer {
     
     var recentData: [RecentDataModel] = []
     private var lastVisionResponse: [String: Any]?
-    
-    private let apiKey = "AIzaSyBk1iHVph8nvXAn0uigTvPzKDpb9cslR18"
-    
+
     init() {
         WebService.sharedInstance.getRecentSearch { list in
             self.recentData = list
@@ -127,7 +125,7 @@ class WatchRecognizer {
             return
         }
         
-        let url = URL(string: "https://vision.googleapis.com/v1/images:annotate?key=\(apiKey)")!
+        let url = URL(string: "https://vision.googleapis.com/v1/images:annotate?key=\(cameraSearchApiKey)")!
         
         let requestJSON: [String: Any] = [
             "requests": [

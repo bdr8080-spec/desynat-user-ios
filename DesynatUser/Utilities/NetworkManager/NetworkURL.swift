@@ -1,6 +1,7 @@
 import Foundation
 
 let kIsAppInstalled = "isAppInstalled"
+let cameraSearchApiKey = "AIzaSyBk1iHVph8nvXAn0uigTvPzKDpb9cslR18"
 
 enum BaseURL {
     static let development  = "https://desynat.com/"//"http://157.241.119.72/"
