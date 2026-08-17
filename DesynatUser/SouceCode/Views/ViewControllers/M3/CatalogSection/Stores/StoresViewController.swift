@@ -67,25 +67,18 @@ class StoresViewController: UIViewController {
     // MARK: - Button's Action
     @IBAction func filterDidTapped(_ sender: Any) {
         let nextVC = StoresFiltersViewController.instantiate(fromAppStoryboard: .Catalog)
-        
-        // Pass previous selections
         nextVC.selectedRatings = appliedRatings
         nextVC.selectedAvailability = appliedAvailability
         nextVC.selectedShortest = appliedShortest
         nextVC.selectedHighest = appliedHighest
-        
-        // Closure callback
         nextVC.onFilterApplied = { [weak self] ratings, availability, shortest, highest in
             guard let self = self else { return }
-            
             self.appliedRatings = ratings
             self.appliedAvailability = availability
             self.appliedShortest = shortest
             self.appliedHighest = highest
-            
             self.viewModel.getStoresListApi()
         }
-        
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
@@ -122,14 +115,12 @@ class StoresViewController: UIViewController {
     }
     
     //MARK: Function's declaration
-    
     func updateCollectionsHeight() {
         storesCollectionViewHeightConstriant.constant = storesCollectionView.contentSize.height
     }
     
     private func startBannerAutoScroll() {
         stopBannerAutoScroll()
-        
         bannerAutoScrollTimer = Timer.scheduledTimer(
             timeInterval: bannerAutoScrollDelay,
             target: self,
@@ -147,20 +138,16 @@ class StoresViewController: UIViewController {
     @objc private func autoScrollBanner() {
         let totalItems = viewModel.homeScreenAllBannersList.count
         guard totalItems > 1 else { return }
-        
         currentBannerIndex += 1
         if currentBannerIndex >= totalItems {
             currentBannerIndex = 0
         }
-        
         let indexPath = IndexPath(item: currentBannerIndex, section: 0)
-        
         bannerCollectionView.scrollToItem(
             at: indexPath,
             at: .centeredHorizontally,
             animated: true
         )
-        
         bannerPageController.currentPage = currentBannerIndex
     }
     
@@ -219,9 +206,8 @@ extension StoresViewController: UICollectionViewDelegate, UICollectionViewDataSo
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         case storesCollectionView:
             let spacing: CGFloat = 10
-            let totalSpacing = spacing * 2 // 3 cells per row → 2 spaces between
+            let totalSpacing = spacing * 2
             let width = (collectionView.frame.width - totalSpacing) / 3
-            //            return CGSize(width: width, height: 194)
             return CGSize(width: width, height: 154)
         default:
             return CGSize.zero

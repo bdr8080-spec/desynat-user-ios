@@ -936,21 +936,21 @@ extension WebService {
         }
     }
     
-    func getOrderDetailInvoice(param: [String: Any], completion: @escaping (_ user: String)-> Void) {
-        //    CommonUtils.showHud(show: true)
-        NetworkManager.shared.request(withAPI: .endpoint(.singleOrderSummaryInvoice), requestMethod: .post, requestParams: param, requestModel: String.self) { result, code in
-            //      CommonUtils.showHud(show: false)
-            self.evaluateWebServiceResponse(response: result) { response, message,error in
-                guard let user = response else {
-                    if let error {
-                        UIApplication.shared.topViewController()?.showAlert(msg: error)
-                    }
-                    return
-                }
-                completion(user)
-            }
-        }
-    }
+//    func getOrderDetailInvoice(param: [String: Any], completion: @escaping (_ user: String)-> Void) {
+//        //    CommonUtils.showHud(show: true)
+//        NetworkManager.shared.request(withAPI: .endpoint(.singleOrderSummaryInvoice), requestMethod: .post, requestParams: param, requestModel: String.self) { result, code in
+//            //      CommonUtils.showHud(show: false)
+//            self.evaluateWebServiceResponse(response: result) { response, message,error in
+//                guard let user = response else {
+//                    if let error {
+//                        UIApplication.shared.topViewController()?.showAlert(msg: error)
+//                    }
+//                    return
+//                }
+//                completion(user)
+//            }
+//        }
+//    }
     
     func cancelOrder(param: [String: Any], completion: @escaping (_ user: EmptyModel)-> Void) {
         CommonUtils.showHud(show: true)

@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-        //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         Thread.sleep(forTimeInterval: 5.0)
         LocationManager.sharedInstance.startUpdatingLocation()
         IQKeyboardManager.shared.enableAutoToolbar = true
