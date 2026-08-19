@@ -141,9 +141,9 @@ struct AllOtherOrderVarient: Codable {
 struct UserRatingReviewProvide: Codable {
     let id, userID, orderID, orderdetailsID: Int?
     let productID: Int?
-    let productRating, productReview, productImage: String?
+    let productRating, productReview: String?
     let storeID: Int?
-    let storeRating, storeReview, storeImage, createdAt: String?
+    let storeRating, storeReview, createdAt: String?
     let updatedAt: String?
     
     enum CodingKeys: String, CodingKey {
@@ -154,11 +154,11 @@ struct UserRatingReviewProvide: Codable {
         case productID = "product_id"
         case productRating = "product_rating"
         case productReview = "product_review"
-        case productImage = "product_image"
+//        case productImage = "product_image"
         case storeID = "store_id"
         case storeRating = "store_rating"
         case storeReview = "store_review"
-        case storeImage = "store_image"
+//        case storeImage = "store_image"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
     }

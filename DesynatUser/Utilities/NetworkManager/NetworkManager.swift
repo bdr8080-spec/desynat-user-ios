@@ -332,3 +332,19 @@ final class NetworkManager {
         }
     }
 }
+
+ 
+//MARK: - Usage of multipart api
+// Any mix of image, video, gif, pdf in one call:
+//NetworkManager.shared.requestMultipart(
+//    url: .endpoint(.uploadPost),
+//    assets: [imageUpload, videoUpload, pdfUpload],
+//    param: ["caption": "Hello"],
+//    compressVideo: true,          // only matters if a .Video asset is present
+//    model: UploadResponse.self
+//) { result, statusCode in
+//    switch result {
+//    case .success(let response): break
+//    case .failure(let error): break
+//    }
+//}

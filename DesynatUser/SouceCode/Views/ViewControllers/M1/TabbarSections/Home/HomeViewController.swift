@@ -14,6 +14,8 @@ import CoreLocation
 class HomeViewController: UIViewController {
     
     // MARK: - IBOutlet's
+    
+    @IBOutlet weak var topHeaderView: UIView!
     @IBOutlet weak var messageCountLabel: UILabel!
     @IBOutlet weak var messageCountView: CustomView!
     @IBOutlet weak var adminstoryButtonOutlet: UIButton!
@@ -85,6 +87,11 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var newestDataFoundLabel: UILabel!
     @IBOutlet weak var btnTopRated: UIButton!
     @IBOutlet weak var btnBestSelling: UIButton!
+    @IBOutlet weak var detailsStackView: UIStackView!
+    @IBOutlet weak var buttonsStackView: UIStackView!
+    @IBOutlet weak var locationDetailsStackView: UIStackView!
+    @IBOutlet weak var notificationView: UIView!
+    @IBOutlet weak var messageChatView: UIView!
     
     // MARK: - Property Decalaration
     private var bottomLabels: [UILabel] = []
@@ -120,7 +127,16 @@ class HomeViewController: UIViewController {
         viewModel.getCenterHomeBannersListApi()
         //viewModel.getSuggestedStoresRequest()
         setupLocation()
-        
+        detailsStackView.semanticContentAttribute = .forceLeftToRight
+        topHeaderView.semanticContentAttribute = .forceLeftToRight
+        buttonsStackView.semanticContentAttribute = .forceLeftToRight
+        locationDetailsStackView.semanticContentAttribute = .forceLeftToRight
+        lblUserName.semanticContentAttribute = .forceLeftToRight
+        lblUserName.textAlignment = .left
+        lblLocatioin.semanticContentAttribute = .forceLeftToRight
+        lblLocatioin.textAlignment = .left
+        notificationView.semanticContentAttribute = .forceLeftToRight
+        messageChatView.semanticContentAttribute = .forceLeftToRight
         let isRTL = AppLanguageManager.shared.currentLanguage == .ar
         if isRTL {
             // best Selling Collection View
@@ -575,6 +591,14 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case bestSellingCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BestSellingsCollectionViewCell", for: indexPath) as! BestSellingsCollectionViewCell
             let data = viewModel.bestSellingProductsList[indexPath.row]
+            let isRTL = AppLanguageManager.shared.currentLanguage == .ar
+
+                if isRTL {
+                    cell.transform = CGAffineTransform(scaleX: -1, y: 1)
+                } else {
+                    cell.transform = .identity
+                }
+
             cell.configData(data: data)
             cell.wishlistButtonTapped = { [weak self] in
                 guard let self = self else { return }
@@ -611,6 +635,14 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case topRatedCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BestSellingsCollectionViewCell", for: indexPath) as! BestSellingsCollectionViewCell
             let data = viewModel.topRatedProductsList[indexPath.row]
+            let isRTL = AppLanguageManager.shared.currentLanguage == .ar
+
+                if isRTL {
+                    cell.transform = CGAffineTransform(scaleX: -1, y: 1)
+                } else {
+                    cell.transform = .identity
+                }
+
             cell.configDataForTopRatedProducts(data: data)
             cell.wishlistButtonTapped = { [weak self] in
                 guard let self = self else { return }
@@ -815,6 +847,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 extension HomeViewController: CLLocationManagerDelegate {
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         manager.stopUpdatingLocation()

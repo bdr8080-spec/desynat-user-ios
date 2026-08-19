@@ -27,7 +27,6 @@ class StoryViewerViewController: UIViewController {
     @IBOutlet weak var addTagLabel: UILabel!
     @IBOutlet weak var addTagView: CustomView!
     
-    
     // MARK: - Variables
     private var videoTimeObserver: Any?
     private var seenStories: Set<Int> = []
@@ -53,7 +52,6 @@ class StoryViewerViewController: UIViewController {
         topSliderCollectionView.semanticContentAttribute = .forceLeftToRight
         storiesCollectionView.semanticContentAttribute = .forceLeftToRight
         setupCollectionViews()
-//        sellerStoreNameLabel.isHidden = true
         switch comingFor {
         case .forAdminStory:
             profileAndNameStackView.isHidden = false
@@ -61,8 +59,6 @@ class StoryViewerViewController: UIViewController {
             fetchAdminStoriesFrom()
             highlightTitleView.isHidden = true
         case .forSellerStory:
-//            profileAndNameStackView.isHidden = true
-//            timerView.isHidden = false
             profileAndNameStackView.isHidden = false
             timerView.isHidden = true
             fetchSelfStories()

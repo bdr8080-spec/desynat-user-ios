@@ -133,7 +133,15 @@ class ProductDetailViewController: UIViewController {
         } else {
             viewModel.getSavedAddressListAPI()
         }
+        
+        if AppLanguageManager.shared.currentLanguage == .ar {
+            imagesPageController.semanticContentAttribute = .forceRightToLeft
+        } else {
+            imagesPageController.semanticContentAttribute = .forceLeftToRight
+        }
     }
+    
+    
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -877,10 +885,31 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     // MARK: - Update Page Control on Scroll
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if scrollView == productImageCollectionView {
+//            let pageIndex = Int(round(scrollView.contentOffset.x / productImageCollectionView.frame.width))
+//            imagesPageController.currentPage = pageIndex
+//        }
+//    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView == productImageCollectionView {
-            let pageIndex = Int(round(scrollView.contentOffset.x / productImageCollectionView.frame.width))
-            imagesPageController.currentPage = pageIndex
+        guard scrollView == productImageCollectionView else {
+            return
+        }
+        let pageWidth = productImageCollectionView.frame.width
+        guard pageWidth > 0,
+              !selectedVariantImages.isEmpty else {
+            return
+        }
+        let collectionViewIndex = Int(
+            round(scrollView.contentOffset.x / pageWidth)
+        )
+        let totalPages = selectedVariantImages.count
+        let isArabic = AppLanguageManager.shared.currentLanguage == .ar
+        if isArabic {
+            imagesPageController.currentPage = totalPages - 1 - collectionViewIndex
+        } else {
+            imagesPageController.currentPage = collectionViewIndex
         }
     }
 }
