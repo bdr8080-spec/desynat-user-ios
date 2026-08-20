@@ -297,8 +297,8 @@ extension ProductsFiltersViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if filtersOptions[indexPath.section].header == "Price" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PriceRangeSliderTableViewCell", for: indexPath) as! PriceRangeSliderTableViewCell
-            cell.minPrice = selectedMinPrice ?? 0
-            cell.maxPrice = selectedMaxPrice ?? 100000
+            cell.minPrice = selectedMinPrice ?? 1
+            cell.maxPrice = selectedMaxPrice ?? 1000
             cell.onPriceChanged = { [weak self] min, max in
                 guard let self = self else { return }
                 self.selectedMinPrice = min

@@ -76,7 +76,6 @@ class HomeViewController: UIViewController {
             newestProductsCollectionView.registerCellFromNib(cellID: "BestSellingsCollectionViewCell")
         }
     }
-    
     @IBOutlet weak var categoriesSectionCollectionView: UICollectionView! {
         didSet {
             categoriesSectionCollectionView.registerCellFromNib(cellID: "CategoriesSectionCollectionViewCell")

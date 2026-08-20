@@ -26,7 +26,7 @@ class StoryViewerViewModel {
         }
     }
     
-    func getSelfStory(completion: @escaping () -> Void) {
+    func getSellerStory(completion: @escaping () -> Void) {
         let savedUser = kSharedUserDefaults.retrieveModelFor(key: .user, model: UserModel.self)
         var param: [String:Any] = ["seller_id": hostVC.sellerId]//,
 //                                   "user_id": savedUser?.id]

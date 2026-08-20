@@ -11,14 +11,14 @@ import UIKit
 class RangeSliderView: UIControl {
     
     // MARK: - Public Values
-    var minValue: CGFloat = 0 {
+    var minValue: CGFloat = 1 {
         didSet { updateLayoutIfNeeded() }
     }
-    var maxValue: CGFloat = 10000 {
+    var maxValue: CGFloat = 1000 {
         didSet { updateLayoutIfNeeded() }
     }
     
-    var initialValue: CGFloat = 0 {
+    var initialValue: CGFloat = 1 {
         didSet {
             initialValue = min(max(initialValue, minValue), currentValue)
             updateThumbPositions()
@@ -26,7 +26,7 @@ class RangeSliderView: UIControl {
         }
     }
     
-    var currentValue: CGFloat = 10000 {
+    var currentValue: CGFloat = 1000 {
         didSet {
             currentValue = min(max(currentValue, initialValue), maxValue)
             updateThumbPositions()

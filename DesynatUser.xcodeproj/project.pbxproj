@@ -177,6 +177,8 @@
 		468D980A2FA48BFD002D0A86 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D98082FA48BFD002D0A86 /* LanguageManager.swift */; };
 		46AA2A9A2FC0211000F0E9F9 /* UploadProductImageForRatingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46AA2A992FC0211000F0E9F9 /* UploadProductImageForRatingCollectionViewCell.xib */; };
 		46AA2A9B2FC0211000F0E9F9 /* UploadProductImageForRatingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AA2A982FC0211000F0E9F9 /* UploadProductImageForRatingCollectionViewCell.swift */; };
+		46B2233030371746003E7392 /* ProductBlurCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B2232E30371746003E7392 /* ProductBlurCollectionViewCell.swift */; };
+		46B2233130371746003E7392 /* ProductBlurCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46B2232F30371746003E7392 /* ProductBlurCollectionViewCell.xib */; };
 		495DBBDB2E81562200E61635 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 495DBBDA2E81562200E61635 /* Alamofire */; };
 		49BD259C2ED6120F00D71B9D /* ProductDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BD259B2ED6120F00D71B9D /* ProductDetailsViewModel.swift */; };
 		49DBE5522EB0836A00DE95E8 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 49DBE5512EB0836A00DE95E8 /* IQKeyboardManagerSwift */; };
@@ -659,6 +661,8 @@
 		468D98082FA48BFD002D0A86 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		46AA2A982FC0211000F0E9F9 /* UploadProductImageForRatingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProductImageForRatingCollectionViewCell.swift; sourceTree = "<group>"; };
 		46AA2A992FC0211000F0E9F9 /* UploadProductImageForRatingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UploadProductImageForRatingCollectionViewCell.xib; sourceTree = "<group>"; };
+		46B2232E30371746003E7392 /* ProductBlurCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductBlurCollectionViewCell.swift; sourceTree = "<group>"; };
+		46B2232F30371746003E7392 /* ProductBlurCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductBlurCollectionViewCell.xib; sourceTree = "<group>"; };
 		495DBBA12E81528A00E61635 /* DesynatUser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesynatUser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49BD259B2ED6120F00D71B9D /* ProductDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewModel.swift; sourceTree = "<group>"; };
 		49EC28B52F15E65000E3FD4E /* CustomOrderPopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOrderPopupViewModel.swift; sourceTree = "<group>"; };
@@ -2225,6 +2229,8 @@
 				6B95F1432EB5DB5E00391509 /* WalkThroughCell.swift */,
 				6B95F1442EB5DB5E00391509 /* WelcomeScreenCollectionViewCell.swift */,
 				6B95F1452EB5DB5E00391509 /* WelcomeScreenCollectionViewCell.xib */,
+				46B2232E30371746003E7392 /* ProductBlurCollectionViewCell.swift */,
+				46B2232F30371746003E7392 /* ProductBlurCollectionViewCell.xib */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -3125,6 +3131,7 @@
 				6B95F1BB2EB5DB5E00391509 /* HomeBannerCollectionViewCell.xib in Resources */,
 				42CF7A662F555E4400B710F5 /* PaymentsHistoryTableViewCell.xib in Resources */,
 				D1AF5FDB2F12680C009CE604 /* ChatsFilterTableViewCell.xib in Resources */,
+				46B2233130371746003E7392 /* ProductBlurCollectionViewCell.xib in Resources */,
 				D1CF05A82EF96C1F005DB273 /* RecommendCollectionCell.xib in Resources */,
 				6B95F1BC2EB5DB5E00391509 /* SuggestedStoresCollectionViewCell.xib in Resources */,
 				D1AF5FD12F1256B2009CE604 /* ReceiverChatTableViewCell.xib in Resources */,
@@ -3356,6 +3363,7 @@
 				6B95F1E52EB5DB5E00391509 /* OTPViewController.swift in Sources */,
 				D1BCAF1B2EFBFB7D00117D0A /* RateProductOrderViewController.swift in Sources */,
 				7A0D074E2F1A3CC6008CFEF7 /* FullScreenBannersCollectionViewCell.swift in Sources */,
+				46B2233030371746003E7392 /* ProductBlurCollectionViewCell.swift in Sources */,
 				425B32C52F72920500445808 /* TicketDetailViewController.swift in Sources */,
 				42B360602F4D7C9800EF8F4C /* SortByAffiliatedProductsViewModel.swift in Sources */,
 				49F323972ED698B30027A573 /* SavedAddressViewModel.swift in Sources */,

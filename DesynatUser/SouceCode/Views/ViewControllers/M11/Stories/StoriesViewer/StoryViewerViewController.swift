@@ -61,7 +61,7 @@ class StoryViewerViewController: UIViewController {
         case .forSellerStory:
             profileAndNameStackView.isHidden = false
             timerView.isHidden = true
-            fetchSelfStories()
+            fetchSellerStories()
             highlightTitleView.isHidden = true
         case .forSellerHighlight:
             timerView.isHidden = false
@@ -97,8 +97,8 @@ class StoryViewerViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    func fetchSelfStories() {
-        viewModel.getSelfStory() { [weak self] in
+    func fetchSellerStories() {
+        viewModel.getSellerStory() { [weak self] in
             guard let self = self else { return }
             self.usersStory = self.viewModel.sellerStories.compactMap { item in
                 guard let url = item.file else { return nil }

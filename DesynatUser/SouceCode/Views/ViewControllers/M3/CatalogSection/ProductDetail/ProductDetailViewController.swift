@@ -55,7 +55,7 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet weak var discountPercentageLabel: UILabel!
     @IBOutlet weak var productImageCollectionView: UICollectionView! {
         didSet {
-            productImageCollectionView.registerCellFromNib(cellID: "ProductDetailImageCollectionViewCell")
+            productImageCollectionView.registerCellFromNib(cellID: "ProductBlurCollectionViewCell")
         }
     }
     @IBOutlet weak var colorsCollectionView: UICollectionView! {
@@ -766,7 +766,7 @@ extension ProductDetailViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView {
         case productImageCollectionView:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductDetailImageCollectionViewCell", for: indexPath) as! ProductDetailImageCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductBlurCollectionViewCell", for: indexPath) as! ProductBlurCollectionViewCell
             let img = selectedVariantImages[indexPath.row]
             cell.configure(mediaURL: img)
             return cell

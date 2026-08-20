@@ -24,11 +24,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="354" height="247"/>
                     </imageView>
                     <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yek-Cf-p0n" customClass="CustomView" customModule="DesynatUser" customModuleProvider="target">
-                        <rect key="frame" x="277" y="209" width="65" height="30"/>
+                        <rect key="frame" x="284" y="214" width="58" height="25"/>
                         <color key="backgroundColor" red="0.19848281149999999" green="0.1875433624" blue="0.1687309444" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="65" id="6hA-fE-BkP"/>
-                            <constraint firstAttribute="height" constant="30" id="yp7-lC-M28"/>
+                            <constraint firstAttribute="width" constant="58" id="6hA-fE-BkP"/>
+                            <constraint firstAttribute="height" constant="25" id="yp7-lC-M28"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -37,9 +37,9 @@
                             <userDefinedRuntimeAttribute type="boolean" keyPath="circleCorner" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ad" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lRh-UQ-kw7">
-                        <rect key="frame" x="301.33333333333331" y="215.66666666666666" width="16.333333333333314" height="17"/>
-                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ad" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lRh-UQ-kw7">
+                        <rect key="frame" x="306.33333333333331" y="219.66666666666666" width="13.666666666666686" height="14"/>
+                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="10"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>

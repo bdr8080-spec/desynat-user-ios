@@ -14,10 +14,10 @@ class PriceRangeSliderTableViewCell: UITableViewCell {
     var onPriceChanged: ((Int, Int) -> Void)?
     
     // Preselected values
-    var minPrice: Int = 0 {
+    var minPrice: Int = 1 {
         didSet { rangeSlider.initialValue = CGFloat(minPrice) } // left thumb
     }
-    var maxPrice: Int = 10000 {
+    var maxPrice: Int = 1000 {
         didSet { rangeSlider.currentValue = CGFloat(maxPrice) } // right thumb
     }
     
