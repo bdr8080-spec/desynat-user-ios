@@ -46,8 +46,8 @@ class AddCardViewController: UIViewController, UITextFieldDelegate {
     }
 }
 extension AddCardViewController {
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
         if textField == cardHolderNameTF {
             let currentText = textField.text ?? ""
             if currentText.hasPrefix(" ") { return false }
@@ -60,49 +60,37 @@ extension AddCardViewController {
         if textField == cardNumberTF {
             let currentText = textField.text ?? ""
             guard let stringRange = Range(range, in: currentText) else { return false }
-            
             let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
             // Allow only numbers
             if !CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string)) && !string.isEmpty {
                 return false
             }
-            
             // Limit to 16 digits
             return updatedText.count <= 16
         }
-        
         //  EXPIRY DATE FORMAT (MM/YY)
         if textField == expiryDateTF {
-            
             let currentText = textField.text ?? ""
             guard let stringRange = Range(range, in: currentText) else { return false }
-            
             let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-            
             // Remove slash
             let cleanText = updatedText.replacingOccurrences(of: "/", with: "")
-            
             // Allow only numbers
             if !CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string)) && !string.isEmpty {
                 return false
             }
-            
             // Max 4 digits (MMYY)
             if cleanText.count > 4 { return false }
-            
             var result = ""
-            
             for (index, char) in cleanText.enumerated() {
                 if index == 2 {
                     result.append("/") // auto add slash
                 }
                 result.append(char)
             }
-            
             textField.text = result
             return false
         }
-        
         //  CVV (max 3 digit)
         if textField == cvvNumber {
             let current = textField.text ?? ""

@@ -24,17 +24,6 @@ class MyOrderDetailVM: NSObject {
         WebService.sharedInstance.getOrderDetail(param: params) { data in
             self.hostVC.orderData = data
             self.hostVC.setData()
-//            self.getOrderInvoice(orderId: self.hostVC.orderData?.order?.orderID)
         }
     }
-    
-//    func getOrderInvoice(orderId: String?) {
-//        let params: [String: Any] = [
-//            "order_id": orderId ?? ""]
-//        WebService.sharedInstance.getOrderDetailInvoice(param: params) { data in
-//            DispatchQueue.main.async {
-//                self.invoiceDetailsUrl = data
-//            }
-//        }
-//    }
 }

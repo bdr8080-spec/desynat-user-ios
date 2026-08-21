@@ -100,8 +100,9 @@ class SearchAffiliatedProductsViewController: UIViewController {
         vc.onImageRecognized = { [weak self] attributes in
             guard let self = self else { return }
             self.comingFromImageScanner = true
-            self.viewModel.attributeText = attributes
-            self.searchTF.text = attributes.joined(separator: ", ")
+            let uniqueResult = attributes.filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }.reduce(into: [String]()) { if !$0.map({ $0.lowercased() }).contains($1.lowercased()) { $0.append($1.trimmingCharacters(in: .whitespacesAndNewlines)) } }
+            self.viewModel.attributeText = uniqueResult
+            self.searchTF.text = uniqueResult.joined(separator: ", ")
             self.viewModel.resetAndFetchProducts()
         }
         self.navigationController?.pushViewController(vc, animated: true)

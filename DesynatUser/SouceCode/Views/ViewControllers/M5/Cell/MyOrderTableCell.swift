@@ -354,13 +354,11 @@ class MyOrderTableCell: UITableViewCell {
         return outputFormatter.string(from: newDate)
     }
   
-  
 }
 
-
 extension String {
+    
     func formattedOrderDate() -> String {
-        
         let isoFormatter = DateFormatter()
         isoFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
         isoFormatter.locale = Locale(identifier: "en_US_POSIX")

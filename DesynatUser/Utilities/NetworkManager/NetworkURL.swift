@@ -1,11 +1,11 @@
 import Foundation
 
 let kIsAppInstalled = "isAppInstalled"
-let cameraSearchApiKey = "AIzaSyBk1iHVph8nvXAn0uigTvPzKDpb9cslR18"
+let googleApiKey = "AIzaSyB4mtISC8aJQl8DkwEd8DAIpBvuHCleO7s" // Desynat User app vision key
 
 enum BaseURL {
-    static let development  = "https://desynat.com/"//"http://157.241.119.72/"
-    static let release      = "https://desynat.com/"//"http://157.241.119.72/"
+    static let development  = "https://desynat.com/"
+    static let release      = "https://desynat.com/"
     
     static func value() -> String {
         switch BuildConfiguration.shared.environment {
@@ -28,9 +28,7 @@ enum NetworkEndPoint: String {
     case createPassword                     = "api/create_password"
     case uploadFile                         = "api/upload"
     case resendOtp                          = "api/resend_otp"
-//    case country                            = "api/country" //FOR 6 COUNTRIES LIST
-//    case allUserCountry                     = "api/all_country" // FOR ALL COUNTRIES LIST
-    case allUserCountry                     = "api/country" //FOR 6 COUNTRIES LIST
+    case allUserCountry                     = "api/country"
     case allUserCurrency                    = "api/all_country_unique_currency"
     case logout                             = "api/user/logout"
     
@@ -70,7 +68,6 @@ enum NetworkEndPoint: String {
     case applyPromocode                     = "api/user/Apply-promocode"
     case applyGiftCard                      = "api/user/apply-gift-card"
     case singleOrderSummary                 = "api/user/single-order-summary"
-//    case singleOrderSummaryInvoice          = "api/user/get-Invoice"
     case completePayment                    = "api/user/product-order-complete-payment"
     case getWalletAmount                    = "api/user/waller-balance"
     
@@ -155,33 +152,32 @@ enum NetworkEndPoint: String {
     case getAffiliateNotificationsList   = "api/affiliate/affiliateUserNotification"
     case markAffiliateReadNotifications  = "api/affiliate/ReadAffiliateUserNotification"
     case markAffiliateAllReadNotifications = ""
-    case markAllReadNotifications = "dfv"
+    case markAllReadNotifications        = "dfv"
     case countOfNotifcation              = "api/user/count-user-notification"
     case countOfNotifcationForAffilated  = "api/affiliate/CountaffiliateUserNotification"
-//    case getAffiliateDashboardData       = "api/affiliate/get_affiliate_dashboard_data"
     case getAffiliateDashboardData       = "api/affiliate/affiliate_dashboard_data"
-    case getSellerStories       = "api/user/get_seller_stories"
-    case getAdminStories       = "api/user/get_admin_stories"
-    case getSellerReels       = "api/user/get_seller_reels"
-    case getSellerHighlights       = "api/user/get_seller_highlights"
-    case addRemoveReelsFromwishlist   = "api/user/add_remove_reel_to_whislist"
-    case shareReels   = "api/user/share_reel"
-    case showAllLiveStraming   = "api/user/show-all-live-streaming-request"
-    case generateAgoraToken   = "api/agora/token"
+    case getSellerStories                = "api/user/get_seller_stories"
+    case getAdminStories                 = "api/user/get_admin_stories"
+    case getSellerReels                  = "api/user/get_seller_reels"
+    case getSellerHighlights             = "api/user/get_seller_highlights"
+    case addRemoveReelsFromwishlist      = "api/user/add_remove_reel_to_whislist"
+    case shareReels                      = "api/user/share_reel"
+    case showAllLiveStraming             = "api/user/show-all-live-streaming-request"
+    case generateAgoraToken              = "api/agora/token"
     
     
     //M12
-    case suggestStore               = "api/user/suggest-store"
-    case bestSellingProduct         = "api/user/best-selling-product"
-    case topRatingProduct           = "api/user/top-rating-product"
-    case newestProduct              = "api/user/newest-product"
-    case getRaisedTickets           = "api/user/get_raised_tickets"
-    case getTicketsType             = "api/ticket_types"
-    case raiseTicket                = "api/user/raise_ticket"
-    case getRaiseTicketForAffiliate = "api/affiliate/get_raised_tickets"
-    case raiseTicketForAffiliate    = "api/affiliate/raise_ticket"
-    case updateAffiliateUserCountry  = "api/affiliate/update-user-selected-country"
-    case updateAffiliateUserCurrency = "api/affiliate/update-user-selected-currency"
+    case suggestStore                   = "api/user/suggest-store"
+    case bestSellingProduct             = "api/user/best-selling-product"
+    case topRatingProduct               = "api/user/top-rating-product"
+    case newestProduct                  = "api/user/newest-product"
+    case getRaisedTickets               = "api/user/get_raised_tickets"
+    case getTicketsType                 = "api/ticket_types"
+    case raiseTicket                    = "api/user/raise_ticket"
+    case getRaiseTicketForAffiliate     = "api/affiliate/get_raised_tickets"
+    case raiseTicketForAffiliate        = "api/affiliate/raise_ticket"
+    case updateAffiliateUserCountry     = "api/affiliate/update-user-selected-country"
+    case updateAffiliateUserCurrency    = "api/affiliate/update-user-selected-currency"
    
     //M13
     case getContacts                     = "api/contact_us"
@@ -208,9 +204,9 @@ enum NetworkEndPoint: String {
     case captureSellerStoreVisitor       = "api/CaptureSellerStoreVisitor"
     case socialSignup                    = "api/socialSignup"
     
-    case seeStory                           = "api/see_story"
-    case bestSellingList                           = "api/user/best-selling-products-list"
-    case topRatedList                           = "api/user/top-rating-products-list"
+    case seeStory                        = "api/see_story"
+    case bestSellingList                 = "api/user/best-selling-products-list"
+    case topRatedList                    = "api/user/top-rating-products-list"
     
     func withBaseURL() -> String {
         return "\(BaseURL.value())\(self.rawValue)"

@@ -96,12 +96,9 @@ class OrderDetailTableCell: UITableViewCell {
         
         if AppLanguageManager.shared.currentLanguage == .ar {
             lblProductName.text = data?.productDetails?.productNameAr
-        }else{
+        } else {
             lblProductName.text = data?.productDetails?.productNameEn
         }
-        
-        //lblProductName.text = data?.productDetails?.productNameEn
-        
         let isReturnAllowed = data?.productDetails?.productReturn == "1"
         if isReturnAllowed {
             lblReturnAvail.text = "\(data?.productDetails?.returnDays ?? "1") \("days return available".localiz())"
@@ -185,8 +182,6 @@ class OrderDetailTableCell: UITableViewCell {
                 }
             }
         }
-        
-        
     }
     
 }

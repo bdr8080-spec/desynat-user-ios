@@ -12,7 +12,6 @@ import DropDown
 extension SceneDelegate {
     
     public func navigateToLoginVc() {
-        
         navigateTo(vc: LoginViewController.instantiate(fromAppStoryboard: .Main))
     }
     
@@ -22,11 +21,9 @@ extension SceneDelegate {
         navigateTo(vc: vc)
     }
     
-    
     public func navigateToWelcomeScreen() {
 //        let vc = WelcomeScreenViewController.instantiate(fromAppStoryboard: .Main)
 //        navigateTo(vc: vc)
-        
         let vc = LoginViewController.instantiate(fromAppStoryboard: .Main)
         UserDefaults.standard.setValue("false", forKey: "isAppInstall")
         navigateTo(vc: vc)
@@ -57,8 +54,8 @@ extension SceneDelegate {
         navigateTo(vc: AffiliatedUserLoginViewController.instantiate(fromAppStoryboard: .AffiliateUser))
     }
     
-    //Pass custom vc to make it root controller
-    public func navigateTo(vc:UIViewController) {
+    // Pass custom vc to make it root controller
+    public func navigateTo(vc: UIViewController) {
         let nc = UINavigationController(rootViewController: vc)
         nc.isNavigationBarHidden = true
         let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as! SceneDelegate

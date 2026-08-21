@@ -147,11 +147,6 @@ extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource , UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == latestSearchCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LatestSearchCollectionCell", for: indexPath) as! LatestSearchCollectionCell
-            //            if AppLanguageManager.shared.currentLanguage == .ar {
-            //                cell.titleLabel.text = recentData[indexPath.row].
-            //            }else{
-            //
-            //            }
             cell.titleLabel.text = recentData[indexPath.row].name
             return cell
         } else {
@@ -196,9 +191,6 @@ extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource , UICol
         latstSearchCollectionViewHieghtConstriant.constant =
         latestSearchCollectionView.collectionViewLayout.collectionViewContentSize.height
     }
-    
-    
-    
     
 }
 
@@ -245,7 +237,7 @@ extension SearchVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
 extension SearchVC {
     
     func checkForImage(image: UIImage) {
-        viewModel.recognizeProduct(image: image) { result in
+        viewModel.callCloudVisionApi(image: image) { result in
             guard let result = result else {
                 self.showAlert(msg: "Product not recognized".localiz())
                 return
@@ -254,7 +246,7 @@ extension SearchVC {
                 let nextVC = SearchProductListViewController
                     .instantiate(fromAppStoryboard: .MyOrder)
                 nextVC.comingFromImageScanner = true
-                nextVC.viewModel.attributeText = result.attributes
+                nextVC.viewModel.attributeText = result.filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }.reduce(into: [String]()) { if !$0.map({ $0.lowercased() }).contains($1.lowercased()) { $0.append($1.trimmingCharacters(in: .whitespacesAndNewlines)) } }
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
         }

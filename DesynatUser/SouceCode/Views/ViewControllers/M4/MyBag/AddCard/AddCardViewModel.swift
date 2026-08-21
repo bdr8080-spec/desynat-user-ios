@@ -27,20 +27,16 @@ class AddCardViewModel{
     }
     
     func validFields() -> Bool {
-        var errorMessage: AlertConstant = .none
         
+        var errorMessage: AlertConstant = .none
         let cardNumber = String.getString(hostVc?.cardNumberTF.text)
             .trimmingCharacters(in: .whitespacesAndNewlines)
-        
         let cardHolderName = String.getString(hostVc?.cardHolderNameTF.text)
             .trimmingCharacters(in: .whitespacesAndNewlines)
-        
         let expiryDate = String.getString(hostVc?.expiryDateTF.text)
             .trimmingCharacters(in: .whitespacesAndNewlines)
-        
         let cvv = String.getString(hostVc?.cvvNumber.text)
             .trimmingCharacters(in: .whitespacesAndNewlines)
-        
         
         // MARK: - Validation Checks
         
@@ -50,16 +46,12 @@ class AddCardViewModel{
             errorMessage = .enterCardNumber
         } else if !cardNumber.isValidCardNumber() {
             errorMessage = .validCardNumber
-            
         } else if expiryDate.isEmpty {
             errorMessage = .enterExpiryDate
-            
         } else if !isValidExpiryDate(expiryDate) {
             errorMessage = .validExpiryDate
-            
         } else if cvv.isEmpty {
             errorMessage = .enterCVV
-            
         } else if cvv.count < 3 {
             errorMessage = .validCVV
         } else if Int(cvv) == 0 {

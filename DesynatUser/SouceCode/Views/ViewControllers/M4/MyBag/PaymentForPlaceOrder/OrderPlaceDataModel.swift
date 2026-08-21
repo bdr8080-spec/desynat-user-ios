@@ -45,12 +45,10 @@ struct PaymentMethodForPlaceOrder {
   var description: String
 }
 
-
 // MARK: - WalletAmountDataModel
 struct WalletAmountDataModel: Codable {
     let balance: Double?
 }
-
 
 // MARK: - CustomOrderPlaceOrderDetail
 struct CustomOrderPlaceOrderDetail: Codable {

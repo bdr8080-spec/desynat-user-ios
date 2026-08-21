@@ -22,7 +22,7 @@ class WatchScannerVc : UIViewController {
     private var isFlashOn = false
     var onImageRecognized: ((_ attributes: [String]) -> Void)?
     var comingFromSearchProduct: Bool = false
-    var viewModel:WatchRecognizer!
+    var viewModel: ScanProductRecognizer!
     
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
@@ -189,7 +189,7 @@ extension WatchScannerVc {
     
     func checkForImage(image: UIImage) {
         
-        viewModel.recognizeProduct(image: image) { result in
+        viewModel.callCloudVisionApi(image: image) { result in
             guard let result = result else {
                 self.showAlert(msg: "Product not recognized".localiz())
                 return
@@ -203,13 +203,19 @@ extension WatchScannerVc {
             
             DispatchQueue.main.async {
                 if self.comingFromSearchProduct {
-                    self.onImageRecognized?(result.attributes)
+                    self.onImageRecognized?(result)
                     self.navigationController?.popViewController(animated: true)
                 } else {
                     let nextVC = SearchProductListViewController
                         .instantiate(fromAppStoryboard: .MyOrder)
                     nextVC.comingFromImageScanner = true
-                    nextVC.viewModel.attributeText = result.attributes
+//                    var seen = Set<String>()
+//                    let uniqueResult = result.filter { item in
+//                        let word = item.trimmingCharacters(in: .whitespacesAndNewlines)
+//                        guard !word.isEmpty else { return false }
+//                        return seen.insert(word.lowercased()).inserted
+//                    }
+                    nextVC.viewModel.attributeText = result.filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }.reduce(into: [String]()) { if !$0.map({ $0.lowercased() }).contains($1.lowercased()) { $0.append($1.trimmingCharacters(in: .whitespacesAndNewlines)) } }
                     self.navigationController?.pushViewController(nextVC, animated: true)
                 }
             }

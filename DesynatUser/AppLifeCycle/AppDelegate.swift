@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         IQKeyboardManager.shared.isEnabled = true
         GMSServices.provideAPIKey("AIzaSyBlCfJlRuxElolt6l-4erdJPR9ySUB8Jwk")    // Our google map API
         GMSPlacesClient.provideAPIKey("AIzaSyB5LK7zzKS4q9ov0R4LFLgaRyPZdZsTKz4")
-//        MFSettings.shared.configure(token: "SK_KWT_vVZlnnAqu8jRByOWaRPNId4ShzEDNt256dvnjebuyzo52dXjAfRx2ixW5umjWSUx", country: .kuwait, environment: MFEnvironment.test)
+        //        MFSettings.shared.configure(token: "SK_KWT_vVZlnnAqu8jRByOWaRPNId4ShzEDNt256dvnjebuyzo52dXjAfRx2ixW5umjWSUx", country: .kuwait, environment: MFEnvironment.test)
         MFSettings.shared.configure(token: "SK_KWT_Xn6nYzfdgF3Lz7TKhrGLhruKiBT5OgesD080ZIJohon0q0CEqCRrwdAsV0qICIsx", country: .kuwait, environment: .live)
         let them = MFTheme(navigationTintColor: .white, navigationBarTintColor: .lightGray, navigationTitle: "Payment", cancelButtonTitle: "Cancel")
         MFSettings.shared.setTheme(theme: them)
@@ -79,25 +79,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     }
     
     func topViewController(base: UIViewController? = UIApplication.shared.connectedScenes
-                                .compactMap { $0 as? UIWindowScene }
-                                .flatMap { $0.windows }
-                                .first { $0.isKeyWindow }?
-                                .rootViewController) -> UIViewController? {
-
-        if let nav = base as? UINavigationController {
-            return topViewController(base: nav.visibleViewController)
+        .compactMap { $0 as? UIWindowScene }
+        .flatMap { $0.windows }
+        .first { $0.isKeyWindow }?
+        .rootViewController) -> UIViewController? {
+            
+            if let nav = base as? UINavigationController {
+                return topViewController(base: nav.visibleViewController)
+            }
+            if let tab = base as? UITabBarController {
+                return topViewController(base: tab.selectedViewController)
+            }
+            if let presented = base?.presentedViewController {
+                return topViewController(base: presented)
+            }
+            return base
         }
-        if let tab = base as? UITabBarController {
-            return topViewController(base: tab.selectedViewController)
-        }
-        if let presented = base?.presentedViewController {
-            return topViewController(base: presented)
-        }
-        return base
-    }
     
     // MARK: UISceneSession Lifecycle
-    
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
@@ -123,11 +122,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     
 }
 
-extension AppDelegate:UNUserNotificationCenterDelegate {
+extension AppDelegate: UNUserNotificationCenterDelegate {
     
     func confrigNotification(application:UIApplication) {
         UNUserNotificationCenter.current().delegate = self
-        
         let options: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(options: options) { granted, error in
             guard granted else { return }
@@ -164,40 +162,35 @@ extension AppDelegate:UNUserNotificationCenterDelegate {
             if let error = error {
                 print("Error fetching remote instange ID: \(error)")
             } else if let result = token {
-//                print("Remote instance ID token: \(result)")
+                //                print("Remote instance ID token: \(result)")
                 kSharedUserDefaults.saveModelFor(key: .deviceToken, value: token)
             }
         }
     }
     
-    func applicationWillTerminate(_ application: UIApplication) {}
+    func applicationWillTerminate(_ application: UIApplication) {
+        
+    }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let payload = notification.request.content.userInfo
-            
-            // Convert payload to JSON text
-            if let jsonText = payload.toPrettyString() {
-//                showShareAlert(withText: jsonText)
-            }
-            
-            if #available(iOS 14.0, *) {
-                completionHandler([.banner, .badge, .sound])
-            } else {
-                completionHandler([.alert, .badge, .sound])
-            }
+        // Convert payload to JSON text
+        if let jsonText = payload.toPrettyString() {
+            //                showShareAlert(withText: jsonText)
+        }
+        if #available(iOS 14.0, *) {
+            completionHandler([.banner, .badge, .sound])
+        } else {
+            completionHandler([.alert, .badge, .sound])
+        }
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let payload = response.notification.request.content.userInfo
-            
-            if let jsonText = payload.toPrettyString() {
-//                showShareAlert(withText: jsonText)
-            }
-
-            // Later you use payload to navigate screens
-            // handleDeepLinks(payload)
-
-            completionHandler()
+        if let jsonText = payload.toPrettyString() {
+            //                showShareAlert(withText: jsonText)
+        }
+        completionHandler()
     }
     
 }
@@ -212,6 +205,3 @@ extension Dictionary {
         return nil
     }
 }
-
-
-//com.app.DesynatUser

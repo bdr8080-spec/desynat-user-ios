@@ -69,7 +69,7 @@ class PlaceOrderPaymentMethodsViewModel {
         if paymentMethod.apiValue == 1 {
             param["payment_id"] = paymentID
         }
-                                    
+        
         WebService.sharedInstance.completeOrderApi(param: param) { response in
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }

@@ -8,6 +8,7 @@
 import UIKit
 
 class MyOrderVM: NSObject {
+    
     private var hostVC: MyOrderVC
     var searchText: String = ""
 
@@ -16,15 +17,10 @@ class MyOrderVM: NSObject {
     }
 
     func getOrders() {
-        var params: [String: Any] = [
-//            "order_type": type,
-            "filter": hostVC.normalOrderFilter.rawValue   // FIX HERE
-        ]
-
+        var params: [String: Any] = ["filter": hostVC.normalOrderFilter.rawValue]
         if !searchText.isEmpty {
             params["search"] = searchText
         }
-
         WebService.sharedInstance.getOrdersApi(param: params) { data in
             self.hostVC.orderData = data
             self.hostVC.orderTableView.reloadData()

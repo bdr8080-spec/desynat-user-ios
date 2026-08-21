@@ -21,7 +21,7 @@ class AffiliatedCameraSearchViewController: UIViewController {
     private var isFlashOn = false
     var onImageRecognized: ((_ attributes: [String]) -> Void)?
     var comingFromSearchProduct: Bool = false
-    var viewModel:WatchRecognizer!
+    var viewModel: ScanProductRecognizer!
     
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
@@ -163,7 +163,7 @@ extension AffiliatedCameraSearchViewController {
     
     func checkForImage(image: UIImage) {
         
-        viewModel.recognizeProduct(image: image) { result in
+        viewModel.callCloudVisionApi(image: image) { result in
             guard let result = result else {
                 self.showAlert(msg: "Product not recognized".localiz())
                 return
@@ -177,13 +177,13 @@ extension AffiliatedCameraSearchViewController {
             
             DispatchQueue.main.async {
                 if self.comingFromSearchProduct {
-                    self.onImageRecognized?(result.attributes)
+                    self.onImageRecognized?(result)
                     self.navigationController?.popViewController(animated: true)
                 } else {
                     let nextVC = SearchAffiliatedProductsViewController
                         .instantiate(fromAppStoryboard: .AffiliateUser)
                     nextVC.comingFromImageScanner = true
-                    nextVC.viewModel.attributeText = result.attributes
+                    nextVC.viewModel.attributeText = result//.attributes
                     self.navigationController?.pushViewController(nextVC, animated: true)
                 }
             }

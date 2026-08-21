@@ -263,28 +263,23 @@ class MyOrderDetailVC: UIViewController {
         let unitPrice = Double(data.amount ?? "") ?? 0
         let quantity = data.quantity ?? 1
         let totalPriceforCustom = unitPrice * Double(quantity)
-        
         itemPriceLabelForCustomOrder.text = "Custom Items Price".localiz()
-        
         lblTotalMrp.text = CommonUtils.formatPriceStringInput(data.order?.totalMrp, currency: "KD")
-        
         customOrderItemPriceLabel.text = CommonUtils.formatPrice(Double(totalPriceforCustom))
         lblDiscountMrp.text = CommonUtils.formatPrice(Double(data.order?.discountMrp ?? "0"))
-        lblShippingFee.text = CommonUtils.formatDeliveryCharges(Double(data.order?.shippingFees ?? "0"))//"\(data.order?.shippingFees ?? "0") KD"
+        lblShippingFee.text = CommonUtils.formatDeliveryCharges(Double(data.order?.shippingFees ?? "0"))
         lblTax.text = CommonUtils.formatPriceStringInput(data.order?.tax)
         lblTotalAmount.text = CommonUtils.formatPrice(Double(data.order?.totalAmount ?? "0"))
         totalPaidAmount = lblTotalAmount.text
         if isCustomOrder {
-            lblDisPrice.text = CommonUtils.formatPriceStringInput(data.chatroomRecordtable?.totalAmount ?? "0")//"Per Item Price \(CommonUtils.formatPrice(Double(unitPrice)))"
+            lblDisPrice.text = CommonUtils.formatPriceStringInput(data.chatroomRecordtable?.totalAmount ?? "0")
             lblPrice.isHidden = true
             discountPercentageLabel.isHidden = true
         } else {
             lblDisPrice.text = CommonUtils.formatPrice(Double(data.variationDetails?.finalPrice ?? "0"))
             lblPrice.isHidden = false
-            //            discountPercentageLabel.isHidden = false
             CommonUtils.updateDiscountPercentageLabel(discountPercentageLabel, actualAmountLabel: lblPrice,discountType: data.variationDetails?.discountType,discountValue: data.variationDetails?.discountValue)
         }
-      
         let orderProductPrice = CommonUtils.formatPrice(Double(data.variationDetails?.actualPrice ?? "0"))
         CommonUtils.setStrikethrough(label: lblPrice, text: orderProductPrice)
         let isReturnAllowed = data.productDetails?.productReturn == "1"
@@ -293,9 +288,7 @@ class MyOrderDetailVC: UIViewController {
         } else {
             lblReturnAvail.text = "No return available".localiz()
         }
-        
         if data.order?.promocodeID != nil {
-            //        if let selected = selectedPromoCode {
             couponDiscountView.isHidden = false
             lblSavedAmount.isHidden = false
             lblCouponDis.text = CommonUtils.formatPriceStringInput(data.order?.promocodeValue ?? "")
@@ -307,7 +300,6 @@ class MyOrderDetailVC: UIViewController {
             couponDiscountView.isHidden = true
             lblSavedAmount.text = "\("You saved".localiz()) \(CommonUtils.formatPriceStringInput(data.order?.discountMrp ?? "0")) \("on this".localiz())"
         }
-        
         let selectedAddress = data.order?.deliveryDetails
         let addressLine = "\(selectedAddress?.name ?? "")-\(selectedAddress?.houseNo ?? ""), \(selectedAddress?.streetNo ?? ""), \(selectedAddress?.city ?? ""), \(selectedAddress?.state ?? ""), \(selectedAddress?.countryName ?? "")-\(selectedAddress?.postalCode ?? "")"
         lblShippingAdd.text = addressLine
@@ -321,7 +313,6 @@ class MyOrderDetailVC: UIViewController {
         } else {
             imgProduct.image = UIImage(named: "")
         }
-        
         if let returnImg = data.returnImage?.first, let returnImgUrl = URL(string: returnImg) {
             imgProfile.sd_imageIndicator = SDWebImageActivityIndicator.gray
             imgProfile.sd_imageIndicator?.startAnimatingIndicator()
@@ -336,7 +327,7 @@ class MyOrderDetailVC: UIViewController {
             } else {
                 setColorBox(size: data.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data.variationDetails?.color?.hexCode ?? "#98ADFF", quantity: "\(data.quantity ?? 0)")
             }
-        }else{
+        } else {
             lblProductName.text = data.productDetails?.productNameEn ?? ""
             if isCustomOrder {
                 setColorBoxWithQuanityInView(size: data.variationDetails?.size?.name ?? "", label: lblSize, hexColor: data.variationDetails?.color?.hexCode ?? "#98ADFF")
@@ -345,13 +336,11 @@ class MyOrderDetailVC: UIViewController {
             }
         }
         configureStatus(with: data)
-        
         lblPaidByCardAmount.text = totalPaidAmount
         reasonLabel.text = data.returnReason ?? data.exchangeReason ?? data.cancelReason ?? data.notDeliveredReason
         returnIdLabel.text = "#\(data.orderID ?? 0)"
         cancellationIDLabel.text = "#\(data.orderID ?? 0)"
         exchangeIdLabel.text = "#\(data.orderID ?? 0)"
-        
         returnDateLabel.text = data.updatedAt?.formattedPlacedDate() ?? ""
         cancellationDateLabel.text = data.updatedAt?.formattedPlacedDate() ?? ""
         exchangeDateLabel.text = data.updatedAt?.formattedPlacedDate() ?? ""
@@ -369,7 +358,6 @@ class MyOrderDetailVC: UIViewController {
         if isCustomOrder {
             lblTotalAmount.text = CommonUtils.formatPrice(Double(data.order?.totalAmount ?? "0"))
         }
-        
         let otherVarientOrders = data.allOtherOrderVarient ?? []
         let customOrderType = otherVarientOrders.filter { $0.orderType == "2" }
         if customOrderType.count > 0 {
@@ -387,7 +375,6 @@ class MyOrderDetailVC: UIViewController {
             let mainOrderDetailsCustomPrice = (Double(data.chatroomRecordtable?.totalAmount ?? "0") ?? 0) + totalPrice
             customOrderItemPriceLabel.text = CommonUtils.formatPrice(Double(mainOrderDetailsCustomPrice))
         }
-        
         let normalOrderType = otherVarientOrders.filter { $0.orderType == "1" }
         if normalOrderType.count > 0 {
             totalMRPView.isHidden = false

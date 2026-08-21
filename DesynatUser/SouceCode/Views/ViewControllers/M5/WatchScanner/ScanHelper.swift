@@ -7,325 +7,638 @@
 
 import UIKit
 
-class WatchRecognizer {
+class ScanProductRecognizer {
     
     var recentData: [RecentDataModel] = []
+    
     private var lastVisionResponse: [String: Any]?
-
+    
     init() {
-        WebService.sharedInstance.getRecentSearch { list in
-            self.recentData = list
+        WebService.sharedInstance.getRecentSearch { [weak self] list in
+            self?.recentData = list
         }
     }
     
-    private func detectProductName(
-        webDetection: [String: Any],
-        brand: String?
-    ) -> String? {
-        
-        if let bestGuess = webDetection["bestGuessLabels"] as? [[String: Any]],
-           let label = bestGuess.first?["label"] as? String {
-            
-            if let brand = brand {
-                return label.replacingOccurrences(
-                    of: brand,
-                    with: "",
-                    options: .caseInsensitive
-                ).trimmingCharacters(in: .whitespaces)
-            }
-            return label
-        }
-        return nil
-    }
-    
-    
-    private func extractAttributes(from labels: [[String: Any]]) -> [String] {
-        
-        let ignored = ["clothing", "product", "fashion", "textile"]
-        
-        return labels.compactMap {
-            let text = ($0["description"] as? String)?.lowercased()
-            return ignored.contains(text ?? "") ? nil : text
-        }
-    }
-    
-    private func detectCategory(from response: [String: Any]) -> String? {
-        
-        // 1️⃣ Prefer web entities (most accurate for ecommerce)
-        if let webDetection = response["webDetection"] as? [String: Any],
-           let entities = webDetection["webEntities"] as? [[String: Any]] {
-            
-            let sorted = entities.sorted {
-                ($0["score"] as? Double ?? 0) >
-                ($1["score"] as? Double ?? 0)
-            }
-            
-            return sorted.first?["description"] as? String
-        }
-        
-        // 2️⃣ Fallback to labels
-        if let labels = response["labelAnnotations"] as? [[String: Any]] {
-            return labels.first?["description"] as? String
-        }
-        
-        return nil
-    }
-    
-    
-    func recognizeProduct(
-        image: UIImage,
-        completion: @escaping (ProductRecognitionResult?) -> Void
-    ) {
-        
-        detectBrandAndModel(image: image) { _, _, colors in
-            
-            guard
-                let json = self.lastVisionResponse,
-                let first = (json["responses"] as? [[String: Any]])?.first
-            else {
-                completion(nil)
-                return
-            }
-            
-            let category = self.detectCategory(from: first)
-            
-            let webDetection = first["webDetection"] as? [String: Any]
-            let brand = webDetection.flatMap { self.detectBrand(from: $0) }
-            let productName = webDetection.flatMap {
-                self.detectProductName(webDetection: $0, brand: brand)
-            }
-            
-            let attributes = self.extractAttributes(
-                from: first["labelAnnotations"] as? [[String: Any]] ?? []
-            )
-            
-            completion(
-                ProductRecognitionResult(
-                    category: category,
-                    brand: brand,
-                    productName: productName,
-                    attributes: attributes,
-                    colors: colors
-                )
-            )
-        } errCompletion: {
-            completion(nil)
-        }
-    }
-    
-    
-    
-    // MARK: - Public
-    func detectBrandAndModel( image: UIImage,
-                              completion: @escaping (_ brand: RecentDataModel?, _ model: String?, _ colors: [DominantColor]) -> Void,
-                              errCompletion:@escaping()->()) {
-        
-        guard let base64Image = base64EncodeImage(image) else {
-            completion(nil, nil, [])
+    func callCloudVisionApi(image: UIImage, completion: @escaping(_ result: [String]?) -> Void) {
+        CommonUtils.showHud(show: true)
+        guard let imageData = image.jpegData(compressionQuality: 0.9) else {
             return
         }
+        // Construct the Vision API request URL
+        let requestURL = "https://vision.googleapis.com/v1/images:annotate?key=\(googleApiKey)"
         
-        let url = URL(string: "https://vision.googleapis.com/v1/images:annotate?key=\(cameraSearchApiKey)")!
-        
+        // Construct the request JSON
         let requestJSON: [String: Any] = [
             "requests": [
-                [
-                    "image": ["content": base64Image],
-                    "features": [
-                        ["type": "WEB_DETECTION", "maxResults": 10],
-                        ["type": "IMAGE_PROPERTIES", "maxResults": 10],
-                        ["type": "LABEL_DETECTION", "maxResults": 10],
-                        ["type": "BARCODE_DETECTION", "maxResults": 10]
-                    ]
-                ]
-            ]
+                "image": ["content": imageData.base64EncodedString()],
+                "features": [
+                    ["type": "LABEL_DETECTION", "maxResults": 10],
+                    ["type": "OBJECT_LOCALIZATION","maxResults": 10],
+                    ["type": "LOGO_DETECTION", "maxResults": 10],
+                    ["type": "WEB_DETECTION","maxResults": 10],
+                    ["type": "TEXT_DETECTION", "maxResults": 10],
+                    ["type": "BARCODE_DETECTION","maxResults": 10]
+                    as [String : Any]]
+            ] as [String : Any]
         ]
         
-        guard let requestData = try? JSONSerialization.data(withJSONObject: requestJSON) else {
-            completion(nil, nil, [])
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = requestData
-        
-        CommonUtils.showHud(show: true)
-        
-        URLSession.shared.dataTask(with: request) { data, _, error in
-            DispatchQueue.main.async {
-                CommonUtils.showHud(show: false)
-            }
-            
-            guard let data = data, error == nil else {
-                completion(nil, nil, [])
-                return
-            }
-            
-            guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-                  let responses = json["responses"] as? [[String: Any]],
-                  let firstResponse = responses.first
-            else {
-                completion(nil, nil, [])
-                return
-            }
-            
-            // ✅ STORE RESPONSE
-            self.lastVisionResponse = json
-            
-            
-//            printInConsole("Watches Scan: \(json)")
-            
-            var brand: RecentDataModel? = nil
-            var model: String? = nil
-            var colors: [DominantColor] = []
-            
-            if let labels = firstResponse["labelAnnotations"] as? [[String: Any]] {
-                continueWithNextResponse()
-            }
-            func continueWithNextResponse() {
-                if let imageProperties = firstResponse["imagePropertiesAnnotation"] as? [String: Any] {
-                    colors = self.extractDominantColors(from: imageProperties)
+        // Perform the request
+        if let jsonData = try? JSONSerialization.data(withJSONObject: requestJSON),
+           let jsonString = String(data: jsonData, encoding: .utf8) {
+            let session = URLSession.shared
+            var request = URLRequest(url: URL(string: requestURL)!)
+            request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = jsonString.data(using: .utf8)
+            let task = session.dataTask(with: request) { (data, response, error) in
+                if let error = error {
+                    print("Error: \(error.localizedDescription)")
+                    return
                 }
-                
-                if let webDetection = firstResponse["webDetection"] as? [String: Any] {
-                    if let bestGuessLabels = webDetection["bestGuessLabels"] as? [[String: Any]],
-                       let guess = bestGuessLabels.first?["label"] as? String {
-                        
-                        let result = self.extractBrandAndModel(from: guess)
-                        if result.brand != nil {
-                            brand = result.brand
-                            model = result.model
-                        }
-                    }
-                    
-                    if let pages = webDetection["pagesWithMatchingImages"] as? [[String: Any]] {
-                        for page in pages {
-                            let title = page["pageTitle"] as? String ?? ""
-                            let urlText = page["url"] as? String ?? ""
-                            let combined = "\(title) \(urlText)"
-                            
-                            let result = self.extractBrandAndModel(from: combined)
-                            if result.brand != nil {
-                                brand = result.brand
-                                model = result.model
-                            }
-                        }
-                    }
-                    
-                    if let entities = webDetection["webEntities"] as? [[String: Any]] {
-                        for entity in entities {
-                            if let desc = entity["description"] as? String {
-                                let result = self.extractBrandAndModel(from: desc)
-                                if result.brand != nil {
-                                    brand = result.brand
-                                    model = result.model
+                if let data = data {
+                    // Parse the response data (data) and handle the results
+                    var findObjects = [String]()
+                    do {
+                        // Decode the JSON response
+                        let jsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                        CommonUtils.showHud(show: false)
+                        // Check if the response contains 'responses' key
+                        if let responses = jsonResponse?["responses"] as? [[String: Any]] {
+                            // Assuming 'LABEL_DETECTION' is requested
+                            print("responses: \(responses)")
+                            if let objectAnnotations = responses.first?["localizedObjectAnnotations"] as? [[String: Any]] {
+                                // Extract label information
+                                for objectAnnotation in objectAnnotations {
+                                    if let name = objectAnnotation["name"] as? String {
+                                        // Handle the label description (e.g., update UI, print, etc.)
+                                        print("Label: \(name)")
+                                        findObjects.append(name)
+                                    }
+                                    if let score = objectAnnotation["score"] as? Double {
+                                        // Handle the label score (e.g., update UI, print, etc.)
+                                        print("Score: \(score)")
+                                    }
                                 }
+                                completion(findObjects)
                             }
+                            else if let labelAnnotations = responses.first?["labelAnnotations"] as? [[String: Any]] {
+                                // Extract label information
+                                for labelAnnotation in labelAnnotations {
+                                    if let description = labelAnnotation["description"] as? String {
+                                        // Handle the label description (e.g., update UI, print, etc.)
+                                        print("Label: \(description)")
+                                        findObjects.append(description)
+                                    }
+                                    if let score = labelAnnotation["score"] as? Double {
+                                        // Handle the label score (e.g., update UI, print, etc.)
+                                        print("Score: \(score)")
+                                    }
+                                }
+                                completion(findObjects)
+                            }
+                            else {
+                                print("No label annotations found in the response.")
+                            }
+                        } else {
+                            print("Invalid or unexpected response format.")
                         }
+                    } catch {
+                        CommonUtils.showHud(show: false)
+                        print("Error decoding JSON response: \(error.localizedDescription)")
                     }
                 }
-                
-                
-                completion(brand, model, colors)
             }
-            
-        }.resume()
-    }
-    
-    private func detectBrand(from webDetection: [String: Any]) -> String? {
-        
-        if let entities = webDetection["webEntities"] as? [[String: Any]] {
-            let candidates = entities
-                .filter { ($0["score"] as? Double ?? 0) > 0.6 }
-                .compactMap { $0["description"] as? String }
-            
-            return candidates.first
-        }
-        return nil
-    }
-    
-    
-    
-    // MARK: - Helpers
-    
-    private func base64EncodeImage(_ image: UIImage) -> String? {
-        image.jpegData(compressionQuality: 0.8)?
-            .base64EncodedString(options: .endLineWithCarriageReturn)
-    }
-    
-    private func extractBrandAndModel(from text: String) -> (brand: RecentDataModel?, model: String?) {
-        for brand in recentData {
-            if text.localizedCaseInsensitiveContains(brand.name ?? "") {
-                let modelPart = text.replacingOccurrences(
-                    of: brand.name ?? "",
-                    with: "",
-                    options: .caseInsensitive
-                )
-                
-                let cleanedModel = modelPart
-                    .replacingOccurrences(of: "watch", with: "", options: .caseInsensitive)
-                    .trimmingCharacters(in: .whitespacesAndNewlines)
-                
-                return (brand, cleanedModel.isEmpty ? nil : cleanedModel)
-            }
-        }
-        return (nil, nil)
-    }
-}
-
-struct DominantColor {
-    let red: Int
-    let green: Int
-    let blue: Int
-    let score: Double
-    var hexCode: String {
-        String(
-            format: "#%02X%02X%02X",
-            red,
-            green,
-            blue
-        )
-    }
-}
-
-extension WatchRecognizer {
-    
-    func extractDominantColors(from imageProperties: [String: Any]?) -> [DominantColor] {
-        guard
-            let imageProperties = imageProperties,
-            let dominantColors = imageProperties["dominantColors"] as? [String: Any],
-            let colorsArray = dominantColors["colors"] as? [[String: Any]]
-        else {
-            return []
-        }
-        
-        return colorsArray.compactMap { item in
-            guard
-                let color = item["color"] as? [String: Any],
-                let red = color["red"] as? Int,
-                let green = color["green"] as? Int,
-                let blue = color["blue"] as? Int,
-                let score = item["score"] as? Double
-            else {
-                return nil
-            }
-            
-            return DominantColor(
-                red: red,
-                green: green,
-                blue: blue,
-                score: score
-            )
+            task.resume()
         }
     }
 }
 
-struct ProductRecognitionResult {
-    let category: String?
-    let brand: String?
-    let productName: String?
-    let attributes: [String]
-    let colors: [DominantColor]
-}
+//class ScanProductRecognizer {
+//
+//    var recentData: [RecentDataModel] = []
+//
+//    private var lastVisionResponse: [String: Any]?
+//
+//    init() {
+//        WebService.sharedInstance.getRecentSearch { [weak self] list in
+//            self?.recentData = list
+//        }
+//    }
+//
+//    func callCloudVisionApi(image: UIImage,completion: @escaping ([String]?) -> Void) {
+//        DispatchQueue.main.async {
+//            CommonUtils.showHud(show: true)
+//        }
+//        // MARK: - Resize Image
+//        let resizedImage = resizeImage(
+//            image,
+//            maxDimension: 1600
+//        )
+//        // MARK: - Convert Image To JPEG
+//        guard let imageData = resizedImage.jpegData(
+//            compressionQuality: 0.65
+//        ) else {
+//            DispatchQueue.main.async {
+//                CommonUtils.showHud(show: false)
+//            }
+//            completion(nil)
+//            return
+//        }
+//
+//        // MARK: - Base64
+//        let base64Image = imageData.base64EncodedString()
+//        
+//        // MARK: - URL
+//        let requestURL = "https://vision.googleapis.com/v1/images:annotate?key=\(googleApiKey)"
+//        guard let url = URL(string: requestURL) else {
+//            DispatchQueue.main.async {
+//                CommonUtils.showHud(show: false)
+//            }
+//            completion(nil)
+//            return
+//        }
+//        let requestJSON: [String: Any] = [
+//            "requests": [["image": ["content": base64Image],
+//                    "features": [["type": "LABEL_DETECTION", "maxResults": 10],
+//                        ["type": "OBJECT_LOCALIZATION","maxResults": 10],
+//                        ["type": "LOGO_DETECTION", "maxResults": 5
+//                        ],
+//
+//                        [
+//                            "type": "WEB_DETECTION",
+//                            "maxResults": 10
+//                        ],
+//
+//                        [
+//                            "type": "TEXT_DETECTION",
+//                            "maxResults": 10
+//                        ],
+//
+//                        [
+//                            "type": "BARCODE_DETECTION",
+//                            "maxResults": 10
+//                        ]
+//                    ]
+//                ]
+//            ]
+//        ]
+//
+//        print("✅ Request JSON created")
+//        print(requestJSON)
+//        // MARK: - Serialize JSON
+//
+//        guard let jsonData = try? JSONSerialization.data(
+//            withJSONObject: requestJSON,
+//            options: []
+//        ) else {
+//            DispatchQueue.main.async {
+//                CommonUtils.showHud(show: false)
+//            }
+//
+//            completion(nil)
+//            return
+//        }
+//
+//        // Optional readable JSON print
+//        if let jsonString = String(data: jsonData,encoding: .utf8) {
+//            print(
+//                jsonString.prefix(2000)
+//            )
+//
+//            print("========== END REQUEST JSON ==========")
+//        }
+//
+//        // MARK: - URLRequest
+//
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "POST"
+//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.httpBody = jsonData
+//        // MARK: - Print CURL
+//        print("========== CURL REQUEST ==========")
+//        print("curl -X POST \\")
+//        print("  '\(requestURL)' \\")
+//        print("  -H 'Content-Type: application/json' \\")
+//        print("  --data-binary '@request.json'")
+//        print("==================================")
+//        print("🚀 Calling Google Vision API...")
+//        // MARK: - API Call
+//
+//        let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+//            DispatchQueue.main.async {
+//                CommonUtils.showHud(show: false)
+//            }
+//            // MARK: - Network Error
+//            if let error = error {
+//                print("❌ NETWORK ERROR")
+//                print(error.localizedDescription)
+//                DispatchQueue.main.async {
+//                    completion(nil)
+//                }
+//                return
+//            }
+//
+//            // MARK: - HTTP Response
+//            if let httpResponse = response as? HTTPURLResponse {
+//                print("🌐 HTTP STATUS CODE:")
+//                print(httpResponse.statusCode)
+//                print("🌐 RESPONSE HEADERS:")
+//                print(httpResponse.allHeaderFields)
+//                if !(200...299).contains(httpResponse.statusCode) {
+//                    print("❌ HTTP ERROR STATUS:")
+//                    print(httpResponse.statusCode)
+//                }
+//            }
+//            // MARK: - Response Data
+//            guard let data = data else {
+//                print("❌ NO RESPONSE DATA")
+//                DispatchQueue.main.async {
+//                    completion(nil)
+//                }
+//                return
+//            }
+//            print("📥 RESPONSE DATA SIZE:")
+//            print("\(data.count) bytes")
+//            // MARK: - Raw Response
+//            if let responseString = String(data: data, encoding: .utf8) {
+//                print("========== GOOGLE VISION RESPONSE ==========")
+//                print(responseString)
+//                print("========== END RESPONSE ==========")
+//            }
+//            // MARK: - Decode JSON
+//            do {
+//                guard let jsonResponse =
+//                        try JSONSerialization.jsonObject(
+//                            with: data,
+//                            options: []
+//                        ) as? [String: Any]
+//                else {
+//
+//                    print("❌ Response is not a JSON dictionary")
+//
+//                    DispatchQueue.main.async {
+//                        completion(nil)
+//                    }
+//
+//                    return
+//                }
+//
+//                self?.lastVisionResponse = jsonResponse
+//
+//                print("✅ JSON RESPONSE DECODED")
+//
+//                // MARK: - Google API Error
+//
+//                if let errorObject =
+//                    jsonResponse["error"] as? [String: Any] {
+//
+//                    print("❌ GOOGLE VISION API ERROR")
+//
+//                    if let code = errorObject["code"] {
+//                        print("Code:", code)
+//                    }
+//
+//                    if let status = errorObject["status"] {
+//                        print("Status:", status)
+//                    }
+//
+//                    if let message = errorObject["message"] {
+//                        print("Message:", message)
+//                    }
+//
+//                    DispatchQueue.main.async {
+//                        completion(nil)
+//                    }
+//
+//                    return
+//                }
+//
+//                // MARK: - Responses
+//
+//                guard let responses =
+//                    jsonResponse["responses"] as? [[String: Any]]
+//                else {
+//
+//                    print("❌ Invalid or unexpected response format")
+//
+//                    print(
+//                        "Available response keys:",
+//                        jsonResponse.keys
+//                    )
+//
+//                    DispatchQueue.main.async {
+//                        completion(nil)
+//                    }
+//
+//                    return
+//                }
+//
+//                print("✅ Responses count:", responses.count)
+//
+//                var findObjects: [String] = []
+//
+//                // MARK: - Parse Each Response
+//
+//                for responseItem in responses {
+//
+//                    // -----------------------------------------
+//                    // LABEL DETECTION
+//                    // -----------------------------------------
+//
+//                    if let labelAnnotations =
+//                        responseItem["labelAnnotations"]
+//                            as? [[String: Any]] {
+//
+//                        print(
+//                            "🏷️ Label count:",
+//                            labelAnnotations.count
+//                        )
+//
+//                        for label in labelAnnotations {
+//
+//                            if let description =
+//                                label["description"] as? String {
+//
+//                                print(
+//                                    "🏷️ Label:",
+//                                    description
+//                                )
+//
+//                                findObjects.append(description)
+//                            }
+//
+//                            if let score =
+//                                label["score"] as? Double {
+//
+//                                print(
+//                                    "📊 Label score:",
+//                                    score
+//                                )
+//                            }
+//                        }
+//                    }
+//
+//                    // -----------------------------------------
+//                    // OBJECT LOCALIZATION
+//                    // -----------------------------------------
+//
+//                    if let objects =
+//                        responseItem["localizedObjectAnnotations"]
+//                            as? [[String: Any]] {
+//
+//                        print(
+//                            "📦 Object count:",
+//                            objects.count
+//                        )
+//
+//                        for object in objects {
+//
+//                            if let name =
+//                                object["name"] as? String {
+//
+//                                print(
+//                                    "📦 Object:",
+//                                    name
+//                                )
+//
+//                                findObjects.append(name)
+//                            }
+//
+//                            if let score =
+//                                object["score"] as? Double {
+//
+//                                print(
+//                                    "📊 Object score:",
+//                                    score
+//                                )
+//                            }
+//                        }
+//                    }
+//
+//                    // -----------------------------------------
+//                    // LOGO DETECTION
+//                    // -----------------------------------------
+//
+//                    if let logos =
+//                        responseItem["logoAnnotations"]
+//                            as? [[String: Any]] {
+//
+//                        print(
+//                            "🔷 Logo count:",
+//                            logos.count
+//                        )
+//
+//                        for logo in logos {
+//
+//                            if let description =
+//                                logo["description"] as? String {
+//
+//                                print(
+//                                    "🔷 Logo:",
+//                                    description
+//                                )
+//
+//                                findObjects.append(description)
+//                            }
+//
+//                            if let score =
+//                                logo["score"] as? Double {
+//
+//                                print(
+//                                    "📊 Logo score:",
+//                                    score
+//                                )
+//                            }
+//                        }
+//                    }
+//
+//                    // -----------------------------------------
+//                    // WEB DETECTION
+//                    // -----------------------------------------
+//
+//                    if let webDetection =
+//                        responseItem["webDetection"]
+//                            as? [String: Any] {
+//
+//                        if let entities =
+//                            webDetection["webEntities"]
+//                                as? [[String: Any]] {
+//
+//                            print(
+//                                "🌐 Web entity count:",
+//                                entities.count
+//                            )
+//
+//                            for entity in entities {
+//
+//                                if let description =
+//                                    entity["description"] as? String {
+//
+//                                    print(
+//                                        "🌐 Web Entity:",
+//                                        description
+//                                    )
+//
+//                                    findObjects.append(description)
+//                                }
+//
+//                                if let score =
+//                                    entity["score"] as? Double {
+//
+//                                    print(
+//                                        "📊 Web score:",
+//                                        score
+//                                    )
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//                    // -----------------------------------------
+//                    // TEXT DETECTION
+//                    // -----------------------------------------
+//
+//                    if let textAnnotations =
+//                        responseItem["textAnnotations"]
+//                            as? [[String: Any]] {
+//
+//                        print(
+//                            "📝 Text annotation count:",
+//                            textAnnotations.count
+//                        )
+//
+//                        for text in textAnnotations {
+//
+//                            if let description =
+//                                text["description"] as? String {
+//
+//                                print(
+//                                    "📝 Detected Text:",
+//                                    description
+//                                )
+//                            }
+//                        }
+//                    }
+//
+//                    // -----------------------------------------
+//                    // BARCODE DETECTION
+//                    // -----------------------------------------
+//
+//                    if let barcodes =
+//                        responseItem["barcodeAnnotations"]
+//                            as? [[String: Any]] {
+//
+//                        print(
+//                            "📱 Barcode count:",
+//                            barcodes.count
+//                        )
+//
+//                        for barcode in barcodes {
+//
+//                            if let displayValue =
+//                                barcode["displayValue"] as? String {
+//
+//                                print(
+//                                    "📱 Barcode:",
+//                                    displayValue
+//                                )
+//
+//                                findObjects.append(displayValue)
+//                            }
+//                        }
+//                    }
+//                }
+//
+//                // MARK: - Remove Duplicates
+//
+//                findObjects = Array(
+//                    Set(
+//                        findObjects
+//                            .map {
+//                                $0.trimmingCharacters(
+//                                    in: .whitespacesAndNewlines
+//                                )
+//                            }
+//                            .filter {
+//                                !$0.isEmpty
+//                            }
+//                    )
+//                )
+//
+//                print("================================")
+//                print("✅ FINAL DETECTED OBJECTS")
+//                print(findObjects)
+//                print("================================")
+//
+//                DispatchQueue.main.async {
+//                    completion(findObjects)
+//                }
+//
+//            } catch {
+//
+//                print("❌ JSON DECODING ERROR")
+//                print(error.localizedDescription)
+//
+//                if let responseString =
+//                    String(data: data, encoding: .utf8) {
+//
+//                    print("❌ RESPONSE THAT FAILED TO DECODE:")
+//                    print(responseString)
+//                }
+//
+//                DispatchQueue.main.async {
+//                    completion(nil)
+//                }
+//            }
+//        }
+//
+//        task.resume()
+//
+//        print("🚀 URLSession task resumed")
+//    }
+//
+//    // MARK: - Resize Image
+//
+//    private func resizeImage(
+//        _ image: UIImage,
+//        maxDimension: CGFloat
+//    ) -> UIImage {
+//
+//        let originalSize = image.size
+//
+//        let scale = min(
+//            maxDimension / originalSize.width,
+//            maxDimension / originalSize.height,
+//            1.0
+//        )
+//
+//        let newSize = CGSize(
+//            width: originalSize.width * scale,
+//            height: originalSize.height * scale
+//        )
+//
+//        if newSize == originalSize {
+//            return image
+//        }
+//
+//        UIGraphicsBeginImageContextWithOptions(
+//            newSize,
+//            true,
+//            1.0
+//        )
+//
+//        image.draw(
+//            in: CGRect(
+//                origin: .zero,
+//                size: newSize
+//            )
+//        )
+//
+//        let resizedImage =
+//            UIGraphicsGetImageFromCurrentImageContext()
+//
+//        UIGraphicsEndImageContext()
+//
+//        return resizedImage ?? image
+//    }
+//}

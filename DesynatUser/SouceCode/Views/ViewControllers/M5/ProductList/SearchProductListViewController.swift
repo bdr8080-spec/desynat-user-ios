@@ -25,10 +25,12 @@ class SearchProductListViewController: UIViewController {
     var appliedSortFilter: Int?
     private var searchWorkItem: DispatchWorkItem?
     var comingFromImageScanner: Bool = false
+    var scannerModel: ScanProductRecognizer!
     
     // MARK: - View's LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.scannerModel = .init()
         searchTF.delegate = self
         if comingFromImageScanner {
             searchTF.text = viewModel.attributeText.joined(separator: ", ")
@@ -90,16 +92,36 @@ class SearchProductListViewController: UIViewController {
     }
     
     @IBAction func cameraDidTapped(_ sender: Any) {
-        let vc = WatchScannerVc.viewFromNIB
-        vc.comingFromSearchProduct = true
-        vc.onImageRecognized = { [weak self] attributes in
-            guard let self = self else { return }
-            self.comingFromImageScanner = true
-            self.viewModel.attributeText = attributes
-            self.searchTF.text = attributes.joined(separator: ", ")
-            self.viewModel.getProductsApi()
+//        let vc = WatchScannerVc.viewFromNIB
+//        vc.comingFromSearchProduct = true
+//        vc.onImageRecognized = { [weak self] attributes in
+//            guard let self = self else { return }
+//            self.comingFromImageScanner = true
+//            self.viewModel.attributeText = attributes
+//            self.searchTF.text = attributes.joined(separator: ", ")
+//            self.viewModel.getProductsApi()
+//        }
+//        self.navigationController?.pushViewController(vc, animated: true)
+        
+        
+        ImagePickerHelper.shared.showPickerControllerForCameraSearch(
+            onCameraSelected: { [weak self] in
+                let vc = WatchScannerVc.viewFromNIB
+                vc.comingFromSearchProduct = true
+                vc.onImageRecognized = { [weak self] attributes in
+                    guard let self = self else { return }
+                    self.comingFromImageScanner = true
+                    let scanWords = attributes.filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }.reduce(into: [String]()) { if !$0.map({ $0.lowercased() }).contains($1.lowercased()) { $0.append($1.trimmingCharacters(in: .whitespacesAndNewlines)) } }
+                    self.viewModel.attributeText = scanWords
+                    self.searchTF.text = scanWords.joined(separator: ", ")
+                    self.viewModel.getProductsApi()
+                }
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+        ) { [weak self] image, _ in
+            guard let self = self, let image = image else { return }
+            self.checkForImage(image: image)
         }
-        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     //MARK: Function's declaration
@@ -185,5 +207,24 @@ extension SearchProductListViewController: SortByStoresViewControllerDelegate {
     func didSelectSortOption(_ option: Int) {
         appliedSortFilter = option
         self.viewModel.getProductsApi()   // call API again
+    }
+
+}
+
+extension SearchProductListViewController {
+    func checkForImage(image: UIImage) {
+        scannerModel.callCloudVisionApi(image: image) { result in
+            guard let result = result else {
+                self.showAlert(msg: "Product not recognized".localiz())
+                return
+            }
+            DispatchQueue.main.async {
+                let nextVC = SearchProductListViewController
+                    .instantiate(fromAppStoryboard: .MyOrder)
+                nextVC.comingFromImageScanner = true
+                nextVC.viewModel.attributeText = result
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+        }
     }
 }
