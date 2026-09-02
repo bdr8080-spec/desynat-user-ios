@@ -70,7 +70,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if islogin == "Yes" {
             // Normal user logged in → Go to home
             kSharedSceneDelegate.navigateToUserHomeVc()
-            //            print("Normal user home set as back target")
         } else {
             // Guest user → Go to appropriate screen (Welcome/Login)
             if let isAppInstalled = UserDefaults.standard.string(forKey:"isAppInstall") {

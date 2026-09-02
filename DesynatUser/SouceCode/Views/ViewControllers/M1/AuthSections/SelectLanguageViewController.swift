@@ -16,7 +16,7 @@ class SelectLanguageViewController: UIViewController {
     @IBOutlet weak var imgEnglish: UIImageView!
     
     // MARK: - Property Decalaration
-    var selectedLanguage: Languages = .en
+    var selectedLanguage: Languages = .ar
     var comingFromDashboard: Bool = false
     
     // MARK: - View's LifeCycle Methods

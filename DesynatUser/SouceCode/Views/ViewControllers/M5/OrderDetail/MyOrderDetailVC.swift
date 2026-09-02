@@ -953,13 +953,11 @@ class MyOrderDetailVC: UIViewController {
             lblPaidByCard.text = "COD".localiz()
             lblTransactionId.isHidden = true
         }
-        
     }
     
     private func handleReturnExchange(data: OrderModel) {
         let isReturnAllowed = data.productDetails?.productReturn == "1"
         let isExchangeAllowed = data.productDetails?.productExchangable == "1"
-        
         if data.userRatingReviewProvide == nil {
             // Rating NOT given
             showRatingView.rating = 0
@@ -973,7 +971,6 @@ class MyOrderDetailVC: UIViewController {
             let rating = Double(data.userRatingReviewProvide?.productRating ?? "") ?? 0
             showRatingView.rating = rating
         }
-        
         returnProductButtonOutlet.isHidden = !isReturnAllowed
         exchangeProductButtonOutlet.isHidden = !isExchangeAllowed
         
@@ -1030,4 +1027,5 @@ extension MyOrderDetailVC: SelectReasonDelegate {
         viewModel.getOrderDetail()
     }
 }
+
 

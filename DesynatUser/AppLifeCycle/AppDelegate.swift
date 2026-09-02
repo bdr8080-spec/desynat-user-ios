@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         Thread.sleep(forTimeInterval: 5.0)
         LocationManager.sharedInstance.startUpdatingLocation()
         IQKeyboardManager.shared.enableAutoToolbar = true
-        AppLanguageManager.shared.defaultLanguage = .en
+        AppLanguageManager.shared.defaultLanguage = .ar
         IQKeyboardManager.shared.isEnabled = true
         GMSServices.provideAPIKey("AIzaSyBlCfJlRuxElolt6l-4erdJPR9ySUB8Jwk")    // Our google map API
         GMSPlacesClient.provideAPIKey("AIzaSyB5LK7zzKS4q9ov0R4LFLgaRyPZdZsTKz4")
