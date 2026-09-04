@@ -4,8 +4,8 @@ let kIsAppInstalled = "isAppInstalled"
 let googleApiKey = "AIzaSyB4mtISC8aJQl8DkwEd8DAIpBvuHCleO7s" // Desynat User app vision key
 
 enum BaseURL {
-    static let development  = "https://desynat.com/"
-    static let release      = "https://desynat.com/"
+    static let development  = "https://desynat.com.kw/"
+    static let release      = "https://desynat.com.kw/"
     
     static func value() -> String {
         switch BuildConfiguration.shared.environment {
