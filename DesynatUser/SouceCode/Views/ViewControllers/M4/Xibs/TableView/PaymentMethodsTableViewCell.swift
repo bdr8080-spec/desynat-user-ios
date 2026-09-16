@@ -63,7 +63,6 @@ extension PaymentMethodsTableViewCell{
             guard let self = self else { return }
             switch response {
             case .success(let session):
-                //        print("Session initiated for Apple Pay")
                 self.applePayButton.load(session, request, .english,
                                          startLoading: {
                     print("Starting Apple Pay...")
@@ -71,7 +70,6 @@ extension PaymentMethodsTableViewCell{
                                          completion: { response, invoiceId in
                     switch response {
                     case .success(let executeResponse):
-                        //            print("Apple Pay success: Invoice \(invoiceId ?? "N/A")")
                         let transactionID = executeResponse.invoiceTransactions?.first?.transactionID ?? ""
                         let paymentID = executeResponse.invoiceTransactions?.first?.paymentID ?? ""
                         let gateway = executeResponse.invoiceTransactions?.first?.paymentGateway ?? "ApplePay"
@@ -79,67 +77,12 @@ extension PaymentMethodsTableViewCell{
                         self.delegate?.paymentCompleted = true
                         self.delegate?.handlePaymentCompletion(transactionID: transactionID, paymentId: paymentID, invoiceId: invoiceId ?? "", gateway: gateway)
                     case .failure(let error):
-                        //            print("Apple Pay failed: \(error.errorDescription)")
                         self.delegate?.didReceivePaymentError("Apple Pay failed: \(error.errorDescription)")
                     }
                 })
             case .failure(let error):
-                //        print("Failed to initiate session: \(error.localizedDescription)")
                 self.delegate?.didReceivePaymentError("Failed to start Apple Pay session")
             }
         }
     }
-    
-    func payByKNET(invoiceValue: Decimal,
-                   orderId: String,
-                   completion: @escaping (MFPaymentStatusResponse?, String?, Error?) -> Void) {
-        let request = MFExecutePaymentRequest(invoiceValue: invoiceValue, paymentMethod: 1)
-        request.customerReference = orderId
-        request.displayCurrencyIso = .kuwait_KWD
-        MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { result, invoiceId in
-            switch result {
-            case .success(let paymentStatus):
-                completion(paymentStatus, invoiceId, nil)
-                
-                let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
-                let paymentID = paymentStatus.invoiceTransactions?.first?.paymentID ?? ""
-                let paymentGateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "KNET"
-                
-                self.delegate?.paymentTransactionDetails = (transactionID, paymentID, invoiceId ?? "", paymentGateway)
-                self.delegate?.paymentCompleted = true
-                self.delegate?.handlePaymentCompletion(transactionID: transactionID, paymentId: paymentID, invoiceId: invoiceId ?? "", gateway: paymentGateway)
-            case .failure(let error):
-                completion(nil, invoiceId,
-                           NSError(domain: "", code: 0,
-                                   userInfo: [NSLocalizedDescriptionKey: error.errorDescription]))
-            }
-        }
-    }
-    
-    func payByVisaPay(invoiceValue: Decimal,
-                      orderId: String,
-                      completion: @escaping (MFPaymentStatusResponse?, String?, Error?) -> Void) {
-        let request = MFExecutePaymentRequest(invoiceValue: invoiceValue, paymentMethod: 2)
-        request.customerReference = orderId
-        request.displayCurrencyIso = .kuwait_KWD // Or your currency
-        
-        MFPaymentRequest.shared.executePayment(request: request, apiLanguage: .english) { result, invoiceId in
-            switch result {
-            case .success(let paymentStatus):
-                completion(paymentStatus, invoiceId, nil)
-                
-                let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
-                let paymentGateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "VisaPay"
-                let paymentID = paymentStatus.invoiceTransactions?.first?.paymentID ?? ""
-                self.delegate?.paymentTransactionDetails = (transactionID, paymentID, invoiceId ?? "", paymentGateway)
-                self.delegate?.paymentCompleted = true
-                self.delegate?.handlePaymentCompletion(transactionID: transactionID, paymentId: paymentID, invoiceId: invoiceId ?? "", gateway: paymentGateway)
-            case .failure(let error):
-                completion(nil, invoiceId,
-                           NSError(domain: "", code: 0,
-                                   userInfo: [NSLocalizedDescriptionKey: error.errorDescription]))
-            }
-        }
-    }
-    
 }

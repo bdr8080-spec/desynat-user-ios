@@ -178,28 +178,17 @@ class PaymentMethodViewController: UIViewController, PlaceOrderPaymentMethodsCel
         let invoiceValue = Decimal(payAmount)
         let request = MFExecutePaymentRequest(invoiceValue: invoiceValue)
         request.customerReference = self.orderId
-//        let supplierId = Int.random(in: 1000...9999)
-//        let supplier = MFSupplier(
-//            supplierCode: supplierId, invoiceShare: invoiceValue
-//        )
-//        request.suppliers = [supplier]
-        
         viewPayment.pay(request, .english) { [weak self] response, invoiceId in
             guard let self = self else { return }
-            
             switch response {
             case .success(let paymentStatus):
-//                print("Payment successful with invoiceId: \(invoiceId ?? "N/A")")
                 let transactionID = paymentStatus.invoiceTransactions?.first?.transactionID ?? ""
                 let paymentId = paymentStatus.invoiceTransactions?.first?.paymentID ?? ""
                 let paymentGateway = paymentStatus.invoiceTransactions?.first?.paymentGateway ?? "card"
                 paymentTransactionDetails = (transactionID, paymentId, invoiceId ?? "", paymentGateway)
                 paymentCompleted = true
                 self.handlePaymentCompletion(transactionID: transactionID, paymentId: paymentId, invoiceId: invoiceId ?? "", gateway: paymentGateway)
-                
-                //        viewModel.payForAddingCard(transactionId: transactionID)
             case .failure(let error):
-//                print("Payment Error: \(error.errorDescription)")
                 self.showAlertAtPayment(msg: "\("Payment Failed:".localiz()) \(error.errorDescription)")
             }
         }
@@ -242,8 +231,6 @@ extension PaymentMethodViewController: UITableViewDelegate, UITableViewDataSourc
         cell.delegate = self
         cell.configData(data: data)
         cell.viewApple.isHidden = true
-        
-        // Just update radio button – NO payment call here!
         cell.radioButonOutlet.setImage(
             (indexPath.row == selectedPaymentMethodID) ? UIImage(named: "radioSelected") : UIImage(named: "radioUnselected"),
             for: .normal
