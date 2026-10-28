@@ -20,7 +20,7 @@ class ScanProductRecognizer {
     }
     
     func callCloudVisionApi(image: UIImage, completion: @escaping(_ result: [String]?) -> Void) {
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         guard let imageData = image.jpegData(compressionQuality: 0.9) else {
             return
         }
@@ -61,7 +61,7 @@ class ScanProductRecognizer {
                     do {
                         // Decode the JSON response
                         let jsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                        CommonUtils.showHud(show: false)
+                        Shimmer.shared.show(show: false)
                         // Check if the response contains 'responses' key
                         if let responses = jsonResponse?["responses"] as? [[String: Any]] {
                             // Assuming 'LABEL_DETECTION' is requested
@@ -103,7 +103,7 @@ class ScanProductRecognizer {
                             print("Invalid or unexpected response format.")
                         }
                     } catch {
-                        CommonUtils.showHud(show: false)
+                        Shimmer.shared.show(show: false)
                         print("Error decoding JSON response: \(error.localizedDescription)")
                     }
                 }
@@ -127,7 +127,7 @@ class ScanProductRecognizer {
 //
 //    func callCloudVisionApi(image: UIImage,completion: @escaping ([String]?) -> Void) {
 //        DispatchQueue.main.async {
-//            CommonUtils.showHud(show: true)
+//            Shimmer.shared.show(show: true)
 //        }
 //        // MARK: - Resize Image
 //        let resizedImage = resizeImage(
@@ -139,7 +139,7 @@ class ScanProductRecognizer {
 //            compressionQuality: 0.65
 //        ) else {
 //            DispatchQueue.main.async {
-//                CommonUtils.showHud(show: false)
+//                Shimmer.shared.show(show: false)
 //            }
 //            completion(nil)
 //            return
@@ -152,7 +152,7 @@ class ScanProductRecognizer {
 //        let requestURL = "https://vision.googleapis.com/v1/images:annotate?key=\(googleApiKey)"
 //        guard let url = URL(string: requestURL) else {
 //            DispatchQueue.main.async {
-//                CommonUtils.showHud(show: false)
+//                Shimmer.shared.show(show: false)
 //            }
 //            completion(nil)
 //            return
@@ -192,7 +192,7 @@ class ScanProductRecognizer {
 //            options: []
 //        ) else {
 //            DispatchQueue.main.async {
-//                CommonUtils.showHud(show: false)
+//                Shimmer.shared.show(show: false)
 //            }
 //
 //            completion(nil)
@@ -226,7 +226,7 @@ class ScanProductRecognizer {
 //
 //        let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
 //            DispatchQueue.main.async {
-//                CommonUtils.showHud(show: false)
+//                Shimmer.shared.show(show: false)
 //            }
 //            // MARK: - Network Error
 //            if let error = error {

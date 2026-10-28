@@ -48,7 +48,7 @@ class SearchVM: NSObject {
 extension SearchVM {
     
     func callCloudVisionApi(image: UIImage, completion: @escaping(_ result: [String]?) -> Void) {
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         guard let imageData = image.jpegData(compressionQuality: 0.9) else {
             return
         }
@@ -90,7 +90,7 @@ extension SearchVM {
                         // Decode the JSON response
                         let jsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                         //                        appDelegate.hideLoadingIndicator()
-                        CommonUtils.showHud(show: false)
+                        Shimmer.shared.show(show: false)
                         // Check if the response contains 'responses' key
                         if let responses = jsonResponse?["responses"] as? [[String: Any]] {
                             // Assuming 'LABEL_DETECTION' is requested
@@ -132,7 +132,7 @@ extension SearchVM {
                             print("Invalid or unexpected response format.")
                         }
                     } catch {
-                        CommonUtils.showHud(show: false)
+                        Shimmer.shared.show(show: false)
                         print("Error decoding JSON response: \(error.localizedDescription)")
                     }
                 }

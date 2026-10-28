@@ -18,7 +18,7 @@ class SupportChatViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         setupWebView()
         if comingUserRole == .affilaiteUser {
             if let savedUser: AffiliateCreateAccountDataModel = kSharedUserDefaults.retrieveModelFor(key: .affiliatedUserDeatils, model: AffiliateCreateAccountDataModel.self) {
@@ -45,7 +45,7 @@ class SupportChatViewController: UIViewController, WKNavigationDelegate {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
         }
     }
     

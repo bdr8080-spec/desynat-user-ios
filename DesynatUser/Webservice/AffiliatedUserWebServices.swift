@@ -12,9 +12,9 @@ extension WebService {
     
     func getAffiliatedProfileService(completion:@escaping (_ user: AffiliateCreateAccountDataModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.getAffiliateProfile), requestMethod: .get, requestModel: AffiliateCreateAccountDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -29,9 +29,9 @@ extension WebService {
     
     func updateAffiliatedProfileService(param: [String: Any], completion:@escaping (_ user: AffiliateCreateAccountDataModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.updatedAffiliateProfile), requestMethod: .post, requestParams: param,  requestModel: AffiliateCreateAccountDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -46,9 +46,9 @@ extension WebService {
     
     func updateAffiliatedAddressService(param: [String: Any], completion:@escaping (_ user: AffiliateCreateAccountDataModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.updatedAffiliateAddress), requestMethod: .post, requestParams: param,  requestModel: AffiliateCreateAccountDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -63,9 +63,9 @@ extension WebService {
     
     func updateAffiliatedBankDetailsService(param: [String: Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.updatedAffiliateBankDetails), requestMethod: .post, requestParams: param,  requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -80,9 +80,9 @@ extension WebService {
     
     func addAffiliatedBankDetailsService(param: [String: Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.addAffiliateBankDetails), requestMethod: .post, requestParams: param,  requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -97,9 +97,9 @@ extension WebService {
     
     func deleteBankAccountAffilaitedUserService(param: [String: Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.deleteAffiliateBankDetails), requestMethod: .post, requestParams: param,  requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -114,9 +114,9 @@ extension WebService {
     
     func makeDefaultBankAccountAffilaitedUserService(param: [String: Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.makeDefualtAffiliateBankDetails), requestMethod: .post, requestParams: param,  requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -131,9 +131,9 @@ extension WebService {
     
     func changePasswordOfAffilaitedUserService(param: [String: Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.updateAffiliateUserPassword), requestMethod: .post, requestParams: param,  requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -148,9 +148,9 @@ extension WebService {
     
     func getAllAffilliatedUserProductsService(param: [String: Any], completion:@escaping (_ user: AffiliatedProductsDataModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.getAllAffiliateUserProduct), requestMethod: .get, requestParams: param,  requestModel: AffiliatedProductsDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -165,9 +165,9 @@ extension WebService {
     
     func geenerateProductLinkService(param: [String: Any], completion:@escaping (_ user: GenerateProductLink)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.generateProductLink), requestMethod: .post, requestParams: param,  requestModel: GenerateProductLink.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -182,9 +182,9 @@ extension WebService {
     
     func addProductToMyProductsService(param: [String: Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.addProductToMyProducts), requestMethod: .post, requestParams: param,  requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -199,9 +199,9 @@ extension WebService {
     
     func getAffiliatedLatestSearchService(completion:@escaping (_ user: [AffiliatedLatestSearch])-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.getLatestSearchData), requestMethod: .get,  requestModel: [AffiliatedLatestSearch].self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -216,9 +216,9 @@ extension WebService {
     
     func getAffiliatedSearchProductsService(completion:@escaping (_ user: [AffiliatedLatestSearch])-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.getRecentSearchData), requestMethod: .get,  requestModel: [AffiliatedLatestSearch].self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -233,9 +233,9 @@ extension WebService {
     
     func getSearchProductsService(param: [String: Any], completion:@escaping (_ user: AffiliatedProductsDataModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.getAffiliatedProductSearchData), requestMethod: .post, requestParams: param,  requestModel: AffiliatedProductsDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -250,9 +250,9 @@ extension WebService {
     
     func getSortListOfAffiliatedProductsService(completion:@escaping (_ user: [SortByStoreDataModel])-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.productfilterKeys), requestMethod: .get,  requestModel: [SortByStoreDataModel].self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -267,9 +267,9 @@ extension WebService {
     
     func getMyProductsListService(param: [String:Any], completion:@escaping (_ user: AffiliatedUserMyProductsDataModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.getMyProducts), requestMethod: .get, requestParams: param,  requestModel: AffiliatedUserMyProductsDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -301,9 +301,9 @@ extension WebService {
     
     func deleteProductsDetailsService(param: [String:Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.deleteMyProductDetails), requestMethod: .post, requestParams: param,  requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -318,9 +318,9 @@ extension WebService {
     
     func changeMobileNumberForAffiliateUserService(withParams dictParams: Dictionary<String, Any>, completion: @escaping (_ user: ChangeMobileNumModel) -> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.changeMobileNumberForAffiliatedUser), requestMethod: .post, requestParams: dictParams, encoding: JSONEncoding.default, requestModel: ChangeMobileNumModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 if let error {
                     UIApplication.shared.topViewController()?.showAlert(msg: error)
@@ -334,9 +334,9 @@ extension WebService {
     
     func userVerifyOtpForAffiliateUserService(withParams dictParams: Dictionary<String, Any>, completion: @escaping (_ user: UserModel) -> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.userVerifyOtpForAffiliatedUser), requestMethod: .post, requestParams: dictParams, encoding: JSONEncoding.default, requestModel: UserModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 if let error {
                     UIApplication.shared.topViewController()?.showAlert(msg: error)
@@ -350,9 +350,9 @@ extension WebService {
     
     func affiliateSubmitWithdrawRequestService(withParams dictParams: Dictionary<String, Any>, completion: @escaping (_ user: UserModel) -> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.affiliateSubmitWithdrawRequest), requestMethod: .post, requestParams: dictParams, encoding: JSONEncoding.default, requestModel: UserModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 if let error {
                     UIApplication.shared.topViewController()?.showAlert(msg: error)
@@ -366,9 +366,9 @@ extension WebService {
     
     func getAffilateWithdrwalService(withParams dictParams: Dictionary<String, Any>, completion: @escaping (_ user: WithdrawRequestDataModel) -> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.getAffilaitedUserWithdrawRequest), requestMethod: .get, requestParams: dictParams, encoding: URLEncoding.default, requestModel: WithdrawRequestDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 if let error {
                     UIApplication.shared.topViewController()?.showAlert(msg: error)
@@ -381,9 +381,9 @@ extension WebService {
     
     func getAffilatePaymentHistoryService(withParams dictParams: Dictionary<String, Any>, completion: @escaping (_ user: OrdersDataAffilaitedPaymentDataModel) -> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.affiliateGetAllOrdersRequest), requestMethod: .get, requestParams: dictParams, encoding: URLEncoding.default, requestModel: OrdersDataAffilaitedPaymentDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 if let error {
                     UIApplication.shared.topViewController()?.showAlert(msg: error)
@@ -396,9 +396,9 @@ extension WebService {
     
     func getAffiliateNotificationsListService(param: [String:Any], completion: @escaping(NotificationsListDataModel) -> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.getAffiliateNotificationsList),requestMethod: .get, requestParams: param, requestModel: NotificationsListDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 guard let response = response else {
                     if let error {
@@ -413,10 +413,10 @@ extension WebService {
     
     func getCountOfNotificationForAffilatedUserService(completion:@escaping (_ user: Int)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.countOfNotifcationForAffilated), requestMethod: .get,requestModel: Int.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
             
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -431,9 +431,9 @@ extension WebService {
     
     func markAffiliateNotificationsService(param: [String:Any], completion: @escaping(EmptyModel) -> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.markAffiliateReadNotifications),requestMethod: .post, requestParams: param, requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 guard let response = response else {
                     if let error {
@@ -448,9 +448,9 @@ extension WebService {
     
     func markAffiliateAllReadNotificationsService(param: [String:Any], completion: @escaping(EmptyModel) -> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.markAffiliateAllReadNotifications),requestMethod: .post, requestParams: param, requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 guard let response = response else {
                     if let error {
@@ -465,9 +465,9 @@ extension WebService {
     
     func getAffiliateDashboardDataService(param: [String:Any], completion: @escaping(AffiliateDashboardDataModel) -> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.getAffiliateDashboardData),requestMethod: .get, requestParams: param, requestModel: AffiliateDashboardDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 guard let response = response else {
                     if let error {
@@ -482,9 +482,9 @@ extension WebService {
     
     func affiliateUserPushNotificationSettingService(completion: @escaping(NotificationDataModel) -> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.affiliatePushNotificationOnOff),requestMethod: .post, requestModel: NotificationDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 guard let response = response else {
                     if let error {
@@ -499,9 +499,9 @@ extension WebService {
     
     func affiliateUserInAppNotificationSettingService(completion: @escaping(NotificationDataModel) -> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.affiliateInAppNotificationOnOff),requestMethod: .post, requestModel: NotificationDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 guard let response = response else {
                     if let error {
@@ -516,9 +516,9 @@ extension WebService {
     
     func getAllTicketListforAffiliateUserService(params: [String: Any], completion:@escaping (_ user: SupportListDataModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.getRaiseTicketForAffiliate), requestMethod: .get, requestParams: params, requestModel: SupportListDataModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -533,9 +533,9 @@ extension WebService {
     
     func raiseTicketForAffiliateUserService(param: [String:Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.raiseTicketForAffiliate), requestMethod: .post, requestParams: param, requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -549,9 +549,9 @@ extension WebService {
     }
     
     func getContactUsService(parameter:[String:Any],completion: @escaping(ContactUsDataModel) -> Void) {
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.getContacts),requestMethod: .get, requestParams: parameter,requestModel: ContactUsDataModel.self) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message, error in
                 guard let response = response else {
                     if let error {
@@ -566,10 +566,10 @@ extension WebService {
     
     func updateAffiliatecountryList(param: [String: Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.updateAffiliateUserCountry), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
             
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -584,10 +584,10 @@ extension WebService {
     
     func updateAffiliateCurrencyList(param: [String: Any], completion:@escaping (_ user: EmptyModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI:.endpoint(.updateAffiliateUserCurrency), requestMethod: .post, requestParams: param, requestModel:EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
             
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {
@@ -602,9 +602,9 @@ extension WebService {
     
     func deleteAccountForAffiliateUserService(completion:@escaping (_ user: EmptyModel)-> Void) {
         let affiliatedAccessToken = kSharedUserDefaults.getStringFor(key: .affiliatedAccessToken)
-        CommonUtils.showHud(show: true)
+        Shimmer.shared.show(show: true)
         NetworkManager.shared.request(withAPI: .endpoint(.deleteAffiliateUserAccount), requestMethod: .post, requestModel: EmptyModel.self, affiliatedUserToken: affiliatedAccessToken) { result, code in
-            CommonUtils.showHud(show: false)
+            Shimmer.shared.show(show: false)
             self.evaluateWebServiceResponse(response: result) { response, message,error in
                 guard let user = response else {
                     if let error {

@@ -34,10 +34,10 @@ class WebService {
   
   func uploadImage(withParams image: UIImage,
                    completion:@escaping (_ profileURL:UploadImageModel)-> Void) {
-      CommonUtils.showHud(show: true)
+      Shimmer.shared.show(show: true)
       let multiPart:MultipartUpload = MultipartUpload(fileName:"image", file: image, mimeType: .image)
       NetworkManager.shared.requestMultiPart(url: .endpoint(.uploadFile), assets: [multiPart], model:UploadImageModel.self) { result, code in
-          CommonUtils.showHud(show: false)
+          Shimmer.shared.show(show: false)
           self.evaluateWebServiceResponse(response: result) { response,message ,error in
               guard let profileURLString = response else {
                   if let error {
